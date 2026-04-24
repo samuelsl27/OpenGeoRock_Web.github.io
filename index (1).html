@@ -1,0 +1,990 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>OpenGeoRock — Open-source geotechnical software</title>
+<meta name="description" content="OpenGeoRock is an open-source suite of geotechnical engineering programs written in Python. Led by Samuel Sáez López at UPCT." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    /* warm, paper-like neutrals; ink black for text */
+    --paper: #f5f1ea;
+    --paper-2: #ede7dc;
+    --paper-3: #e3dccd;
+    --ink: #141311;
+    --ink-2: #2a2824;
+    --mute: #6b6660;
+    --rule: #1413111f;
+    --rule-2: #14131114;
+    /* single accent — deep slope-green (critical surface) */
+    --accent: oklch(0.52 0.11 148);
+    --accent-ink: oklch(0.34 0.08 148);
+    /* terracotta for material swatch echoes only */
+    --terra: #c98a5f;
+    --ochre: #d4a36a;
+    --shadow: 0 1px 0 #14131108, 0 14px 40px -24px #14131140;
+    --radius: 4px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  html{background:var(--paper); color:var(--ink); -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility}
+  body{
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    letter-spacing: -0.005em;
+    overflow-x: hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  ::selection{background:var(--accent); color:#fff}
+
+  /* ---------- typography ---------- */
+  .serif{font-family:'Newsreader', 'Iowan Old Style', Georgia, serif; font-weight:400; letter-spacing:-0.015em}
+  .mono{font-family:'JetBrains Mono', ui-monospace, monospace; font-feature-settings:"ss01","cv11"; letter-spacing:0}
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--mute);
+  }
+  .eyebrow .dot{display:inline-block; width:6px;height:6px;border-radius:50%;background:var(--accent); vertical-align:2px; margin-right:8px}
+  h1,h2,h3,h4{margin:0; font-weight:500}
+
+  /* ---------- shell ---------- */
+  .wrap{max-width: 1240px; margin: 0 auto; padding: 0 28px}
+  @media (max-width: 640px){ .wrap{padding:0 20px} }
+
+  /* ---------- top bar ---------- */
+  header.top{
+    position:sticky; top:0; z-index:50;
+    backdrop-filter: blur(10px) saturate(140%);
+    -webkit-backdrop-filter: blur(10px) saturate(140%);
+    background: color-mix(in oklab, var(--paper) 82%, transparent);
+    border-bottom: 1px solid var(--rule);
+  }
+  .top-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    height:64px;
+  }
+  .brand{display:flex; align-items:center; gap:10px; font-weight:600; letter-spacing:-0.01em}
+  .brand .name{font-size:15px; display:inline-flex; align-items:center}
+  .brand .name b{font-weight:600}
+  .brand .name span{color:var(--mute); font-weight:400}
+  .brand.wordmark .name::before{
+    content:""; display:inline-block;
+    width: 10px; height: 10px; margin-right: 10px;
+    background: var(--ink);
+    transform: rotate(45deg);
+    border-radius: 1px;
+  }
+  footer .brand.wordmark .name::before{background: var(--ink)}
+  nav.primary{display:flex; gap:28px; align-items:center}
+  nav.primary a{
+    font-size:13.5px; color:var(--ink-2);
+    padding:6px 0; position:relative;
+  }
+  nav.primary a:hover{color:var(--ink)}
+  nav.primary a.cta{
+    padding:8px 14px; background:var(--ink); color:var(--paper);
+    border-radius:999px; font-weight:500;
+  }
+  nav.primary a.cta:hover{background:var(--accent-ink); color:#fff}
+  @media (max-width: 820px){
+    nav.primary a:not(.cta){display:none}
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    padding: 72px 0 40px;
+    position:relative;
+  }
+  .hero-grid{
+    display:grid; grid-template-columns: 1.1fr 1fr; gap: 64px; align-items:end;
+  }
+  @media (max-width: 960px){
+    .hero-grid{grid-template-columns: 1fr; gap: 36px}
+    .hero{padding: 48px 0 24px}
+  }
+  .hero h1{
+    font-family:'Newsreader', Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(44px, 6vw, 88px);
+    line-height: 0.98;
+    letter-spacing: -0.028em;
+    color: var(--ink);
+  }
+  .hero h1 em{font-style:italic; color:var(--accent-ink); font-weight:400}
+  .hero h1 .soft{color:var(--mute)}
+  .hero .lede{
+    margin-top: 24px;
+    font-size: 17px;
+    line-height: 1.55;
+    max-width: 52ch;
+    color: var(--ink-2);
+  }
+  .hero .cta-row{
+    display:flex; gap:12px; flex-wrap:wrap; margin-top:32px;
+  }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:11px 18px; border-radius:999px;
+    font-size:13.5px; font-weight:500;
+    border:1px solid transparent; cursor:pointer;
+    transition: background .15s ease, color .15s ease, border-color .15s ease;
+  }
+  .btn.primary{background:var(--ink); color:var(--paper)}
+  .btn.primary:hover{background:var(--accent-ink)}
+  .btn.ghost{background:transparent; color:var(--ink); border-color: var(--rule)}
+  .btn.ghost:hover{border-color: var(--ink); background: var(--paper-2)}
+  .btn .ic{width:14px;height:14px}
+  .btn.locked{opacity:.5; cursor:not-allowed}
+  .btn.locked:hover{background:transparent; border-color:var(--rule)}
+  .tag{
+    display:inline-flex; align-items:center; gap:6px;
+    font-family:'JetBrains Mono',monospace; font-size:10.5px;
+    padding:3px 7px; border-radius:3px;
+    background: var(--paper-3); color: var(--ink-2);
+    letter-spacing:0.04em;
+  }
+  .tag.soon{background:transparent; border:1px dashed var(--rule); color:var(--mute)}
+
+  /* hero right — specimen card */
+  .specimen{
+    background: #fff;
+    border:1px solid var(--rule);
+    border-radius: 8px;
+    padding: 22px;
+    box-shadow: var(--shadow);
+    font-family:'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--ink-2);
+  }
+  .specimen .sp-head{
+    display:flex; justify-content:space-between; padding-bottom:14px;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 14px; align-items:center;
+  }
+  .specimen .sp-head .t{letter-spacing:0.1em; text-transform:uppercase; font-size:10.5px; color:var(--mute)}
+  .specimen .sp-head .fos{font-size:22px; color:var(--ink); font-weight:500}
+  .specimen .sp-head .fos .label{font-size:10.5px; color:var(--mute); text-transform:uppercase; letter-spacing:0.1em; margin-right:8px}
+  .specimen .row{
+    display:grid; grid-template-columns: 1fr auto; padding:5px 0;
+    border-bottom:1px dashed var(--rule-2);
+  }
+  .specimen .row:last-child{border-bottom:none}
+  .specimen .row .k{color:var(--mute)}
+  .specimen .row .v{color:var(--ink)}
+  .specimen .row .v.hi{color:var(--accent-ink); font-weight:500}
+  .specimen .chart{
+    margin-top: 16px; aspect-ratio: 16/9;
+    background: var(--paper);
+    border:1px solid var(--rule);
+    border-radius:4px;
+    position:relative; overflow:hidden;
+  }
+  .specimen .chart svg{position:absolute; inset:0; width:100%; height:100%}
+
+  /* stat strip */
+  .stats{
+    margin-top: 56px; padding-top: 28px;
+    border-top: 1px solid var(--rule);
+    display:grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+  }
+  @media (max-width: 720px){ .stats{grid-template-columns: repeat(2, 1fr); gap:24px 20px} }
+  .stat .k{font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--mute)}
+  .stat .v{font-family:'Newsreader', serif; font-size: 26px; margin-top: 4px; letter-spacing:-0.015em}
+  .stat .v .u{font-size:13px; color:var(--mute); margin-left:4px}
+
+  /* ---------- section base ---------- */
+  section{padding: 96px 0; border-top: 1px solid var(--rule)}
+  @media (max-width: 720px){ section{padding:72px 0} }
+  .sec-head{display:flex; justify-content:space-between; align-items:baseline; gap:32px; margin-bottom:48px; flex-wrap:wrap}
+  .sec-head h2{
+    font-family:'Newsreader', serif;
+    font-size: clamp(30px, 3.4vw, 44px);
+    font-weight: 400; letter-spacing:-0.02em; line-height: 1.05;
+    max-width: 22ch;
+  }
+  .sec-head h2 em{font-style:italic; color:var(--accent-ink)}
+  .sec-head .meta{flex:0 0 auto; max-width: 42ch; color:var(--mute); font-size:14px; text-align:right}
+  @media (max-width: 720px){ .sec-head .meta{text-align:left} }
+
+  /* ---------- project section ---------- */
+  #project .cols{display:grid; grid-template-columns: 1fr 1fr; gap:56px}
+  @media (max-width: 860px){ #project .cols{grid-template-columns: 1fr; gap:28px} }
+  #project p{font-size:17px; line-height:1.6; color:var(--ink-2); margin:0 0 1em}
+  .feat-grid{
+    display:grid; grid-template-columns: repeat(2, 1fr); gap: 1px;
+    background: var(--rule);
+    border:1px solid var(--rule);
+    margin-top: 14px;
+  }
+  .feat{background:var(--paper); padding:20px 20px}
+  .feat .n{font-family:'JetBrains Mono',monospace; font-size:10.5px; color:var(--mute); letter-spacing:0.1em}
+  .feat .t{margin-top:6px; font-size:14.5px; font-weight:500; color:var(--ink)}
+  .feat .d{margin-top:4px; font-size:13px; color:var(--mute); line-height:1.5}
+
+  /* ---------- software showcase ---------- */
+  #software{background: var(--paper-2)}
+  .sw-head-row{
+    display:flex; align-items:center; gap:14px; margin-bottom:6px; flex-wrap:wrap;
+  }
+  .sw-title{
+    font-family:'Newsreader', serif; font-weight:500;
+    font-size: clamp(34px, 4vw, 52px); letter-spacing:-0.02em; line-height:1;
+  }
+  .sw-title .short{color:var(--mute); font-size:0.55em; letter-spacing:0.02em; margin-left:14px; font-style:italic}
+  .sw-sub{color:var(--ink-2); max-width: 62ch; font-size: 17px; line-height:1.55; margin-top:18px}
+  .sw-status{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:6px 12px; border-radius:999px;
+    background: #fff; border:1px solid var(--rule);
+    font-family:'JetBrains Mono',monospace; font-size:11px;
+    color: var(--ink-2); letter-spacing:0.04em;
+  }
+  .sw-status .pulse{
+    width:8px;height:8px;border-radius:50%; background:var(--accent);
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent) 60%, transparent);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse{
+    0%{box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent) 60%, transparent)}
+    80%,100%{box-shadow: 0 0 0 10px transparent}
+  }
+
+  .screens{
+    margin-top: 48px;
+    display:grid; grid-template-columns: 2fr 1fr; gap: 20px;
+  }
+  @media (max-width: 900px){ .screens{grid-template-columns: 1fr} }
+  .screen{
+    background:#fff; border:1px solid var(--rule); border-radius: 8px;
+    overflow:hidden; box-shadow: var(--shadow);
+    display:flex; flex-direction:column;
+  }
+  .screen .sh{
+    display:flex; align-items:center; gap:10px; padding:10px 14px;
+    border-bottom:1px solid var(--rule); background: var(--paper);
+  }
+  .screen .sh .lights{display:flex; gap:5px}
+  .screen .sh .lights i{width:10px;height:10px;border-radius:50%; background:var(--paper-3)}
+  .screen .sh .title{font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--mute); letter-spacing:0.04em}
+  .screen .body{flex:1; position:relative; background: var(--paper)}
+  .screen img{width:100%; height:100%; object-fit:cover; object-position:top left; display:block}
+  .screen .cap{
+    padding: 14px 16px; border-top:1px solid var(--rule); background:#fff;
+    display:flex; justify-content:space-between; align-items:center;
+  }
+  .screen .cap .n{font-family:'JetBrains Mono',monospace; font-size:10.5px; color:var(--mute); letter-spacing:0.1em; text-transform:uppercase}
+  .screen .cap .t{font-size:14px; font-weight:500}
+  .screen.tall .body{aspect-ratio: 16/10}
+  .screen.sq .body{aspect-ratio: 4/5}
+  .screen-stack{display:grid; gap:20px; grid-template-rows: 1fr 1fr}
+  @media (max-width:900px){ .screen-stack{grid-template-rows:auto auto} }
+
+  /* specs strip */
+  .specs{
+    margin-top: 56px;
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 10px;
+    padding: 32px;
+    display:grid; grid-template-columns: repeat(4, 1fr); gap: 28px;
+  }
+  @media (max-width: 820px){ .specs{grid-template-columns: repeat(2, 1fr); gap:24px} }
+  .specs .row{display:flex; flex-direction:column; gap:4px}
+  .specs .row .k{font-family:'JetBrains Mono',monospace; font-size:10.5px; color: color-mix(in oklab, var(--paper) 60%, transparent); letter-spacing:0.1em; text-transform:uppercase}
+  .specs .row .v{font-size: 15.5px; font-weight:500; font-family:'Inter', sans-serif; letter-spacing:-0.01em}
+  .specs .row .v .acc{color: oklch(0.78 0.12 148)}
+
+  /* ---------- suite roadmap ---------- */
+  #suite{background: var(--paper)}
+  .suite-list{
+    margin-top:8px; border-top: 1px solid var(--ink);
+  }
+  .suite-row{
+    display:grid; grid-template-columns: 80px 1.2fr 2fr 170px; gap: 24px;
+    padding: 28px 0; border-bottom: 1px solid var(--rule);
+    align-items: baseline;
+  }
+  @media (max-width: 820px){
+    .suite-row{grid-template-columns: 60px 1fr; gap: 8px 16px; row-gap: 6px; padding: 20px 0}
+    .suite-row .descr{grid-column: 1/-1; margin-top:4px}
+    .suite-row .status-cell{grid-column: 1/-1; text-align:left; margin-top:6px}
+  }
+  .suite-row .num{
+    font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--mute);
+    letter-spacing:0.1em;
+  }
+  .suite-row .name{
+    font-family:'Newsreader', serif; font-size: 26px; letter-spacing:-0.015em;
+    font-weight:500;
+  }
+  .suite-row .name .full{color:var(--mute); font-size: 15px; margin-left: 10px; font-family:'Inter', sans-serif; font-weight:400; font-style:italic}
+  .suite-row .descr{color:var(--ink-2); font-size:14.5px; line-height:1.5}
+  .suite-row .status-cell{text-align:right; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.06em}
+  .suite-row .status-cell .st{
+    display:inline-flex; align-items:center; gap:6px; padding:4px 10px;
+    border-radius:999px; border:1px solid var(--rule);
+    text-transform:uppercase;
+  }
+  .suite-row .status-cell .st.active{background: var(--ink); color: var(--paper); border-color: var(--ink)}
+  .suite-row .status-cell .st .d{width:6px;height:6px;border-radius:50%; background:var(--mute)}
+  .suite-row .status-cell .st.active .d{background: var(--accent)}
+  .suite-row.featured .name{color:var(--ink)}
+  .suite-row.planned{opacity:0.78}
+
+  /* ---------- team ---------- */
+  #team{background: var(--paper-2)}
+  .team-grid{
+    display:grid; grid-template-columns: 1.2fr 1fr; gap: 56px;
+    align-items:start;
+  }
+  @media (max-width: 900px){ .team-grid{grid-template-columns: 1fr; gap: 40px} }
+  .person{
+    background:#fff; border:1px solid var(--rule); border-radius: 10px;
+    overflow:hidden; box-shadow: var(--shadow);
+  }
+  .person .photo{
+    aspect-ratio: 4/5; overflow:hidden; background: var(--paper-3);
+  }
+  .person .photo img{width:100%; height:100%; object-fit:cover}
+  .person.lead .photo{aspect-ratio: 4/5}
+  .person .body{padding: 22px 24px 26px}
+  .person .role{
+    font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.1em;
+    text-transform:uppercase; color:var(--mute);
+  }
+  .person .role .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--accent);vertical-align:2px;margin-right:6px}
+  .person .name{font-family:'Newsreader', serif; font-size: 28px; letter-spacing:-0.015em; margin-top: 6px; font-weight:500}
+  .person .aff{color:var(--ink-2); font-size:14.5px; margin-top:4px}
+  .person .bio{margin-top:14px; color:var(--ink-2); font-size:14.5px; line-height:1.55}
+  .person .links{margin-top: 18px; display:flex; gap:10px; flex-wrap:wrap}
+  .person .links a{
+    display:inline-flex; align-items:center; gap:7px;
+    font-size:12.5px; padding: 7px 12px; border-radius: 999px;
+    border:1px solid var(--rule); color:var(--ink-2);
+    font-family:'Inter', sans-serif;
+  }
+  .person .links a:hover{border-color:var(--ink); color:var(--ink)}
+  .person .links a svg{width:13px;height:13px}
+
+  /* affiliations strip */
+  .affils{
+    margin-top: 56px;
+    border-top: 1px solid var(--rule);
+    padding-top: 28px;
+  }
+  .affils .label{
+    font-family:'JetBrains Mono',monospace; font-size:10.5px;
+    color:var(--mute); letter-spacing:0.1em; text-transform:uppercase;
+    margin-bottom: 20px;
+  }
+  .affils .grid{
+    display:grid; grid-template-columns: 1fr 1fr; gap: 20px;
+  }
+  @media (max-width: 720px){ .affils .grid{grid-template-columns: 1fr} }
+  .affil{
+    display:flex; align-items:center; gap: 22px;
+    background:#fff; border:1px solid var(--rule); border-radius: 10px;
+    padding: 22px 26px;
+    transition: border-color .15s ease, transform .15s ease;
+  }
+  .affil:hover{border-color: var(--ink)}
+  .affil .logo-box{
+    flex: 0 0 auto;
+    width: 110px; height: 64px;
+    display:grid; place-items:center;
+  }
+  .affil .logo-box img{max-width:100%; max-height:100%; object-fit: contain}
+  .affil .meta-col{flex:1; min-width:0}
+  .affil .role{
+    font-family:'JetBrains Mono',monospace; font-size:10.5px; color:var(--mute);
+    letter-spacing:0.1em; text-transform:uppercase;
+  }
+  .affil .name{font-size: 15px; font-weight:500; color:var(--ink); margin-top:4px; letter-spacing:-0.005em}
+  .affil .sub{font-size: 13px; color:var(--mute); margin-top:2px}
+  @media (max-width: 480px){
+    .affil{flex-direction:column; align-items:flex-start; gap:14px}
+    .affil .logo-box{width:auto; height: 54px}
+  }
+
+  /* attribution card */
+  .attrib{
+    background: #fff;
+    border:1px solid var(--rule);
+    border-radius: 10px; padding: 28px;
+    font-size: 14px; color: var(--ink-2); line-height:1.6;
+  }
+  .attrib h4{font-family:'Newsreader', serif; font-size:22px; font-weight:500; letter-spacing:-0.01em; color:var(--ink); margin-bottom:10px}
+  .attrib .line{display:flex; gap:10px; padding:10px 0; border-top: 1px dashed var(--rule-2); font-size:13.5px}
+  .attrib .line:first-of-type{border-top:none}
+  .attrib .line .k{font-family:'JetBrains Mono',monospace; font-size:10.5px; color:var(--mute); letter-spacing:0.08em; text-transform:uppercase; width:110px; flex:0 0 auto; padding-top:2px}
+  .attrib .line .v{flex:1}
+
+  /* ---------- contribute / CTA ---------- */
+  #contribute{background: var(--ink); color: var(--paper); border-top-color: var(--ink)}
+  #contribute .eyebrow{color: color-mix(in oklab, var(--paper) 60%, transparent)}
+  #contribute h2{color: var(--paper)}
+  #contribute h2 em{color: oklch(0.82 0.12 148)}
+  #contribute .sec-head .meta{color: color-mix(in oklab, var(--paper) 65%, transparent)}
+  .channels{
+    display:grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
+  }
+  @media (max-width: 820px){ .channels{grid-template-columns: 1fr} }
+  .channel{
+    background: color-mix(in oklab, var(--paper) 6%, transparent);
+    border: 1px solid color-mix(in oklab, var(--paper) 14%, transparent);
+    border-radius: 10px;
+    padding: 24px;
+    display:flex; flex-direction:column; gap: 12px;
+    min-height: 180px;
+  }
+  .channel .c-head{display:flex; justify-content:space-between; align-items:center}
+  .channel .c-head .n{font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color: color-mix(in oklab, var(--paper) 55%, transparent)}
+  .channel .c-title{font-family:'Newsreader', serif; font-size: 24px; line-height:1.1; font-weight:500; letter-spacing:-0.015em}
+  .channel .c-body{color: color-mix(in oklab, var(--paper) 72%, transparent); font-size:13.5px; line-height:1.55; flex:1}
+  .channel .c-foot{display:flex; justify-content:space-between; align-items:center; font-size:12px}
+  .channel .c-foot .arrow{opacity:.6; transition:transform .15s ease}
+  .channel:hover .c-foot .arrow{transform:translateX(3px); opacity:1}
+  .channel.locked{opacity:.55}
+  .channel.locked .c-foot .arrow{display:none}
+
+  /* ---------- footer ---------- */
+  footer{
+    padding: 48px 0 32px;
+    border-top: 1px solid var(--rule);
+    font-size: 13px; color: var(--mute);
+  }
+  footer .row{
+    display:flex; justify-content:space-between; align-items:flex-start; gap:28px; flex-wrap:wrap
+  }
+  footer .col b{color:var(--ink); font-weight:500; display:block; margin-bottom:8px; font-size:12px; letter-spacing:0.06em; text-transform:uppercase; font-family:'JetBrains Mono',monospace}
+  footer .col a{display:block; padding:3px 0}
+  footer .col a:hover{color:var(--ink)}
+  footer .col a.muted{opacity:.5}
+  footer .col a.muted:hover{color:var(--mute)}
+  footer .legal{margin-top: 36px; padding-top: 18px; border-top: 1px solid var(--rule); display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.05em}
+
+  /* utility */
+  .noise-bg{
+    position: absolute; inset: 0; pointer-events:none; opacity:.35;
+    background-image: radial-gradient(1px 1px at 20% 20%, #14131110 0, transparent 2px), radial-gradient(1px 1px at 80% 60%, #14131108 0, transparent 2px);
+    background-size: 40px 40px, 55px 55px;
+    mix-blend-mode: multiply;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============== TOP ============== -->
+<header class="top">
+  <div class="wrap top-inner">
+    <a class="brand wordmark" href="#top">
+      <span class="name"><b>OpenGeoRock</b></span>
+    </a>
+    <nav class="primary">
+      <a href="#project">Project</a>
+      <a href="#software">Slip2D</a>
+      <a href="#suite">Suite</a>
+      <a href="#team">Team</a>
+      <a href="#contribute" class="cta">Contribute</a>
+    </nav>
+  </div>
+</header>
+
+<a id="top"></a>
+
+<!-- ============== HERO ============== -->
+<section class="hero" style="border-top:none; padding-top: 72px">
+  <div class="wrap">
+    <div class="eyebrow"><span class="dot"></span>v0.1.6 · in active development · GPL-3.0</div>
+    <div class="hero-grid" style="margin-top:22px">
+      <div>
+        <h1>
+          Open-source <em>geotechnical</em><br/>
+          software, <span class="soft">built in the open.</span>
+        </h1>
+        <p class="lede">
+          OpenGeoRock is a growing suite of Python programs for slope stability, rock mechanics and finite-element geotechnical analysis — designed as a rigorous, modern alternative that engineers and researchers can read, extend and trust.
+        </p>
+        <div class="cta-row">
+          <a class="btn primary" href="#software">
+            Explore OGR Slip2D
+            <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/><path d="M13 5l7 7-7 7"/></svg>
+          </a>
+          <a class="btn ghost locked" title="Downloads will open with the first public release" aria-disabled="true">
+            <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 12l3 3 3-3"/><path d="M12 6v9"/></svg>
+            Downloads <span class="tag soon" style="margin-left:6px">SOON</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- specimen: analysis result card -->
+      <div class="specimen" aria-hidden="true">
+        <div class="sp-head">
+          <div>
+            <div class="t">Analysis · bishop_simplified</div>
+            <div style="margin-top:4px; font-size:11px; color:var(--mute)">772 / 1202 valid surfaces · 8 iter</div>
+          </div>
+          <div class="fos"><span class="label">FoS</span>1.521</div>
+        </div>
+        <div class="chart" style="aspect-ratio: 1218/607">
+          <img src="assets/screens/hero-analysis.png" alt="Slope analysis with critical slip surface and factor of safety 1.52" loading="eager" style="position:absolute; inset:0; width:100%; height:100%; object-fit: contain; background:#fff"/>
+        </div>
+        <div style="margin-top:14px">
+          <div class="row"><span class="k">method</span><span class="v">bishop_simplified</span></div>
+          <div class="row"><span class="k">critical FoS</span><span class="v hi">1.521</span></div>
+          <div class="row"><span class="k">centre</span><span class="v">(71.43, 81.00)</span></div>
+          <div class="row"><span class="k">radius</span><span class="v">61.00 m</span></div>
+          <div class="row"><span class="k">engine</span><span class="v">ogr-slip2d · py3.11</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- stat strip -->
+    <div class="stats">
+      <div class="stat">
+        <div class="k">Programs planned</div>
+        <div class="v">5 <span class="u">in the suite</span></div>
+      </div>
+      <div class="stat">
+        <div class="k">Currently shipping</div>
+        <div class="v">OGR Slip2D <span class="u">·&nbsp;v0.1.6</span></div>
+      </div>
+      <div class="stat">
+        <div class="k">License</div>
+        <div class="v">GPL-3.0</div>
+      </div>
+      <div class="stat">
+        <div class="k">Stack</div>
+        <div class="v">Python 3.11 <span class="u">·&nbsp;PySide6</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== PROJECT ============== -->
+<section id="project">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="eyebrow"><span class="dot"></span>01 / The project</div>
+        <h2 style="margin-top:12px">A modern, transparent toolkit for <em>ground engineering</em>.</h2>
+      </div>
+      <div class="meta">OpenGeoRock is a community-driven suite of geotechnical analysis programs, written entirely in Python and released under GPL-3.0 so anyone can read the source, reproduce results, and extend the engines.</div>
+    </div>
+
+    <div class="cols">
+      <div>
+        <p>Most of the software geotechnical engineers rely on is closed, expensive, and opaque — a black box at the centre of decisions about dams, slopes, tunnels and foundations. OpenGeoRock is an effort to rebuild those core tools in the open, with a clean engineering core, a modern desktop interface, and a test suite that anyone can inspect.</p>
+        <p>The suite will grow incrementally. We are starting with 2D slope stability — the tool practitioners reach for most — and will expand into material databases, 2D/3D finite element analysis, and 3D limit equilibrium over the coming years.</p>
+      </div>
+
+      <div>
+        <div class="eyebrow">Design principles</div>
+        <div class="feat-grid">
+          <div class="feat">
+            <div class="n">01</div>
+            <div class="t">Readable engines</div>
+            <div class="d">Computation cores are pure Python, documented, and decoupled from the UI so they can be scripted or embedded.</div>
+          </div>
+          <div class="feat">
+            <div class="n">02</div>
+            <div class="t">Modern desktop UX</div>
+            <div class="d">A clean PySide6/Qt6 interface with a proper modeller, interpreter, and an embedded Python terminal for automation.</div>
+          </div>
+          <div class="feat">
+            <div class="n">03</div>
+            <div class="t">Verifiable results</div>
+            <div class="d">Benchmarks and reference cases ship with the source. Any run can be reproduced from its project file alone.</div>
+          </div>
+          <div class="feat">
+            <div class="n">04</div>
+            <div class="t">Built for contribution</div>
+            <div class="d">Small, well-scoped modules. New methods, materials and analysis types are meant to be added by the community.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== SOFTWARE ============== -->
+<section id="software">
+  <div class="wrap">
+    <div class="sec-head" style="align-items:flex-end">
+      <div style="flex:1">
+        <div class="eyebrow"><span class="dot"></span>02 / First release</div>
+        <div class="sw-head-row" style="margin-top:14px">
+          <div class="sw-title">OGR Slip2D <span class="short">/ ogr-slip2d</span></div>
+        </div>
+        <p class="sw-sub">A modern, open-source 2D slope stability program based on the <em>Limit Equilibrium Method</em>. It supports circular and non-circular failure surfaces, multiple materials, pore pressure models, external loads, structural reinforcement, and seismic analysis.</p>
+      </div>
+      <div class="sw-status" style="align-self:flex-start; margin-top: 18px">
+        <span class="pulse"></span> GUI in active development · engine stable
+      </div>
+    </div>
+
+    <!-- screens -->
+    <div class="screens" style="grid-template-columns: 1fr 1fr">
+      <div class="screen tall" style="grid-column: 1 / -1">
+        <div class="sh">
+          <div class="lights"><i></i><i></i><i></i></div>
+          <div class="title">modeler · results · embedded python terminal</div>
+        </div>
+        <div class="body" style="aspect-ratio: 1918/1030; background: var(--paper-3)">
+          <img src="assets/screens/01-modeler.png" alt="Modeler workspace with slope geometry, slip surfaces, and embedded Python terminal" loading="lazy" style="object-fit: contain; object-position: center; background:#fff"/>
+        </div>
+        <div class="cap">
+          <div class="n">fig · 01 / modeler</div>
+          <div class="t">Geometry editor · critical surface · scripting console</div>
+        </div>
+      </div>
+      <div class="screen" style="grid-column: 1 / -1">
+        <div class="sh">
+          <div class="lights"><i></i><i></i><i></i></div>
+          <div class="title">interpret · result viewer</div>
+        </div>
+        <div class="body" style="aspect-ratio: 1918/1030; background: var(--paper-3)">
+          <img src="assets/screens/02-interpret.png" alt="Interpret module showing FoS summary and surface table" loading="lazy" style="object-fit: contain; object-position: center; background:#fff"/>
+        </div>
+        <div class="cap">
+          <div class="n">fig · 02 / interpret</div>
+          <div class="t">Result post-processing · FoS summary · surface table</div>
+        </div>
+      </div>
+      <div class="screen">
+        <div class="sh">
+          <div class="lights"><i></i><i></i><i></i></div>
+          <div class="title">define materials · properties</div>
+        </div>
+        <div class="body" style="aspect-ratio: 712/650; background: var(--paper-3); display:grid; place-items:center">
+          <img src="assets/screens/03-materials.png" alt="Define Materials dialog with Mohr-Coulomb properties" loading="lazy" style="width:100%; height:100%; object-fit: contain; object-position: center; padding: 18px; background:#fff"/>
+        </div>
+        <div class="cap">
+          <div class="n">fig · 03 / materials</div>
+          <div class="t">Strength &amp; pore-pressure definition</div>
+        </div>
+      </div>
+      <div class="screen">
+        <div class="sh">
+          <div class="lights"><i></i><i></i><i></i></div>
+          <div class="title">surface options · search config</div>
+        </div>
+        <div class="body" style="aspect-ratio: 712/650; background: var(--paper-3); display:grid; place-items:center">
+          <img src="assets/screens/04-surfaces.png" alt="Surface options dialog for configuring failure surface search" loading="lazy" style="width:100%; height:100%; object-fit: contain; object-position: center; padding: 18px; background:#fff"/>
+        </div>
+        <div class="cap">
+          <div class="n">fig · 04 / surfaces</div>
+          <div class="t">Search method &amp; filters</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- spec strip -->
+    <div class="specs">
+      <div class="row">
+        <div class="k">Lead developer</div>
+        <div class="v">Samuel Sáez López</div>
+      </div>
+      <div class="row">
+        <div class="k">Institution</div>
+        <div class="v">UPCT <span style="color:color-mix(in oklab, var(--paper) 55%, transparent)">· PhD programme</span></div>
+      </div>
+      <div class="row">
+        <div class="k">License</div>
+        <div class="v"><span class="acc">GPL-3.0</span></div>
+      </div>
+      <div class="row">
+        <div class="k">Stack</div>
+        <div class="v">Python 3.11+ · PySide6 (Qt6)</div>
+      </div>
+      <div class="row">
+        <div class="k">Analysis methods</div>
+        <div class="v">Bishop · Janbu · Spencer · Morgenstern–Price</div>
+      </div>
+      <div class="row">
+        <div class="k">Surfaces</div>
+        <div class="v">Circular &amp; non-circular</div>
+      </div>
+      <div class="row">
+        <div class="k">Loading</div>
+        <div class="v">External loads · pore pressure · seismic (k<sub>h</sub>, k<sub>v</sub>)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== SUITE ROADMAP ============== -->
+<section id="suite">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="eyebrow"><span class="dot"></span>03 / The suite</div>
+        <h2 style="margin-top:12px">Five programs, <em>one open ecosystem.</em></h2>
+      </div>
+      <div class="meta">OGR Slip2D is the first piece. Over the coming years the suite will grow to cover the workflows a modern geotechnical office runs daily — from material databases to 3D finite element analysis.</div>
+    </div>
+
+    <div class="suite-list">
+
+      <div class="suite-row featured">
+        <div class="num">01</div>
+        <div>
+          <div class="name">OGR Slip2D<span class="full">2D slope stability</span></div>
+        </div>
+        <div class="descr">Limit-equilibrium slope stability in 2D. Circular and non-circular surfaces, staged loading, pore pressure models, reinforcement and pseudo-static seismic analysis.</div>
+        <div class="status-cell"><span class="st active"><span class="d"></span>In development</span></div>
+      </div>
+
+      <div class="suite-row planned">
+        <div class="num">02</div>
+        <div>
+          <div class="name">OGR Data<span class="full">material &amp; rock-mass database</span></div>
+        </div>
+        <div class="descr">A curated, queryable database of soil and rock-mass properties, correlations and empirical charts, feeding the rest of the suite with consistent inputs.</div>
+        <div class="status-cell"><span class="st"><span class="d"></span>Planned</span></div>
+      </div>
+
+      <div class="suite-row planned">
+        <div class="num">03</div>
+        <div>
+          <div class="name">OGR FEM2D<span class="full">2D finite element analysis</span></div>
+        </div>
+        <div class="descr">Elasto-plastic 2D FEM for stresses, deformations and strength reduction, for excavations, tunnels and embankments.</div>
+        <div class="status-cell"><span class="st"><span class="d"></span>Planned</span></div>
+      </div>
+
+      <div class="suite-row planned">
+        <div class="num">04</div>
+        <div>
+          <div class="name">OGR Slip3D<span class="full">3D slope stability</span></div>
+        </div>
+        <div class="descr">Extension of the limit-equilibrium engine to fully three-dimensional failure surfaces — for open-pit mines, landslides and complex terrain.</div>
+        <div class="status-cell"><span class="st"><span class="d"></span>Planned</span></div>
+      </div>
+
+      <div class="suite-row planned">
+        <div class="num">05</div>
+        <div>
+          <div class="name">OGR FEM3D<span class="full">3D finite element analysis</span></div>
+        </div>
+        <div class="descr">Full 3D finite-element solver for rock and soil mechanics: stress analysis, deformation, and coupled groundwater flow on arbitrary geometries.</div>
+        <div class="status-cell"><span class="st"><span class="d"></span>Planned</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============== TEAM ============== -->
+<section id="team">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="eyebrow"><span class="dot"></span>04 / Who is behind it</div>
+        <h2 style="margin-top:12px">A small team, <em>based in Cartagena.</em></h2>
+      </div>
+      <div class="meta">OpenGeoRock is led and coded by Samuel Sáez López as part of his PhD at the Universidad Politécnica de Cartagena (UPCT), under the academic direction of Prof. Emilio Trigueros Tornero.</div>
+    </div>
+
+    <div class="team-grid">
+      <!-- Samuel -->
+      <div class="person lead">
+        <div class="photo">
+          <img src="assets/people/samuel.jpg" alt="Samuel Sáez López on site at a quarry" loading="lazy"/>
+        </div>
+        <div class="body">
+          <div class="role"><span class="dot"></span>Lead developer · Author</div>
+          <div class="name">Samuel Sáez López</div>
+          <div class="aff">
+            Mining Engineer · <span style="color:var(--mute)">Universidad Politécnica de Cartagena (UPCT)</span>
+          </div>
+          <div style="margin-top:10px; padding:10px 12px; background: var(--paper); border:1px solid var(--rule); border-radius: 6px; font-family:'JetBrains Mono', monospace; font-size: 11.5px; line-height:1.45; color: var(--ink-2); letter-spacing:0.01em">
+            <span style="color:var(--mute); text-transform:uppercase; letter-spacing:0.08em; font-size:10px">PhD student ·</span>
+            Technology and Modeling in Civil, Mining, and Environmental Engineering
+          </div>
+          <div class="bio">
+            Samuel is a mining engineer and PhD candidate at UPCT. He is the sole author and maintainer of the OpenGeoRock codebase, and leads the design of both its computational engine and its interface. His doctoral research on slope stability and rock mechanics directly informs the numerical methods shipped in OGR Slip2D.
+          </div>
+          <div class="links">
+            <a href="https://www.linkedin.com/in/samuel-saez-lopez-7603091a2/" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 4a2 2 0 100 4 2 2 0 000-4zm-1 6h2v10H3V10zm5 0h2v1.5c.6-1 1.8-1.7 3-1.7 2.3 0 3.5 1.5 3.5 4.2V20h-2v-5.3c0-1.6-.6-2.5-2-2.5s-2.2 1-2.2 2.5V20H8V10z"/></svg>
+              LinkedIn
+            </a>
+            <a href="/cdn-cgi/l/email-protection#0a796b677f6f6624796b6f704a6f6e7f247f7a697e246f79">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+              <span class="__cf_email__" data-cfemail="2c5f4d41594940025f4d49566c49485902595c4f5802495f">[email&#160;protected]</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Emilio + attribution -->
+      <div>
+        <div class="person">
+          <div class="body">
+            <div class="role"><span class="dot"></span>Academic advisor · Collaborator</div>
+            <div class="name" style="display:flex; align-items:center; gap:16px; flex-wrap:wrap">
+              <img src="assets/people/emilio.jpg" alt="Emilio Trigueros" style="width:56px; height:56px; border-radius:50%; object-fit:cover; border:1px solid var(--rule)"/>
+              Emilio Trigueros Tornero
+            </div>
+            <div class="aff">Professor · Director of the PhD programme · UPCT</div>
+            <div class="bio">
+              Prof. Trigueros is the academic director of Samuel's doctoral research at UPCT and a close collaborator on the scientific direction of the OpenGeoRock project. He contributes guidance on rock mechanics, research methodology and the broader geotechnical context in which the suite is being developed.
+            </div>
+            <div class="links">
+              <a href="https://www.linkedin.com/in/emilio-trigueros-a0ba0a40/" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 4a2 2 0 100 4 2 2 0 000-4zm-1 6h2v10H3V10zm5 0h2v1.5c.6-1 1.8-1.7 3-1.7 2.3 0 3.5 1.5 3.5 4.2V20h-2v-5.3c0-1.6-.6-2.5-2-2.5s-2.2 1-2.2 2.5V20H8V10z"/></svg>
+                LinkedIn
+              </a>
+              <a href="https://personas.upct.es/perfil/emilio.trigueros" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c3 3.5 3 14 0 18"/><path d="M12 3c-3 3.5-3 14 0 18"/></svg>
+                UPCT profile
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="attrib" style="margin-top: 20px">
+          <h4>Authorship &amp; intellectual property</h4>
+          <p style="margin:0 0 12px; color:var(--ink-2)">
+            To make the division of contributions unambiguous, the OpenGeoRock source and this site state explicitly:
+          </p>
+          <div class="line">
+            <div class="k">Code author</div>
+            <div class="v">Samuel Sáez López is the sole author and copyright holder of the OpenGeoRock source code.</div>
+          </div>
+          <div class="line">
+            <div class="k">Advisor</div>
+            <div class="v">Emilio Trigueros Tornero contributes academic direction and scientific collaboration; he is not an author of the software.</div>
+          </div>
+          <div class="line">
+            <div class="k">License</div>
+            <div class="v">All source is released under the GNU General Public License v3.0.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- affiliations -->
+    <div class="affils">
+      <div class="label">Academic &amp; professional collaborators</div>
+      <div class="grid">
+        <a class="affil" href="https://www.upct.es" target="_blank" rel="noopener">
+          <div class="logo-box"><img src="assets/logos/upct.png" alt="Universidad Politécnica de Cartagena"/></div>
+          <div class="meta-col">
+            <div class="role">Academic institution</div>
+            <div class="name">Universidad Politécnica de Cartagena</div>
+            <div class="sub">PhD programme · research context</div>
+          </div>
+        </a>
+        <a class="affil" href="#" onclick="event.preventDefault()" style="cursor:default">
+          <div class="logo-box"><img src="assets/logos/imga.png" alt="IMGA S.L.P."/></div>
+          <div class="meta-col">
+            <div class="role">Professional collaborator</div>
+            <div class="name">IMGA S.L.P.</div>
+            <div class="sub">Ingeniería Minera, Geológica y Ambiental</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== CONTRIBUTE ============== -->
+<section id="contribute">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="eyebrow"><span class="dot"></span>05 / Get involved</div>
+        <h2 style="margin-top:12px">Good geotechnical software is <em>built collectively.</em></h2>
+      </div>
+      <div class="meta">OpenGeoRock is looking for engineers, researchers and developers interested in contributing code, validating benchmarks, reporting issues, or simply trying the software on real projects.</div>
+    </div>
+
+    <div class="channels">
+      <a class="channel" href="/cdn-cgi/l/email-protection#b8cbd9d5cdddd496cbd9ddc2f8dddccd96cdc8dbcc96ddcb">
+        <div class="c-head">
+          <div class="n">01 · direct</div>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+        </div>
+        <div class="c-title">Get in touch</div>
+        <div class="c-body">Questions, collaboration proposals, or use cases from your own work — write to the lead developer directly.</div>
+        <div class="c-foot"><span><span class="__cf_email__" data-cfemail="b7c4d6dac2d2db99c4d6d2cdf7d2d3c299c2c7d4c399d2c4">[email&#160;protected]</span></span><span class="arrow">→</span></div>
+      </a>
+
+      <div class="channel locked" aria-disabled="true" title="Opens with the first public release">
+        <div class="c-head">
+          <div class="n">02 · community</div>
+          <span class="tag soon" style="background:transparent; border-color: color-mix(in oklab, var(--paper) 25%, transparent); color: color-mix(in oklab, var(--paper) 70%, transparent)">SOON</span>
+        </div>
+        <div class="c-title">Forum &amp; discussions</div>
+        <div class="c-body">A public forum for users and contributors: modelling questions, feature requests, shared benchmark cases and release discussion.</div>
+        <div class="c-foot"><span>Opens with v0.2</span></div>
+      </div>
+
+      <div class="channel locked" aria-disabled="true" title="Opens with the first public release">
+        <div class="c-head">
+          <div class="n">03 · builds</div>
+          <span class="tag soon" style="background:transparent; border-color: color-mix(in oklab, var(--paper) 25%, transparent); color: color-mix(in oklab, var(--paper) 70%, transparent)">SOON</span>
+        </div>
+        <div class="c-title">Downloads</div>
+        <div class="c-body">Signed installers for Windows, macOS and Linux, plus source tarballs and example projects. Available once the first public beta of OGR Slip2D is released.</div>
+        <div class="c-foot"><span>Windows · macOS · Linux</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== FOOTER ============== -->
+<footer>
+  <div class="wrap">
+    <div class="row">
+      <div class="col" style="max-width:360px">
+        <div class="brand wordmark" style="margin-bottom:10px">
+          <span class="name"><b>OpenGeoRock</b></span>
+        </div>
+        <div>Open-source geotechnical software, developed in Castellón de la Plana, Spain.</div>
+      </div>
+
+      <div class="col">
+        <b>Project</b>
+        <a href="#project">Overview</a>
+        <a href="#software">OGR Slip2D</a>
+        <a href="#suite">Suite roadmap</a>
+        <a href="#team">Team</a>
+      </div>
+
+      <div class="col">
+        <b>Resources</b>
+        <a class="muted" href="#" aria-disabled="true">Documentation · soon</a>
+        <a class="muted" href="#" aria-disabled="true">Downloads · soon</a>
+        <a class="muted" href="#" aria-disabled="true">Forum · soon</a>
+        <a class="muted" href="#" aria-disabled="true">Changelog · soon</a>
+      </div>
+
+      <div class="col">
+        <b>Connect</b>
+        <a href="/cdn-cgi/l/email-protection#c3b0a2aeb6a6afedb0a2a6b983a6a7b6edb6b3a0b7eda6b0">Email</a>
+        <a href="https://www.linkedin.com/in/samuel-saez-lopez-7603091a2/" target="_blank" rel="noopener">Samuel · LinkedIn</a>
+        <a href="https://www.linkedin.com/in/emilio-trigueros-a0ba0a40/" target="_blank" rel="noopener">Emilio · LinkedIn</a>
+        <a href="https://personas.upct.es/perfil/emilio.trigueros" target="_blank" rel="noopener">UPCT profile</a>
+      </div>
+    </div>
+
+    <div class="legal">
+      <div>© 2026 Samuel Sáez López · Released under GPL-3.0</div>
+      <div>OpenGeoRock · v0.1.6 · built in Castellón de la Plana</div>
+    </div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</html>
