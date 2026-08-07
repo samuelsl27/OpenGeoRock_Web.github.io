@@ -1,0 +1,16 @@
+{
+  "$comment": [
+    "Copia este archivo a .claude/settings.local.json y ajústalo a tu gusto.",
+    "settings.local.json está en .gitignore: no se versiona.",
+    "Lo de aquí se fusiona sobre .claude/settings.json."
+  ],
+  "permissions": {
+    "allow": [
+      "Bash(start:*)",
+      "Bash(explorer:*)"
+    ]
+  },
+  "env": {
+    "CONTEXT7_API_KEY": "pon-aqui-tu-clave-o-mejor-en-el-entorno-del-sistema"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "$comment": [
+    "Configuración compartida del proyecto (se versiona).",
+    "Los ajustes personales van en .claude/settings.local.json, que está",
+    "en .gitignore: así cada persona ajusta lo suyo sin tocar el repo.",
+    "git push sobre main publica en producción: por eso está en 'ask'."
+  ],
+  "permissions": {
+    "allow": [
+      "Bash(git status)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git show:*)",
+      "Bash(python -m http.server:*)",
+      "Bash(grep:*)",
+      "Bash(rg:*)",
+      "Bash(ls:*)",
+      "Bash(find:*)"
+    ],
+    "ask": [
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(rm:*)",
+      "Bash(mv:*)"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Write(./CNAME)",
+      "Edit(./CNAME)",
+      "Bash(git push --force:*)",
+      "Bash(git reset --hard:*)"
+    ]
+  }
+}

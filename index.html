@@ -4,7 +4,8 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>OpenGeoRock — Open-source geotechnical software</title>
-<meta name="description" content="OpenGeoRock is an open-source suite of geotechnical engineering programs written in Python. Led by Samuel Sáez López at UPCT." />
+<meta name="description" content="OpenGeoRock is an open-source suite of geotechnical engineering programs written in Python. OGR Slip2D — slope stability, finite-element groundwater flow and probabilistic analysis — is public under AGPL-3.0. Led by Samuel Sáez López at UPCT." />
+<link rel="canonical" href="https://opengeorock.org/" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -503,7 +504,7 @@
 <!-- ============== HERO ============== -->
 <section class="hero" style="border-top:none; padding-top: 72px">
   <div class="wrap">
-    <div class="eyebrow"><span class="dot"></span>v0.1.6 · in active development · GPL-3.0</div>
+    <div class="eyebrow"><span class="dot"></span>v0.1.59 · in active development · AGPL-3.0-or-later</div>
     <div class="hero-grid" style="margin-top:22px">
       <div>
         <h1>
@@ -518,7 +519,11 @@
             Explore OGR Slip2D
             <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/><path d="M13 5l7 7-7 7"/></svg>
           </a>
-          <a class="btn ghost locked" title="Downloads will open with the first public release" aria-disabled="true">
+          <a class="btn ghost" href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener">
+            <svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0C17.3 4.7 18.3 5 18.3 5c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0012 .5z"/></svg>
+            Source on GitHub
+          </a>
+          <a class="btn ghost locked" title="Signed installers will open with the first public release" aria-disabled="true">
             <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 12l3 3 3-3"/><path d="M12 6v9"/></svg>
             Downloads <span class="tag soon" style="margin-left:6px">SOON</span>
           </a>
@@ -554,12 +559,12 @@
         <div class="v">5 <span class="u">in the suite</span></div>
       </div>
       <div class="stat">
-        <div class="k">Currently shipping</div>
-        <div class="v">OGR Slip2D <span class="u">·&nbsp;v0.1.6</span></div>
+        <div class="k">Source available</div>
+        <div class="v">OGR Slip2D <span class="u">·&nbsp;v0.1.59</span></div>
       </div>
       <div class="stat">
         <div class="k">License</div>
-        <div class="v">GPL-3.0</div>
+        <div class="v">AGPL-3.0 <span class="u">·&nbsp;or later</span></div>
       </div>
       <div class="stat">
         <div class="k">Stack</div>
@@ -577,7 +582,7 @@
         <div class="eyebrow"><span class="dot"></span>01 / The project</div>
         <h2 style="margin-top:12px">A modern, transparent toolkit for <em>ground engineering</em>.</h2>
       </div>
-      <div class="meta">OpenGeoRock is a community-driven suite of geotechnical analysis programs, written entirely in Python and released under GPL-3.0 so anyone can read the source, reproduce results, and extend the engines.</div>
+      <div class="meta">OpenGeoRock is a community-driven suite of geotechnical analysis programs, written entirely in Python and released under AGPL-3.0-or-later so anyone can read the source, reproduce results, and extend the engines. The source of OGR Slip2D is public today.</div>
     </div>
 
     <div class="cols">
@@ -624,10 +629,10 @@
         <div class="sw-head-row" style="margin-top:14px">
           <div class="sw-title">OGR Slip2D <span class="short">/ ogr-slip2d</span></div>
         </div>
-        <p class="sw-sub">A modern, open-source 2D slope stability program based on the <em>Limit Equilibrium Method</em>. It supports circular and non-circular failure surfaces, multiple materials, pore pressure models, external loads, structural reinforcement, and seismic analysis.</p>
+        <p class="sw-sub">A modern, open-source 2D slope stability program built on the <em>Limit Equilibrium Method</em>: seven methods over circular and non-circular surfaces, eighteen strength models, external loads, reinforcement and pseudo-static seismic analysis. It also ships a full <em>finite-element groundwater</em> engine — saturated, unsaturated and transient seepage coupled back into stability — plus probabilistic and sensitivity analysis, Eurocode 7 partial factors, DXF interoperability and a command-line interface. The source is public and every method is published with the reference case it was validated against.</p>
       </div>
       <div class="sw-status" style="align-self:flex-start; margin-top: 18px">
-        <span class="pulse"></span> GUI in active development · engine stable
+        <span class="pulse"></span> v0.1.59 · public source · pre-release, in active development
       </div>
     </div>
 
@@ -691,15 +696,11 @@
     <div class="specs">
       <div class="row">
         <div class="k">Lead developer</div>
-        <div class="v">Samuel Sáez López</div>
-      </div>
-      <div class="row">
-        <div class="k">Institution</div>
-        <div class="v">UPCT <span style="color:color-mix(in oklab, var(--paper) 55%, transparent)">· PhD programme</span></div>
+        <div class="v">Samuel Sáez López <span style="color:color-mix(in oklab, var(--paper) 55%, transparent)">· UPCT, PhD programme</span></div>
       </div>
       <div class="row">
         <div class="k">License</div>
-        <div class="v"><span class="acc">GPL-3.0</span></div>
+        <div class="v"><span class="acc">AGPL-3.0-or-later</span></div>
       </div>
       <div class="row">
         <div class="k">Stack</div>
@@ -707,15 +708,39 @@
       </div>
       <div class="row">
         <div class="k">Analysis methods</div>
-        <div class="v">Bishop · Janbu · Spencer · Morgenstern–Price</div>
+        <div class="v">Fellenius · Bishop · Janbu · Spencer · GLE/Morgenstern–Price · Lowe–Karafiath</div>
       </div>
       <div class="row">
         <div class="k">Surfaces</div>
-        <div class="v">Circular &amp; non-circular</div>
+        <div class="v">Circular &amp; non-circular · 6 search algorithms</div>
+      </div>
+      <div class="row">
+        <div class="k">Strength models</div>
+        <div class="v">18 — Mohr–Coulomb · Hoek–Brown · Barton–Bandis · SHANSEP · anisotropic</div>
+      </div>
+      <div class="row">
+        <div class="k">Groundwater</div>
+        <div class="v">FE seepage — <span class="acc">saturated · unsaturated · transient</span></div>
       </div>
       <div class="row">
         <div class="k">Loading</div>
-        <div class="v">External loads · pore pressure · seismic (k<sub>h</sub>, k<sub>v</sub>)</div>
+        <div class="v">External loads · pore pressure · seismic (k<sub>h</sub>, k<sub>v</sub>) · tension cracks</div>
+      </div>
+      <div class="row">
+        <div class="k">Probabilistic</div>
+        <div class="v">Monte Carlo · Latin hypercube · sensitivity sweeps</div>
+      </div>
+      <div class="row">
+        <div class="k">Design codes</div>
+        <div class="v">Eurocode 7 — DA1-C1 · DA1-C2 · DA2 · DA3</div>
+      </div>
+      <div class="row">
+        <div class="k">Interoperability</div>
+        <div class="v">DXF import &amp; export · PDF reports · CLI · English / Spanish</div>
+      </div>
+      <div class="row">
+        <div class="k">Test suite</div>
+        <div class="v"><span class="acc">1280 tests passing</span> · validated against external references</div>
       </div>
     </div>
   </div>
@@ -739,7 +764,7 @@
         <div>
           <div class="name">OGR Slip2D<span class="full">2D slope stability</span></div>
         </div>
-        <div class="descr">Limit-equilibrium slope stability in 2D. Circular and non-circular surfaces, staged loading, pore pressure models, reinforcement and pseudo-static seismic analysis.</div>
+        <div class="descr">Limit-equilibrium slope stability in 2D. Circular and non-circular surfaces, staged loading, finite-element groundwater flow, reinforcement, pseudo-static seismic analysis and probabilistic assessment. Source public under AGPL-3.0.</div>
         <div class="status-cell"><span class="st active"><span class="d"></span>In development</span></div>
       </div>
 
@@ -757,7 +782,7 @@
         <div>
           <div class="name">OGR FEM2D<span class="full">2D finite element analysis</span></div>
         </div>
-        <div class="descr">Elasto-plastic 2D FEM for stresses, deformations and strength reduction, for excavations, tunnels and embankments.</div>
+        <div class="descr">Elasto-plastic 2D FEM for stresses, deformations and strength reduction, for excavations, tunnels and embankments. The finite-element kernel already ships inside Slip2D for groundwater flow.</div>
         <div class="status-cell"><span class="st"><span class="d"></span>Planned</span></div>
       </div>
 
@@ -818,9 +843,13 @@
               <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 4a2 2 0 100 4 2 2 0 000-4zm-1 6h2v10H3V10zm5 0h2v1.5c.6-1 1.8-1.7 3-1.7 2.3 0 3.5 1.5 3.5 4.2V20h-2v-5.3c0-1.6-.6-2.5-2-2.5s-2.2 1-2.2 2.5V20H8V10z"/></svg>
               LinkedIn
             </a>
-            <a href="/cdn-cgi/l/email-protection#0a796b677f6f6624796b6f704a6f6e7f247f7a697e246f79">
+            <a href="mailto:samuel.saez@edu.upct.es">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
-              <span class="__cf_email__" data-cfemail="2c5f4d41594940025f4d49566c49485902595c4f5802495f">[email&#160;protected]</span>
+              samuel.saez@edu.upct.es
+            </a>
+            <a href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0C17.3 4.7 18.3 5 18.3 5c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0012 .5z"/></svg>
+              GitHub
             </a>
           </div>
         </div>
@@ -867,7 +896,11 @@
           </div>
           <div class="line">
             <div class="k">License</div>
-            <div class="v">All source is released under the GNU General Public License v3.0.</div>
+            <div class="v">All source is released under the GNU Affero General Public License v3.0 or later. Up to v0.1.42 the project was GPL-3.0; it moved to AGPL in v0.1.43 so that a modified version offered as a network service must publish its source.</div>
+          </div>
+          <div class="line">
+            <div class="k">Contributions</div>
+            <div class="v">Accepted under the terms of the project's CLA, published in the repository.</div>
           </div>
         </div>
       </div>
@@ -910,25 +943,25 @@
     </div>
 
     <div class="channels">
-      <a class="channel" href="/cdn-cgi/l/email-protection#b8cbd9d5cdddd496cbd9ddc2f8dddccd96cdc8dbcc96ddcb">
+      <a class="channel" href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener">
         <div class="c-head">
-          <div class="n">01 · direct</div>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+          <div class="n">01 · source</div>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0C17.3 4.7 18.3 5 18.3 5c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0012 .5z"/></svg>
         </div>
-        <div class="c-title">Get in touch</div>
-        <div class="c-body">Questions, collaboration proposals, or use cases from your own work — write to the lead developer directly.</div>
-        <div class="c-foot"><span><span class="__cf_email__" data-cfemail="b7c4d6dac2d2db99c4d6d2cdf7d2d3c299c2c7d4c399d2c4">[email&#160;protected]</span></span><span class="arrow">→</span></div>
+        <div class="c-title">Read the code</div>
+        <div class="c-body">The full source of OGR Slip2D is public: engines, tests and validation cases. Clone it, run the suite, and check any result against the reference it was validated with.</div>
+        <div class="c-foot"><span>github.com/samuelsl27/OGR-Slip2D</span><span class="arrow">→</span></div>
       </a>
 
-      <div class="channel locked" aria-disabled="true" title="Opens with the first public release">
+      <a class="channel" href="https://github.com/samuelsl27/OGR-Slip2D/issues">
         <div class="c-head">
           <div class="n">02 · community</div>
-          <span class="tag soon" style="background:transparent; border-color: color-mix(in oklab, var(--paper) 25%, transparent); color: color-mix(in oklab, var(--paper) 70%, transparent)">SOON</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 11.5a8.4 8.4 0 01-9 8.4 8.9 8.9 0 01-3.9-.9L3 21l1.9-5.1A8.4 8.4 0 1121 11.5z"/></svg>
         </div>
-        <div class="c-title">Forum &amp; discussions</div>
-        <div class="c-body">A public forum for users and contributors: modelling questions, feature requests, shared benchmark cases and release discussion.</div>
-        <div class="c-foot"><span>Opens with v0.2</span></div>
-      </div>
+        <div class="c-title">Issues &amp; validation cases</div>
+        <div class="c-body">Bug reports, modelling questions and feature requests. The most valuable contribution is a <em>validation case</em>: a slope whose factor of safety you know from a publication, another program or a hand calculation.</div>
+        <div class="c-foot"><span>Open an issue</span><span class="arrow">→</span></div>
+      </a>
 
       <div class="channel locked" aria-disabled="true" title="Opens with the first public release">
         <div class="c-head">
@@ -964,15 +997,17 @@
 
       <div class="col">
         <b>Resources</b>
-        <a class="muted" href="#" aria-disabled="true">Documentation · soon</a>
+        <a href="https://github.com/samuelsl27/OGR-Slip2D#readme" target="_blank" rel="noopener">Documentation</a>
+        <a href="https://github.com/samuelsl27/OGR-Slip2D/tree/main/docs/changelog" target="_blank" rel="noopener">Changelog</a>
+        <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Contributing</a>
+        <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/LICENSE" target="_blank" rel="noopener">License · AGPL-3.0</a>
         <a class="muted" href="#" aria-disabled="true">Downloads · soon</a>
-        <a class="muted" href="#" aria-disabled="true">Forum · soon</a>
-        <a class="muted" href="#" aria-disabled="true">Changelog · soon</a>
       </div>
 
       <div class="col">
         <b>Connect</b>
-        <a href="/cdn-cgi/l/email-protection#c3b0a2aeb6a6afedb0a2a6b983a6a7b6edb6b3a0b7eda6b0">Email</a>
+        <a href="mailto:samuel.saez@edu.upct.es">Email</a>
+        <a href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener">GitHub · OGR Slip2D</a>
         <a href="https://www.linkedin.com/in/samuel-saez-lopez-7603091a2/" target="_blank" rel="noopener">Samuel · LinkedIn</a>
         <a href="https://www.linkedin.com/in/emilio-trigueros-a0ba0a40/" target="_blank" rel="noopener">Emilio · LinkedIn</a>
         <a href="https://personas.upct.es/perfil/emilio.trigueros" target="_blank" rel="noopener">UPCT profile</a>
@@ -980,11 +1015,10 @@
     </div>
 
     <div class="legal">
-      <div>© 2026 Samuel Sáez López · Released under GPL-3.0</div>
-      <div>OpenGeoRock · v0.1.6 · built in Castellón de la Plana</div>
+      <div>© 2026 Samuel Sáez López · Released under AGPL-3.0-or-later</div>
+      <div>OpenGeoRock · v0.1.59 · built in Castellón de la Plana</div>
     </div>
   </div>
 </footer>
-
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</body>
 </html>

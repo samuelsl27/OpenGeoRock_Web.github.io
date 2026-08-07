@@ -1,0 +1,22 @@
+# Ajustes personales del agente (los compartidos van en .claude/settings.json)
+.claude/settings.local.json
+
+# Secretos
+.env
+.env.*
+
+# Sistema operativo
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Editores
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+
+# Originales de imágenes sin optimizar: en el repo solo va la versión servida
+assets/**/*.psd
+assets/**/*.xcf
+assets/_raw/

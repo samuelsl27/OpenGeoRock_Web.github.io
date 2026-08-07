@@ -1,0 +1,17 @@
+{
+  "files.eol": "\n",
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "editor.tabSize": 2,
+  "[html]": {
+    "editor.tabSize": 2,
+    "editor.formatOnSave": false
+  },
+  "html.format.wrapLineLength": 0,
+  "search.exclude": {
+    "assets/**": true
+  },
+  "files.associations": {
+    "CNAME": "plaintext"
+  }
+}
