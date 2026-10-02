@@ -23,14 +23,21 @@
   /* ---------- menú móvil ---------- */
   var menuBtn = $(".menu-btn"), mobileNav = $(".mobile-nav");
   if (menuBtn && mobileNav) {
-    menuBtn.addEventListener("click", function () {
-      var open = mobileNav.classList.toggle("open");
+    var setMenu = function (open) {
+      mobileNav.classList.toggle("open", open);
       menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+      menuBtn.setAttribute("aria-label", open ? T.close : T.menu);
       document.body.style.overflow = open ? "hidden" : "";
+    };
+    menuBtn.addEventListener("click", function () { setMenu(!mobileNav.classList.contains("open")); });
+    mobileNav.addEventListener("click", function (e) { if (e.target.closest("a")) setMenu(false); });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && mobileNav.classList.contains("open")) { setMenu(false); menuBtn.focus(); }
     });
-    mobileNav.addEventListener("click", function (e) {
-      if (e.target.closest("a")) { mobileNav.classList.remove("open"); menuBtn.setAttribute("aria-expanded", "false"); document.body.style.overflow = ""; }
-    });
+    // al pasar a anchura de escritorio el menú móvil deja de existir: que no se quede abierto
+    var wide = window.matchMedia("(min-width: 1181px)");
+    var onWide = function () { if (wide.matches) setMenu(false); };
+    if (wide.addEventListener) wide.addEventListener("change", onWide); else if (wide.addListener) wide.addListener(onWide);
   }
 
   /* ---------- mega-menú ---------- */
@@ -117,14 +124,30 @@
   /* ---------- índice lateral de la doc (móvil) ---------- */
   var side = $(".doc-side"), sideBtn = $(".doc-side-toggle");
   if (side && sideBtn) {
+    // el botón nace dentro de la cabecera de la página; para que su position: sticky
+    // lo mantenga a la vista durante toda la lectura tiene que colgar del <main>
+    var docMain = $(".doc-main");
+    if (docMain && sideBtn.parentElement !== docMain) docMain.insertBefore(sideBtn, docMain.firstChild);
+    var setSide = function (open) {
+      side.classList.toggle("open", open);
+      sideBtn.setAttribute("aria-expanded", open ? "true" : "false");
+      document.body.classList.toggle("side-open", open);
+      document.body.style.overflow = open ? "hidden" : "";
+    };
     sideBtn.addEventListener("click", function (e) {
       e.stopPropagation();
-      var open = side.classList.toggle("open");
-      sideBtn.setAttribute("aria-expanded", open ? "true" : "false");
+      setSide(!side.classList.contains("open"));
     });
     document.addEventListener("click", function (e) {
-      if (side.classList.contains("open") && !side.contains(e.target)) { side.classList.remove("open"); sideBtn.setAttribute("aria-expanded", "false"); }
+      if (!side.classList.contains("open")) return;
+      if (!side.contains(e.target) || e.target.closest("a")) setSide(false);
     });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && side.classList.contains("open")) { setSide(false); sideBtn.focus(); }
+    });
+    var wideDoc = window.matchMedia("(min-width: 1025px)");
+    var onWideDoc = function () { if (wideDoc.matches) setSide(false); };
+    if (wideDoc.addEventListener) wideDoc.addEventListener("change", onWideDoc); else if (wideDoc.addListener) wideDoc.addListener(onWideDoc);
     var cur = $('.doc-nav a[aria-current="page"]', side);
     if (cur && cur.scrollIntoView) { var r = cur.getBoundingClientRect(); if (r.top > window.innerHeight - 80) side.scrollTop = cur.offsetTop - 120; }
   }
@@ -140,7 +163,15 @@
       var ids = Object.keys(map);
       var active = null;
       for (var i = 0; i < ids.length; i++) { if (visible[ids[i]]) { active = ids[i]; break; } }
-      if (active) links.forEach(function (a) { a.classList.toggle("active", a === map[active]); });
+      if (active) links.forEach(function (a) {
+        var on = a === map[active];
+        a.classList.toggle("active", on);
+        // en la subnavegación (que se desplaza en horizontal en móvil), la activa a la vista
+        if (on && a.parentElement && a.parentElement.scrollWidth > a.parentElement.clientWidth) {
+          var bar = a.parentElement, l = a.offsetLeft, r = l + a.offsetWidth;
+          if (l < bar.scrollLeft || r > bar.scrollLeft + bar.clientWidth) bar.scrollTo({ left: l - 16, behavior: "smooth" });
+        }
+      });
     }, { rootMargin: "-80px 0px -60% 0px" });
     Object.keys(map).forEach(function (id) { io.observe(document.getElementById(id)); });
   }
@@ -148,6 +179,24 @@
   spy($$('.subnav a[href^="#"]'));
   var printBtn = $(".doc-toc .print");
   if (printBtn) printBtn.addEventListener("click", function () { window.print(); });
+
+  /* ---------- fórmulas en línea más anchas que la columna (móvil) ----------
+     Solo esas reciben desplazamiento propio (.m-wide en docs.css); las demás
+     siguen alineadas con el texto. */
+  var inlineMath = $$(".prose span.m");
+  function markWide() {
+    inlineMath.forEach(function (m) {
+      m.classList.remove("m-wide");
+      var box = m.parentElement;
+      // span.m es un elemento en línea (scrollWidth = 0): se compara su caja con la del bloque
+      if (box && m.getBoundingClientRect().right > box.getBoundingClientRect().right + 1) m.classList.add("m-wide");
+    });
+  }
+  if (inlineMath.length) {
+    markWide();
+    var mwTimer;
+    window.addEventListener("resize", function () { clearTimeout(mwTimer); mwTimer = setTimeout(markWide, 150); });
+  }
 
   /* ---------- buscador de la documentación ---------- */
   var indexState = 0, indexQueue = [];

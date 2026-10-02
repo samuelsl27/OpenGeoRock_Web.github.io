@@ -186,14 +186,19 @@ ol.refs li:target, ul.refs li:target { background: var(--green-soft); }
   .doc-shell { grid-template-columns: 1fr; }
   .doc-side {
     position: fixed; top: var(--top-h); left: 0; bottom: 0; width: min(340px, 88vw); z-index: 45;
-    background: var(--paper); transform: translateX(-102%); transition: transform 0.25s ease;
-    box-shadow: 8px 0 30px -10px #0003; height: auto;
+    background: var(--paper); transform: translateX(-102%); height: auto;
+    /* cerrado: oculto también para el teclado y sin sombra que asome por el borde */
+    visibility: hidden; transition: transform 0.25s ease, visibility 0s linear 0.25s;
   }
-  .doc-side.open { transform: none; }
+  .doc-side.open { transform: none; visibility: visible; box-shadow: 8px 0 30px -10px #0003; transition: transform 0.25s ease; }
+  /* velo sobre la página mientras el índice está abierto */
+  body.side-open::after { content: ""; position: fixed; inset: var(--top-h) 0 0 0; z-index: 44; background: color-mix(in oklab, var(--ink) 28%, transparent); }
   .doc-side-toggle {
     display: inline-flex; align-items: center; gap: 8px; margin-bottom: 16px;
-    height: 34px; padding: 0 12px; border: 1px solid var(--rule); border-radius: var(--radius);
-    background: var(--white); font: 13px var(--sans); color: var(--ink); cursor: pointer;
+    height: 36px; padding: 0 14px; border: 1px solid var(--rule); border-radius: var(--radius);
+    background: var(--white); font: 13.5px var(--sans); color: var(--ink); cursor: pointer;
+    /* acompaña la lectura: el índice está a un toque en cualquier punto de la página */
+    position: sticky; top: calc(var(--top-h) + 10px); z-index: 30; box-shadow: 0 4px 14px -6px #0004;
   }
   .doc-side-toggle svg { width: 16px; height: 16px; }
   .doc-main { padding: 26px var(--gutter) 64px; }
@@ -202,6 +207,11 @@ ol.refs li:target, ul.refs li:target { background: var(--green-soft); }
 }
 @media (max-width: 720px) {
   .prose { font-size: 16px; }
+  .prose .ui, a.cite { white-space: normal; }
+  .prose h2 .ht, .prose h3 .ht { min-width: 0; }
+  .impl .src, .impl .src a { overflow-wrap: anywhere; }
+  /* fórmula en línea más ancha que la columna (la marca site.js): desplazamiento propio */
+  .prose span.m.m-wide { display: inline-block; max-width: 100%; overflow-x: auto; overflow-y: hidden; vertical-align: middle; scrollbar-width: thin; }
   .prose h2 { font-size: 25px; }
   .eq { padding-right: 0; padding-bottom: 22px; }
   .eq[data-n]::after { top: auto; bottom: 0; transform: none; }

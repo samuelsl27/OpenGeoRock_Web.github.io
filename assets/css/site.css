@@ -134,10 +134,16 @@ main { display: block; }
 /* ---------- cabecera ---------- */
 .top {
   position: sticky; top: 0; z-index: 50;
+  border-bottom: 1px solid var(--rule);
+}
+/* El desenfoque va en un pseudo-elemento y no en .top: un backdrop-filter en
+   .top la convierte en el bloque contenedor de sus hijos position: fixed, y el
+   menú móvil quedaba encerrado en la altura de la cabecera. */
+.top::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
   background: color-mix(in oklab, var(--paper) 90%, transparent);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--rule);
 }
 .top-inner { display: flex; align-items: center; height: var(--top-h); gap: 28px; }
 .brand { display: inline-flex; align-items: center; gap: 10px; flex: none; }
@@ -186,7 +192,13 @@ main { display: block; }
 .lang a:hover { color: var(--ink); background: var(--paper-2); }
 .lang a[aria-current="true"] { background: var(--ink); color: var(--paper); }
 .menu-btn { display: none; width: 40px; height: 40px; border: 1px solid var(--rule); border-radius: var(--radius); background: transparent; cursor: pointer; align-items: center; justify-content: center; color: var(--ink); }
-.menu-btn svg { width: 20px; height: 20px; }
+.menu-btn svg { width: 20px; height: 20px; overflow: visible; }
+.menu-btn path { transition: transform 0.2s ease, opacity 0.2s ease; }
+.menu-btn .l1 { transform-origin: 12px 7px; }
+.menu-btn .l3 { transform-origin: 12px 17px; }
+.menu-btn[aria-expanded="true"] .l1 { transform: translateY(5px) rotate(45deg); }
+.menu-btn[aria-expanded="true"] .l2 { opacity: 0; }
+.menu-btn[aria-expanded="true"] .l3 { transform: translateY(-5px) rotate(-45deg); }
 .mobile-nav { display: none; }
 
 /* ---------- botones ---------- */
@@ -216,8 +228,8 @@ main { display: block; }
 .cta-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
 
 /* ---------- etiquetas ---------- */
-.eyebrow { display: inline-flex; align-items: center; gap: 10px; color: var(--mute); }
-.eyebrow .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 4px var(--green-soft); flex: none; }
+.eyebrow { display: block; color: var(--mute); }
+.eyebrow .dot { display: inline-block; vertical-align: 0.12em; margin-right: 10px; width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 4px var(--green-soft); }
 .tag {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 3px 9px; border-radius: 99px; border: 1px solid var(--rule);
@@ -577,9 +589,11 @@ table.data .bad { color: var(--crit); }
 .split { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
 
 /* ---------- responsive ---------- */
-@media (max-width: 1100px) {
+@media (max-width: 1280px) {
   .nav > a, .nav > .has-menu > button { padding: 8px 8px; }
   .top-right .btn.gh span { display: none; }
+}
+@media (max-width: 1100px) {
   .suite { grid-template-columns: repeat(2, 1fr); }
   .suite .card.ink { grid-column: 1 / -1; min-height: 260px; }
   .metrics { grid-template-columns: repeat(3, 1fr); }
@@ -588,15 +602,22 @@ table.data .bad { color: var(--crit); }
   .foot .cols { grid-template-columns: repeat(3, 1fr); }
   .foot .cols > :first-child { grid-column: 1 / -1; }
 }
-@media (max-width: 960px) {
-  .nav, .top-right .lang, .top-right .gh { display: none; }
+/* Cabecera: el menú completo solo cuando cabe en los dos idiomas (en español
+   necesita unos 1160 px); por debajo, botón de menú y panel a pantalla completa. */
+@media (max-width: 1180px) {
+  .nav, .top-right .gh { display: none; }
   .menu-btn { display: inline-flex; }
-  .mobile-nav.open { display: block; position: fixed; inset: var(--top-h) 0 0 0; z-index: 49; background: var(--paper); overflow-y: auto; padding: 18px var(--gutter) 40px; border-top: 1px solid var(--rule); }
+  .mobile-nav .lang { display: none; }
+  .mobile-nav.open { display: block; position: fixed; inset: var(--top-h) 0 0 0; z-index: 49; background: var(--paper); overflow-y: auto; overscroll-behavior: contain; padding: 8px var(--gutter) 40px; border-top: 1px solid var(--rule); }
   .mobile-nav a { display: block; padding: 13px 0; border-bottom: 1px solid var(--rule); font-size: 17px; }
   .mobile-nav .label { display: block; padding: 22px 0 6px; }
   .mobile-nav .sub a { padding-left: 14px; font-size: 15px; color: var(--ink-2); }
-  .mobile-nav .lang { margin-top: 22px; }
-  .mobile-nav .lang a { display: inline-block; border: 0; padding: 8px 14px; font-size: 12px; }
+  .mobile-nav a[aria-current="page"] { font-weight: 600; box-shadow: inset 3px 0 0 var(--green); padding-left: 12px; }
+  .mobile-nav a.btn { display: flex; justify-content: center; margin-top: 28px; padding: 0 22px; border: 1px solid var(--ink); font-size: 16px; box-shadow: none; }
+  .mobile-nav a.btn[aria-current="page"] { padding-left: 22px; }
+}
+@media (max-width: 960px) {
+
   .hero-grid, .grid-2, .sec-head, .cta-band, .people { grid-template-columns: 1fr; gap: 36px; }
   .cta-band .cta-row { justify-content: flex-start; }
   .grid-3, .gallery, .feature-grid { grid-template-columns: repeat(2, 1fr); }
@@ -629,6 +650,25 @@ table.data .bad { color: var(--crit); }
   .steps > li { padding-left: 50px; }
   .top-right .btn.primary { display: none; }
   .lang-hint { left: 18px; right: 18px; max-width: none; }
+  /* botones con textos largos: que partan línea en vez de ensanchar la página */
+  .btn { white-space: normal; height: auto; min-height: 40px; padding-top: 9px; padding-bottom: 9px; line-height: 1.25; text-align: left; }
+  .btn.lg { min-height: 46px; }
+  .btn.sm { min-height: 32px; padding-top: 6px; padding-bottom: 6px; }
+  .cta-band > *, .hero-grid > *, .grid-2 > * { min-width: 0; }
+  /* barras que se desplazan en horizontal: un difuminado en el borde avisa de que hay más */
+  .subnav .wrap, .tablist { -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 28px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 28px), transparent); }
+  .subnav .wrap { padding-right: 28px; }
+  /* palabras largas en títulos («sobredimensionamiento»): partición silábica */
+  h1, h2, h3 { overflow-wrap: break-word; hyphens: auto; -webkit-hyphens: auto; }
+}
+
+@media (max-width: 400px) {
+  /* móviles estrechos (320–400 px): la cabecera con EN/ES tiene que caber */
+  .top-inner { gap: 10px; }
+  .brand { gap: 8px; }
+  .brand b { font-size: 18px; }
+  .top-right { gap: 6px; }
+  .lang a { padding: 6px 7px; }
 }
 
 /* ---------- impresión ---------- */
