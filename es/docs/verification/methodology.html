@@ -1,0 +1,381 @@
+<!doctype html>
+<html class="no-js" lang="es" data-root="../../../">
+<head>
+<meta charset="utf-8">
+<title>Metodología de verificación — documentación de OGR Slip2D</title>
+<meta name="description" content="Cómo se verifica OGR Slip2D: cada cifra se contrasta con una referencia que el programa no ha producido, de cuatro tipos y con una tolerancia que depende de la calidad de cada fuente; qué se hace cuando un caso falla, cómo está organizada la carpeta de validación y cómo ejecutar los casos.">
+<!-- @inc head -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.replace("no-js", "js")</script>
+<link rel="canonical" href="https://opengeorock.org/es/docs/verification/methodology.html">
+<link rel="alternate" hreflang="en" href="https://opengeorock.org/docs/verification/methodology.html">
+<link rel="alternate" hreflang="es" href="https://opengeorock.org/es/docs/verification/methodology.html">
+<link rel="alternate" hreflang="x-default" href="https://opengeorock.org/docs/verification/methodology.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="OpenGeoRock">
+<meta property="og:title" content="Metodología de verificación — documentación de OGR Slip2D">
+<meta property="og:description" content="Cómo se verifica OGR Slip2D: cada cifra se contrasta con una referencia que el programa no ha producido, de cuatro tipos y con una tolerancia que depende de la calidad de cada fuente; qué se hace cuando un caso falla, cómo está organizada la carpeta de validación y cómo ejecutar los casos.">
+<meta property="og:url" content="https://opengeorock.org/es/docs/verification/methodology.html">
+<meta property="og:image" content="https://opengeorock.org/assets/img/og-image.png">
+<meta property="og:locale" content="es_ES">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#f4efe6">
+<link rel="icon" href="../../../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../../assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../../assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&amp;display=swap">
+<link rel="stylesheet" href="../../../assets/css/site.css">
+<link rel="stylesheet" href="../../../assets/css/docs.css">
+<link rel="stylesheet" href="../../../assets/vendor/katex/katex.min.css">
+<script src="../../../assets/js/site.js" defer></script>
+<!-- @end head -->
+</head>
+<body class="docs">
+<!-- @inc header -->
+<a class="skip" href="#main">Saltar al contenido</a>
+<header class="top">
+  <div class="wrap top-inner">
+    <a class="brand" href="../../../es/index.html" aria-label="OpenGeoRock — inicio">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
+      <b>OpenGeoRock</b>
+    </a>
+    <nav class="nav" aria-label="Principal">
+      <div class="has-menu" data-nav="products">
+        <button type="button" aria-expanded="false" aria-haspopup="true">Productos <svg class="caret" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+        <div class="mega">
+          <div class="mega-cols">
+            <div class="mega-col">
+              <span class="label">Disponible hoy</span>
+              <a class="mega-item feature" href="../../../es/products/slip2d.html"><b>OGR Slip2D</b><span>Estabilidad de taludes 2D: equilibrio límite, agua subterránea por elementos finitos y análisis probabilístico.</span></a>
+              <a class="mega-item" href="../../../es/ai/index.html"><b>Servidor MCP para agentes de IA <span class="tag live">nuevo</span></b><span>Claude, ChatGPT o un modelo local construyen y calculan modelos de OGR Slip2D.</span></a>
+            </div>
+            <div class="mega-col">
+              <span class="label">En la hoja de ruta</span>
+              <a class="mega-item" href="../../../es/products/index.html#ogr-data"><b>OGR Data</b><span>Base de datos de propiedades de suelos y macizos rocosos</span></a>
+              <a class="mega-item" href="../../../es/products/index.html#ogr-fem2d"><b>OGR FEM2D</b><span>Elementos finitos elastoplásticos 2D</span></a>
+              <a class="mega-item" href="../../../es/products/index.html#ogr-slip3d"><b>OGR Slip3D</b><span>Equilibrio límite en 3D</span></a>
+              <a class="mega-item" href="../../../es/products/index.html#ogr-fem3d"><b>OGR FEM3D</b><span>Elementos finitos 3D con flujo acoplado</span></a>
+            </div>
+            <div class="mega-col">
+              <span class="label">Úsalo desde</span>
+              <a class="mega-item" href="../../../es/docs/getting-started/interface.html"><b>El programa de escritorio</b><span>Modelador, intérprete y terminal de Python</span></a>
+              <a class="mega-item" href="../../../es/docs/reference/python-api.html"><b>Python</b><span>Automatiza análisis desde tu propio código</span></a>
+              <a class="mega-item" href="../../../es/docs/reference/cli.html"><b>La línea de comandos</b><span>Cálculos por lotes con ogr-slip2d-cli</span></a>
+            </div>
+          </div>
+          <div class="mega-foot"><span>Cinco programas, un núcleo abierto.</span><a href="../../../es/products/index.html">Todos los productos →</a></div>
+        </div>
+      </div>
+      <a href="../../../es/examples/index.html" data-nav="examples">Ejemplos</a>
+      <a href="../../../es/ai/index.html" data-nav="ai">IA y MCP</a>
+      <a href="../../../es/docs/index.html" data-nav="docs" aria-current="page">Documentación</a>
+      <a href="../../../es/verification/index.html" data-nav="verification">Verificación</a>
+      <a href="../../../es/about/index.html" data-nav="about">Proyecto</a>
+    </nav>
+    <div class="top-right">
+      <span class="lang" role="group" aria-label="Idioma"><a href="../../../docs/verification/methodology.html" hreflang="en" lang="en">EN</a><a href="../../../es/docs/verification/methodology.html" hreflang="es" lang="es" aria-current="true">ES</a></span>
+      <a class="btn gh" href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener" aria-label="Código fuente en GitHub"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0C17.3 4.7 18.3 5 18.3 5c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0012 .5z"/></svg><span>GitHub</span></a>
+      <a class="btn primary" href="../../../es/download/index.html" data-nav="download">Descargar OGR Slip2D</a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menú"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Principal (móvil)">
+    <span class="label">Productos</span>
+    <a href="../../../es/products/slip2d.html">OGR Slip2D</a>
+    <div class="sub"><a href="../../../es/products/index.html">La suite OpenGeoRock</a><a href="../../../es/ai/index.html">Servidor MCP para agentes de IA</a></div>
+    <span class="label">Aprende</span>
+    <a href="../../../es/examples/index.html">Ejemplos</a>
+    <a href="../../../es/docs/index.html">Documentación</a>
+    <a href="../../../es/verification/index.html">Verificación</a>
+    <span class="label">Proyecto</span>
+    <a href="../../../es/about/index.html">El proyecto</a>
+    <a href="../../../es/download/index.html">Descargar OGR Slip2D</a>
+    <a href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener">Código en GitHub ↗</a>
+    <span class="lang" role="group" aria-label="Idioma"><a href="../../../docs/verification/methodology.html" hreflang="en" lang="en">EN</a><a href="../../../es/docs/verification/methodology.html" hreflang="es" lang="es" aria-current="true">ES</a></span>
+  </nav>
+</header>
+<!-- @end header -->
+
+<div class="doc-shell">
+  <aside class="doc-side" id="doc-side">
+<!-- @inc docnav -->
+<div class="doc-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input type="search" placeholder="Buscar en la documentación  /" aria-label="Buscar en la documentación" autocomplete="off"><div class="results" role="listbox"></div></div>
+<nav class="doc-nav" aria-label="Documentación">
+<a class="home" href="../../../es/docs/index.html"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 016.5 3H20v15H6.5A2.5 2.5 0 004 20.5z"/><path d="M4 20.5A2.5 2.5 0 016.5 18H20v3H6.5A2.5 2.5 0 014 20.5z"/></svg> Portada de la documentación</a>
+<details open><summary>1 · Primeros pasos</summary><ul>
+<li><a href="../../../es/docs/getting-started/installation.html"><span class="n">1.1</span><span>Instalación</span></a></li>
+<li><a href="../../../es/docs/getting-started/quick-start.html"><span class="n">1.2</span><span>Inicio rápido: tu primer modelo</span></a></li>
+<li><a href="../../../es/docs/getting-started/interface.html"><span class="n">1.3</span><span>La interfaz</span></a></li>
+</ul></details>
+<details open><summary>2 · Guía de usuario</summary><ul>
+<li><a href="../../../es/docs/user-guide/project-settings.html"><span class="n">2.1</span><span>Configuración del proyecto</span></a></li>
+<li><a href="../../../es/docs/user-guide/geometry.html"><span class="n">2.2</span><span>Geometría y contornos</span></a></li>
+<li><a href="../../../es/docs/user-guide/materials.html"><span class="n">2.3</span><span>Materiales</span></a></li>
+<li><a href="../../../es/docs/user-guide/water.html"><span class="n">2.4</span><span>Agua y presión intersticial</span></a></li>
+<li><a href="../../../es/docs/user-guide/loads.html"><span class="n">2.5</span><span>Cargas y carga sísmica</span></a></li>
+<li><a href="../../../es/docs/user-guide/supports.html"><span class="n">2.6</span><span>Soportes</span></a></li>
+<li><a href="../../../es/docs/user-guide/surfaces.html"><span class="n">2.7</span><span>Superficies de rotura y búsqueda</span></a></li>
+<li><a href="../../../es/docs/user-guide/results.html"><span class="n">2.8</span><span>Cálculo e interpretación de resultados</span></a></li>
+<li><a href="../../../es/docs/user-guide/groundwater.html"><span class="n">2.9</span><span>Agua subterránea por elementos finitos</span></a></li>
+<li><a href="../../../es/docs/user-guide/probabilistic.html"><span class="n">2.10</span><span>Análisis probabilístico y de sensibilidad</span></a></li>
+<li><a href="../../../es/docs/user-guide/design-standards.html"><span class="n">2.11</span><span>Normas de diseño</span></a></li>
+<li><a href="../../../es/docs/user-guide/automation.html"><span class="n">2.12</span><span>Informes, scripting y línea de comandos</span></a></li>
+</ul></details>
+<details open><summary>3 · Manual de teoría</summary><ul>
+<li><a href="../../../es/docs/theory/limit-equilibrium.html"><span class="n">3.1</span><span>Equilibrio límite y factor de seguridad</span></a></li>
+<li><a href="../../../es/docs/theory/methods.html"><span class="n">3.2</span><span>Métodos de dovelas</span></a></li>
+<li><a href="../../../es/docs/theory/interslice.html"><span class="n">3.3</span><span>Fuerzas entre dovelas, convergencia y admisibilidad</span></a></li>
+<li><a href="../../../es/docs/theory/search.html"><span class="n">3.4</span><span>Búsqueda de la superficie de rotura</span></a></li>
+<li><a href="../../../es/docs/theory/strength.html"><span class="n">3.5</span><span>Modelos de resistencia al corte</span></a></li>
+<li><a href="../../../es/docs/theory/pore-pressure.html"><span class="n">3.6</span><span>Presión intersticial y resistencia no saturada</span></a></li>
+<li><a href="../../../es/docs/theory/seepage.html"><span class="n">3.7</span><span>Filtración por elementos finitos</span></a></li>
+<li><a href="../../../es/docs/theory/rapid-drawdown.html"><span class="n">3.8</span><span>Desembalse rápido</span></a></li>
+<li><a href="../../../es/docs/theory/seismic.html"><span class="n">3.9</span><span>Análisis sísmico</span></a></li>
+<li><a href="../../../es/docs/theory/supports.html"><span class="n">3.10</span><span>Fuerzas de los soportes</span></a></li>
+<li><a href="../../../es/docs/theory/probabilistic.html"><span class="n">3.11</span><span>Análisis probabilístico</span></a></li>
+<li><a href="../../../es/docs/theory/partial-factors.html"><span class="n">3.12</span><span>Coeficientes parciales (Eurocódigo 7)</span></a></li>
+</ul></details>
+<details open><summary>4 · Verificación</summary><ul>
+<li><a href="../../../es/docs/verification/methodology.html" aria-current="page"><span class="n">4.1</span><span>Metodología de verificación</span></a></li>
+<li><a href="../../../es/docs/verification/slope-benchmarks.html"><span class="n">4.2</span><span>Casos de referencia de equilibrio límite</span></a></li>
+<li><a href="../../../es/docs/verification/analytic-checks.html"><span class="n">4.3</span><span>Agua subterránea y comprobaciones analíticas</span></a></li>
+</ul></details>
+<details open><summary>5 · Referencia</summary><ul>
+<li><a href="../../../es/docs/reference/mcp.html"><span class="n">5.1</span><span>Servidor MCP</span></a></li>
+<li><a href="../../../es/docs/reference/cli.html"><span class="n">5.2</span><span>Interfaz de línea de comandos</span></a></li>
+<li><a href="../../../es/docs/reference/python-api.html"><span class="n">5.3</span><span>API de Python</span></a></li>
+<li><a href="../../../es/docs/reference/file-format.html"><span class="n">5.4</span><span>El formato .ogr</span></a></li>
+<li><a href="../../../es/docs/reference/error-codes.html"><span class="n">5.5</span><span>Códigos de error</span></a></li>
+<li><a href="../../../es/docs/reference/notation.html"><span class="n">5.6</span><span>Notación y glosario</span></a></li>
+<li><a href="../../../es/docs/reference/bibliography.html"><span class="n">5.7</span><span>Bibliografía</span></a></li>
+</ul></details>
+</nav>
+<!-- @end docnav -->
+  </aside>
+
+  <main id="main" class="doc-main">
+    <header class="doc-head">
+<!-- @inc dochead -->
+<button class="doc-side-toggle" type="button" aria-controls="doc-side" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg> Contenido</button>
+<nav class="crumbs label" aria-label="Ruta de navegación"><a href="../../../es/docs/index.html">Documentación</a><span aria-hidden="true">/</span><span>4 · Verificación</span></nav>
+<div class="chapter label">4.1</div>
+<h1>Metodología de verificación</h1>
+<div class="meta label"><span>Describe OGR Slip2D <span data-v>0.1.235</span></span></div>
+<!-- @end dochead -->
+    </header>
+
+    <article class="doc prose">
+      <p class="lede">OGR Slip2D se verifica comparando lo que calcula con algo que el propio programa no ha producido: un factor de seguridad publicado en un artículo, en un estudio comparativo o en un manual de referencia, una solución en forma cerrada o una identidad que debe cumplirse exactamente. Esta página explica el principio, los cuatro tipos de referencia, cómo se deduce la tolerancia de cada caso publicado de la calidad de su fuente, qué se hace cuando un caso falla y cómo ejecutar los casos. Los casos en sí se exponen en la <a class="xref" href="slope-benchmarks.html">Sección 4.2</a> y en la <a class="xref" href="analytic-checks.html">Sección 4.3</a>.</p>
+
+      <h2 id="principle"><span class="secnum">4.1.1</span><span class="ht">El principio: una referencia externa</span><a class="anchor" href="#principle" aria-label="Enlace a esta sección">#</a></h2>
+      <p>Un factor de seguridad es tan fiable como la evidencia que respalda al programa que lo calculó. La evidencia habitual, que el programa dé hoy el mismo número que ayer, es débil: un test que compara la salida con una grabación de la salida anterior del propio programa protege frente al cambio, no frente al error, y si la grabación contiene un fallo, el test lo consagra. Por eso OGR Slip2D se verifica con referencias que no ha producido él, y una comparación con su propia salida no se registra como verificación.</p>
+      <p>Esta regla es la primera condición que las reglas de contribución del proyecto exigen a un método, un motor de cálculo o una fórmula nuevos: necesita un valor de referencia —un caso publicado, una solución en forma cerrada o una propiedad analítica— y no una instantánea de lo que el código imprime en ese momento (<a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">CONTRIBUTING.md</a>). La <a href="../../verification/index.html">página de Verificación</a> resume el resultado para una primera lectura; este capítulo lo expone caso por caso.</p>
+
+      <h2 id="kinds"><span class="secnum">4.1.2</span><span class="ht">Cuatro tipos de referencia</span><a class="anchor" href="#kinds" aria-label="Enlace a esta sección">#</a></h2>
+      <p>La <a class="xref" href="#tbl-kinds">Tabla 4.1.1</a> enumera los tipos de referencia que cuentan, con un ejemplo de cada uno y la sección en que se usa.</p>
+      <figure class="tbl" id="tbl-kinds">
+        <figcaption><span class="fignum">Tabla 4.1.1</span> Tipos de referencia con los que se verifica OGR Slip2D.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Tipo</th><th>Qué es la referencia</th><th>Ejemplo</th><th>Dónde</th></tr></thead>
+            <tbody>
+              <tr><td>Caso publicado</td><td>Un factor de seguridad de un estudio comparativo, un artículo o un manual de referencia, con su fuente y su propia tolerancia.</td><td>Los siete casos, de ACADS 1(a) a ACADS 2(b).</td><td><a class="xref" href="slope-benchmarks.html">Sección 4.2</a></td></tr>
+              <tr><td>Solución en forma cerrada</td><td>Una solución exacta de las ecuaciones que resuelve el programa.</td><td>La ley de Darcy, los medios estratificados, la respuesta de un acuífero a un escalón de altura, el caudal de una presa rectangular.</td><td><a class="xref" href="analytic-checks.html">Sección 4.3</a></td></tr>
+              <tr><td>Identidad analítica</td><td>Una relación que se cumple exactamente por la forma en que se definen las magnitudes.</td><td>Con un factor objetivo de 1.0, las fuerzas de soporte necesarias bajo la hipótesis activa y bajo la pasiva coinciden; las constantes de Hoek-Brown para GSI = 100.</td><td><a class="xref" href="analytic-checks.html">Sección 4.3</a>, <a class="xref" href="slope-benchmarks.html#method-checks">Sección 4.2.9</a></td></tr>
+              <tr><td>Coherencia</td><td>Concordancia con otra vía del programa que ya está verificada, o con un invariante que conserva toda construcción correcta.</td><td>Un transitorio largo debe reproducir el régimen permanente; una malla de elementos finitos conserva el área de sus regiones; una ida y vuelta de DXF conserva la forma.</td><td><a class="xref" href="analytic-checks.html">Sección 4.3</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <div class="note"><span class="label">Qué no es una referencia</span><p>Una comparación con otro programa es bienvenida como comprobación cruzada, pero no es una validación: dos programas pueden equivocarse de la misma manera. Cuando se registra una comparación así, la cifra se cita como obtenida con ese programa y esa versión, sin adjuntar sus archivos, y el archivo del caso indica que se trata de una comparación. Solo un valor publicado, una solución en forma cerrada o una propiedad analítica sirve como verdad de referencia.</p></div>
+
+      <h2 id="search-and-method"><span class="secnum">4.1.3</span><span class="ht">Comprobar la búsqueda y comprobar el método</span><a class="anchor" href="#search-and-method" aria-label="Enlace a esta sección">#</a></h2>
+      <p>Un factor de seguridad publicado puede responder a dos preguntas distintas, y el caso se construye según la que permita su fuente.</p>
+      <ul>
+        <li><strong>Un caso de búsqueda.</strong> La fuente da el factor de seguridad mínimo de un talud. El caso ejecuta la búsqueda que declara su modelo y compara el factor de seguridad crítico de cada método declarado con el publicado, de modo que la búsqueda y el método se comprueban juntos: una búsqueda que no encuentra el círculo crítico devuelve un factor de seguridad mayor y el caso falla. Los casos 001 a 006 son de este tipo.</li>
+        <li><strong>Un caso de superficie dada.</strong> La fuente fija la superficie de rotura y da el factor de seguridad sobre ella. El caso evalúa cada método sobre esa superficie, sin búsqueda, de modo que la cifra mide solo el método. El caso 007 es de este tipo.</li>
+      </ul>
+      <p>Solo el segundo tipo permite distinguir un método de otro. Sobre un círculo crítico que cada método encuentra por sí mismo, la diferencia entre dos métodos mezcla el método con la búsqueda, y un método que devolviera la respuesta de otro más sencillo podría pasar inadvertido (<a class="xref" href="#failure">Sección 4.1.5</a>).</p>
+
+      <h2 id="tolerance"><span class="secnum">4.1.4</span><span class="ht">Cómo se elige la tolerancia de un caso</span><a class="anchor" href="#tolerance" aria-label="Enlace a esta sección">#</a></h2>
+      <p>La tolerancia de un caso es la diferencia relativa que admite entre el factor de seguridad calculado por OGR Slip2D y el valor de referencia:</p>
+      <div class="eq" id="eq-difference" data-tex="\delta = \dfrac{F - F_{\mathrm{ref}}}{F_{\mathrm{ref}}}, \qquad \text{el caso cumple si } |\delta| \le \varepsilon" data-n="4.1.1"><!--k--><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>δ</mi><mo>=</mo><mstyle scriptlevel="0" displaystyle="true"><mfrac><mrow><mi>F</mi><mo>−</mo><msub><mi>F</mi><mrow><mi mathvariant="normal">r</mi><mi mathvariant="normal">e</mi><mi mathvariant="normal">f</mi></mrow></msub></mrow><msub><mi>F</mi><mrow><mi mathvariant="normal">r</mi><mi mathvariant="normal">e</mi><mi mathvariant="normal">f</mi></mrow></msub></mfrac></mstyle><mo separator="true">,</mo><mspace width="2em"/><mtext>el caso cumple si </mtext><mi mathvariant="normal">∣</mi><mi>δ</mi><mi mathvariant="normal">∣</mi><mo>≤</mo><mi>ε</mi></mrow><annotation encoding="application/x-tex">\delta = \dfrac{F - F_{\mathrm{ref}}}{F_{\mathrm{ref}}}, \qquad \text{el caso cumple si } |\delta| \le \varepsilon</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.0379em;">δ</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:2.1963em;vertical-align:-0.836em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3603em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.1389em;">F</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight" style="margin-right:0.0778em;">ref</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.1389em;">F</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.1389em;">F</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight" style="margin-right:0.0778em;">ref</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.836em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:2em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord text"><span class="mord">el caso cumple si </span></span><span class="mord">∣</span><span class="mord mathnormal" style="margin-right:0.0379em;">δ</span><span class="mord">∣</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">ε</span></span></span></span></span><!--/k--></div>
+      <p class="where">donde</p>
+      <dl class="symbols">
+        <dt><span class="m" data-tex="F"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">F</span></span></span></span><!--/k--></span></dt><dd>factor de seguridad calculado por OGR Slip2D</dd>
+        <dt><span class="m" data-tex="F_{\mathrm{ref}}"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mrow><mi mathvariant="normal">r</mi><mi mathvariant="normal">e</mi><mi mathvariant="normal">f</mi></mrow></msub></mrow><annotation encoding="application/x-tex">F_{\mathrm{ref}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.1389em;">F</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight" style="margin-right:0.0778em;">ref</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><!--/k--></span></dt><dd>valor de referencia del caso (<code>fos</code> en su <code>esperado.json</code>)</dd>
+        <dt><span class="m" data-tex="\varepsilon"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ε</mi></mrow><annotation encoding="application/x-tex">\varepsilon</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">ε</span></span></span></span><!--/k--></span></dt><dd>tolerancia del caso (<code>tolerancia_relativa</code>), como fracción: 0.02 equivale a un 2 %</dd>
+      </dl>
+      <p>La tolerancia reside en el caso y no en el test, porque depende de la calidad de la fuente: un valor leído en una figura no merece la precisión de uno tabulado. Se elige planteando tres preguntas a la fuente.</p>
+      <ol>
+        <li><em>¿Cuánto discrepan entre sí las cifras publicadas?</em> Un estudio comparativo publica un valor del árbitro y la media de los programas participantes, y ambos difieren. Una tolerancia más estrecha que esa dispersión haría fallar el caso por la calidad de la referencia y no por la del código.</li>
+        <li><em>¿Qué deja sin decir la fuente?</em> Un parámetro que el problema no da hay que deducirlo o suponerlo, y el efecto de esa elección sobre el factor de seguridad forma parte de la tolerancia.</li>
+        <li><em>¿Qué valor publicado tiene respaldo estadístico o independiente?</em> Se prefiere la media de muchos programas al resultado de uno solo, de modo que la salida de ningún programa concreto quede escrita en un caso.</li>
+      </ol>
+      <p>El test de los archivos de los casos da por fallido un caso que no declara tolerancia, o que declara una superior al 10 %, porque más allá de ese valor una validación deja de discriminar nada. La <a class="xref" href="#tbl-tolerances">Tabla 4.1.2</a> da la tolerancia de cada caso con el motivo que consta en su archivo.</p>
+      <figure class="tbl" id="tbl-tolerances">
+        <figcaption><span class="fignum">Tabla 4.1.2</span> Tolerancia de cada caso publicado y su motivo.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Caso</th><th>Valor de referencia</th><th class="n">Tolerancia</th><th>Motivo</th></tr></thead>
+            <tbody>
+              <tr><td>001 · ACADS 1(a)</td><td>Media de 33 programas, 0.991</td><td class="n">2.0 %</td><td>El valor del árbitro (1.00) y la media (0.991) difieren un 0.9 %; exigir un 0.5 % pediría a la fuente una precisión que no tiene.</td></tr>
+              <tr><td>002 · Yamagami &amp; Ueta (1988)</td><td>Valores calculados por los autores: Bishop 1.348, Ordinario 1.282</td><td class="n">1.5 %</td><td>Un valor calculado y publicado por los autores, no una media entre programas que discrepan; se comprueban dos métodos a la vez.</td></tr>
+              <tr><td>003 · ACADS 1(c)</td><td>Valor medio de Bishop de 16 programas, 1.406</td><td class="n">1.5 %</td><td>Cubre el 1.1 % que hay entre la media (1.406) y el valor del árbitro (1.39).</td></tr>
+              <tr><td>004 · Arai &amp; Tagyo (1985), ej. 1</td><td>Valor publicado, 1.451</td><td class="n">3.5 %</td><td>El valor de 1985 y los reanálisis posteriores que recoge el archivo del caso difieren un 2.6–2.9 %: la resolución del caso la fija la fuente, no el código.</td></tr>
+              <tr><td>005 · Arai &amp; Tagyo (1985), ej. 3</td><td>Valor publicado, 1.138</td><td class="n">2.5 %</td><td>El mismo razonamiento; la diferencia entre el valor de 1985 y los reanálisis es del 1.9 %.</td></tr>
+              <tr><td>006 · Ejemplo de refuerzo (1999)</td><td>Valor publicado, 0.764</td><td class="n">1.0 %</td><td>El peso específico no figura en el enunciado y, dentro de un intervalo plausible, desplaza el factor de seguridad en torno a un 1 %.</td></tr>
+              <tr><td>007 · ACADS 2(b)</td><td>Valor medio de Bishop de 11 programas, 2.204; valor del árbitro, 2.29</td><td class="n">2.0 %</td><td>El valor del árbitro (2.29) y la media de 24 programas (2.239) difieren un 2.2 %.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p>Cuando una fuente publica varias cifras, el caso indica cuál usa y por qué, y para un método del que la fuente no da ningún valor el caso no declara ninguno. El estudio de ACADS, por ejemplo, da para los problemas 1(a) y 1(c) una media de Bishop y una media de todos los programas juntos, pero ningún valor para cada método riguroso; Spencer y GLE / Morgenstern-Price solo se declaran en el caso 007, donde el problema fija el círculo y el estudio da un valor del árbitro. Un test de la batería vigila la regla para los casos 001 a 004 y exige que al menos un caso distinga un método riguroso del de Bishop frente a una cifra publicada.</p>
+
+      <h2 id="failure"><span class="secnum">4.1.5</span><span class="ht">Cuando un caso falla</span><a class="anchor" href="#failure" aria-label="Enlace a esta sección">#</a></h2>
+      <p>Un caso que falla no se edita para que cumpla. Si un valor de referencia no se reproduce, el fallo está en el código o en el valor esperado, y averiguar cuál de los dos es justamente el trabajo que un caso de validación existe para hacer posible. Ni el valor esperado ni la tolerancia se ajustan a la salida: la tolerancia pertenece a la fuente, y el valor esperado es un hecho sobre una publicación.</p>
+      <p>Lo inverso también es cierto: un caso solo vale lo que es capaz de detectar. Hasta la versión 0.1.106, el método de Spencer (<a class="cite" href="../reference/bibliography.html#spencer1967">Spencer, 1967</a>) y el método GLE / Morgenstern-Price (<a class="cite" href="../reference/bibliography.html#morgenstern1965">Morgenstern y Price, 1965</a>) devolvían, sobre una superficie circular, el mismo factor de seguridad que el método de Bishop simplificado (<a class="cite" href="../reference/bibliography.html#bishop1955">Bishop, 1955</a>), hasta la sexta cifra. Ningún caso de la carpeta podía verlo: cada uno comparaba el mínimo hallado por una búsqueda con un mínimo publicado, y el valor de Bishop es una respuesta plausible. El defecto, que en realidad eran tres defectos, duró unas ochenta versiones. El caso 007 se escribió para hacerlo visible. El círculo lo fija el enunciado, y las dos referencias publicadas, un valor medio de Bishop de 2.204 y un valor del árbitro de 2.29, difieren un 3.9 %, de modo que un método de equilibrio completo que devuelva la cifra de Bishop falla. El método de Spencer de la versión 0.1.105 daba 2.2088 sobre ese círculo, más de un 3 % por debajo del valor del árbitro y fuera de la tolerancia del 2 % del caso. Las mediciones constan en la <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/docs/audits/spencer_gle_interslice_v179.md" target="_blank" rel="noopener">auditoría</a> que se conserva en el repositorio.</p>
+
+      <h2 id="folder"><span class="secnum">4.1.6</span><span class="ht">La carpeta de validación</span><a class="anchor" href="#folder" aria-label="Enlace a esta sección">#</a></h2>
+      <p>Los casos están en la carpeta <code>validacion/</code> del repositorio, una subcarpeta por caso, numeradas en el orden en que se añadieron:</p>
+      <div class="code"><pre><code>validacion/
+├── README.md
+└── casos/
+    ├── 000-plantilla/         plantilla; el ejecutor la omite porque no tiene modelo
+    ├── 001-acads-1a/
+    │   ├── caso.md            qué es el caso y de dónde procede su valor esperado
+    │   ├── modelo.ogr         el modelo, listo para abrirlo en el programa
+    │   └── esperado.json      valores esperados, tolerancia y cómo ejecutar el caso
+    └── ...</code></pre></div>
+      <p>El archivo <code>.ogr</code> es el modelo del caso, en JSON plano (<a class="xref" href="../reference/file-format.html">Sección 5.4</a>). La <a class="xref" href="#tbl-esperado">Tabla 4.1.3</a> enumera lo que contiene <code>esperado.json</code> y lo que hace con ello el ejecutor.</p>
+      <figure class="tbl" id="tbl-esperado">
+        <figcaption><span class="fignum">Tabla 4.1.3</span> Campos de <code>esperado.json</code>.</figcaption>
+        <div class="table-wrap">
+          <table class="data method-table">
+            <thead><tr><th>Campo</th><th>Contenido</th><th>Qué hace el ejecutor</th></tr></thead>
+            <tbody>
+              <tr><td><code>id</code></td><td>Nombre del caso.</td><td>—</td></tr>
+              <tr><td><code>fuente</code></td><td>Cita completa de la fuente, con las cifras publicadas que ofrece.</td><td>Un caso cuya fuente falta o es vaga (diez caracteres o menos) falla.</td></tr>
+              <tr><td><code>tipo_referencia</code></td><td>Tipo de referencia; <code>publicado</code> en los siete casos.</td><td>—</td></tr>
+              <tr><td><code>tolerancia_relativa</code></td><td>La tolerancia <span class="m" data-tex="\varepsilon"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ε</mi></mrow><annotation encoding="application/x-tex">\varepsilon</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">ε</span></span></span></span><!--/k--></span>.</td><td>Debe ser un número mayor que 0 y no superior a 0.10.</td></tr>
+              <tr><td><code>fos</code></td><td>El valor de referencia de cada método, por identificador de método.</td><td>Cada valor se compara con el calculado; un identificador que el programa no conoce hace fallar el caso.</td></tr>
+              <tr><td><code>busqueda</code></td><td>Cómo ejecutar el caso: <code>tipo</code> de búsqueda (<code>grid</code>, <code>slope</code>, <code>auto_refine</code>, <code>block</code>, <code>path</code>, <code>simulated_annealing</code> o <code>particle_swarm</code>), <code>num_slices</code>, <code>num_surfaces</code> y <code>semilla</code> (semilla del generador aleatorio).</td><td>Se aplica a una copia de los ajustes; lo que no se declara procede de <code>modelo.ogr</code>.</td></tr>
+              <tr><td><code>superficie</code></td><td>Un círculo de rotura fijado por el enunciado: <code>centro</code> (x, y) y <code>radio</code>.</td><td>Si está presente, cada método se evalúa sobre ese círculo y no se busca nada.</td></tr>
+              <tr><td><code>notas</code></td><td>Condiciones necesarias para que el caso sea reproducible.</td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p>El modelo, el valor esperado y su fuente se incluyen en el control de versiones; los archivos de proyecto de otros programas, las capturas de pantalla de otros programas y los informes de terceros, no. La distinción es de derechos de autor: el archivo <code>.ogr</code> es del propio proyecto, y el número esperado es un hecho que se puede citar.</p>
+      <div class="impl">
+        <span class="label">En OGR Slip2D</span>
+        <p>Un caso de búsqueda ejecuta la búsqueda que declara el modelo, y esa búsqueda la construye la misma función que usan la interfaz y la línea de comandos, de modo que el caso verifica la búsqueda que el programa ejecuta de verdad y no una reconstrucción de ella. Para un círculo dado, este se evalúa como un círculo de una Grid Search, que recorre las masas disjuntas que un círculo puede cortar y se queda con el menor factor de seguridad. Los valores de <code>busqueda</code> que sustituyen a los del modelo se aplican a una copia: una ejecución de verificación no reescribe el modelo del caso.</p>
+        <span class="src">Código: <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/tests/test_validation_cases.py" target="_blank" rel="noopener">tests/test_validation_cases.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/tree/main/validacion" target="_blank" rel="noopener">validacion/</a></span>
+      </div>
+
+      <h2 id="running"><span class="secnum">4.1.7</span><span class="ht">Ejecución de los casos</span><a class="anchor" href="#running" aria-label="Enlace a esta sección">#</a></h2>
+      <p>Un solo test, <code>tests/test_validation_cases.py</code>, recorre cada carpeta de caso que tiene un modelo y un <code>esperado.json</code>, de modo que añadir un caso no requiere escribir código. El proyecto usa su propio ejecutor de tests y no necesita pytest; los módulos de test no se pueden importar fuera del ejecutor. Desde un clon del repositorio (<a class="xref" href="../getting-started/installation.html#tests">Sección 1.1.5</a>):</p>
+      <div class="code"><pre><code>python tests/_runner.py validation_cases     # los siete casos y las comprobaciones de sus archivos
+python tests/_runner.py published_cases      # las comprobaciones que los acompañan</code></pre></div>
+      <p>Una selección por nombre de archivo imprime una advertencia <code>FILTERED RUN</code> alrededor de sus totales y no vale como evidencia para publicar una versión; la batería completa, que es lo que necesita una versión, se ejecuta sin argumentos. Además de reproducir los valores esperados, el test comprueba que cada carpeta tiene sus tres archivos, que <code>esperado.json</code> es válido, que cada caso cita una fuente y declara una tolerancia razonable, que los identificadores de método y los tipos de búsqueda existen, y que al menos un caso se ejecuta de verdad, de modo que una carpeta vacía no pueda pasar en silencio.</p>
+      <p>Para añadir un caso: construye el modelo en el programa y guárdalo como <code>modelo.ogr</code>; escribe <code>caso.md</code> con la geometría, los materiales y, sobre todo, de dónde procede el número esperado, porque sin fuente un valor esperado no es más que una opinión; rellena <code>esperado.json</code>; y ejecuta el test. Se agradecen casos nuevos: un talud cuyo factor de seguridad se conozca por una publicación o por un cálculo a mano, con su fuente (<a href="https://github.com/samuelsl27/OGR-Slip2D/issues/new/choose" target="_blank" rel="noopener">abre un caso de validación</a>).</p>
+
+      <h2 id="rules"><span class="secnum">4.1.8</span><span class="ht">Reglas que complementan los casos</span><a class="anchor" href="#rules" aria-label="Enlace a esta sección">#</a></h2>
+      <p>Un valor de referencia no puede detectar todo tipo de fallos, y las reglas de contribución del proyecto añaden tres hábitos más a los casos.</p>
+      <ul>
+        <li><strong>Ningún ajuste puede quedar sin efecto.</strong> Un control que no cambia el resultado es peor que ninguno, porque el usuario cree que el análisis lo respeta. Toda opción nueva viene con un test que demuestra que mueve la cifra.</li>
+        <li><strong>Las anomalías se comunican antes de corregirlas.</strong> Un comportamiento que parece erróneo se describe, con la evidencia, antes de cambiar el código.</li>
+        <li><strong>Los tests no arrastran estado.</strong> El idioma, las unidades y las cachés se restauran, porque un arrastre hace que fallen tests sin relación solo en una ejecución completa.</li>
+      </ul>
+
+      <h2 id="scope"><span class="secnum">4.1.9</span><span class="ht">Lo que la verificación no demuestra</span><a class="anchor" href="#scope" aria-label="Enlace a esta sección">#</a></h2>
+      <div class="note warn"><span class="label">Alcance</span><p>Los siete casos publicados usan superficies circulares y materiales de Mohr-Coulomb. En uno de ellos interviene la presión intersticial, mediante un nivel freático, y en otro una carga; ninguno tiene soportes, carga sísmica, un campo de presiones intersticiales por elementos finitos ni una superficie no circular. Esas funcionalidades las ejercitan otros tests de la batería, mediante formas cerradas e identidades cuando existen, pero no un factor de seguridad publicado. Un valor reproducido es evidencia para su caso y no una garantía para cualquier talud, y los valores publicados tienen una dispersión propia, que reflejan las tolerancias de la <a class="xref" href="#tbl-tolerances">Tabla 4.1.2</a>. Los resultados deben contrastarse con cálculos independientes antes de basar en ellos cualquier decisión: un proyecto lo firma una persona, no un programa.</p></div>
+
+      <h2 id="references"><span class="secnum">4.1.10</span><span class="ht">Referencias</span><a class="anchor" href="#references" aria-label="Enlace a esta sección">#</a></h2>
+      <ul class="refs">
+        <li><a href="../reference/bibliography.html#bishop1955">Bishop, A.W. (1955)</a>. The use of the slip circle in the stability analysis of slopes. <em>Géotechnique</em>, 5(1), 7–17.</li>
+        <li><a href="../reference/bibliography.html#morgenstern1965">Morgenstern, N.R. &amp; Price, V.E. (1965)</a>. The analysis of the stability of general slip surfaces. <em>Géotechnique</em>, 15(1), 79–93.</li>
+        <li><a href="../reference/bibliography.html#spencer1967">Spencer, E. (1967)</a>. A method of analysis of the stability of embankments assuming parallel inter-slice forces. <em>Géotechnique</em>, 17(1), 11–26.</li>
+      </ul>
+    </article>
+
+<!-- @inc docfoot -->
+<nav class="doc-pager" aria-label="Páginas">
+<a class="prev" href="../../../es/docs/theory/partial-factors.html"><span class="label">← Anterior · 3.12</span><b>Coeficientes parciales (Eurocódigo 7)</b></a>
+<a class="next" href="../../../es/docs/verification/slope-benchmarks.html"><span class="label">4.2 · Siguiente →</span><b>Casos de referencia de equilibrio límite</b></a>
+</nav>
+<div class="doc-edit label"><a href="https://github.com/samuelsl27/OpenGeoRock_Web.github.io/blob/main/es/docs/verification/methodology.html" target="_blank" rel="noopener">Editar esta página ↗</a><a href="https://github.com/samuelsl27/OGR-Slip2D/issues" target="_blank" rel="noopener">Informar de un problema ↗</a></div>
+<!-- @end docfoot -->
+  </main>
+
+  <aside class="doc-toc" aria-label="En esta página">
+    <div class="toc-inner">
+<!-- @inc pagetoc -->
+<span class="label">En esta página</span><ul><li class="h2"><a href="#principle">4.1.1 El principio: una referencia externa</a></li><li class="h2"><a href="#kinds">4.1.2 Cuatro tipos de referencia</a></li><li class="h2"><a href="#search-and-method">4.1.3 Comprobar la búsqueda y comprobar el método</a></li><li class="h2"><a href="#tolerance">4.1.4 Cómo se elige la tolerancia de un caso</a></li><li class="h2"><a href="#failure">4.1.5 Cuando un caso falla</a></li><li class="h2"><a href="#folder">4.1.6 La carpeta de validación</a></li><li class="h2"><a href="#running">4.1.7 Ejecución de los casos</a></li><li class="h2"><a href="#rules">4.1.8 Reglas que complementan los casos</a></li><li class="h2"><a href="#scope">4.1.9 Lo que la verificación no demuestra</a></li><li class="h2"><a href="#references">4.1.10 Referencias</a></li></ul><button class="print" type="button"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="1.5"/><path d="M6 14h12v7H6z"/></svg> Imprimir esta página</button>
+<!-- @end pagetoc -->
+    </div>
+  </aside>
+</div>
+
+<!-- @inc footer -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <a class="brand" href="../../../es/index.html" aria-label="OpenGeoRock — inicio">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
+          <b>OpenGeoRock</b>
+        </a>
+        <p class="tagline">Software geotécnico de código abierto, desarrollado a la vista de todos en la Universidad Politécnica de Cartagena.</p>
+        <span class="lang" role="group" aria-label="Idioma"><a href="../../../docs/verification/methodology.html" hreflang="en" lang="en">EN</a><a href="../../../es/docs/verification/methodology.html" hreflang="es" lang="es" aria-current="true">ES</a></span>
+      </div>
+      <div>
+        <h5>Productos</h5>
+        <ul>
+          <li><a href="../../../es/products/slip2d.html">OGR Slip2D</a></li>
+          <li><a href="../../../es/products/index.html">La suite</a></li>
+          <li><a href="../../../es/ai/index.html">Servidor MCP</a></li>
+          <li><a href="../../../es/download/index.html">Descargar</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Aprende</h5>
+        <ul>
+          <li><a href="../../../es/docs/index.html">Documentación</a></li>
+          <li><a href="../../../es/docs/getting-started/quick-start.html">Inicio rápido</a></li>
+          <li><a href="../../../es/docs/theory/methods.html">Manual de teoría</a></li>
+          <li><a href="../../../es/examples/index.html">Ejemplos</a></li>
+          <li><a href="../../../es/verification/index.html">Verificación</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Proyecto</h5>
+        <ul>
+          <li><a href="../../../es/about/index.html">El proyecto</a></li>
+          <li><a href="../../../es/about/index.html#team">Equipo</a></li>
+          <li><a href="../../../es/about/index.html#cite">Cómo citar</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Contribuir</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/LICENSE" target="_blank" rel="noopener">Licencia · AGPL-3.0</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contacto</h5>
+        <ul>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/issues" target="_blank" rel="noopener">Incidencias</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/tree/main/docs/changelog" target="_blank" rel="noopener">Historial de cambios</a></li>
+          <li><a href="mailto:samuel.saez@edu.upct.es">Correo</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© 2026 Samuel Sáez López · OGR Slip2D es software libre bajo AGPL-3.0-or-later, sin garantía de ningún tipo.</span>
+      <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
+    </div>
+  </div>
+</footer>
+<!-- @end footer -->
+</body>
+</html>

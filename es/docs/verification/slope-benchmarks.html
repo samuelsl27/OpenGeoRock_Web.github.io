@@ -1,0 +1,975 @@
+<!doctype html>
+<html class="no-js" lang="es" data-root="../../../">
+<head>
+<meta charset="utf-8">
+<title>Casos de referencia de equilibrio límite — documentación de OGR Slip2D</title>
+<meta name="description" content="Los siete casos publicados de estabilidad de taludes que OGR Slip2D reproduce, uno por uno: fuente, modelo, búsqueda o superficie dada, valor de referencia, valor obtenido, diferencia y tolerancia, recalculados con la versión 0.1.235; y las comprobaciones de los métodos sobre superficies dadas.">
+<!-- @inc head -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.replace("no-js", "js")</script>
+<link rel="canonical" href="https://opengeorock.org/es/docs/verification/slope-benchmarks.html">
+<link rel="alternate" hreflang="en" href="https://opengeorock.org/docs/verification/slope-benchmarks.html">
+<link rel="alternate" hreflang="es" href="https://opengeorock.org/es/docs/verification/slope-benchmarks.html">
+<link rel="alternate" hreflang="x-default" href="https://opengeorock.org/docs/verification/slope-benchmarks.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="OpenGeoRock">
+<meta property="og:title" content="Casos de referencia de equilibrio límite — documentación de OGR Slip2D">
+<meta property="og:description" content="Los siete casos publicados de estabilidad de taludes que OGR Slip2D reproduce, uno por uno: fuente, modelo, búsqueda o superficie dada, valor de referencia, valor obtenido, diferencia y tolerancia, recalculados con la versión 0.1.235; y las comprobaciones de los métodos sobre superficies dadas.">
+<meta property="og:url" content="https://opengeorock.org/es/docs/verification/slope-benchmarks.html">
+<meta property="og:image" content="https://opengeorock.org/assets/img/og-image.png">
+<meta property="og:locale" content="es_ES">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#f4efe6">
+<link rel="icon" href="../../../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../../assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../../assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&amp;display=swap">
+<link rel="stylesheet" href="../../../assets/css/site.css">
+<link rel="stylesheet" href="../../../assets/css/docs.css">
+<link rel="stylesheet" href="../../../assets/vendor/katex/katex.min.css">
+<script src="../../../assets/js/site.js" defer></script>
+<!-- @end head -->
+</head>
+<body class="docs">
+<!-- @inc header -->
+<a class="skip" href="#main">Saltar al contenido</a>
+<header class="top">
+  <div class="wrap top-inner">
+    <a class="brand" href="../../../es/index.html" aria-label="OpenGeoRock — inicio">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
+      <b>OpenGeoRock</b>
+    </a>
+    <nav class="nav" aria-label="Principal">
+      <div class="has-menu" data-nav="products">
+        <button type="button" aria-expanded="false" aria-haspopup="true">Productos <svg class="caret" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+        <div class="mega">
+          <div class="mega-cols">
+            <div class="mega-col">
+              <span class="label">Disponible hoy</span>
+              <a class="mega-item feature" href="../../../es/products/slip2d.html"><b>OGR Slip2D</b><span>Estabilidad de taludes 2D: equilibrio límite, agua subterránea por elementos finitos y análisis probabilístico.</span></a>
+              <a class="mega-item" href="../../../es/ai/index.html"><b>Servidor MCP para agentes de IA <span class="tag live">nuevo</span></b><span>Claude, ChatGPT o un modelo local construyen y calculan modelos de OGR Slip2D.</span></a>
+            </div>
+            <div class="mega-col">
+              <span class="label">En la hoja de ruta</span>
+              <a class="mega-item" href="../../../es/products/index.html#ogr-data"><b>OGR Data</b><span>Base de datos de propiedades de suelos y macizos rocosos</span></a>
+              <a class="mega-item" href="../../../es/products/index.html#ogr-fem2d"><b>OGR FEM2D</b><span>Elementos finitos elastoplásticos 2D</span></a>
+              <a class="mega-item" href="../../../es/products/index.html#ogr-slip3d"><b>OGR Slip3D</b><span>Equilibrio límite en 3D</span></a>
+              <a class="mega-item" href="../../../es/products/index.html#ogr-fem3d"><b>OGR FEM3D</b><span>Elementos finitos 3D con flujo acoplado</span></a>
+            </div>
+            <div class="mega-col">
+              <span class="label">Úsalo desde</span>
+              <a class="mega-item" href="../../../es/docs/getting-started/interface.html"><b>El programa de escritorio</b><span>Modelador, intérprete y terminal de Python</span></a>
+              <a class="mega-item" href="../../../es/docs/reference/python-api.html"><b>Python</b><span>Automatiza análisis desde tu propio código</span></a>
+              <a class="mega-item" href="../../../es/docs/reference/cli.html"><b>La línea de comandos</b><span>Cálculos por lotes con ogr-slip2d-cli</span></a>
+            </div>
+          </div>
+          <div class="mega-foot"><span>Cinco programas, un núcleo abierto.</span><a href="../../../es/products/index.html">Todos los productos →</a></div>
+        </div>
+      </div>
+      <a href="../../../es/examples/index.html" data-nav="examples">Ejemplos</a>
+      <a href="../../../es/ai/index.html" data-nav="ai">IA y MCP</a>
+      <a href="../../../es/docs/index.html" data-nav="docs" aria-current="page">Documentación</a>
+      <a href="../../../es/verification/index.html" data-nav="verification">Verificación</a>
+      <a href="../../../es/about/index.html" data-nav="about">Proyecto</a>
+    </nav>
+    <div class="top-right">
+      <span class="lang" role="group" aria-label="Idioma"><a href="../../../docs/verification/slope-benchmarks.html" hreflang="en" lang="en">EN</a><a href="../../../es/docs/verification/slope-benchmarks.html" hreflang="es" lang="es" aria-current="true">ES</a></span>
+      <a class="btn gh" href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener" aria-label="Código fuente en GitHub"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0C17.3 4.7 18.3 5 18.3 5c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0012 .5z"/></svg><span>GitHub</span></a>
+      <a class="btn primary" href="../../../es/download/index.html" data-nav="download">Descargar OGR Slip2D</a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menú"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Principal (móvil)">
+    <span class="label">Productos</span>
+    <a href="../../../es/products/slip2d.html">OGR Slip2D</a>
+    <div class="sub"><a href="../../../es/products/index.html">La suite OpenGeoRock</a><a href="../../../es/ai/index.html">Servidor MCP para agentes de IA</a></div>
+    <span class="label">Aprende</span>
+    <a href="../../../es/examples/index.html">Ejemplos</a>
+    <a href="../../../es/docs/index.html">Documentación</a>
+    <a href="../../../es/verification/index.html">Verificación</a>
+    <span class="label">Proyecto</span>
+    <a href="../../../es/about/index.html">El proyecto</a>
+    <a href="../../../es/download/index.html">Descargar OGR Slip2D</a>
+    <a href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener">Código en GitHub ↗</a>
+    <span class="lang" role="group" aria-label="Idioma"><a href="../../../docs/verification/slope-benchmarks.html" hreflang="en" lang="en">EN</a><a href="../../../es/docs/verification/slope-benchmarks.html" hreflang="es" lang="es" aria-current="true">ES</a></span>
+  </nav>
+</header>
+<!-- @end header -->
+
+<div class="doc-shell">
+  <aside class="doc-side" id="doc-side">
+<!-- @inc docnav -->
+<div class="doc-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input type="search" placeholder="Buscar en la documentación  /" aria-label="Buscar en la documentación" autocomplete="off"><div class="results" role="listbox"></div></div>
+<nav class="doc-nav" aria-label="Documentación">
+<a class="home" href="../../../es/docs/index.html"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 016.5 3H20v15H6.5A2.5 2.5 0 004 20.5z"/><path d="M4 20.5A2.5 2.5 0 016.5 18H20v3H6.5A2.5 2.5 0 014 20.5z"/></svg> Portada de la documentación</a>
+<details open><summary>1 · Primeros pasos</summary><ul>
+<li><a href="../../../es/docs/getting-started/installation.html"><span class="n">1.1</span><span>Instalación</span></a></li>
+<li><a href="../../../es/docs/getting-started/quick-start.html"><span class="n">1.2</span><span>Inicio rápido: tu primer modelo</span></a></li>
+<li><a href="../../../es/docs/getting-started/interface.html"><span class="n">1.3</span><span>La interfaz</span></a></li>
+</ul></details>
+<details open><summary>2 · Guía de usuario</summary><ul>
+<li><a href="../../../es/docs/user-guide/project-settings.html"><span class="n">2.1</span><span>Configuración del proyecto</span></a></li>
+<li><a href="../../../es/docs/user-guide/geometry.html"><span class="n">2.2</span><span>Geometría y contornos</span></a></li>
+<li><a href="../../../es/docs/user-guide/materials.html"><span class="n">2.3</span><span>Materiales</span></a></li>
+<li><a href="../../../es/docs/user-guide/water.html"><span class="n">2.4</span><span>Agua y presión intersticial</span></a></li>
+<li><a href="../../../es/docs/user-guide/loads.html"><span class="n">2.5</span><span>Cargas y carga sísmica</span></a></li>
+<li><a href="../../../es/docs/user-guide/supports.html"><span class="n">2.6</span><span>Soportes</span></a></li>
+<li><a href="../../../es/docs/user-guide/surfaces.html"><span class="n">2.7</span><span>Superficies de rotura y búsqueda</span></a></li>
+<li><a href="../../../es/docs/user-guide/results.html"><span class="n">2.8</span><span>Cálculo e interpretación de resultados</span></a></li>
+<li><a href="../../../es/docs/user-guide/groundwater.html"><span class="n">2.9</span><span>Agua subterránea por elementos finitos</span></a></li>
+<li><a href="../../../es/docs/user-guide/probabilistic.html"><span class="n">2.10</span><span>Análisis probabilístico y de sensibilidad</span></a></li>
+<li><a href="../../../es/docs/user-guide/design-standards.html"><span class="n">2.11</span><span>Normas de diseño</span></a></li>
+<li><a href="../../../es/docs/user-guide/automation.html"><span class="n">2.12</span><span>Informes, scripting y línea de comandos</span></a></li>
+</ul></details>
+<details open><summary>3 · Manual de teoría</summary><ul>
+<li><a href="../../../es/docs/theory/limit-equilibrium.html"><span class="n">3.1</span><span>Equilibrio límite y factor de seguridad</span></a></li>
+<li><a href="../../../es/docs/theory/methods.html"><span class="n">3.2</span><span>Métodos de dovelas</span></a></li>
+<li><a href="../../../es/docs/theory/interslice.html"><span class="n">3.3</span><span>Fuerzas entre dovelas, convergencia y admisibilidad</span></a></li>
+<li><a href="../../../es/docs/theory/search.html"><span class="n">3.4</span><span>Búsqueda de la superficie de rotura</span></a></li>
+<li><a href="../../../es/docs/theory/strength.html"><span class="n">3.5</span><span>Modelos de resistencia al corte</span></a></li>
+<li><a href="../../../es/docs/theory/pore-pressure.html"><span class="n">3.6</span><span>Presión intersticial y resistencia no saturada</span></a></li>
+<li><a href="../../../es/docs/theory/seepage.html"><span class="n">3.7</span><span>Filtración por elementos finitos</span></a></li>
+<li><a href="../../../es/docs/theory/rapid-drawdown.html"><span class="n">3.8</span><span>Desembalse rápido</span></a></li>
+<li><a href="../../../es/docs/theory/seismic.html"><span class="n">3.9</span><span>Análisis sísmico</span></a></li>
+<li><a href="../../../es/docs/theory/supports.html"><span class="n">3.10</span><span>Fuerzas de los soportes</span></a></li>
+<li><a href="../../../es/docs/theory/probabilistic.html"><span class="n">3.11</span><span>Análisis probabilístico</span></a></li>
+<li><a href="../../../es/docs/theory/partial-factors.html"><span class="n">3.12</span><span>Coeficientes parciales (Eurocódigo 7)</span></a></li>
+</ul></details>
+<details open><summary>4 · Verificación</summary><ul>
+<li><a href="../../../es/docs/verification/methodology.html"><span class="n">4.1</span><span>Metodología de verificación</span></a></li>
+<li><a href="../../../es/docs/verification/slope-benchmarks.html" aria-current="page"><span class="n">4.2</span><span>Casos de referencia de equilibrio límite</span></a></li>
+<li><a href="../../../es/docs/verification/analytic-checks.html"><span class="n">4.3</span><span>Agua subterránea y comprobaciones analíticas</span></a></li>
+</ul></details>
+<details open><summary>5 · Referencia</summary><ul>
+<li><a href="../../../es/docs/reference/mcp.html"><span class="n">5.1</span><span>Servidor MCP</span></a></li>
+<li><a href="../../../es/docs/reference/cli.html"><span class="n">5.2</span><span>Interfaz de línea de comandos</span></a></li>
+<li><a href="../../../es/docs/reference/python-api.html"><span class="n">5.3</span><span>API de Python</span></a></li>
+<li><a href="../../../es/docs/reference/file-format.html"><span class="n">5.4</span><span>El formato .ogr</span></a></li>
+<li><a href="../../../es/docs/reference/error-codes.html"><span class="n">5.5</span><span>Códigos de error</span></a></li>
+<li><a href="../../../es/docs/reference/notation.html"><span class="n">5.6</span><span>Notación y glosario</span></a></li>
+<li><a href="../../../es/docs/reference/bibliography.html"><span class="n">5.7</span><span>Bibliografía</span></a></li>
+</ul></details>
+</nav>
+<!-- @end docnav -->
+  </aside>
+
+  <main id="main" class="doc-main">
+    <header class="doc-head">
+<!-- @inc dochead -->
+<button class="doc-side-toggle" type="button" aria-controls="doc-side" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg> Contenido</button>
+<nav class="crumbs label" aria-label="Ruta de navegación"><a href="../../../es/docs/index.html">Documentación</a><span aria-hidden="true">/</span><span>4 · Verificación</span></nav>
+<div class="chapter label">4.2</div>
+<h1>Casos de referencia de equilibrio límite</h1>
+<div class="meta label"><span>Describe OGR Slip2D <span data-v>0.1.235</span></span></div>
+<!-- @end dochead -->
+    </header>
+
+    <article class="doc prose">
+      <p class="lede">Siete casos publicados se ejecutan con OGR Slip2D <span data-v>0.1.235</span> exactamente como los ejecuta la batería de tests. Para cada uno, esta página da su fuente, qué comprueba, el modelo, la búsqueda o la superficie dada, el valor de referencia y el valor obtenido. La referencia de cada caso es un valor publicado, y su tolerancia se deduce de la precisión de esa fuente (<a class="xref" href="methodology.html#tolerance">Sección 4.1.4</a>).</p>
+      <p>Los casos están en la carpeta <a href="https://github.com/samuelsl27/OGR-Slip2D/tree/main/validacion/casos" target="_blank" rel="noopener">validacion/casos/</a> del repositorio. Cada uno contiene el modelo (<code>modelo.ogr</code>), los valores esperados con su fuente y su tolerancia (<code>esperado.json</code>) y una descripción (<code>caso.md</code>). La numeración es el orden en que se añadieron los casos.</p>
+
+      <h2 id="summary"><span class="secnum">4.2.1</span><span class="ht">Los siete casos de un vistazo</span><a class="anchor" href="#summary" aria-label="Enlace a esta sección">#</a></h2>
+      <p>La <a class="xref" href="#tbl-summary">Tabla 4.2.1</a> enumera los casos y la <a class="xref" href="#fig-differences">Figura 4.2.1</a> muestra, para cada método de cada caso, la diferencia respecto al valor de referencia frente a la banda de tolerancia del caso. Las secciones siguientes dan cada caso por extenso.</p>
+      <figure class="tbl" id="tbl-summary">
+        <figcaption><span class="fignum">Tabla 4.2.1</span> Los siete casos publicados: fuente, qué comprueba cada uno, tolerancia y mayor diferencia hallada entre sus métodos.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Caso</th><th>Fuente</th><th>Qué comprueba</th><th class="n">Tolerancia</th><th class="n">Mayor diferencia</th></tr></thead>
+            <tbody>
+              <tr><td><a href="#acads-1a">001 · ACADS 1(a)</a></td><td><a class="cite" href="../reference/bibliography.html#giam1989">Giam y Donald (1989)</a></td><td>La búsqueda: un talud homogéneo en tensiones totales</td><td class="n">2.0 %</td><td class="n">−0.25 %</td></tr>
+              <tr><td><a href="#yamagami-ueta">002 · Yamagami &amp; Ueta</a></td><td><a class="cite" href="../reference/bibliography.html#yamagami1988">Yamagami y Ueta (1988)</a></td><td>Dos métodos a la vez, de modo que también queda fijada la diferencia entre ellos</td><td class="n">1.5 %</td><td class="n">+0.25 %</td></tr>
+              <tr><td><a href="#acads-1c">003 · ACADS 1(c)</a></td><td><a class="cite" href="../reference/bibliography.html#giam1989">Giam y Donald (1989)</a></td><td>Tres capas: regiones y asignación de materiales</td><td class="n">1.5 %</td><td class="n">+0.16 %</td></tr>
+              <tr><td><a href="#arai-tagyo-1">004 · Arai &amp; Tagyo, ej. 1</a></td><td><a class="cite" href="../reference/bibliography.html#arai1985">Arai y Tagyo (1985)</a></td><td>Un talud de 20 m de altura con 1V:1.5H</td><td class="n">3.5 %</td><td class="n">−2.67 %</td></tr>
+              <tr><td><a href="#arai-tagyo-3">005 · Arai &amp; Tagyo, ej. 3</a></td><td><a class="cite" href="../reference/bibliography.html#arai1985">Arai y Tagyo (1985)</a></td><td>El mismo talud con un nivel freático: aísla la presión intersticial</td><td class="n">2.5 %</td><td class="n">−1.58 %</td></tr>
+              <tr><td><a href="#reinforcement-1999">006 · Ejemplo de refuerzo (1999)</a></td><td>Manual de referencia de un programa de estabilidad de taludes (1999)</td><td>El filtro de profundidad mínima de las superficies llega al motor de cálculo</td><td class="n">1.0 %</td><td class="n">+0.26 %</td></tr>
+              <tr><td><a href="#acads-2b">007 · ACADS 2(b)</a></td><td><a class="cite" href="../reference/bibliography.html#giam1989">Giam y Donald (1989)</a></td><td>Los métodos por sí solos, sobre el círculo que fija el enunciado, sin búsqueda</td><td class="n">2.0 %</td><td class="n">+0.52 %</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <figure class="fig" id="fig-differences">
+        <div class="art">
+          <svg class="dg" viewBox="0 0 640 346" role="img" aria-labelledby="fig-differences-t"><title id="fig-differences-t">Diferencia entre el factor de seguridad de OGR Slip2D y el valor de referencia para cada uno de los doce pares de método y caso, cada uno dentro de la banda de tolerancia sombreada de su caso: la mayor, menos 2.67 por ciento, corresponde al caso 004</title>
+          <path class="thin" opacity=".28" d="M176.0 14V302.0"/>
+          <text class="mute" x="176.0" y="320.0" text-anchor="middle">−4</text>
+          <path class="thin" opacity=".28" d="M222.5 14V302.0"/>
+          <text class="mute" x="222.5" y="320.0" text-anchor="middle">−3</text>
+          <path class="thin" opacity=".28" d="M269.0 14V302.0"/>
+          <text class="mute" x="269.0" y="320.0" text-anchor="middle">−2</text>
+          <path class="thin" opacity=".28" d="M315.5 14V302.0"/>
+          <text class="mute" x="315.5" y="320.0" text-anchor="middle">−1</text>
+          <path class="thin" opacity=".28" d="M362.0 14V302.0"/>
+          <text class="mute" x="362.0" y="320.0" text-anchor="middle">0</text>
+          <path class="thin" opacity=".28" d="M408.5 14V302.0"/>
+          <text class="mute" x="408.5" y="320.0" text-anchor="middle">+1</text>
+          <path class="thin" opacity=".28" d="M455.0 14V302.0"/>
+          <text class="mute" x="455.0" y="320.0" text-anchor="middle">+2</text>
+          <path class="thin" opacity=".28" d="M501.5 14V302.0"/>
+          <text class="mute" x="501.5" y="320.0" text-anchor="middle">+3</text>
+          <path class="thin" opacity=".28" d="M548.0 14V302.0"/>
+          <text class="mute" x="548.0" y="320.0" text-anchor="middle">+4</text>
+          <path class="ln" d="M362.0 14V302.0"/>
+          <rect class="s0" x="269.0" y="18.0" width="186.0" height="16"/>
+          <circle class="pt" cx="350.4" cy="26.0" r="4"/>
+          <text x="166" y="30.5" text-anchor="end">001 · Bishop</text>
+          <text class="mute" x="560" y="30.0">−0.25 %</text>
+          <rect class="s0" x="269.0" y="42.0" width="186.0" height="16"/>
+          <circle class="pt" cx="355.7" cy="50.0" r="4"/>
+          <text x="166" y="54.5" text-anchor="end">001 · Janbu corr.</text>
+          <text class="mute" x="560" y="54.0">−0.14 %</text>
+          <rect class="s0" x="292.2" y="66.0" width="139.5" height="16"/>
+          <circle class="pt" cx="369.4" cy="74.0" r="4"/>
+          <text x="166" y="78.5" text-anchor="end">002 · Bishop</text>
+          <text class="mute" x="560" y="78.0">+0.16 %</text>
+          <rect class="s0" x="292.2" y="90.0" width="139.5" height="16"/>
+          <circle class="pt" cx="373.8" cy="98.0" r="4"/>
+          <text x="166" y="102.5" text-anchor="end">002 · Ordinario</text>
+          <text class="mute" x="560" y="102.0">+0.25 %</text>
+          <rect class="s0" x="292.2" y="114.0" width="139.5" height="16"/>
+          <circle class="pt" cx="369.7" cy="122.0" r="4"/>
+          <text x="166" y="126.5" text-anchor="end">003 · Bishop</text>
+          <text class="mute" x="560" y="126.0">+0.16 %</text>
+          <rect class="s0" x="199.2" y="138.0" width="325.5" height="16"/>
+          <circle class="pt" cx="238.0" cy="146.0" r="4"/>
+          <text x="166" y="150.5" text-anchor="end">004 · Bishop</text>
+          <text class="mute" x="560" y="150.0">−2.67 %</text>
+          <rect class="s0" x="245.8" y="162.0" width="232.5" height="16"/>
+          <circle class="pt" cx="288.6" cy="170.0" r="4"/>
+          <text x="166" y="174.5" text-anchor="end">005 · Bishop</text>
+          <text class="mute" x="560" y="174.0">−1.58 %</text>
+          <rect class="s0" x="315.5" y="186.0" width="93.0" height="16"/>
+          <circle class="pt" cx="374.1" cy="194.0" r="4"/>
+          <text x="166" y="198.5" text-anchor="end">006 · Bishop</text>
+          <text class="mute" x="560" y="198.0">+0.26 %</text>
+          <rect class="s0" x="269.0" y="210.0" width="186.0" height="16"/>
+          <circle class="pt" cx="372.2" cy="218.0" r="4"/>
+          <text x="166" y="222.5" text-anchor="end">007 · Bishop</text>
+          <text class="mute" x="560" y="222.0">+0.22 %</text>
+          <rect class="s0" x="269.0" y="234.0" width="186.0" height="16"/>
+          <circle class="pt" cx="365.7" cy="242.0" r="4"/>
+          <text x="166" y="246.5" text-anchor="end">007 · Spencer</text>
+          <text class="mute" x="560" y="246.0">+0.08 %</text>
+          <rect class="s0" x="269.0" y="258.0" width="186.0" height="16"/>
+          <circle class="pt" cx="386.1" cy="266.0" r="4"/>
+          <text x="166" y="270.5" text-anchor="end">007 · GLE</text>
+          <text class="mute" x="560" y="270.0">+0.52 %</text>
+          <rect class="s0" x="269.0" y="282.0" width="186.0" height="16"/>
+          <circle class="pt" cx="364.1" cy="290.0" r="4"/>
+          <text x="166" y="294.5" text-anchor="end">007 · Janbu corr.</text>
+          <text class="mute" x="560" y="294.0">+0.05 %</text>
+          <text class="mute" x="362.0" y="340" text-anchor="middle">diferencia respecto al valor de referencia (%)</text>
+          </svg>
+        </div>
+        <figcaption><span class="fignum">Figura 4.2.1</span> Diferencia entre el factor de seguridad de OGR Slip2D <span data-v>0.1.235</span> y el valor de referencia, como porcentaje de la referencia, para los doce pares de método y caso. La banda sombreada es la tolerancia de cada caso.</figcaption>
+      </figure>
+      <div class="note"><span class="label">Cómo se calculan las diferencias</span><p>Los valores obtenidos se muestran con cuatro decimales, pero la diferencia de cada fila y su comparación con la tolerancia usan los valores sin redondear, como en la <a class="xref" href="methodology.html#eq-difference">Ec. (4.1.1)</a>: la diferencia es relativa al valor de referencia, y positiva cuando OGR Slip2D da el factor de seguridad mayor. Los valores se recalcularon con la versión <span data-v>0.1.235</span> sobre los modelos del repositorio, con la función que usa la batería de tests.</p></div>
+      <div class="note warn"><span class="label">Alcance</span><p>Los siete casos usan superficies circulares y materiales de Mohr-Coulomb. En uno de ellos interviene la presión intersticial, mediante un nivel freático, y en otro una carga; ninguno tiene soportes, carga sísmica, un campo de presiones intersticiales por elementos finitos ni una superficie no circular. Spencer y GLE / Morgenstern-Price solo se comparan con un valor publicado en el caso 007 (<a class="xref" href="methodology.html#tolerance">Sección 4.1.4</a>); otras comprobaciones de esos métodos están en la <a class="xref" href="#method-checks">Sección 4.2.9</a>.</p></div>
+
+      <h2 id="acads-1a"><span class="secnum">4.2.2</span><span class="ht">Caso 001 · ACADS 1(a): talud homogéneo, tensiones totales</span><a class="anchor" href="#acads-1a" aria-label="Enlace a esta sección">#</a></h2>
+      <p>Problema 1(a) del estudio de <a class="cite" href="../reference/bibliography.html#giam1989">Giam y Donald (1989)</a>: un talud homogéneo analizado en tensiones totales, sin presión intersticial, para el que el estudio pide el factor de seguridad y su superficie circular crítica. Treinta y tres programas lo resolvieron de forma independiente, y el informe da tres cifras: un valor del árbitro de 1.00, la media de los 33 programas, 0.991, y el valor medio de Bishop de 18 programas, 0.993. El caso toma la media de los 33 programas como referencia para los dos métodos que declara. Es el valor con respaldo estadístico y no consagra el resultado de ningún programa concreto. La tolerancia es del 2.0 %: el valor del árbitro y la media difieren entre sí un 0.9 %, y exigir un 0.5 % pediría a la fuente una precisión que no tiene.</p>
+      <p><strong>Qué comprueba.</strong> La búsqueda: hay que encontrar el círculo crítico, y una búsqueda que no lo encontrara devolvería un factor de seguridad mayor. Todas las coordenadas proceden del texto del enunciado y ninguna se lee en una figura. Spencer y GLE / Morgenstern-Price no se declaran, porque el estudio da un valor medio de Bishop y una media de todos los programas, pero ningún valor para un método riguroso.</p>
+      <figure class="fig" id="fig-geom-001">
+        <div class="art">
+          <svg class="dg" viewBox="0 0 640 223" role="img" aria-labelledby="fig-geom-001-t"><title id="fig-geom-001-t">Sección transversal del caso 001, ACADS 1(a): un talud homogéneo de 10 m de altura con 1V:2H</title>
+          <path class="s1" d="M46 187.4L46 130.7L159.3 130.7L386 17.4L612.7 17.4L612.7 187.4Z"/>
+          <path class="ln" d="M46 187.4L612.7 187.4L612.7 17.4L386 17.4L159.3 130.7L46 130.7Z"/>
+          <path class="thin" d="M46 14V187.4 H624"/>
+          <path class="thin" d="M46 187.4v5"/><text class="mute" x="46" y="206.4" text-anchor="middle">20</text>
+          <path class="thin" d="M159.3 187.4v5"/><text class="mute" x="159.3" y="206.4" text-anchor="middle">30</text>
+          <path class="thin" d="M272.7 187.4v5"/><text class="mute" x="272.7" y="206.4" text-anchor="middle">40</text>
+          <path class="thin" d="M386 187.4v5"/><text class="mute" x="386" y="206.4" text-anchor="middle">50</text>
+          <path class="thin" d="M499.3 187.4v5"/><text class="mute" x="499.3" y="206.4" text-anchor="middle">60</text>
+          <path class="thin" d="M612.7 187.4v5"/><text class="mute" x="612.7" y="206.4" text-anchor="middle">70</text>
+          <path class="thin" d="M46 187.4h-5"/><text class="mute" x="38" y="191.4" text-anchor="end">20</text>
+          <path class="thin" d="M46 130.7h-5"/><text class="mute" x="38" y="134.7" text-anchor="end">25</text>
+          <path class="thin" d="M46 74.1h-5"/><text class="mute" x="38" y="78.1" text-anchor="end">30</text>
+          <path class="thin" d="M46 17.4h-5"/><text class="mute" x="38" y="21.4" text-anchor="end">35</text>
+          <text class="mute" x="624" y="220.4" text-anchor="end">x (m)</text>
+          <text class="mute" x="52" y="25">y (m)</text>
+          </svg>
+        </div>
+        <figcaption><span class="fignum">Figura 4.2.2</span> Sección transversal del caso 001, en metros. Los centros de la rejilla de búsqueda quedan por encima de la sección y no se dibujan.</figcaption>
+      </figure>
+      <figure class="tbl" id="tbl-001-model">
+        <figcaption><span class="fignum">Tabla 4.2.2</span> Modelo y búsqueda del caso 001.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Concepto</th><th>Datos</th></tr></thead>
+            <tbody>
+              <tr><td>Coordenadas</td><td>Del texto del enunciado; ninguna se lee en una figura</td></tr>
+              <tr><td>Contorno externo (cerrado)</td><td>(20, 20) → (70, 20) → (70, 35) → (50, 35) → (30, 25) → (20, 25)</td></tr>
+              <tr><td>Talud</td><td>Cara de (30, 25) a (50, 35): 10 m de altura con 1V:2H (β = 26.57°)</td></tr>
+              <tr><td>Agua subterránea</td><td>Ninguna: análisis en tensiones totales, sin presión intersticial</td></tr>
+              <tr><td>Sentido de rotura</td><td>de derecha a izquierda</td></tr>
+              <tr><td>Búsqueda</td><td>Grid Search de superficies circulares</td></tr>
+              <tr><td>Rejilla de centros (m)</td><td>x de 22.8 a 43.7, y de 42.3 a 62.6; 20 × 20 intervalos (21 × 21 centros)</td></tr>
+              <tr><td>Incremento de radio</td><td>11 (12 círculos por centro)</td></tr>
+              <tr><td>Dovelas</td><td>25</td></tr>
+              <tr><td>Área mínima</td><td>0.5 m²</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <figure class="tbl" id="tbl-001-materials">
+        <figcaption><span class="fignum">Tabla 4.2.3</span> Material del caso 001.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Material</th><th>Modelo de resistencia</th><th class="n">Cohesión</th><th class="n">Ángulo de rozamiento</th><th class="n">Peso específico</th><th>Presión intersticial</th></tr></thead>
+            <tbody>
+              <tr><td>Suelo</td><td>Mohr-Coulomb</td><td class="n">3.0 kPa</td><td class="n">19.6°</td><td class="n">20.0 kN/m³</td><td>ninguna</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <div class="impl">
+        <span class="label">En OGR Slip2D</span>
+        <p>El ejecutor toma la búsqueda del modelo, una Grid Search de superficies circulares, fija las 25 dovelas que declara el caso y conserva el factor de seguridad crítico de cada método declarado. El mismo problema sirve para comprobar la Slope Search: con 1 500 superficies, la búsqueda dirigida tiene que quedar dentro de ese mismo 2 % respecto a 0.991 con las semillas 7, 42 y 123, y no debe dar un valor superior al de la Grid Search en más de un 0.5 %.</p>
+        <span class="src">Código: <a href="https://github.com/samuelsl27/OGR-Slip2D/tree/main/validacion/casos/001-acads-1a" target="_blank" rel="noopener">validacion/casos/001-acads-1a/</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/tests/test_acads_validation_v178.py" target="_blank" rel="noopener">tests/test_acads_validation_v178.py</a></span>
+      </div>
+      <figure class="tbl" id="tbl-001-results">
+        <figcaption><span class="fignum">Tabla 4.2.4</span> Caso 001: factores de seguridad de referencia y calculados.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Método</th><th class="n">Referencia</th><th class="n">OGR Slip2D</th><th class="n">Diferencia</th><th class="n">Tolerancia</th></tr></thead>
+            <tbody>
+              <tr><td>Bishop simplificado</td><td class="n">0.991</td><td class="n">0.9885</td><td class="n">−0.25 %</td><td class="n" rowspan="2">2.0 %</td></tr>
+              <tr><td>Janbu corregido</td><td class="n">0.991</td><td class="n">0.9897</td><td class="n">−0.14 %</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+
+      <h2 id="yamagami-ueta"><span class="secnum">4.2.3</span><span class="ht">Caso 002 · Yamagami &amp; Ueta (1988): talud homogéneo</span><a class="anchor" href="#yamagami-ueta" aria-label="Enlace a esta sección">#</a></h2>
+      <p>Un talud homogéneo sin presión intersticial, tomado del artículo de <a class="cite" href="../reference/bibliography.html#yamagami1988">Yamagami y Ueta (1988)</a> sobre la búsqueda de superficies de rotura no circulares con el método de Morgenstern-Price. Los autores publican un factor de seguridad de Bishop simplificado de 1.348 y uno Ordinario (Fellenius) de 1.282, y el caso declara ambos. Son valores calculados y publicados por los autores y no una media entre programas que discrepan, por lo que su tolerancia, del 1.5 %, es más estrecha que el 2.0 % de los casos 001 y 007.</p>
+      <p><strong>Qué comprueba.</strong> Dos métodos a la vez. Los dos valores publicados difieren un 4.9 % del valor de Bishop, de modo que reproducir ambos fija también la diferencia entre ellos, y no solo su nivel. El caso ejecuta una Grid Search de superficies circulares, así que comprueba también la búsqueda. Las coordenadas están rotuladas en la figura que documenta el problema, y no ha hecho falta medir ninguna dimensión a escala sobre un dibujo.</p>
+      <figure class="fig" id="fig-geom-002">
+        <div class="art">
+          <svg class="dg" viewBox="0 0 640 281" role="img" aria-labelledby="fig-geom-002-t"><title id="fig-geom-002-t">Sección transversal del caso 002, el talud de Yamagami y Ueta: 5 m de altura con 1V:2H sobre un estrato de 5 m</title>
+          <path class="s1" d="M46 245.2L46 131.9L159.3 131.9L386 18.5L612.7 18.5L612.7 245.2Z"/>
+          <path class="ln" d="M46 245.2L612.7 245.2L612.7 18.5L386 18.5L159.3 131.9L46 131.9Z"/>
+          <path class="thin" d="M46 14V245.2 H624"/>
+          <path class="thin" d="M46 245.2v5"/><text class="mute" x="46" y="264.2" text-anchor="middle">0</text>
+          <path class="thin" d="M159.3 245.2v5"/><text class="mute" x="159.3" y="264.2" text-anchor="middle">5</text>
+          <path class="thin" d="M272.7 245.2v5"/><text class="mute" x="272.7" y="264.2" text-anchor="middle">10</text>
+          <path class="thin" d="M386 245.2v5"/><text class="mute" x="386" y="264.2" text-anchor="middle">15</text>
+          <path class="thin" d="M499.3 245.2v5"/><text class="mute" x="499.3" y="264.2" text-anchor="middle">20</text>
+          <path class="thin" d="M612.7 245.2v5"/><text class="mute" x="612.7" y="264.2" text-anchor="middle">25</text>
+          <path class="thin" d="M46 245.2h-5"/><text class="mute" x="38" y="249.2" text-anchor="end">0</text>
+          <path class="thin" d="M46 199.9h-5"/><text class="mute" x="38" y="203.9" text-anchor="end">2</text>
+          <path class="thin" d="M46 154.5h-5"/><text class="mute" x="38" y="158.5" text-anchor="end">4</text>
+          <path class="thin" d="M46 109.2h-5"/><text class="mute" x="38" y="113.2" text-anchor="end">6</text>
+          <path class="thin" d="M46 63.9h-5"/><text class="mute" x="38" y="67.9" text-anchor="end">8</text>
+          <path class="thin" d="M46 18.5h-5"/><text class="mute" x="38" y="22.5" text-anchor="end">10</text>
+          <text class="mute" x="624" y="278.2" text-anchor="end">x (m)</text>
+          <text class="mute" x="52" y="25">y (m)</text>
+          </svg>
+        </div>
+        <figcaption><span class="fignum">Figura 4.2.3</span> Sección transversal del caso 002, en metros. Los centros de la rejilla de búsqueda quedan por encima de la sección y no se dibujan.</figcaption>
+      </figure>
+      <figure class="tbl" id="tbl-002-model">
+        <figcaption><span class="fignum">Tabla 4.2.5</span> Modelo y búsqueda del caso 002.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Concepto</th><th>Datos</th></tr></thead>
+            <tbody>
+              <tr><td>Coordenadas</td><td>Rotuladas en la figura que documenta el problema</td></tr>
+              <tr><td>Contorno externo (cerrado)</td><td>(0, 0) → (25, 0) → (25, 10) → (15, 10) → (5, 5) → (0, 5)</td></tr>
+              <tr><td>Talud</td><td>Cara de (5, 5) a (15, 10): 5 m de altura con 1V:2H (β = 26.57°), sobre un estrato de 5 m</td></tr>
+              <tr><td>Agua subterránea</td><td>Ninguna</td></tr>
+              <tr><td>Sentido de rotura</td><td>de derecha a izquierda</td></tr>
+              <tr><td>Búsqueda</td><td>Grid Search de superficies circulares</td></tr>
+              <tr><td>Rejilla de centros (m)</td><td>x de 2 a 28, y de 10 a 40; 25 × 25 intervalos (26 × 26 centros)</td></tr>
+              <tr><td>Incremento de radio</td><td>12 (13 círculos por centro)</td></tr>
+              <tr><td>Dovelas</td><td>30</td></tr>
+              <tr><td>Área mínima</td><td>0.5 m²</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <figure class="tbl" id="tbl-002-materials">
+        <figcaption><span class="fignum">Tabla 4.2.6</span> Material del caso 002.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Material</th><th>Modelo de resistencia</th><th class="n">Cohesión</th><th class="n">Ángulo de rozamiento</th><th class="n">Peso específico</th><th>Presión intersticial</th></tr></thead>
+            <tbody>
+              <tr><td>Suelo</td><td>Mohr-Coulomb</td><td class="n">9.8 kPa</td><td class="n">10.0°</td><td class="n">17.64 kN/m³</td><td>ninguna</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <div class="impl">
+        <span class="label">En OGR Slip2D</span>
+        <p>Las 30 dovelas las declara el caso; todo lo demás de la búsqueda procede del modelo. La Slope Search, con 2 000 superficies y la semilla 42, reproduce también 1.348 dentro del 2 %.</p>
+        <span class="src">Código: <a href="https://github.com/samuelsl27/OGR-Slip2D/tree/main/validacion/casos/002-yamagami-ueta-1988" target="_blank" rel="noopener">validacion/casos/002-yamagami-ueta-1988/</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/tests/test_published_cases_v179.py" target="_blank" rel="noopener">tests/test_published_cases_v179.py</a></span>
+      </div>
+      <figure class="tbl" id="tbl-002-results">
+        <figcaption><span class="fignum">Tabla 4.2.7</span> Caso 002: factores de seguridad de referencia y calculados.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Método</th><th class="n">Referencia</th><th class="n">OGR Slip2D</th><th class="n">Diferencia</th><th class="n">Tolerancia</th></tr></thead>
+            <tbody>
+              <tr><td>Bishop simplificado</td><td class="n">1.348</td><td class="n">1.3502</td><td class="n">+0.16 %</td><td class="n" rowspan="2">1.5 %</td></tr>
+              <tr><td>Ordinario (Fellenius)</td><td class="n">1.282</td><td class="n">1.2852</td><td class="n">+0.25 %</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+
+      <h2 id="acads-1c"><span class="secnum">4.2.4</span><span class="ht">Caso 003 · ACADS 1(c): tres capas</span><a class="anchor" href="#acads-1c" aria-label="Enlace a esta sección">#</a></h2>
+      <p>Problema 1(c) del mismo estudio (<a class="cite" href="../reference/bibliography.html#giam1989">Giam y Donald, 1989</a>), el homólogo estratificado del caso 001. El informe da un valor del árbitro de 1.39, el valor medio de Bishop de 16 programas, 1.406, y la media de 31 programas, 1.381. El caso usa la media de Bishop, que tiene respaldo estadístico y corresponde al método; la tolerancia, del 1.5 %, cubre el 1.1 % que la separa del valor del árbitro.</p>
+      <p><strong>Qué comprueba.</strong> Las regiones y la asignación de materiales: el talud tiene tres, con resistencias distintas. Las coordenadas están en el texto del problema, y solo la forma en que se conectan las dos líneas de material figura en un dibujo. Acompañan al caso dos comprobaciones. Un círculo crítico de este problema publicado en un manual de verificación de un programa, con centro (34.121, 43.254) y puntos de entrada y salida en x = 29.702 y 50.991, tiene ambos puntos a 18.781 del centro, lo que fija un radio que la figura deja ambiguo; colocado sobre la geometría del caso, ese círculo corta el terreno en x = 29.703 y 50.991, es decir, con una diferencia de un milímetro. Y el método de Bishop sobre ese mismo círculo da un factor de seguridad dentro del 1 % del valor de Bishop publicado, que depende de las capas que atraviesa el círculo.</p>
+      <figure class="fig" id="fig-geom-003">
+        <div class="art">
+          <svg class="dg" viewBox="0 0 640 223" role="img" aria-labelledby="fig-geom-003-t"><title id="fig-geom-003-t">Sección transversal del caso 003, ACADS 1(c): un talud de 10 m con tres regiones de material</title>
+          <path class="s2" d="M612.7 142.1L612.7 187.4L46 187.4L46 130.7L159.3 130.7L272.7 108.1L408.7 142.1Z"/>
+          <path class="s1" d="M612.7 62.7L612.7 142.1L408.7 142.1L272.7 108.1L386 85.4L431.3 62.7Z"/>
+          <path class="s0" d="M159.3 130.7L386 17.4L612.7 17.4L612.7 62.7L431.3 62.7L386 85.4L272.7 108.1Z"/>
+          <path class="thin" d="M159.3 130.7L272.7 108.1L386 85.4L431.3 62.7L612.7 62.7"/>
+          <path class="thin" d="M272.7 108.1L408.7 142.1L612.7 142.1"/>
+          <path class="ln" d="M46 187.4L612.7 187.4L612.7 142.1L612.7 62.7L612.7 17.4L386 17.4L159.3 130.7L46 130.7Z"/>
+          <text class="mute" x="499.3" y="40.1" text-anchor="middle">Suelo 1</text>
+          <text class="mute" x="522" y="102.4" text-anchor="middle">Suelo 2</text>
+          <text class="mute" x="329.3" y="164.7" text-anchor="middle">Suelo 3</text>
+          <path class="thin" d="M46 14V187.4 H624"/>
+          <path class="thin" d="M46 187.4v5"/><text class="mute" x="46" y="206.4" text-anchor="middle">20</text>
+          <path class="thin" d="M159.3 187.4v5"/><text class="mute" x="159.3" y="206.4" text-anchor="middle">30</text>
+          <path class="thin" d="M272.7 187.4v5"/><text class="mute" x="272.7" y="206.4" text-anchor="middle">40</text>
+          <path class="thin" d="M386 187.4v5"/><text class="mute" x="386" y="206.4" text-anchor="middle">50</text>
+          <path class="thin" d="M499.3 187.4v5"/><text class="mute" x="499.3" y="206.4" text-anchor="middle">60</text>
+          <path class="thin" d="M612.7 187.4v5"/><text class="mute" x="612.7" y="206.4" text-anchor="middle">70</text>
+          <path class="thin" d="M46 187.4h-5"/><text class="mute" x="38" y="191.4" text-anchor="end">20</text>
+          <path class="thin" d="M46 130.7h-5"/><text class="mute" x="38" y="134.7" text-anchor="end">25</text>
+          <path class="thin" d="M46 74.1h-5"/><text class="mute" x="38" y="78.1" text-anchor="end">30</text>
+          <path class="thin" d="M46 17.4h-5"/><text class="mute" x="38" y="21.4" text-anchor="end">35</text>
+          <text class="mute" x="624" y="220.4" text-anchor="end">x (m)</text>
+          <text class="mute" x="52" y="25">y (m)</text>
+          </svg>
+        </div>
+        <figcaption><span class="fignum">Figura 4.2.4</span> Sección transversal del caso 003, en metros. Las dos líneas de material salen juntas del pie y se separan en (40, 27). No se dibujan los centros de la rejilla de búsqueda.</figcaption>
+      </figure>
+      <figure class="tbl" id="tbl-003-model">
+        <figcaption><span class="fignum">Tabla 4.2.8</span> Modelo y búsqueda del caso 003.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Concepto</th><th>Datos</th></tr></thead>
+            <tbody>
+              <tr><td>Coordenadas</td><td>Del texto del enunciado; la forma en que se conectan las líneas de material se lee en una figura</td></tr>
+              <tr><td>Contorno externo (cerrado)</td><td>(20, 20) → (70, 20) → (70, 24) → (70, 31) → (70, 35) → (50, 35) → (30, 25) → (20, 25)</td></tr>
+              <tr><td>Línea de material superior</td><td>(30, 25) → (40, 27) → (50, 29) → (54, 31) → (70, 31)</td></tr>
+              <tr><td>Línea de material inferior</td><td>(40, 27) → (52, 24) → (70, 24)</td></tr>
+              <tr><td>Regiones</td><td>Tres: Suelo 1 sobre la línea superior, Suelo 2 entre las líneas, Suelo 3 por debajo</td></tr>
+              <tr><td>Agua subterránea</td><td>Ninguna</td></tr>
+              <tr><td>Sentido de rotura</td><td>de derecha a izquierda</td></tr>
+              <tr><td>Búsqueda</td><td>Grid Search de superficies circulares</td></tr>
+              <tr><td>Rejilla de centros (m)</td><td>x de 25 a 50, y de 35 a 60; 21 × 21 intervalos (22 × 22 centros)</td></tr>
+              <tr><td>Incremento de radio</td><td>11 (12 círculos por centro)</td></tr>
+              <tr><td>Dovelas</td><td>25</td></tr>
+              <tr><td>Área mínima</td><td>0.5 m²</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <figure class="tbl" id="tbl-003-materials">
+        <figcaption><span class="fignum">Tabla 4.2.9</span> Materiales del caso 003.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Material</th><th>Modelo de resistencia</th><th class="n">Cohesión</th><th class="n">Ángulo de rozamiento</th><th class="n">Peso específico</th><th>Presión intersticial</th></tr></thead>
+            <tbody>
+              <tr><td>Suelo 1 (superior)</td><td>Mohr-Coulomb</td><td class="n">0.0 kPa</td><td class="n">38.0°</td><td class="n">19.5 kN/m³</td><td>ninguna</td></tr>
+              <tr><td>Suelo 2 (intermedio)</td><td>Mohr-Coulomb</td><td class="n">5.3 kPa</td><td class="n">23.0°</td><td class="n">19.5 kN/m³</td><td>ninguna</td></tr>
+              <tr><td>Suelo 3 (inferior)</td><td>Mohr-Coulomb</td><td class="n">7.2 kPa</td><td class="n">20.0°</td><td class="n">19.5 kN/m³</td><td>ninguna</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <div class="impl">
+        <span class="label">En OGR Slip2D</span>
+        <p>El ejecutor toma la Grid Search del modelo y fija 25 dovelas. Solo se declara Bishop: el estudio no da ninguna media para los métodos rigurosos individuales de este problema.</p>
+        <span class="src">Código: <a href="https://github.com/samuelsl27/OGR-Slip2D/tree/main/validacion/casos/003-acads-1c" target="_blank" rel="noopener">validacion/casos/003-acads-1c/</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/tests/test_published_cases_v179.py" target="_blank" rel="noopener">tests/test_published_cases_v179.py</a></span>
+      </div>
+      <figure class="tbl" id="tbl-003-results">
+        <figcaption><span class="fignum">Tabla 4.2.10</span> Caso 003: factor de seguridad de referencia y calculado.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Método</th><th class="n">Referencia</th><th class="n">OGR Slip2D</th><th class="n">Diferencia</th><th class="n">Tolerancia</th></tr></thead>
+            <tbody>
+              <tr><td>Bishop simplificado</td><td class="n">1.406</td><td class="n">1.4083</td><td class="n">+0.16 %</td><td class="n">1.5 %</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+
+      <h2 id="arai-tagyo-1"><span class="secnum">4.2.5</span><span class="ht">Caso 004 · Arai &amp; Tagyo (1985), ejemplo 1: un talud alto y empinado</span><a class="anchor" href="#arai-tagyo-1" aria-label="Enlace a esta sección">#</a></h2>
+      <p>Ejemplo 1 de <a class="cite" href="../reference/bibliography.html#arai1985">Arai y Tagyo (1985)</a>: un talud homogéneo sin presión intersticial, de 20 m de altura con 1V:1.5H, para el que el artículo da un factor de seguridad de Bishop simplificado de 1.451. Junto con el caso 005, es el único con un talud tan alto y tan empinado, de modo que un error que crezca con la altura o con la inclinación se vería aquí en primer lugar. Las coordenadas están rotuladas en la figura del problema.</p>
+      <figure class="fig" id="fig-geom-004">
+        <div class="art">
+          <svg class="dg" viewBox="0 0 640 357" role="img" aria-labelledby="fig-geom-004-t"><title id="fig-geom-004-t">Sección transversal del caso 004, ejemplo 1 de Arai y Tagyo: un talud de 20 m de altura con 1V:1.5H sobre un estrato de 15 m</title>
+          <path class="s1" d="M46 320.5L46 191.7L200.5 191.7L458.1 20L612.7 20L612.7 320.5Z"/>
+          <path class="ln" d="M46 320.5L612.7 320.5L612.7 20L458.1 20L200.5 191.7L46 191.7Z"/>
+          <path class="thin" d="M46 14V320.5 H624"/>
+          <path class="thin" d="M46 320.5v5"/><text class="mute" x="46" y="339.5" text-anchor="middle">0</text>
+          <path class="thin" d="M217.7 320.5v5"/><text class="mute" x="217.7" y="339.5" text-anchor="middle">20</text>
+          <path class="thin" d="M389.4 320.5v5"/><text class="mute" x="389.4" y="339.5" text-anchor="middle">40</text>
+          <path class="thin" d="M561.2 320.5v5"/><text class="mute" x="561.2" y="339.5" text-anchor="middle">60</text>
+          <path class="thin" d="M46 320.5h-5"/><text class="mute" x="38" y="324.5" text-anchor="end">0</text>
+          <path class="thin" d="M46 234.7h-5"/><text class="mute" x="38" y="238.7" text-anchor="end">10</text>
+          <path class="thin" d="M46 148.8h-5"/><text class="mute" x="38" y="152.8" text-anchor="end">20</text>
+          <path class="thin" d="M46 62.9h-5"/><text class="mute" x="38" y="66.9" text-anchor="end">30</text>
+          <text class="mute" x="624" y="353.5" text-anchor="end">x (m)</text>
+          <text class="mute" x="52" y="25">y (m)</text>
+          </svg>
+        </div>
+        <figcaption><span class="fignum">Figura 4.2.5</span> Sección transversal del caso 004, en metros. El caso 005 añade un nivel freático a la misma sección. Los centros de la rejilla de búsqueda quedan por encima de la sección y no se dibujan.</figcaption>
+      </figure>
+      <figure class="tbl" id="tbl-004-model">
+        <figcaption><span class="fignum">Tabla 4.2.11</span> Modelo y búsqueda del caso 004.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Concepto</th><th>Datos</th></tr></thead>
+            <tbody>
+              <tr><td>Coordenadas</td><td>Rotuladas en la figura del problema</td></tr>
+              <tr><td>Contorno externo (cerrado)</td><td>(0, 0) → (66, 0) → (66, 35) → (48, 35) → (18, 15) → (0, 15)</td></tr>
+              <tr><td>Talud</td><td>Cara de (18, 15) a (48, 35): 20 m de altura con 1V:1.5H (β = 33.69°), sobre un estrato de 15 m</td></tr>
+              <tr><td>Agua subterránea</td><td>Ninguna</td></tr>
+              <tr><td>Sentido de rotura</td><td>de derecha a izquierda</td></tr>
+              <tr><td>Búsqueda</td><td>Grid Search de superficies circulares</td></tr>
+              <tr><td>Rejilla de centros (m)</td><td>x de 10 a 70, y de 35 a 90; 25 × 25 intervalos (26 × 26 centros)</td></tr>
+              <tr><td>Incremento de radio</td><td>12 (13 círculos por centro)</td></tr>
+              <tr><td>Dovelas</td><td>30</td></tr>
+              <tr><td>Área mínima</td><td>1 m²</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <figure class="tbl" id="tbl-004-materials">
+        <figcaption><span class="fignum">Tabla 4.2.12</span> Material del caso 004.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Material</th><th>Modelo de resistencia</th><th class="n">Cohesión</th><th class="n">Ángulo de rozamiento</th><th class="n">Peso específico</th><th>Presión intersticial</th></tr></thead>
+            <tbody>
+              <tr><td>Suelo</td><td>Mohr-Coulomb</td><td class="n">41.65 kPa</td><td class="n">15.0°</td><td class="n">18.82 kN/m³</td><td>ninguna</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <div class="impl">
+        <span class="label">En OGR Slip2D</span>
+        <p>Las 30 dovelas las declara el caso; todo lo demás de la búsqueda procede del modelo. La Slope Search, con 2 000 superficies y la semilla 42, también queda dentro del 3.5 % del caso y es al menos tan crítica como la rejilla declarada, con una tolerancia del 1 %.</p>
+        <span class="src">Código: <a href="https://github.com/samuelsl27/OGR-Slip2D/tree/main/validacion/casos/004-arai-tagyo-1985-ej1" target="_blank" rel="noopener">validacion/casos/004-arai-tagyo-1985-ej1/</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/tests/test_published_cases_v179.py" target="_blank" rel="noopener">tests/test_published_cases_v179.py</a></span>
+      </div>
+      <figure class="tbl" id="tbl-004-results">
+        <figcaption><span class="fignum">Tabla 4.2.13</span> Caso 004: factor de seguridad de referencia y calculado.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Método</th><th class="n">Referencia</th><th class="n">OGR Slip2D</th><th class="n">Diferencia</th><th class="n">Tolerancia</th></tr></thead>
+            <tbody>
+              <tr><td>Bishop simplificado</td><td class="n">1.451</td><td class="n">1.4123</td><td class="n">−2.67 %</td><td class="n">3.5 %</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <div class="note"><span class="label">Por qué la tolerancia es del 3.5 % y no del 1 %</span><p>El valor obtenido queda un 2.67 % por debajo del publicado, y el archivo del caso explica la diferencia en lugar de ocultarla. Un reanálisis del mismo talud con otro programa, anotado en el archivo del caso como 1.409, queda un 2.9 % por debajo del valor de 1985, y el valor que se obtiene ahora, 1.4123, está a menos de un 0.3 % de él. El archivo lee la diferencia como la que separa una búsqueda de 1985, necesariamente más gruesa, con menos dovelas y menos círculos, de una búsqueda actual, que encuentra un mínimo más bajo porque examina más superficies. Un mínimo más bajo es un mínimo mejor, puesto que el equilibrio límite busca el factor de seguridad más bajo; esta lectura es una interpretación, y los ajustes de búsqueda del artículo no se reproducen aquí. Por eso el caso conserva el valor publicado como referencia, con una tolerancia que cubre la diferencia conocida, de modo que detecta una regresión grave sin fingir que la fuente es más precisa de lo que es. Tomar 1.409 como valor esperado escribiría en el caso la salida de otro programa, y un promedio de los dos inventaría una referencia que nadie ha publicado.</p></div>
+
+      <h2 id="arai-tagyo-3"><span class="secnum">4.2.6</span><span class="ht">Caso 005 · Arai &amp; Tagyo (1985), ejemplo 3: el mismo talud con agua</span><a class="anchor" href="#arai-tagyo-3" aria-label="Enlace a esta sección">#</a></h2>
+      <p>Ejemplo 3 de <a class="cite" href="../reference/bibliography.html#arai1985">Arai y Tagyo (1985)</a>: el talud del ejemplo 1 con un nivel freático, para el que el artículo da un factor de seguridad de Bishop simplificado de 1.138. Los dos casos comparten su contorno externo y su material, de modo que la diferencia entre ellos aísla la presión intersticial y nada más. La tolerancia es del 2.5 %, por la misma razón que en el caso 004: el valor de 1985 y los reanálisis anotados en el archivo del caso difieren un 1.9 %.</p>
+      <p><strong>Qué comprueba.</strong> El agua. Es el único caso con presión intersticial, de modo que un error en el cálculo de <span class="m" data-tex="u"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>u</mi></mrow><annotation encoding="application/x-tex">u</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">u</span></span></span></span><!--/k--></span> podría pasar inadvertido en los otros seis casos y aquí quedaría a la vista. La presión es hidrostática por debajo del nivel freático y nula por encima, con el peso específico del fluido intersticial del proyecto, 9.81 kN/m³. Las coordenadas, incluido el nivel freático, están rotuladas en la figura del problema. El caso declara solo el valor de Bishop, el que toma del artículo.</p>
+      <figure class="fig" id="fig-geom-005">
+        <div class="art">
+          <svg class="dg" viewBox="0 0 640 357" role="img" aria-labelledby="fig-geom-005-t"><title id="fig-geom-005-t">Sección transversal del caso 005, ejemplo 3 de Arai y Tagyo: el talud del ejemplo 1 con un nivel freático</title>
+          <path class="s1" d="M46 320.5L46 191.7L200.5 191.7L458.1 20L612.7 20L612.7 320.5Z"/>
+          <path class="ln" d="M46 320.5L612.7 320.5L612.7 20L458.1 20L200.5 191.7L46 191.7Z"/>
+          <path class="wat" d="M46 191.7L200.5 191.7L303.6 123L458.1 71.5L612.7 45.8"/>
+          <text class="mute" x="561.2" y="83.5" text-anchor="middle">nivel freático</text>
+          <path class="thin" d="M46 14V320.5 H624"/>
+          <path class="thin" d="M46 320.5v5"/><text class="mute" x="46" y="339.5" text-anchor="middle">0</text>
+          <path class="thin" d="M217.7 320.5v5"/><text class="mute" x="217.7" y="339.5" text-anchor="middle">20</text>
+          <path class="thin" d="M389.4 320.5v5"/><text class="mute" x="389.4" y="339.5" text-anchor="middle">40</text>
+          <path class="thin" d="M561.2 320.5v5"/><text class="mute" x="561.2" y="339.5" text-anchor="middle">60</text>
+          <path class="thin" d="M46 320.5h-5"/><text class="mute" x="38" y="324.5" text-anchor="end">0</text>
+          <path class="thin" d="M46 234.7h-5"/><text class="mute" x="38" y="238.7" text-anchor="end">10</text>
+          <path class="thin" d="M46 148.8h-5"/><text class="mute" x="38" y="152.8" text-anchor="end">20</text>
+          <path class="thin" d="M46 62.9h-5"/><text class="mute" x="38" y="66.9" text-anchor="end">30</text>
+          <text class="mute" x="624" y="353.5" text-anchor="end">x (m)</text>
+          <text class="mute" x="52" y="25">y (m)</text>
+          </svg>
+        </div>
+        <figcaption><span class="fignum">Figura 4.2.6</span> Sección transversal del caso 005, en metros: la sección del caso 004 con el nivel freático del problema (línea discontinua). No se dibujan los centros de la rejilla de búsqueda.</figcaption>
+      </figure>
+      <figure class="tbl" id="tbl-005-model">
+        <figcaption><span class="fignum">Tabla 4.2.14</span> Modelo y búsqueda del caso 005.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Concepto</th><th>Datos</th></tr></thead>
+            <tbody>
+              <tr><td>Coordenadas</td><td>Rotuladas en la figura del problema, incluido el nivel freático</td></tr>
+              <tr><td>Contorno externo (cerrado)</td><td>(0, 0) → (66, 0) → (66, 35) → (48, 35) → (18, 15) → (0, 15)</td></tr>
+              <tr><td>Nivel freático</td><td>(0, 15) → (18, 15) → (30, 23) → (48, 29) → (66, 32)</td></tr>
+              <tr><td>Presión intersticial</td><td>Hidrostática por debajo del nivel freático y nula por encima; peso específico del fluido intersticial 9.81 kN/m³</td></tr>
+              <tr><td>Sentido de rotura</td><td>de derecha a izquierda</td></tr>
+              <tr><td>Búsqueda</td><td>Grid Search de superficies circulares</td></tr>
+              <tr><td>Rejilla de centros (m)</td><td>x de 10 a 70, y de 35 a 90; 25 × 25 intervalos (26 × 26 centros)</td></tr>
+              <tr><td>Incremento de radio</td><td>12 (13 círculos por centro)</td></tr>
+              <tr><td>Dovelas</td><td>30</td></tr>
+              <tr><td>Área mínima</td><td>1 m²</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <figure class="tbl" id="tbl-005-materials">
+        <figcaption><span class="fignum">Tabla 4.2.15</span> Material del caso 005, el mismo que en el caso 004.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Material</th><th>Modelo de resistencia</th><th class="n">Cohesión</th><th class="n">Ángulo de rozamiento</th><th class="n">Peso específico</th><th>Presión intersticial</th></tr></thead>
+            <tbody>
+              <tr><td>Suelo</td><td>Mohr-Coulomb</td><td class="n">41.65 kPa</td><td class="n">15.0°</td><td class="n">18.82 kN/m³</td><td>nivel freático</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <div class="impl">
+        <span class="label">En OGR Slip2D</span>
+        <p>Las 30 dovelas las declara el caso. Un segundo test compara la pareja: los dos modelos deben compartir su contorno externo y su material, solo el modelo con agua puede tener nivel freático, y la caída del factor de seguridad causada por el agua debe quedar a menos de cinco puntos porcentuales de la publicada, 21.6 % (de 1.451 a 1.138). Con los valores de la <a class="xref" href="#tbl-004-results">Tabla 4.2.13</a> y la <a class="xref" href="#tbl-005-results">Tabla 4.2.16</a>, la caída calculada es del 20.7 % (de 1.4123 a 1.1200).</p>
+        <span class="src">Código: <a href="https://github.com/samuelsl27/OGR-Slip2D/tree/main/validacion/casos/005-arai-tagyo-1985-ej3" target="_blank" rel="noopener">validacion/casos/005-arai-tagyo-1985-ej3/</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/tests/test_published_cases_v179.py" target="_blank" rel="noopener">tests/test_published_cases_v179.py</a></span>
+      </div>
+      <figure class="tbl" id="tbl-005-results">
+        <figcaption><span class="fignum">Tabla 4.2.16</span> Caso 005: factor de seguridad de referencia y calculado.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Método</th><th class="n">Referencia</th><th class="n">OGR Slip2D</th><th class="n">Diferencia</th><th class="n">Tolerancia</th></tr></thead>
+            <tbody>
+              <tr><td>Bishop simplificado</td><td class="n">1.138</td><td class="n">1.1200</td><td class="n">−1.58 %</td><td class="n">2.5 %</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p>La nota del caso 004 vale también aquí: el valor obtenido queda un 1.58 % por debajo del publicado, dentro del 2.5 % que el caso admite para la diferencia conocida entre el valor de 1985 y los reanálisis modernos.</p>
+
+      <h2 id="reinforcement-1999"><span class="secnum">4.2.7</span><span class="ht">Caso 006 · Ejemplo de refuerzo (1999): el filtro de profundidad mínima</span><a class="anchor" href="#reinforcement-1999" aria-label="Enlace a esta sección">#</a></h2>
+      <p>El ejemplo de retroanálisis de refuerzo del manual de referencia de un programa de estabilidad de taludes, publicado en 1999; el caso se llama Ejemplo de refuerzo (1999), como en la <a href="../../verification/index.html">página de Verificación</a>. El ejemplo es un talud sin cohesión con una carga distribuida en la coronación, y pide la fuerza de refuerzo que lleva el talud a un factor de seguridad de 1.5, partiendo del factor sin refuerzo, 0.764, hallado sobre el círculo de centro (−11.41, 35.264) y radio 34.426 m. El enunciado añade dos condiciones: solo se consideran superficies de rotura con una profundidad mínima de 2 m, y se coloca un punto de foco en el pie, de modo que solo se consideran los círculos que pasan por él. La fuente no tiene entrada en la <a href="../reference/bibliography.html">bibliografía</a>.</p>
+      <p><strong>Qué comprueba.</strong> Que el filtro de profundidad mínima llega al motor de cálculo. Es el único caso que ejercita un filtro de superficies: los demás comprueban métodos y búsquedas, y ninguno comprobaba que un ajuste de filtro de superficies llegara al análisis, lo que durante muchas versiones no ocurría. La condición forma parte del enunciado y no es un detalle de la solución: sin ella el problema no tiene la respuesta publicada. El archivo del caso anota que, con el mismo modelo y el filtro desactivado, el mínimo cae sobre una lámina delgada de 0.669 m de espesor en la cara del talud, con su centro en el borde de la rejilla. Si el filtro dejara de llegar al motor de cálculo, este caso fallaría: en la versión <span data-v>0.1.235</span>, la Grid Search del modelo con el filtro desactivado da 0.7277, con centro en (−20.0, 45.6), que queda un 4.7 % por debajo del valor publicado y fuera de la tolerancia.</p>
+      <figure class="fig" id="fig-geom-006">
+        <div class="art">
+          <svg class="dg" viewBox="0 0 640 403" role="img" aria-labelledby="fig-geom-006-t"><title id="fig-geom-006-t">Sección transversal del caso 006, el ejemplo de refuerzo: un talud de 12 m a 45 grados con una carga distribuida de 40 kPa en la coronación y un punto de foco en el pie</title>
+          <defs><marker id="ah-load" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="arrowhead ink"/></marker></defs><path class="s0" d="M46 366.6L46 295.7L116.8 295.7L286.8 125.7L612.7 125.7L612.7 366.6Z"/>
+          <path class="ln" d="M46 366.6L612.7 366.6L612.7 125.7L286.8 125.7L116.8 295.7L46 295.7Z"/>
+          <path class="frc ink" d="M286.8 66.2L286.8 123.7" marker-end="url(#ah-load)"/>
+          <path class="frc ink" d="M323.7 66.2L323.7 123.7" marker-end="url(#ah-load)"/>
+          <path class="frc ink" d="M360.5 66.2L360.5 123.7" marker-end="url(#ah-load)"/>
+          <path class="frc ink" d="M397.3 66.2L397.3 123.7" marker-end="url(#ah-load)"/>
+          <path class="frc ink" d="M434.2 66.2L434.2 123.7" marker-end="url(#ah-load)"/>
+          <path class="frc ink" d="M471 66.2L471 123.7" marker-end="url(#ah-load)"/>
+          <path class="thin" d="M286.8 66.2H471"/>
+          <text class="mute" x="378.9" y="60.2" text-anchor="middle">40 kPa</text>
+          <circle class="dash" cx="116.8" cy="295.7" r="14.2"/>
+          <circle class="pt" cx="116.8" cy="295.7" r="3"/>
+          <text class="mute" x="128.8" y="315.7">punto de foco</text>
+          <path class="thin" d="M46 14V366.6 H624"/>
+          <path class="thin" d="M46 366.6v5"/><text class="mute" x="46" y="385.6" text-anchor="middle">0</text>
+          <path class="thin" d="M187.7 366.6v5"/><text class="mute" x="187.7" y="385.6" text-anchor="middle">10</text>
+          <path class="thin" d="M329.3 366.6v5"/><text class="mute" x="329.3" y="385.6" text-anchor="middle">20</text>
+          <path class="thin" d="M471 366.6v5"/><text class="mute" x="471" y="385.6" text-anchor="middle">30</text>
+          <path class="thin" d="M612.7 366.6v5"/><text class="mute" x="612.7" y="385.6" text-anchor="middle">40</text>
+          <path class="thin" d="M46 366.6h-5"/><text class="mute" x="38" y="370.6" text-anchor="end">0</text>
+          <path class="thin" d="M46 295.7h-5"/><text class="mute" x="38" y="299.7" text-anchor="end">5</text>
+          <path class="thin" d="M46 224.9h-5"/><text class="mute" x="38" y="228.9" text-anchor="end">10</text>
+          <path class="thin" d="M46 154.1h-5"/><text class="mute" x="38" y="158.1" text-anchor="end">15</text>
+          <path class="thin" d="M46 83.2h-5"/><text class="mute" x="38" y="87.2" text-anchor="end">20</text>
+          <text class="mute" x="624" y="399.6" text-anchor="end">x (m)</text>
+          <text class="mute" x="52" y="25">y (m)</text>
+          </svg>
+        </div>
+        <figcaption><span class="fignum">Figura 4.2.7</span> Sección transversal del caso 006, en metros: el talud de 12 m con la carga de 40 kPa en la coronación y el punto de foco en el pie (el círculo discontinuo es su tolerancia de 1 m). Los centros de la rejilla de búsqueda quedan arriba a la izquierda de la sección y no se dibujan.</figcaption>
+      </figure>
+      <figure class="tbl" id="tbl-006-model">
+        <figcaption><span class="fignum">Tabla 4.2.17</span> Modelo y búsqueda del caso 006.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Concepto</th><th>Datos</th></tr></thead>
+            <tbody>
+              <tr><td>Contorno externo (cerrado)</td><td>(0, 0) → (40, 0) → (40, 17) → (17, 17) → (5, 5) → (0, 5)</td></tr>
+              <tr><td>Talud</td><td>Entre el pie (5, 5) y la coronación (17, 17): 12 m de altura a 45°, sobre un banco de 5 m de altura</td></tr>
+              <tr><td>Carga distribuida</td><td>40 kPa, constante, normal al contorno, en la coronación de x = 17 a x = 30</td></tr>
+              <tr><td>Objeto de foco</td><td>Punto (5, 5) con una tolerancia de 1 m: solo los círculos que pasan por él</td></tr>
+              <tr><td>Agua subterránea</td><td>Ninguna</td></tr>
+              <tr><td>Sentido de rotura</td><td>de derecha a izquierda</td></tr>
+              <tr><td>Búsqueda</td><td>Grid Search de superficies circulares</td></tr>
+              <tr><td>Rejilla de centros (m)</td><td>x de −20 a 12, y de 15 a 50; 16 × 16 intervalos (17 × 17 centros)</td></tr>
+              <tr><td>Incremento de radio</td><td>40 (41 círculos por centro)</td></tr>
+              <tr><td>Límites del talud (x)</td><td>izquierdo 5, derecho 25</td></tr>
+              <tr><td>Profundidad mínima</td><td>2 m</td></tr>
+              <tr><td>Dovelas</td><td>50</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <figure class="tbl" id="tbl-006-materials">
+        <figcaption><span class="fignum">Tabla 4.2.18</span> Material del caso 006. El ángulo de rozamiento se deduce y el peso específico se adopta, como se explica a continuación.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Material</th><th>Modelo de resistencia</th><th class="n">Cohesión</th><th class="n">Ángulo de rozamiento</th><th class="n">Peso específico</th><th>Presión intersticial</th></tr></thead>
+            <tbody>
+              <tr><td>Suelo</td><td>Mohr-Coulomb</td><td class="n">0.0 kPa</td><td class="n">36.0°</td><td class="n">20.0 kN/m³</td><td>ninguna</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p>Dos de las tres cifras del material no están publicadas, y decirlo importa más que el resultado. El ángulo de rozamiento se deduce, no se supone: el ejemplo publica un factor <span class="m" data-tex="F_{\mathrm{r}} = 1.960"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mi mathvariant="normal">r</mi></msub><mo>=</mo><mn>1.960</mn></mrow><annotation encoding="application/x-tex">F_{\mathrm{r}} = 1.960</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.1389em;">F</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathrm mtight">r</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">1.960</span></span></span></span><!--/k--></span> junto con un ángulo de rozamiento de 54.93° para el material reforzado, ambos ligados por <span class="m" data-tex="\tan\phi'_{\mathrm{r}} = F_{\mathrm{r}}\tan\phi'"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>tan</mi><mo>⁡</mo><msubsup><mi>ϕ</mi><mi mathvariant="normal">r</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msubsup><mo>=</mo><msub><mi>F</mi><mi mathvariant="normal">r</mi></msub><mi>tan</mi><mo>⁡</mo><msup><mi>ϕ</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup></mrow><annotation encoding="application/x-tex">\tan\phi&#x27;_{\mathrm{r}} = F_{\mathrm{r}}\tan\phi&#x27;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.9989em;vertical-align:-0.247em;"></span><span class="mop">tan</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">ϕ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.7519em;"><span style="top:-2.453em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathrm mtight">r</span></span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.247em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.9463em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.1389em;">F</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathrm mtight">r</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop">tan</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">ϕ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7519em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span></span><!--/k--></span>, y un ángulo de rozamiento de 36° da <span class="m" data-tex="\arctan(1.960\,\tan 36^\circ) = 54.92^\circ"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>arctan</mi><mo>⁡</mo><mo stretchy="false">(</mo><mn>1.960</mn><mtext> </mtext><mi>tan</mi><mo>⁡</mo><msup><mn>36</mn><mo>∘</mo></msup><mo stretchy="false">)</mo><mo>=</mo><msup><mn>54.92</mn><mo>∘</mo></msup></mrow><annotation encoding="application/x-tex">\arctan(1.960\,\tan 36^\circ) = 54.92^\circ</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop">arctan</span><span class="mopen">(</span><span class="mord">1.960</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop">tan</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">3</span><span class="mord"><span class="mord">6</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6741em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mbin mtight">∘</span></span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6741em;"></span><span class="mord">54.9</span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6741em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mbin mtight">∘</span></span></span></span></span></span></span></span></span></span></span><!--/k--></span>. Un segundo par de valores del manual, 2.044 y 56.04°, es coherente con él: <span class="m" data-tex="\arctan(2.044\,\tan 36^\circ) = 56.04^\circ"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>arctan</mi><mo>⁡</mo><mo stretchy="false">(</mo><mn>2.044</mn><mtext> </mtext><mi>tan</mi><mo>⁡</mo><msup><mn>36</mn><mo>∘</mo></msup><mo stretchy="false">)</mo><mo>=</mo><msup><mn>56.04</mn><mo>∘</mo></msup></mrow><annotation encoding="application/x-tex">\arctan(2.044\,\tan 36^\circ) = 56.04^\circ</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop">arctan</span><span class="mopen">(</span><span class="mord">2.044</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop">tan</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">3</span><span class="mord"><span class="mord">6</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6741em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mbin mtight">∘</span></span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6741em;"></span><span class="mord">56.0</span><span class="mord"><span class="mord">4</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6741em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mbin mtight">∘</span></span></span></span></span></span></span></span></span></span></span><!--/k--></span>. Un único ángulo de rozamiento satisface dos ecuaciones independientes. El peso específico, 20 kN/m³, no puede deducirse y se adopta a sabiendas: sin cohesión, el factor de seguridad apenas depende de él. El archivo del caso recoge que, sobre el círculo publicado, un peso específico de 16 a 22 kN/m³ mueve el factor entre 0.7595 y 0.7668, en torno a un 1 % en total, y esa es la razón de que la tolerancia sea del 1.0 % y no más estrecha.</p>
+      <div class="impl">
+        <span class="label">En OGR Slip2D</span>
+        <p>El ejecutor toma la búsqueda del modelo y fija 50 dovelas. La rejilla, la profundidad mínima, el punto de foco y los límites del talud son los de la tabla; el límite izquierdo del talud en el pie no es un adorno, porque el círculo publicado pasa por debajo del banco y sale del modelo por su cara izquierda vertical, y sin ese límite se descarta por salir de la región de suelo. El problema publicado se ejecutó con una rejilla de 24 × 24 y 60 incrementos de radio; el caso usa 16 × 16 y 40, que según el archivo del caso dan el mismo error en la mitad de tiempo, con el centro crítico más próximo al publicado.</p>
+        <span class="src">Código: <a href="https://github.com/samuelsl27/OGR-Slip2D/tree/main/validacion/casos" target="_blank" rel="noopener">validacion/casos/</a> (caso 006)</span>
+      </div>
+      <figure class="tbl" id="tbl-006-results">
+        <figcaption><span class="fignum">Tabla 4.2.19</span> Caso 006: factor de seguridad de referencia y calculado.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Método</th><th class="n">Referencia</th><th class="n">OGR Slip2D</th><th class="n">Diferencia</th><th class="n">Tolerancia</th></tr></thead>
+            <tbody>
+              <tr><td>Bishop simplificado</td><td class="n">0.764</td><td class="n">0.7660</td><td class="n">+0.26 %</td><td class="n">1.0 %</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+
+      <h2 id="acads-2b"><span class="secnum">4.2.8</span><span class="ht">Caso 007 · ACADS 2(b): la presa de Talbingo sobre un círculo dado</span><a class="anchor" href="#acads-2b" aria-label="Enlace a esta sección">#</a></h2>
+      <p>Problema 2(b) del estudio de <a class="cite" href="../reference/bibliography.html#giam1989">Giam y Donald (1989)</a>: la presa de Talbingo, con cuatro materiales, al final de la construcción, sobre un círculo que da el enunciado: centro (100.3, 291.0) y radio 278.8 m. El informe da un valor del árbitro de 2.29, un valor medio de Bishop de 11 programas, 2.204, y una media de 24 programas, 2.239. El caso compara Bishop con su propia media, 2.204, y Spencer y GLE / Morgenstern-Price con el valor del árbitro, 2.29. La tolerancia es del 2.0 %: el valor del árbitro y la media de los 24 programas difieren un 2.2 %, y una tolerancia más estrecha exigiría a la fuente una precisión que no tiene.</p>
+      <p><strong>Qué comprueba.</strong> Los métodos por sí solos. El círculo viene dado, de modo que no hay búsqueda y la cifra mide el método. Y las dos referencias publicadas difieren un 3.9 %, porque Bishop tiene su propia media y el valor del árbitro es el del problema: un método de equilibrio completo que devolviera el valor de Bishop fallaría. Es el único caso que puede distinguir un método riguroso del de Bishop frente a una cifra publicada, y la razón por la que se añadió (<a class="xref" href="methodology.html#failure">Sección 4.1.5</a>).</p>
+      <p>Las coordenadas de los 26 puntos de la sección están tabuladas en el enunciado del problema, y la forma en que se conectan se leyó en sus dibujos. La escollera, la transición y el filtro tienen los mismos parámetros, de modo que, de las cinco líneas interiores, solo las dos que delimitan el núcleo pueden afectar al resultado, y esas no son ambiguas.</p>
+      <figure class="fig" id="fig-geom-007">
+        <div class="art">
+          <svg class="dg" viewBox="0 0 640 310" role="img" aria-labelledby="fig-geom-007-t"><title id="fig-geom-007-t">Sección transversal del caso 007, la presa de Talbingo de ACADS 2(b), con el círculo dado por el problema: centro (100.3, 291.0), radio 278.8 m</title>
+          <path class="s3" d="M332.5 131.9L384.3 159.4L390.6 159.4L442.5 188L448.8 188L496.4 216.5L501.7 216.5L551.4 246.1L557.7 246.1L612.7 273.6L371.7 273.6L349.4 159.4Z"/>
+          <path class="s0" d="M327.2 131.9L332.5 131.9L335.7 145.8L337.8 159.4L317.7 273.6L314.6 273.6L335.7 159.4L333.5 145.8Z"/>
+          <path class="s1" d="M325.4 131.9L327.2 131.9L333.5 145.8L335.7 159.4L314.6 273.6L221.5 273.6L318.8 159.4Z"/>
+          <path class="s2" d="M321.9 131.9L325.4 131.9L318.8 159.4L221.5 273.6L193 273.6L310.3 159.4Z"/>
+          <path class="s3" d="M193 273.6L46 273.6L321.9 131.9L310.3 159.4Z"/>
+          <path class="s2" d="M371.7 273.6L317.7 273.6L337.8 159.4L335.7 145.8L332.5 131.9L349.4 159.4Z"/>
+          <path class="thin" d="M193 273.6L310.3 159.4L321.9 131.9"/>
+          <path class="thin" d="M221.5 273.6L318.8 159.4L325.4 131.9"/>
+          <path class="thin" d="M314.6 273.6L335.7 159.4L333.5 145.8L327.2 131.9"/>
+          <path class="thin" d="M317.7 273.6L337.8 159.4L335.7 145.8L332.5 131.9"/>
+          <path class="thin" d="M371.7 273.6L349.4 159.4L332.5 131.9"/>
+          <path class="ln" d="M612.7 273.6L557.7 246.1L551.4 246.1L501.7 216.5L496.4 216.5L448.8 188L442.5 188L390.6 159.4L384.3 159.4L332.5 131.9L327.2 131.9L325.4 131.9L321.9 131.9L46 273.6Z"/>
+          <path class="crit" d="M83 257.6L89.3 258.8L95.6 259.9L101.9 260.8L108.2 261.6L114.6 262.1L121 262.6L127.3 262.8L133.7 262.9L140.1 262.8L146.5 262.6L152.8 262.1L159.2 261.6L165.5 260.8L171.9 259.9L178.1 258.8L184.4 257.6L190.6 256.2L196.8 254.6L203 252.9L209.1 251L215.1 248.9L221.1 246.7L227 244.3L232.9 241.8L238.7 239.1L244.4 236.3L250 233.4L255.6 230.2L261.1 227L266.5 223.6L271.8 220L277 216.3L282.1 212.5L287.1 208.6L292.1 204.5L296.8 200.3L301.5 195.9L306.1 191.5L310.6 186.9L314.9 182.2L319.1 177.4L323.2 172.5L327.1 167.5L331 162.4L334.6 157.2L338.2 151.9L341.6 146.5L344.9 141"/>
+          <path class="dash" d="M133.7 19.1L83 257.6"/>
+          <circle class="pt" cx="133.7" cy="19.1" r="3"/>
+          <text class="mute" x="141.7" y="13.1">centro (100.3, 291.0), R = 278.8 m</text>
+          <text class="mute" x="295.2" y="221.1" text-anchor="middle"> núcleo</text>
+          <path class="thin" d="M46 14V273.6 H624"/>
+          <path class="thin" d="M46 273.6v5"/><text class="mute" x="46" y="292.6" text-anchor="middle">0</text>
+          <path class="thin" d="M220.9 273.6v5"/><text class="mute" x="220.9" y="292.6" text-anchor="middle">200</text>
+          <path class="thin" d="M395.8 273.6v5"/><text class="mute" x="395.8" y="292.6" text-anchor="middle">400</text>
+          <path class="thin" d="M570.7 273.6v5"/><text class="mute" x="570.7" y="292.6" text-anchor="middle">600</text>
+          <path class="thin" d="M46 273.6h-5"/><text class="mute" x="38" y="277.6" text-anchor="end">0</text>
+          <path class="thin" d="M46 229.8h-5"/><text class="mute" x="38" y="233.8" text-anchor="end">50</text>
+          <path class="thin" d="M46 186.1h-5"/><text class="mute" x="38" y="190.1" text-anchor="end">100</text>
+          <path class="thin" d="M46 142.4h-5"/><text class="mute" x="38" y="146.4" text-anchor="end">150</text>
+          <path class="thin" d="M46 98.7h-5"/><text class="mute" x="38" y="102.7" text-anchor="end">200</text>
+          <path class="thin" d="M46 54.9h-5"/><text class="mute" x="38" y="58.9" text-anchor="end">250</text>
+          <text class="mute" x="624" y="306.6" text-anchor="end">x (m)</text>
+          <text class="mute" x="52" y="25">y (m)</text>
+          </svg>
+        </div>
+        <figcaption><span class="fignum">Figura 4.2.8</span> Sección transversal del caso 007, en metros, con el círculo dado por el problema (rojo). Las zonas de escollera, transición y filtro se sombrean aparte, pero tienen los mismos parámetros.</figcaption>
+      </figure>
+      <figure class="tbl" id="tbl-007-model">
+        <figcaption><span class="fignum">Tabla 4.2.20</span> Modelo y superficie del caso 007.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Concepto</th><th>Datos</th></tr></thead>
+            <tbody>
+              <tr><td>Coordenadas</td><td>26 puntos tabulados en el enunciado del problema; la conexión de las líneas interiores se lee en sus dibujos</td></tr>
+              <tr><td>Contorno externo (cerrado)</td><td>(648, 0) → (585.1, 31.4) → (577.9, 31.4) → (521.1, 65.3) → (515, 65.3) → (460.6, 97.9) → (453.4, 97.9) → (394.1, 130.6) → (386.9, 130.6) → (327.6, 162) → (321.6, 162) → (319.5, 162) → (315.5, 162) → (0, 0)</td></tr>
+              <tr><td>Línea interior 1</td><td>(168.1, 0) → (302.2, 130.6) → (315.5, 162)</td></tr>
+              <tr><td>Línea interior 2</td><td>(200.7, 0) → (311.9, 130.6) → (319.5, 162)</td></tr>
+              <tr><td>Línea interior 3</td><td>(307.1, 0) → (331.3, 130.6) → (328.8, 146.1) → (321.6, 162)</td></tr>
+              <tr><td>Línea interior 4</td><td>(310.7, 0) → (333.7, 130.6) → (331.3, 146.1) → (327.6, 162)</td></tr>
+              <tr><td>Línea interior 5</td><td>(372.4, 0) → (347, 130.6) → (327.6, 162)</td></tr>
+              <tr><td>Agua subterránea</td><td>Ninguna: final de construcción, sin presión intersticial</td></tr>
+              <tr><td>Sentido de rotura</td><td>de derecha a izquierda</td></tr>
+              <tr><td>Superficie</td><td>Círculo dado por el problema: centro (100.3, 291.0), radio 278.8 m</td></tr>
+              <tr><td>Búsqueda</td><td>Ninguna: cada método se evalúa sobre el círculo dado</td></tr>
+              <tr><td>Dovelas</td><td>25</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <figure class="tbl" id="tbl-007-materials">
+        <figcaption><span class="fignum">Tabla 4.2.21</span> Materiales del caso 007.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Material</th><th>Modelo de resistencia</th><th class="n">Cohesión</th><th class="n">Ángulo de rozamiento</th><th class="n">Peso específico</th><th>Presión intersticial</th></tr></thead>
+            <tbody>
+              <tr><td>Escollera</td><td>Mohr-Coulomb</td><td class="n">0.0 kPa</td><td class="n">45.0°</td><td class="n">20.4 kN/m³</td><td>ninguna</td></tr>
+              <tr><td>Transición</td><td>Mohr-Coulomb</td><td class="n">0.0 kPa</td><td class="n">45.0°</td><td class="n">20.4 kN/m³</td><td>ninguna</td></tr>
+              <tr><td>Filtro</td><td>Mohr-Coulomb</td><td class="n">0.0 kPa</td><td class="n">45.0°</td><td class="n">20.4 kN/m³</td><td>ninguna</td></tr>
+              <tr><td>Núcleo</td><td>Mohr-Coulomb</td><td class="n">85.0 kPa</td><td class="n">23.0°</td><td class="n">18.1 kN/m³</td><td>ninguna</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <div class="impl">
+        <span class="label">En OGR Slip2D</span>
+        <p>Cada método declarado se evalúa sobre el círculo dado con 25 dovelas, mediante la función que evalúa los círculos de una Grid Search; cuando un círculo corta varias masas disjuntas, se conserva el factor de seguridad más bajo. No se usan los ajustes de búsqueda del modelo.</p>
+        <span class="src">Código: <a href="https://github.com/samuelsl27/OGR-Slip2D/tree/main/validacion/casos/007-acads-2b" target="_blank" rel="noopener">validacion/casos/007-acads-2b/</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/tests/test_validation_cases.py" target="_blank" rel="noopener">tests/test_validation_cases.py</a></span>
+      </div>
+      <figure class="tbl" id="tbl-007-results">
+        <figcaption><span class="fignum">Tabla 4.2.22</span> Caso 007: factores de seguridad de referencia y calculados sobre el círculo dado.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Método</th><th class="n">Referencia</th><th class="n">OGR Slip2D</th><th class="n">Diferencia</th><th class="n">Tolerancia</th></tr></thead>
+            <tbody>
+              <tr><td>Bishop simplificado</td><td class="n">2.204</td><td class="n">2.2088</td><td class="n">+0.22 %</td><td class="n" rowspan="4">2.0 %</td></tr>
+              <tr><td>Spencer</td><td class="n">2.29</td><td class="n">2.2918</td><td class="n">+0.08 %</td></tr>
+              <tr><td>GLE / Morgenstern-Price</td><td class="n">2.29</td><td class="n">2.3019</td><td class="n">+0.52 %</td></tr>
+              <tr><td>Janbu corregido</td><td class="n">2.073</td><td class="n">2.0739</td><td class="n">+0.05 %</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p>El archivo del caso no dice de dónde procede el valor de referencia de Janbu corregido, 2.073; se muestra tal como lo declara el caso.</p>
+
+      <h2 id="method-checks"><span class="secnum">4.2.9</span><span class="ht">Comprobaciones de los métodos sobre superficies dadas</span><a class="anchor" href="#method-checks" aria-label="Enlace a esta sección">#</a></h2>
+      <p>Además de los siete casos, la batería de tests comprueba los métodos de equilibrio sobre superficies que se dan y no se buscan, de modo que la respuesta no depende de una búsqueda. Aquí se describen dos de esas comprobaciones: un ejemplo resuelto publicado y un conjunto de identidades exactas.</p>
+
+      <h3 id="usace-example"><span class="ht">Un ejemplo resuelto publicado: el Apéndice G de EM 1110-2-1902</span><a class="anchor" href="#usace-example" aria-label="Enlace a esta sección">#</a></h3>
+      <p>Los métodos Corps of Engineers #1 y #2 y el método de Lowe-Karafiath comparten una misma recursión para las fuerzas entre dovelas (<a class="xref" href="../theory/methods.html#prescribed">Sección 3.2.7</a>). Se comprueba dovela a dovela con el ejemplo resuelto de desembalse rápido del Apéndice G de <a class="cite" href="../reference/bibliography.html#usace2003">USACE (2003)</a>, cuyas Figuras G-7a, G-7b y G-9 imprimen la tabla completa de sus doce dovelas: la fuerza entre dovelas, la fuerza normal en la base y el factor de seguridad. Las dovelas tienen <span class="m" data-tex="c' = 0"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>c</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">c&#x27; = 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.7519em;"></span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7519em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span><!--/k--></span> y <span class="m" data-tex="\phi' = 30^\circ"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>ϕ</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mo>=</mo><msup><mn>30</mn><mo>∘</mo></msup></mrow><annotation encoding="application/x-tex">\phi&#x27; = 30^\circ</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.9463em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal">ϕ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7519em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6741em;"></span><span class="mord">3</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6741em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mbin mtight">∘</span></span></span></span></span></span></span></span></span></span></span><!--/k--></span>, con presión intersticial en las bases y una carga de agua en la cara superior, en la primera etapa, y se comportan sin drenaje (<span class="m" data-tex="\phi = 0"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ϕ</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\phi = 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">ϕ</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span><!--/k--></span>, con cohesión) en la segunda. El manual publica <span class="m" data-tex="F = 3.49"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi><mo>=</mo><mn>3.49</mn></mrow><annotation encoding="application/x-tex">F = 3.49</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">F</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">3.49</span></span></span></span><!--/k--></span> para la primera etapa y <span class="m" data-tex="F = 1.35"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi><mo>=</mo><mn>1.35</mn></mrow><annotation encoding="application/x-tex">F = 1.35</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">F</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">1.35</span></span></span></span><!--/k--></span> para la segunda. Como el manual dice que sus cifras se redondearon para las tablas, las tolerancias son fracciones de la escala de cada columna y no de cada valor.</p>
+      <figure class="tbl" id="tbl-usace">
+        <figcaption><span class="fignum">Tabla 4.2.23</span> Comprobación dovela a dovela con el Apéndice G de EM 1110-2-1902; lo que exige el test.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Magnitud</th><th>Referencia</th><th>Exigencia</th></tr></thead>
+            <tbody>
+              <tr><td>Fuerza entre dovelas, segunda etapa</td><td>Columna de la Figura G-9</td><td>Peor diferencia no superior al 2 % del mayor valor de la columna</td></tr>
+              <tr><td>Fuerza entre dovelas, primera etapa</td><td>Columna de la Figura G-7a, con <span class="m" data-tex="F = 3.49"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi><mo>=</mo><mn>3.49</mn></mrow><annotation encoding="application/x-tex">F = 3.49</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">F</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">3.49</span></span></span></span><!--/k--></span></td><td>Peor diferencia no superior al 2 % del mayor valor de la columna</td></tr>
+              <tr><td>Cierre de la primera etapa</td><td>Residuo de la última dovela, 10 kips en el manual</td><td>Residuo no superior al 5 % de la escala, y dentro del 2 % del residuo publicado</td></tr>
+              <tr><td>Fuerza normal en la base, primera etapa</td><td>Columna de la Figura G-7b</td><td>Peor diferencia no superior al 3 % del mayor valor de la columna</td></tr>
+              <tr><td>Factor de seguridad, segunda etapa</td><td><span class="m" data-tex="F = 1.35"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi><mo>=</mo><mn>1.35</mn></mrow><annotation encoding="application/x-tex">F = 1.35</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">F</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">1.35</span></span></span></span><!--/k--></span></td><td>Dentro del 1 % con la inclinación del terraplén 3:1, <span class="m" data-tex="\arctan(1/3) = 18.435^\circ"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>arctan</mi><mo>⁡</mo><mo stretchy="false">(</mo><mn>1</mn><mi mathvariant="normal">/</mi><mn>3</mn><mo stretchy="false">)</mo><mo>=</mo><msup><mn>18.435</mn><mo>∘</mo></msup></mrow><annotation encoding="application/x-tex">\arctan(1/3) = 18.435^\circ</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop">arctan</span><span class="mopen">(</span><span class="mord">1/3</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6741em;"></span><span class="mord">18.43</span><span class="mord"><span class="mord">5</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6741em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mbin mtight">∘</span></span></span></span></span></span></span></span></span></span></span><!--/k--></span>; dentro del 1.5 % con los 18° impresos en las tablas</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p>La inclinación de las fuerzas entre dovelas es la única magnitud del ejemplo que las tablas no imprimen, y la comprobación muestra que los datos la determinan: con fuerzas entre dovelas horizontales, las mismas dovelas no cierran cerca de la columna publicada, y el test exige que el residuo de la última dovela supere el 20 % de la escala. Las reglas que dan la inclinación en cada método se comprueban como simple geometría: para Corps of Engineers #1 es una constante, la inclinación de la cuerda de la superficie de rotura; para el #2 es la pendiente del terreno sobre cada dovela, de modo que es horizontal bajo una coronación plana; ambas coinciden con la geometría hasta 10<sup>−12</sup>. Y se cumple la identidad que cita el propio manual: con fuerzas entre dovelas horizontales, la recursión reproduce el método de Janbu simplificado (<a class="cite" href="../reference/bibliography.html#janbu1973">Janbu, 1973</a>) con una diferencia inferior al 0.5 %.</p>
+      <div class="impl">
+        <span class="label">En OGR Slip2D</span>
+        <p>El ejemplo se introduce dovela a dovela, en las unidades del manual, como dovelas que llevan los pesos, las inclinaciones de base, las longitudes y las presiones intersticiales publicados, y se ejecuta con la recursión real del programa, sin modificarla. El factor de seguridad de la segunda etapa se halla como lo halla el manual, buscando la raíz del desequilibrio de la última dovela.</p>
+        <span class="src">Código: <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/tests/test_modified_swedish_v198.py" target="_blank" rel="noopener">tests/test_modified_swedish_v198.py</a></span>
+      </div>
+
+      <h3 id="interslice-identities"><span class="ht">Identidades exactas de Spencer y GLE</span><a class="anchor" href="#interslice-identities" aria-label="Enlace a esta sección">#</a></h3>
+      <p>El sistema de fuerzas entre dovelas del método de Spencer (<a class="cite" href="../reference/bibliography.html#spencer1967">Spencer, 1967</a>) y del método GLE / Morgenstern-Price (<a class="cite" href="../reference/bibliography.html#morgenstern1965">Morgenstern y Price, 1965</a>) tiene anclajes exactos, casos en los que su respuesta tiene que coincidir con la de otro método en todas las cifras, y cuatro tests son esos anclajes. Se escribieron tras el defecto descrito en la <a class="xref" href="methodology.html#failure">Sección 4.1.5</a>, que ningún factor de seguridad podía revelar porque el valor de Bishop es plausible. Dos de ellos siguen a <a class="cite" href="../reference/bibliography.html#fredlund1977">Fredlund y Krahn (1977)</a>: con <span class="m" data-tex="\lambda = 0"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\lambda = 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6944em;"></span><span class="mord mathnormal">λ</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span><!--/k--></span> las fuerzas entre dovelas son horizontales, no hay fuerza tangencial entre dovelas, y cada rama de la solución degenera en un método que el programa ya tiene.</p>
+      <figure class="tbl" id="tbl-identities">
+        <figcaption><span class="fignum">Tabla 4.2.24</span> Identidades del sistema de fuerzas entre dovelas, comprobadas sobre un círculo.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Identidad</th><th>Enunciado</th><th class="n">Tolerancia</th></tr></thead>
+            <tbody>
+              <tr><td>I1</td><td>La rama de equilibrio de fuerzas con <span class="m" data-tex="\lambda = 0"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\lambda = 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6944em;"></span><span class="mord mathnormal">λ</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span><!--/k--></span> es el método de Janbu simplificado.</td><td class="n">10<sup>−6</sup></td></tr>
+              <tr><td>I2</td><td>La rama de equilibrio de momentos con <span class="m" data-tex="\lambda = 0"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\lambda = 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6944em;"></span><span class="mord mathnormal">λ</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span><!--/k--></span> es el método de Bishop simplificado (<a class="cite" href="../reference/bibliography.html#bishop1955">Bishop, 1955</a>), sobre un círculo.</td><td class="n">10<sup>−6</sup></td></tr>
+              <tr><td>I3</td><td>La rama de fuerzas con <span class="m" data-tex="\lambda"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi></mrow><annotation encoding="application/x-tex">\lambda</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6944em;"></span><span class="mord mathnormal">λ</span></span></span></span><!--/k--></span> es la recursión del método sueco modificado con la inclinación <span class="m" data-tex="\theta = \arctan\lambda"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>θ</mi><mo>=</mo><mi>arctan</mi><mo>⁡</mo><mi>λ</mi></mrow><annotation encoding="application/x-tex">\theta = \arctan\lambda</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.0278em;">θ</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6944em;"></span><span class="mop">arctan</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">λ</span></span></span></span><!--/k--></span>, para cada <span class="m" data-tex="\lambda"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi></mrow><annotation encoding="application/x-tex">\lambda</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6944em;"></span><span class="mord mathnormal">λ</span></span></span></span><!--/k--></span> ensayado (0, 0.2, 0.45 y 0.7; al menos tres deben converger).</td><td class="n">10<sup>−6</sup></td></tr>
+              <tr><td>I4</td><td>GLE con una función de fuerzas entre dovelas constante es el método de Spencer; los valores de <span class="m" data-tex="\lambda"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi></mrow><annotation encoding="application/x-tex">\lambda</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6944em;"></span><span class="mord mathnormal">λ</span></span></span></span><!--/k--></span> coinciden hasta 10<sup>−9</sup>.</td><td class="n">10<sup>−6</sup></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p>Las tolerancias son relativas al factor de seguridad del otro método. I3 es la más fuerte, porque la recursión con la que se compara es la comprobada con el ejemplo resuelto anterior, de modo que la rama de fuerzas de Spencer queda anclada a un caso resuelto a mano en un manual publicado. El modelo es la geometría y el material de ACADS 1(a) (<span class="m" data-tex="c' = 3.0"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>c</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mo>=</mo><mn>3.0</mn></mrow><annotation encoding="application/x-tex">c&#x27; = 3.0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.7519em;"></span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7519em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">3.0</span></span></span></span><!--/k--></span> kPa, <span class="m" data-tex="\phi' = 19.6^\circ"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>ϕ</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mo>=</mo><msup><mn>19.6</mn><mo>∘</mo></msup></mrow><annotation encoding="application/x-tex">\phi&#x27; = 19.6^\circ</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.9463em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal">ϕ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7519em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6741em;"></span><span class="mord">19.</span><span class="mord"><span class="mord">6</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6741em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mbin mtight">∘</span></span></span></span></span></span></span></span></span></span></span><!--/k--></span>, <span class="m" data-tex="\gamma = 20.0"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>γ</mi><mo>=</mo><mn>20.0</mn></mrow><annotation encoding="application/x-tex">\gamma = 20.0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.0556em;">γ</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">20.0</span></span></span></span><!--/k--></span> kN/m³), un círculo elegido a mano, de centro (33, 52) y radio 28 m, y 25 dovelas. Cada una de I1 a I3 se ejecuta en seco, con una línea piezométrica por (20, 23), (45, 27) y (70, 31) y <span class="m" data-tex="H_u = 1"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mi>u</mi></msub><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">H_u = 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0813em;">H</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0813em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">u</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span><!--/k--></span>, y con un coeficiente sísmico horizontal de 0.15. Otro test muestra que <span class="m" data-tex="\lambda"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi></mrow><annotation encoding="application/x-tex">\lambda</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6944em;"></span><span class="mord mathnormal">λ</span></span></span></span><!--/k--></span> mueve la respuesta, algo que las identidades, enunciadas con <span class="m" data-tex="\lambda = 0"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\lambda = 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6944em;"></span><span class="mord mathnormal">λ</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span><!--/k--></span> o entre dos ramas de fuerzas, no podrían hacer por sí solas: la rama de momentos con <span class="m" data-tex="\lambda = 0.5"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo>=</mo><mn>0.5</mn></mrow><annotation encoding="application/x-tex">\lambda = 0.5</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6944em;"></span><span class="mord mathnormal">λ</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">0.5</span></span></span></span><!--/k--></span> difiere de la de <span class="m" data-tex="\lambda = 0"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\lambda = 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6944em;"></span><span class="mord mathnormal">λ</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span><!--/k--></span> en más de 10<sup>−3</sup>.</p>
+      <div class="impl">
+        <span class="label">En OGR Slip2D</span>
+        <p>Las identidades se comprueban sobre el sistema de ecuaciones que comparten Spencer y GLE, y sobre los métodos del registro evaluados sobre el mismo círculo con una tolerancia de convergencia de 10<sup>−10</sup>, lo bastante estricta para que el criterio de parada no pueda confundirse con una señal.</p>
+        <span class="src">Código: <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/tests/test_gle_interslice_v1106.py" target="_blank" rel="noopener">tests/test_gle_interslice_v1106.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_slip2d/interslice.py" target="_blank" rel="noopener">ogr_slip2d/interslice.py</a></span>
+      </div>
+
+      <h2 id="references"><span class="secnum">4.2.10</span><span class="ht">Referencias</span><a class="anchor" href="#references" aria-label="Enlace a esta sección">#</a></h2>
+      <ul class="refs">
+        <li><a href="../reference/bibliography.html#arai1985">Arai, K. &amp; Tagyo, K. (1985)</a>. Determination of noncircular slip surface giving the minimum factor of safety in slope stability analysis. <em>Soils and Foundations</em>, 25(1), 43–51.</li>
+        <li><a href="../reference/bibliography.html#bishop1955">Bishop, A.W. (1955)</a>. The use of the slip circle in the stability analysis of slopes. <em>Géotechnique</em>, 5(1), 7–17.</li>
+        <li><a href="../reference/bibliography.html#fredlund1977">Fredlund, D.G. &amp; Krahn, J. (1977)</a>. Comparison of slope stability methods of analysis. <em>Canadian Geotechnical Journal</em>, 14(3), 429–439.</li>
+        <li><a href="../reference/bibliography.html#giam1989">Giam, S.K. &amp; Donald, I.B. (1989)</a>. <em>Example Problems for Testing Soil Slope Stability Programs</em>. Civil Engineering Research Report No. 8/1989, Monash University, Melbourne.</li>
+        <li><a href="../reference/bibliography.html#janbu1973">Janbu, N. (1973)</a>. Slope stability computations. In Hirschfeld, R.C. &amp; Poulos, S.J. (eds), <em>Embankment-Dam Engineering: Casagrande Volume</em>. John Wiley &amp; Sons, New York, 47–86.</li>
+        <li><a href="../reference/bibliography.html#morgenstern1965">Morgenstern, N.R. &amp; Price, V.E. (1965)</a>. The analysis of the stability of general slip surfaces. <em>Géotechnique</em>, 15(1), 79–93.</li>
+        <li><a href="../reference/bibliography.html#spencer1967">Spencer, E. (1967)</a>. A method of analysis of the stability of embankments assuming parallel inter-slice forces. <em>Géotechnique</em>, 17(1), 11–26.</li>
+        <li><a href="../reference/bibliography.html#usace2003">U.S. Army Corps of Engineers (2003)</a>. <em>Engineering and Design: Slope Stability</em>. Engineer Manual EM 1110-2-1902. Department of the Army, Washington, DC.</li>
+        <li><a href="../reference/bibliography.html#yamagami1988">Yamagami, T. &amp; Ueta, Y. (1988)</a>. Search for noncircular slip surfaces by the Morgenstern–Price method. <em>Proceedings of the 6th International Conference on Numerical Methods in Geomechanics</em>, Innsbruck, 1335–1340.</li>
+      </ul>
+    </article>
+
+<!-- @inc docfoot -->
+<nav class="doc-pager" aria-label="Páginas">
+<a class="prev" href="../../../es/docs/verification/methodology.html"><span class="label">← Anterior · 4.1</span><b>Metodología de verificación</b></a>
+<a class="next" href="../../../es/docs/verification/analytic-checks.html"><span class="label">4.3 · Siguiente →</span><b>Agua subterránea y comprobaciones analíticas</b></a>
+</nav>
+<div class="doc-edit label"><a href="https://github.com/samuelsl27/OpenGeoRock_Web.github.io/blob/main/es/docs/verification/slope-benchmarks.html" target="_blank" rel="noopener">Editar esta página ↗</a><a href="https://github.com/samuelsl27/OGR-Slip2D/issues" target="_blank" rel="noopener">Informar de un problema ↗</a></div>
+<!-- @end docfoot -->
+  </main>
+
+  <aside class="doc-toc" aria-label="En esta página">
+    <div class="toc-inner">
+<!-- @inc pagetoc -->
+<span class="label">En esta página</span><ul><li class="h2"><a href="#summary">4.2.1 Los siete casos de un vistazo</a></li><li class="h2"><a href="#acads-1a">4.2.2 Caso 001 · ACADS 1(a): talud homogéneo, tensiones totales</a></li><li class="h2"><a href="#yamagami-ueta">4.2.3 Caso 002 · Yamagami &amp; Ueta (1988): talud homogéneo</a></li><li class="h2"><a href="#acads-1c">4.2.4 Caso 003 · ACADS 1(c): tres capas</a></li><li class="h2"><a href="#arai-tagyo-1">4.2.5 Caso 004 · Arai &amp; Tagyo (1985), ejemplo 1: un talud alto y empinado</a></li><li class="h2"><a href="#arai-tagyo-3">4.2.6 Caso 005 · Arai &amp; Tagyo (1985), ejemplo 3: el mismo talud con agua</a></li><li class="h2"><a href="#reinforcement-1999">4.2.7 Caso 006 · Ejemplo de refuerzo (1999): el filtro de profundidad mínima</a></li><li class="h2"><a href="#acads-2b">4.2.8 Caso 007 · ACADS 2(b): la presa de Talbingo sobre un círculo dado</a></li><li class="h2"><a href="#method-checks">4.2.9 Comprobaciones de los métodos sobre superficies dadas</a></li><li class="h3"><a href="#usace-example">Un ejemplo resuelto publicado: el Apéndice G de EM 1110-2-1902</a></li><li class="h3"><a href="#interslice-identities">Identidades exactas de Spencer y GLE</a></li><li class="h2"><a href="#references">4.2.10 Referencias</a></li></ul><button class="print" type="button"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="1.5"/><path d="M6 14h12v7H6z"/></svg> Imprimir esta página</button>
+<!-- @end pagetoc -->
+    </div>
+  </aside>
+</div>
+
+<!-- @inc footer -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <a class="brand" href="../../../es/index.html" aria-label="OpenGeoRock — inicio">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
+          <b>OpenGeoRock</b>
+        </a>
+        <p class="tagline">Software geotécnico de código abierto, desarrollado a la vista de todos en la Universidad Politécnica de Cartagena.</p>
+        <span class="lang" role="group" aria-label="Idioma"><a href="../../../docs/verification/slope-benchmarks.html" hreflang="en" lang="en">EN</a><a href="../../../es/docs/verification/slope-benchmarks.html" hreflang="es" lang="es" aria-current="true">ES</a></span>
+      </div>
+      <div>
+        <h5>Productos</h5>
+        <ul>
+          <li><a href="../../../es/products/slip2d.html">OGR Slip2D</a></li>
+          <li><a href="../../../es/products/index.html">La suite</a></li>
+          <li><a href="../../../es/ai/index.html">Servidor MCP</a></li>
+          <li><a href="../../../es/download/index.html">Descargar</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Aprende</h5>
+        <ul>
+          <li><a href="../../../es/docs/index.html">Documentación</a></li>
+          <li><a href="../../../es/docs/getting-started/quick-start.html">Inicio rápido</a></li>
+          <li><a href="../../../es/docs/theory/methods.html">Manual de teoría</a></li>
+          <li><a href="../../../es/examples/index.html">Ejemplos</a></li>
+          <li><a href="../../../es/verification/index.html">Verificación</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Proyecto</h5>
+        <ul>
+          <li><a href="../../../es/about/index.html">El proyecto</a></li>
+          <li><a href="../../../es/about/index.html#team">Equipo</a></li>
+          <li><a href="../../../es/about/index.html#cite">Cómo citar</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Contribuir</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/LICENSE" target="_blank" rel="noopener">Licencia · AGPL-3.0</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contacto</h5>
+        <ul>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/issues" target="_blank" rel="noopener">Incidencias</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/tree/main/docs/changelog" target="_blank" rel="noopener">Historial de cambios</a></li>
+          <li><a href="mailto:samuel.saez@edu.upct.es">Correo</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© 2026 Samuel Sáez López · OGR Slip2D es software libre bajo AGPL-3.0-or-later, sin garantía de ningún tipo.</span>
+      <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
+    </div>
+  </div>
+</footer>
+<!-- @end footer -->
+</body>
+</html>

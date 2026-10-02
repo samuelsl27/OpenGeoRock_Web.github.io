@@ -1,0 +1,439 @@
+<!doctype html>
+<html class="no-js" lang="en" data-root="../../">
+<head>
+<meta charset="utf-8">
+<title>Python API — OGR Slip2D documentation</title>
+<meta name="description" content="Scripting OGR Slip2D from Python at two levels: the engine (Project, run_analysis, GridSearch and the methods) and the operations layer ogr_api that the MCP server uses, plus the variables of the embedded terminal, with a tested example for each.">
+<!-- @inc head -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.replace("no-js", "js")</script>
+<link rel="canonical" href="https://opengeorock.org/docs/reference/python-api.html">
+<link rel="alternate" hreflang="en" href="https://opengeorock.org/docs/reference/python-api.html">
+<link rel="alternate" hreflang="es" href="https://opengeorock.org/es/docs/reference/python-api.html">
+<link rel="alternate" hreflang="x-default" href="https://opengeorock.org/docs/reference/python-api.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="OpenGeoRock">
+<meta property="og:title" content="Python API — OGR Slip2D documentation">
+<meta property="og:description" content="Scripting OGR Slip2D from Python at two levels: the engine (Project, run_analysis, GridSearch and the methods) and the operations layer ogr_api that the MCP server uses, plus the variables of the embedded terminal, with a tested example for each.">
+<meta property="og:url" content="https://opengeorock.org/docs/reference/python-api.html">
+<meta property="og:image" content="https://opengeorock.org/assets/img/og-image.png">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#f4efe6">
+<link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&amp;display=swap">
+<link rel="stylesheet" href="../../assets/css/site.css">
+<link rel="stylesheet" href="../../assets/css/docs.css">
+<script src="../../assets/js/site.js" defer></script>
+<!-- @end head -->
+</head>
+<body class="docs">
+<!-- @inc header -->
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="wrap top-inner">
+    <a class="brand" href="../../index.html" aria-label="OpenGeoRock — home">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
+      <b>OpenGeoRock</b>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <div class="has-menu" data-nav="products">
+        <button type="button" aria-expanded="false" aria-haspopup="true">Products <svg class="caret" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+        <div class="mega">
+          <div class="mega-cols">
+            <div class="mega-col">
+              <span class="label">Available today</span>
+              <a class="mega-item feature" href="../../products/slip2d.html"><b>OGR Slip2D</b><span>2D slope stability: limit equilibrium, finite-element groundwater and probabilistic analysis.</span></a>
+              <a class="mega-item" href="../../ai/index.html"><b>MCP server for AI agents <span class="tag live">new</span></b><span>Let Claude, ChatGPT or a local model build and run OGR Slip2D models.</span></a>
+            </div>
+            <div class="mega-col">
+              <span class="label">On the roadmap</span>
+              <a class="mega-item" href="../../products/index.html#ogr-data"><b>OGR Data</b><span>Soil and rock-mass property database</span></a>
+              <a class="mega-item" href="../../products/index.html#ogr-fem2d"><b>OGR FEM2D</b><span>2D elastoplastic finite elements</span></a>
+              <a class="mega-item" href="../../products/index.html#ogr-slip3d"><b>OGR Slip3D</b><span>3D limit equilibrium</span></a>
+              <a class="mega-item" href="../../products/index.html#ogr-fem3d"><b>OGR FEM3D</b><span>3D finite elements with coupled flow</span></a>
+            </div>
+            <div class="mega-col">
+              <span class="label">Use it from</span>
+              <a class="mega-item" href="../../docs/getting-started/interface.html"><b>The desktop program</b><span>Modeller, interpreter and Python terminal</span></a>
+              <a class="mega-item" href="../../docs/reference/python-api.html"><b>Python</b><span>Script analyses from your own code</span></a>
+              <a class="mega-item" href="../../docs/reference/cli.html"><b>The command line</b><span>Batch runs with ogr-slip2d-cli</span></a>
+            </div>
+          </div>
+          <div class="mega-foot"><span>Five programs, one open core.</span><a href="../../products/index.html">All products →</a></div>
+        </div>
+      </div>
+      <a href="../../examples/index.html" data-nav="examples">Examples</a>
+      <a href="../../ai/index.html" data-nav="ai">AI &amp; MCP</a>
+      <a href="../../docs/index.html" data-nav="docs" aria-current="page">Docs</a>
+      <a href="../../verification/index.html" data-nav="verification">Verification</a>
+      <a href="../../about/index.html" data-nav="about">About</a>
+    </nav>
+    <div class="top-right">
+      <span class="lang" role="group" aria-label="Language"><a href="../../docs/reference/python-api.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../../es/docs/reference/python-api.html" hreflang="es" lang="es">ES</a></span>
+      <a class="btn gh" href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener" aria-label="Source code on GitHub"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0C17.3 4.7 18.3 5 18.3 5c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0012 .5z"/></svg><span>GitHub</span></a>
+      <a class="btn primary" href="../../download/index.html" data-nav="download">Get OGR Slip2D</a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Main (mobile)">
+    <span class="label">Products</span>
+    <a href="../../products/slip2d.html">OGR Slip2D</a>
+    <div class="sub"><a href="../../products/index.html">The OpenGeoRock suite</a><a href="../../ai/index.html">MCP server for AI agents</a></div>
+    <span class="label">Learn</span>
+    <a href="../../examples/index.html">Examples</a>
+    <a href="../../docs/index.html">Documentation</a>
+    <a href="../../verification/index.html">Verification</a>
+    <span class="label">Project</span>
+    <a href="../../about/index.html">About</a>
+    <a href="../../download/index.html">Get OGR Slip2D</a>
+    <a href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener">Source on GitHub ↗</a>
+    <span class="lang" role="group" aria-label="Language"><a href="../../docs/reference/python-api.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../../es/docs/reference/python-api.html" hreflang="es" lang="es">ES</a></span>
+  </nav>
+</header>
+<!-- @end header -->
+
+<div class="doc-shell">
+  <aside class="doc-side" id="doc-side">
+<!-- @inc docnav -->
+<div class="doc-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input type="search" placeholder="Search the documentation  /" aria-label="Search the documentation" autocomplete="off"><div class="results" role="listbox"></div></div>
+<nav class="doc-nav" aria-label="Documentation">
+<a class="home" href="../../docs/index.html"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 016.5 3H20v15H6.5A2.5 2.5 0 004 20.5z"/><path d="M4 20.5A2.5 2.5 0 016.5 18H20v3H6.5A2.5 2.5 0 014 20.5z"/></svg> Documentation home</a>
+<details open><summary>1 · Getting started</summary><ul>
+<li><a href="../../docs/getting-started/installation.html"><span class="n">1.1</span><span>Installation</span></a></li>
+<li><a href="../../docs/getting-started/quick-start.html"><span class="n">1.2</span><span>Quick start: your first model</span></a></li>
+<li><a href="../../docs/getting-started/interface.html"><span class="n">1.3</span><span>The interface</span></a></li>
+</ul></details>
+<details open><summary>2 · User guide</summary><ul>
+<li><a href="../../docs/user-guide/project-settings.html"><span class="n">2.1</span><span>Project settings</span></a></li>
+<li><a href="../../docs/user-guide/geometry.html"><span class="n">2.2</span><span>Geometry and boundaries</span></a></li>
+<li><a href="../../docs/user-guide/materials.html"><span class="n">2.3</span><span>Materials</span></a></li>
+<li><a href="../../docs/user-guide/water.html"><span class="n">2.4</span><span>Water and pore pressure</span></a></li>
+<li><a href="../../docs/user-guide/loads.html"><span class="n">2.5</span><span>Loads and seismic loading</span></a></li>
+<li><a href="../../docs/user-guide/supports.html"><span class="n">2.6</span><span>Supports</span></a></li>
+<li><a href="../../docs/user-guide/surfaces.html"><span class="n">2.7</span><span>Slip surfaces and search</span></a></li>
+<li><a href="../../docs/user-guide/results.html"><span class="n">2.8</span><span>Computing and interpreting results</span></a></li>
+<li><a href="../../docs/user-guide/groundwater.html"><span class="n">2.9</span><span>Finite-element groundwater</span></a></li>
+<li><a href="../../docs/user-guide/probabilistic.html"><span class="n">2.10</span><span>Probabilistic and sensitivity analysis</span></a></li>
+<li><a href="../../docs/user-guide/design-standards.html"><span class="n">2.11</span><span>Design standards</span></a></li>
+<li><a href="../../docs/user-guide/automation.html"><span class="n">2.12</span><span>Reports, scripting and the command line</span></a></li>
+</ul></details>
+<details open><summary>3 · Theory manual</summary><ul>
+<li><a href="../../docs/theory/limit-equilibrium.html"><span class="n">3.1</span><span>Limit equilibrium and the factor of safety</span></a></li>
+<li><a href="../../docs/theory/methods.html"><span class="n">3.2</span><span>Methods of slices</span></a></li>
+<li><a href="../../docs/theory/interslice.html"><span class="n">3.3</span><span>Interslice forces, convergence and admissibility</span></a></li>
+<li><a href="../../docs/theory/search.html"><span class="n">3.4</span><span>Slip-surface search</span></a></li>
+<li><a href="../../docs/theory/strength.html"><span class="n">3.5</span><span>Shear strength models</span></a></li>
+<li><a href="../../docs/theory/pore-pressure.html"><span class="n">3.6</span><span>Pore pressure and unsaturated strength</span></a></li>
+<li><a href="../../docs/theory/seepage.html"><span class="n">3.7</span><span>Finite-element seepage</span></a></li>
+<li><a href="../../docs/theory/rapid-drawdown.html"><span class="n">3.8</span><span>Rapid drawdown</span></a></li>
+<li><a href="../../docs/theory/seismic.html"><span class="n">3.9</span><span>Seismic analysis</span></a></li>
+<li><a href="../../docs/theory/supports.html"><span class="n">3.10</span><span>Support forces</span></a></li>
+<li><a href="../../docs/theory/probabilistic.html"><span class="n">3.11</span><span>Probabilistic analysis</span></a></li>
+<li><a href="../../docs/theory/partial-factors.html"><span class="n">3.12</span><span>Partial factors (Eurocode 7)</span></a></li>
+</ul></details>
+<details open><summary>4 · Verification</summary><ul>
+<li><a href="../../docs/verification/methodology.html"><span class="n">4.1</span><span>Verification methodology</span></a></li>
+<li><a href="../../docs/verification/slope-benchmarks.html"><span class="n">4.2</span><span>Limit-equilibrium benchmarks</span></a></li>
+<li><a href="../../docs/verification/analytic-checks.html"><span class="n">4.3</span><span>Groundwater and analytic checks</span></a></li>
+</ul></details>
+<details open><summary>5 · Reference</summary><ul>
+<li><a href="../../docs/reference/mcp.html"><span class="n">5.1</span><span>MCP server</span></a></li>
+<li><a href="../../docs/reference/cli.html"><span class="n">5.2</span><span>Command-line interface</span></a></li>
+<li><a href="../../docs/reference/python-api.html" aria-current="page"><span class="n">5.3</span><span>Python API</span></a></li>
+<li><a href="../../docs/reference/file-format.html"><span class="n">5.4</span><span>The .ogr file format</span></a></li>
+<li><a href="../../docs/reference/error-codes.html"><span class="n">5.5</span><span>Error codes</span></a></li>
+<li><a href="../../docs/reference/notation.html"><span class="n">5.6</span><span>Notation and glossary</span></a></li>
+<li><a href="../../docs/reference/bibliography.html"><span class="n">5.7</span><span>Bibliography</span></a></li>
+</ul></details>
+</nav>
+<!-- @end docnav -->
+  </aside>
+
+  <main id="main" class="doc-main">
+    <header class="doc-head">
+<!-- @inc dochead -->
+<button class="doc-side-toggle" type="button" aria-controls="doc-side" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg> Contents</button>
+<nav class="crumbs label" aria-label="Breadcrumb"><a href="../../docs/index.html">Documentation</a><span aria-hidden="true">/</span><span>5 · Reference</span></nav>
+<div class="chapter label">5.3</div>
+<h1>Python API</h1>
+<div class="meta label"><span>Describes OGR Slip2D <span data-v>0.1.235</span></span></div>
+<!-- @end dochead -->
+    </header>
+
+    <article class="doc prose">
+      <p class="lede">OGR Slip2D is a Python program, and everything it computes can be driven from a script. There are two levels: the <strong>engine</strong>, whose objects (<code>Project</code>, the searches and the methods) give full control and full responsibility, and the <strong>operations layer</strong> <code>ogr_api</code>, the named, validated and undoable operations that the MCP server publishes as tools. The program's window also has a Python terminal connected to the live project. This page shows a short example of each, all checked against v<span data-v>0.1.235</span>.</p>
+
+      <h2 id="levels"><span class="secnum">5.3.1</span><span class="ht">Two levels</span><a class="anchor" href="#levels" aria-label="Link to this section">#</a></h2>
+      <figure class="tbl" id="tbl-levels">
+        <figcaption><span class="fignum">Table 5.3.1</span> The two Python levels of OGR Slip2D.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th></th><th>Engine</th><th>Operations layer</th></tr></thead>
+            <tbody>
+              <tr><td>Packages</td><td><code>ogr_core</code> (model, settings, files), <code>ogr_slip2d</code> (methods, searches), <code>ogr_fem2d</code> (seepage)</td><td><code>ogr_api</code></td></tr>
+              <tr><td>You hold</td><td>Python objects: a <code>Project</code>, a search, its result</td><td>handles: <code>project_id</code>, <code>job_id</code>, <code>result_id</code></td></tr>
+              <tr><td>Validation</td><td>what each object checks; a misspelt setting is accepted in silence</td><td>every argument and setting checked, with the closest valid names</td></tr>
+              <tr><td>Undo</td><td>no</td><td>every edit is one undo step</td></tr>
+              <tr><td>Analyses</td><td>run in your process</td><td>background jobs in a child process that can be cancelled</td></tr>
+              <tr><td>Answers</td><td>full result objects (every surface, every slice)</td><td>JSON-safe summaries; full results on request</td></tr>
+              <tr><td>Use it for</td><td>research, parametric studies, new post-processing</td><td>scripts that should behave as the program does; what an agent does</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p>Both need the package installed (<a class="xref" href="../getting-started/installation.html">Section 1.1</a>); neither needs the window. The repository's <code>examples/quick_slope.py</code> uses the engine and <code>examples/api_acads.py</code> the operations layer; from the root of the repository they run as <code>python -m examples.quick_slope</code> and <code>python -m examples.api_acads</code>.</p>
+
+      <h2 id="engine"><span class="secnum">5.3.2</span><span class="ht">The engine</span><a class="anchor" href="#engine" aria-label="Link to this section">#</a></h2>
+      <h3 id="projects"><span class="ht">Projects</span><a class="anchor" href="#projects" aria-label="Link to this section">#</a></h3>
+      <p>A model is a <code>Project</code> (<code>ogr_core.project</code>). <code>Project.load(path)</code> reads a <code>.ogr</code> file and <code>project.save(path)</code> writes one (<a class="xref" href="file-format.html">Section 5.4</a>); <code>Project(name)</code> starts an empty one, to which boundaries and materials are added with <code>add_boundary</code> and <code>add_material</code>, as <code>examples/quick_slope.py</code> does. <code>ogr_core.project.demo.<wbr>build_demo_project()</code> returns the demo slope.</p>
+
+      <h3 id="run-analysis"><span class="ht">The analysis the project describes</span><a class="anchor" href="#run-analysis" aria-label="Link to this section">#</a></h3>
+      <p><code>run_analysis(project, method_ids=None, progress_cb=None, *, allow_unconfigured=False)</code>, in <code>ogr_slip2d.analysis_runner</code>, is the analysis that <span class="ui">Analysis → Compute</span>, the command line and the operations layer run: one search per method, built from the project's settings, with the design-standard partial factors applied to a copy (the project passed in is never modified), rapid drawdown, slope limits, surface filters, focus objects, the seismic mode, the convergence settings, the seed and the admissibility checks.</p>
+      <div class="code"><pre><code>from ogr_core.project import Project
+from ogr_slip2d.analysis_runner import run_analysis
+
+
+def main():
+    project = Project.load("slope.ogr")
+    outcome = run_analysis(project)        <span class="c"># the methods enabled in the project</span>
+    for note in outcome.warnings:
+        print("Note:", note)
+    for method_id, result in outcome.results.items():
+        critical = result.critical
+        if critical is None:
+            print(f"{method_id}: no valid surface")
+        else:
+            print(f"{method_id}: {critical.fos:.4f} "
+                  f"({result.valid_count} valid of {result.attempts})")
+
+
+if __name__ == "__main__":
+    main()</code></pre></div>
+      <ul>
+        <li>It returns an <code>AnalysisOutcome</code> with <code>results</code> (method id → search result), <code>factor_report</code> (the design-standard report), <code>warnings</code> (the notes the window shows) and <code>project</code> (the factored copy that was analysed). <code>results, report = run_analysis(project)</code> also works.</li>
+        <li>If the project cannot be analysed as configured, it raises <code>AnalysisNotConfigured</code>, a <code>ValueError</code> whose <code>problems</code> lists every reason; <code>allow_unconfigured=True</code> runs anyway, for a caller that has read them.</li>
+        <li>With a design standard active, <code>critical.fos</code> is an over-design factor, which must exceed 1, not a factor of safety.</li>
+        <li><code>progress_cb(done, total)</code> is called across the whole run, all methods included.</li>
+      </ul>
+
+      <h3 id="hand-built"><span class="ht">A search built by hand</span><a class="anchor" href="#hand-built" aria-label="Link to this section">#</a></h3>
+      <p>The searches (<code>GridSearch</code>, <code>SlopeSearch</code>, <code>AutoRefineSearch</code>, <code>BlockSearch</code>, <code>PathSearch</code>, <code>SimulatedAnnealingSearch</code>; the particle swarm is in <code>ogr_slip2d.particle_swarm</code>) and the nine methods (<code>BishopSimplified</code>, <code>JanbuSimplified</code>, <code>JanbuCorrected</code>, <code>OrdinaryFellenius</code>, <code>Spencer</code>, <code>GLEMorgensternPrice</code>, <code>LoweKarafiath</code>, <code>CorpsOfEngineers1</code>, <code>CorpsOfEngineers2</code>) can be built directly; <code>method_registry()</code> maps each method id to its class.</p>
+      <div class="code"><pre><code>from ogr_core.project import Project, save_results
+from ogr_slip2d import BishopSimplified, GridSearch
+
+project = Project.load("slope.ogr")
+search = GridSearch(method=BishopSimplified(), grid_nx=6, grid_ny=6,
+                    radius_increment=5, num_slices=25)
+result = search.run(project)               <span class="c"># 7 × 7 centres × 6 radii = 294 circles</span>
+print(result.critical.fos, result.attempts)
+save_results("slope_bishop.h5", result, project_id=project.id)</code></pre></div>
+      <div class="note warn"><span class="label">A hand-built search is not Compute</span><p>An object built by hand uses its own defaults and reads from the project only the model itself. A method takes a tolerance of 0.001, 75 iterations and no Steffensen acceleration (the project defaults are 0.005, 50 and Steffensen on); <code>GridSearch</code> takes 10 × 10 intervals, a radius increment of 10, 30 slices and a minimum area of 0.5 m², and places the grid itself when <code>grid_x</code> and <code>grid_y</code> are not given. The project's slope limits, surface filters, focus objects and seismic Ky mode reach a hand-built search only if they are passed to it, and rapid drawdown and the design standard are applied only by the analysis runner. To get what the window computes, use <code>run_analysis</code>. <code>build_search(project, method_id)</code> returns the search the project configures for one method, rapid drawdown included; the design standard is applied by <code>run_analysis</code>, to a copy of the project.</p></div>
+      <figure class="tbl" id="tbl-search-result">
+        <figcaption><span class="fignum">Table 5.3.2</span> What a search returns (<code>SearchResult</code>) and what each evaluated surface carries (<code>LEMResult</code>).</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Attribute</th><th>Meaning</th></tr></thead>
+            <tbody>
+              <tr><td><code>result.critical</code></td><td>The admissible surface with the lowest factor of safety (the lowest critical seismic coefficient in a Ky run), or <code>None</code> when no surface is valid. If every valid surface failed the admissibility checks, the checks are ignored rather than returning nothing, and <code>inadmissible_count</code> says so.</td></tr>
+              <tr><td><code>result.evaluations</code></td><td>Every surface that was sliced and computed, valid or not, in the order generated.</td></tr>
+              <tr><td><code>valid_count</code>, <code>invalid_count</code></td><td>Surfaces with and without a factor of safety; their sum is <code>total_count</code>.</td></tr>
+              <tr><td><code>attempts</code>, <code>focus_rejected</code></td><td>Candidates formed (a Grid Search attempts (<em>nx</em> + 1)(<em>ny</em> + 1)(<em>radius increment</em> + 1)) and candidates removed by focus objects.</td></tr>
+              <tr><td><code>top_n(n)</code>, <code>min_fos</code></td><td>The <em>n</em> best valid surfaces; the factor of the critical surface.</td></tr>
+              <tr><td><code>minima</code>, <code>optimized</code>, <code>objective</code></td><td>Distinct local minima (multimodal particle swarm); the surface produced by <em>Optimize Surfaces</em> when it improved on the search; <code>"fos"</code> or <code>"ky"</code>.</td></tr>
+              <tr><td><code>fos</code></td><td>Factor of safety of one surface, or <code>None</code> when there is none (never NaN).</td></tr>
+              <tr><td><code>converged</code>, <code>iterations</code>, <code>method_id</code></td><td>Convergence of the iteration, iterations used and method.</td></tr>
+              <tr><td><code>surface</code>, <code>slices</code></td><td>The slip surface (<code>surface.to_dict()</code> gives its geometry) and its slices.</td></tr>
+              <tr><td><code>is_valid</code></td><td>Converged, with a positive factor and no error.</td></tr>
+              <tr><td><code>admissible</code>, <code>admissibility_note</code>, <code>admissibility_reason</code></td><td>Verdict of the post-analysis checks (tensile stress, m-alpha).</td></tr>
+              <tr><td><code>error_message</code>, <code>reason</code></td><td>Why there is no factor, in words and as a code (<a class="xref" href="error-codes.html#reasons">Section 5.5.2</a>).</td></tr>
+              <tr><td><code>details</code></td><td>Extras such as <code>lambda</code>, <code>ky</code> or <code>newmark_displacement</code>.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+
+      <h3 id="one-surface"><span class="ht">One surface</span><a class="anchor" href="#one-surface" aria-label="Link to this section">#</a></h3>
+      <p><code>evaluate_surfaces(project, surface, method_ids=None)</code> computes the factor of safety of one given surface with each method, through the same checks, factored copy and configured search as <code>run_analysis</code>. Its <code>results</code> map each method id to a result, or to <code>None</code> when the surface does not cut the model.</p>
+      <div class="code"><pre><code>from ogr_core.project import Project
+from ogr_slip2d import SlipCircle
+from ogr_slip2d.analysis_runner import evaluate_surfaces
+
+project = Project.load("slope.ogr")
+circle = SlipCircle(centre_x=37.5, centre_y=31.7, radius=16.5)
+outcome = evaluate_surfaces(project, circle, ["bishop_simplified", "spencer"])
+for method_id, res in outcome.results.items():
+    print(method_id, None if res is None else res.fos)</code></pre></div>
+
+      <h3 id="results-files"><span class="ht">Results files</span><a class="anchor" href="#results-files" aria-label="Link to this section">#</a></h3>
+      <p><code>save_results(path, search_result, project_id="")</code> writes one search result to HDF5 and <code>load_summary(path)</code> reads back its metadata and summary arrays, without the slices; both are in <code>ogr_core.project</code>. The layout is in <a class="xref" href="file-format.html#results">Section 5.4.5</a>.</p>
+
+      <h3 id="processes"><span class="ht">Scripts and worker processes</span><a class="anchor" href="#processes" aria-label="Link to this section">#</a></h3>
+      <p>A Grid Search of 400 circles or more is evaluated in a pool of worker processes (at most 8, using by default 50 % of the logical processors; <span class="ui">Project Settings → Advanced</span> can switch it off). On Windows each worker imports the script again, so a script that runs a search should keep its top-level code under <code>if __name__ == "__main__":</code>, as the examples on this page and in the repository do. A pool that cannot start does not stop the analysis: the search falls back to one process.</p>
+
+      <h2 id="operations"><span class="secnum">5.3.3</span><span class="ht">The operations layer</span><a class="anchor" href="#operations" aria-label="Link to this section">#</a></h2>
+      <p><code>ogr_api</code> holds everything the program can do to a model as named operations with typed arguments and JSON-safe answers, without Qt and without the MCP SDK. There are 73 operations: the MCP tools except <code>server_info</code>, under the same names, and every parameter of a tool is a parameter of its operation, so the tool tables of <a class="xref" href="mcp.html#tools">Section 5.1.7</a> describe them too. <code>ogr_api.OPERATIONS</code> is the registry.</p>
+      <div class="code"><pre><code>from pathlib import Path
+
+from ogr_api import OgrApiError, Workspace, call
+
+
+def main():
+    ws = Workspace(workdir=Path.cwd())
+    try:
+        pid = call(ws, "project_open", path="slope.ogr")["project_id"]
+        call(ws, "analysis_configure", project_id=pid,
+             methods=["bishop_simplified", "spencer"],
+             grid={"nx": 6, "ny": 6}, radius_increment=5)
+        run = call(ws, "analysis_run", project_id=pid, wait_seconds=300)
+        if run["state"] != "done":
+            print("still running:", run["job_id"])
+            return
+        for m in run["summary"]["methods"]:
+            print(m["method_id"], m["caption"], m["value"], m["counts"]["valid"])
+        try:
+            call(ws, "settings_set", project_id=pid,
+                 changes={"search.search_methd": "grid"})
+        except OgrApiError as exc:
+            print(exc.code, exc.hint)     <span class="c"># E_INVALID_ARGUMENT Did you mean 'search_method'?</span>
+    finally:
+        ws.shutdown()
+
+
+if __name__ == "__main__":
+    main()</code></pre></div>
+      <ul>
+        <li><strong><code>Workspace(workdir=None, jobs_root=None, max_concurrent_jobs=1, max_results_per_project=5)</code></strong> holds the open models, their undo history, their results and the job manager. <code>workdir</code> anchors relative paths; without it a relative path is an error. It keeps the last five results of each model.</li>
+        <li><strong><code>call(ws, "operation", **kwargs)</code></strong> runs one operation. The model is named by <code>project_id</code>, which may be omitted while only one model is open.</li>
+        <li><strong>Edits</strong> are atomic and each is one undo step (<code>call(ws, "project_history", action="undo")</code>).</li>
+        <li><strong>Analyses</strong> (<code>analysis_run</code>, <code>groundwater_run</code>, <code>statistics_run</code>, <code>back_analysis_run</code>, <code>optimize_run</code>, <code>drawdown_sweep_run</code>) run as jobs in a child process, on a detached copy of the model. A call waits up to <code>wait_seconds</code> and otherwise answers <code>state: "running"</code> with a <code>job_id</code> for <code>job_get</code>; <code>job_cancel</code> kills the job's process tree. The answer of a finished run carries <code>result_id</code>, <code>summary</code> and <code>stale</code> (whether the model has changed since). <code>ws.shutdown()</code> kills the jobs still running and removes their files.</li>
+        <li><strong>Errors</strong> are <code>OgrApiError</code> subclasses with a stable <code>code</code>, a <code>message</code>, a <code>hint</code> and <code>details</code> (<a class="xref" href="error-codes.html#api-errors">Section 5.5.4</a>). An argument name that the operation does not take is not an <code>OgrApiError</code>: Python raises <code>TypeError</code>.</li>
+        <li><strong><code>python_exec</code></strong> runs a script with <code>project</code>, <code>api</code> (every operation as <code>api.&lt;name&gt;(...)</code>, with <code>project_id</code> filled in), <code>np</code>, <code>ogr_core</code>, <code>ogr_slip2d</code> and <code>result(result_id)</code> (a stored result in full) as one undo step; it returns <code>ok</code>, <code>stdout</code>, <code>stderr</code>, <code>value</code> (the representation of the last expression), <code>error</code> and <code>rolled_back</code>.</li>
+      </ul>
+      <div class="impl">
+        <span class="label">In OGR Slip2D</span>
+        <p>The operations layer exists because the engine's settings objects accept a misspelt setting in silence and an unknown search id becomes a Grid Search; here both are refused, with a suggestion. It never imports Qt or the MCP SDK, which a test checks, so the same registry serves the MCP server, the window's agent bridge and a plain script.</p>
+        <span class="src">Source: <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_api/__init__.py" target="_blank" rel="noopener">ogr_api/__init__.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_api/workspace.py" target="_blank" rel="noopener">ogr_api/workspace.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/examples/api_acads.py" target="_blank" rel="noopener">examples/api_acads.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/examples/quick_slope.py" target="_blank" rel="noopener">examples/quick_slope.py</a></span>
+      </div>
+
+      <h2 id="terminal"><span class="secnum">5.3.4</span><span class="ht">The embedded terminal</span><a class="anchor" href="#terminal" aria-label="Link to this section">#</a></h2>
+      <p><span class="ui">Window → Terminal</span> (<kbd>Ctrl</kbd>+<kbd>`</kbd>) opens a Python console inside the program, connected to the live project. It runs in the program's own process: whatever it does, it does to the model on screen.</p>
+      <figure class="tbl" id="tbl-terminal">
+        <figcaption><span class="fignum">Table 5.3.3</span> Names available in the embedded terminal.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Name</th><th>What it is</th></tr></thead>
+            <tbody>
+              <tr><td><code>project</code></td><td>The current <code>Project</code>; it is re-attached when a project is created or opened.</td></tr>
+              <tr><td><code>canvas</code></td><td>The drawing canvas of the main window.</td></tr>
+              <tr><td><code>mainwindow</code></td><td>The main window.</td></tr>
+              <tr><td><code>np</code></td><td>NumPy.</td></tr>
+              <tr><td><code>ogr_core</code>, <code>ogr_slip2d</code></td><td>The model and solver packages.</td></tr>
+              <tr><td><code>help_ogr()</code></td><td>Prints a short list of tips.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <div class="code"><pre><code>&gt;&gt;&gt; print(len(project.materials), project.bounding_box())
+&gt;&gt;&gt; from ogr_slip2d.analysis_runner import run_analysis
+&gt;&gt;&gt; outcome = run_analysis(project, ["spencer"])
+&gt;&gt;&gt; print(outcome.results["spencer"].critical.fos)</code></pre></div>
+      <ul>
+        <li><kbd>Enter</kbd> runs the input, <kbd>Shift</kbd>+<kbd>Enter</kbd> starts a new line, <kbd>Ctrl</kbd>+<kbd>↑</kbd> and <kbd>Ctrl</kbd>+<kbd>↓</kbd> walk the history and <kbd>Ctrl</kbd>+<kbd>L</kbd> clears the console.</li>
+        <li>The value of a bare expression is not echoed: use <code>print()</code>, as above.</li>
+        <li>The console runs on the window's own thread, so a long calculation started there holds the window until it ends.</li>
+        <li>Changes made to <code>project</code> from the console act on the model directly and are not steps of <span class="ui">Edit → Undo</span>. For undoable edits from a script, use the operations layer or an agent's <code>python_exec</code>.</li>
+      </ul>
+      <div class="impl">
+        <span class="label">In OGR Slip2D</span>
+        <p>The console executes each input as a block of statements, which is why expressions are not echoed. Its tips (<code>help_ogr()</code>) still show bare expressions such as <code>r.critical.fos</code>, which print nothing as written.</p>
+        <span class="src">Source: <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_gui/widgets/terminal.py" target="_blank" rel="noopener">ogr_gui/widgets/terminal.py</a></span>
+      </div>
+    </article>
+
+<!-- @inc docfoot -->
+<nav class="doc-pager" aria-label="Pages">
+<a class="prev" href="../../docs/reference/cli.html"><span class="label">← Previous · 5.2</span><b>Command-line interface</b></a>
+<a class="next" href="../../docs/reference/file-format.html"><span class="label">5.4 · Next →</span><b>The .ogr file format</b></a>
+</nav>
+<div class="doc-edit label"><a href="https://github.com/samuelsl27/OpenGeoRock_Web.github.io/blob/main/docs/reference/python-api.html" target="_blank" rel="noopener">Edit this page ↗</a><a href="https://github.com/samuelsl27/OGR-Slip2D/issues" target="_blank" rel="noopener">Report a problem ↗</a></div>
+<!-- @end docfoot -->
+  </main>
+
+  <aside class="doc-toc" aria-label="On this page">
+    <div class="toc-inner">
+<!-- @inc pagetoc -->
+<span class="label">On this page</span><ul><li class="h2"><a href="#levels">5.3.1 Two levels</a></li><li class="h2"><a href="#engine">5.3.2 The engine</a></li><li class="h3"><a href="#projects">Projects</a></li><li class="h3"><a href="#run-analysis">The analysis the project describes</a></li><li class="h3"><a href="#hand-built">A search built by hand</a></li><li class="h3"><a href="#one-surface">One surface</a></li><li class="h3"><a href="#results-files">Results files</a></li><li class="h3"><a href="#processes">Scripts and worker processes</a></li><li class="h2"><a href="#operations">5.3.3 The operations layer</a></li><li class="h2"><a href="#terminal">5.3.4 The embedded terminal</a></li></ul><button class="print" type="button"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="1.5"/><path d="M6 14h12v7H6z"/></svg> Print this page</button>
+<!-- @end pagetoc -->
+    </div>
+  </aside>
+</div>
+
+<!-- @inc footer -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <a class="brand" href="../../index.html" aria-label="OpenGeoRock — home">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
+          <b>OpenGeoRock</b>
+        </a>
+        <p class="tagline">Open-source geotechnical software, built in the open at the Universidad Politécnica de Cartagena.</p>
+        <span class="lang" role="group" aria-label="Language"><a href="../../docs/reference/python-api.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../../es/docs/reference/python-api.html" hreflang="es" lang="es">ES</a></span>
+      </div>
+      <div>
+        <h5>Products</h5>
+        <ul>
+          <li><a href="../../products/slip2d.html">OGR Slip2D</a></li>
+          <li><a href="../../products/index.html">The suite</a></li>
+          <li><a href="../../ai/index.html">MCP server</a></li>
+          <li><a href="../../download/index.html">Download</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Learn</h5>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="../../docs/getting-started/quick-start.html">Quick start</a></li>
+          <li><a href="../../docs/theory/methods.html">Theory manual</a></li>
+          <li><a href="../../examples/index.html">Examples</a></li>
+          <li><a href="../../verification/index.html">Verification</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Project</h5>
+        <ul>
+          <li><a href="../../about/index.html">About</a></li>
+          <li><a href="../../about/index.html#team">Team</a></li>
+          <li><a href="../../about/index.html#cite">How to cite</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Contributing</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/LICENSE" target="_blank" rel="noopener">Licence · AGPL-3.0</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Connect</h5>
+        <ul>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/issues" target="_blank" rel="noopener">Issues</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/tree/main/docs/changelog" target="_blank" rel="noopener">Changelog</a></li>
+          <li><a href="mailto:samuel.saez@edu.upct.es">Email</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© 2026 Samuel Sáez López · OGR Slip2D is free software under AGPL-3.0-or-later, with no warranty of any kind.</span>
+      <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
+    </div>
+  </div>
+  <div class="lang-hint" role="dialog" aria-label="Idioma" lang="es">
+    ¿Prefieres leer esta web en español?
+    <div class="row"><a class="btn sm primary go" href="../../es/index.html">Ver en español</a><button class="btn sm" type="button" data-dismiss>No, gracias</button></div>
+  </div>
+</footer>
+<!-- @end footer -->
+</body>
+</html>

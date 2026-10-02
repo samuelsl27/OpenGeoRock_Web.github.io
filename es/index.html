@@ -1,0 +1,683 @@
+<!doctype html>
+<html class="no-js" lang="es" data-root="../">
+<head>
+<meta charset="utf-8">
+<title>OpenGeoRock — software geotécnico de código abierto</title>
+<meta name="description" content="OpenGeoRock es una suite de código abierto para estabilidad de taludes, agua subterránea y mecánica de rocas. OGR Slip2D: nueve métodos de equilibrio límite, filtración por elementos finitos, análisis probabilístico y un servidor MCP oficial para agentes de IA.">
+<!-- @inc head -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.replace("no-js", "js")</script>
+<link rel="canonical" href="https://opengeorock.org/es/">
+<link rel="alternate" hreflang="en" href="https://opengeorock.org/">
+<link rel="alternate" hreflang="es" href="https://opengeorock.org/es/">
+<link rel="alternate" hreflang="x-default" href="https://opengeorock.org/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="OpenGeoRock">
+<meta property="og:title" content="OpenGeoRock — software geotécnico de código abierto">
+<meta property="og:description" content="OpenGeoRock es una suite de código abierto para estabilidad de taludes, agua subterránea y mecánica de rocas. OGR Slip2D: nueve métodos de equilibrio límite, filtración por elementos finitos, análisis probabilístico y un servidor MCP oficial para agentes de IA.">
+<meta property="og:url" content="https://opengeorock.org/es/">
+<meta property="og:image" content="https://opengeorock.org/assets/img/og-image.png">
+<meta property="og:locale" content="es_ES">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#f4efe6">
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&amp;display=swap">
+<link rel="stylesheet" href="../assets/css/site.css">
+
+<script src="../assets/js/site.js" defer></script>
+<!-- @end head -->
+</head>
+<body>
+<!-- @inc header -->
+<a class="skip" href="#main">Saltar al contenido</a>
+<header class="top">
+  <div class="wrap top-inner">
+    <a class="brand" href="../es/index.html" aria-label="OpenGeoRock — inicio">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
+      <b>OpenGeoRock</b>
+    </a>
+    <nav class="nav" aria-label="Principal">
+      <div class="has-menu" data-nav="products">
+        <button type="button" aria-expanded="false" aria-haspopup="true">Productos <svg class="caret" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+        <div class="mega">
+          <div class="mega-cols">
+            <div class="mega-col">
+              <span class="label">Disponible hoy</span>
+              <a class="mega-item feature" href="../es/products/slip2d.html"><b>OGR Slip2D</b><span>Estabilidad de taludes 2D: equilibrio límite, agua subterránea por elementos finitos y análisis probabilístico.</span></a>
+              <a class="mega-item" href="../es/ai/index.html"><b>Servidor MCP para agentes de IA <span class="tag live">nuevo</span></b><span>Claude, ChatGPT o un modelo local construyen y calculan modelos de OGR Slip2D.</span></a>
+            </div>
+            <div class="mega-col">
+              <span class="label">En la hoja de ruta</span>
+              <a class="mega-item" href="../es/products/index.html#ogr-data"><b>OGR Data</b><span>Base de datos de propiedades de suelos y macizos rocosos</span></a>
+              <a class="mega-item" href="../es/products/index.html#ogr-fem2d"><b>OGR FEM2D</b><span>Elementos finitos elastoplásticos 2D</span></a>
+              <a class="mega-item" href="../es/products/index.html#ogr-slip3d"><b>OGR Slip3D</b><span>Equilibrio límite en 3D</span></a>
+              <a class="mega-item" href="../es/products/index.html#ogr-fem3d"><b>OGR FEM3D</b><span>Elementos finitos 3D con flujo acoplado</span></a>
+            </div>
+            <div class="mega-col">
+              <span class="label">Úsalo desde</span>
+              <a class="mega-item" href="../es/docs/getting-started/interface.html"><b>El programa de escritorio</b><span>Modelador, intérprete y terminal de Python</span></a>
+              <a class="mega-item" href="../es/docs/reference/python-api.html"><b>Python</b><span>Automatiza análisis desde tu propio código</span></a>
+              <a class="mega-item" href="../es/docs/reference/cli.html"><b>La línea de comandos</b><span>Cálculos por lotes con ogr-slip2d-cli</span></a>
+            </div>
+          </div>
+          <div class="mega-foot"><span>Cinco programas, un núcleo abierto.</span><a href="../es/products/index.html">Todos los productos →</a></div>
+        </div>
+      </div>
+      <a href="../es/examples/index.html" data-nav="examples">Ejemplos</a>
+      <a href="../es/ai/index.html" data-nav="ai">IA y MCP</a>
+      <a href="../es/docs/index.html" data-nav="docs">Documentación</a>
+      <a href="../es/verification/index.html" data-nav="verification">Verificación</a>
+      <a href="../es/about/index.html" data-nav="about">Proyecto</a>
+    </nav>
+    <div class="top-right">
+      <span class="lang" role="group" aria-label="Idioma"><a href="../index.html" hreflang="en" lang="en">EN</a><a href="../es/index.html" hreflang="es" lang="es" aria-current="true">ES</a></span>
+      <a class="btn gh" href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener" aria-label="Código fuente en GitHub"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0C17.3 4.7 18.3 5 18.3 5c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0012 .5z"/></svg><span>GitHub</span></a>
+      <a class="btn primary" href="../es/download/index.html" data-nav="download">Descargar OGR Slip2D</a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menú"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Principal (móvil)">
+    <span class="label">Productos</span>
+    <a href="../es/products/slip2d.html">OGR Slip2D</a>
+    <div class="sub"><a href="../es/products/index.html">La suite OpenGeoRock</a><a href="../es/ai/index.html">Servidor MCP para agentes de IA</a></div>
+    <span class="label">Aprende</span>
+    <a href="../es/examples/index.html">Ejemplos</a>
+    <a href="../es/docs/index.html">Documentación</a>
+    <a href="../es/verification/index.html">Verificación</a>
+    <span class="label">Proyecto</span>
+    <a href="../es/about/index.html">El proyecto</a>
+    <a href="../es/download/index.html">Descargar OGR Slip2D</a>
+    <a href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener">Código en GitHub ↗</a>
+    <span class="lang" role="group" aria-label="Idioma"><a href="../index.html" hreflang="en" lang="en">EN</a><a href="../es/index.html" hreflang="es" lang="es" aria-current="true">ES</a></span>
+  </nav>
+</header>
+<!-- @end header -->
+
+<main id="main">
+
+<!-- ====== HERO ====== -->
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow label"><span class="dot"></span>OGR Slip2D <span data-v>0.1.235</span> · versión preliminar · AGPL-3.0-or-later</div>
+    <div class="hero-grid">
+      <div>
+        <h1>Software geotécnico para <em>leer</em>, <em>comprobar</em> y <span class="crit">conversar</span>.</h1>
+        <p class="lede">OpenGeoRock es una suite de código abierto para estabilidad de taludes, agua subterránea y mecánica de rocas. Su primer programa, OGR Slip2D, reúne nueve métodos de equilibrio límite, filtración por elementos finitos y análisis probabilístico, e incluye un servidor MCP oficial, de modo que los agentes de IA pueden construir, ejecutar y leer modelos.</p>
+        <div class="cta-row">
+          <a class="btn primary lg" href="download/index.html">Descargar OGR Slip2D <span class="arrow">→</span></a>
+          <a class="btn lg" href="docs/index.html">Leer la documentación</a>
+        </div>
+        <div class="hero-note label"><span><i></i>Python 3.11+</span><span><i></i>Escritorio · Python · CLI · MCP</span><span><i></i>Gratuito y de código abierto</span></div>
+      </div>
+      <figure class="sheet animate">
+        <div class="corner label">Hoja 01</div>
+        <div class="fig"><!-- svg:hero --><svg class="slope-svg" id="hero" viewBox="0 0 850 652" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="hero-t">
+<title id="hero-t">Análisis de equilibrio límite calculado con OGR Slip2D: 156 de los 169 centros de la rejilla con algún círculo válido, factor de seguridad crítico 1.290 (spencer)</title>
+<defs>
+<clipPath id="hero-clip"><polygon points="-160,632 840,632 840,452 500,452 380,372 320,372 200,292 -160,292"/></clipPath>
+</defs>
+<g class="strata" clip-path="url(#hero-clip)">
+<polygon class="st st-0" points="-160,632 840,632 840,452 500,452 380,372 320,372 200,292 -160,292"/>
+<polygon class="st st-1" points="-100,392 -160,392 410,392 950,392 950,752 -100,752"/>
+<polygon class="st st-2" points="-100,512 -160,512 840,512 950,512 950,752 -100,752"/>
+</g>
+<polyline class="contact" points="-160,392 410,392"/>
+<polyline class="contact" points="-160,512 840,512"/>
+<polyline class="wt" points="-160,352 290,382 440,442 540,467 840,472"/>
+<path class="wt-mark" d="M41,352h18l-9,12z"/><path class="wt-tick" d="M43,371h14M46,375h8"/>
+<g class="centres">
+<circle cx="90" cy="292" r="5.5" style="--f:1.000"/>
+<circle cx="90" cy="269.33" r="5.5" style="--f:1.000"/>
+<circle cx="90" cy="246.67" r="5.5" style="--f:1.000"/>
+<circle cx="90" cy="224" r="5.5" style="--f:1.000"/>
+<circle cx="90" cy="201.33" r="5.5" style="--f:1.000"/>
+<circle cx="90" cy="178.67" r="5.5" style="--f:1.000"/>
+<circle cx="90" cy="156" r="5.5" style="--f:1.000"/>
+<circle cx="90" cy="133.33" r="5.5" style="--f:1.000"/>
+<circle cx="90" cy="110.67" r="5.5" style="--f:1.000"/>
+<circle cx="90" cy="88" r="5.5" style="--f:1.000"/>
+<circle cx="90" cy="65.33" r="5.5" style="--f:1.000"/>
+<circle cx="90" cy="42.67" r="5.5" style="--f:1.000"/>
+<circle cx="90" cy="20" r="5.5" style="--f:1.000"/>
+<circle cx="140" cy="292" r="5.5" style="--f:1.000"/>
+<circle cx="140" cy="269.33" r="5.5" style="--f:1.000"/>
+<circle cx="140" cy="246.67" r="5.5" style="--f:1.000"/>
+<circle cx="140" cy="224" r="5.5" style="--f:1.000"/>
+<circle cx="140" cy="201.33" r="5.5" style="--f:1.000"/>
+<circle cx="140" cy="178.67" r="5.5" style="--f:1.000"/>
+<circle cx="140" cy="156" r="5.5" style="--f:1.000"/>
+<circle cx="140" cy="133.33" r="5.5" style="--f:1.000"/>
+<circle cx="140" cy="110.67" r="5.5" style="--f:1.000"/>
+<circle cx="140" cy="88" r="5.5" style="--f:1.000"/>
+<circle cx="140" cy="65.33" r="5.5" style="--f:1.000"/>
+<circle cx="140" cy="42.67" r="5.5" style="--f:1.000"/>
+<circle cx="140" cy="20" r="5.5" style="--f:1.000"/>
+<circle cx="190" cy="292" r="5.5" style="--f:1.000"/>
+<circle cx="190" cy="269.33" r="5.5" style="--f:1.000"/>
+<circle cx="190" cy="246.67" r="5.5" style="--f:1.000"/>
+<circle cx="190" cy="224" r="5.5" style="--f:1.000"/>
+<circle cx="190" cy="201.33" r="5.5" style="--f:1.000"/>
+<circle cx="190" cy="178.67" r="5.5" style="--f:1.000"/>
+<circle cx="190" cy="156" r="5.5" style="--f:1.000"/>
+<circle cx="190" cy="133.33" r="5.5" style="--f:1.000"/>
+<circle cx="190" cy="110.67" r="5.5" style="--f:1.000"/>
+<circle cx="190" cy="88" r="5.5" style="--f:1.000"/>
+<circle cx="190" cy="65.33" r="5.5" style="--f:1.000"/>
+<circle cx="190" cy="42.67" r="5.5" style="--f:1.000"/>
+<circle cx="190" cy="20" r="5.5" style="--f:1.000"/>
+<circle cx="240" cy="292" r="5.5" style="--f:1.000"/>
+<circle cx="240" cy="269.33" r="5.5" style="--f:0.961"/>
+<circle cx="240" cy="246.67" r="5.5" style="--f:1.000"/>
+<circle cx="240" cy="224" r="5.5" style="--f:1.000"/>
+<circle cx="240" cy="201.33" r="5.5" style="--f:1.000"/>
+<circle cx="240" cy="178.67" r="5.5" style="--f:1.000"/>
+<circle cx="240" cy="156" r="5.5" style="--f:1.000"/>
+<circle cx="240" cy="133.33" r="5.5" style="--f:1.000"/>
+<circle cx="240" cy="110.67" r="5.5" style="--f:1.000"/>
+<circle cx="240" cy="88" r="5.5" style="--f:1.000"/>
+<circle cx="240" cy="65.33" r="5.5" style="--f:1.000"/>
+<circle cx="240" cy="42.67" r="5.5" style="--f:1.000"/>
+<circle cx="240" cy="20" r="5.5" style="--f:1.000"/>
+<circle cx="290" cy="292" r="5.5" style="--f:0.619"/>
+<circle cx="290" cy="269.33" r="5.5" style="--f:0.481"/>
+<circle cx="290" cy="246.67" r="5.5" style="--f:0.407"/>
+<circle cx="290" cy="224" r="5.5" style="--f:0.450"/>
+<circle cx="290" cy="201.33" r="5.5" style="--f:0.567"/>
+<circle cx="290" cy="178.67" r="5.5" style="--f:0.738"/>
+<circle cx="290" cy="156" r="5.5" style="--f:0.819"/>
+<circle cx="290" cy="133.33" r="5.5" style="--f:0.841"/>
+<circle cx="290" cy="110.67" r="5.5" style="--f:0.790"/>
+<circle cx="290" cy="88" r="5.5" style="--f:0.824"/>
+<circle cx="290" cy="65.33" r="5.5" style="--f:0.782"/>
+<circle cx="290" cy="42.67" r="5.5" style="--f:0.819"/>
+<circle cx="290" cy="20" r="5.5" style="--f:0.869"/>
+<circle cx="340" cy="292" r="5.5" style="--f:0.600"/>
+<circle cx="340" cy="269.33" r="5.5" style="--f:0.496"/>
+<circle cx="340" cy="246.67" r="5.5" style="--f:0.444"/>
+<circle cx="340" cy="224" r="5.5" style="--f:0.378"/>
+<circle cx="340" cy="201.33" r="5.5" style="--f:0.268"/>
+<circle cx="340" cy="178.67" r="5.5" style="--f:0.298"/>
+<circle cx="340" cy="156" r="5.5" style="--f:0.368"/>
+<circle cx="340" cy="133.33" r="5.5" style="--f:0.368"/>
+<circle cx="340" cy="110.67" r="5.5" style="--f:0.387"/>
+<circle cx="340" cy="88" r="5.5" style="--f:0.412"/>
+<circle cx="340" cy="65.33" r="5.5" style="--f:0.424"/>
+<circle cx="340" cy="42.67" r="5.5" style="--f:0.451"/>
+<circle cx="340" cy="20" r="5.5" style="--f:0.478"/>
+<circle cx="390" cy="292" r="5.5" style="--f:0.263"/>
+<circle cx="390" cy="269.33" r="5.5" style="--f:0.157"/>
+<circle cx="390" cy="246.67" r="5.5" style="--f:0.104"/>
+<circle cx="390" cy="224" r="5.5" style="--f:0.079"/>
+<circle cx="390" cy="201.33" r="5.5" style="--f:0.068"/>
+<circle cx="390" cy="178.67" r="5.5" style="--f:0.073"/>
+<circle cx="390" cy="156" r="5.5" style="--f:0.087"/>
+<circle cx="390" cy="133.33" r="5.5" style="--f:0.110"/>
+<circle cx="390" cy="110.67" r="5.5" style="--f:0.143"/>
+<circle cx="390" cy="88" r="5.5" style="--f:0.157"/>
+<circle cx="390" cy="65.33" r="5.5" style="--f:0.179"/>
+<circle cx="390" cy="42.67" r="5.5" style="--f:0.208"/>
+<circle cx="390" cy="20" r="5.5" style="--f:0.251"/>
+<circle cx="440" cy="292" r="5.5" style="--f:0.281"/>
+<circle cx="440" cy="269.33" r="5.5" style="--f:0.179"/>
+<circle cx="440" cy="246.67" r="5.5" style="--f:0.106"/>
+<circle cx="440" cy="224" r="5.5" style="--f:0.051"/>
+<circle cx="440" cy="201.33" r="5.5" style="--f:0.015"/>
+<circle cx="440" cy="178.67" r="5.5" style="--f:0.001"/>
+<circle cx="440" cy="156" r="5.5" style="--f:0.000"/>
+<circle cx="440" cy="133.33" r="5.5" style="--f:0.009"/>
+<circle cx="440" cy="110.67" r="5.5" style="--f:0.027"/>
+<circle cx="440" cy="88" r="5.5" style="--f:0.049"/>
+<circle cx="440" cy="65.33" r="5.5" style="--f:0.068"/>
+<circle cx="440" cy="42.67" r="5.5" style="--f:0.089"/>
+<circle cx="440" cy="20" r="5.5" style="--f:0.113"/>
+<circle cx="490" cy="292" r="5.5" style="--f:0.333"/>
+<circle cx="490" cy="269.33" r="5.5" style="--f:0.341"/>
+<circle cx="490" cy="246.67" r="5.5" style="--f:0.443"/>
+<circle cx="490" cy="224" r="5.5" style="--f:0.394"/>
+<circle cx="490" cy="201.33" r="5.5" style="--f:0.321"/>
+<circle cx="490" cy="178.67" r="5.5" style="--f:0.258"/>
+<circle cx="490" cy="156" r="5.5" style="--f:0.209"/>
+<circle cx="490" cy="133.33" r="5.5" style="--f:0.177"/>
+<circle cx="490" cy="110.67" r="5.5" style="--f:0.156"/>
+<circle cx="490" cy="88" r="5.5" style="--f:0.145"/>
+<circle cx="490" cy="65.33" r="5.5" style="--f:0.141"/>
+<circle cx="490" cy="42.67" r="5.5" style="--f:0.136"/>
+<circle cx="490" cy="20" r="5.5" style="--f:0.151"/>
+<circle cx="540" cy="292" r="5.5" style="--f:1.000"/>
+<circle cx="540" cy="269.33" r="5.5" style="--f:1.000"/>
+<circle cx="540" cy="246.67" r="5.5" style="--f:1.000"/>
+<circle cx="540" cy="224" r="5.5" style="--f:1.000"/>
+<circle cx="540" cy="201.33" r="5.5" style="--f:0.436"/>
+<circle cx="540" cy="178.67" r="5.5" style="--f:0.545"/>
+<circle cx="540" cy="156" r="5.5" style="--f:0.675"/>
+<circle cx="540" cy="133.33" r="5.5" style="--f:0.672"/>
+<circle cx="540" cy="110.67" r="5.5" style="--f:0.600"/>
+<circle cx="540" cy="88" r="5.5" style="--f:0.546"/>
+<circle cx="540" cy="65.33" r="5.5" style="--f:0.498"/>
+<circle cx="540" cy="42.67" r="5.5" style="--f:0.471"/>
+<circle cx="540" cy="20" r="5.5" style="--f:0.451"/>
+<circle cx="590" cy="292" r="5.5" style="--f:1.000"/>
+<circle cx="590" cy="269.33" r="5.5" style="--f:1.000"/>
+<circle cx="590" cy="246.67" r="5.5" style="--f:1.000"/>
+<circle cx="590" cy="224" r="5.5" style="--f:1.000"/>
+<circle cx="590" cy="201.33" r="5.5" style="--f:1.000"/>
+<circle cx="590" cy="178.67" r="5.5" style="--f:1.000"/>
+<circle cx="590" cy="156" r="5.5" style="--f:0.895"/>
+<circle cx="590" cy="133.33" r="5.5" style="--f:0.947"/>
+<circle cx="590" cy="110.67" r="5.5" style="--f:1.000"/>
+<circle cx="590" cy="88" r="5.5" style="--f:0.623"/>
+<circle cx="590" cy="65.33" r="5.5" style="--f:0.733"/>
+<circle cx="590" cy="42.67" r="5.5" style="--f:0.570"/>
+<circle cx="590" cy="20" r="5.5" style="--f:0.665"/>
+<circle cx="640" cy="292" r="5.5" style="--f:1.000"/>
+<circle cx="640" cy="269.33" r="5.5" style="--f:1.000"/>
+<circle cx="640" cy="246.67" r="5.5" style="--f:1.000"/>
+<circle cx="640" cy="224" r="5.5" style="--f:1.000"/>
+<circle cx="640" cy="201.33" r="5.5" style="--f:1.000"/>
+<circle cx="640" cy="178.67" r="5.5" style="--f:1.000"/>
+<circle cx="640" cy="156" r="5.5" style="--f:1.000"/>
+<circle cx="640" cy="133.33" r="5.5" style="--f:1.000"/>
+<circle cx="640" cy="110.67" r="5.5" style="--f:1.000"/>
+<circle cx="640" cy="88" r="5.5" style="--f:1.000"/>
+<circle cx="640" cy="65.33" r="5.5" style="--f:1.000"/>
+<circle cx="640" cy="42.67" r="5.5" style="--f:0.848"/>
+<circle cx="640" cy="20" r="5.5" style="--f:0.742"/>
+</g>
+<g class="surfaces">
+<path class="sf" style="--f:0.738;--i:0" d="M176.76,292A160.21 160.21 0 0 0 268.06,337.37"/>
+<path class="sf" style="--f:0.733;--i:1" d="M345.71,372A392.07 392.07 0 0 0 487.76,443.84"/>
+<path class="sf" style="--f:0.675;--i:2" d="M346.66,372A289.89 289.89 0 0 0 482.06,440.04"/>
+<path class="sf" style="--f:0.672;--i:3" d="M199.09,292A376.03 376.03 0 0 0 739.62,452"/>
+<path class="sf" style="--f:0.665;--i:4" d="M328.61,372A438.44 438.44 0 0 0 493.55,447.7"/>
+<path class="sf" style="--f:0.623;--i:5" d="M347.86,372A373.21 373.21 0 0 0 495.62,449.08"/>
+<path class="sf" style="--f:0.619;--i:6" d="M221.57,306.38A69.93 69.93 0 0 0 303.05,360.7"/>
+<path class="sf" style="--f:0.600;--i:7" d="M321.78,372A340.47 340.47 0 0 0 494.02,448.01"/>
+<path class="sf" style="--f:0.600;--i:8" d="M127.19,292A212.81 212.81 0 0 0 488.56,444.37"/>
+<path class="sf" style="--f:0.570;--i:9" d="M330.82,372A419.09 419.09 0 0 0 499.94,451.96"/>
+<path class="sf" style="--f:0.567;--i:10" d="M180.65,292A142.05 142.05 0 0 0 276.04,342.69"/>
+<path class="sf" style="--f:0.546;--i:11" d="M182.11,292A411.95 411.95 0 0 0 732.88,452"/>
+<path class="sf" style="--f:0.545;--i:12" d="M349.4,372A271.49 271.49 0 0 0 490.37,445.58"/>
+<path class="sf" style="--f:0.498;--i:13" d="M158.82,292A443.48 443.48 0 0 0 757.17,452"/>
+<path class="sf" style="--f:0.496;--i:14" d="M115.34,291.99A225.8 225.8 0 0 0 485.28,442.19"/>
+<path class="sf" style="--f:0.481;--i:15" d="M206.35,296.23A87.87 87.87 0 0 0 297.35,356.9"/>
+<path class="sf" style="--f:0.478;--i:16" d="M-61.48,292A484.95 484.95 0 0 0 560.34,452"/>
+<path class="sf" style="--f:0.471;--i:17" d="M150.74,292A462.26 462.26 0 0 0 754.79,452"/>
+<path class="sf" style="--f:0.451;--i:18" d="M-30.86,292A446.88 446.88 0 0 0 519.31,452"/>
+<path class="sf" style="--f:0.451;--i:19" d="M142.84,292A481.38 481.38 0 0 0 752.37,452"/>
+<path class="sf" style="--f:0.450;--i:20" d="M186.39,292A123.93 123.93 0 0 0 283.65,347.77"/>
+<path class="sf" style="--f:0.444;--i:21" d="M105.22,292A239.11 239.11 0 0 0 481.32,439.55"/>
+<path class="sf" style="--f:0.443;--i:22" d="M299.89,358.59A220.61 220.61 0 0 0 570.67,452"/>
+<path class="sf" style="--f:0.436;--i:23" d="M352.99,372A253.18 253.18 0 0 0 498.68,451.12"/>
+<path class="sf" style="--f:0.424;--i:24" d="M-29.08,292A433.13 433.13 0 0 0 535.16,452"/>
+<path class="sf" style="--f:0.412;--i:25" d="M-27.18,292A420.04 420.04 0 0 0 549.62,452"/>
+<path class="sf" style="--f:0.407;--i:26" d="M194.32,292A105.87 105.87 0 0 0 290.81,352.54"/>
+<path class="sf" style="--f:0.394;--i:27" d="M222.72,307.14A279.92 279.92 0 0 0 652.39,452"/>
+<path class="sf" style="--f:0.387;--i:28" d="M5.83,292A380.2 380.2 0 0 0 507.46,452"/>
+<path class="sf" style="--f:0.378;--i:29" d="M62.11,292A286.09 286.09 0 0 0 512.81,452"/>
+<path class="sf" style="--f:0.368;--i:30" d="M8.93,292A367.12 367.12 0 0 0 522.3,452"/>
+<path class="sf" style="--f:0.368;--i:31" d="M12.63,292A354.49 354.49 0 0 0 535.06,452"/>
+<path class="sf" style="--f:0.341;--i:32" d="M340.68,372A181.21 181.21 0 0 0 497.58,450.39"/>
+<path class="sf" style="--f:0.333;--i:33" d="M347.3,372A163.6 163.6 0 0 0 524.12,452"/>
+<path class="sf" style="--f:0.321;--i:34" d="M210.18,298.79A296.3 296.3 0 0 0 647.99,452"/>
+<path class="sf" style="--f:0.298;--i:35" d="M188.76,292A188.99 188.99 0 0 0 309.86,365.24"/>
+<path class="sf" style="--f:0.281;--i:36" d="M235.62,315.75A205.76 205.76 0 0 0 569.37,452"/>
+<path class="sf" style="--f:0.268;--i:37" d="M195.19,292A170.85 170.85 0 0 0 318.18,370.78"/>
+<path class="sf" style="--f:0.263;--i:38" d="M182.34,292A207.66 207.66 0 0 0 522.37,452"/>
+<path class="sf" style="--f:0.258;--i:39" d="M197.9,292A313.31 313.31 0 0 0 643.14,452"/>
+<path class="sf" style="--f:0.251;--i:40" d="M34.93,292A447.28 447.28 0 0 0 505.91,452"/>
+<path class="sf" style="--f:0.209;--i:41" d="M188.28,292A330.95 330.95 0 0 0 638.03,452"/>
+<path class="sf" style="--f:0.208;--i:42" d="M37.01,292A432.17 432.17 0 0 0 528.63,452"/>
+<path class="sf" style="--f:0.179;--i:43" d="M221.54,306.36A221.58 221.58 0 0 0 565.42,452"/>
+<path class="sf" style="--f:0.179;--i:44" d="M40.33,292A416.71 416.71 0 0 0 545.36,452"/>
+<path class="sf" style="--f:0.177;--i:45" d="M179.02,292A349.12 349.12 0 0 0 632.6,452"/>
+<path class="sf" style="--f:0.157;--i:46" d="M46.36,292A399.63 399.63 0 0 0 554.95,452"/>
+<path class="sf" style="--f:0.157;--i:47" d="M165.59,291.99A225.55 225.55 0 0 0 522.32,452"/>
+<path class="sf" style="--f:0.156;--i:48" d="M170.09,292A367.73 367.73 0 0 0 626.81,452"/>
+<path class="sf" style="--f:0.151;--i:49" d="M137.12,292A445.54 445.54 0 0 0 599,452"/>
+<path class="sf" style="--f:0.145;--i:50" d="M161.45,292A386.73 386.73 0 0 0 620.62,452"/>
+<path class="sf" style="--f:0.143;--i:51" d="M52.91,292A382.77 382.77 0 0 0 563.22,452"/>
+<path class="sf" style="--f:0.141;--i:52" d="M153.1,292A406.06 406.06 0 0 0 613.97,452"/>
+<path class="sf" style="--f:0.136;--i:53" d="M166.48,292A408.45 408.45 0 0 0 498.54,451.03"/>
+<path class="sf" style="--f:0.113;--i:54" d="M78.92,292A452.06 452.06 0 0 0 573.18,452"/>
+<path class="sf" style="--f:0.110;--i:55" d="M91.68,292A337.89 337.89 0 0 0 502.34,452"/>
+<path class="sf" style="--f:0.106;--i:56" d="M206.92,296.62A238.37 238.37 0 0 0 561.07,452"/>
+<path class="sf" style="--f:0.104;--i:57" d="M150.47,292A243.78 243.78 0 0 0 521.4,452"/>
+<path class="sf" style="--f:0.089;--i:58" d="M87.02,292A432.16 432.16 0 0 0 578.59,452"/>
+<path class="sf" style="--f:0.087;--i:59" d="M101,292A319.4 319.4 0 0 0 509.99,452"/>
+<path class="sf" style="--f:0.079;--i:60" d="M136.67,292A262.3 262.3 0 0 0 519.68,452"/>
+<path class="sf" style="--f:0.073;--i:61" d="M112.1,292A300.12 300.12 0 0 0 513.95,452"/>
+<path class="sf" style="--f:0.068;--i:62" d="M95.4,292A412.46 412.46 0 0 0 583.58,452"/>
+<path class="sf" style="--f:0.068;--i:63" d="M123.94,292A281.09 281.09 0 0 0 517.18,452"/>
+<path class="sf" style="--f:0.051;--i:64" d="M193.27,292A255.93 255.93 0 0 0 556.26,452"/>
+<path class="sf" style="--f:0.049;--i:65" d="M130.78,292A370.45 370.45 0 0 0 508.82,452"/>
+<path class="sf" style="--f:0.027;--i:66" d="M139.94,292A350.6 350.6 0 0 0 520.07,452"/>
+<path class="sf" style="--f:0.015;--i:67" d="M181.36,292A274.07 274.07 0 0 0 550.83,452"/>
+<path class="sf" style="--f:0.009;--i:68" d="M149.51,292A331 331 0 0 0 529.5,452"/>
+<path class="sf" style="--f:0.001;--i:69" d="M170.15,292A292.68 292.68 0 0 0 544.65,452"/>
+</g>
+<g class="slices">
+<path d="M159.56,292V292"/>
+<path d="M171.77,314.73V292"/>
+<path d="M183.98,333.75V292"/>
+<path d="M196.18,350.16V292"/>
+<path d="M208.39,364.57V297.6"/>
+<path d="M220.6,377.37V305.73"/>
+<path d="M236.42,392V316.28"/>
+<path d="M248.87,402.2V324.58"/>
+<path d="M261.33,411.38V332.88"/>
+<path d="M273.78,419.66V341.19"/>
+<path d="M286.24,427.11V349.49"/>
+<path d="M298.7,433.8V357.8"/>
+<path d="M311.15,439.8V366.1"/>
+<path d="M323.61,445.13V372"/>
+<path d="M336.06,449.84V372"/>
+<path d="M348.52,453.95V372"/>
+<path d="M360.97,457.49V372"/>
+<path d="M373.43,460.49V372"/>
+<path d="M385.89,462.94V375.92"/>
+<path d="M398.34,464.88V384.23"/>
+<path d="M410.8,466.31V392.53"/>
+<path d="M423.25,467.23V400.84"/>
+<path d="M435.71,467.65V409.14"/>
+<path d="M448.17,467.57V417.44"/>
+<path d="M460.62,466.99V425.75"/>
+<path d="M473.08,465.92V434.05"/>
+<path d="M485.53,464.33V442.36"/>
+<path d="M497.99,462.24V450.66"/>
+<path d="M510.44,459.61V452"/>
+<path d="M524.02,456.14V452"/>
+<path d="M537.6,452V452"/>
+</g>
+<path class="critical" pathLength="1" d="M159.56,292A311.68 311.68 0 0 0 537.6,452"/>
+<g class="crit-centre"><path class="radius" d="M440,156L159.56,292M440,156L537.6,452"/><circle cx="440" cy="156" r="6"/></g>
+<polygon class="outline" points="-160,632 840,632 840,452 500,452 380,372 320,372 200,292 -160,292"/>
+</svg><!-- /svg:hero --></div>
+        <div class="titleblock">
+          <div><div class="k">Modelo</div><div class="v">Talud de dos capas · nivel freático</div></div>
+          <div><div class="k">Búsqueda</div><div class="v">Rejilla · 169 centros</div></div>
+          <div><div class="k">Método</div><div class="v">Spencer · λ 0.343</div></div>
+          <div><div class="k">FS crítico</div><div class="v fos">1.290</div></div>
+        </div>
+      </figure>
+    </div>
+
+    <div class="metrics">
+      <div class="metric"><div class="v">9</div><a class="k label" href="docs/theory/methods.html">Métodos de equilibrio límite</a></div>
+      <div class="metric"><div class="v">7</div><a class="k label" href="docs/theory/search.html">Algoritmos de búsqueda</a></div>
+      <div class="metric"><div class="v">22</div><a class="k label" href="docs/theory/strength.html">Modelos de resistencia</a></div>
+      <div class="metric"><div class="v">74</div><a class="k label" href="ai/index.html">Herramientas MCP</a></div>
+      <div class="metric"><div class="v">5 265</div><a class="k label" href="verification/index.html">Tests superados</a></div>
+      <div class="metric"><div class="v">7</div><a class="k label" href="docs/verification/slope-benchmarks.html">Casos de referencia publicados</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== SUITE ====== -->
+<section class="section">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="sec-num label">§ 01 — La suite</div><h2>Cinco programas, <em>un núcleo abierto.</em></h2></div>
+      <p>OGR Slip2D está disponible hoy con su código fuente público. Cuatro programas más seguirán sobre el mismo núcleo en Python: una base de datos de propiedades, elementos finitos en 2D y 3D y equilibrio límite tridimensional.</p>
+    </div>
+    <div class="suite">
+      <a class="card ink" href="products/slip2d.html">
+        <div class="split"><span class="tag live">En desarrollo · código fuente disponible</span><span class="label">OGR-01</span></div>
+        <svg class="glyph" viewBox="0 0 300 120" aria-hidden="true" style="height:130px">
+          <path d="M8 104H96L150 54H292" fill="none" stroke="#f4efe6" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M8 104V116H292V54" fill="none" stroke="#f4efe666" stroke-width="1"/>
+          <g fill="none" stroke-width="1.1" opacity=".55"><path d="M84 104A78 78 0 0 0 214 54" stroke="#9bd8a8"/><path d="M72 104A92 92 0 0 0 226 54" stroke="#9bd8a8"/><path d="M92 104A66 66 0 0 0 200 54" stroke="#9bd8a8"/></g>
+          <path d="M78 104A84 84 0 0 0 219 54" fill="none" stroke="#e05a2a" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="150" cy="22" r="3" fill="#e05a2a"/><path d="M150 22L78 104M150 22L219 54" stroke="#e05a2a" stroke-width=".8" stroke-dasharray="3 3" fill="none"/>
+        </svg>
+        <h3>OGR Slip2D</h3>
+        <p>Estabilidad de taludes 2D por equilibrio límite, agua subterránea por elementos finitos, análisis probabilístico y de sensibilidad, soportes, carga sísmica y Eurocódigo 7.</p>
+        <div class="chips mt-s"><span class="tag">9 métodos</span><span class="tag">Filtración MEF</span><span class="tag">Monte Carlo</span><span class="tag">DXF</span><span class="tag">MCP</span></div>
+      </a>
+      <a class="card planned" href="products/index.html#ogr-data">
+        <div class="split"><span class="tag soon">Previsto</span><span class="label">OGR-02</span></div>
+        <svg class="glyph" viewBox="0 0 200 120" aria-hidden="true"><path d="M18 106H190M18 106V10" fill="none" stroke="#6a645c" stroke-width="1"/><path d="M26 98L182 26" fill="none" stroke="oklch(0.5 0.11 150)" stroke-width="2"/><g fill="#34302a" opacity=".75"><circle cx="38" cy="90" r="2.6"/><circle cx="50" cy="96" r="2.6"/><circle cx="62" cy="80" r="2.6"/><circle cx="76" cy="84" r="2.6"/><circle cx="88" cy="70" r="2.6"/><circle cx="98" cy="76" r="2.6"/><circle cx="112" cy="58" r="2.6"/><circle cx="124" cy="62" r="2.6"/><circle cx="136" cy="48" r="2.6"/><circle cx="150" cy="52" r="2.6"/><circle cx="160" cy="36" r="2.6"/><circle cx="172" cy="40" r="2.6"/></g></svg>
+        <h3>OGR Data</h3>
+        <p>Base de datos de propiedades de suelos y macizos rocosos, correlaciones y ábacos.</p>
+      </a>
+      <a class="card planned" href="products/index.html#ogr-fem2d">
+        <div class="split"><span class="tag soon">Previsto</span><span class="label">OGR-03</span></div>
+        <svg class="glyph" viewBox="0 0 200 120" aria-hidden="true"><g fill="none" stroke="#34302a" stroke-width=".9" opacity=".8"><path d="M10 108V52H70L120 80H190V108Z" stroke-width="1.6"/><path d="M10 80H190M40 52V108M70 52V108M100 66V108M130 80V108M160 80V108M10 52L40 80L70 52M40 80L70 108M70 80L100 108M100 80L130 108M130 80L160 108M160 80L190 108M10 80L40 108M70 52L100 80M100 66L120 80"/></g><path d="M58 52Q96 96 150 80" fill="none" stroke="#c8431b" stroke-width="2"/></svg>
+        <h3>OGR FEM2D</h3>
+        <p>Elementos finitos elastoplásticos en 2D y reducción de resistencia.</p>
+      </a>
+      <a class="card planned" href="products/index.html#ogr-slip3d">
+        <div class="split"><span class="tag soon">Previsto</span><span class="label">OGR-04</span></div>
+        <svg class="glyph" viewBox="0 0 200 120" aria-hidden="true"><g fill="none" stroke="#34302a" stroke-width="1.2" stroke-linejoin="round"><path d="M14 92L74 62L134 92L74 122" opacity="0"/><path d="M20 96L80 66H120L180 36"/><path d="M20 96L60 112L120 82L160 62L180 36"/><path d="M80 66L120 82M120 66L160 62"/></g><ellipse cx="108" cy="72" rx="38" ry="16" transform="rotate(-24 108 72)" fill="none" stroke="#c8431b" stroke-width="2"/><path d="M76 84Q110 108 140 60" fill="none" stroke="#c8431b" stroke-width="1" stroke-dasharray="3 3"/></svg>
+        <h3>OGR Slip3D</h3>
+        <p>Superficies 3D de equilibrio límite para cortas mineras, deslizamientos y terrenos complejos.</p>
+      </a>
+      <a class="card planned" href="products/index.html#ogr-fem3d">
+        <div class="split"><span class="tag soon">Previsto</span><span class="label">OGR-05</span></div>
+        <svg class="glyph" viewBox="0 0 200 120" aria-hidden="true"><g fill="none" stroke="#34302a" stroke-width=".9" opacity=".85" stroke-linejoin="round"><path d="M50 40L110 20L170 40L110 60Z" stroke-width="1.5"/><path d="M50 40V90L110 110V60M170 40V90L110 110" stroke-width="1.5"/><path d="M80 30L140 50M80 50L140 30M70 47V97M90 53V103M130 53V103M150 47V97M50 65L110 85L170 65"/></g><path d="M110 60V110" stroke="oklch(0.5 0.11 150)" stroke-width="2"/></svg>
+        <h3>OGR FEM3D</h3>
+        <p>Elementos finitos 3D para roca y suelo, con flujo de agua subterránea acoplado.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ====== SLIP2D ====== -->
+<section class="section alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="sec-num label">§ 02 — OGR Slip2D</div><h2>Todo lo que un análisis de taludes <em>necesita</em>, a la vista de todos.</h2></div>
+      <p>Un programa de escritorio con un modelador, un intérprete de resultados y un terminal de Python integrado, construido sobre un núcleo de cálculo que se puede leer línea a línea y comprobado con casos de referencia publicados.</p>
+    </div>
+    <div class="feature-grid">
+      <div class="feature">
+        <svg class="ic" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 27H12L21 15H31"/><path d="M8 27A17 17 0 0 0 25 15" stroke="#c8431b" stroke-width="2"/><path d="M12 27V21M15 25V19M18 23V18" stroke-width="1"/></svg>
+        <h4>Nueve métodos de equilibrio límite</h4>
+        <p>Ordinario, Bishop, Janbu simplificado y corregido, Spencer, Morgenstern–Price/GLE, Lowe–Karafiath y los dos métodos de Corps of Engineers.</p>
+      </div>
+      <div class="feature">
+        <svg class="ic" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><g stroke-width="1.2"><circle cx="8" cy="6" r="1.4"/><circle cx="14" cy="6" r="1.4"/><circle cx="20" cy="6" r="1.4"/><circle cx="8" cy="11" r="1.4"/><circle cx="14" cy="11" r="1.4" fill="#c8431b" stroke="#c8431b"/><circle cx="20" cy="11" r="1.4"/></g><path d="M3 29H12L21 19H31"/><path d="M7 29Q16 34 24 19" stroke="#c8431b" stroke-width="2"/></svg>
+        <h4>Siete algoritmos de búsqueda</h4>
+        <p>De rejilla, de talud, de refinado automático, por bloques, de camino, por recocido simulado y por enjambre de partículas, para superficies circulares y no circulares, con objetos de foco y optimización.</p>
+      </div>
+      <div class="feature">
+        <svg class="ic" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 30V4M4 30H31"/><path d="M4 24C10 14 18 10 30 7" stroke="#c8431b" stroke-width="2"/><path d="M4 20L30 11" stroke-dasharray="2 2"/></svg>
+        <h4>Veintidós modelos de resistencia</h4>
+        <p>Mohr–Coulomb, perfiles sin drenaje, Hoek–Brown, Barton–Bandis, curva potencial, SHANSEP, modelos anisótropos y funciones definidas por el usuario.</p>
+      </div>
+      <div class="feature">
+        <svg class="ic" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 29V13H11L23 23H31V29Z"/><path d="M3 18H12L22 26" stroke="#2f6fb3" stroke-width="2"/><path d="M8 13L14 29M14 17L20 29" stroke-width=".9"/></svg>
+        <h4>Agua subterránea por elementos finitos</h4>
+        <p>Filtración saturada, no saturada y transitoria sobre una malla triangular conforme, con superficies de rezume y un factor de seguridad por etapa.</p>
+      </div>
+      <div class="feature">
+        <svg class="ic" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 30H31"/><path d="M6 30V24M10 30V17M14 30V10M18 30V8M22 30V14M26 30V21M30 30V26" stroke-width="2.4"/><path d="M8 4V30" stroke="#c8431b" stroke-dasharray="2 2"/></svg>
+        <h4>Análisis probabilístico y de sensibilidad</h4>
+        <p>Muestreo de Monte Carlo y de hipercubo latino sobre siete distribuciones, probabilidad de rotura, índice de fiabilidad y barridos de sensibilidad.</p>
+      </div>
+      <div class="feature">
+        <svg class="ic" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 28H13L22 14H31"/><path d="M16 20L28 26M18 17L30 23" stroke-width="2"/><path d="M26 6V12M23 9L26 12L29 9" stroke="#c8431b"/></svg>
+        <h4>Cargas, soportes y normas de diseño</h4>
+        <p>Nueve tipos de soporte, cargas distribuidas y lineales, carga sísmica pseudoestática y desplazamiento de Newmark, grietas de tracción y coeficientes parciales del Eurocódigo 7.</p>
+      </div>
+    </div>
+    <div class="cta-row">
+      <a class="btn primary" href="products/slip2d.html">Explorar OGR Slip2D <span class="arrow">→</span></a>
+      <a class="btn" href="docs/theory/limit-equilibrium.html">Leer el manual de teoría</a>
+    </div>
+  </div>
+</section>
+
+<!-- ====== AI / MCP ====== -->
+<section class="section">
+  <div class="wrap grid-2">
+    <div>
+      <div class="sec-num label">§ 03 — Pensado para agentes de IA</div>
+      <h2 class="mt-s">Pide un talud. <em>Obtén un factor de seguridad.</em></h2>
+      <p class="lede mt-m">OGR Slip2D incluye un servidor oficial del Model Context Protocol, desarrollado en el mismo repositorio que el motor de cálculo. Cualquier cliente MCP —Claude, ChatGPT, el SDK de OpenAI Agents o un modelo local en LM Studio u Ollama— puede abrir el programa, construir la geometría, ejecutar el análisis y leer cada dovela, mientras lo ves ocurrir en la ventana.</p>
+      <ul class="ticks">
+        <li>Uno de los primeros programas geotécnicos con un servidor MCP oficial y, hasta donde sabemos (octubre de 2026), el primer programa de estabilidad de taludes de código abierto que incluye uno.</li>
+        <li>74 herramientas que alcanzan todas las acciones de modelado y análisis de los menús del programa.</li>
+        <li>Trabaja sobre la ventana abierta: el mismo modelo y la misma pila de deshacer que tú.</li>
+        <li>Se ejecuta en tu equipo: stdio para los clientes de escritorio, HTTP con token y OAuth 2.1 para los remotos.</li>
+      </ul>
+      <div class="cta-row">
+        <a class="btn primary" href="ai/index.html#install">Conecta tu agente <span class="arrow">→</span></a>
+        <a class="btn" href="docs/reference/mcp.html">Referencia de herramientas</a>
+      </div>
+    </div>
+    <div class="chat" role="img" aria-label="Una sesión con un agente: el usuario pide el modelo de un talud y el agente lo construye e informa de los factores de seguridad calculados por OGR Slip2D">
+      <div class="bar label"><i></i><i></i><i></i>&nbsp; sesión con un agente · ogr-slip2d</div>
+      <div class="body">
+        <div class="msg user">Construye un talud de 16 m con una berma a media altura: arena limosa sobre arcilla sobre grava densa, con el nivel freático 6 m por debajo de la coronación. Compruébalo con Bishop, Spencer y Morgenstern–Price.</div>
+        <div class="tool"><b>model_define</b><span>3 materiales · 2 contactos · nivel freático</span></div>
+        <div class="tool"><b>analysis_configure</b><span>búsqueda de rejilla · 30 dovelas · izquierda → derecha</span></div>
+        <div class="tool"><b>analysis_run</b><span>1 859 superficies · 87 s</span></div>
+        <div class="msg agent">Factores de seguridad críticos: Bishop <strong>1.300</strong>, Spencer <strong>1.290</strong> (λ = 0.343), Morgenstern–Price <strong>1.292</strong>. El círculo crítico (centro 60.0, 47.6; R = 31.2 m) atraviesa la arcilla y sale 3.8 m más allá del pie.</div>
+        <div class="note-line">El modelo de la Hoja 01 de arriba, construido de este modo.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== VERIFICATION ====== -->
+<section class="section alt">
+  <div class="wrap grid-2">
+    <div>
+      <div class="sec-num label">§ 04 — Verificación</div>
+      <h2 class="mt-s">Contrastado con referencias, <em>no dado por bueno.</em></h2>
+      <p class="lede mt-m">Cada método incluye el caso publicado con el que se validó, y la batería de tests compara los resultados con referencias externas y soluciones en forma cerrada, nunca con instantáneas de su propia salida.</p>
+      <div class="cta-row">
+        <a class="btn primary" href="verification/index.html">Ver la verificación <span class="arrow">→</span></a>
+        <a class="btn" href="docs/verification/methodology.html">Metodología</a>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table class="data">
+        <thead><tr><th>Caso</th><th>Método</th><th class="n">Referencia</th><th class="n">OGR Slip2D</th></tr></thead>
+        <tbody>
+          <tr><td>ACADS 1(a) · Giam &amp; Donald 1989</td><td>Bishop</td><td class="n">0.991</td><td class="n">0.9885</td></tr>
+          <tr><td>ACADS 1(c) · tres capas</td><td>Bishop</td><td class="n">1.406</td><td class="n">1.4083</td></tr>
+          <tr><td>Yamagami &amp; Ueta 1988</td><td>Bishop</td><td class="n">1.348</td><td class="n">1.3502</td></tr>
+          <tr><td>ACADS 2(b) · presa de Talbingo</td><td>Spencer</td><td class="n">2.29</td><td class="n">2.2918</td></tr>
+          <tr><td>Filtración confinada · Darcy</td><td>Filtración MEF</td><td class="n">exacto</td><td class="n">0.000 %</td></tr>
+          <tr><td>Escalón transitorio · erfc</td><td>MEF transitorio</td><td class="n">exacto</td><td class="n">0.11 %</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ====== EXAMPLES ====== -->
+<section class="section">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="sec-num label">§ 05 — Ejemplos resueltos</div><h2>Cinco modelos, <em>con sus archivos.</em></h2></div>
+      <p>Resueltos con OGR Slip2D y publicados con los datos para comprobarlos y el <code>.ogr</code> para abrirlos. Todas las cifras son resultados del programa.</p>
+    </div>
+    <div class="grid-3">
+      <a class="card" href="examples/index.html#ex1"><span class="label">Ejemplo 1</span><h3>Un talud de dos capas</h3><p>Búsqueda por rejilla con tres métodos sobre el talud del inicio rápido.</p><div class="foot label"><span>Spencer · F = 1.290</span><span>→</span></div></a>
+      <a class="card" href="examples/index.html#ex2"><span class="label">Ejemplo 2</span><h3>Terraplén sobre una capa débil</h3><p>Las búsquedas por bloques y de camino encuentran la misma superficie no circular; una berma eleva el factor de seguridad.</p><div class="foot label"><span>0.988 → 1.180</span><span>→</span></div></a>
+      <a class="card" href="examples/index.html#ex3"><span class="label">Ejemplo 3</span><h3>Presa de tierra con dren de pie</h3><p>Filtración por elementos finitos, la superficie libre y la presión intersticial en cada dovela.</p><div class="foot label"><span>Aguas abajo · F = 1.799</span><span>→</span></div></a>
+      <a class="card" href="examples/index.html#ex4"><span class="label">Ejemplo 4</span><h3>Resistencias inciertas</h3><p>1 000 muestras de Monte Carlo: la probabilidad de rotura y el índice de fiabilidad.</p><div class="foot label"><span>P<sub>F</sub> 0.5 % · β 2.69</span><span>→</span></div></a>
+      <a class="card" href="examples/index.html#ex5"><span class="label">Ejemplo 5</span><h3>Desembalse rápido</h3><p>Filtración transitoria en siete etapas: el factor de seguridad frente al tiempo.</p><div class="foot label"><span>Mínimo 1.469 · día 10</span><span>→</span></div></a>
+      <a class="card ink" href="examples/index.html"><span class="label">Los cinco</span><h3>Ábrelos tú mismo</h3><p>Cada figura la calculó el programa, y cada modelo se puede descargar y abrir en él.</p><div class="foot label"><span>Ejemplos</span><span>→</span></div></a>
+    </div>
+  </div>
+</section>
+
+<!-- ====== OPEN ====== -->
+<section class="section">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="sec-num label">§ 06 — Desarrollado a la vista de todos</div><h2>Software de investigación, <em>para la práctica.</em></h2></div>
+      <p>OpenGeoRock lo desarrolla Samuel Sáez López como parte de su investigación doctoral en la Universidad Politécnica de Cartagena, bajo la supervisión académica del Prof. Emilio Trigueros Tornero y con IMGA S.L.P. como colaboradora profesional.</p>
+    </div>
+    <div class="grid-3">
+      <a class="card" href="about/index.html#team"><span class="label">Equipo</span><h3>Quién lo desarrolla</h3><p>Un ingeniero de minas y doctorando, un profesor de mecánica de rocas y las personas que envían casos de validación.</p><div class="foot label"><span>Sobre el proyecto</span><span>→</span></div></a>
+      <a class="card" href="about/index.html#licence"><span class="label">Licencia</span><h3>AGPL-3.0-or-later</h3><p>Úsalo libremente, también en trabajos profesionales de ingeniería. Las versiones modificadas que se ofrezcan a través de una red deben publicar su código fuente.</p><div class="foot label"><span>Qué significa la licencia</span><span>→</span></div></a>
+      <a class="card" href="about/index.html#contribute"><span class="label">Contribuir</span><h3>Envía un caso de validación</h3><p>La contribución más valiosa: un talud cuyo factor de seguridad se conozca por una publicación, por otro programa o por un cálculo a mano.</p><div class="foot label"><span>Cómo contribuir</span><span>→</span></div></a>
+    </div>
+  </div>
+</section>
+
+<!-- ====== CTA ====== -->
+<section class="section ink">
+  <div class="wrap cta-band">
+    <div>
+      <div class="label">Primeros pasos</div>
+      <h2 class="mt-s">Léelo. Ejecútalo. <em>Compruébalo.</em></h2>
+    </div>
+    <div class="cta-row">
+      <a class="btn primary lg" href="download/index.html">Descargar OGR Slip2D</a>
+      <a class="btn lg" href="docs/getting-started/quick-start.html">Inicio rápido</a>
+      <a class="btn lg" href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener">Código fuente en GitHub ↗</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- @inc footer -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <a class="brand" href="../es/index.html" aria-label="OpenGeoRock — inicio">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
+          <b>OpenGeoRock</b>
+        </a>
+        <p class="tagline">Software geotécnico de código abierto, desarrollado a la vista de todos en la Universidad Politécnica de Cartagena.</p>
+        <span class="lang" role="group" aria-label="Idioma"><a href="../index.html" hreflang="en" lang="en">EN</a><a href="../es/index.html" hreflang="es" lang="es" aria-current="true">ES</a></span>
+      </div>
+      <div>
+        <h5>Productos</h5>
+        <ul>
+          <li><a href="../es/products/slip2d.html">OGR Slip2D</a></li>
+          <li><a href="../es/products/index.html">La suite</a></li>
+          <li><a href="../es/ai/index.html">Servidor MCP</a></li>
+          <li><a href="../es/download/index.html">Descargar</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Aprende</h5>
+        <ul>
+          <li><a href="../es/docs/index.html">Documentación</a></li>
+          <li><a href="../es/docs/getting-started/quick-start.html">Inicio rápido</a></li>
+          <li><a href="../es/docs/theory/methods.html">Manual de teoría</a></li>
+          <li><a href="../es/examples/index.html">Ejemplos</a></li>
+          <li><a href="../es/verification/index.html">Verificación</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Proyecto</h5>
+        <ul>
+          <li><a href="../es/about/index.html">El proyecto</a></li>
+          <li><a href="../es/about/index.html#team">Equipo</a></li>
+          <li><a href="../es/about/index.html#cite">Cómo citar</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Contribuir</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/LICENSE" target="_blank" rel="noopener">Licencia · AGPL-3.0</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contacto</h5>
+        <ul>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/issues" target="_blank" rel="noopener">Incidencias</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/tree/main/docs/changelog" target="_blank" rel="noopener">Historial de cambios</a></li>
+          <li><a href="mailto:samuel.saez@edu.upct.es">Correo</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© 2026 Samuel Sáez López · OGR Slip2D es software libre bajo AGPL-3.0-or-later, sin garantía de ningún tipo.</span>
+      <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
+    </div>
+  </div>
+</footer>
+<!-- @end footer -->
+</body>
+</html>

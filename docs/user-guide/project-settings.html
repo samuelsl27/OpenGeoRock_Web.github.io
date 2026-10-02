@@ -1,0 +1,518 @@
+<!doctype html>
+<html class="no-js" lang="en" data-root="../../">
+<head>
+<meta charset="utf-8">
+<title>Project settings — OGR Slip2D documentation</title>
+<meta name="description" content="Every page of the OGR Slip2D Project Settings dialog — General, Methods, Groundwater, Transient, Statistics, Random Numbers, Design Standard, Advanced, Seismic and Project Summary — with each field, its default and its range, the six unit systems and the failure direction.">
+<!-- @inc head -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.replace("no-js", "js")</script>
+<link rel="canonical" href="https://opengeorock.org/docs/user-guide/project-settings.html">
+<link rel="alternate" hreflang="en" href="https://opengeorock.org/docs/user-guide/project-settings.html">
+<link rel="alternate" hreflang="es" href="https://opengeorock.org/es/docs/user-guide/project-settings.html">
+<link rel="alternate" hreflang="x-default" href="https://opengeorock.org/docs/user-guide/project-settings.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="OpenGeoRock">
+<meta property="og:title" content="Project settings — OGR Slip2D documentation">
+<meta property="og:description" content="Every page of the OGR Slip2D Project Settings dialog — General, Methods, Groundwater, Transient, Statistics, Random Numbers, Design Standard, Advanced, Seismic and Project Summary — with each field, its default and its range, the six unit systems and the failure direction.">
+<meta property="og:url" content="https://opengeorock.org/docs/user-guide/project-settings.html">
+<meta property="og:image" content="https://opengeorock.org/assets/img/og-image.png">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#f4efe6">
+<link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&amp;display=swap">
+<link rel="stylesheet" href="../../assets/css/site.css">
+<link rel="stylesheet" href="../../assets/css/docs.css">
+<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
+<script src="../../assets/js/site.js" defer></script>
+<!-- @end head -->
+</head>
+<body class="docs">
+<!-- @inc header -->
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="wrap top-inner">
+    <a class="brand" href="../../index.html" aria-label="OpenGeoRock — home">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
+      <b>OpenGeoRock</b>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <div class="has-menu" data-nav="products">
+        <button type="button" aria-expanded="false" aria-haspopup="true">Products <svg class="caret" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+        <div class="mega">
+          <div class="mega-cols">
+            <div class="mega-col">
+              <span class="label">Available today</span>
+              <a class="mega-item feature" href="../../products/slip2d.html"><b>OGR Slip2D</b><span>2D slope stability: limit equilibrium, finite-element groundwater and probabilistic analysis.</span></a>
+              <a class="mega-item" href="../../ai/index.html"><b>MCP server for AI agents <span class="tag live">new</span></b><span>Let Claude, ChatGPT or a local model build and run OGR Slip2D models.</span></a>
+            </div>
+            <div class="mega-col">
+              <span class="label">On the roadmap</span>
+              <a class="mega-item" href="../../products/index.html#ogr-data"><b>OGR Data</b><span>Soil and rock-mass property database</span></a>
+              <a class="mega-item" href="../../products/index.html#ogr-fem2d"><b>OGR FEM2D</b><span>2D elastoplastic finite elements</span></a>
+              <a class="mega-item" href="../../products/index.html#ogr-slip3d"><b>OGR Slip3D</b><span>3D limit equilibrium</span></a>
+              <a class="mega-item" href="../../products/index.html#ogr-fem3d"><b>OGR FEM3D</b><span>3D finite elements with coupled flow</span></a>
+            </div>
+            <div class="mega-col">
+              <span class="label">Use it from</span>
+              <a class="mega-item" href="../../docs/getting-started/interface.html"><b>The desktop program</b><span>Modeller, interpreter and Python terminal</span></a>
+              <a class="mega-item" href="../../docs/reference/python-api.html"><b>Python</b><span>Script analyses from your own code</span></a>
+              <a class="mega-item" href="../../docs/reference/cli.html"><b>The command line</b><span>Batch runs with ogr-slip2d-cli</span></a>
+            </div>
+          </div>
+          <div class="mega-foot"><span>Five programs, one open core.</span><a href="../../products/index.html">All products →</a></div>
+        </div>
+      </div>
+      <a href="../../examples/index.html" data-nav="examples">Examples</a>
+      <a href="../../ai/index.html" data-nav="ai">AI &amp; MCP</a>
+      <a href="../../docs/index.html" data-nav="docs" aria-current="page">Docs</a>
+      <a href="../../verification/index.html" data-nav="verification">Verification</a>
+      <a href="../../about/index.html" data-nav="about">About</a>
+    </nav>
+    <div class="top-right">
+      <span class="lang" role="group" aria-label="Language"><a href="../../docs/user-guide/project-settings.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../../es/docs/user-guide/project-settings.html" hreflang="es" lang="es">ES</a></span>
+      <a class="btn gh" href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener" aria-label="Source code on GitHub"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0C17.3 4.7 18.3 5 18.3 5c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0012 .5z"/></svg><span>GitHub</span></a>
+      <a class="btn primary" href="../../download/index.html" data-nav="download">Get OGR Slip2D</a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Main (mobile)">
+    <span class="label">Products</span>
+    <a href="../../products/slip2d.html">OGR Slip2D</a>
+    <div class="sub"><a href="../../products/index.html">The OpenGeoRock suite</a><a href="../../ai/index.html">MCP server for AI agents</a></div>
+    <span class="label">Learn</span>
+    <a href="../../examples/index.html">Examples</a>
+    <a href="../../docs/index.html">Documentation</a>
+    <a href="../../verification/index.html">Verification</a>
+    <span class="label">Project</span>
+    <a href="../../about/index.html">About</a>
+    <a href="../../download/index.html">Get OGR Slip2D</a>
+    <a href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener">Source on GitHub ↗</a>
+    <span class="lang" role="group" aria-label="Language"><a href="../../docs/user-guide/project-settings.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../../es/docs/user-guide/project-settings.html" hreflang="es" lang="es">ES</a></span>
+  </nav>
+</header>
+<!-- @end header -->
+
+<div class="doc-shell">
+  <aside class="doc-side" id="doc-side">
+<!-- @inc docnav -->
+<div class="doc-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input type="search" placeholder="Search the documentation  /" aria-label="Search the documentation" autocomplete="off"><div class="results" role="listbox"></div></div>
+<nav class="doc-nav" aria-label="Documentation">
+<a class="home" href="../../docs/index.html"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 016.5 3H20v15H6.5A2.5 2.5 0 004 20.5z"/><path d="M4 20.5A2.5 2.5 0 016.5 18H20v3H6.5A2.5 2.5 0 014 20.5z"/></svg> Documentation home</a>
+<details open><summary>1 · Getting started</summary><ul>
+<li><a href="../../docs/getting-started/installation.html"><span class="n">1.1</span><span>Installation</span></a></li>
+<li><a href="../../docs/getting-started/quick-start.html"><span class="n">1.2</span><span>Quick start: your first model</span></a></li>
+<li><a href="../../docs/getting-started/interface.html"><span class="n">1.3</span><span>The interface</span></a></li>
+</ul></details>
+<details open><summary>2 · User guide</summary><ul>
+<li><a href="../../docs/user-guide/project-settings.html" aria-current="page"><span class="n">2.1</span><span>Project settings</span></a></li>
+<li><a href="../../docs/user-guide/geometry.html"><span class="n">2.2</span><span>Geometry and boundaries</span></a></li>
+<li><a href="../../docs/user-guide/materials.html"><span class="n">2.3</span><span>Materials</span></a></li>
+<li><a href="../../docs/user-guide/water.html"><span class="n">2.4</span><span>Water and pore pressure</span></a></li>
+<li><a href="../../docs/user-guide/loads.html"><span class="n">2.5</span><span>Loads and seismic loading</span></a></li>
+<li><a href="../../docs/user-guide/supports.html"><span class="n">2.6</span><span>Supports</span></a></li>
+<li><a href="../../docs/user-guide/surfaces.html"><span class="n">2.7</span><span>Slip surfaces and search</span></a></li>
+<li><a href="../../docs/user-guide/results.html"><span class="n">2.8</span><span>Computing and interpreting results</span></a></li>
+<li><a href="../../docs/user-guide/groundwater.html"><span class="n">2.9</span><span>Finite-element groundwater</span></a></li>
+<li><a href="../../docs/user-guide/probabilistic.html"><span class="n">2.10</span><span>Probabilistic and sensitivity analysis</span></a></li>
+<li><a href="../../docs/user-guide/design-standards.html"><span class="n">2.11</span><span>Design standards</span></a></li>
+<li><a href="../../docs/user-guide/automation.html"><span class="n">2.12</span><span>Reports, scripting and the command line</span></a></li>
+</ul></details>
+<details open><summary>3 · Theory manual</summary><ul>
+<li><a href="../../docs/theory/limit-equilibrium.html"><span class="n">3.1</span><span>Limit equilibrium and the factor of safety</span></a></li>
+<li><a href="../../docs/theory/methods.html"><span class="n">3.2</span><span>Methods of slices</span></a></li>
+<li><a href="../../docs/theory/interslice.html"><span class="n">3.3</span><span>Interslice forces, convergence and admissibility</span></a></li>
+<li><a href="../../docs/theory/search.html"><span class="n">3.4</span><span>Slip-surface search</span></a></li>
+<li><a href="../../docs/theory/strength.html"><span class="n">3.5</span><span>Shear strength models</span></a></li>
+<li><a href="../../docs/theory/pore-pressure.html"><span class="n">3.6</span><span>Pore pressure and unsaturated strength</span></a></li>
+<li><a href="../../docs/theory/seepage.html"><span class="n">3.7</span><span>Finite-element seepage</span></a></li>
+<li><a href="../../docs/theory/rapid-drawdown.html"><span class="n">3.8</span><span>Rapid drawdown</span></a></li>
+<li><a href="../../docs/theory/seismic.html"><span class="n">3.9</span><span>Seismic analysis</span></a></li>
+<li><a href="../../docs/theory/supports.html"><span class="n">3.10</span><span>Support forces</span></a></li>
+<li><a href="../../docs/theory/probabilistic.html"><span class="n">3.11</span><span>Probabilistic analysis</span></a></li>
+<li><a href="../../docs/theory/partial-factors.html"><span class="n">3.12</span><span>Partial factors (Eurocode 7)</span></a></li>
+</ul></details>
+<details open><summary>4 · Verification</summary><ul>
+<li><a href="../../docs/verification/methodology.html"><span class="n">4.1</span><span>Verification methodology</span></a></li>
+<li><a href="../../docs/verification/slope-benchmarks.html"><span class="n">4.2</span><span>Limit-equilibrium benchmarks</span></a></li>
+<li><a href="../../docs/verification/analytic-checks.html"><span class="n">4.3</span><span>Groundwater and analytic checks</span></a></li>
+</ul></details>
+<details open><summary>5 · Reference</summary><ul>
+<li><a href="../../docs/reference/mcp.html"><span class="n">5.1</span><span>MCP server</span></a></li>
+<li><a href="../../docs/reference/cli.html"><span class="n">5.2</span><span>Command-line interface</span></a></li>
+<li><a href="../../docs/reference/python-api.html"><span class="n">5.3</span><span>Python API</span></a></li>
+<li><a href="../../docs/reference/file-format.html"><span class="n">5.4</span><span>The .ogr file format</span></a></li>
+<li><a href="../../docs/reference/error-codes.html"><span class="n">5.5</span><span>Error codes</span></a></li>
+<li><a href="../../docs/reference/notation.html"><span class="n">5.6</span><span>Notation and glossary</span></a></li>
+<li><a href="../../docs/reference/bibliography.html"><span class="n">5.7</span><span>Bibliography</span></a></li>
+</ul></details>
+</nav>
+<!-- @end docnav -->
+  </aside>
+
+  <main id="main" class="doc-main">
+    <header class="doc-head">
+<!-- @inc dochead -->
+<button class="doc-side-toggle" type="button" aria-controls="doc-side" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg> Contents</button>
+<nav class="crumbs label" aria-label="Breadcrumb"><a href="../../docs/index.html">Documentation</a><span aria-hidden="true">/</span><span>2 · User guide</span></nav>
+<div class="chapter label">2.1</div>
+<h1>Project settings</h1>
+<div class="meta label"><span>Describes OGR Slip2D <span data-v>0.1.235</span></span></div>
+<!-- @end dochead -->
+    </header>
+
+    <article class="doc prose">
+      <p class="lede">The Project Settings dialog holds the choices that apply to the whole analysis: units and failure direction, the methods of slices and their convergence, the groundwater method, the statistical and seismic analyses, partial factors and a few numerical controls. This page goes through its ten pages field by field, with the default value of each. The settings are saved in the project file, so every project carries its own.</p>
+
+      <h2 id="dialog"><span class="secnum">2.1.1</span><span class="ht">Opening the dialog</span><a class="anchor" href="#dialog" aria-label="Link to this section">#</a></h2>
+      <p>Choose <span class="ui">Analysis → Project Settings…</span> (<kbd>Ctrl</kbd>+<kbd>J</kbd>) or the toolbar button. The pages are listed on the left — <strong>General</strong>, <strong>Methods</strong>, <strong>Groundwater</strong>, <strong>Transient</strong>, <strong>Statistics</strong>, <strong>Random Numbers</strong>, <strong>Design Standard</strong>, <strong>Advanced</strong>, <strong>Seismic</strong> and <strong>Project Summary</strong> — and the buttons at the bottom act on all of them at once:</p>
+      <ul>
+        <li><span class="ui">OK</span> applies every page and closes the dialog; <span class="ui">Apply</span> applies them and leaves it open; <span class="ui">Cancel</span> closes it without applying what has not been applied yet.</li>
+        <li><span class="ui">Restore Defaults</span> puts back the default value of every project setting.</li>
+      </ul>
+      <p>The settings of the slip-surface search — surface type, search method, grid, filters, optimisation — are not in this dialog but in <span class="ui">Surfaces → Surface Options…</span> (<a class="xref" href="surfaces.html">Section 2.7</a>).</p>
+      <div class="note warn"><span class="label">Version 0.1.235</span><p><span class="ui">Restore Defaults</span> takes effect immediately, before <span class="ui">OK</span>, and <span class="ui">Cancel</span> does not undo it. It also resets the settings that live outside this dialog: the whole Surface Options configuration, the slope limits and the moment axis go back to their defaults too.</p></div>
+
+      <figure class="fig shot-fig" id="fig-project-settings">
+        <div class="art"><img src="../../assets/img/shots/project-settings.webp" alt="The Project Settings dialog open on the Methods page: the list of pages on the left, the nine methods with check boxes, and the convergence options below them" loading="lazy" width="1025" height="800"></div>
+        <figcaption><span class="fignum">Figure 2.1.1</span> Project Settings, Methods page.</figcaption>
+      </figure>
+
+      <h2 id="general"><span class="secnum">2.1.2</span><span class="ht">General</span><a class="anchor" href="#general" aria-label="Link to this section">#</a></h2>
+      <figure class="tbl" id="tbl-general">
+        <figcaption><span class="fignum">Table 2.1.1</span> General page.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Field</th><th>Meaning</th><th>Default</th><th>Range or choices</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Units</strong></td><td>Unit system for display and input (<a href="#units">Unit systems</a>). The line below the list summarises its units.</td><td>Metric, stress as kPa</td><td>Six systems</td></tr>
+              <tr><td><strong>Time Units</strong></td><td>Unit of time</td><td><code>d</code></td><td><code>s</code>, <code>min</code>, <code>h</code>, <code>d</code>, <code>mo</code>, <code>yr</code></td></tr>
+              <tr><td><strong>Permeability Units</strong></td><td>Unit of hydraulic conductivity</td><td><code>m/s</code></td><td><code>m/s</code>, <code>m/day</code>, <code>m/year</code>, <code>cm/s</code>, <code>mm/hour</code></td></tr>
+              <tr><td><strong>Failure Direction</strong></td><td>Which way the sliding mass moves (<a href="#failure-direction">Failure direction</a>)</td><td>Right to Left</td><td>Right to Left, Left to Right</td></tr>
+              <tr><td><strong>Max Materials</strong></td><td>Largest number of materials the project may hold</td><td class="n">20</td><td>1 to 500</td></tr>
+              <tr><td><strong>Max Supports</strong></td><td>Largest number of supports</td><td class="n">20</td><td>0 to 500</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <div class="note warn"><span class="label">Version 0.1.235</span><p><strong>Max Materials</strong> is enforced when properties are imported from another project and by the scripting and agent interfaces, but not by the Define Materials dialog, where materials can be added beyond the limit. <strong>Max Supports</strong> is stored and not enforced anywhere.</p></div>
+
+      <h3 id="units"><span class="ht">Unit systems</span><a class="anchor" href="#units" aria-label="Link to this section">#</a></h3>
+      <p>OGR Slip2D computes and stores every value in the SI system of the second row of <a class="xref" href="#tbl-units">Table 2.1.2</a> (m, kN, kPa, kN/m³). Choosing another system does not change the model: values are converted when they are shown and converted back when they are entered.</p>
+      <figure class="tbl" id="tbl-units">
+        <figcaption><span class="fignum">Table 2.1.2</span> The six unit systems, in the order of the list.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>System</th><th>Length, force, force per length, stress, unit weight</th></tr></thead>
+            <tbody>
+              <tr><td>Metric, stress as MPa</td><td>m, MN, MN/m, MPa, MN/m³</td></tr>
+              <tr><td>Metric, stress as kPa</td><td>m, kN, kN/m, kPa, kN/m³</td></tr>
+              <tr><td>Metric, stress as tonnes/m²</td><td>m, tonnes, tonnes/m, tonnes/m², tonnes/m³</td></tr>
+              <tr><td>Imperial, stress as tons/ft²</td><td>ft, short tons (2000 lbs), tons/ft, tons/ft², tons/ft³</td></tr>
+              <tr><td>Imperial, stress as ksf</td><td>ft, kips, kips/ft, ksf, kips/ft³</td></tr>
+              <tr><td>Imperial, stress as psf</td><td>ft, lbs, lbs/ft, psf, lbs/ft³</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <div class="note warn"><span class="label">Version 0.1.235</span><p>The unit system reaches only the <span class="ui">Define Materials</span> dialog — unit weights, strength parameters, constant pore pressure and air entry value — and the Newmark displacement shown in the Interpret window. Coordinates, loads, supports, the water pressure grid and the remaining fields of this dialog are always entered and shown in metres, kN and kPa, whatever system is selected. With the default system nothing differs.</p></div>
+
+      <h3 id="failure-direction"><span class="ht">Failure direction</span><a class="anchor" href="#failure-direction" aria-label="Link to this section">#</a></h3>
+      <p>The equations of every method are written for a mass that slides in a known direction (<a class="xref" href="../theory/limit-equilibrium.html#direction">Section 3.1.5</a>). The page shows a small sketch of the slope and an arrow for the option chosen:</p>
+      <ul>
+        <li><strong>Right to Left</strong> (the default): the sliding mass moves towards decreasing <span class="m" data-tex="x"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span></span></span></span><!--/k--></span>; the crest is on the right and the toe on the left.</li>
+        <li><strong>Left to Right</strong>: the mass moves towards increasing <span class="m" data-tex="x"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span></span></span></span><!--/k--></span>; the crest is on the left and the toe on the right.</li>
+      </ul>
+      <p>Set it before computing whenever the ground of the model falls to the right. The direction also decides the sense in which the horizontal seismic force and the support forces act.</p>
+
+      <h2 id="methods"><span class="secnum">2.1.3</span><span class="ht">Methods</span><a class="anchor" href="#methods" aria-label="Link to this section">#</a></h2>
+      <p>The upper group, <strong>Methods (enable/disable)</strong>, has one check box per method of slices: Bishop Simplified, Janbu Simplified, Janbu Corrected, Ordinary / Fellenius, Spencer, GLE / Morgenstern-Price, Corps of Engineers #1, Corps of Engineers #2 and Lowe-Karafiath. A new project has <strong>Bishop Simplified</strong> and <strong>Janbu Simplified</strong> enabled. Every enabled method runs its own search, so each has its own critical surface; if none is enabled, Compute runs Bishop Simplified. The methods are described in <a class="xref" href="../theory/methods.html">Section 3.2</a>.</p>
+      <figure class="tbl" id="tbl-convergence">
+        <figcaption><span class="fignum">Table 2.1.3</span> Convergence Options group of the Methods page.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Field</th><th>Meaning</th><th>Default</th><th>Range or choices</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Number of slices</strong></td><td>Slices into which each trial surface is divided</td><td class="n">25</td><td>3 to 500</td></tr>
+              <tr><td><strong>Tolerance</strong></td><td>Convergence tolerance on the factor of safety</td><td class="n">0.005</td><td>10⁻⁶ to 1</td></tr>
+              <tr><td><strong>Maximum iterations (scope differs by method)</strong></td><td>Iteration budget; what it bounds depends on the method (below)</td><td class="n">50</td><td>1 to 500</td></tr>
+              <tr><td><strong>Interslice force function</strong></td><td>Shape of <span class="m" data-tex="f(x)"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">f(x)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span></span></span></span><!--/k--></span> in GLE / Morgenstern-Price; enabled only when that method is ticked. <span class="m" data-tex="x"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span></span></span></span><!--/k--></span> runs from 0 at the left end of the surface to 1 at the right.</td><td>Half Sine</td><td>Half Sine, Constant, Trapezoidal, Clipped Sine</td></tr>
+              <tr><td><strong>Interslice forces</strong></td><td>Whether the interslice resultant whose inclination Lowe-Karafiath and Corps of Engineers #1 and #2 prescribe is the total force or the effective force with the water thrust applied separately; enabled only when one of those three is ticked</td><td>Total (water thrust included)</td><td>Effective (water thrust separated), Total (water thrust included)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p>The same <strong>Maximum iterations</strong> bounds a different loop in each family of methods:</p>
+      <ul>
+        <li>Bishop Simplified, Janbu Simplified and Janbu Corrected: the iteration on the factor of safety, exactly as set.</li>
+        <li>Lowe-Karafiath and Corps of Engineers #1 and #2: the same iteration, but a value below 60 is raised to 60.</li>
+        <li>Ordinary / Fellenius: nothing, as the method has no iteration.</li>
+        <li>Spencer and GLE / Morgenstern-Price: the search for the interslice inclination; above 400 it is also the budget of the inner iteration solved at each step of that search, which otherwise keeps its 400 passes.</li>
+      </ul>
+      <p>With <strong>Constant</strong> as the interslice force function, GLE / Morgenstern-Price is equivalent to Spencer. <strong>Total</strong> is the convention in which the published values of the three prescribed-inclination methods are given; <strong>Effective</strong> is the choice for a slope with water standing over it, where the total-force assumption makes the factor of safety depend on the depth of the water (<a class="xref" href="../theory/interslice.html">Section 3.3</a>).</p>
+
+      <h2 id="groundwater"><span class="secnum">2.1.4</span><span class="ht">Groundwater</span><a class="anchor" href="#groundwater" aria-label="Link to this section">#</a></h2>
+      <p>The <strong>Basic</strong> group chooses how pore pressures are obtained; the <strong>Advanced</strong> group switches on one of three analyses that change them. How each method is used, and how the materials take their pore pressure from it, is the subject of <a class="xref" href="water.html">Section 2.4</a>.</p>
+      <figure class="tbl" id="tbl-groundwater">
+        <figcaption><span class="fignum">Table 2.1.4</span> Groundwater page. The list of methods shows their identifiers as they are stored.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Field</th><th>Meaning</th><th>Default</th><th>Range or choices</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Method</strong></td><td>Source of the pore pressures: none, water surfaces (<code>water_table</code>, <code>piezo_line</code>), the <span class="m" data-tex="r_u"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>r</mi><mi>u</mi></msub></mrow><annotation encoding="application/x-tex">r_u</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0278em;">r</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">u</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><!--/k--></span> coefficient (<code>ru</code>), a water pressure grid of total head, pressure head or pore pressure, or a finite-element seepage analysis, steady or transient</td><td><code>water_table</code></td><td><code>none</code>, <code>water_table</code>, <code>piezo_line</code>, <code>ru</code>, <code>grid_total_head</code>, <code>grid_pressure_head</code>, <code>grid_pore_pressure</code>, <code>fea_steady</code>, <code>fea_transient</code></td></tr>
+              <tr><td><strong>Pore Fluid Unit Weight</strong></td><td>Unit weight of water, <span class="m" data-tex="\gamma_w"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>γ</mi><mi>w</mi></msub></mrow><annotation encoding="application/x-tex">\gamma_w</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0556em;">γ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0556em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0269em;">w</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><!--/k--></span></td><td class="n">9.81 kN/m³</td><td>0.1 to 50 kN/m³</td></tr>
+              <tr><td><strong>Default Hu</strong></td><td>Coefficient <span class="m" data-tex="H_u"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mi>u</mi></msub></mrow><annotation encoding="application/x-tex">H_u</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0813em;">H</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0813em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">u</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><!--/k--></span> applied to the vertical distance below a water surface, for materials that do not set their own</td><td class="n">1.0</td><td>0 to 1</td></tr>
+              <tr><td><strong>Auto Hu (compute from water-surface slope)</strong></td><td><span class="m" data-tex="H_u = \cos^2\alpha"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mi>u</mi></msub><mo>=</mo><msup><mrow><mi>cos</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mi>α</mi></mrow><annotation encoding="application/x-tex">H_u = \cos^2\alpha</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0813em;">H</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0813em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">u</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.8141em;"></span><span class="mop"><span class="mop">cos</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0037em;">α</span></span></span></span><!--/k--></span> from the inclination of the water surface, for every material</td><td>off</td><td>—</td></tr>
+              <tr><td><strong>Negative pore pressure cutoff</strong> / <strong>Cutoff value</strong></td><td>Upper limit on the matric suction used in the shear strength of materials with unsaturated parameters</td><td>off / 100 kPa</td><td>0 to 10⁶ kPa</td></tr>
+              <tr><td><strong>Advanced</strong></td><td>One option at most: <strong>None</strong>, <strong>Transient groundwater</strong>, <strong>Calculate Excess Pore Pressure (B-bar method)</strong> or <strong>Rapid Drawdown analysis</strong></td><td>None</td><td>Mutually exclusive</td></tr>
+              <tr><td><strong>Drawdown method</strong></td><td>Procedure of the rapid drawdown analysis; enabled only with that option</td><td>Effective Stress using B-bar</td><td>Effective Stress using B-bar; Duncan, Wright, Wong 3 Stage (1990); Army Corp. Eng. 2 Stage (1970); Lowe and Karafiath (1960)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p>The three advanced options cannot run together, which is why they are radio buttons. <strong>Rapid Drawdown analysis</strong> enables <span class="ui">Boundaries → Add Drawdown Line</span> and <span class="ui">Groundwater → Drawdown Level Sweep…</span>; all four drawdown procedures need the groundwater method <code>water_table</code> or <code>piezo_line</code> and at least one material marked with undrained behaviour, and the analysis refuses to run otherwise (<a class="xref" href="../theory/rapid-drawdown.html">Section 3.8</a>). <strong>Transient groundwater</strong> enables the Transient page and <span class="ui">Groundwater → Transient Groundwater…</span>.</p>
+
+      <h2 id="transient"><span class="secnum">2.1.5</span><span class="ht">Transient</span><a class="anchor" href="#transient" aria-label="Link to this section">#</a></h2>
+      <p>The solver options of the staged transient seepage analysis. The page is greyed out until <strong>Transient groundwater</strong> is chosen on the Groundwater page and applied; the stage times and the per-stage <em>Calculate SF</em> flags are edited in <span class="ui">Groundwater → Transient Groundwater…</span> (<a class="xref" href="groundwater.html">Section 2.9</a>).</p>
+      <figure class="tbl" id="tbl-transient">
+        <figcaption><span class="fignum">Table 2.1.5</span> Transient page.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Field</th><th>Meaning</th><th>Default</th><th>Range</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Transient groundwater</strong></td><td>Read-only: On, or Off with a pointer to the Groundwater page</td><td>Off</td><td>—</td></tr>
+              <tr><td><strong>Stages defined</strong></td><td>Read-only: number of stages and how many compute a factor of safety</td><td>0</td><td>—</td></tr>
+              <tr><td><strong>Tolerance</strong></td><td>Convergence tolerance of the transient solver</td><td class="n">10⁻⁵</td><td>10⁻⁹ to 1</td></tr>
+              <tr><td><strong>Maximum iterations</strong></td><td>Iterations per time step</td><td class="n">30</td><td>1 to 1000</td></tr>
+              <tr><td><strong>Number of time steps</strong></td><td>Time steps per stage; <em>Auto</em> derives it from the element size and the storage, so that the water front crosses about one element per step</td><td>Auto</td><td>Auto, 1 to 100 000</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+
+      <h2 id="statistics"><span class="secnum">2.1.6</span><span class="ht">Statistics</span><a class="anchor" href="#statistics" aria-label="Link to this section">#</a></h2>
+      <p>Switches on the probabilistic and sensitivity analyses run by <span class="ui">Statistics → Compute Statistics</span>. The random variables themselves are defined in <span class="ui">Statistics → Random Variables…</span>; both are described in <a class="xref" href="probabilistic.html">Section 2.10</a>.</p>
+      <figure class="tbl" id="tbl-statistics">
+        <figcaption><span class="fignum">Table 2.1.6</span> Statistics page.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Field</th><th>Meaning</th><th>Default</th><th>Range or choices</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Probabilistic analysis</strong></td><td>Sample the random variables and compute the distribution of the factor of safety</td><td>off</td><td>—</td></tr>
+              <tr><td><strong>Sensitivity analysis</strong></td><td>Sweep each random variable across its range</td><td>off</td><td>—</td></tr>
+              <tr><td><strong>Analysis type</strong></td><td><em>Global Minimum</em> re-evaluates the deterministic critical surface for every sample; <em>Overall Slope</em> repeats the whole search for every sample, which is much slower</td><td>Global Minimum</td><td>Global Minimum, Overall Slope</td></tr>
+              <tr><td><strong>Sampling method</strong></td><td>How the samples are drawn</td><td>Monte Carlo</td><td>Monte Carlo, Latin Hypercube</td></tr>
+              <tr><td><strong>Number of samples</strong></td><td>Samples of the probabilistic analysis</td><td class="n">1000</td><td>1 to 1 000 000</td></tr>
+              <tr><td><strong>Sensitivity intervals</strong></td><td>Equal intervals into which each variable's range is divided for the sensitivity sweep</td><td class="n">50</td><td>2 to 500</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p>The commands of the <span class="ui">Statistics</span> menu stay greyed out until one of the two analyses is ticked here.</p>
+
+      <h2 id="random-numbers"><span class="secnum">2.1.7</span><span class="ht">Random Numbers</span><a class="anchor" href="#random-numbers" aria-label="Link to this section">#</a></h2>
+      <figure class="tbl" id="tbl-random">
+        <figcaption><span class="fignum">Table 2.1.7</span> Random Numbers page.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Field</th><th>Meaning</th><th>Default</th><th>Range or choices</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Generation</strong></td><td><em>Pseudo-random</em> is reproducible: the same seed gives the same answer. <em>Random</em> takes its seed from the clock, so successive runs differ.</td><td>Pseudo-random</td><td>Pseudo-random, Random</td></tr>
+              <tr><td><strong>Seed</strong></td><td>Seed of the pseudo-random stream; disabled with <em>Random</em></td><td class="n">10116</td><td>0 to 2 147 483 647</td></tr>
+              <tr><td><strong>Share one Latin Hypercube stratification across variables</strong></td><td>Sample <span class="m" data-tex="i"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6595em;"></span><span class="mord mathnormal">i</span></span></span></span><!--/k--></span> falls in the same stratum of every variable, so the variables move together; no effect on Monte Carlo</td><td>off</td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p>The seed governs the probabilistic and sensitivity analyses and the searches that draw surfaces at random (Slope, Block, Path and Simulated Annealing). The Grid Search and Auto Refine enumerate their surfaces, so nothing there is random. Keep the pseudo-random generator for results that go into a report: they can be reproduced exactly.</p>
+
+      <h2 id="design-standard"><span class="secnum">2.1.8</span><span class="ht">Design Standard</span><a class="anchor" href="#design-standard" aria-label="Link to this section">#</a></h2>
+      <p>Partial factors, off by default: switching them on changes every factor of safety the model has given so far, so it is an explicit choice. When they are applied, the analysis works on a factored copy of the model — the project itself is never changed — and the value it reports is an <em>over-design factor</em>, which must exceed 1, rather than a factor of safety. The status bar, the Results dock and the analysis notes say so. The procedure is explained in <a class="xref" href="design-standards.html">Section 2.11</a> and <a class="xref" href="../theory/partial-factors.html">Section 3.12</a>.</p>
+      <figure class="tbl" id="tbl-design">
+        <figcaption><span class="fignum">Table 2.1.8</span> Design Standard page.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Field</th><th>Meaning</th><th>Default</th><th>Range or choices</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Apply partial factors</strong></td><td>Switches the design standard on</td><td>off</td><td>—</td></tr>
+              <tr><td><strong>Design standard</strong></td><td>Loads a set of factors; enabled when the box above is ticked</td><td>None</td><td>None; Eurocode 7 — DA1 Combination 1; Eurocode 7 — DA1 Combination 2; Eurocode 7 — DA2; Eurocode 7 — DA3; Custom</td></tr>
+              <tr><td><strong>Permanent actions</strong>, <strong>Variable actions</strong></td><td>Factors that multiply the actions</td><td class="n">1.0</td><td>0.1 to 10</td></tr>
+              <tr><td><strong>Cohesion</strong>, <strong>tan(friction angle)</strong>, <strong>Undrained strength cu</strong>, <strong>Shear strength (other models)</strong></td><td>Factors that divide the strength, by category of strength model</td><td class="n">1.0</td><td>0.1 to 10</td></tr>
+              <tr><td><strong>Unit weight</strong></td><td>Factor that multiplies the unit weights</td><td class="n">1.0</td><td>0.1 to 10</td></tr>
+              <tr><td><strong>Resistance</strong></td><td>Factor that divides the whole resistance</td><td class="n">1.0</td><td>0.1 to 10</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p>Choosing a standard loads its factors (<a class="xref" href="#tbl-presets">Table 2.1.9</a>); the factor fields can only be edited with <strong>Custom</strong>.</p>
+      <figure class="tbl" id="tbl-presets">
+        <figcaption><span class="fignum">Table 2.1.9</span> Factors loaded by each standard (EN 1997-1, Annex A). <span class="m" data-tex="\gamma_{G}"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>γ</mi><mi>G</mi></msub></mrow><annotation encoding="application/x-tex">\gamma_{G}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0556em;">γ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.0556em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">G</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><!--/k--></span>, <span class="m" data-tex="\gamma_{Q}"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>γ</mi><mi>Q</mi></msub></mrow><annotation encoding="application/x-tex">\gamma_{Q}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.7167em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0556em;">γ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.0556em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">Q</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span></span></span></span><!--/k--></span>: permanent and variable actions; <span class="m" data-tex="\gamma_{c'}"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>γ</mi><msup><mi>c</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup></msub></mrow><annotation encoding="application/x-tex">\gamma_{c&#x27;}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0556em;">γ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.328em;"><span style="top:-2.55em;margin-left:-0.0556em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6828em;"><span style="top:-2.786em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="katex-sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><!--/k--></span>, <span class="m" data-tex="\gamma_{\phi'}"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>γ</mi><msup><mi>ϕ</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup></msub></mrow><annotation encoding="application/x-tex">\gamma_{\phi&#x27;}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.7167em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0556em;">γ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.0556em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight">ϕ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6828em;"><span style="top:-2.786em;margin-right:0.0714em;"><span class="pstrut" style="height:2.5em;"></span><span class="katex-sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span></span></span></span><!--/k--></span>, <span class="m" data-tex="\gamma_{cu}"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>γ</mi><mrow><mi>c</mi><mi>u</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\gamma_{cu}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0556em;">γ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0556em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">c</span><span class="mord mathnormal mtight">u</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><!--/k--></span>, <span class="m" data-tex="\gamma_{\tau}"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>γ</mi><mi>τ</mi></msub></mrow><annotation encoding="application/x-tex">\gamma_{\tau}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0556em;">γ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0556em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.1132em;">τ</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><!--/k--></span>: cohesion, tan φ′, undrained strength and other models; <span class="m" data-tex="\gamma_{\gamma}"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>γ</mi><mi>γ</mi></msub></mrow><annotation encoding="application/x-tex">\gamma_{\gamma}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.7167em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0556em;">γ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0556em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.0556em;">γ</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span></span></span></span><!--/k--></span>: unit weight; <span class="m" data-tex="\gamma_{R}"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>γ</mi><mi>R</mi></msub></mrow><annotation encoding="application/x-tex">\gamma_{R}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0556em;">γ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.0556em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.0077em;">R</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><!--/k--></span>: resistance.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Standard</th><th class="n">γG</th><th class="n">γQ</th><th class="n">γc′</th><th class="n">γφ′</th><th class="n">γcu</th><th class="n">γτ</th><th class="n">γγ</th><th class="n">γR</th></tr></thead>
+            <tbody>
+              <tr><td>DA1 Combination 1</td><td class="n">1.35</td><td class="n">1.5</td><td class="n">1.0</td><td class="n">1.0</td><td class="n">1.0</td><td class="n">1.0</td><td class="n">1.0</td><td class="n">1.0</td></tr>
+              <tr><td>DA1 Combination 2</td><td class="n">1.0</td><td class="n">1.3</td><td class="n">1.25</td><td class="n">1.25</td><td class="n">1.4</td><td class="n">1.25</td><td class="n">1.0</td><td class="n">1.0</td></tr>
+              <tr><td>DA2</td><td class="n">1.35</td><td class="n">1.5</td><td class="n">1.0</td><td class="n">1.0</td><td class="n">1.0</td><td class="n">1.0</td><td class="n">1.0</td><td class="n">1.1</td></tr>
+              <tr><td>DA3</td><td class="n">1.35</td><td class="n">1.5</td><td class="n">1.25</td><td class="n">1.25</td><td class="n">1.4</td><td class="n">1.25</td><td class="n">1.0</td><td class="n">1.0</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <div class="note warn"><span class="label">Limitations in 0.1.235</span><p>The permanent-action factor is not applied: the weight of the soil carries no action factor, every distributed and line load is multiplied by the <em>variable</em> factor, and the analysis notes say so when the permanent factor differs from 1. The action factors loaded for DA3 are those of set A1 (1.35 and 1.5), where a slope under DA3 takes set A2 (1.0 and 1.3). The <em>Shear strength (other models)</em> factor is not an EN 1997-1 factor: OGR Slip2D sets it equal to the tan φ′ factor of the same set.</p></div>
+
+      <h2 id="advanced"><span class="secnum">2.1.9</span><span class="ht">Advanced</span><a class="anchor" href="#advanced" aria-label="Link to this section">#</a></h2>
+      <p>Numerical and admissibility controls of the limit-equilibrium run. The defaults suit most models.</p>
+      <figure class="tbl" id="tbl-advanced">
+        <figcaption><span class="fignum">Table 2.1.10</span> Advanced page.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Field</th><th>Meaning</th><th>Default</th><th>Range</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Tensile stress check</strong> / <strong>Percentage of slices</strong></td><td>Rejects a surface with tension on a slice base, checked after the factor of safety has converged, over a percentage of the slices counted from the toe</td><td>off / 95 %</td><td>1 to 100 %</td></tr>
+              <tr><td><strong>Use enhanced particle swarm algorithm</strong></td><td>At the end of each iteration of the Particle Swarm search, the particles with the highest factors are scattered again</td><td>on</td><td>—</td></tr>
+              <tr><td><strong>Accelerate convergence (Steffensen, scope differs by method)</strong></td><td>Aitken extrapolation of the iteration on the factor of safety. Used by Bishop Simplified on circular surfaces and by both Janbu methods; the other methods do not use it.</td><td>on</td><td>—</td></tr>
+              <tr><td><strong>Search surfaces in parallel</strong> / <strong>Processors to use</strong></td><td>Splits the surfaces of a search across several processes; the result is identical, only the time changes. The line below shows how many processes the percentage gives on this computer (at most 8).</td><td>on / 50 %</td><td>1 to 100 %</td></tr>
+              <tr><td><strong>Initial factor of safety</strong></td><td>First trial value of the iteration: a starting point, not a lower bound</td><td class="n">1.0</td><td>0.001 to 100</td></tr>
+              <tr><td><strong>Minimum lambda</strong>, <strong>Maximum lambda</strong></td><td>Range searched for the interslice scale factor <span class="m" data-tex="\lambda"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi></mrow><annotation encoding="application/x-tex">\lambda</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6944em;"></span><span class="mord mathnormal">λ</span></span></span></span><!--/k--></span> of Spencer and GLE / Morgenstern-Price</td><td>−0.1, 6.0</td><td>−10 to 10</td></tr>
+              <tr><td><strong>Maximum base angle on weak-layer clips</strong></td><td>Steepest slice base allowed on a surface that a weak layer has clipped; 90° switches it off</td><td>80°</td><td>1 to 90°</td></tr>
+              <tr><td><strong>Check m-alpha &lt; 0.2</strong></td><td>Rejects surfaces on which <span class="m" data-tex="m_\alpha"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>m</mi><mi>α</mi></msub></mrow><annotation encoding="application/x-tex">m_\alpha</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">m</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0037em;">α</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><!--/k--></span> falls below 0.2 <a class="cite" href="../reference/bibliography.html#whitman1967">(Whitman &amp; Bailey, 1967)</a>; applied to Bishop Simplified, both Janbu methods, Spencer and GLE / Morgenstern-Price</td><td>on</td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p>Surfaces rejected by the m-alpha check keep their factor of safety and stay in the results; they are only barred from being the critical surface. In a purely cohesive soil the check amounts to a ceiling of 78.5° on the inclination of the slice base, which is tighter than the default 80° of the weak-layer ceiling. Narrowing the lambda range below 1.5 can exclude the solution: the validation circle the program is checked against needs <span class="m" data-tex="\lambda = 1.49"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo>=</mo><mn>1.49</mn></mrow><annotation encoding="application/x-tex">\lambda = 1.49</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6944em;"></span><span class="mord mathnormal">λ</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">1.49</span></span></span></span><!--/k--></span> (<a class="xref" href="../theory/interslice.html">Section 3.3</a>).</p>
+
+      <h2 id="seismic"><span class="secnum">2.1.10</span><span class="ht">Seismic</span><a class="anchor" href="#seismic" aria-label="Link to this section">#</a></h2>
+      <p>What a seismic run reports beyond the factor of safety. The seismic coefficients themselves are set in <span class="ui">Loading → Seismic Load…</span> and the acceleration records in <span class="ui">Loading → Seismic Records…</span> (<a class="xref" href="loads.html#seismic">Section 2.5.4</a>).</p>
+      <figure class="tbl" id="tbl-seismic">
+        <figcaption><span class="fignum">Table 2.1.11</span> Seismic page.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Field</th><th>Meaning</th><th>Default</th><th>Range or choices</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Critical acceleration</strong>: Compute Ky for all surfaces</td><td>For every surface, the horizontal seismic coefficient <span class="m" data-tex="k_y"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>k</mi><mi>y</mi></msub></mrow><annotation encoding="application/x-tex">k_y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.9805em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0315em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0315em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0359em;">y</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span></span></span></span><!--/k--></span> that brings it to the target factor of safety; surfaces are ranked by it</td><td>off</td><td>—</td></tr>
+              <tr><td><strong>Target factor of safety</strong></td><td>Factor of safety that defines <span class="m" data-tex="k_y"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>k</mi><mi>y</mi></msub></mrow><annotation encoding="application/x-tex">k_y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.9805em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0315em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0315em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0359em;">y</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span></span></span></span><!--/k--></span>; enabled with either analysis</td><td class="n">1.0</td><td>0.001 to 100</td></tr>
+              <tr><td><strong>Permanent displacement</strong>: Newmark displacements</td><td>Displacement of a rigid sliding block, integrated from a record above <span class="m" data-tex="k_y"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>k</mi><mi>y</mi></msub></mrow><annotation encoding="application/x-tex">k_y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.9805em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0315em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0315em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0359em;">y</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span></span></span></span><!--/k--></span></td><td>off</td><td>—</td></tr>
+              <tr><td><strong>Seismic record</strong></td><td>Record to integrate, listed with its peak acceleration and duration</td><td>(none)</td><td>Records of the project</td></tr>
+              <tr><td><strong>Displacements computed using</strong></td><td>Polarity of the record</td><td>Maximum of both polarities</td><td>Maximum of both polarities, Direct polarity, Inverse polarity, Average of both polarities</td></tr>
+              <tr><td><strong>Direction</strong>: Allow upslope displacement</td><td>Off: the resistance to upslope movement is taken as infinite and the block only moves downslope</td><td>off</td><td>—</td></tr>
+              <tr><td><strong>Scale record by a factor of</strong></td><td>Multiplies the accelerations of the record; 1 uses it as recorded</td><td class="n">1.0</td><td>0.0001 to 1000</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p>With either analysis on, the critical surface reported is the one with the lowest <span class="m" data-tex="k_y"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>k</mi><mi>y</mi></msub></mrow><annotation encoding="application/x-tex">k_y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.9805em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0315em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0315em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0359em;">y</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span></span></span></span><!--/k--></span>, which in general is not the one with the lowest factor of safety. A Newmark run needs a record: with <em>(none)</em> selected the run says so instead of reporting a displacement. The record, polarity, direction and scale fields are enabled only with Newmark displacements ticked (<a class="xref" href="../theory/seismic.html">Section 3.9</a>).</p>
+
+      <h2 id="summary"><span class="secnum">2.1.11</span><span class="ht">Project Summary</span><a class="anchor" href="#summary" aria-label="Link to this section">#</a></h2>
+      <figure class="tbl" id="tbl-summary">
+        <figcaption><span class="fignum">Table 2.1.12</span> Project Summary page.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Field</th><th>Used in</th><th>Default</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Project Title</strong></td><td>Title of the PDF report</td><td>Untitled Project</td></tr>
+              <tr><td><strong>Author</strong></td><td>PDF report and <span class="ui">Analysis → Info Viewer</span></td><td>pre-filled</td></tr>
+              <tr><td><strong>Company</strong></td><td>PDF report</td><td>pre-filled</td></tr>
+              <tr><td><strong>Analysis</strong></td><td>Free description of the analysis</td><td>empty</td></tr>
+              <tr><td><strong>Comments</strong></td><td>Free text, one comment per line; blank lines are dropped</td><td>empty</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <div class="note"><span class="label">Note</span><p>In version <span data-v>0.1.235</span> the <strong>Author</strong> and <strong>Company</strong> of a new project come pre-filled with the name and institution of the program's author. Replace them with your own before generating a report with <span class="ui">File → Generate Report…</span> (<a class="xref" href="automation.html">Section 2.12</a>).</p></div>
+
+      <div class="impl">
+        <span class="label">In OGR Slip2D</span>
+        <p>Every field of the dialog is written to the <code>settings</code> block of the <code>.ogr</code> file (<a class="xref" href="../reference/file-format.html">Section 5.4</a>), so reopening a project restores the configuration it was analysed with. The surface search settings travel in the same block, under <code>search</code>.</p>
+        <span class="src">Source: <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_core/project/settings.py" target="_blank" rel="noopener">ogr_core/project/settings.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_gui/dialogs/project_settings_dialog.py" target="_blank" rel="noopener">ogr_gui/dialogs/project_settings_dialog.py</a></span>
+      </div>
+    </article>
+
+<!-- @inc docfoot -->
+<nav class="doc-pager" aria-label="Pages">
+<a class="prev" href="../../docs/getting-started/interface.html"><span class="label">← Previous · 1.3</span><b>The interface</b></a>
+<a class="next" href="../../docs/user-guide/geometry.html"><span class="label">2.2 · Next →</span><b>Geometry and boundaries</b></a>
+</nav>
+<div class="doc-edit label"><a href="https://github.com/samuelsl27/OpenGeoRock_Web.github.io/blob/main/docs/user-guide/project-settings.html" target="_blank" rel="noopener">Edit this page ↗</a><a href="https://github.com/samuelsl27/OGR-Slip2D/issues" target="_blank" rel="noopener">Report a problem ↗</a></div>
+<!-- @end docfoot -->
+  </main>
+
+  <aside class="doc-toc" aria-label="On this page">
+    <div class="toc-inner">
+<!-- @inc pagetoc -->
+<span class="label">On this page</span><ul><li class="h2"><a href="#dialog">2.1.1 Opening the dialog</a></li><li class="h2"><a href="#general">2.1.2 General</a></li><li class="h3"><a href="#units">Unit systems</a></li><li class="h3"><a href="#failure-direction">Failure direction</a></li><li class="h2"><a href="#methods">2.1.3 Methods</a></li><li class="h2"><a href="#groundwater">2.1.4 Groundwater</a></li><li class="h2"><a href="#transient">2.1.5 Transient</a></li><li class="h2"><a href="#statistics">2.1.6 Statistics</a></li><li class="h2"><a href="#random-numbers">2.1.7 Random Numbers</a></li><li class="h2"><a href="#design-standard">2.1.8 Design Standard</a></li><li class="h2"><a href="#advanced">2.1.9 Advanced</a></li><li class="h2"><a href="#seismic">2.1.10 Seismic</a></li><li class="h2"><a href="#summary">2.1.11 Project Summary</a></li></ul><button class="print" type="button"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="1.5"/><path d="M6 14h12v7H6z"/></svg> Print this page</button>
+<!-- @end pagetoc -->
+    </div>
+  </aside>
+</div>
+
+<!-- @inc footer -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <a class="brand" href="../../index.html" aria-label="OpenGeoRock — home">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
+          <b>OpenGeoRock</b>
+        </a>
+        <p class="tagline">Open-source geotechnical software, built in the open at the Universidad Politécnica de Cartagena.</p>
+        <span class="lang" role="group" aria-label="Language"><a href="../../docs/user-guide/project-settings.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../../es/docs/user-guide/project-settings.html" hreflang="es" lang="es">ES</a></span>
+      </div>
+      <div>
+        <h5>Products</h5>
+        <ul>
+          <li><a href="../../products/slip2d.html">OGR Slip2D</a></li>
+          <li><a href="../../products/index.html">The suite</a></li>
+          <li><a href="../../ai/index.html">MCP server</a></li>
+          <li><a href="../../download/index.html">Download</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Learn</h5>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="../../docs/getting-started/quick-start.html">Quick start</a></li>
+          <li><a href="../../docs/theory/methods.html">Theory manual</a></li>
+          <li><a href="../../examples/index.html">Examples</a></li>
+          <li><a href="../../verification/index.html">Verification</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Project</h5>
+        <ul>
+          <li><a href="../../about/index.html">About</a></li>
+          <li><a href="../../about/index.html#team">Team</a></li>
+          <li><a href="../../about/index.html#cite">How to cite</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Contributing</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/LICENSE" target="_blank" rel="noopener">Licence · AGPL-3.0</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Connect</h5>
+        <ul>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/issues" target="_blank" rel="noopener">Issues</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/tree/main/docs/changelog" target="_blank" rel="noopener">Changelog</a></li>
+          <li><a href="mailto:samuel.saez@edu.upct.es">Email</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© 2026 Samuel Sáez López · OGR Slip2D is free software under AGPL-3.0-or-later, with no warranty of any kind.</span>
+      <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
+    </div>
+  </div>
+  <div class="lang-hint" role="dialog" aria-label="Idioma" lang="es">
+    ¿Prefieres leer esta web en español?
+    <div class="row"><a class="btn sm primary go" href="../../es/index.html">Ver en español</a><button class="btn sm" type="button" data-dismiss>No, gracias</button></div>
+  </div>
+</footer>
+<!-- @end footer -->
+</body>
+</html>

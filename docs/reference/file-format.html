@@ -1,0 +1,417 @@
+<!doctype html>
+<html class="no-js" lang="en" data-root="../../">
+<head>
+<meta charset="utf-8">
+<title>The .ogr file format — OGR Slip2D documentation</title>
+<meta name="description" content="The .ogr project file of OGR Slip2D: a plain UTF-8 JSON document with the model, its settings and any computed groundwater field; its top-level and settings keys, how versions are handled, and the HDF5 file that holds search results.">
+<!-- @inc head -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.replace("no-js", "js")</script>
+<link rel="canonical" href="https://opengeorock.org/docs/reference/file-format.html">
+<link rel="alternate" hreflang="en" href="https://opengeorock.org/docs/reference/file-format.html">
+<link rel="alternate" hreflang="es" href="https://opengeorock.org/es/docs/reference/file-format.html">
+<link rel="alternate" hreflang="x-default" href="https://opengeorock.org/docs/reference/file-format.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="OpenGeoRock">
+<meta property="og:title" content="The .ogr file format — OGR Slip2D documentation">
+<meta property="og:description" content="The .ogr project file of OGR Slip2D: a plain UTF-8 JSON document with the model, its settings and any computed groundwater field; its top-level and settings keys, how versions are handled, and the HDF5 file that holds search results.">
+<meta property="og:url" content="https://opengeorock.org/docs/reference/file-format.html">
+<meta property="og:image" content="https://opengeorock.org/assets/img/og-image.png">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#f4efe6">
+<link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&amp;display=swap">
+<link rel="stylesheet" href="../../assets/css/site.css">
+<link rel="stylesheet" href="../../assets/css/docs.css">
+<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
+<script src="../../assets/js/site.js" defer></script>
+<!-- @end head -->
+</head>
+<body class="docs">
+<!-- @inc header -->
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="wrap top-inner">
+    <a class="brand" href="../../index.html" aria-label="OpenGeoRock — home">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
+      <b>OpenGeoRock</b>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <div class="has-menu" data-nav="products">
+        <button type="button" aria-expanded="false" aria-haspopup="true">Products <svg class="caret" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+        <div class="mega">
+          <div class="mega-cols">
+            <div class="mega-col">
+              <span class="label">Available today</span>
+              <a class="mega-item feature" href="../../products/slip2d.html"><b>OGR Slip2D</b><span>2D slope stability: limit equilibrium, finite-element groundwater and probabilistic analysis.</span></a>
+              <a class="mega-item" href="../../ai/index.html"><b>MCP server for AI agents <span class="tag live">new</span></b><span>Let Claude, ChatGPT or a local model build and run OGR Slip2D models.</span></a>
+            </div>
+            <div class="mega-col">
+              <span class="label">On the roadmap</span>
+              <a class="mega-item" href="../../products/index.html#ogr-data"><b>OGR Data</b><span>Soil and rock-mass property database</span></a>
+              <a class="mega-item" href="../../products/index.html#ogr-fem2d"><b>OGR FEM2D</b><span>2D elastoplastic finite elements</span></a>
+              <a class="mega-item" href="../../products/index.html#ogr-slip3d"><b>OGR Slip3D</b><span>3D limit equilibrium</span></a>
+              <a class="mega-item" href="../../products/index.html#ogr-fem3d"><b>OGR FEM3D</b><span>3D finite elements with coupled flow</span></a>
+            </div>
+            <div class="mega-col">
+              <span class="label">Use it from</span>
+              <a class="mega-item" href="../../docs/getting-started/interface.html"><b>The desktop program</b><span>Modeller, interpreter and Python terminal</span></a>
+              <a class="mega-item" href="../../docs/reference/python-api.html"><b>Python</b><span>Script analyses from your own code</span></a>
+              <a class="mega-item" href="../../docs/reference/cli.html"><b>The command line</b><span>Batch runs with ogr-slip2d-cli</span></a>
+            </div>
+          </div>
+          <div class="mega-foot"><span>Five programs, one open core.</span><a href="../../products/index.html">All products →</a></div>
+        </div>
+      </div>
+      <a href="../../examples/index.html" data-nav="examples">Examples</a>
+      <a href="../../ai/index.html" data-nav="ai">AI &amp; MCP</a>
+      <a href="../../docs/index.html" data-nav="docs" aria-current="page">Docs</a>
+      <a href="../../verification/index.html" data-nav="verification">Verification</a>
+      <a href="../../about/index.html" data-nav="about">About</a>
+    </nav>
+    <div class="top-right">
+      <span class="lang" role="group" aria-label="Language"><a href="../../docs/reference/file-format.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../../es/docs/reference/file-format.html" hreflang="es" lang="es">ES</a></span>
+      <a class="btn gh" href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener" aria-label="Source code on GitHub"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0C17.3 4.7 18.3 5 18.3 5c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0012 .5z"/></svg><span>GitHub</span></a>
+      <a class="btn primary" href="../../download/index.html" data-nav="download">Get OGR Slip2D</a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Main (mobile)">
+    <span class="label">Products</span>
+    <a href="../../products/slip2d.html">OGR Slip2D</a>
+    <div class="sub"><a href="../../products/index.html">The OpenGeoRock suite</a><a href="../../ai/index.html">MCP server for AI agents</a></div>
+    <span class="label">Learn</span>
+    <a href="../../examples/index.html">Examples</a>
+    <a href="../../docs/index.html">Documentation</a>
+    <a href="../../verification/index.html">Verification</a>
+    <span class="label">Project</span>
+    <a href="../../about/index.html">About</a>
+    <a href="../../download/index.html">Get OGR Slip2D</a>
+    <a href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener">Source on GitHub ↗</a>
+    <span class="lang" role="group" aria-label="Language"><a href="../../docs/reference/file-format.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../../es/docs/reference/file-format.html" hreflang="es" lang="es">ES</a></span>
+  </nav>
+</header>
+<!-- @end header -->
+
+<div class="doc-shell">
+  <aside class="doc-side" id="doc-side">
+<!-- @inc docnav -->
+<div class="doc-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input type="search" placeholder="Search the documentation  /" aria-label="Search the documentation" autocomplete="off"><div class="results" role="listbox"></div></div>
+<nav class="doc-nav" aria-label="Documentation">
+<a class="home" href="../../docs/index.html"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 016.5 3H20v15H6.5A2.5 2.5 0 004 20.5z"/><path d="M4 20.5A2.5 2.5 0 016.5 18H20v3H6.5A2.5 2.5 0 014 20.5z"/></svg> Documentation home</a>
+<details open><summary>1 · Getting started</summary><ul>
+<li><a href="../../docs/getting-started/installation.html"><span class="n">1.1</span><span>Installation</span></a></li>
+<li><a href="../../docs/getting-started/quick-start.html"><span class="n">1.2</span><span>Quick start: your first model</span></a></li>
+<li><a href="../../docs/getting-started/interface.html"><span class="n">1.3</span><span>The interface</span></a></li>
+</ul></details>
+<details open><summary>2 · User guide</summary><ul>
+<li><a href="../../docs/user-guide/project-settings.html"><span class="n">2.1</span><span>Project settings</span></a></li>
+<li><a href="../../docs/user-guide/geometry.html"><span class="n">2.2</span><span>Geometry and boundaries</span></a></li>
+<li><a href="../../docs/user-guide/materials.html"><span class="n">2.3</span><span>Materials</span></a></li>
+<li><a href="../../docs/user-guide/water.html"><span class="n">2.4</span><span>Water and pore pressure</span></a></li>
+<li><a href="../../docs/user-guide/loads.html"><span class="n">2.5</span><span>Loads and seismic loading</span></a></li>
+<li><a href="../../docs/user-guide/supports.html"><span class="n">2.6</span><span>Supports</span></a></li>
+<li><a href="../../docs/user-guide/surfaces.html"><span class="n">2.7</span><span>Slip surfaces and search</span></a></li>
+<li><a href="../../docs/user-guide/results.html"><span class="n">2.8</span><span>Computing and interpreting results</span></a></li>
+<li><a href="../../docs/user-guide/groundwater.html"><span class="n">2.9</span><span>Finite-element groundwater</span></a></li>
+<li><a href="../../docs/user-guide/probabilistic.html"><span class="n">2.10</span><span>Probabilistic and sensitivity analysis</span></a></li>
+<li><a href="../../docs/user-guide/design-standards.html"><span class="n">2.11</span><span>Design standards</span></a></li>
+<li><a href="../../docs/user-guide/automation.html"><span class="n">2.12</span><span>Reports, scripting and the command line</span></a></li>
+</ul></details>
+<details open><summary>3 · Theory manual</summary><ul>
+<li><a href="../../docs/theory/limit-equilibrium.html"><span class="n">3.1</span><span>Limit equilibrium and the factor of safety</span></a></li>
+<li><a href="../../docs/theory/methods.html"><span class="n">3.2</span><span>Methods of slices</span></a></li>
+<li><a href="../../docs/theory/interslice.html"><span class="n">3.3</span><span>Interslice forces, convergence and admissibility</span></a></li>
+<li><a href="../../docs/theory/search.html"><span class="n">3.4</span><span>Slip-surface search</span></a></li>
+<li><a href="../../docs/theory/strength.html"><span class="n">3.5</span><span>Shear strength models</span></a></li>
+<li><a href="../../docs/theory/pore-pressure.html"><span class="n">3.6</span><span>Pore pressure and unsaturated strength</span></a></li>
+<li><a href="../../docs/theory/seepage.html"><span class="n">3.7</span><span>Finite-element seepage</span></a></li>
+<li><a href="../../docs/theory/rapid-drawdown.html"><span class="n">3.8</span><span>Rapid drawdown</span></a></li>
+<li><a href="../../docs/theory/seismic.html"><span class="n">3.9</span><span>Seismic analysis</span></a></li>
+<li><a href="../../docs/theory/supports.html"><span class="n">3.10</span><span>Support forces</span></a></li>
+<li><a href="../../docs/theory/probabilistic.html"><span class="n">3.11</span><span>Probabilistic analysis</span></a></li>
+<li><a href="../../docs/theory/partial-factors.html"><span class="n">3.12</span><span>Partial factors (Eurocode 7)</span></a></li>
+</ul></details>
+<details open><summary>4 · Verification</summary><ul>
+<li><a href="../../docs/verification/methodology.html"><span class="n">4.1</span><span>Verification methodology</span></a></li>
+<li><a href="../../docs/verification/slope-benchmarks.html"><span class="n">4.2</span><span>Limit-equilibrium benchmarks</span></a></li>
+<li><a href="../../docs/verification/analytic-checks.html"><span class="n">4.3</span><span>Groundwater and analytic checks</span></a></li>
+</ul></details>
+<details open><summary>5 · Reference</summary><ul>
+<li><a href="../../docs/reference/mcp.html"><span class="n">5.1</span><span>MCP server</span></a></li>
+<li><a href="../../docs/reference/cli.html"><span class="n">5.2</span><span>Command-line interface</span></a></li>
+<li><a href="../../docs/reference/python-api.html"><span class="n">5.3</span><span>Python API</span></a></li>
+<li><a href="../../docs/reference/file-format.html" aria-current="page"><span class="n">5.4</span><span>The .ogr file format</span></a></li>
+<li><a href="../../docs/reference/error-codes.html"><span class="n">5.5</span><span>Error codes</span></a></li>
+<li><a href="../../docs/reference/notation.html"><span class="n">5.6</span><span>Notation and glossary</span></a></li>
+<li><a href="../../docs/reference/bibliography.html"><span class="n">5.7</span><span>Bibliography</span></a></li>
+</ul></details>
+</nav>
+<!-- @end docnav -->
+  </aside>
+
+  <main id="main" class="doc-main">
+    <header class="doc-head">
+<!-- @inc dochead -->
+<button class="doc-side-toggle" type="button" aria-controls="doc-side" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg> Contents</button>
+<nav class="crumbs label" aria-label="Breadcrumb"><a href="../../docs/index.html">Documentation</a><span aria-hidden="true">/</span><span>5 · Reference</span></nav>
+<div class="chapter label">5.4</div>
+<h1>The .ogr file format</h1>
+<div class="meta label"><span>Describes OGR Slip2D <span data-v>0.1.235</span></span></div>
+<!-- @end dochead -->
+    </header>
+
+    <article class="doc prose">
+      <p class="lede">An OGR Slip2D project is one plain JSON file with the extension <code>.ogr</code>: the geometry, the materials, the loads, the supports, every setting and, once computed, the finite-element groundwater field. It can be read, compared and kept under version control like any text file. The results of a search, which can run to thousands of surfaces with their slices, go to a separate HDF5 file. This page lists the keys of the first and the layout of the second.</p>
+
+      <h2 id="json"><span class="secnum">5.4.1</span><span class="ht">A plain JSON document</span><a class="anchor" href="#json" aria-label="Link to this section">#</a></h2>
+      <ul>
+        <li><strong>Encoding.</strong> UTF-8, indented with two spaces; non-ASCII characters are written as they are, not escaped.</li>
+        <li><strong>Units.</strong> Values are stored in SI (m, kN per metre of slope, kPa, kN/m³, degrees), whatever unit system the window displays: units are converted only where the interface shows or reads them.</li>
+        <li><strong>Identifiers.</strong> Objects carry UUID strings, and references between them use those ids: a material points at its water surface with <code>water_surface_id</code>, a region assignment at its material with <code>material_id</code>.</li>
+        <li><strong>Regions are not stored as such.</strong> The regions are computed from the external and material boundaries; what the file keeps is each assignment as a point inside a region (<code>region_assignments</code>), which is re-located in the recomputed regions after every geometry change.</li>
+        <li><strong>The same document everywhere.</strong> The window, <code>ogr-slip2d-cli</code>, the operations layer and the MCP server read and write the same file; <code>project_get</code> returns one section of it to an agent (<a class="xref" href="mcp.html">Section 5.1</a>).</li>
+      </ul>
+      <p>Saving writes the whole document, so a file saved by the current version carries every key below. A file is never modified by a calculation.</p>
+
+      <h3 id="excerpt"><span class="ht">An excerpt</span><a class="anchor" href="#excerpt" aria-label="Link to this section">#</a></h3>
+      <p>The beginning of a two-layer slope with a water table, as saved by v<span data-v>0.1.235</span>; <code>…</code> marks lines left out.</p>
+      <div class="code"><pre><code>{
+  "format_version": "0.1",
+  "id": "ed1d8a87-0f66-45c7-9027-1d689a44c66f",
+  "name": "Two-layer slope with water table",
+  "settings": {
+    "units": {
+      "system": "metric",
+      "time": "d",
+      "permeability": "m/s",
+      "failure_direction": "L2R",
+      "system_id": "metric_kpa"
+    },
+    "methods": {
+      "enabled_methods": [
+        "bishop_simplified",
+        "spencer",
+        "gle_morgenstern_price"
+      ],
+      "num_slices": 30,
+      "tolerance": 0.005,
+      "max_iterations": 50,
+      "interslice_function": "half_sine",
+      "interslice_forces": "total"
+    },
+    …
+  },
+  "boundaries": [
+    {
+      "id": "ea9a0c7f-a789-4ec7-84e8-1f58c319e9c3",
+      "name": "External Boundary",
+      "type": "EXTERNAL",
+      …
+      "polyline": {
+        "id": "d8620e5a-bf0d-45ad-90e8-7cc9a4062aa1",
+        "closed": true,
+        "vertices": [
+          [
+            0.0,
+            0.0
+          ],
+          …
+  "materials": [
+    {
+      "id": "9c481951-90f0-4962-93f7-98cb59eae48d",
+      "name": "Silty sand",
+      "strength": {
+        "model_id": "mohr_coulomb",
+        "params": {
+          "cohesion": 5.0,
+          "friction_angle": 32.0
+        }
+      },
+      "unit_weight": 19.0,
+      "sat_unit_weight": 21.0,
+      "use_sat_unit_weight": false,
+      "pore_pressure": "water_table",
+      …
+  "user_surfaces": []
+}</code></pre></div>
+
+      <h2 id="top-level"><span class="secnum">5.4.2</span><span class="ht">Top-level keys</span><a class="anchor" href="#top-level" aria-label="Link to this section">#</a></h2>
+      <figure class="tbl" id="tbl-top-level">
+        <figcaption><span class="fignum">Table 5.4.1</span> Top-level keys of a <code>.ogr</code> file, in the order they are written.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Key</th><th>Content</th></tr></thead>
+            <tbody>
+              <tr><td><code>format_version</code></td><td>The string <code>"0.1"</code> (<a class="xref" href="#versions">Section 5.4.4</a>).</td></tr>
+              <tr><td><code>id</code>, <code>name</code></td><td>UUID and name of the project.</td></tr>
+              <tr><td><code>settings</code></td><td>Every analysis setting (<a class="xref" href="#tbl-settings">Table 5.4.2</a>).</td></tr>
+              <tr><td><code>boundaries</code></td><td>Every polyline of the model, each with <code>id</code>, <code>name</code>, <code>type</code>, <code>color</code>, <code>line_width</code>, <code>visible</code>, <code>material_id</code>, <code>suppressed</code> and <code>polyline</code> (<code>id</code>, <code>closed</code>, <code>vertices</code> as [<em>x</em>, <em>y</em>] pairs). <code>type</code> is one of <code>EXTERNAL</code>, <code>MATERIAL</code>, <code>WATER_TABLE</code>, <code>PIEZOMETRIC</code>, <code>DRAWDOWN</code>, <code>TENSION_CRACK</code>, <code>BLOCK_SEARCH_OBJECT</code>, <code>WEAK_LAYER</code> or <code>ANISOTROPIC_SURFACE</code>. A Block Search object also carries <code>block_object</code> (its kind and options) when one is set.</td></tr>
+              <tr><td><code>materials</code></td><td>Every material: <code>id</code>, <code>name</code>, <code>strength</code> (<code>model_id</code> and its <code>params</code>), <code>unit_weight</code>, <code>sat_unit_weight</code>, <code>use_sat_unit_weight</code>, <code>pore_pressure</code> (<code>none</code>, <code>water_table</code>, <code>piezometric</code>, <code>ru</code>, <code>constant</code> or <code>fem</code>), <code>ru</code>, <code>constant_u</code>, <code>water_surface_id</code>, <code>color</code>, <code>hatch</code>, <code>hydraulic</code> (hydraulic properties), <code>phi_b</code>, <code>air_entry_value</code>, <code>hu</code>, <code>auto_hu</code>, <code>undrained_behaviour</code>, <code>b_bar</code>, <code>drawdown_envelope</code>, <code>use_grid</code>, <code>weight_creates_excess</code> and <code>anisotropic_surface_id</code>.</td></tr>
+              <tr><td><code>supports</code>, <code>support_types</code></td><td>The supports placed in the model and the support types they refer to.</td></tr>
+              <tr><td><code>distributed_loads</code>, <code>line_loads</code></td><td>Distributed loads (kPa) and line loads (kN/m).</td></tr>
+              <tr><td><code>seismic</code></td><td>The pseudo-static load: <code>kh</code>, <code>kv</code>, <code>enabled</code> and <code>creates_excess_pore_pressure</code>.</td></tr>
+              <tr><td><code>seismic_records</code></td><td>Acceleration records for the Newmark analysis.</td></tr>
+              <tr><td><code>region_assignments</code></td><td>One entry per assignment: the point (<code>x</code>, <code>y</code>), the <code>material_id</code> and the outline (<code>footprint</code>, and <code>footprint_holes</code> for a region with lenses) of the region it fell in.</td></tr>
+              <tr><td><code>tension_crack_properties</code></td><td>Water in the tension crack: <code>mode</code>, <code>percent_filled</code>, <code>elevation</code>, <code>depth</code>, <code>piezo_id</code>.</td></tr>
+              <tr><td><code>water_pressure_grid</code></td><td>The water pressure grid, or <code>null</code>.</td></tr>
+              <tr><td><code>fem_mesh</code>, <code>seepage_bcs</code></td><td>The finite-element mesh and the seepage boundary conditions, or <code>null</code>.</td></tr>
+              <tr><td><code>seepage_result</code>, <code>transient_results</code></td><td>The computed steady groundwater field (or <code>null</code>) and the fields of the transient stages. Only the irreducible data are written; the derived fields are rebuilt when the file is read.</td></tr>
+              <tr><td><code>random_variables</code></td><td>The inputs made random for the probabilistic and sensitivity analyses.</td></tr>
+              <tr><td><code>annotations</code></td><td>Drawings, texts and dimensions; the analysis never reads them.</td></tr>
+              <tr><td><code>focus_objects</code></td><td>Focus objects that restrict the search.</td></tr>
+              <tr><td><code>user_surfaces</code></td><td>Circles defined by hand and analysed together with the search. Their ends where they meet the ground are not meaningful in the file: they are a result of the analysis, not an input.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <div class="note water"><span class="label">The groundwater field is saved</span><p>Since v0.1.78 the computed seepage field is written with the mesh. Before that version a project whose materials take their pore pressure from the finite-element field reopened without it, and an analysis would have reported <span class="m" data-tex="u = 0"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>u</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">u = 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">u</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span><!--/k--></span> everywhere. A model whose materials use <code>fem</code> pore pressures and has no field is now refused by the analysis instead (<a class="xref" href="cli.html">Section 5.2</a>).</p></div>
+
+      <h2 id="settings"><span class="secnum">5.4.3</span><span class="ht">Settings keys</span><a class="anchor" href="#settings" aria-label="Link to this section">#</a></h2>
+      <figure class="tbl" id="tbl-settings">
+        <figcaption><span class="fignum">Table 5.4.2</span> Keys of <code>settings</code>. Each section is written whole, so every field of every section is present in a saved file.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Key</th><th>Content</th><th>Some of its fields</th></tr></thead>
+            <tbody>
+              <tr><td><code>units</code></td><td>Display units and failure direction</td><td><code>system</code>, <code>time</code>, <code>permeability</code>, <code>failure_direction</code> (<code>"L2R"</code> or <code>"R2L"</code>), <code>system_id</code></td></tr>
+              <tr><td><code>methods</code></td><td>Methods and convergence</td><td><code>enabled_methods</code>, <code>num_slices</code>, <code>tolerance</code>, <code>max_iterations</code>, <code>interslice_function</code>, <code>interslice_forces</code></td></tr>
+              <tr><td><code>groundwater</code></td><td>How pore pressure is obtained</td><td><code>method</code>, <code>pore_fluid_unit_weight</code>, <code>rapid_drawdown</code>, <code>rapid_drawdown_method</code>, <code>transient</code>, <code>transient_stages</code>, <code>default_hu</code>, <code>auto_hu</code></td></tr>
+              <tr><td><code>search</code></td><td>Surface type, search method and its options, slope limits, filters</td><td><code>surface_type</code>, <code>search_method</code>, <code>grid_nx</code>, <code>grid_ny</code>, <code>radius_increment</code>, <code>num_surfaces</code>, <code>slope_limit_left</code>, <code>slope_limit_right</code> (71 fields in all)</td></tr>
+              <tr><td><code>statistics</code></td><td>Probabilistic and sensitivity analyses</td><td><code>probabilistic_analysis</code>, <code>sensitivity_analysis</code>, <code>sampling_method</code>, <code>num_samples</code>, <code>analysis_type</code>, <code>seed</code></td></tr>
+              <tr><td><code>back_analysis</code></td><td>Back analysis of the support force</td><td><code>enabled</code>, <code>target_fos</code>, <code>elevation</code>, <code>method_id</code></td></tr>
+              <tr><td><code>random_numbers</code></td><td>Seed of the random searches and of the sampling</td><td><code>method</code>, <code>seed</code>, <code>lhs_correlate</code></td></tr>
+              <tr><td><code>design_standard</code></td><td>Partial factors</td><td><code>enabled</code>, <code>standard</code>, <code>factor_permanent</code>, <code>factor_variable</code>, <code>factor_cohesion</code>, <code>factor_friction</code>, <code>factor_unit_weight</code>, <code>factor_resistance</code>, <code>factor_undrained</code>, <code>factor_shear_strength</code></td></tr>
+              <tr><td><code>advanced</code></td><td>Admissibility checks, iteration and parallel search</td><td><code>check_tensile_stresses</code>, <code>tensile_percent</code>, <code>check_m_alpha</code>, <code>initial_fos</code>, <code>min_lambda</code>, <code>max_lambda</code>, <code>iterate_steffensen</code>, <code>parallel_search</code>, <code>parallel_cpu_percent</code></td></tr>
+              <tr><td><code>seismic</code></td><td>Seismic analysis beyond the factor of safety</td><td><code>compute_ky</code>, <code>ky_target_fos</code>, <code>newmark</code>, <code>record_id</code>, <code>polarity</code>, <code>allow_upslope</code>, <code>scale</code></td></tr>
+              <tr><td><code>summary</code></td><td>Project summary</td><td><code>title</code>, <code>analysis</code>, <code>author</code>, <code>company</code>, <code>date_created</code>, <code>comments</code></td></tr>
+              <tr><td><code>max_materials</code>, <code>max_supports</code></td><td>Limits of the model</td><td>20 each by default</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p>The meaning of each setting is given where it is set: <a class="xref" href="../user-guide/project-settings.html">Section 2.1</a> for the window, and <code>catalog("settings")</code> or <code>settings_get</code> for the operations layer, which list every setting with its type and options.</p>
+
+      <h2 id="versions"><span class="secnum">5.4.4</span><span class="ht">Versions and compatibility</span><a class="anchor" href="#versions" aria-label="Link to this section">#</a></h2>
+      <p>Every file carries <code>"format_version": "0.1"</code>, the value of <code>FILE_FORMAT_VERSION</code> in the program. The reader does not consult it: an older file is recognised by the keys it carries, a key that is missing takes its default, and a few conventions that changed are converted when the file is read. Those conversions are documented in the code, for example:</p>
+      <ul>
+        <li>a closed boundary that repeats its first vertex at the end, as every DXF import wrote before v0.1.197, is read without the repeated vertex (the same polygon);</li>
+        <li>a rapid-drawdown project saved before the B̄ fields existed (v0.1.62) gets back the behaviour it was computed with;</li>
+        <li>a B̄ rapid-drawdown project drawn with the drawdown convention used before v0.1.69 has its water table and drawdown line exchanged, so that the model means what it meant;</li>
+        <li>a water pressure grid that also declares its own value type sets the groundwater method accordingly (v0.1.202).</li>
+      </ul>
+      <p>The conversion of v0.1.69 changes, on purpose, the factor of safety of the files it applies to, and the changelog of that version says so. Nothing guarantees that an older version of the program opens a file written by a newer one.</p>
+
+      <h2 id="results"><span class="secnum">5.4.5</span><span class="ht">Results in HDF5</span><a class="anchor" href="#results" aria-label="Link to this section">#</a></h2>
+      <p>The results of a search are written to an HDF5 file, normally beside the project with the same name and the extension <code>.h5</code>. The window writes the result of the first method after each Compute once the project has a file; <code>ogr-slip2d-cli compute</code> writes one file per method (<a class="xref" href="cli.html">Section 5.2</a>); a script uses <code>save_results</code> (<a class="xref" href="python-api.html">Section 5.3</a>). Each file holds one search; an existing file is replaced.</p>
+      <figure class="tbl" id="tbl-hdf5">
+        <figcaption><span class="fignum">Table 5.4.3</span> Layout of a results file.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Path</th><th>Kind</th><th>Content</th></tr></thead>
+            <tbody>
+              <tr><td><code>/</code></td><td>attributes</td><td><code>format_version</code> (<code>"0.1"</code>), <code>project_id</code>, <code>method</code>, <code>n_surfaces</code> (surfaces stored under <code>/surfaces</code>), <code>n_valid</code>, <code>n_invalid</code>, <code>n_attempts</code>, <code>objective</code> (<code>"fos"</code> or <code>"ky"</code>); <code>n_focus_rejected</code> only when a focus object removed candidates, <code>n_user_surfaces</code> only when there are user surfaces.</td></tr>
+              <tr><td><code>/surfaces/surface_00000</code>…</td><td>group per surface</td><td>Attributes <code>fos</code> (absent when there is no factor of safety), <code>converged</code>, <code>iterations</code>, <code>method</code>, <code>is_valid</code>, <code>error</code>, <code>reason</code> (<a class="xref" href="error-codes.html#reasons">Section 5.5.2</a>), <code>surface_type</code>; for circular and composite surfaces <code>centre_x</code>, <code>centre_y</code>, <code>radius</code> and, when known, <code>x_left</code>, <code>x_right</code>; in seismic runs <code>ky</code>, <code>ky_fos</code>, <code>newmark_displacement</code>.</td></tr>
+              <tr><td><code>…/slices</code></td><td>dataset</td><td>One row per slice: <code>index</code>, <code>x_centre</code>, <code>width</code>, <code>base_y_left</code>, <code>base_y_right</code> (m), <code>base_angle_deg</code> (°), <code>base_length</code>, <code>height</code> (m), <code>weight</code> (kN/m), <code>pore_pressure</code> at the base and <code>surface_pressure</code> of the distributed load on top (kPa). Compressed with gzip.</td></tr>
+              <tr><td><code>/user_surfaces/…</code></td><td>groups</td><td>The surfaces defined by hand, laid out as <code>/surfaces</code>; present only when there are any.</td></tr>
+              <tr><td><code>/summary/fos_array</code></td><td>dataset</td><td>Factor of safety of each surface of <code>/surfaces</code>, in the same order; NaN where there is no valid factor.</td></tr>
+              <tr><td><code>/summary/centres</code>, <code>/summary/radii</code></td><td>datasets</td><td>Centre (<em>N</em> × 2) and radius of each surface; NaN for surfaces that are not circles.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p>Surfaces rejected before they could be sliced are counted in <code>n_valid</code> + <code>n_invalid</code> and <code>n_attempts</code> but have no group, so <code>n_surfaces</code> can be smaller than the number attempted. The file stores one search, not the model: it is read together with the <code>.ogr</code> it came from.</p>
+      <div class="impl">
+        <span class="label">In OGR Slip2D</span>
+        <p>A surface without a factor of safety gets no <code>fos</code> attribute, and its <code>reason</code> instead, so that a reader that forgets to check gets an error naming the surface rather than a number. The module's own header still draws the metadata as a group <code>meta</code> and the surfaces as <code>surface_0000</code>; the code writes the metadata as attributes of the root and numbers the surfaces with five digits, as this page shows.</p>
+        <span class="src">Source: <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_core/project/project.py" target="_blank" rel="noopener">ogr_core/project/project.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_core/project/settings.py" target="_blank" rel="noopener">ogr_core/project/settings.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_core/project/results_io.py" target="_blank" rel="noopener">ogr_core/project/results_io.py</a></span>
+      </div>
+    </article>
+
+<!-- @inc docfoot -->
+<nav class="doc-pager" aria-label="Pages">
+<a class="prev" href="../../docs/reference/python-api.html"><span class="label">← Previous · 5.3</span><b>Python API</b></a>
+<a class="next" href="../../docs/reference/error-codes.html"><span class="label">5.5 · Next →</span><b>Error codes</b></a>
+</nav>
+<div class="doc-edit label"><a href="https://github.com/samuelsl27/OpenGeoRock_Web.github.io/blob/main/docs/reference/file-format.html" target="_blank" rel="noopener">Edit this page ↗</a><a href="https://github.com/samuelsl27/OGR-Slip2D/issues" target="_blank" rel="noopener">Report a problem ↗</a></div>
+<!-- @end docfoot -->
+  </main>
+
+  <aside class="doc-toc" aria-label="On this page">
+    <div class="toc-inner">
+<!-- @inc pagetoc -->
+<span class="label">On this page</span><ul><li class="h2"><a href="#json">5.4.1 A plain JSON document</a></li><li class="h3"><a href="#excerpt">An excerpt</a></li><li class="h2"><a href="#top-level">5.4.2 Top-level keys</a></li><li class="h2"><a href="#settings">5.4.3 Settings keys</a></li><li class="h2"><a href="#versions">5.4.4 Versions and compatibility</a></li><li class="h2"><a href="#results">5.4.5 Results in HDF5</a></li></ul><button class="print" type="button"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="1.5"/><path d="M6 14h12v7H6z"/></svg> Print this page</button>
+<!-- @end pagetoc -->
+    </div>
+  </aside>
+</div>
+
+<!-- @inc footer -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <a class="brand" href="../../index.html" aria-label="OpenGeoRock — home">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
+          <b>OpenGeoRock</b>
+        </a>
+        <p class="tagline">Open-source geotechnical software, built in the open at the Universidad Politécnica de Cartagena.</p>
+        <span class="lang" role="group" aria-label="Language"><a href="../../docs/reference/file-format.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../../es/docs/reference/file-format.html" hreflang="es" lang="es">ES</a></span>
+      </div>
+      <div>
+        <h5>Products</h5>
+        <ul>
+          <li><a href="../../products/slip2d.html">OGR Slip2D</a></li>
+          <li><a href="../../products/index.html">The suite</a></li>
+          <li><a href="../../ai/index.html">MCP server</a></li>
+          <li><a href="../../download/index.html">Download</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Learn</h5>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="../../docs/getting-started/quick-start.html">Quick start</a></li>
+          <li><a href="../../docs/theory/methods.html">Theory manual</a></li>
+          <li><a href="../../examples/index.html">Examples</a></li>
+          <li><a href="../../verification/index.html">Verification</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Project</h5>
+        <ul>
+          <li><a href="../../about/index.html">About</a></li>
+          <li><a href="../../about/index.html#team">Team</a></li>
+          <li><a href="../../about/index.html#cite">How to cite</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Contributing</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/LICENSE" target="_blank" rel="noopener">Licence · AGPL-3.0</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Connect</h5>
+        <ul>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/issues" target="_blank" rel="noopener">Issues</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/tree/main/docs/changelog" target="_blank" rel="noopener">Changelog</a></li>
+          <li><a href="mailto:samuel.saez@edu.upct.es">Email</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© 2026 Samuel Sáez López · OGR Slip2D is free software under AGPL-3.0-or-later, with no warranty of any kind.</span>
+      <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
+    </div>
+  </div>
+  <div class="lang-hint" role="dialog" aria-label="Idioma" lang="es">
+    ¿Prefieres leer esta web en español?
+    <div class="row"><a class="btn sm primary go" href="../../es/index.html">Ver en español</a><button class="btn sm" type="button" data-dismiss>No, gracias</button></div>
+  </div>
+</footer>
+<!-- @end footer -->
+</body>
+</html>

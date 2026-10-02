@@ -1,0 +1,351 @@
+<!doctype html>
+<html class="no-js" lang="en" data-root="../../">
+<head>
+<meta charset="utf-8">
+<title>Reports, scripting and the command line — OGR Slip2D documentation</title>
+<meta name="description" content="Get results out of OGR Slip2D and drive it without the mouse: the PDF report, images, printing and DXF export, the embedded Python terminal, the command line, the Python API and AI agents through the MCP server.">
+<!-- @inc head -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.replace("no-js", "js")</script>
+<link rel="canonical" href="https://opengeorock.org/docs/user-guide/automation.html">
+<link rel="alternate" hreflang="en" href="https://opengeorock.org/docs/user-guide/automation.html">
+<link rel="alternate" hreflang="es" href="https://opengeorock.org/es/docs/user-guide/automation.html">
+<link rel="alternate" hreflang="x-default" href="https://opengeorock.org/docs/user-guide/automation.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="OpenGeoRock">
+<meta property="og:title" content="Reports, scripting and the command line — OGR Slip2D documentation">
+<meta property="og:description" content="Get results out of OGR Slip2D and drive it without the mouse: the PDF report, images, printing and DXF export, the embedded Python terminal, the command line, the Python API and AI agents through the MCP server.">
+<meta property="og:url" content="https://opengeorock.org/docs/user-guide/automation.html">
+<meta property="og:image" content="https://opengeorock.org/assets/img/og-image.png">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#f4efe6">
+<link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&amp;display=swap">
+<link rel="stylesheet" href="../../assets/css/site.css">
+<link rel="stylesheet" href="../../assets/css/docs.css">
+<script src="../../assets/js/site.js" defer></script>
+<!-- @end head -->
+</head>
+<body class="docs">
+<!-- @inc header -->
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="wrap top-inner">
+    <a class="brand" href="../../index.html" aria-label="OpenGeoRock — home">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
+      <b>OpenGeoRock</b>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <div class="has-menu" data-nav="products">
+        <button type="button" aria-expanded="false" aria-haspopup="true">Products <svg class="caret" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+        <div class="mega">
+          <div class="mega-cols">
+            <div class="mega-col">
+              <span class="label">Available today</span>
+              <a class="mega-item feature" href="../../products/slip2d.html"><b>OGR Slip2D</b><span>2D slope stability: limit equilibrium, finite-element groundwater and probabilistic analysis.</span></a>
+              <a class="mega-item" href="../../ai/index.html"><b>MCP server for AI agents <span class="tag live">new</span></b><span>Let Claude, ChatGPT or a local model build and run OGR Slip2D models.</span></a>
+            </div>
+            <div class="mega-col">
+              <span class="label">On the roadmap</span>
+              <a class="mega-item" href="../../products/index.html#ogr-data"><b>OGR Data</b><span>Soil and rock-mass property database</span></a>
+              <a class="mega-item" href="../../products/index.html#ogr-fem2d"><b>OGR FEM2D</b><span>2D elastoplastic finite elements</span></a>
+              <a class="mega-item" href="../../products/index.html#ogr-slip3d"><b>OGR Slip3D</b><span>3D limit equilibrium</span></a>
+              <a class="mega-item" href="../../products/index.html#ogr-fem3d"><b>OGR FEM3D</b><span>3D finite elements with coupled flow</span></a>
+            </div>
+            <div class="mega-col">
+              <span class="label">Use it from</span>
+              <a class="mega-item" href="../../docs/getting-started/interface.html"><b>The desktop program</b><span>Modeller, interpreter and Python terminal</span></a>
+              <a class="mega-item" href="../../docs/reference/python-api.html"><b>Python</b><span>Script analyses from your own code</span></a>
+              <a class="mega-item" href="../../docs/reference/cli.html"><b>The command line</b><span>Batch runs with ogr-slip2d-cli</span></a>
+            </div>
+          </div>
+          <div class="mega-foot"><span>Five programs, one open core.</span><a href="../../products/index.html">All products →</a></div>
+        </div>
+      </div>
+      <a href="../../examples/index.html" data-nav="examples">Examples</a>
+      <a href="../../ai/index.html" data-nav="ai">AI &amp; MCP</a>
+      <a href="../../docs/index.html" data-nav="docs" aria-current="page">Docs</a>
+      <a href="../../verification/index.html" data-nav="verification">Verification</a>
+      <a href="../../about/index.html" data-nav="about">About</a>
+    </nav>
+    <div class="top-right">
+      <span class="lang" role="group" aria-label="Language"><a href="../../docs/user-guide/automation.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../../es/docs/user-guide/automation.html" hreflang="es" lang="es">ES</a></span>
+      <a class="btn gh" href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener" aria-label="Source code on GitHub"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0C17.3 4.7 18.3 5 18.3 5c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0012 .5z"/></svg><span>GitHub</span></a>
+      <a class="btn primary" href="../../download/index.html" data-nav="download">Get OGR Slip2D</a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Main (mobile)">
+    <span class="label">Products</span>
+    <a href="../../products/slip2d.html">OGR Slip2D</a>
+    <div class="sub"><a href="../../products/index.html">The OpenGeoRock suite</a><a href="../../ai/index.html">MCP server for AI agents</a></div>
+    <span class="label">Learn</span>
+    <a href="../../examples/index.html">Examples</a>
+    <a href="../../docs/index.html">Documentation</a>
+    <a href="../../verification/index.html">Verification</a>
+    <span class="label">Project</span>
+    <a href="../../about/index.html">About</a>
+    <a href="../../download/index.html">Get OGR Slip2D</a>
+    <a href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener">Source on GitHub ↗</a>
+    <span class="lang" role="group" aria-label="Language"><a href="../../docs/user-guide/automation.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../../es/docs/user-guide/automation.html" hreflang="es" lang="es">ES</a></span>
+  </nav>
+</header>
+<!-- @end header -->
+
+<div class="doc-shell">
+  <aside class="doc-side" id="doc-side">
+<!-- @inc docnav -->
+<div class="doc-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input type="search" placeholder="Search the documentation  /" aria-label="Search the documentation" autocomplete="off"><div class="results" role="listbox"></div></div>
+<nav class="doc-nav" aria-label="Documentation">
+<a class="home" href="../../docs/index.html"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 016.5 3H20v15H6.5A2.5 2.5 0 004 20.5z"/><path d="M4 20.5A2.5 2.5 0 016.5 18H20v3H6.5A2.5 2.5 0 014 20.5z"/></svg> Documentation home</a>
+<details open><summary>1 · Getting started</summary><ul>
+<li><a href="../../docs/getting-started/installation.html"><span class="n">1.1</span><span>Installation</span></a></li>
+<li><a href="../../docs/getting-started/quick-start.html"><span class="n">1.2</span><span>Quick start: your first model</span></a></li>
+<li><a href="../../docs/getting-started/interface.html"><span class="n">1.3</span><span>The interface</span></a></li>
+</ul></details>
+<details open><summary>2 · User guide</summary><ul>
+<li><a href="../../docs/user-guide/project-settings.html"><span class="n">2.1</span><span>Project settings</span></a></li>
+<li><a href="../../docs/user-guide/geometry.html"><span class="n">2.2</span><span>Geometry and boundaries</span></a></li>
+<li><a href="../../docs/user-guide/materials.html"><span class="n">2.3</span><span>Materials</span></a></li>
+<li><a href="../../docs/user-guide/water.html"><span class="n">2.4</span><span>Water and pore pressure</span></a></li>
+<li><a href="../../docs/user-guide/loads.html"><span class="n">2.5</span><span>Loads and seismic loading</span></a></li>
+<li><a href="../../docs/user-guide/supports.html"><span class="n">2.6</span><span>Supports</span></a></li>
+<li><a href="../../docs/user-guide/surfaces.html"><span class="n">2.7</span><span>Slip surfaces and search</span></a></li>
+<li><a href="../../docs/user-guide/results.html"><span class="n">2.8</span><span>Computing and interpreting results</span></a></li>
+<li><a href="../../docs/user-guide/groundwater.html"><span class="n">2.9</span><span>Finite-element groundwater</span></a></li>
+<li><a href="../../docs/user-guide/probabilistic.html"><span class="n">2.10</span><span>Probabilistic and sensitivity analysis</span></a></li>
+<li><a href="../../docs/user-guide/design-standards.html"><span class="n">2.11</span><span>Design standards</span></a></li>
+<li><a href="../../docs/user-guide/automation.html" aria-current="page"><span class="n">2.12</span><span>Reports, scripting and the command line</span></a></li>
+</ul></details>
+<details open><summary>3 · Theory manual</summary><ul>
+<li><a href="../../docs/theory/limit-equilibrium.html"><span class="n">3.1</span><span>Limit equilibrium and the factor of safety</span></a></li>
+<li><a href="../../docs/theory/methods.html"><span class="n">3.2</span><span>Methods of slices</span></a></li>
+<li><a href="../../docs/theory/interslice.html"><span class="n">3.3</span><span>Interslice forces, convergence and admissibility</span></a></li>
+<li><a href="../../docs/theory/search.html"><span class="n">3.4</span><span>Slip-surface search</span></a></li>
+<li><a href="../../docs/theory/strength.html"><span class="n">3.5</span><span>Shear strength models</span></a></li>
+<li><a href="../../docs/theory/pore-pressure.html"><span class="n">3.6</span><span>Pore pressure and unsaturated strength</span></a></li>
+<li><a href="../../docs/theory/seepage.html"><span class="n">3.7</span><span>Finite-element seepage</span></a></li>
+<li><a href="../../docs/theory/rapid-drawdown.html"><span class="n">3.8</span><span>Rapid drawdown</span></a></li>
+<li><a href="../../docs/theory/seismic.html"><span class="n">3.9</span><span>Seismic analysis</span></a></li>
+<li><a href="../../docs/theory/supports.html"><span class="n">3.10</span><span>Support forces</span></a></li>
+<li><a href="../../docs/theory/probabilistic.html"><span class="n">3.11</span><span>Probabilistic analysis</span></a></li>
+<li><a href="../../docs/theory/partial-factors.html"><span class="n">3.12</span><span>Partial factors (Eurocode 7)</span></a></li>
+</ul></details>
+<details open><summary>4 · Verification</summary><ul>
+<li><a href="../../docs/verification/methodology.html"><span class="n">4.1</span><span>Verification methodology</span></a></li>
+<li><a href="../../docs/verification/slope-benchmarks.html"><span class="n">4.2</span><span>Limit-equilibrium benchmarks</span></a></li>
+<li><a href="../../docs/verification/analytic-checks.html"><span class="n">4.3</span><span>Groundwater and analytic checks</span></a></li>
+</ul></details>
+<details open><summary>5 · Reference</summary><ul>
+<li><a href="../../docs/reference/mcp.html"><span class="n">5.1</span><span>MCP server</span></a></li>
+<li><a href="../../docs/reference/cli.html"><span class="n">5.2</span><span>Command-line interface</span></a></li>
+<li><a href="../../docs/reference/python-api.html"><span class="n">5.3</span><span>Python API</span></a></li>
+<li><a href="../../docs/reference/file-format.html"><span class="n">5.4</span><span>The .ogr file format</span></a></li>
+<li><a href="../../docs/reference/error-codes.html"><span class="n">5.5</span><span>Error codes</span></a></li>
+<li><a href="../../docs/reference/notation.html"><span class="n">5.6</span><span>Notation and glossary</span></a></li>
+<li><a href="../../docs/reference/bibliography.html"><span class="n">5.7</span><span>Bibliography</span></a></li>
+</ul></details>
+</nav>
+<!-- @end docnav -->
+  </aside>
+
+  <main id="main" class="doc-main">
+    <header class="doc-head">
+<!-- @inc dochead -->
+<button class="doc-side-toggle" type="button" aria-controls="doc-side" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg> Contents</button>
+<nav class="crumbs label" aria-label="Breadcrumb"><a href="../../docs/index.html">Documentation</a><span aria-hidden="true">/</span><span>2 · User guide</span></nav>
+<div class="chapter label">2.12</div>
+<h1>Reports, scripting and the command line</h1>
+<div class="meta label"><span>Describes OGR Slip2D <span data-v>0.1.235</span></span></div>
+<!-- @end dochead -->
+    </header>
+
+    <article class="doc prose">
+      <p class="lede">This page covers what leaves the program — the PDF report, images, prints and DXF drawings — and the ways of running it without the mouse: the Python terminal inside the window, the command line, the Python API and AI agents connected through the MCP server. The last three have their own reference chapters; here they are introduced from the point of view of the desktop program.</p>
+
+      <h2 id="report"><span class="secnum">2.12.1</span><span class="ht">The PDF report</span><a class="anchor" href="#report" aria-label="Link to this section">#</a></h2>
+      <p><span class="ui">File → Generate Report…</span> writes an A4 PDF of the last Compute, with every method it ran; without a Compute it refuses, with a message. The file name proposed is the project's name followed by <code>_report.pdf</code>. The report has eight sections:</p>
+      <ol>
+        <li><strong>Project Summary</strong>: title, file, author, company, dates and comments;</li>
+        <li><strong>General Settings</strong>: units, time and permeability units, failure direction;</li>
+        <li><strong>Analysis Options</strong>: the methods, number of slices, tolerance and maximum iterations, and the surface options;</li>
+        <li><strong>Material Properties</strong>;</li>
+        <li><strong>Global Minimums</strong>: for each method, the factor of safety and the critical surface (centre and radius for a circle, the two end points, the total slice area);</li>
+        <li><strong>Valid / Invalid Surfaces</strong>: the counts per method, with the generation attempts;</li>
+        <li><strong>Slice Data</strong> of the critical surface of each method;</li>
+        <li><strong>List of Coordinates</strong> of the boundaries.</li>
+      </ol>
+      <p>The title, author and company come from <span class="ui">Analysis → Project Settings →</span> <span class="ui">Project Summary</span>.</p>
+      <div class="note warn"><span class="label">Before you send a report (version 0.1.235)</span>
+        <ul>
+          <li>A new project carries the program author's name and institution as its default <em>Author</em> and <em>Company</em> in Project Summary. Replace them, or the report will name someone else.</li>
+          <li>The report contains tables only, no drawing of the model; add one with <span class="ui">File → Export Image…</span>.</li>
+          <li>It does not include the analysis notes, and it does not record a design standard: with one applied, the value it labels <em>Factor of Safety (FS)</em> is an over-design factor (<a class="xref" href="design-standards.html">Section 2.11</a>).</li>
+          <li>Its footer states the licence as GPL-3.0; the program is licensed under AGPL-3.0-or-later.</li>
+        </ul>
+      </div>
+
+      <h2 id="images"><span class="secnum">2.12.2</span><span class="ht">Images</span><a class="anchor" href="#images" aria-label="Link to this section">#</a></h2>
+      <ul>
+        <li><span class="ui">File → Export Image…</span> writes a PNG of everything drawn in the model view — the whole extent, not only the part on screen — on a white background. It asks for the <em>Width in pixels</em> (1920 by default; 200 to 12 000); the height follows from the proportions of the model.</li>
+        <li><span class="ui">Edit → Copy Image</span> copies the view as it is on screen to the clipboard, as a bitmap.</li>
+        <li>The Interpret window has its own <span class="ui">File → Export Image…</span> (PNG or JPEG of its view) and <span class="ui">Edit → Copy Image</span> (<a class="xref" href="results.html">Section 2.8</a>).</li>
+      </ul>
+      <div class="note"><span class="label">Note</span><p><span class="ui">Edit → Picture Format</span> offers <em>Bitmap</em> and <em>Vector (SVG)</em>, but in version 0.1.235 the choice has no effect: Copy Image always places a bitmap on the clipboard.</p></div>
+
+      <h2 id="printing"><span class="secnum">2.12.3</span><span class="ht">Printing</span><a class="anchor" href="#printing" aria-label="Link to this section">#</a></h2>
+      <p><span class="ui">File → Page Setup…</span> chooses the paper and margins, and <span class="ui">File → Print Preview…</span> shows the whole model drawn on that page; print from the preview window. In version 0.1.235 <span class="ui">File → Print…</span> (<kbd>Ctrl</kbd>+<kbd>P</kbd>) only displays a message.</p>
+
+      <h2 id="dxf"><span class="secnum">2.12.4</span><span class="ht">DXF drawings</span><a class="anchor" href="#dxf" aria-label="Link to this section">#</a></h2>
+      <p><span class="ui">File → Export DXF…</span> writes the model to a DXF drawing for CAD. The dialog sets the unit of the coordinates (m, cm, mm, km, ft or in; the model is in metres and the unit is recorded in the file), what to include — <em>Boundaries (geometry)</em>, <em>Supports</em>, <em>Loads (as arrows)</em>, <em>Finite element mesh</em> (off by default, as it writes one line per element edge), <em>Critical slip surface</em> (after a Compute) and <em>Annotations (title, factor of safety)</em> — and the <em>Load arrow size</em> as a percentage of the model diagonal (2 %). The geometry goes to the layers the DXF importer recognises, so the drawing can be edited and imported back; loads, mesh, slip surface and annotations go to separate layers whose names start with <code>OGR_X_</code>, which the importer ignores, so a load arrow cannot come back as a boundary. Importing a DXF is described in <a class="xref" href="geometry.html">Section 2.2</a>.</p>
+
+      <h2 id="terminal"><span class="secnum">2.12.5</span><span class="ht">The Python terminal</span><a class="anchor" href="#terminal" aria-label="Link to this section">#</a></h2>
+      <p><span class="ui">Window → Terminal</span> (<kbd>Ctrl</kbd>+<kbd>`</kbd>) opens a Python console inside the window, connected to the live model. These names are defined in it:</p>
+      <figure class="tbl" id="tbl-terminal-names">
+        <figcaption><span class="fignum">Table 2.12.1</span> Names available in the terminal.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Name</th><th>What it is</th></tr></thead>
+            <tbody>
+              <tr><td><code>project</code></td><td>The project open in the window — the same object you are editing. It follows New Project, Open Project and Load Demo Slope.</td></tr>
+              <tr><td><code>canvas</code></td><td>The model view.</td></tr>
+              <tr><td><code>mainwindow</code></td><td>The main window.</td></tr>
+              <tr><td><code>ogr_core</code>, <code>ogr_slip2d</code></td><td>The model and analysis packages.</td></tr>
+              <tr><td><code>np</code></td><td>NumPy.</td></tr>
+              <tr><td><code>help_ogr()</code></td><td>Prints these names, a few examples and the keys.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p><kbd>Enter</kbd> runs the input, <kbd>Shift</kbd>+<kbd>Enter</kbd> starts a new line of the same input, <kbd>Ctrl</kbd>+<kbd>↑</kbd> and <kbd>Ctrl</kbd>+<kbd>↓</kbd> move through the history, and <kbd>Ctrl</kbd>+<kbd>L</kbd> clears the console. To run the analysis exactly as the project is configured, as Compute does, use the analysis runner:</p>
+      <div class="code"><pre><code>&gt;&gt;&gt; [m.name for m in project.materials]
+&gt;&gt;&gt; from ogr_slip2d.analysis_runner import run_analysis
+&gt;&gt;&gt; out = run_analysis(project)            # the methods enabled in the project
+&gt;&gt;&gt; {mid: r.critical.fos for mid, r in out.results.items() if r.critical}
+&gt;&gt;&gt; out.warnings                           # the analysis notes</code></pre></div>
+      <div class="note"><span class="label">Note</span><p>Changes made to <code>project</code> from the terminal do not go through <span class="ui">Edit → Undo</span>, and the view is not redrawn by itself: call <code>canvas.refresh_scene()</code>. A calculation started here runs in the window's own thread, so the window waits until it ends. A search built by hand from its class, as in the example of <code>help_ogr()</code>, uses that class's defaults, not the project's settings; <code>run_analysis</code> uses the project's.</p></div>
+
+      <h2 id="cli"><span class="secnum">2.12.6</span><span class="ht">The command line</span><a class="anchor" href="#cli" aria-label="Link to this section">#</a></h2>
+      <p><code>ogr-slip2d-cli</code> runs a saved project without opening the window. It computes the analysis the project describes, through the same runner as the desktop program; each option overrides one setting of the project in memory, and the file is never modified.</p>
+      <figure class="tbl" id="tbl-cli">
+        <figcaption><span class="fignum">Table 2.12.2</span> Commands of <code>ogr-slip2d-cli</code>. The full reference is <a class="xref" href="../reference/cli.html">Section 5.2</a>.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Command</th><th>What it does</th></tr></thead>
+            <tbody>
+              <tr><td><code>info project.ogr</code></td><td>A summary of the project and its materials.</td></tr>
+              <tr><td><code>compute project.ogr</code></td><td>Runs the analysis, prints every note and a table of the critical value of each method, and saves each method's result as HDF5 (<code>project.h5</code>, or one file per method). Options: <code>--method</code>, <code>--slices</code>, <code>--nx</code>, <code>--ny</code> (grid intervals), <code>--dr</code> (Radius Increment), <code>--search</code>, <code>--samples</code> (Number of Surfaces of the Slope, Block and Path searches) and <code>--output</code>.</td></tr>
+              <tr><td><code>methods</code></td><td>The nine methods with the equilibrium each satisfies.</td></tr>
+              <tr><td><code>strength-models</code></td><td>The strength models and their parameters.</td></tr>
+              <tr><td><code>new-demo out.ogr</code></td><td>Saves the demo slope as a project.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p>A project the analysis cannot honour is refused with its reasons and exit code 3, as Compute refuses it in the window. Version 0.1.235 has no command-line command for the statistical analyses. <code>--search</code> takes the search ids <code>grid</code>, <code>slope</code>, <code>auto_refine</code>, <code>block</code>, <code>path</code>, <code>simulated_annealing</code> and <code>particle_swarm</code>; an id it does not recognise is not refused, and the run falls back to a Grid Search.</p>
+
+      <h2 id="python-api"><span class="secnum">2.12.7</span><span class="ht">Python API</span><a class="anchor" href="#python-api" aria-label="Link to this section">#</a></h2>
+      <p>Every part of the program can be imported from Python. The shortest way to analyse a saved project is the same runner the window and the command line use:</p>
+      <div class="code"><pre><code>from ogr_core.project import Project
+from ogr_slip2d.analysis_runner import run_analysis
+
+project = Project.load("slope.ogr")
+out = run_analysis(project)        # refuses, with reasons, what Compute refuses
+for method_id, result in out.results.items():
+    crit = result.critical
+    print(method_id, crit.fos if crit else "no valid surface")
+for note in out.warnings:
+    print("Note:", note)</code></pre></div>
+      <p>For building and editing models from code, the operations layer <code>ogr_api</code> offers the same operations as the tools of the MCP server, with validation, undo and long runs as background jobs; the repository's <code>examples/</code> folder has a worked script. The Python API is described in <a class="xref" href="../reference/python-api.html">Section 5.3</a>.</p>
+
+      <h2 id="ai-agents"><span class="secnum">2.12.8</span><span class="ht">AI agents</span><a class="anchor" href="#ai-agents" aria-label="Link to this section">#</a></h2>
+      <p>The MCP server, <code>ogr-slip2d-mcp</code>, lets an AI agent build, run and read models through the same operations (it needs the <code>[mcp]</code> extra; see <a class="xref" href="../getting-started/installation.html">Section 1.1</a>). The desktop program opens an <strong>agent bridge</strong> when it starts — <span class="ui">Tools → Agent bridge (MCP)</span>, local connections only and with a token — so that a server started with <code>ogr-slip2d-mcp --attach</code> works on the open window: every edit the agent makes appears on screen and can be undone. Start the program with <code>ogr-slip2d --no-agent-bridge</code>, or untick the menu item, to keep agents out. How to connect an agent is explained on the <a href="../../ai/index.html">AI &amp; MCP page</a>, and every tool is listed in <a class="xref" href="../reference/mcp.html">Section 5.1</a>.</p>
+    </article>
+
+<!-- @inc docfoot -->
+<nav class="doc-pager" aria-label="Pages">
+<a class="prev" href="../../docs/user-guide/design-standards.html"><span class="label">← Previous · 2.11</span><b>Design standards</b></a>
+<a class="next" href="../../docs/theory/limit-equilibrium.html"><span class="label">3.1 · Next →</span><b>Limit equilibrium and the factor of safety</b></a>
+</nav>
+<div class="doc-edit label"><a href="https://github.com/samuelsl27/OpenGeoRock_Web.github.io/blob/main/docs/user-guide/automation.html" target="_blank" rel="noopener">Edit this page ↗</a><a href="https://github.com/samuelsl27/OGR-Slip2D/issues" target="_blank" rel="noopener">Report a problem ↗</a></div>
+<!-- @end docfoot -->
+  </main>
+
+  <aside class="doc-toc" aria-label="On this page">
+    <div class="toc-inner">
+<!-- @inc pagetoc -->
+<span class="label">On this page</span><ul><li class="h2"><a href="#report">2.12.1 The PDF report</a></li><li class="h2"><a href="#images">2.12.2 Images</a></li><li class="h2"><a href="#printing">2.12.3 Printing</a></li><li class="h2"><a href="#dxf">2.12.4 DXF drawings</a></li><li class="h2"><a href="#terminal">2.12.5 The Python terminal</a></li><li class="h2"><a href="#cli">2.12.6 The command line</a></li><li class="h2"><a href="#python-api">2.12.7 Python API</a></li><li class="h2"><a href="#ai-agents">2.12.8 AI agents</a></li></ul><button class="print" type="button"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="1.5"/><path d="M6 14h12v7H6z"/></svg> Print this page</button>
+<!-- @end pagetoc -->
+    </div>
+  </aside>
+</div>
+
+<!-- @inc footer -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <a class="brand" href="../../index.html" aria-label="OpenGeoRock — home">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
+          <b>OpenGeoRock</b>
+        </a>
+        <p class="tagline">Open-source geotechnical software, built in the open at the Universidad Politécnica de Cartagena.</p>
+        <span class="lang" role="group" aria-label="Language"><a href="../../docs/user-guide/automation.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../../es/docs/user-guide/automation.html" hreflang="es" lang="es">ES</a></span>
+      </div>
+      <div>
+        <h5>Products</h5>
+        <ul>
+          <li><a href="../../products/slip2d.html">OGR Slip2D</a></li>
+          <li><a href="../../products/index.html">The suite</a></li>
+          <li><a href="../../ai/index.html">MCP server</a></li>
+          <li><a href="../../download/index.html">Download</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Learn</h5>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="../../docs/getting-started/quick-start.html">Quick start</a></li>
+          <li><a href="../../docs/theory/methods.html">Theory manual</a></li>
+          <li><a href="../../examples/index.html">Examples</a></li>
+          <li><a href="../../verification/index.html">Verification</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Project</h5>
+        <ul>
+          <li><a href="../../about/index.html">About</a></li>
+          <li><a href="../../about/index.html#team">Team</a></li>
+          <li><a href="../../about/index.html#cite">How to cite</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Contributing</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/LICENSE" target="_blank" rel="noopener">Licence · AGPL-3.0</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Connect</h5>
+        <ul>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/issues" target="_blank" rel="noopener">Issues</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/tree/main/docs/changelog" target="_blank" rel="noopener">Changelog</a></li>
+          <li><a href="mailto:samuel.saez@edu.upct.es">Email</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© 2026 Samuel Sáez López · OGR Slip2D is free software under AGPL-3.0-or-later, with no warranty of any kind.</span>
+      <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
+    </div>
+  </div>
+  <div class="lang-hint" role="dialog" aria-label="Idioma" lang="es">
+    ¿Prefieres leer esta web en español?
+    <div class="row"><a class="btn sm primary go" href="../../es/index.html">Ver en español</a><button class="btn sm" type="button" data-dismiss>No, gracias</button></div>
+  </div>
+</footer>
+<!-- @end footer -->
+</body>
+</html>

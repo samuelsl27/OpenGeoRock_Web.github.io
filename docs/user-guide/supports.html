@@ -1,0 +1,394 @@
+<!doctype html>
+<html class="no-js" lang="en" data-root="../../">
+<head>
+<meta charset="utf-8">
+<title>Supports — OGR Slip2D documentation</title>
+<meta name="description" content="Supports in OGR Slip2D: defining support types (the nine kinds and their properties), placing single supports and patterns, editing them, active and passive forces and force orientation, and the back analysis of the support force.">
+<!-- @inc head -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.replace("no-js", "js")</script>
+<link rel="canonical" href="https://opengeorock.org/docs/user-guide/supports.html">
+<link rel="alternate" hreflang="en" href="https://opengeorock.org/docs/user-guide/supports.html">
+<link rel="alternate" hreflang="es" href="https://opengeorock.org/es/docs/user-guide/supports.html">
+<link rel="alternate" hreflang="x-default" href="https://opengeorock.org/docs/user-guide/supports.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="OpenGeoRock">
+<meta property="og:title" content="Supports — OGR Slip2D documentation">
+<meta property="og:description" content="Supports in OGR Slip2D: defining support types (the nine kinds and their properties), placing single supports and patterns, editing them, active and passive forces and force orientation, and the back analysis of the support force.">
+<meta property="og:url" content="https://opengeorock.org/docs/user-guide/supports.html">
+<meta property="og:image" content="https://opengeorock.org/assets/img/og-image.png">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#f4efe6">
+<link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&amp;display=swap">
+<link rel="stylesheet" href="../../assets/css/site.css">
+<link rel="stylesheet" href="../../assets/css/docs.css">
+<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
+<script src="../../assets/js/site.js" defer></script>
+<!-- @end head -->
+</head>
+<body class="docs">
+<!-- @inc header -->
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="wrap top-inner">
+    <a class="brand" href="../../index.html" aria-label="OpenGeoRock — home">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
+      <b>OpenGeoRock</b>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <div class="has-menu" data-nav="products">
+        <button type="button" aria-expanded="false" aria-haspopup="true">Products <svg class="caret" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+        <div class="mega">
+          <div class="mega-cols">
+            <div class="mega-col">
+              <span class="label">Available today</span>
+              <a class="mega-item feature" href="../../products/slip2d.html"><b>OGR Slip2D</b><span>2D slope stability: limit equilibrium, finite-element groundwater and probabilistic analysis.</span></a>
+              <a class="mega-item" href="../../ai/index.html"><b>MCP server for AI agents <span class="tag live">new</span></b><span>Let Claude, ChatGPT or a local model build and run OGR Slip2D models.</span></a>
+            </div>
+            <div class="mega-col">
+              <span class="label">On the roadmap</span>
+              <a class="mega-item" href="../../products/index.html#ogr-data"><b>OGR Data</b><span>Soil and rock-mass property database</span></a>
+              <a class="mega-item" href="../../products/index.html#ogr-fem2d"><b>OGR FEM2D</b><span>2D elastoplastic finite elements</span></a>
+              <a class="mega-item" href="../../products/index.html#ogr-slip3d"><b>OGR Slip3D</b><span>3D limit equilibrium</span></a>
+              <a class="mega-item" href="../../products/index.html#ogr-fem3d"><b>OGR FEM3D</b><span>3D finite elements with coupled flow</span></a>
+            </div>
+            <div class="mega-col">
+              <span class="label">Use it from</span>
+              <a class="mega-item" href="../../docs/getting-started/interface.html"><b>The desktop program</b><span>Modeller, interpreter and Python terminal</span></a>
+              <a class="mega-item" href="../../docs/reference/python-api.html"><b>Python</b><span>Script analyses from your own code</span></a>
+              <a class="mega-item" href="../../docs/reference/cli.html"><b>The command line</b><span>Batch runs with ogr-slip2d-cli</span></a>
+            </div>
+          </div>
+          <div class="mega-foot"><span>Five programs, one open core.</span><a href="../../products/index.html">All products →</a></div>
+        </div>
+      </div>
+      <a href="../../examples/index.html" data-nav="examples">Examples</a>
+      <a href="../../ai/index.html" data-nav="ai">AI &amp; MCP</a>
+      <a href="../../docs/index.html" data-nav="docs" aria-current="page">Docs</a>
+      <a href="../../verification/index.html" data-nav="verification">Verification</a>
+      <a href="../../about/index.html" data-nav="about">About</a>
+    </nav>
+    <div class="top-right">
+      <span class="lang" role="group" aria-label="Language"><a href="../../docs/user-guide/supports.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../../es/docs/user-guide/supports.html" hreflang="es" lang="es">ES</a></span>
+      <a class="btn gh" href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener" aria-label="Source code on GitHub"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0C17.3 4.7 18.3 5 18.3 5c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0012 .5z"/></svg><span>GitHub</span></a>
+      <a class="btn primary" href="../../download/index.html" data-nav="download">Get OGR Slip2D</a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Main (mobile)">
+    <span class="label">Products</span>
+    <a href="../../products/slip2d.html">OGR Slip2D</a>
+    <div class="sub"><a href="../../products/index.html">The OpenGeoRock suite</a><a href="../../ai/index.html">MCP server for AI agents</a></div>
+    <span class="label">Learn</span>
+    <a href="../../examples/index.html">Examples</a>
+    <a href="../../docs/index.html">Documentation</a>
+    <a href="../../verification/index.html">Verification</a>
+    <span class="label">Project</span>
+    <a href="../../about/index.html">About</a>
+    <a href="../../download/index.html">Get OGR Slip2D</a>
+    <a href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener">Source on GitHub ↗</a>
+    <span class="lang" role="group" aria-label="Language"><a href="../../docs/user-guide/supports.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../../es/docs/user-guide/supports.html" hreflang="es" lang="es">ES</a></span>
+  </nav>
+</header>
+<!-- @end header -->
+
+<div class="doc-shell">
+  <aside class="doc-side" id="doc-side">
+<!-- @inc docnav -->
+<div class="doc-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input type="search" placeholder="Search the documentation  /" aria-label="Search the documentation" autocomplete="off"><div class="results" role="listbox"></div></div>
+<nav class="doc-nav" aria-label="Documentation">
+<a class="home" href="../../docs/index.html"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 016.5 3H20v15H6.5A2.5 2.5 0 004 20.5z"/><path d="M4 20.5A2.5 2.5 0 016.5 18H20v3H6.5A2.5 2.5 0 014 20.5z"/></svg> Documentation home</a>
+<details open><summary>1 · Getting started</summary><ul>
+<li><a href="../../docs/getting-started/installation.html"><span class="n">1.1</span><span>Installation</span></a></li>
+<li><a href="../../docs/getting-started/quick-start.html"><span class="n">1.2</span><span>Quick start: your first model</span></a></li>
+<li><a href="../../docs/getting-started/interface.html"><span class="n">1.3</span><span>The interface</span></a></li>
+</ul></details>
+<details open><summary>2 · User guide</summary><ul>
+<li><a href="../../docs/user-guide/project-settings.html"><span class="n">2.1</span><span>Project settings</span></a></li>
+<li><a href="../../docs/user-guide/geometry.html"><span class="n">2.2</span><span>Geometry and boundaries</span></a></li>
+<li><a href="../../docs/user-guide/materials.html"><span class="n">2.3</span><span>Materials</span></a></li>
+<li><a href="../../docs/user-guide/water.html"><span class="n">2.4</span><span>Water and pore pressure</span></a></li>
+<li><a href="../../docs/user-guide/loads.html"><span class="n">2.5</span><span>Loads and seismic loading</span></a></li>
+<li><a href="../../docs/user-guide/supports.html" aria-current="page"><span class="n">2.6</span><span>Supports</span></a></li>
+<li><a href="../../docs/user-guide/surfaces.html"><span class="n">2.7</span><span>Slip surfaces and search</span></a></li>
+<li><a href="../../docs/user-guide/results.html"><span class="n">2.8</span><span>Computing and interpreting results</span></a></li>
+<li><a href="../../docs/user-guide/groundwater.html"><span class="n">2.9</span><span>Finite-element groundwater</span></a></li>
+<li><a href="../../docs/user-guide/probabilistic.html"><span class="n">2.10</span><span>Probabilistic and sensitivity analysis</span></a></li>
+<li><a href="../../docs/user-guide/design-standards.html"><span class="n">2.11</span><span>Design standards</span></a></li>
+<li><a href="../../docs/user-guide/automation.html"><span class="n">2.12</span><span>Reports, scripting and the command line</span></a></li>
+</ul></details>
+<details open><summary>3 · Theory manual</summary><ul>
+<li><a href="../../docs/theory/limit-equilibrium.html"><span class="n">3.1</span><span>Limit equilibrium and the factor of safety</span></a></li>
+<li><a href="../../docs/theory/methods.html"><span class="n">3.2</span><span>Methods of slices</span></a></li>
+<li><a href="../../docs/theory/interslice.html"><span class="n">3.3</span><span>Interslice forces, convergence and admissibility</span></a></li>
+<li><a href="../../docs/theory/search.html"><span class="n">3.4</span><span>Slip-surface search</span></a></li>
+<li><a href="../../docs/theory/strength.html"><span class="n">3.5</span><span>Shear strength models</span></a></li>
+<li><a href="../../docs/theory/pore-pressure.html"><span class="n">3.6</span><span>Pore pressure and unsaturated strength</span></a></li>
+<li><a href="../../docs/theory/seepage.html"><span class="n">3.7</span><span>Finite-element seepage</span></a></li>
+<li><a href="../../docs/theory/rapid-drawdown.html"><span class="n">3.8</span><span>Rapid drawdown</span></a></li>
+<li><a href="../../docs/theory/seismic.html"><span class="n">3.9</span><span>Seismic analysis</span></a></li>
+<li><a href="../../docs/theory/supports.html"><span class="n">3.10</span><span>Support forces</span></a></li>
+<li><a href="../../docs/theory/probabilistic.html"><span class="n">3.11</span><span>Probabilistic analysis</span></a></li>
+<li><a href="../../docs/theory/partial-factors.html"><span class="n">3.12</span><span>Partial factors (Eurocode 7)</span></a></li>
+</ul></details>
+<details open><summary>4 · Verification</summary><ul>
+<li><a href="../../docs/verification/methodology.html"><span class="n">4.1</span><span>Verification methodology</span></a></li>
+<li><a href="../../docs/verification/slope-benchmarks.html"><span class="n">4.2</span><span>Limit-equilibrium benchmarks</span></a></li>
+<li><a href="../../docs/verification/analytic-checks.html"><span class="n">4.3</span><span>Groundwater and analytic checks</span></a></li>
+</ul></details>
+<details open><summary>5 · Reference</summary><ul>
+<li><a href="../../docs/reference/mcp.html"><span class="n">5.1</span><span>MCP server</span></a></li>
+<li><a href="../../docs/reference/cli.html"><span class="n">5.2</span><span>Command-line interface</span></a></li>
+<li><a href="../../docs/reference/python-api.html"><span class="n">5.3</span><span>Python API</span></a></li>
+<li><a href="../../docs/reference/file-format.html"><span class="n">5.4</span><span>The .ogr file format</span></a></li>
+<li><a href="../../docs/reference/error-codes.html"><span class="n">5.5</span><span>Error codes</span></a></li>
+<li><a href="../../docs/reference/notation.html"><span class="n">5.6</span><span>Notation and glossary</span></a></li>
+<li><a href="../../docs/reference/bibliography.html"><span class="n">5.7</span><span>Bibliography</span></a></li>
+</ul></details>
+</nav>
+<!-- @end docnav -->
+  </aside>
+
+  <main id="main" class="doc-main">
+    <header class="doc-head">
+<!-- @inc dochead -->
+<button class="doc-side-toggle" type="button" aria-controls="doc-side" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg> Contents</button>
+<nav class="crumbs label" aria-label="Breadcrumb"><a href="../../docs/index.html">Documentation</a><span aria-hidden="true">/</span><span>2 · User guide</span></nav>
+<div class="chapter label">2.6</div>
+<h1>Supports</h1>
+<div class="meta label"><span>Describes OGR Slip2D <span data-v>0.1.235</span></span></div>
+<!-- @end dochead -->
+    </header>
+
+    <article class="doc prose">
+      <p class="lede">Anchors, soil nails, piles, geosynthetics and walls add a force where a slip surface crosses them. In OGR Slip2D a support is a line from its <em>head</em>, at the slope face, to its <em>tail</em>, inside the ground, and it takes its properties from a named support type defined once for the project. This page explains how to define support types, place supports one by one or as a pattern, edit them, choose between active and passive forces, and find the support force a design needs with the back analysis. How each type develops its force is the subject of <a class="xref" href="../theory/supports.html">Section 3.10</a>.</p>
+
+      <h2 id="define"><span class="secnum">2.6.1</span><span class="ht">Defining support types</span><a class="anchor" href="#define" aria-label="Link to this section">#</a></h2>
+      <p>Supports cannot be placed until the project has at least one support type. Choose <span class="ui">Properties → Define Support…</span> to open <strong>Define Support Properties</strong>. The list on the left, <strong>Support Types</strong>, holds the named property sets of the project, each shown with its kind in brackets; <span class="ui">+ Add</span> creates one, <span class="ui">Duplicate</span> copies the selected one and <span class="ui">− Remove</span> deletes it (the last one cannot be removed). Opened on a project without types, the dialog starts with <em>Type 1</em>, an End Anchored support.</p>
+      <figure class="tbl" id="tbl-define">
+        <figcaption><span class="fignum">Table 2.6.1</span> Fields of a support type.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Field</th><th>Meaning</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Name</strong></td><td>Name of the property set, used in every list of supports</td></tr>
+              <tr><td><strong>Support Type</strong></td><td>One of nine kinds (<a class="xref" href="#tbl-types">Table 2.6.2</a>). Changing it resets the parameters to the defaults of the new kind.</td></tr>
+              <tr><td><strong>Force Application</strong></td><td>Active or Passive (<a class="xref" href="#force">Section 2.6.2</a>); set to the default of the kind when the kind is chosen</td></tr>
+              <tr><td><strong>Force Orientation</strong></td><td>Direction of the support force (<a class="xref" href="#tbl-orientation">Table 2.6.3</a>); set to the default of the kind</td></tr>
+              <tr><td><strong>User Angle (from horizontal)</strong></td><td>Angle of the force, enabled only with <em>User-defined angle</em></td></tr>
+              <tr><td>Parameters</td><td>The properties of the kind, grouped in tabs for some of them; a short description of the kind is shown above them</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p>Parameters are labelled with their stored names in words (<em>Out Of Plane Spacing</em>, <em>Bond Length Percent</em>…) and carry their units: kN, kN/m, kPa, m, degrees or per cent. These units are fixed — they are not converted to the unit system of the project. The capacities of anchors, tiebacks, nails and piles are per support, and the program divides them by the out-of-plane spacing to obtain a force per metre of slope; a geosynthetic is described per metre of sheet width, with its strip coverage.</p>
+
+      <figure class="tbl" id="tbl-types">
+        <figcaption><span class="fignum">Table 2.6.2</span> The nine kinds of support, with their default force application and orientation and their parameters (default values).</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Kind</th><th>Defaults</th><th>Parameters</th></tr></thead>
+            <tbody>
+              <tr><td>End Anchored</td><td>Active, parallel to support</td><td>Anchor capacity 200 kN; out-of-plane spacing 1.5 m. A constant force, the capacity divided by the spacing, wherever the surface crosses the bolt.</td></tr>
+              <tr><td>Grouted Tieback</td><td>Active, parallel to support</td><td><em>Tensile / Plate</em>: tensile capacity 600 kN, plate capacity 300 kN, shear capacity 0 kN (0 = no shear). <em>Pullout</em>: bond strength 150 kN/m, bond length 30 % of the length, at the tail. <em>Geometry</em>: out-of-plane spacing 2.0 m.</td></tr>
+              <tr><td>Grouted Tieback with Friction</td><td>Active, parallel to support</td><td>As the Grouted Tieback, with <em>Pullout (Friction)</em> instead: interface model Linear (Mohr-Coulomb) or Hyperbolic, adhesion 60 kPa, friction angle 25°, grout diameter 0.15 m, bond length 30 %.</td></tr>
+              <tr><td>Soil Nail</td><td>Passive, parallel to support</td><td><em>Tensile / Plate</em>: tensile capacity 100 kN, plate capacity 50 kN, shear capacity 0 kN. <em>Pullout</em>: bond strength 30 kN/m, along the whole length. <em>Geometry</em>: out-of-plane spacing 1.5 m.</td></tr>
+              <tr><td>Pile / Micropile</td><td>Passive, tangent to slip surface</td><td>Failure mode Shear or Ito &amp; Matsui; pile shear strength 100 kN; out-of-plane spacing 2.0 m; pile diameter 0.6 m (Ito &amp; Matsui only); force location at the slip surface or at the centroid of the pressure diagram.</td></tr>
+              <tr><td>Geosynthetic</td><td>Passive, parallel to support</td><td><em>Tensile</em>: tensile capacity 50 kN/m, strip coverage 100 %, connection strength 0 kN/m, anchorage None, Slope face, Embedded end or Both ends. <em>Pullout &amp; Stripping</em>: adhesion and friction angle (0 kPa, 25°), coefficient of interaction Ci (0.8) or friction factor F* (0.6). <em>F* vs Depth</em>: F* constant or a function of depth.</td></tr>
+              <tr><td>User Defined</td><td>Active, parallel to support</td><td>Out-of-plane spacing 1.0 m and a table of force per support against distance from the head, interpolated linearly and constant beyond its ends (by default 100, 200 and 100 kN at 0, 5 and 10 m).</td></tr>
+              <tr><td>Retaining Wall (EFP)</td><td>Active, horizontal</td><td>Profile Uniform, Triangular (default), Trapezoidal or Custom; pressure 20 kPa (uniform); equivalent fluid pressure 25 kN/m³ (triangular and trapezoidal); flat part 60 % of the height (trapezoidal); force location. Cannot be placed as a pattern.</td></tr>
+              <tr><td>Helical Anchor</td><td>Active, tangent to slip surface</td><td><em>Capacities</em>: tensile capacity 150 kN, head assembly capacity 100 kN, shear capacity 0 kN. <em>Anchor</em>: shaft Round or Square, shaft width 0.09 m, 3 helices of average diameter 0.25 m at 1.5 m spacing. <em>Geometry</em>: out-of-plane spacing 2.0 m. Its capacity is computed from the soil.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p>The tieback, nail, geosynthetic and anchor capacities combine several failure modes — tensile rupture, pullout behind the slip surface, stripping of the head or plate — and the force at a crossing is the smallest that applies there. The Ito &amp; Matsui mode of the pile derives its force from the soil flowing between the piles of a row <a class="cite" href="../reference/bibliography.html#ito1975">(Ito &amp; Matsui, 1975)</a>. The equations are in <a class="xref" href="../theory/supports.html">Section 3.10</a>.</p>
+      <p><span class="ui">OK</span> stores the list. Supports already placed follow their property set: a change of kind or of parameters applies to them at once. A support whose set has been removed falls back to the first set of the same kind — or, when there is none, to the default properties of that kind — and the analysis notes say so.</p>
+
+      <h2 id="force"><span class="secnum">2.6.2</span><span class="ht">Force application and orientation</span><a class="anchor" href="#force" aria-label="Link to this section">#</a></h2>
+      <p>The force of a support can enter the equilibrium of the sliding mass in two ways <a class="cite" href="../reference/bibliography.html#duncan2005">(Duncan &amp; Wright, 2005)</a>:</p>
+      <ul>
+        <li><strong>Active</strong>: the force reduces the driving action, as a prestressed anchor does before any movement: <span class="m" data-tex="F = R / (D - T)"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi><mo>=</mo><mi>R</mi><mi mathvariant="normal">/</mi><mo stretchy="false">(</mo><mi>D</mi><mo>−</mo><mi>T</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">F = R / (D - T)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">F</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0077em;">R</span><span class="mord">/</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.0278em;">D</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">T</span><span class="mclose">)</span></span></span></span><!--/k--></span>.</li>
+        <li><strong>Passive</strong>: the force adds to the resistance and is mobilised only as the mass moves, as an untensioned nail: <span class="m" data-tex="F = (R + T) / D"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi><mo>=</mo><mo stretchy="false">(</mo><mi>R</mi><mo>+</mo><mi>T</mi><mo stretchy="false">)</mo><mi mathvariant="normal">/</mi><mi>D</mi></mrow><annotation encoding="application/x-tex">F = (R + T) / D</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">F</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.0077em;">R</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">T</span><span class="mclose">)</span><span class="mord">/</span><span class="mord mathnormal" style="margin-right:0.0278em;">D</span></span></span></span><!--/k--></span>, so the support force is divided by the factor of safety like the strength of the soil.</li>
+      </ul>
+      <p>Here <span class="m" data-tex="R"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.0077em;">R</span></span></span></span><!--/k--></span> and <span class="m" data-tex="D"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi></mrow><annotation encoding="application/x-tex">D</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.0278em;">D</span></span></span></span><!--/k--></span> are the resisting and driving sums and <span class="m" data-tex="T"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">T</span></span></span></span><!--/k--></span> the support force. For the same force the two give different factors of safety; the defaults of each kind are listed in <a class="xref" href="#tbl-types">Table 2.6.2</a>.</p>
+      <figure class="tbl" id="tbl-orientation">
+        <figcaption><span class="fignum">Table 2.6.3</span> Force orientations.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Force Orientation</th><th>Direction of the force at the crossing</th></tr></thead>
+            <tbody>
+              <tr><td>Tangent to slip surface</td><td>Along the slip surface, resisting the movement</td></tr>
+              <tr><td>Parallel to support</td><td>Along the support, from head to tail: a bolt in tension pulls the sliding mass towards its anchor</td></tr>
+              <tr><td>Bisector (tangent + parallel)</td><td>Halfway between the two above</td></tr>
+              <tr><td>Horizontal</td><td>Horizontal, against the failure direction</td></tr>
+              <tr><td>Perpendicular to pile</td><td>Across the support, on the side that resists the movement</td></tr>
+              <tr><td>User-defined angle</td><td>At <strong>User Angle (from horizontal)</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <div class="note warn"><span class="label">Where application and orientation are stored</span><p>Each placed support keeps its own force application and orientation. <span class="ui">Add Support</span> copies them from the support type when the support is placed; <span class="ui">Add Support Pattern…</span> takes them from its own dialog, where they start at <em>Active</em> and <em>Tangent To Slip</em> whatever the type says. Changing them later in Define Support does not change the supports already placed: edit those with <span class="ui">Properties…</span> in their right-click menu, or with <span class="ui">Modify Pattern…</span> for a row.</p></div>
+
+      <h2 id="place"><span class="secnum">2.6.3</span><span class="ht">Placing supports</span><a class="anchor" href="#place" aria-label="Link to this section">#</a></h2>
+      <h3 id="add-support"><span class="ht">One support at a time</span><a class="anchor" href="#add-support" aria-label="Link to this section">#</a></h3>
+      <ol>
+        <li>Choose <span class="ui">Support → Add Support</span>.</li>
+        <li>Click the <strong>head</strong>, at the slope face, then the <strong>tail</strong>, the end inside the ground. Clicks are snapped like any drawing.</li>
+        <li>Repeat for the next support; press <kbd>Esc</kbd> to finish.</li>
+      </ol>
+      <p>The order of the clicks matters: the stripping length is measured from the head and the pullout length from the tail, and a force parallel to the support pulls from head to tail. <span class="ui">Add Support</span> always uses the <strong>first</strong> support type of the list in Define Support; to give a support another type, use <span class="ui">Support → Modify Support…</span> or <span class="ui">Properties…</span> in its right-click menu.</p>
+
+      <h3 id="pattern"><span class="ht">A pattern of supports</span><a class="anchor" href="#pattern" aria-label="Link to this section">#</a></h3>
+      <p><span class="ui">Support → Add Support Pattern…</span> places a row of identical supports along the slope. Fill in the dialog, press <span class="ui">OK</span>, then click two points along the slope face: the first support has its head on the first point and the others follow at the in-plane spacing along the segment, as many as fit.</p>
+      <figure class="tbl" id="tbl-pattern">
+        <figcaption><span class="fignum">Table 2.6.4</span> Add Support Pattern dialog.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Field</th><th>Meaning</th><th>Default</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Type</strong></td><td>Support type of the row; Retaining Wall (EFP) types are not offered</td><td>First type</td></tr>
+              <tr><td><strong>Length</strong></td><td>Length of every support</td><td class="n">6.0 m</td></tr>
+              <tr><td><strong>In-plane spacing</strong></td><td>Distance between heads along the picked segment</td><td class="n">1.5 m</td></tr>
+              <tr><td><strong>Mode</strong></td><td><em>Angle from horizontal</em>: every support at <strong>Angle</strong>. <em>Perpendicular to boundary</em>: normal to the picked segment. <em>Vertical (depth)</em>: straight down.</td><td>Angle from horizontal</td></tr>
+              <tr><td><strong>Angle</strong></td><td>Angle of the supports from the positive <span class="m" data-tex="x"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span></span></span></span><!--/k--></span> axis, counter-clockwise; negative values point downwards. Only for <em>Angle from horizontal</em>.</td><td>−15°</td></tr>
+              <tr><td><strong>Flip angle 180°</strong></td><td>Reverses the direction from head to tail</td><td>off</td></tr>
+              <tr><td><strong>Application</strong>, <strong>Force direction</strong></td><td>Force application and orientation given to every support of the row</td><td>Active, Tangent To Slip</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p>The default angle of −15° points down and to the right, into a slope whose crest is on the right (failure from right to left); for a slope that fails from left to right use an angle such as −165°. With <em>Perpendicular to boundary</em>, click the two points from left to right so that the supports point into the ground.</p>
+
+      <h2 id="edit"><span class="secnum">2.6.4</span><span class="ht">Editing supports</span><a class="anchor" href="#edit" aria-label="Link to this section">#</a></h2>
+      <figure class="tbl" id="tbl-edit">
+        <figcaption><span class="fignum">Table 2.6.5</span> Commands that change placed supports.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Command</th><th>What it does</th></tr></thead>
+            <tbody>
+              <tr><td>Right-click → <span class="ui">Properties…</span></td><td>Opens <strong>Support Properties</strong> for that support: name, support type, force application, force orientation, user angle, head and tail coordinates and colour, with its length and axis angle.</td></tr>
+              <tr><td>Right-click → <span class="ui">Modify Pattern…</span></td><td>Finds the supports of the same kind and similar length laid at a regular spacing, and edits them together: type, length, in-plane spacing, angle from horizontal, application and orientation.</td></tr>
+              <tr><td><span class="ui">Support → Modify Support…</span></td><td>Choose a support from a list, then its support type.</td></tr>
+              <tr><td><span class="ui">Support → Move Support…</span></td><td>Choose a support, then a displacement in <span class="m" data-tex="x"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span></span></span></span><!--/k--></span> and in <span class="m" data-tex="y"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi></mrow><annotation encoding="application/x-tex">y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">y</span></span></span></span><!--/k--></span>; both ends move, so length and angle are kept.</td></tr>
+              <tr><td><span class="ui">Support → Stretch Support</span> or right-click → <span class="ui">Stretch</span></td><td>Click near an end of a support, then the new position of that end. The end moved is the one nearest the first click.</td></tr>
+              <tr><td><span class="ui">Support → Ungroup Support Pattern</span></td><td>Releases every pattern of the model at once, so that each support can be edited on its own.</td></tr>
+              <tr><td><span class="ui">Support → Delete Support</span> or right-click → <span class="ui">Delete</span></td><td>Click supports to delete them; <kbd>Esc</kbd> finishes.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p>Changes to supports are not on the undo stack. Supports are not moved when the geometry is edited, so check them after reshaping the slope. <span class="ui">Tools → Property Tables → Support Properties Table</span> lists the supports of the model; in the Interpret window, <span class="ui">Data → Support Force Analysis…</span> and <span class="ui">Data → Support Force Diagram…</span> show the force each support develops along its length and which failure mode governs (<a class="xref" href="results.html">Section 2.8</a>).</p>
+
+      <h2 id="back-analysis"><span class="secnum">2.6.5</span><span class="ht">Back analysis of the support force</span><a class="anchor" href="#back-analysis" aria-label="Link to this section">#</a></h2>
+      <p><span class="ui">Support → Back Analysis of Support Force…</span> answers the design question the other way round: what horizontal force is needed for every slip surface to reach a target factor of safety? The factor is fixed at the target, so the force comes out of the resisting and driving sums without iteration, under both the active and the passive assumptions; the surface that needs the largest force is reported <a class="cite" href="../reference/bibliography.html#duncan2005">(Duncan &amp; Wright, 2005)</a>.</p>
+      <figure class="tbl" id="tbl-back">
+        <figcaption><span class="fignum">Table 2.6.6</span> Back Analysis of Support Force dialog.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Field</th><th>Meaning</th><th>Default</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Target factor of safety</strong></td><td>Factor of safety every surface must reach (0.001 to 100)</td><td class="n">1.3</td></tr>
+              <tr><td><strong>Elevation (y)</strong></td><td>Elevation of the horizontal force. It affects only Bishop, which takes moments; for Janbu the position of a horizontal force does not matter.</td><td class="n">0.0</td></tr>
+              <tr><td><strong>Analysis method</strong></td><td><code>bishop_simplified</code>, <code>janbu_simplified</code> or <code>janbu_corrected</code>; the method is not defined for the others</td><td><code>bishop_simplified</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p>The search configured in Surface Options is run on the model, with the design standard if one is on. The status bar reports the required force for the target factor of safety, the active and passive forces of the governing surface, its factor of safety without support and the number of surfaces analysed. The passive value is the larger of the two, so it is the conservative one. In the Interpret window, <span class="ui">Data → Back Analysis…</span> computes the same quantities for the critical surface shown there. The back analysis neither uses nor changes the results of <span class="ui">Analysis → Compute</span>.</p>
+
+      <div class="impl">
+        <span class="label">In OGR Slip2D</span>
+        <p>Each kind of support is a plug-in that declares its parameters, its default application and orientation and the force it can develop at a distance from its head; the dialog is built from those declarations. Every placed support names its property set, so two sets of the same kind with different capacities stay distinct in the analysis.</p>
+        <span class="src">Source: <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_core/support/support.py" target="_blank" rel="noopener">ogr_core/support/support.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_slip2d/support_integration.py" target="_blank" rel="noopener">ogr_slip2d/support_integration.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_slip2d/back_analysis.py" target="_blank" rel="noopener">ogr_slip2d/back_analysis.py</a></span>
+      </div>
+    </article>
+
+<!-- @inc docfoot -->
+<nav class="doc-pager" aria-label="Pages">
+<a class="prev" href="../../docs/user-guide/loads.html"><span class="label">← Previous · 2.5</span><b>Loads and seismic loading</b></a>
+<a class="next" href="../../docs/user-guide/surfaces.html"><span class="label">2.7 · Next →</span><b>Slip surfaces and search</b></a>
+</nav>
+<div class="doc-edit label"><a href="https://github.com/samuelsl27/OpenGeoRock_Web.github.io/blob/main/docs/user-guide/supports.html" target="_blank" rel="noopener">Edit this page ↗</a><a href="https://github.com/samuelsl27/OGR-Slip2D/issues" target="_blank" rel="noopener">Report a problem ↗</a></div>
+<!-- @end docfoot -->
+  </main>
+
+  <aside class="doc-toc" aria-label="On this page">
+    <div class="toc-inner">
+<!-- @inc pagetoc -->
+<span class="label">On this page</span><ul><li class="h2"><a href="#define">2.6.1 Defining support types</a></li><li class="h2"><a href="#force">2.6.2 Force application and orientation</a></li><li class="h2"><a href="#place">2.6.3 Placing supports</a></li><li class="h3"><a href="#add-support">One support at a time</a></li><li class="h3"><a href="#pattern">A pattern of supports</a></li><li class="h2"><a href="#edit">2.6.4 Editing supports</a></li><li class="h2"><a href="#back-analysis">2.6.5 Back analysis of the support force</a></li></ul><button class="print" type="button"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="1.5"/><path d="M6 14h12v7H6z"/></svg> Print this page</button>
+<!-- @end pagetoc -->
+    </div>
+  </aside>
+</div>
+
+<!-- @inc footer -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <a class="brand" href="../../index.html" aria-label="OpenGeoRock — home">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
+          <b>OpenGeoRock</b>
+        </a>
+        <p class="tagline">Open-source geotechnical software, built in the open at the Universidad Politécnica de Cartagena.</p>
+        <span class="lang" role="group" aria-label="Language"><a href="../../docs/user-guide/supports.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../../es/docs/user-guide/supports.html" hreflang="es" lang="es">ES</a></span>
+      </div>
+      <div>
+        <h5>Products</h5>
+        <ul>
+          <li><a href="../../products/slip2d.html">OGR Slip2D</a></li>
+          <li><a href="../../products/index.html">The suite</a></li>
+          <li><a href="../../ai/index.html">MCP server</a></li>
+          <li><a href="../../download/index.html">Download</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Learn</h5>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="../../docs/getting-started/quick-start.html">Quick start</a></li>
+          <li><a href="../../docs/theory/methods.html">Theory manual</a></li>
+          <li><a href="../../examples/index.html">Examples</a></li>
+          <li><a href="../../verification/index.html">Verification</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Project</h5>
+        <ul>
+          <li><a href="../../about/index.html">About</a></li>
+          <li><a href="../../about/index.html#team">Team</a></li>
+          <li><a href="../../about/index.html#cite">How to cite</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Contributing</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/LICENSE" target="_blank" rel="noopener">Licence · AGPL-3.0</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Connect</h5>
+        <ul>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/issues" target="_blank" rel="noopener">Issues</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/tree/main/docs/changelog" target="_blank" rel="noopener">Changelog</a></li>
+          <li><a href="mailto:samuel.saez@edu.upct.es">Email</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© 2026 Samuel Sáez López · OGR Slip2D is free software under AGPL-3.0-or-later, with no warranty of any kind.</span>
+      <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
+    </div>
+  </div>
+  <div class="lang-hint" role="dialog" aria-label="Idioma" lang="es">
+    ¿Prefieres leer esta web en español?
+    <div class="row"><a class="btn sm primary go" href="../../es/index.html">Ver en español</a><button class="btn sm" type="button" data-dismiss>No, gracias</button></div>
+  </div>
+</footer>
+<!-- @end footer -->
+</body>
+</html>

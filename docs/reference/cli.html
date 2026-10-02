@@ -1,0 +1,437 @@
+<!doctype html>
+<html class="no-js" lang="en" data-root="../../">
+<head>
+<meta charset="utf-8">
+<title>Command-line interface — OGR Slip2D documentation</title>
+<meta name="description" content="Reference of ogr-slip2d-cli: the info, compute, methods, strength-models and new-demo commands, every option of compute and its method aliases, the HDF5 output, exit codes, and the options of the graphical launcher.">
+<!-- @inc head -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.replace("no-js", "js")</script>
+<link rel="canonical" href="https://opengeorock.org/docs/reference/cli.html">
+<link rel="alternate" hreflang="en" href="https://opengeorock.org/docs/reference/cli.html">
+<link rel="alternate" hreflang="es" href="https://opengeorock.org/es/docs/reference/cli.html">
+<link rel="alternate" hreflang="x-default" href="https://opengeorock.org/docs/reference/cli.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="OpenGeoRock">
+<meta property="og:title" content="Command-line interface — OGR Slip2D documentation">
+<meta property="og:description" content="Reference of ogr-slip2d-cli: the info, compute, methods, strength-models and new-demo commands, every option of compute and its method aliases, the HDF5 output, exit codes, and the options of the graphical launcher.">
+<meta property="og:url" content="https://opengeorock.org/docs/reference/cli.html">
+<meta property="og:image" content="https://opengeorock.org/assets/img/og-image.png">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#f4efe6">
+<link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&amp;display=swap">
+<link rel="stylesheet" href="../../assets/css/site.css">
+<link rel="stylesheet" href="../../assets/css/docs.css">
+<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
+<script src="../../assets/js/site.js" defer></script>
+<!-- @end head -->
+</head>
+<body class="docs">
+<!-- @inc header -->
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="wrap top-inner">
+    <a class="brand" href="../../index.html" aria-label="OpenGeoRock — home">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
+      <b>OpenGeoRock</b>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <div class="has-menu" data-nav="products">
+        <button type="button" aria-expanded="false" aria-haspopup="true">Products <svg class="caret" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+        <div class="mega">
+          <div class="mega-cols">
+            <div class="mega-col">
+              <span class="label">Available today</span>
+              <a class="mega-item feature" href="../../products/slip2d.html"><b>OGR Slip2D</b><span>2D slope stability: limit equilibrium, finite-element groundwater and probabilistic analysis.</span></a>
+              <a class="mega-item" href="../../ai/index.html"><b>MCP server for AI agents <span class="tag live">new</span></b><span>Let Claude, ChatGPT or a local model build and run OGR Slip2D models.</span></a>
+            </div>
+            <div class="mega-col">
+              <span class="label">On the roadmap</span>
+              <a class="mega-item" href="../../products/index.html#ogr-data"><b>OGR Data</b><span>Soil and rock-mass property database</span></a>
+              <a class="mega-item" href="../../products/index.html#ogr-fem2d"><b>OGR FEM2D</b><span>2D elastoplastic finite elements</span></a>
+              <a class="mega-item" href="../../products/index.html#ogr-slip3d"><b>OGR Slip3D</b><span>3D limit equilibrium</span></a>
+              <a class="mega-item" href="../../products/index.html#ogr-fem3d"><b>OGR FEM3D</b><span>3D finite elements with coupled flow</span></a>
+            </div>
+            <div class="mega-col">
+              <span class="label">Use it from</span>
+              <a class="mega-item" href="../../docs/getting-started/interface.html"><b>The desktop program</b><span>Modeller, interpreter and Python terminal</span></a>
+              <a class="mega-item" href="../../docs/reference/python-api.html"><b>Python</b><span>Script analyses from your own code</span></a>
+              <a class="mega-item" href="../../docs/reference/cli.html"><b>The command line</b><span>Batch runs with ogr-slip2d-cli</span></a>
+            </div>
+          </div>
+          <div class="mega-foot"><span>Five programs, one open core.</span><a href="../../products/index.html">All products →</a></div>
+        </div>
+      </div>
+      <a href="../../examples/index.html" data-nav="examples">Examples</a>
+      <a href="../../ai/index.html" data-nav="ai">AI &amp; MCP</a>
+      <a href="../../docs/index.html" data-nav="docs" aria-current="page">Docs</a>
+      <a href="../../verification/index.html" data-nav="verification">Verification</a>
+      <a href="../../about/index.html" data-nav="about">About</a>
+    </nav>
+    <div class="top-right">
+      <span class="lang" role="group" aria-label="Language"><a href="../../docs/reference/cli.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../../es/docs/reference/cli.html" hreflang="es" lang="es">ES</a></span>
+      <a class="btn gh" href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener" aria-label="Source code on GitHub"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0C17.3 4.7 18.3 5 18.3 5c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0012 .5z"/></svg><span>GitHub</span></a>
+      <a class="btn primary" href="../../download/index.html" data-nav="download">Get OGR Slip2D</a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Main (mobile)">
+    <span class="label">Products</span>
+    <a href="../../products/slip2d.html">OGR Slip2D</a>
+    <div class="sub"><a href="../../products/index.html">The OpenGeoRock suite</a><a href="../../ai/index.html">MCP server for AI agents</a></div>
+    <span class="label">Learn</span>
+    <a href="../../examples/index.html">Examples</a>
+    <a href="../../docs/index.html">Documentation</a>
+    <a href="../../verification/index.html">Verification</a>
+    <span class="label">Project</span>
+    <a href="../../about/index.html">About</a>
+    <a href="../../download/index.html">Get OGR Slip2D</a>
+    <a href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener">Source on GitHub ↗</a>
+    <span class="lang" role="group" aria-label="Language"><a href="../../docs/reference/cli.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../../es/docs/reference/cli.html" hreflang="es" lang="es">ES</a></span>
+  </nav>
+</header>
+<!-- @end header -->
+
+<div class="doc-shell">
+  <aside class="doc-side" id="doc-side">
+<!-- @inc docnav -->
+<div class="doc-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input type="search" placeholder="Search the documentation  /" aria-label="Search the documentation" autocomplete="off"><div class="results" role="listbox"></div></div>
+<nav class="doc-nav" aria-label="Documentation">
+<a class="home" href="../../docs/index.html"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 016.5 3H20v15H6.5A2.5 2.5 0 004 20.5z"/><path d="M4 20.5A2.5 2.5 0 016.5 18H20v3H6.5A2.5 2.5 0 014 20.5z"/></svg> Documentation home</a>
+<details open><summary>1 · Getting started</summary><ul>
+<li><a href="../../docs/getting-started/installation.html"><span class="n">1.1</span><span>Installation</span></a></li>
+<li><a href="../../docs/getting-started/quick-start.html"><span class="n">1.2</span><span>Quick start: your first model</span></a></li>
+<li><a href="../../docs/getting-started/interface.html"><span class="n">1.3</span><span>The interface</span></a></li>
+</ul></details>
+<details open><summary>2 · User guide</summary><ul>
+<li><a href="../../docs/user-guide/project-settings.html"><span class="n">2.1</span><span>Project settings</span></a></li>
+<li><a href="../../docs/user-guide/geometry.html"><span class="n">2.2</span><span>Geometry and boundaries</span></a></li>
+<li><a href="../../docs/user-guide/materials.html"><span class="n">2.3</span><span>Materials</span></a></li>
+<li><a href="../../docs/user-guide/water.html"><span class="n">2.4</span><span>Water and pore pressure</span></a></li>
+<li><a href="../../docs/user-guide/loads.html"><span class="n">2.5</span><span>Loads and seismic loading</span></a></li>
+<li><a href="../../docs/user-guide/supports.html"><span class="n">2.6</span><span>Supports</span></a></li>
+<li><a href="../../docs/user-guide/surfaces.html"><span class="n">2.7</span><span>Slip surfaces and search</span></a></li>
+<li><a href="../../docs/user-guide/results.html"><span class="n">2.8</span><span>Computing and interpreting results</span></a></li>
+<li><a href="../../docs/user-guide/groundwater.html"><span class="n">2.9</span><span>Finite-element groundwater</span></a></li>
+<li><a href="../../docs/user-guide/probabilistic.html"><span class="n">2.10</span><span>Probabilistic and sensitivity analysis</span></a></li>
+<li><a href="../../docs/user-guide/design-standards.html"><span class="n">2.11</span><span>Design standards</span></a></li>
+<li><a href="../../docs/user-guide/automation.html"><span class="n">2.12</span><span>Reports, scripting and the command line</span></a></li>
+</ul></details>
+<details open><summary>3 · Theory manual</summary><ul>
+<li><a href="../../docs/theory/limit-equilibrium.html"><span class="n">3.1</span><span>Limit equilibrium and the factor of safety</span></a></li>
+<li><a href="../../docs/theory/methods.html"><span class="n">3.2</span><span>Methods of slices</span></a></li>
+<li><a href="../../docs/theory/interslice.html"><span class="n">3.3</span><span>Interslice forces, convergence and admissibility</span></a></li>
+<li><a href="../../docs/theory/search.html"><span class="n">3.4</span><span>Slip-surface search</span></a></li>
+<li><a href="../../docs/theory/strength.html"><span class="n">3.5</span><span>Shear strength models</span></a></li>
+<li><a href="../../docs/theory/pore-pressure.html"><span class="n">3.6</span><span>Pore pressure and unsaturated strength</span></a></li>
+<li><a href="../../docs/theory/seepage.html"><span class="n">3.7</span><span>Finite-element seepage</span></a></li>
+<li><a href="../../docs/theory/rapid-drawdown.html"><span class="n">3.8</span><span>Rapid drawdown</span></a></li>
+<li><a href="../../docs/theory/seismic.html"><span class="n">3.9</span><span>Seismic analysis</span></a></li>
+<li><a href="../../docs/theory/supports.html"><span class="n">3.10</span><span>Support forces</span></a></li>
+<li><a href="../../docs/theory/probabilistic.html"><span class="n">3.11</span><span>Probabilistic analysis</span></a></li>
+<li><a href="../../docs/theory/partial-factors.html"><span class="n">3.12</span><span>Partial factors (Eurocode 7)</span></a></li>
+</ul></details>
+<details open><summary>4 · Verification</summary><ul>
+<li><a href="../../docs/verification/methodology.html"><span class="n">4.1</span><span>Verification methodology</span></a></li>
+<li><a href="../../docs/verification/slope-benchmarks.html"><span class="n">4.2</span><span>Limit-equilibrium benchmarks</span></a></li>
+<li><a href="../../docs/verification/analytic-checks.html"><span class="n">4.3</span><span>Groundwater and analytic checks</span></a></li>
+</ul></details>
+<details open><summary>5 · Reference</summary><ul>
+<li><a href="../../docs/reference/mcp.html"><span class="n">5.1</span><span>MCP server</span></a></li>
+<li><a href="../../docs/reference/cli.html" aria-current="page"><span class="n">5.2</span><span>Command-line interface</span></a></li>
+<li><a href="../../docs/reference/python-api.html"><span class="n">5.3</span><span>Python API</span></a></li>
+<li><a href="../../docs/reference/file-format.html"><span class="n">5.4</span><span>The .ogr file format</span></a></li>
+<li><a href="../../docs/reference/error-codes.html"><span class="n">5.5</span><span>Error codes</span></a></li>
+<li><a href="../../docs/reference/notation.html"><span class="n">5.6</span><span>Notation and glossary</span></a></li>
+<li><a href="../../docs/reference/bibliography.html"><span class="n">5.7</span><span>Bibliography</span></a></li>
+</ul></details>
+</nav>
+<!-- @end docnav -->
+  </aside>
+
+  <main id="main" class="doc-main">
+    <header class="doc-head">
+<!-- @inc dochead -->
+<button class="doc-side-toggle" type="button" aria-controls="doc-side" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg> Contents</button>
+<nav class="crumbs label" aria-label="Breadcrumb"><a href="../../docs/index.html">Documentation</a><span aria-hidden="true">/</span><span>5 · Reference</span></nav>
+<div class="chapter label">5.2</div>
+<h1>Command-line interface</h1>
+<div class="meta label"><span>Describes OGR Slip2D <span data-v>0.1.235</span></span></div>
+<!-- @end dochead -->
+    </header>
+
+    <article class="doc prose">
+      <p class="lede"><code>ogr-slip2d-cli</code> runs OGR Slip2D without its window. It summarises a project, computes it as the project describes and writes the results to HDF5, lists the methods and strength models, and writes the demo slope to a file. <code>compute</code> goes through the same analysis code as <span class="ui">Analysis → Compute</span>, so a run without options gives the numbers the window gives. The last section covers the options of the graphical program's launcher.</p>
+
+      <h2 id="running"><span class="secnum">5.2.1</span><span class="ht">Running it</span><a class="anchor" href="#running" aria-label="Link to this section">#</a></h2>
+      <p>The command is installed with the package (<a class="xref" href="../getting-started/installation.html">Section 1.1</a>); <code>python -m ogr_cli</code> is the same program. Every command accepts <code>--help</code>.</p>
+      <figure class="tbl" id="tbl-commands">
+        <figcaption><span class="fignum">Table 5.2.1</span> Commands of <code>ogr-slip2d-cli</code>.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Command</th><th>What it does</th></tr></thead>
+            <tbody>
+              <tr><td><code>info PROJECT</code></td><td>Shows a summary of a <code>.ogr</code> project.</td></tr>
+              <tr><td><code>compute PROJECT [options]</code></td><td>Runs the analysis the project describes, prints the critical value of each method and saves the results to HDF5.</td></tr>
+              <tr><td><code>methods</code></td><td>Lists the limit-equilibrium methods with the equilibrium each satisfies.</td></tr>
+              <tr><td><code>strength-models</code></td><td>Lists the strength models with their parameters and units.</td></tr>
+              <tr><td><code>new-demo OUTPUT</code></td><td>Writes the demo slope as a <code>.ogr</code> file.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p>Besides <code>--help</code>, the command takes the two options of its command-line library, <code>--install-completion</code> and <code>--show-completion</code>, for shell completion.</p>
+
+      <h2 id="info"><span class="secnum">5.2.2</span><span class="ht">info</span><a class="anchor" href="#info" aria-label="Link to this section">#</a></h2>
+      <div class="code"><pre><code>ogr-slip2d-cli info slope.ogr</code></pre></div>
+      <p>Prints a table with the path, the author and company of the project summary, the number of boundaries, materials, supports, distributed loads and line loads, whether the pseudo-static seismic load is on, and the bounding box (<em>x</em><sub>min</sub>, <em>y</em><sub>min</sub>, <em>x</em><sub>max</sub>, <em>y</em><sub>max</sub>, in m). A second table lists each material with its strength model, its unit weight γ, its saturated unit weight γ<sub>sat</sub> (shown only when the material uses it below the water surface) and its colour. A file that does not exist ends with exit code 1.</p>
+
+      <h2 id="compute"><span class="secnum">5.2.3</span><span class="ht">compute</span><a class="anchor" href="#compute" aria-label="Link to this section">#</a></h2>
+      <div class="code"><pre><code>ogr-slip2d-cli compute PROJECT [--method M] [--slices N] [--nx N] [--ny N]
+                               [--dr N] [--search S] [--samples N] [--output FILE]</code></pre></div>
+      <p>Every option defaults to the value stored in the project; an option given overrides that one setting for this run and nothing else. The overrides are written on the copy loaded in memory: the <code>.ogr</code> file is never modified by a calculation.</p>
+      <figure class="tbl" id="tbl-compute-options">
+        <figcaption><span class="fignum">Table 5.2.2</span> Options of <code>compute</code> and the project setting each one overrides.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Option</th><th>Value</th><th>Overrides</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td><code>--method</code></td><td>text</td><td><code>methods.enabled_methods</code></td><td>One method id or alias (<a class="xref" href="#tbl-aliases">Table 5.2.3</a>). Without it, the methods enabled in the project, or Bishop simplified if none is enabled. An unknown name ends with exit code 2.</td></tr>
+              <tr><td><code>--slices</code></td><td>integer</td><td><code>methods.num_slices</code></td><td>Number of slices per surface.</td></tr>
+              <tr><td><code>--nx</code></td><td>integer</td><td><code>search.grid_nx</code></td><td>Grid of centres: number of <em>intervals</em> along <em>x</em> (centres = <code>nx</code> + 1).</td></tr>
+              <tr><td><code>--ny</code></td><td>integer</td><td><code>search.grid_ny</code></td><td>The same along <em>y</em>.</td></tr>
+              <tr><td><code>--dr</code></td><td>number</td><td><code>search.radius_increment</code></td><td>Radius increment as a number of intervals (radii per centre = <code>dr</code> + 1); the grid search rounds it to a whole number.</td></tr>
+              <tr><td><code>--search</code></td><td>text</td><td><code>search.search_method</code></td><td><code>grid</code>, <code>slope</code>, <code>auto_refine</code>, <code>block</code>, <code>path</code>, <code>simulated_annealing</code> or <code>particle_swarm</code>.</td></tr>
+              <tr><td><code>--samples</code></td><td>integer</td><td><code>search.num_surfaces</code>, <code>search.block_num_surfaces</code>, <code>search.path_num_surfaces</code></td><td>Number of surfaces of the Slope, Block and Path searches.</td></tr>
+              <tr><td><code>--output</code></td><td>path</td><td>—</td><td>HDF5 results file; by default the project path with the extension <code>.h5</code> (see <a href="#outputs">Output files</a>).</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <div class="note warn"><span class="label">--search is not checked</span><p>The help text of <code>--search</code> lists six values; <code>particle_swarm</code>, the seventh search, is accepted too. A value that is not one of the seven is not rejected: the engine runs a Grid Search for any id it does not know, and no note says so. Spell the search exactly, or set it in the project.</p></div>
+
+      <figure class="tbl" id="tbl-aliases">
+        <figcaption><span class="fignum">Table 5.2.3</span> Names accepted by <code>--method</code>. Case is ignored, and hyphens and spaces count as underscores.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Method id</th><th>Also accepted</th></tr></thead>
+            <tbody>
+              <tr><td><code>bishop_simplified</code></td><td><code>bishop</code></td></tr>
+              <tr><td><code>janbu_simplified</code></td><td><code>janbu</code></td></tr>
+              <tr><td><code>janbu_corrected</code></td><td>—</td></tr>
+              <tr><td><code>ordinary_fellenius</code></td><td><code>ordinary</code>, <code>fellenius</code></td></tr>
+              <tr><td><code>spencer</code></td><td>—</td></tr>
+              <tr><td><code>gle_morgenstern_price</code></td><td><code>gle</code>, <code>morgenstern_price</code></td></tr>
+              <tr><td><code>lowe_karafiath</code></td><td><code>lowe</code></td></tr>
+              <tr><td><code>corps_engineers_1</code></td><td><code>corps1</code>, <code>coe1</code>, <code>modified_swedish</code></td></tr>
+              <tr><td><code>corps_engineers_2</code></td><td><code>corps2</code>, <code>coe2</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+
+      <h3 id="compute-steps"><span class="ht">What compute does</span><a class="anchor" href="#compute-steps" aria-label="Link to this section">#</a></h3>
+      <ol>
+        <li>Loads the project and applies the overrides in memory.</li>
+        <li>Checks that the project can be analysed as configured. If it cannot, it prints every reason after <code>Cannot compute:</code> and ends with exit code 3, instead of reporting a number computed from settings it would have to drop. Examples: materials that take their pore pressure from a finite-element field that has not been computed (the run would report <span class="m" data-tex="u = 0"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>u</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">u = 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">u</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span><!--/k--></span> everywhere, which looks like a dry slope), a rapid-drawdown setup that cannot apply, a Block Search without the objects it needs, seismic coefficients out of range, a strength model with invalid parameters, or a setting name that has been retired.</li>
+        <li>Runs the analysis through the same analysis runner as the window: the design-standard partial factors applied to a copy, rapid drawdown, the project's search with its filters, slope limits and focus objects, the convergence settings, the random seed and the admissibility checks (<a class="xref" href="python-api.html">Section 5.3</a>).</li>
+        <li>Prints the notes of the run (lines starting <code>Note:</code>), then one table row per method: the critical value, the numbers of valid, invalid and attempted surfaces, the surfaces removed by focus objects (a column shown only when a focus object removed some) and whether the critical surface converged.</li>
+        <li>Writes the results to HDF5 (see <a href="#outputs">Output files</a>).</li>
+      </ol>
+      <figure class="tbl" id="tbl-compute-label">
+        <figcaption><span class="fignum">Table 5.2.4</span> What the value column of <code>compute</code> holds.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Column heading</th><th>When</th><th>Value</th></tr></thead>
+            <tbody>
+              <tr><td><code>Critical FoS</code></td><td>no design standard, no seismic Ky mode</td><td>factor of safety of the critical surface</td></tr>
+              <tr><td><code>Over-design factor</code></td><td>a design standard is active</td><td>the factor obtained with factored inputs; it must exceed 1. A line <code>Design standard applied: …</code> says so and lists the notes of the standard.</td></tr>
+              <tr><td><code>Critical Ky</code></td><td><em>Compute Ky</em> on</td><td>the lowest critical seismic coefficient of the surfaces searched</td></tr>
+              <tr><td><code>Newmark disp. (cm)</code></td><td>Newmark analysis on</td><td>permanent displacement of the critical surface, in centimetres</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <div class="note warn"><span class="label">Known defect</span><p>With a design standard <em>and</em> a seismic Ky or Newmark mode both on, the column is headed <code>Over-design factor</code> while the values printed are the critical seismic coefficients (or the displacements). The window and the operations layer caption them by the seismic quantity. The program's code declares this as a defect of the command line and leaves it unchanged in v<span data-v>0.1.235</span>.</p></div>
+      <p>A run on the demo slope (<a class="xref" href="#new-demo">Section 5.2.6</a>), whose project enables Bishop simplified and Janbu simplified:</p>
+      <div class="code"><pre><code>ogr-slip2d-cli new-demo demo
+ogr-slip2d-cli compute demo.ogr
+
+Note: The Failure Direction is set to Right to Left, which puts the crest on the right,
+but the ground surface is higher on the left (y = 25 at the left end against y = 15 at
+the right end). Tension-crack water thrust, support force direction and the Path Search
+starting face all read this setting.
+                              grid — 2 method(s)
+┌───────────────────┬──────────────┬───────┬─────────┬───────────┬───────────┐
+│ Method            │ Critical FoS │ Valid │ Invalid │ Attempted │ Converged │
+├───────────────────┼──────────────┼───────┼─────────┼───────────┼───────────┤
+│ bishop_simplified │ 1.0914       │ 1366  │ 493     │ 1859      │ True      │
+│ janbu_simplified  │ 1.0434       │ 1379  │ 480     │ 1859      │ True      │
+└───────────────────┴──────────────┴───────┴─────────┴───────────┴───────────┘
+Results saved: demo_bishop_simplified.h5
+Results saved: demo_janbu_simplified.h5</code></pre></div>
+      <p>The grid of the demo has 12 × 12 intervals and a radius increment of 10, so 13 × 13 × 11 = 1859 circles are attempted per method. The note about the failure direction appears because the demo is saved with the program's default direction (right to left) although its slope falls to the right; as the note says, that setting matters for tension-crack water, supports and the Path Search, none of which this run uses.</p>
+
+      <h3 id="outputs"><span class="ht">Output files</span><a class="anchor" href="#outputs" aria-label="Link to this section">#</a></h3>
+      <ul>
+        <li><strong>One method:</strong> the file given with <code>--output</code>, or the project path with the extension <code>.h5</code> (<code>slope.ogr</code> → <code>slope.h5</code>).</li>
+        <li><strong>Several methods:</strong> one file per method, named after the base file with the method id appended: <code>slope_bishop_simplified.h5</code>, <code>slope_spencer.h5</code>… With <code>--output results/run.h5</code> the names are <code>results/run_&lt;method_id&gt;.h5</code>.</li>
+        <li>A missing folder is created and an existing file of the same name is overwritten.</li>
+      </ul>
+      <p>Each file holds one search: every surface analysed with its slices, and summary arrays. The layout is described in <a class="xref" href="file-format.html#results">Section 5.4.5</a>. When the window computes a project that has a file (opened or saved), it writes the first method's result to the same <code>&lt;project&gt;.h5</code> name.</p>
+
+      <h3 id="exit-codes"><span class="ht">Exit codes</span><a class="anchor" href="#exit-codes" aria-label="Link to this section">#</a></h3>
+      <figure class="tbl" id="tbl-cli-exit">
+        <figcaption><span class="fignum">Table 5.2.5</span> Exit codes of <code>ogr-slip2d-cli</code>.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th class="n">Code</th><th>Meaning</th></tr></thead>
+            <tbody>
+              <tr><td class="n">0</td><td>Success. A method that found no valid surface is reported as <code>no valid surface</code> in its row and still exits with 0.</td></tr>
+              <tr><td class="n">1</td><td>The project file does not exist (<code>info</code>, <code>compute</code>).</td></tr>
+              <tr><td class="n">2</td><td>Unknown method name in <code>--method</code>; also any usage error reported by the command-line library (a missing argument, an unknown option).</td></tr>
+              <tr><td class="n">3</td><td>The project cannot be analysed as configured; the reasons are printed.</td></tr>
+              <tr><td class="n">4</td><td>The run produced no result for any method.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+
+      <h2 id="methods"><span class="secnum">5.2.4</span><span class="ht">methods</span><a class="anchor" href="#methods" aria-label="Link to this section">#</a></h2>
+      <p>Lists the nine registered methods with their id, display name and whether they satisfy force and moment equilibrium; the ids are those accepted by <code>--method</code> and by the operations layer (<a class="xref" href="../theory/methods.html">Section 3.2</a>).</p>
+      <div class="code"><pre><code>ogr-slip2d-cli methods
+
+                           Registered LEM methods
+┌───────────────────────┬─────────────────────────┬───────────┬────────────┐
+│ ID                    │ Display Name            │ Force eq. │ Moment eq. │
+├───────────────────────┼─────────────────────────┼───────────┼────────────┤
+│ bishop_simplified     │ Bishop Simplified       │ —         │ ✓          │
+│ gle_morgenstern_price │ GLE / Morgenstern-Price │ ✓         │ ✓          │
+│ janbu_simplified      │ Janbu Simplified        │ ✓         │ —          │
+│ janbu_corrected       │ Janbu Corrected         │ ✓         │ —          │
+│ corps_engineers_1     │ Corps of Engineers #1   │ ✓         │ —          │
+│ corps_engineers_2     │ Corps of Engineers #2   │ ✓         │ —          │
+│ lowe_karafiath        │ Lowe-Karafiath          │ ✓         │ —          │
+│ ordinary_fellenius    │ Ordinary / Fellenius    │ —         │ ✓          │
+│ spencer               │ Spencer                 │ ✓         │ ✓          │
+└───────────────────────┴─────────────────────────┴───────────┴────────────┘</code></pre></div>
+
+      <h2 id="strength-models"><span class="secnum">5.2.5</span><span class="ht">strength-models</span><a class="anchor" href="#strength-models" aria-label="Link to this section">#</a></h2>
+      <p>Lists the 22 registered strength models with their id, display name and parameters with units, for example <code>mohr_coulomb</code> (cohesion in kPa, friction angle in degrees), <code>hoek_brown</code> (<code>sigci</code> in kPa, <code>mb</code>, <code>s</code>, <code>a</code>) or <code>barton_bandis</code> (<code>phi_r</code>, <code>JRC</code>, <code>JCS</code>, <code>max_total_friction</code>). Models defined by a table or by other materials, such as <code>shear_normal_function</code> or <code>generalized_anisotropic</code>, show no parameters. The models are described in <a class="xref" href="../theory/strength.html">Section 3.5</a>.</p>
+      <div class="code"><pre><code>ogr-slip2d-cli strength-models</code></pre></div>
+
+      <h2 id="new-demo"><span class="secnum">5.2.6</span><span class="ht">new-demo</span><a class="anchor" href="#new-demo" aria-label="Link to this section">#</a></h2>
+      <div class="code"><pre><code>ogr-slip2d-cli new-demo demo          <span class="c"># writes demo.ogr</span></code></pre></div>
+      <p>Writes the demo slope, the same model as <span class="ui">File → Load Demo Slope</span> in the window and <code>project_new(template="demo")</code> for an agent: a homogeneous slope 10 m high at 1V:1H, external boundary (0, 0)–(50, 0)–(50, 15)–(35, 15)–(25, 25)–(0, 25), one Mohr–Coulomb material "Silty clay" (<span class="m" data-tex="c' = 10"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>c</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mo>=</mo><mn>10</mn></mrow><annotation encoding="application/x-tex">c&#x27; = 10</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.7519em;"></span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7519em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">10</span></span></span></span><!--/k--></span> kPa, <span class="m" data-tex="\phi' = 25^\circ"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>ϕ</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mo>=</mo><msup><mn>25</mn><mo>∘</mo></msup></mrow><annotation encoding="application/x-tex">\phi&#x27; = 25^\circ</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.9463em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal">ϕ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7519em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6741em;"></span><span class="mord">2</span><span class="mord"><span class="mord">5</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6741em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mbin mtight">∘</span></span></span></span></span></span></span></span></span></span></span><!--/k--></span>, <span class="m" data-tex="\gamma = 19"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>γ</mi><mo>=</mo><mn>19</mn></mrow><annotation encoding="application/x-tex">\gamma = 19</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.0556em;">γ</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">19</span></span></span></span><!--/k--></span> kN/m³) and a horizontal water table at <em>y</em> = 8 m assigned to it. The extension <code>.ogr</code> is added when the name does not end with it, replacing any other extension.</p>
+
+      <h2 id="gui-launcher"><span class="secnum">5.2.7</span><span class="ht">The graphical launcher</span><a class="anchor" href="#gui-launcher" aria-label="Link to this section">#</a></h2>
+      <p>The desktop program starts with <code>ogr-slip2d</code> or, equivalently, <code>python -m ogr_gui</code>. The launcher has one option of its own:</p>
+      <figure class="tbl" id="tbl-gui-options">
+        <figcaption><span class="fignum">Table 5.2.6</span> Options of the graphical launcher.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Option</th><th>Meaning</th></tr></thead>
+            <tbody>
+              <tr><td><code>--no-agent-bridge</code></td><td>Start without the agent bridge, so that no MCP server can work on this window (<a class="xref" href="mcp.html#window">Section 5.1.6</a>). It can still be switched on later in <span class="ui">Tools → Agent bridge (MCP)</span>.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <div class="code"><pre><code>ogr-slip2d
+python -m ogr_gui --no-agent-bridge</code></pre></div>
+      <p>Any other argument is handed to the Qt application object. The launcher does not open a project given on the command line: the window starts with an empty project, and a file is opened with <span class="ui">File → Open Project…</span>.</p>
+      <div class="impl">
+        <span class="label">In OGR Slip2D</span>
+        <p>The command line, the window and the operations layer call one analysis runner, which is the single place where methods and searches are built from a project. It exists because, before v0.1.77, the command line read nothing from the project's settings and silently skipped rapid drawdown, the partial factors and most searches.</p>
+        <span class="src">Source: <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_cli/__main__.py" target="_blank" rel="noopener">ogr_cli/__main__.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_slip2d/analysis_runner.py" target="_blank" rel="noopener">ogr_slip2d/analysis_runner.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_gui/__main__.py" target="_blank" rel="noopener">ogr_gui/__main__.py</a></span>
+      </div>
+    </article>
+
+<!-- @inc docfoot -->
+<nav class="doc-pager" aria-label="Pages">
+<a class="prev" href="../../docs/reference/mcp.html"><span class="label">← Previous · 5.1</span><b>MCP server</b></a>
+<a class="next" href="../../docs/reference/python-api.html"><span class="label">5.3 · Next →</span><b>Python API</b></a>
+</nav>
+<div class="doc-edit label"><a href="https://github.com/samuelsl27/OpenGeoRock_Web.github.io/blob/main/docs/reference/cli.html" target="_blank" rel="noopener">Edit this page ↗</a><a href="https://github.com/samuelsl27/OGR-Slip2D/issues" target="_blank" rel="noopener">Report a problem ↗</a></div>
+<!-- @end docfoot -->
+  </main>
+
+  <aside class="doc-toc" aria-label="On this page">
+    <div class="toc-inner">
+<!-- @inc pagetoc -->
+<span class="label">On this page</span><ul><li class="h2"><a href="#running">5.2.1 Running it</a></li><li class="h2"><a href="#info">5.2.2 info</a></li><li class="h2"><a href="#compute">5.2.3 compute</a></li><li class="h3"><a href="#compute-steps">What compute does</a></li><li class="h3"><a href="#outputs">Output files</a></li><li class="h3"><a href="#exit-codes">Exit codes</a></li><li class="h2"><a href="#methods">5.2.4 methods</a></li><li class="h2"><a href="#strength-models">5.2.5 strength-models</a></li><li class="h2"><a href="#new-demo">5.2.6 new-demo</a></li><li class="h2"><a href="#gui-launcher">5.2.7 The graphical launcher</a></li></ul><button class="print" type="button"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="1.5"/><path d="M6 14h12v7H6z"/></svg> Print this page</button>
+<!-- @end pagetoc -->
+    </div>
+  </aside>
+</div>
+
+<!-- @inc footer -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <a class="brand" href="../../index.html" aria-label="OpenGeoRock — home">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
+          <b>OpenGeoRock</b>
+        </a>
+        <p class="tagline">Open-source geotechnical software, built in the open at the Universidad Politécnica de Cartagena.</p>
+        <span class="lang" role="group" aria-label="Language"><a href="../../docs/reference/cli.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../../es/docs/reference/cli.html" hreflang="es" lang="es">ES</a></span>
+      </div>
+      <div>
+        <h5>Products</h5>
+        <ul>
+          <li><a href="../../products/slip2d.html">OGR Slip2D</a></li>
+          <li><a href="../../products/index.html">The suite</a></li>
+          <li><a href="../../ai/index.html">MCP server</a></li>
+          <li><a href="../../download/index.html">Download</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Learn</h5>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="../../docs/getting-started/quick-start.html">Quick start</a></li>
+          <li><a href="../../docs/theory/methods.html">Theory manual</a></li>
+          <li><a href="../../examples/index.html">Examples</a></li>
+          <li><a href="../../verification/index.html">Verification</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Project</h5>
+        <ul>
+          <li><a href="../../about/index.html">About</a></li>
+          <li><a href="../../about/index.html#team">Team</a></li>
+          <li><a href="../../about/index.html#cite">How to cite</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Contributing</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/LICENSE" target="_blank" rel="noopener">Licence · AGPL-3.0</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Connect</h5>
+        <ul>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/issues" target="_blank" rel="noopener">Issues</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/tree/main/docs/changelog" target="_blank" rel="noopener">Changelog</a></li>
+          <li><a href="mailto:samuel.saez@edu.upct.es">Email</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© 2026 Samuel Sáez López · OGR Slip2D is free software under AGPL-3.0-or-later, with no warranty of any kind.</span>
+      <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
+    </div>
+  </div>
+  <div class="lang-hint" role="dialog" aria-label="Idioma" lang="es">
+    ¿Prefieres leer esta web en español?
+    <div class="row"><a class="btn sm primary go" href="../../es/index.html">Ver en español</a><button class="btn sm" type="button" data-dismiss>No, gracias</button></div>
+  </div>
+</footer>
+<!-- @end footer -->
+</body>
+</html>

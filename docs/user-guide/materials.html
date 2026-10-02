@@ -1,0 +1,403 @@
+<!doctype html>
+<html class="no-js" lang="en" data-root="../../">
+<head>
+<meta charset="utf-8">
+<title>Materials — OGR Slip2D documentation</title>
+<meta name="description" content="Defining materials in OGR Slip2D: name, colour, unit weights, the 22 strength models and their parameters, water parameters, the GSI calculator for Hoek–Brown, assigning materials to regions, the first-material rule, property tables and importing properties from another project.">
+<!-- @inc head -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.replace("no-js", "js")</script>
+<link rel="canonical" href="https://opengeorock.org/docs/user-guide/materials.html">
+<link rel="alternate" hreflang="en" href="https://opengeorock.org/docs/user-guide/materials.html">
+<link rel="alternate" hreflang="es" href="https://opengeorock.org/es/docs/user-guide/materials.html">
+<link rel="alternate" hreflang="x-default" href="https://opengeorock.org/docs/user-guide/materials.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="OpenGeoRock">
+<meta property="og:title" content="Materials — OGR Slip2D documentation">
+<meta property="og:description" content="Defining materials in OGR Slip2D: name, colour, unit weights, the 22 strength models and their parameters, water parameters, the GSI calculator for Hoek–Brown, assigning materials to regions, the first-material rule, property tables and importing properties from another project.">
+<meta property="og:url" content="https://opengeorock.org/docs/user-guide/materials.html">
+<meta property="og:image" content="https://opengeorock.org/assets/img/og-image.png">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#f4efe6">
+<link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&amp;display=swap">
+<link rel="stylesheet" href="../../assets/css/site.css">
+<link rel="stylesheet" href="../../assets/css/docs.css">
+<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
+<script src="../../assets/js/site.js" defer></script>
+<!-- @end head -->
+</head>
+<body class="docs">
+<!-- @inc header -->
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="wrap top-inner">
+    <a class="brand" href="../../index.html" aria-label="OpenGeoRock — home">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
+      <b>OpenGeoRock</b>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <div class="has-menu" data-nav="products">
+        <button type="button" aria-expanded="false" aria-haspopup="true">Products <svg class="caret" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+        <div class="mega">
+          <div class="mega-cols">
+            <div class="mega-col">
+              <span class="label">Available today</span>
+              <a class="mega-item feature" href="../../products/slip2d.html"><b>OGR Slip2D</b><span>2D slope stability: limit equilibrium, finite-element groundwater and probabilistic analysis.</span></a>
+              <a class="mega-item" href="../../ai/index.html"><b>MCP server for AI agents <span class="tag live">new</span></b><span>Let Claude, ChatGPT or a local model build and run OGR Slip2D models.</span></a>
+            </div>
+            <div class="mega-col">
+              <span class="label">On the roadmap</span>
+              <a class="mega-item" href="../../products/index.html#ogr-data"><b>OGR Data</b><span>Soil and rock-mass property database</span></a>
+              <a class="mega-item" href="../../products/index.html#ogr-fem2d"><b>OGR FEM2D</b><span>2D elastoplastic finite elements</span></a>
+              <a class="mega-item" href="../../products/index.html#ogr-slip3d"><b>OGR Slip3D</b><span>3D limit equilibrium</span></a>
+              <a class="mega-item" href="../../products/index.html#ogr-fem3d"><b>OGR FEM3D</b><span>3D finite elements with coupled flow</span></a>
+            </div>
+            <div class="mega-col">
+              <span class="label">Use it from</span>
+              <a class="mega-item" href="../../docs/getting-started/interface.html"><b>The desktop program</b><span>Modeller, interpreter and Python terminal</span></a>
+              <a class="mega-item" href="../../docs/reference/python-api.html"><b>Python</b><span>Script analyses from your own code</span></a>
+              <a class="mega-item" href="../../docs/reference/cli.html"><b>The command line</b><span>Batch runs with ogr-slip2d-cli</span></a>
+            </div>
+          </div>
+          <div class="mega-foot"><span>Five programs, one open core.</span><a href="../../products/index.html">All products →</a></div>
+        </div>
+      </div>
+      <a href="../../examples/index.html" data-nav="examples">Examples</a>
+      <a href="../../ai/index.html" data-nav="ai">AI &amp; MCP</a>
+      <a href="../../docs/index.html" data-nav="docs" aria-current="page">Docs</a>
+      <a href="../../verification/index.html" data-nav="verification">Verification</a>
+      <a href="../../about/index.html" data-nav="about">About</a>
+    </nav>
+    <div class="top-right">
+      <span class="lang" role="group" aria-label="Language"><a href="../../docs/user-guide/materials.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../../es/docs/user-guide/materials.html" hreflang="es" lang="es">ES</a></span>
+      <a class="btn gh" href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener" aria-label="Source code on GitHub"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0C17.3 4.7 18.3 5 18.3 5c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0012 .5z"/></svg><span>GitHub</span></a>
+      <a class="btn primary" href="../../download/index.html" data-nav="download">Get OGR Slip2D</a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Main (mobile)">
+    <span class="label">Products</span>
+    <a href="../../products/slip2d.html">OGR Slip2D</a>
+    <div class="sub"><a href="../../products/index.html">The OpenGeoRock suite</a><a href="../../ai/index.html">MCP server for AI agents</a></div>
+    <span class="label">Learn</span>
+    <a href="../../examples/index.html">Examples</a>
+    <a href="../../docs/index.html">Documentation</a>
+    <a href="../../verification/index.html">Verification</a>
+    <span class="label">Project</span>
+    <a href="../../about/index.html">About</a>
+    <a href="../../download/index.html">Get OGR Slip2D</a>
+    <a href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener">Source on GitHub ↗</a>
+    <span class="lang" role="group" aria-label="Language"><a href="../../docs/user-guide/materials.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../../es/docs/user-guide/materials.html" hreflang="es" lang="es">ES</a></span>
+  </nav>
+</header>
+<!-- @end header -->
+
+<div class="doc-shell">
+  <aside class="doc-side" id="doc-side">
+<!-- @inc docnav -->
+<div class="doc-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input type="search" placeholder="Search the documentation  /" aria-label="Search the documentation" autocomplete="off"><div class="results" role="listbox"></div></div>
+<nav class="doc-nav" aria-label="Documentation">
+<a class="home" href="../../docs/index.html"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 016.5 3H20v15H6.5A2.5 2.5 0 004 20.5z"/><path d="M4 20.5A2.5 2.5 0 016.5 18H20v3H6.5A2.5 2.5 0 014 20.5z"/></svg> Documentation home</a>
+<details open><summary>1 · Getting started</summary><ul>
+<li><a href="../../docs/getting-started/installation.html"><span class="n">1.1</span><span>Installation</span></a></li>
+<li><a href="../../docs/getting-started/quick-start.html"><span class="n">1.2</span><span>Quick start: your first model</span></a></li>
+<li><a href="../../docs/getting-started/interface.html"><span class="n">1.3</span><span>The interface</span></a></li>
+</ul></details>
+<details open><summary>2 · User guide</summary><ul>
+<li><a href="../../docs/user-guide/project-settings.html"><span class="n">2.1</span><span>Project settings</span></a></li>
+<li><a href="../../docs/user-guide/geometry.html"><span class="n">2.2</span><span>Geometry and boundaries</span></a></li>
+<li><a href="../../docs/user-guide/materials.html" aria-current="page"><span class="n">2.3</span><span>Materials</span></a></li>
+<li><a href="../../docs/user-guide/water.html"><span class="n">2.4</span><span>Water and pore pressure</span></a></li>
+<li><a href="../../docs/user-guide/loads.html"><span class="n">2.5</span><span>Loads and seismic loading</span></a></li>
+<li><a href="../../docs/user-guide/supports.html"><span class="n">2.6</span><span>Supports</span></a></li>
+<li><a href="../../docs/user-guide/surfaces.html"><span class="n">2.7</span><span>Slip surfaces and search</span></a></li>
+<li><a href="../../docs/user-guide/results.html"><span class="n">2.8</span><span>Computing and interpreting results</span></a></li>
+<li><a href="../../docs/user-guide/groundwater.html"><span class="n">2.9</span><span>Finite-element groundwater</span></a></li>
+<li><a href="../../docs/user-guide/probabilistic.html"><span class="n">2.10</span><span>Probabilistic and sensitivity analysis</span></a></li>
+<li><a href="../../docs/user-guide/design-standards.html"><span class="n">2.11</span><span>Design standards</span></a></li>
+<li><a href="../../docs/user-guide/automation.html"><span class="n">2.12</span><span>Reports, scripting and the command line</span></a></li>
+</ul></details>
+<details open><summary>3 · Theory manual</summary><ul>
+<li><a href="../../docs/theory/limit-equilibrium.html"><span class="n">3.1</span><span>Limit equilibrium and the factor of safety</span></a></li>
+<li><a href="../../docs/theory/methods.html"><span class="n">3.2</span><span>Methods of slices</span></a></li>
+<li><a href="../../docs/theory/interslice.html"><span class="n">3.3</span><span>Interslice forces, convergence and admissibility</span></a></li>
+<li><a href="../../docs/theory/search.html"><span class="n">3.4</span><span>Slip-surface search</span></a></li>
+<li><a href="../../docs/theory/strength.html"><span class="n">3.5</span><span>Shear strength models</span></a></li>
+<li><a href="../../docs/theory/pore-pressure.html"><span class="n">3.6</span><span>Pore pressure and unsaturated strength</span></a></li>
+<li><a href="../../docs/theory/seepage.html"><span class="n">3.7</span><span>Finite-element seepage</span></a></li>
+<li><a href="../../docs/theory/rapid-drawdown.html"><span class="n">3.8</span><span>Rapid drawdown</span></a></li>
+<li><a href="../../docs/theory/seismic.html"><span class="n">3.9</span><span>Seismic analysis</span></a></li>
+<li><a href="../../docs/theory/supports.html"><span class="n">3.10</span><span>Support forces</span></a></li>
+<li><a href="../../docs/theory/probabilistic.html"><span class="n">3.11</span><span>Probabilistic analysis</span></a></li>
+<li><a href="../../docs/theory/partial-factors.html"><span class="n">3.12</span><span>Partial factors (Eurocode 7)</span></a></li>
+</ul></details>
+<details open><summary>4 · Verification</summary><ul>
+<li><a href="../../docs/verification/methodology.html"><span class="n">4.1</span><span>Verification methodology</span></a></li>
+<li><a href="../../docs/verification/slope-benchmarks.html"><span class="n">4.2</span><span>Limit-equilibrium benchmarks</span></a></li>
+<li><a href="../../docs/verification/analytic-checks.html"><span class="n">4.3</span><span>Groundwater and analytic checks</span></a></li>
+</ul></details>
+<details open><summary>5 · Reference</summary><ul>
+<li><a href="../../docs/reference/mcp.html"><span class="n">5.1</span><span>MCP server</span></a></li>
+<li><a href="../../docs/reference/cli.html"><span class="n">5.2</span><span>Command-line interface</span></a></li>
+<li><a href="../../docs/reference/python-api.html"><span class="n">5.3</span><span>Python API</span></a></li>
+<li><a href="../../docs/reference/file-format.html"><span class="n">5.4</span><span>The .ogr file format</span></a></li>
+<li><a href="../../docs/reference/error-codes.html"><span class="n">5.5</span><span>Error codes</span></a></li>
+<li><a href="../../docs/reference/notation.html"><span class="n">5.6</span><span>Notation and glossary</span></a></li>
+<li><a href="../../docs/reference/bibliography.html"><span class="n">5.7</span><span>Bibliography</span></a></li>
+</ul></details>
+</nav>
+<!-- @end docnav -->
+  </aside>
+
+  <main id="main" class="doc-main">
+    <header class="doc-head">
+<!-- @inc dochead -->
+<button class="doc-side-toggle" type="button" aria-controls="doc-side" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg> Contents</button>
+<nav class="crumbs label" aria-label="Breadcrumb"><a href="../../docs/index.html">Documentation</a><span aria-hidden="true">/</span><span>2 · User guide</span></nav>
+<div class="chapter label">2.3</div>
+<h1>Materials</h1>
+<div class="meta label"><span>Describes OGR Slip2D <span data-v>0.1.235</span></span></div>
+<!-- @end dochead -->
+    </header>
+
+    <article class="doc prose">
+      <p class="lede">Every region of the model is made of a material, and a material says three things: how much it weighs, how strong it is and where its pore pressure comes from. Materials are defined in one dialog and then painted onto the regions of the model. This page describes the dialog field by field, the GSI calculator for the Hoek–Brown criterion, how materials are assigned — including what happens to a region nobody assigned — and the tools that list materials or bring them in from another project.</p>
+
+      <h2 id="define"><span class="secnum">2.3.1</span><span class="ht">Defining materials</span><a class="anchor" href="#define" aria-label="Link to this section">#</a></h2>
+      <p>Open <span class="ui">Properties → Define Materials…</span> (also on the toolbar, and in the right-click menu of a region). The list on the left holds the materials of the project, each in its colour; <span class="ui">+ Add</span> creates one and <span class="ui">− Remove</span> deletes the selected one. A new material is called <em>Material n</em> and starts as Mohr–Coulomb with <span class="m" data-tex="c' = 10"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>c</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mo>=</mo><mn>10</mn></mrow><annotation encoding="application/x-tex">c&#x27; = 10</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.7519em;"></span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7519em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">10</span></span></span></span><!--/k--></span> kPa and <span class="m" data-tex="\phi' = 25^\circ"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>ϕ</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msup><mo>=</mo><msup><mn>25</mn><mo>∘</mo></msup></mrow><annotation encoding="application/x-tex">\phi&#x27; = 25^\circ</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.9463em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal">ϕ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7519em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6741em;"></span><span class="mord">2</span><span class="mord"><span class="mord">5</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6741em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mbin mtight">∘</span></span></span></span></span></span></span></span></span></span></span><!--/k--></span>.</p>
+      <p>The editor on the right shows the selected material in up to five groups: <strong>General</strong>, <strong>Strength Type</strong> and <strong>Water Parameters</strong> always, <strong>Rapid Drawdown Parameters</strong> and <strong>Excess Pore Pressure</strong> only when the project runs those analyses. Edits are kept while you move from one material to another; <span class="ui">OK</span> stores the whole list and <span class="ui">Cancel</span> discards every change made since the dialog was opened. There is no Apply button.</p>
+
+      <figure class="fig shot-fig" id="fig-define-materials">
+        <div class="art"><img src="../../assets/img/shots/define-materials.webp" alt="The Define Materials dialog: the list of materials on the left and, on the right, the General group with name, colour and unit weights, the Strength Type group with a strength model and its parameters, and the Water Parameters group" loading="lazy" width="900" height="783"></div>
+        <figcaption><span class="fignum">Figure 2.3.1</span> The Define Materials dialog.</figcaption>
+      </figure>
+
+      <h3 id="general"><span class="ht">General</span><a class="anchor" href="#general" aria-label="Link to this section">#</a></h3>
+      <figure class="tbl" id="tbl-general">
+        <figcaption><span class="fignum">Table 2.3.1</span> General group. Values are shown in the units of the project (<a href="project-settings.html#units">Unit systems</a>).</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Field</th><th>Meaning</th><th>Default</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Name</strong></td><td>Name of the material, as listed and reported</td><td>Material n</td></tr>
+              <tr><td><strong>Color</strong></td><td>Colour of its regions on the canvas; the button opens a colour picker</td><td>light brown</td></tr>
+              <tr><td><strong>Unit Weight</strong></td><td>Bulk unit weight <span class="m" data-tex="\gamma"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>γ</mi></mrow><annotation encoding="application/x-tex">\gamma</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.0556em;">γ</span></span></span></span><!--/k--></span></td><td class="n">20 kN/m³</td></tr>
+              <tr><td><strong>Saturated Unit Weight</strong></td><td>Optional saturated bulk unit weight, used below the water table. Available only when the model has a water table.</td><td>off / 21 kN/m³</td></tr>
+              <tr><td><strong>Unsaturated Shear Strength Angle</strong></td><td><span class="m" data-tex="\phi^b"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>ϕ</mi><mi>b</mi></msup></mrow><annotation encoding="application/x-tex">\phi^b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1.0435em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal">ϕ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">b</span></span></span></span></span></span></span></span></span></span></span><!--/k--></span>, the angle that adds strength for matric suction; 0 means suction adds nothing. Shown only with a finite-element groundwater method.</td><td class="n">0°</td></tr>
+              <tr><td><strong>Air Entry Value</strong></td><td>Suction below which the saturated friction angle still governs. Shown only with a finite-element groundwater method.</td><td class="n">0 kPa</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p>The saturated unit weight is the bulk unit weight of the saturated soil, not the submerged (buoyant) one, so it should be greater than the unit weight above the water table; the dialog shows a warning in red when it is not, and keeps the value as typed. The two unsaturated parameters follow the extended Mohr–Coulomb envelope of <a class="cite" href="../reference/bibliography.html#fredlund1978">Fredlund, Morgenstern &amp; Widger (1978)</a>; they only matter where a seepage analysis gives negative pore pressures (<a class="xref" href="../theory/pore-pressure.html">Section 3.6</a>).</p>
+
+      <h3 id="strength"><span class="ht">Strength type</span><a class="anchor" href="#strength" aria-label="Link to this section">#</a></h3>
+      <p>The drop-down list of the <strong>Strength Type</strong> group offers 22 strength models. The equation of the chosen model is shown beside the list, and its parameters appear below it, each labelled with the name under which it is stored and with a tooltip that describes it. Models defined by a table — the shear/normal, discrete, C/Phi and anisotropic functions and the ranges of Generalized Anisotropic — show the table instead, with <span class="ui">+ Row</span> and <span class="ui">− Row</span> buttons. Snowden Modified Anisotropic Linear has two buttons, <span class="ui">Bedding Strength Function…</span> and <span class="ui">Rock Mass Strength Function…</span>, and the depth-dependent undrained models an <strong>Apply cutoff</strong> box.</p>
+      <figure class="tbl" id="tbl-strength">
+        <figcaption><span class="fignum">Table 2.3.2</span> Strength models in the order of the list, with the parameter fields and the values a model starts with when it is chosen. Stresses in kPa, angles in degrees.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Strength type</th><th>Parameters (starting values)</th></tr></thead>
+            <tbody>
+              <tr><td>Mohr-Coulomb</td><td><code>cohesion</code> 10, <code>friction_angle</code> 30</td></tr>
+              <tr><td>Undrained (φ=0)</td><td><code>cohesion</code> 50 — the undrained strength <span class="m" data-tex="c_u"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>c</mi><mi>u</mi></msub></mrow><annotation encoding="application/x-tex">c_u</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">u</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><!--/k--></span></td></tr>
+              <tr><td>Infinite Strength</td><td>none — the slip surface cannot pass through it</td></tr>
+              <tr><td>No Strength (water)</td><td>none — for water or material with no shear strength</td></tr>
+              <tr><td>Generalized Hoek-Brown</td><td><code>sigci</code> 50 000, <code>mb</code> 2.5, <code>s</code> 0.004, <code>a</code> 0.5; <span class="ui">GSI…</span> derives <code>mb</code>, <code>s</code> and <code>a</code> (<a class="xref" href="#gsi">Section 2.3.2</a>)</td></tr>
+              <tr><td>Hoek-Brown</td><td><code>sigci</code> 15 000, <code>m</code> 0.357, <code>s</code> 0.0017</td></tr>
+              <tr><td>Power Curve</td><td><code>a</code> 0.7, <code>b</code> 1.0, <code>c</code> 3, <code>d</code> 0, <code>waviness</code> 0</td></tr>
+              <tr><td>Hyperbolic</td><td><code>c_inf</code> 150, <code>phi_0</code> 20</td></tr>
+              <tr><td>Vertical Stress Ratio</td><td><code>K</code> 0.25, <code>min_strength</code> 0</td></tr>
+              <tr><td>Barton-Bandis</td><td><code>phi_r</code> 30, <code>JRC</code> 8, <code>JCS</code> 50 000, <code>max_total_friction</code> 75</td></tr>
+              <tr><td>Drained-Undrained</td><td><code>cohesion</code> 5, <code>phi</code> 28, <code>sigma_threshold</code> 100</td></tr>
+              <tr><td>Anisotropic Linear</td><td><code>c1</code> 5, <code>phi1</code> 15, <code>c2</code> 20, <code>phi2</code> 30, <code>bedding_angle</code> 0, <code>A</code> 10, <code>B</code> 30; optional anisotropic surface</td></tr>
+              <tr><td>Shear/Normal Function</td><td>Table of normal stress and shear strength, interpolated linearly</td></tr>
+              <tr><td>Discrete Function</td><td>Table of normal stress and shear strength, as steps</td></tr>
+              <tr><td>C/Phi Function</td><td>Table of normal stress, cohesion and friction angle, interpolated</td></tr>
+              <tr><td>SHANSEP</td><td><code>S</code> 0.25, <code>m</code> 0.8, <code>OCR</code> 1.0, <code>A</code> 0, <code>su_min</code> 0</td></tr>
+              <tr><td>Anisotropic Strength Function</td><td>Table of ranges of slice base inclination from −90° to +90°: angle to, cohesion, friction angle</td></tr>
+              <tr><td>Generalized Anisotropic</td><td>Ranges of slice base inclination from −90° to +90°, each taking the strength of another material of the project</td></tr>
+              <tr><td>Snowden Modified Anisotropic Linear</td><td><code>bedding_angle</code> 0, <code>A1</code> 10, <code>B1</code> 30, <code>A2</code> 10, <code>B2</code> 30, plus the bedding and rock mass strength functions; optional anisotropic surface</td></tr>
+              <tr><td>Undrained, c(depth below layer top)</td><td><code>cohesion_top</code> 20, <code>cohesion_change</code> 2 kPa/m, <code>cutoff</code> 100 (with <strong>Apply cutoff</strong>)</td></tr>
+              <tr><td>Undrained, c(depth below datum)</td><td><code>cohesion_datum</code> 20, <code>cohesion_change</code> 2 kPa/m, <code>datum</code> 0 m, <code>cutoff</code> 100</td></tr>
+              <tr><td>Undrained, c(distance to slope)</td><td><code>cohesion_top</code> 20, <code>cohesion_change</code> 2 kPa/m, <code>cutoff</code> 100</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p>The equations behind each model, and how a curved envelope is used inside the methods of slices, are in <a class="xref" href="../theory/strength.html">Section 3.5</a>. For Anisotropic Linear and Snowden Modified Anisotropic Linear an <strong>Anisotropic Surface:</strong> list appears below the parameters: <em>(none - use the angle above)</em> takes the single <code>bedding_angle</code>, and choosing an anisotropic surface of the model (<a href="geometry.html#weak-layers">Weak layers and anisotropic surfaces</a>) makes the bedding follow it point by point.</p>
+      <p>When a strength cannot be used — a table whose rows are not in order, ranges with a gap, a material saved by an older version whose table now means something else — a message in red explains why below the parameters, and <span class="ui">OK</span> refuses the change until it is corrected. A row of a table that is not made of numbers also keeps the dialog on that material.</p>
+      <div class="note warn"><span class="label">Hoek-Brown in 0.1.235</span><p>The envelope used by the two Hoek–Brown models gives no shear strength at zero normal stress, where the criterion's own Mohr envelope does (about 307.5 kPa with the starting constants of Generalized Hoek-Brown). The program records this as defect D171; the criterion is described in <a class="xref" href="../theory/strength.html">Section 3.5</a>.</p></div>
+
+      <h3 id="water-parameters"><span class="ht">Water parameters</span><a class="anchor" href="#water-parameters" aria-label="Link to this section">#</a></h3>
+      <p>The <strong>Water Parameters</strong> group decides where the pore pressure of the material comes from. It is described with the groundwater methods in <a class="xref" href="water.html#material-water">Section 2.4.2</a>; in short:</p>
+      <figure class="tbl" id="tbl-water">
+        <figcaption><span class="fignum">Table 2.3.3</span> Water Parameters group. The <strong>Type</strong> list shows the identifiers as they are stored.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Field</th><th>Meaning</th><th>Default</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Type</strong></td><td><code>none</code> (dry), <code>water_table</code>, <code>piezometric</code>, <code>ru</code>, <code>constant</code> or <code>fem</code> (from a finite-element seepage field)</td><td><code>none</code></td></tr>
+              <tr><td><strong>Use the water pressure grid</strong></td><td>With a grid groundwater method: whether the grid gives this material its pore pressure. Shown only with those methods.</td><td>on</td></tr>
+              <tr><td><strong>Water Surface</strong></td><td>Which water table or piezometric line the material reads; <em>(first of this type)</em> takes the first one drawn</td><td>(first of this type)</td></tr>
+              <tr><td><strong>Hu coefficient</strong></td><td>Ticked: the material's own <span class="m" data-tex="H_u"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mi>u</mi></msub></mrow><annotation encoding="application/x-tex">H_u</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0813em;">H</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0813em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">u</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><!--/k--></span> (0 to 1). Unticked: the project default.</td><td>off / 1.0</td></tr>
+              <tr><td><strong>Auto Hu (cos²α from the water-surface slope)</strong></td><td><span class="m" data-tex="H_u"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mi>u</mi></msub></mrow><annotation encoding="application/x-tex">H_u</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0813em;">H</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0813em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">u</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><!--/k--></span> from the inclination of the water surface above the point</td><td>off</td></tr>
+              <tr><td><strong>Ru coefficient</strong></td><td>Pore-pressure ratio <span class="m" data-tex="r_u"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>r</mi><mi>u</mi></msub></mrow><annotation encoding="application/x-tex">r_u</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0278em;">r</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">u</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><!--/k--></span> (0 to 1), for the type <code>ru</code></td><td class="n">0</td></tr>
+              <tr><td><strong>Constant u</strong></td><td>Pore pressure for the type <code>constant</code></td><td class="n">0 kPa</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p>Only the fields the chosen type reads are enabled. The whole group is greyed out for the strength models that read no pore pressure — Undrained (φ=0), No Strength, Infinite Strength and the three depth-dependent undrained models — and hidden when the project uses a finite-element groundwater method.</p>
+      <div class="note water"><span class="label">Water</span><p>A material starts dry (<code>none</code>). Drawing a water table does not wet anything by itself: the materials have to point at it, which the Assign Water Surface dialog does for several at once (<a href="water.html#assign-water">Assign Water Surface</a>).</p></div>
+
+      <h3 id="drawdown-excess"><span class="ht">Rapid drawdown and excess pore pressure</span><a class="anchor" href="#drawdown-excess" aria-label="Link to this section">#</a></h3>
+      <p>Two more groups appear only when the analysis that reads them is chosen on the Groundwater page of Project Settings (<a class="xref" href="project-settings.html#groundwater">Section 2.1.4</a>):</p>
+      <ul>
+        <li><strong>Rapid Drawdown Parameters</strong>: <strong>Undrained Behaviour</strong> (off) marks a material of low permeability that keeps its excess pore pressure when the water level drops. With the <em>Effective Stress using B-bar</em> procedure it takes a <strong>B-bar</strong> value (0 by default, 0 to 5); with the three multi-stage procedures it takes an undrained envelope, set with <span class="ui">Define Strength…</span> as a total-stress R envelope (intercept and angle) or a <span class="m" data-tex="K_c = 1"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>K</mi><mi>c</mi></msub><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">K_c = 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0715em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">c</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span><!--/k--></span> envelope, and summarised beside the button.</li>
+        <li><strong>Excess Pore Pressure</strong>: <strong>B-bar</strong> (Skempton's <span class="m" data-tex="\bar B"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>B</mi><mo>ˉ</mo></mover></mrow><annotation encoding="application/x-tex">\bar B</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8201em;"></span><span class="mord katex-accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8201em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.0502em;">B</span></span><span style="top:-3.2523em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1667em;"><span class="mord">ˉ</span></span></span></span></span></span></span></span></span></span><!--/k--></span>, 0 to 5) gives <span class="m" data-tex="\Delta u = \bar B\,\Delta\sigma_v"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Δ</mi><mi>u</mi><mo>=</mo><mover accent="true"><mi>B</mi><mo>ˉ</mo></mover><mtext> </mtext><mi mathvariant="normal">Δ</mi><msub><mi>σ</mi><mi>v</mi></msub></mrow><annotation encoding="application/x-tex">\Delta u = \bar B\,\Delta\sigma_v</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6833em;"></span><span class="mord">Δ</span><span class="mord mathnormal">u</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.9701em;vertical-align:-0.15em;"></span><span class="mord katex-accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8201em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.0502em;">B</span></span><span style="top:-3.2523em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1667em;"><span class="mord">ˉ</span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">Δ</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">σ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0359em;">v</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><!--/k--></span> under the loads applied <a class="cite" href="../reference/bibliography.html#skempton1954">(Skempton, 1954)</a>; 0 is a free-draining material. <strong>Material weight creates excess pore pressure</strong> (off) makes the weight of this material load the materials beneath it — an embankment over a clay foundation usually has it on and a B-bar of 0.</li>
+      </ul>
+      <p>Both analyses are described in <a class="xref" href="water.html#excess">Section 2.4.6</a> and <a class="xref" href="../theory/rapid-drawdown.html">Section 3.8</a>.</p>
+
+      <h2 id="gsi"><span class="secnum">2.3.2</span><span class="ht">The GSI calculator</span><a class="anchor" href="#gsi" aria-label="Link to this section">#</a></h2>
+      <p>For a material with the <strong>Generalized Hoek-Brown</strong> strength type, a <span class="ui">GSI…</span> button appears next to the list. It opens the <strong>Parameter Calculator</strong>, which derives the rock-mass constants from the Geological Strength Index, the intact-rock constant <span class="m" data-tex="m_i"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>m</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">m_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">m</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><!--/k--></span> and the disturbance factor <span class="m" data-tex="D"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi></mrow><annotation encoding="application/x-tex">D</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.0278em;">D</span></span></span></span><!--/k--></span>, following <a class="cite" href="../reference/bibliography.html#hoek2002">Hoek, Carranza-Torres &amp; Corkum (2002)</a>:</p>
+      <div class="eq" id="eq-mb" data-tex="m_b = m_i \exp\!\left(\dfrac{\mathrm{GSI} - 100}{28 - 14D}\right)" data-n="2.3.1"><!--k--><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>m</mi><mi>b</mi></msub><mo>=</mo><msub><mi>m</mi><mi>i</mi></msub><mi>exp</mi><mo>⁡</mo><mtext> ⁣</mtext><mrow><mo fence="true">(</mo><mstyle scriptlevel="0" displaystyle="true"><mfrac><mrow><mrow><mi mathvariant="normal">G</mi><mi mathvariant="normal">S</mi><mi mathvariant="normal">I</mi></mrow><mo>−</mo><mn>100</mn></mrow><mrow><mn>28</mn><mo>−</mo><mn>14</mn><mi>D</mi></mrow></mfrac></mstyle><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">m_b = m_i \exp\!\left(\dfrac{\mathrm{GSI} - 100}{28 - 14D}\right)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">m</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">b</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:2.4em;vertical-align:-0.95em;"></span><span class="mord"><span class="mord mathnormal">m</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop">exp</span><span class="mspace" style="margin-right:-0.1667em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size3">(</span></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3603em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">28</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">14</span><span class="mord mathnormal" style="margin-right:0.0278em;">D</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathrm">GSI</span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">100</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7693em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size3">)</span></span></span></span></span></span></span><!--/k--></div>
+      <div class="eq" id="eq-s" data-tex="s = \exp\!\left(\dfrac{\mathrm{GSI} - 100}{9 - 3D}\right)" data-n="2.3.2"><!--k--><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>s</mi><mo>=</mo><mi>exp</mi><mo>⁡</mo><mtext> ⁣</mtext><mrow><mo fence="true">(</mo><mstyle scriptlevel="0" displaystyle="true"><mfrac><mrow><mrow><mi mathvariant="normal">G</mi><mi mathvariant="normal">S</mi><mi mathvariant="normal">I</mi></mrow><mo>−</mo><mn>100</mn></mrow><mrow><mn>9</mn><mo>−</mo><mn>3</mn><mi>D</mi></mrow></mfrac></mstyle><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">s = \exp\!\left(\dfrac{\mathrm{GSI} - 100}{9 - 3D}\right)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">s</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:2.4em;vertical-align:-0.95em;"></span><span class="mop">exp</span><span class="mspace" style="margin-right:-0.1667em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size3">(</span></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3603em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">9</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">3</span><span class="mord mathnormal" style="margin-right:0.0278em;">D</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathrm">GSI</span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">100</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7693em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size3">)</span></span></span></span></span></span></span><!--/k--></div>
+      <div class="eq" id="eq-a" data-tex="a = \dfrac{1}{2} + \dfrac{1}{6}\left(e^{-\mathrm{GSI}/15} - e^{-20/3}\right)" data-n="2.3.3"><!--k--><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>a</mi><mo>=</mo><mstyle scriptlevel="0" displaystyle="true"><mfrac><mn>1</mn><mn>2</mn></mfrac></mstyle><mo>+</mo><mstyle scriptlevel="0" displaystyle="true"><mfrac><mn>1</mn><mn>6</mn></mfrac></mstyle><mrow><mo fence="true">(</mo><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi mathvariant="normal">G</mi><mi mathvariant="normal">S</mi><mi mathvariant="normal">I</mi></mrow><mi mathvariant="normal">/</mi><mn>15</mn></mrow></msup><mo>−</mo><msup><mi>e</mi><mrow><mo>−</mo><mn>20</mn><mi mathvariant="normal">/</mi><mn>3</mn></mrow></msup><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">a = \dfrac{1}{2} + \dfrac{1}{6}\left(e^{-\mathrm{GSI}/15} - e^{-20/3}\right)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">a</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:2.0074em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:2.0074em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">6</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size2">(</span></span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.938em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight"><span class="mord mathrm mtight">GSI</span></span><span class="mord mtight">/15</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.938em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">20/3</span></span></span></span></span></span></span></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size2">)</span></span></span></span></span></span></span><!--/k--></div>
+      <figure class="tbl" id="tbl-gsi">
+        <figcaption><span class="fignum">Table 2.3.4</span> Parameter Calculator. Each input has a list of descriptions beside it that fills in a typical value.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Field</th><th>Meaning</th><th>Default</th><th>Range</th></tr></thead>
+            <tbody>
+              <tr><td><strong>GSI</strong></td><td>Geological Strength Index; the list offers six rock-mass descriptions, from 85 (intact or massive, very good surfaces) to 15 (laminated or sheared, very poor surfaces)</td><td class="n">50</td><td>0 to 100</td></tr>
+              <tr><td><strong>mi</strong></td><td>Intact-rock constant; the list offers 30 lithologies, with values from 4 (claystone) to 32 (granite)</td><td class="n">10</td><td>0 to 100</td></tr>
+              <tr><td><strong>Disturbance factor D</strong></td><td>Disturbance by blasting and stress relief; the list offers eight excavation methods, from 0 (controlled blasting, mechanical excavation) to 1 (poor or uncontrolled production blasting)</td><td class="n">0</td><td>0 to 2</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p>The <strong>Calculated</strong> group shows <span class="m" data-tex="m_b"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>m</mi><mi>b</mi></msub></mrow><annotation encoding="application/x-tex">m_b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">m</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">b</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><!--/k--></span>, <span class="m" data-tex="s"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi></mrow><annotation encoding="application/x-tex">s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">s</span></span></span></span><!--/k--></span> and <span class="m" data-tex="a"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">a</span></span></span></span><!--/k--></span> as the inputs change; <span class="ui">Use these values</span> writes the three into the material. The intact strength <code>sigci</code> is typed in the material itself. <span class="m" data-tex="D = 2"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">D = 2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.0278em;">D</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">2</span></span></span></span><!--/k--></span> makes <span class="m" data-tex="m_b"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>m</mi><mi>b</mi></msub></mrow><annotation encoding="application/x-tex">m_b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">m</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">b</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><!--/k--></span> undefined, so it is clamped to 1.999 and the dialog says so. GSI and <span class="m" data-tex="D"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi></mrow><annotation encoding="application/x-tex">D</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.0278em;">D</span></span></span></span><!--/k--></span> are matters of judgement: use the descriptions rather than a remembered number.</p>
+
+      <h2 id="assign"><span class="secnum">2.3.3</span><span class="ht">Assigning materials to regions</span><a class="anchor" href="#assign" aria-label="Link to this section">#</a></h2>
+      <p>Regions are formed by the external and material boundaries (<a href="geometry.html#material-boundaries">Material boundaries and regions</a>). To give them materials:</p>
+      <ol>
+        <li>Choose <span class="ui">Properties → Assign Materials</span>. A floating <strong>Assign Materials</strong> panel opens with the list of materials, each with its colour, and <em>(None — unassign)</em> at the top; the first material is selected.</li>
+        <li>Select a material in the panel and click every region that is made of it. Each click is one undo step.</li>
+        <li>Select the next material and repeat. Close the panel to return to the Select tool.</li>
+      </ol>
+      <p>Two shortcuts do the same for one region: right-click the region and choose a material from <span class="ui">Assign Material</span> in its menu, which also tells you the material the region has now; or use <span class="ui">Properties → Assign Material</span>, the painting tool on its own, which paints with the material selected in the Assign Materials panel and therefore works only while that panel is open.</p>
+      <p>An assignment is recorded as the point clicked together with the outline the region had at that moment. If a material boundary drawn later splits the region, every piece keeps the material; if the region was already split when you clicked, only the piece you clicked takes it.</p>
+
+      <h3 id="first-material"><span class="ht">Regions without a material</span><a class="anchor" href="#first-material" aria-label="Link to this section">#</a></h3>
+      <div class="note warn"><span class="label">The first-material rule</span><p>A region to which no material has been assigned is made of the <strong>first material</strong> in the list of Define Materials. The analysis, the data tips and the right-click menu of the region all treat it so, and nothing warns that the region was never painted. Assign every region explicitly, or keep the most widespread material first in the list.</p></div>
+      <div class="note"><span class="label">Version 0.1.235</span><p>The <em>(None — unassign)</em> entry of the Assign Materials panel does not remove an assignment yet: with it selected, a click only asks you to pick a material. To change a region, paint it with another material.</p></div>
+
+      <h2 id="tables"><span class="secnum">2.3.4</span><span class="ht">Property tables</span><a class="anchor" href="#tables" aria-label="Link to this section">#</a></h2>
+      <p><span class="ui">Tools → Property Tables</span> shows read-only tables of the model, with a <span class="ui">Copy to clipboard</span> button: the <strong>Material Properties Table</strong> (name, strength model, unit weight, saturated unit weight when used, pore-pressure type and one column per strength parameter in use), the <strong>Support Properties Table</strong> and the <strong>Hydraulic Properties Table</strong>. The material table is also on the toolbar. Hovering over a region with the data tips on shows the same properties for one material (<a href="../getting-started/interface.html#data-tips">Data tips</a>).</p>
+
+      <h2 id="import"><span class="secnum">2.3.5</span><span class="ht">Importing properties</span><a class="anchor" href="#import" aria-label="Link to this section">#</a></h2>
+      <p><span class="ui">File → Import Properties…</span> copies the materials and the support types of another <code>.ogr</code> project into this one. After choosing the file, choose what to import: <strong>Materials</strong>, <strong>Supports</strong> or <strong>Both</strong> (the default).</p>
+      <ul>
+        <li>Nothing already in the project is overwritten: an imported name that already exists — compared without regard to case — gets a number, such as <em>Clay (2)</em>.</li>
+        <li>Imported materials get new identifiers, and lose their links to the other project's water surfaces and anisotropic surfaces, which do not exist here; a material that read a water surface comes in dry. Assign it to a water surface of this project (<a href="water.html#assign-water">Assign Water Surface</a>).</li>
+        <li>The <strong>Max Materials</strong> limit of the project is respected (<a class="xref" href="project-settings.html#general">Section 2.1.2</a>).</li>
+        <li>Support <em>types</em> are imported, not placed supports.</li>
+      </ul>
+      <p>The status bar reports how many materials and support types were imported. The materials still have to be assigned to regions.</p>
+
+      <div class="impl">
+        <span class="label">In OGR Slip2D</span>
+        <p>Every strength model is a plug-in registered by its identifier; the list of the dialog and the parameter fields are built from the registry, so the dialog and the analysis cannot disagree on what a model takes. Values are stored in SI units and converted for display. The default of a region without a material is applied where the regions are resolved, the same place the analysis asks.</p>
+        <span class="src">Source: <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_core/materials/builtin_models.py" target="_blank" rel="noopener">ogr_core/materials/builtin_models.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_core/materials/parameter_calculator.py" target="_blank" rel="noopener">ogr_core/materials/parameter_calculator.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_gui/dialogs/material_properties_dialog.py" target="_blank" rel="noopener">ogr_gui/dialogs/material_properties_dialog.py</a></span>
+      </div>
+    </article>
+
+<!-- @inc docfoot -->
+<nav class="doc-pager" aria-label="Pages">
+<a class="prev" href="../../docs/user-guide/geometry.html"><span class="label">← Previous · 2.2</span><b>Geometry and boundaries</b></a>
+<a class="next" href="../../docs/user-guide/water.html"><span class="label">2.4 · Next →</span><b>Water and pore pressure</b></a>
+</nav>
+<div class="doc-edit label"><a href="https://github.com/samuelsl27/OpenGeoRock_Web.github.io/blob/main/docs/user-guide/materials.html" target="_blank" rel="noopener">Edit this page ↗</a><a href="https://github.com/samuelsl27/OGR-Slip2D/issues" target="_blank" rel="noopener">Report a problem ↗</a></div>
+<!-- @end docfoot -->
+  </main>
+
+  <aside class="doc-toc" aria-label="On this page">
+    <div class="toc-inner">
+<!-- @inc pagetoc -->
+<span class="label">On this page</span><ul><li class="h2"><a href="#define">2.3.1 Defining materials</a></li><li class="h3"><a href="#general">General</a></li><li class="h3"><a href="#strength">Strength type</a></li><li class="h3"><a href="#water-parameters">Water parameters</a></li><li class="h3"><a href="#drawdown-excess">Rapid drawdown and excess pore pressure</a></li><li class="h2"><a href="#gsi">2.3.2 The GSI calculator</a></li><li class="h2"><a href="#assign">2.3.3 Assigning materials to regions</a></li><li class="h3"><a href="#first-material">Regions without a material</a></li><li class="h2"><a href="#tables">2.3.4 Property tables</a></li><li class="h2"><a href="#import">2.3.5 Importing properties</a></li></ul><button class="print" type="button"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="1.5"/><path d="M6 14h12v7H6z"/></svg> Print this page</button>
+<!-- @end pagetoc -->
+    </div>
+  </aside>
+</div>
+
+<!-- @inc footer -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <a class="brand" href="../../index.html" aria-label="OpenGeoRock — home">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
+          <b>OpenGeoRock</b>
+        </a>
+        <p class="tagline">Open-source geotechnical software, built in the open at the Universidad Politécnica de Cartagena.</p>
+        <span class="lang" role="group" aria-label="Language"><a href="../../docs/user-guide/materials.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../../es/docs/user-guide/materials.html" hreflang="es" lang="es">ES</a></span>
+      </div>
+      <div>
+        <h5>Products</h5>
+        <ul>
+          <li><a href="../../products/slip2d.html">OGR Slip2D</a></li>
+          <li><a href="../../products/index.html">The suite</a></li>
+          <li><a href="../../ai/index.html">MCP server</a></li>
+          <li><a href="../../download/index.html">Download</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Learn</h5>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="../../docs/getting-started/quick-start.html">Quick start</a></li>
+          <li><a href="../../docs/theory/methods.html">Theory manual</a></li>
+          <li><a href="../../examples/index.html">Examples</a></li>
+          <li><a href="../../verification/index.html">Verification</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Project</h5>
+        <ul>
+          <li><a href="../../about/index.html">About</a></li>
+          <li><a href="../../about/index.html#team">Team</a></li>
+          <li><a href="../../about/index.html#cite">How to cite</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Contributing</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/LICENSE" target="_blank" rel="noopener">Licence · AGPL-3.0</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Connect</h5>
+        <ul>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/issues" target="_blank" rel="noopener">Issues</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/tree/main/docs/changelog" target="_blank" rel="noopener">Changelog</a></li>
+          <li><a href="mailto:samuel.saez@edu.upct.es">Email</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© 2026 Samuel Sáez López · OGR Slip2D is free software under AGPL-3.0-or-later, with no warranty of any kind.</span>
+      <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
+    </div>
+  </div>
+  <div class="lang-hint" role="dialog" aria-label="Idioma" lang="es">
+    ¿Prefieres leer esta web en español?
+    <div class="row"><a class="btn sm primary go" href="../../es/index.html">Ver en español</a><button class="btn sm" type="button" data-dismiss>No, gracias</button></div>
+  </div>
+</footer>
+<!-- @end footer -->
+</body>
+</html>

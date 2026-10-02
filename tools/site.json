@@ -1,0 +1,90 @@
+{
+  "base_url": "https://opengeorock.org/",
+  "repo_web": "https://github.com/samuelsl27/OpenGeoRock_Web.github.io",
+  "repo_program": "https://github.com/samuelsl27/OGR-Slip2D",
+  "version": "0.1.235",
+  "version_date": "2026-10-01",
+  "nav_sections": {
+    "products/": "products",
+    "examples/": "examples",
+    "ai/": "ai",
+    "docs/": "docs",
+    "verification/": "verification",
+    "about/": "about",
+    "download/": "download"
+  },
+  "docs": [
+    {
+      "n": "1", "dir": "getting-started", "en": "Getting started", "es": "Primeros pasos",
+      "d_en": "Install OGR Slip2D, build and analyse your first slope, and find your way around the program.",
+      "d_es": "Instala OGR Slip2D, construye y calcula tu primer talud y oriéntate en el programa.",
+      "pages": [
+        { "n": "1.1", "slug": "installation", "en": "Installation", "es": "Instalación" },
+        { "n": "1.2", "slug": "quick-start", "en": "Quick start: your first model", "es": "Inicio rápido: tu primer modelo" },
+        { "n": "1.3", "slug": "interface", "en": "The interface", "es": "La interfaz" }
+      ]
+    },
+    {
+      "n": "2", "dir": "user-guide", "en": "User guide", "es": "Guía de usuario",
+      "d_en": "Every step of a model in the order you build it: geometry, materials, water, loads, supports, search and results.",
+      "d_es": "Cada paso de un modelo en el orden en que se construye: geometría, materiales, agua, cargas, soportes, búsqueda y resultados.",
+      "pages": [
+        { "n": "2.1", "slug": "project-settings", "en": "Project settings", "es": "Configuración del proyecto" },
+        { "n": "2.2", "slug": "geometry", "en": "Geometry and boundaries", "es": "Geometría y contornos" },
+        { "n": "2.3", "slug": "materials", "en": "Materials", "es": "Materiales" },
+        { "n": "2.4", "slug": "water", "en": "Water and pore pressure", "es": "Agua y presión intersticial" },
+        { "n": "2.5", "slug": "loads", "en": "Loads and seismic loading", "es": "Cargas y carga sísmica" },
+        { "n": "2.6", "slug": "supports", "en": "Supports", "es": "Soportes" },
+        { "n": "2.7", "slug": "surfaces", "en": "Slip surfaces and search", "es": "Superficies de rotura y búsqueda" },
+        { "n": "2.8", "slug": "results", "en": "Computing and interpreting results", "es": "Cálculo e interpretación de resultados" },
+        { "n": "2.9", "slug": "groundwater", "en": "Finite-element groundwater", "es": "Agua subterránea por elementos finitos" },
+        { "n": "2.10", "slug": "probabilistic", "en": "Probabilistic and sensitivity analysis", "es": "Análisis probabilístico y de sensibilidad" },
+        { "n": "2.11", "slug": "design-standards", "en": "Design standards", "es": "Normas de diseño" },
+        { "n": "2.12", "slug": "automation", "en": "Reports, scripting and the command line", "es": "Informes, scripting y línea de comandos" }
+      ]
+    },
+    {
+      "n": "3", "dir": "theory", "en": "Theory manual", "es": "Manual de teoría",
+      "d_en": "The equations OGR Slip2D solves, with their assumptions, their original sources and how they are implemented.",
+      "d_es": "Las ecuaciones que resuelve OGR Slip2D, con sus hipótesis, sus fuentes originales y cómo están implementadas.",
+      "pages": [
+        { "n": "3.1", "slug": "limit-equilibrium", "en": "Limit equilibrium and the factor of safety", "es": "Equilibrio límite y factor de seguridad" },
+        { "n": "3.2", "slug": "methods", "en": "Methods of slices", "es": "Métodos de dovelas" },
+        { "n": "3.3", "slug": "interslice", "en": "Interslice forces, convergence and admissibility", "es": "Fuerzas entre dovelas, convergencia y admisibilidad" },
+        { "n": "3.4", "slug": "search", "en": "Slip-surface search", "es": "Búsqueda de la superficie de rotura" },
+        { "n": "3.5", "slug": "strength", "en": "Shear strength models", "es": "Modelos de resistencia al corte" },
+        { "n": "3.6", "slug": "pore-pressure", "en": "Pore pressure and unsaturated strength", "es": "Presión intersticial y resistencia no saturada" },
+        { "n": "3.7", "slug": "seepage", "en": "Finite-element seepage", "es": "Filtración por elementos finitos" },
+        { "n": "3.8", "slug": "rapid-drawdown", "en": "Rapid drawdown", "es": "Desembalse rápido" },
+        { "n": "3.9", "slug": "seismic", "en": "Seismic analysis", "es": "Análisis sísmico" },
+        { "n": "3.10", "slug": "supports", "en": "Support forces", "es": "Fuerzas de los soportes" },
+        { "n": "3.11", "slug": "probabilistic", "en": "Probabilistic analysis", "es": "Análisis probabilístico" },
+        { "n": "3.12", "slug": "partial-factors", "en": "Partial factors (Eurocode 7)", "es": "Coeficientes parciales (Eurocódigo 7)" }
+      ]
+    },
+    {
+      "n": "4", "dir": "verification", "en": "Verification", "es": "Verificación",
+      "d_en": "How results are checked against published cases and closed-form solutions, case by case.",
+      "d_es": "Cómo se contrastan los resultados con casos publicados y soluciones cerradas, caso a caso.",
+      "pages": [
+        { "n": "4.1", "slug": "methodology", "en": "Verification methodology", "es": "Metodología de verificación" },
+        { "n": "4.2", "slug": "slope-benchmarks", "en": "Limit-equilibrium benchmarks", "es": "Casos de referencia de equilibrio límite" },
+        { "n": "4.3", "slug": "analytic-checks", "en": "Groundwater and analytic checks", "es": "Agua subterránea y comprobaciones analíticas" }
+      ]
+    },
+    {
+      "n": "5", "dir": "reference", "en": "Reference", "es": "Referencia",
+      "d_en": "The MCP server, the command line, the Python API, the file format, error codes, notation and bibliography.",
+      "d_es": "El servidor MCP, la línea de comandos, la API de Python, el formato de archivo, los códigos de error, la notación y la bibliografía.",
+      "pages": [
+        { "n": "5.1", "slug": "mcp", "en": "MCP server", "es": "Servidor MCP" },
+        { "n": "5.2", "slug": "cli", "en": "Command-line interface", "es": "Interfaz de línea de comandos" },
+        { "n": "5.3", "slug": "python-api", "en": "Python API", "es": "API de Python" },
+        { "n": "5.4", "slug": "file-format", "en": "The .ogr file format", "es": "El formato .ogr" },
+        { "n": "5.5", "slug": "error-codes", "en": "Error codes", "es": "Códigos de error" },
+        { "n": "5.6", "slug": "notation", "en": "Notation and glossary", "es": "Notación y glosario" },
+        { "n": "5.7", "slug": "bibliography", "en": "Bibliography", "es": "Bibliografía" }
+      ]
+    }
+  ]
+}

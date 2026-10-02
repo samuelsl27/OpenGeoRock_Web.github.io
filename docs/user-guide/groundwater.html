@@ -1,0 +1,385 @@
+<!doctype html>
+<html class="no-js" lang="en" data-root="../../">
+<head>
+<meta charset="utf-8">
+<title>Finite-element groundwater — OGR Slip2D documentation</title>
+<meta name="description" content="Compute the pore pressures of a slope by finite-element seepage in OGR Slip2D: method, hydraulic properties, mesh, boundary conditions and reservoirs, steady and transient analyses, interpretation, coupling to the stability analysis and the drawdown level sweep.">
+<!-- @inc head -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.replace("no-js", "js")</script>
+<link rel="canonical" href="https://opengeorock.org/docs/user-guide/groundwater.html">
+<link rel="alternate" hreflang="en" href="https://opengeorock.org/docs/user-guide/groundwater.html">
+<link rel="alternate" hreflang="es" href="https://opengeorock.org/es/docs/user-guide/groundwater.html">
+<link rel="alternate" hreflang="x-default" href="https://opengeorock.org/docs/user-guide/groundwater.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="OpenGeoRock">
+<meta property="og:title" content="Finite-element groundwater — OGR Slip2D documentation">
+<meta property="og:description" content="Compute the pore pressures of a slope by finite-element seepage in OGR Slip2D: method, hydraulic properties, mesh, boundary conditions and reservoirs, steady and transient analyses, interpretation, coupling to the stability analysis and the drawdown level sweep.">
+<meta property="og:url" content="https://opengeorock.org/docs/user-guide/groundwater.html">
+<meta property="og:image" content="https://opengeorock.org/assets/img/og-image.png">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#f4efe6">
+<link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&amp;display=swap">
+<link rel="stylesheet" href="../../assets/css/site.css">
+<link rel="stylesheet" href="../../assets/css/docs.css">
+<script src="../../assets/js/site.js" defer></script>
+<!-- @end head -->
+</head>
+<body class="docs">
+<!-- @inc header -->
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="wrap top-inner">
+    <a class="brand" href="../../index.html" aria-label="OpenGeoRock — home">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
+      <b>OpenGeoRock</b>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <div class="has-menu" data-nav="products">
+        <button type="button" aria-expanded="false" aria-haspopup="true">Products <svg class="caret" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+        <div class="mega">
+          <div class="mega-cols">
+            <div class="mega-col">
+              <span class="label">Available today</span>
+              <a class="mega-item feature" href="../../products/slip2d.html"><b>OGR Slip2D</b><span>2D slope stability: limit equilibrium, finite-element groundwater and probabilistic analysis.</span></a>
+              <a class="mega-item" href="../../ai/index.html"><b>MCP server for AI agents <span class="tag live">new</span></b><span>Let Claude, ChatGPT or a local model build and run OGR Slip2D models.</span></a>
+            </div>
+            <div class="mega-col">
+              <span class="label">On the roadmap</span>
+              <a class="mega-item" href="../../products/index.html#ogr-data"><b>OGR Data</b><span>Soil and rock-mass property database</span></a>
+              <a class="mega-item" href="../../products/index.html#ogr-fem2d"><b>OGR FEM2D</b><span>2D elastoplastic finite elements</span></a>
+              <a class="mega-item" href="../../products/index.html#ogr-slip3d"><b>OGR Slip3D</b><span>3D limit equilibrium</span></a>
+              <a class="mega-item" href="../../products/index.html#ogr-fem3d"><b>OGR FEM3D</b><span>3D finite elements with coupled flow</span></a>
+            </div>
+            <div class="mega-col">
+              <span class="label">Use it from</span>
+              <a class="mega-item" href="../../docs/getting-started/interface.html"><b>The desktop program</b><span>Modeller, interpreter and Python terminal</span></a>
+              <a class="mega-item" href="../../docs/reference/python-api.html"><b>Python</b><span>Script analyses from your own code</span></a>
+              <a class="mega-item" href="../../docs/reference/cli.html"><b>The command line</b><span>Batch runs with ogr-slip2d-cli</span></a>
+            </div>
+          </div>
+          <div class="mega-foot"><span>Five programs, one open core.</span><a href="../../products/index.html">All products →</a></div>
+        </div>
+      </div>
+      <a href="../../examples/index.html" data-nav="examples">Examples</a>
+      <a href="../../ai/index.html" data-nav="ai">AI &amp; MCP</a>
+      <a href="../../docs/index.html" data-nav="docs" aria-current="page">Docs</a>
+      <a href="../../verification/index.html" data-nav="verification">Verification</a>
+      <a href="../../about/index.html" data-nav="about">About</a>
+    </nav>
+    <div class="top-right">
+      <span class="lang" role="group" aria-label="Language"><a href="../../docs/user-guide/groundwater.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../../es/docs/user-guide/groundwater.html" hreflang="es" lang="es">ES</a></span>
+      <a class="btn gh" href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener" aria-label="Source code on GitHub"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0C17.3 4.7 18.3 5 18.3 5c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0012 .5z"/></svg><span>GitHub</span></a>
+      <a class="btn primary" href="../../download/index.html" data-nav="download">Get OGR Slip2D</a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Main (mobile)">
+    <span class="label">Products</span>
+    <a href="../../products/slip2d.html">OGR Slip2D</a>
+    <div class="sub"><a href="../../products/index.html">The OpenGeoRock suite</a><a href="../../ai/index.html">MCP server for AI agents</a></div>
+    <span class="label">Learn</span>
+    <a href="../../examples/index.html">Examples</a>
+    <a href="../../docs/index.html">Documentation</a>
+    <a href="../../verification/index.html">Verification</a>
+    <span class="label">Project</span>
+    <a href="../../about/index.html">About</a>
+    <a href="../../download/index.html">Get OGR Slip2D</a>
+    <a href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener">Source on GitHub ↗</a>
+    <span class="lang" role="group" aria-label="Language"><a href="../../docs/user-guide/groundwater.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../../es/docs/user-guide/groundwater.html" hreflang="es" lang="es">ES</a></span>
+  </nav>
+</header>
+<!-- @end header -->
+
+<div class="doc-shell">
+  <aside class="doc-side" id="doc-side">
+<!-- @inc docnav -->
+<div class="doc-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input type="search" placeholder="Search the documentation  /" aria-label="Search the documentation" autocomplete="off"><div class="results" role="listbox"></div></div>
+<nav class="doc-nav" aria-label="Documentation">
+<a class="home" href="../../docs/index.html"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 016.5 3H20v15H6.5A2.5 2.5 0 004 20.5z"/><path d="M4 20.5A2.5 2.5 0 016.5 18H20v3H6.5A2.5 2.5 0 014 20.5z"/></svg> Documentation home</a>
+<details open><summary>1 · Getting started</summary><ul>
+<li><a href="../../docs/getting-started/installation.html"><span class="n">1.1</span><span>Installation</span></a></li>
+<li><a href="../../docs/getting-started/quick-start.html"><span class="n">1.2</span><span>Quick start: your first model</span></a></li>
+<li><a href="../../docs/getting-started/interface.html"><span class="n">1.3</span><span>The interface</span></a></li>
+</ul></details>
+<details open><summary>2 · User guide</summary><ul>
+<li><a href="../../docs/user-guide/project-settings.html"><span class="n">2.1</span><span>Project settings</span></a></li>
+<li><a href="../../docs/user-guide/geometry.html"><span class="n">2.2</span><span>Geometry and boundaries</span></a></li>
+<li><a href="../../docs/user-guide/materials.html"><span class="n">2.3</span><span>Materials</span></a></li>
+<li><a href="../../docs/user-guide/water.html"><span class="n">2.4</span><span>Water and pore pressure</span></a></li>
+<li><a href="../../docs/user-guide/loads.html"><span class="n">2.5</span><span>Loads and seismic loading</span></a></li>
+<li><a href="../../docs/user-guide/supports.html"><span class="n">2.6</span><span>Supports</span></a></li>
+<li><a href="../../docs/user-guide/surfaces.html"><span class="n">2.7</span><span>Slip surfaces and search</span></a></li>
+<li><a href="../../docs/user-guide/results.html"><span class="n">2.8</span><span>Computing and interpreting results</span></a></li>
+<li><a href="../../docs/user-guide/groundwater.html" aria-current="page"><span class="n">2.9</span><span>Finite-element groundwater</span></a></li>
+<li><a href="../../docs/user-guide/probabilistic.html"><span class="n">2.10</span><span>Probabilistic and sensitivity analysis</span></a></li>
+<li><a href="../../docs/user-guide/design-standards.html"><span class="n">2.11</span><span>Design standards</span></a></li>
+<li><a href="../../docs/user-guide/automation.html"><span class="n">2.12</span><span>Reports, scripting and the command line</span></a></li>
+</ul></details>
+<details open><summary>3 · Theory manual</summary><ul>
+<li><a href="../../docs/theory/limit-equilibrium.html"><span class="n">3.1</span><span>Limit equilibrium and the factor of safety</span></a></li>
+<li><a href="../../docs/theory/methods.html"><span class="n">3.2</span><span>Methods of slices</span></a></li>
+<li><a href="../../docs/theory/interslice.html"><span class="n">3.3</span><span>Interslice forces, convergence and admissibility</span></a></li>
+<li><a href="../../docs/theory/search.html"><span class="n">3.4</span><span>Slip-surface search</span></a></li>
+<li><a href="../../docs/theory/strength.html"><span class="n">3.5</span><span>Shear strength models</span></a></li>
+<li><a href="../../docs/theory/pore-pressure.html"><span class="n">3.6</span><span>Pore pressure and unsaturated strength</span></a></li>
+<li><a href="../../docs/theory/seepage.html"><span class="n">3.7</span><span>Finite-element seepage</span></a></li>
+<li><a href="../../docs/theory/rapid-drawdown.html"><span class="n">3.8</span><span>Rapid drawdown</span></a></li>
+<li><a href="../../docs/theory/seismic.html"><span class="n">3.9</span><span>Seismic analysis</span></a></li>
+<li><a href="../../docs/theory/supports.html"><span class="n">3.10</span><span>Support forces</span></a></li>
+<li><a href="../../docs/theory/probabilistic.html"><span class="n">3.11</span><span>Probabilistic analysis</span></a></li>
+<li><a href="../../docs/theory/partial-factors.html"><span class="n">3.12</span><span>Partial factors (Eurocode 7)</span></a></li>
+</ul></details>
+<details open><summary>4 · Verification</summary><ul>
+<li><a href="../../docs/verification/methodology.html"><span class="n">4.1</span><span>Verification methodology</span></a></li>
+<li><a href="../../docs/verification/slope-benchmarks.html"><span class="n">4.2</span><span>Limit-equilibrium benchmarks</span></a></li>
+<li><a href="../../docs/verification/analytic-checks.html"><span class="n">4.3</span><span>Groundwater and analytic checks</span></a></li>
+</ul></details>
+<details open><summary>5 · Reference</summary><ul>
+<li><a href="../../docs/reference/mcp.html"><span class="n">5.1</span><span>MCP server</span></a></li>
+<li><a href="../../docs/reference/cli.html"><span class="n">5.2</span><span>Command-line interface</span></a></li>
+<li><a href="../../docs/reference/python-api.html"><span class="n">5.3</span><span>Python API</span></a></li>
+<li><a href="../../docs/reference/file-format.html"><span class="n">5.4</span><span>The .ogr file format</span></a></li>
+<li><a href="../../docs/reference/error-codes.html"><span class="n">5.5</span><span>Error codes</span></a></li>
+<li><a href="../../docs/reference/notation.html"><span class="n">5.6</span><span>Notation and glossary</span></a></li>
+<li><a href="../../docs/reference/bibliography.html"><span class="n">5.7</span><span>Bibliography</span></a></li>
+</ul></details>
+</nav>
+<!-- @end docnav -->
+  </aside>
+
+  <main id="main" class="doc-main">
+    <header class="doc-head">
+<!-- @inc dochead -->
+<button class="doc-side-toggle" type="button" aria-controls="doc-side" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg> Contents</button>
+<nav class="crumbs label" aria-label="Breadcrumb"><a href="../../docs/index.html">Documentation</a><span aria-hidden="true">/</span><span>2 · User guide</span></nav>
+<div class="chapter label">2.9</div>
+<h1>Finite-element groundwater</h1>
+<div class="meta label"><span>Describes OGR Slip2D <span data-v>0.1.235</span></span></div>
+<!-- @end dochead -->
+    </header>
+
+    <article class="doc prose">
+      <p class="lede">Instead of drawing a water table, OGR Slip2D can compute the pore pressures of the slope by a finite-element seepage analysis, steady or in stages through time, and hand them to the limit-equilibrium analysis. The <span class="ui">Groundwater</span> menu is ordered as the workflow, and each command becomes available only when the step before it has been done. The equations are in <a class="xref" href="../theory/seepage.html">Section 3.7</a>.</p>
+
+      <h2 id="workflow"><span class="secnum">2.9.1</span><span class="ht">The workflow</span><a class="anchor" href="#workflow" aria-label="Link to this section">#</a></h2>
+      <figure class="tbl" id="tbl-workflow">
+        <figcaption><span class="fignum">Table 2.9.1</span> From geometry to factor of safety with a finite-element pore-pressure field.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th class="n">Step</th><th>Command</th><th>Available when</th></tr></thead>
+            <tbody>
+              <tr><td class="n">1</td><td><span class="ui">Analysis → Project Settings →</span> <span class="ui">Groundwater</span>: Method <code>fea_steady</code> or <code>fea_transient</code></td><td>always</td></tr>
+              <tr><td class="n">2</td><td><span class="ui">Properties → Define Materials…</span>: Water Parameters, Type <code>fem</code>, for every material that takes the field (<a class="xref" href="#coupling">Section 2.9.8</a>)</td><td>always — but see the note there</td></tr>
+              <tr><td class="n">3</td><td><span class="ui">Groundwater →</span> <span class="ui">Define Hydraulic Properties…</span></td><td>the method is a finite-element one and materials exist</td></tr>
+              <tr><td class="n">4</td><td><span class="ui">Groundwater → Mesh →</span> <span class="ui">Generate FE Mesh…</span></td><td>always (needs an External Boundary)</td></tr>
+              <tr><td class="n">5</td><td><span class="ui">Groundwater →</span> <span class="ui">Set Boundary Conditions…</span></td><td>a mesh exists</td></tr>
+              <tr><td class="n">6</td><td><span class="ui">Groundwater → Transient Groundwater…</span> (only for a staged analysis)</td><td>the method is a finite-element one</td></tr>
+              <tr><td class="n">7</td><td><span class="ui">Groundwater → Compute Groundwater</span></td><td>a mesh exists</td></tr>
+              <tr><td class="n">8</td><td><span class="ui">Groundwater → Interpret Groundwater</span></td><td>a groundwater result exists</td></tr>
+              <tr><td class="n">9</td><td><span class="ui">Analysis → Compute</span></td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+
+      <h2 id="method"><span class="secnum">2.9.2</span><span class="ht">Choosing a finite-element method</span><a class="anchor" href="#method" aria-label="Link to this section">#</a></h2>
+      <p>In <span class="ui">Analysis → Project Settings →</span> <span class="ui">Groundwater</span>, set <strong>Method</strong> to <code>fea_steady</code> or <code>fea_transient</code>. The program treats the two in the same way: whether the analysis runs in stages is decided by the <strong>Advanced</strong> group of the same page, where <strong>Transient groundwater</strong> is one of four mutually exclusive choices (with <em>None</em>, <em>Calculate Excess Pore Pressure (B-bar method)</em> and <em>Rapid Drawdown analysis</em>). With a finite-element method:</p>
+      <ul>
+        <li>the hydraulic commands of the Groundwater menu become available;</li>
+        <li><span class="ui">Properties → Define Materials…</span> shows two unsaturated-strength fields for each material, <strong>Unsaturated Shear Strength Angle</strong> (φ<sup>b</sup>) and <strong>Air Entry Value</strong>, both 0 by default, so that suction adds no strength unless you ask for it (<a class="xref" href="../theory/pore-pressure.html">Section 3.6</a>). <strong>Negative pore pressure cutoff</strong> on the Groundwater page caps the suction they can use;</li>
+        <li>a reservoir is not drawn: it is the total head you prescribe on the boundary, and the stability analysis applies the weight of the standing water wherever that head is above the ground. Do not draw a water table on top of it.</li>
+      </ul>
+
+      <h2 id="hydraulic-properties"><span class="secnum">2.9.3</span><span class="ht">Hydraulic properties</span><a class="anchor" href="#hydraulic-properties" aria-label="Link to this section">#</a></h2>
+      <p><span class="ui">Groundwater →</span> <span class="ui">Define Hydraulic Properties…</span> lists the materials on the left (names and colours are edited in Define Materials) and the permeability of the selected one on the right. A material you never edit here keeps the defaults: constant permeability with K<sub>s</sub> = 1 × 10⁻⁶.</p>
+      <figure class="tbl" id="tbl-hydraulic">
+        <figcaption><span class="fignum">Table 2.9.2</span> Fields of Define Hydraulic Properties.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Field</th><th>Meaning</th><th>Default</th></tr></thead>
+            <tbody>
+              <tr><td>Saturated permeability Ks</td><td>Permeability K1 of the saturated soil. Disabled for <em>User Defined</em>, which takes it from the first point of its curve.</td><td class="n">1 × 10⁻⁶</td></tr>
+              <tr><td>K2 / K1</td><td>Anisotropy: ratio of the second principal permeability to the first.</td><td class="n">1</td></tr>
+              <tr><td>K1 angle (deg from +X)</td><td>Direction of K1.</td><td class="n">0°</td></tr>
+              <tr><td>Model</td><td>How the permeability falls in the unsaturated zone: <em>Constant</em>, <em>Simple</em> (with a soil type: General, Sand, Silt, Clay or Loam), <em>Brooks-Corey</em>, <em>Fredlund-Xing</em>, <em>Gardner</em>, <em>van Genuchten</em> or <em>User Defined</em>. The parameters of the chosen model appear below it.</td><td>Constant</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p><strong>Pick…</strong> loads representative literature parameters for Brooks-Corey, Fredlund-Xing, Gardner and van Genuchten; <strong>Plot…</strong> draws the permeability against suction for the material shown.</p>
+
+      <figure class="fig shot-fig" id="fig-hydraulic-properties">
+        <div class="art"><img src="../../assets/img/shots/hydraulic-properties.webp" alt="The Define Hydraulic Properties dialog: the list of materials on the left; the saturated permeability, anisotropy and the unsaturated permeability model with its parameters on the right" loading="lazy" width="905" height="650"></div>
+        <figcaption><span class="fignum">Figure 2.9.1</span> Define Hydraulic Properties.</figcaption>
+      </figure>
+
+      <div class="note warn"><span class="label">Units are not converted</span><p>The program converts neither K<sub>s</sub> nor the stage times: <em>Permeability Units</em> and <em>Time Units</em> on the General page of Project Settings only label them, and the dialog shows no unit. A steady analysis does not depend on the unit as long as every material uses the same one, but a transient analysis does: give the stage times in the time unit of K<sub>s</sub> — seconds for K<sub>s</sub> in m/s. Note that the two labels default to m/s and days.</p></div>
+
+      <h2 id="mesh"><span class="secnum">2.9.4</span><span class="ht">The finite-element mesh</span><a class="anchor" href="#mesh" aria-label="Link to this section">#</a></h2>
+      <p><span class="ui">Groundwater → Mesh →</span> <span class="ui">Generate FE Mesh…</span> asks for the <strong>approximate number of elements</strong> (1000 by default; 20 to 200 000) and meshes every material region of the model with three-node triangles, the nodes shared along the contacts, so each element takes the material the limit-equilibrium analysis reads for that region. The status bar reports the number of elements and nodes and the smallest angle of the mesh.</p>
+      <p>Boundary conditions are attached to node numbers, so a new mesh — or <span class="ui">Groundwater → Mesh → Reset FE Mesh</span> — drops the boundary conditions, the computed field, the transient results and the conditions stored with the transient stages, and says so in the status bar. The stages themselves keep their times, labels and flags.</p>
+
+      <h2 id="boundary-conditions"><span class="secnum">2.9.5</span><span class="ht">Boundary conditions</span><a class="anchor" href="#boundary-conditions" aria-label="Link to this section">#</a></h2>
+      <p>A mesh starts with default conditions: <em>Unknown (P=0 or Q=0)</em> on the ground surface, slope face included, and zero nodal flow on the left, right and bottom edges. These prescribe no head anywhere, and a steady problem without a prescribed head has no solution, so at least one head must be set before computing.</p>
+      <p><span class="ui">Groundwater →</span> <span class="ui">Set Boundary Conditions…</span> assigns a condition to a whole side of the model at a time. Choose the <strong>Type</strong>, enter the <strong>Value</strong> where the type takes one, select the target in <strong>Apply to</strong> — <em>Left edge</em>, <em>Right edge</em>, <em>Bottom edge</em> or <em>Ground surface</em>, each with its number of nodes — and press <strong>Assign</strong>. <strong>Restore defaults</strong> goes back to the default conditions. The summary line counts the nodes of each type.</p>
+      <figure class="tbl" id="tbl-bc-types">
+        <figcaption><span class="fignum">Table 2.9.3</span> Boundary-condition types.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Type</th><th>Value</th><th>Seepage face</th></tr></thead>
+            <tbody>
+              <tr><td>Total Head</td><td>head H (m)</td><td>—</td></tr>
+              <tr><td>Pressure Head</td><td>head P (m)</td><td>—</td></tr>
+              <tr><td>Zero Pressure</td><td>—</td><td>—</td></tr>
+              <tr><td>Nodal Flow Rate</td><td>flow at each node</td><td>allowed</td></tr>
+              <tr><td>Infiltration</td><td>flux on the boundary segments; applied to segments only</td><td>allowed</td></tr>
+              <tr><td>Unknown (P=0 or Q=0)</td><td>—</td><td>decided by the solver, node by node: P = 0 where water seeps out, Q = 0 elsewhere</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p>Two more targets at the bottom of the list prescribe a <strong>reservoir</strong>: <em>Reservoir on the left, at Value</em> and <em>Reservoir on the right, at Value</em>. Enter the water level as the Value and press Assign: every boundary node the water reaches — the vertical edge on that side and the ground surface inwards for as long as it stays at or below the level — receives a total head equal to the level, and the dialog reports how many nodes were submerged. A reservoir that reaches only a node or two is usually a level typed below the toe.</p>
+
+      <figure class="fig shot-fig" id="fig-boundary-conditions">
+        <div class="art"><img src="../../assets/img/shots/boundary-conditions.webp" alt="The Set Boundary Conditions dialog: condition type, value and seepage-face option, the list of sides and reservoir targets, and the summary of conditions per type" loading="lazy" width="700" height="650"></div>
+        <figcaption><span class="fignum">Figure 2.9.2</span> Set Boundary Conditions, with the reservoir targets at the end of the list.</figcaption>
+      </figure>
+
+      <div class="note"><span class="label">Note</span><p>In version 0.1.235 the <strong>Pick by</strong> selector of the dialog (<em>Line segments</em> or <em>Nodes</em>) has no effect: a condition always goes to every node of the chosen side, and infiltration to its segments. OK keeps the conditions; Cancel discards everything assigned since the dialog opened.</p></div>
+
+      <h2 id="compute-groundwater"><span class="secnum">2.9.6</span><span class="ht">Computing the field</span><a class="anchor" href="#compute-groundwater" aria-label="Link to this section">#</a></h2>
+      <p><span class="ui">Groundwater → Compute Groundwater</span> solves the steady field, or the stages of a transient analysis when one is configured. A steady solve reports the number of iterations and the range of pore pressure in the status bar, and names any material that used the default hydraulic properties; when it does not converge, the status bar says why. The field is saved in the <code>.ogr</code> file, so reopening a project does not require computing it again.</p>
+      <div class="impl">
+        <span class="label">In OGR Slip2D</span>
+        <p>The steady analysis solves for the total head on linear triangles, with the permeability reduced in the unsaturated zone by the model of each material, by under-relaxed Picard iteration (relaxation 0.4, at most 200 iterations, tolerance 10⁻⁵ m). Nodes of type <em>Unknown</em> switch between seepage face and no-flow until they settle <a class="cite" href="../reference/bibliography.html#neuman1973">(Neuman, 1973)</a>. The transient analysis solves Richards' equation in mixed form with implicit time steps <a class="cite" href="../reference/bibliography.html#celia1990">(Celia, Bouloutas &amp; Zarba, 1990)</a>.</p>
+        <span class="src">Source: <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_slip2d/transient_stability.py" target="_blank" rel="noopener">ogr_slip2d/transient_stability.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/tree/main/ogr_fem2d/solvers" target="_blank" rel="noopener">ogr_fem2d/solvers/</a></span>
+      </div>
+
+      <h2 id="interpret-groundwater"><span class="secnum">2.9.7</span><span class="ht">Interpreting the field</span><a class="anchor" href="#interpret-groundwater" aria-label="Link to this section">#</a></h2>
+      <p><span class="ui">Groundwater → Interpret Groundwater</span> opens the <em>Interpret Groundwater</em> window. Its bar offers:</p>
+      <ul>
+        <li><strong>Field</strong>: filled contours of <em>Total Head H</em>, <em>Pressure Head P</em> or <em>Pore Pressure u</em>, suction showing as negative values;</li>
+        <li><strong>Flow vectors</strong> (on): the Darcy velocity of the elements;</li>
+        <li><strong>Free surface (P=0)</strong> (on): the line of zero pressure;</li>
+        <li><strong>Mesh</strong> (off): the element edges;</li>
+        <li><strong>Discharge section…</strong>: asks for a section as <code>x0,y0,x1,y1</code> and reports the flow through it per unit width, positive towards the normal of the section (the direction from the first point to the second turned 90° anticlockwise);</li>
+        <li>for a transient run, a <strong>Stage</strong> list, with <em>[SF]</em> on the stages that computed a factor of safety, and <strong>FoS vs time…</strong>.</li>
+      </ul>
+      <p>The line below the plot gives the number of nodes, the ranges of head and pore pressure, the iterations, the seepage-face nodes and, for a stage, its time and factors of safety; <em>NOT CONVERGED</em> appears when the solve did not converge.</p>
+      <figure class="fig shot-fig" id="fig-groundwater-interpret">
+        <div class="art"><img src="../../assets/img/shots/groundwater-interpret.webp" alt="The Interpret Groundwater window: contours of the groundwater field over the finite-element mesh, flow vectors and the free surface, with the field selector and options above" loading="lazy" width="1600" height="635"></div>
+        <figcaption><span class="fignum">Figure 2.9.3</span> The Interpret Groundwater window.</figcaption>
+      </figure>
+      <p>The groundwater fields can also be contoured over the stability results, in the Interpret window of <span class="ui">Analysis → Interpret</span>, with <span class="ui">View → Contour Options…</span>; its <span class="ui">Groundwater</span> menu adds the iteration history, a convergence plot, a query of head at a point and <em>Export All Nodal Values…</em> to CSV (<a class="xref" href="results.html">Section 2.8</a>).</p>
+
+      <h2 id="coupling"><span class="secnum">2.9.8</span><span class="ht">Using the field in the stability analysis</span><a class="anchor" href="#coupling" aria-label="Link to this section">#</a></h2>
+      <p>The computed field reaches the limit-equilibrium analysis only through the materials whose <strong>Water Parameters → Type</strong> is <code>fem</code>: at the base of every slice of such a material, the pore pressure is interpolated from the nodal values of the element that contains it. A slice base outside the mesh gets no pore pressure. A material left on any other type ignores the field entirely.</p>
+      <div class="note warn"><span class="label">Set the type before choosing the method</span><p>In version 0.1.235 Define Materials hides the whole <em>Water Parameters</em> group while the groundwater method is <code>fea_steady</code> or <code>fea_transient</code>, so the Type cannot be changed then. Set Type to <code>fem</code> for the materials concerned <em>before</em> choosing the finite-element method — or switch the method back for a moment to change it. The same coupling can be set through the MCP server or the Python API (<a class="xref" href="../reference/mcp.html">Section 5.1</a>).</p></div>
+      <p>Compute refuses to run while a material of type <code>fem</code> has no computed field to read, rather than report the pore pressure as zero, which would look like a dry slope. Generating a new mesh clears the field, so compute the groundwater again after remeshing. After a transient analysis the field stored in the project is that of the last stage.</p>
+
+      <h2 id="transient"><span class="secnum">2.9.9</span><span class="ht">Transient analysis</span><a class="anchor" href="#transient" aria-label="Link to this section">#</a></h2>
+      <p>A staged analysis is set up in <span class="ui">Groundwater → Transient Groundwater…</span>. Its first box does the same as choosing <strong>Transient groundwater</strong> in the Advanced group of <span class="ui">Analysis → Project Settings →</span> <span class="ui">Groundwater</span>.</p>
+      <ul>
+        <li><strong>Transient groundwater analysis</strong> switches the staged analysis on or off; switching it on turns off the other advanced option, if one was chosen.</li>
+        <li><strong>Stages</strong>: a table with <em>Time</em>, <em>Calculate SF</em> and <em>Label</em>. <strong>Add stage</strong> adds a row at twice the latest time (1 for the first), <strong>Delete stage</strong> removes the selected rows. Times must be positive and distinct; the stages are sorted by time.</li>
+        <li><strong>Capture current BCs</strong> stores the conditions currently set in Set Boundary Conditions in the selected stage, which is marked <em>[BC]</em>. A stage without conditions of its own uses the current ones, and the field only evolves where a stage's conditions differ from the initial ones.</li>
+        <li><strong>Capture as initial state</strong> stores the current conditions as the initial state: the steady field the run starts from. Without it, the current conditions are used, so the model starts in equilibrium with them.</li>
+        <li><strong>Transient FEA options</strong>: <em>Tolerance</em> (1 × 10⁻⁵), <em>Maximum iterations</em> (30) and <em>Number of time steps</em> per stage (<em>Auto</em> by default: derived from the element size and the storage, so that the water front crosses about one element per step). The same three are on the Transient page of Project Settings, which is greyed out unless the transient option is on.</li>
+      </ul>
+      <p>For a drawdown, for example, assign a reservoir at the initial level and capture it as the initial state. Then press <strong>Restore defaults</strong> in Set Boundary Conditions — assigning a lower reservoir does not clear the heads of the nodes it no longer reaches — assign the reservoir at the lower level, and any other condition again, select a stage and capture it. Compute Groundwater solves the stages in order and computes the factor of safety, with every enabled method, at the stages marked <em>Calculate SF</em>. They are plotted against time by <strong>FoS vs time…</strong> in Interpret Groundwater and by <span class="ui">Data → Graph SF with Time…</span> in the Interpret window. If no material is of type <code>fem</code>, the run warns that the stage factors would ignore the computed pressures.</p>
+      <div class="note"><span class="label">Note</span><p>The transient analysis also uses the saturated and residual water contents (0.4 and 0.05) and the specific storage (1 × 10⁻⁵ 1/m) of each material. Define Hydraulic Properties does not show them in version 0.1.235; they keep these defaults unless they are set through the MCP server or the Python API.</p></div>
+
+      <h2 id="drawdown-sweep"><span class="secnum">2.9.10</span><span class="ht">Drawdown Level Sweep</span><a class="anchor" href="#drawdown-sweep" aria-label="Link to this section">#</a></h2>
+      <p><span class="ui">Groundwater → Drawdown Level Sweep…</span> belongs to the limit-equilibrium rapid-drawdown analysis, not to the finite-element one: it needs <em>Rapid Drawdown analysis</em> selected in the Advanced group, a groundwater method based on water surfaces, and at least one material with undrained behaviour (<a class="xref" href="water.html">Section 2.4</a>, <a class="xref" href="../theory/rapid-drawdown.html">Section 3.8</a>). It answers a question the total drawdown alone does not: the critical reservoir level is not always the lowest one.</p>
+      <p>The dialog asks for the <strong>Number of levels</strong> (11 by default; 2 to 101), spaced evenly from the initial water table down to the lowest ground of the model, and whether to <strong>Include total drawdown</strong> (ticked). Each level is a full search with every enabled method, so the number of levels is the cost of the run. The status bar then gives the critical level and its factor of safety — and, when the total drawdown would overstate it, by how much — and a chart plots the factor of safety against the drawdown level.</p>
+    </article>
+
+<!-- @inc docfoot -->
+<nav class="doc-pager" aria-label="Pages">
+<a class="prev" href="../../docs/user-guide/results.html"><span class="label">← Previous · 2.8</span><b>Computing and interpreting results</b></a>
+<a class="next" href="../../docs/user-guide/probabilistic.html"><span class="label">2.10 · Next →</span><b>Probabilistic and sensitivity analysis</b></a>
+</nav>
+<div class="doc-edit label"><a href="https://github.com/samuelsl27/OpenGeoRock_Web.github.io/blob/main/docs/user-guide/groundwater.html" target="_blank" rel="noopener">Edit this page ↗</a><a href="https://github.com/samuelsl27/OGR-Slip2D/issues" target="_blank" rel="noopener">Report a problem ↗</a></div>
+<!-- @end docfoot -->
+  </main>
+
+  <aside class="doc-toc" aria-label="On this page">
+    <div class="toc-inner">
+<!-- @inc pagetoc -->
+<span class="label">On this page</span><ul><li class="h2"><a href="#workflow">2.9.1 The workflow</a></li><li class="h2"><a href="#method">2.9.2 Choosing a finite-element method</a></li><li class="h2"><a href="#hydraulic-properties">2.9.3 Hydraulic properties</a></li><li class="h2"><a href="#mesh">2.9.4 The finite-element mesh</a></li><li class="h2"><a href="#boundary-conditions">2.9.5 Boundary conditions</a></li><li class="h2"><a href="#compute-groundwater">2.9.6 Computing the field</a></li><li class="h2"><a href="#interpret-groundwater">2.9.7 Interpreting the field</a></li><li class="h2"><a href="#coupling">2.9.8 Using the field in the stability analysis</a></li><li class="h2"><a href="#transient">2.9.9 Transient analysis</a></li><li class="h2"><a href="#drawdown-sweep">2.9.10 Drawdown Level Sweep</a></li></ul><button class="print" type="button"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="1.5"/><path d="M6 14h12v7H6z"/></svg> Print this page</button>
+<!-- @end pagetoc -->
+    </div>
+  </aside>
+</div>
+
+<!-- @inc footer -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <a class="brand" href="../../index.html" aria-label="OpenGeoRock — home">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
+          <b>OpenGeoRock</b>
+        </a>
+        <p class="tagline">Open-source geotechnical software, built in the open at the Universidad Politécnica de Cartagena.</p>
+        <span class="lang" role="group" aria-label="Language"><a href="../../docs/user-guide/groundwater.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../../es/docs/user-guide/groundwater.html" hreflang="es" lang="es">ES</a></span>
+      </div>
+      <div>
+        <h5>Products</h5>
+        <ul>
+          <li><a href="../../products/slip2d.html">OGR Slip2D</a></li>
+          <li><a href="../../products/index.html">The suite</a></li>
+          <li><a href="../../ai/index.html">MCP server</a></li>
+          <li><a href="../../download/index.html">Download</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Learn</h5>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="../../docs/getting-started/quick-start.html">Quick start</a></li>
+          <li><a href="../../docs/theory/methods.html">Theory manual</a></li>
+          <li><a href="../../examples/index.html">Examples</a></li>
+          <li><a href="../../verification/index.html">Verification</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Project</h5>
+        <ul>
+          <li><a href="../../about/index.html">About</a></li>
+          <li><a href="../../about/index.html#team">Team</a></li>
+          <li><a href="../../about/index.html#cite">How to cite</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Contributing</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/LICENSE" target="_blank" rel="noopener">Licence · AGPL-3.0</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Connect</h5>
+        <ul>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/issues" target="_blank" rel="noopener">Issues</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/tree/main/docs/changelog" target="_blank" rel="noopener">Changelog</a></li>
+          <li><a href="mailto:samuel.saez@edu.upct.es">Email</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© 2026 Samuel Sáez López · OGR Slip2D is free software under AGPL-3.0-or-later, with no warranty of any kind.</span>
+      <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
+    </div>
+  </div>
+  <div class="lang-hint" role="dialog" aria-label="Idioma" lang="es">
+    ¿Prefieres leer esta web en español?
+    <div class="row"><a class="btn sm primary go" href="../../es/index.html">Ver en español</a><button class="btn sm" type="button" data-dismiss>No, gracias</button></div>
+  </div>
+</footer>
+<!-- @end footer -->
+</body>
+</html>

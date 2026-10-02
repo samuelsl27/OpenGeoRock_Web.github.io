@@ -1,0 +1,619 @@
+<!doctype html>
+<html class="no-js" lang="en" data-root="../../">
+<head>
+<meta charset="utf-8">
+<title>Slip surfaces and search — OGR Slip2D documentation</title>
+<meta name="description" content="How to choose and configure the seven slip-surface searches of OGR Slip2D: Surface Options, grids of centres, Block Search objects, surfaces defined by hand, focus objects, Slope Limits, filters, weak layers and surface optimisation.">
+<!-- @inc head -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.replace("no-js", "js")</script>
+<link rel="canonical" href="https://opengeorock.org/docs/user-guide/surfaces.html">
+<link rel="alternate" hreflang="en" href="https://opengeorock.org/docs/user-guide/surfaces.html">
+<link rel="alternate" hreflang="es" href="https://opengeorock.org/es/docs/user-guide/surfaces.html">
+<link rel="alternate" hreflang="x-default" href="https://opengeorock.org/docs/user-guide/surfaces.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="OpenGeoRock">
+<meta property="og:title" content="Slip surfaces and search — OGR Slip2D documentation">
+<meta property="og:description" content="How to choose and configure the seven slip-surface searches of OGR Slip2D: Surface Options, grids of centres, Block Search objects, surfaces defined by hand, focus objects, Slope Limits, filters, weak layers and surface optimisation.">
+<meta property="og:url" content="https://opengeorock.org/docs/user-guide/surfaces.html">
+<meta property="og:image" content="https://opengeorock.org/assets/img/og-image.png">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#f4efe6">
+<link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&amp;display=swap">
+<link rel="stylesheet" href="../../assets/css/site.css">
+<link rel="stylesheet" href="../../assets/css/docs.css">
+<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
+<script src="../../assets/js/site.js" defer></script>
+<!-- @end head -->
+</head>
+<body class="docs">
+<!-- @inc header -->
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="wrap top-inner">
+    <a class="brand" href="../../index.html" aria-label="OpenGeoRock — home">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
+      <b>OpenGeoRock</b>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <div class="has-menu" data-nav="products">
+        <button type="button" aria-expanded="false" aria-haspopup="true">Products <svg class="caret" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+        <div class="mega">
+          <div class="mega-cols">
+            <div class="mega-col">
+              <span class="label">Available today</span>
+              <a class="mega-item feature" href="../../products/slip2d.html"><b>OGR Slip2D</b><span>2D slope stability: limit equilibrium, finite-element groundwater and probabilistic analysis.</span></a>
+              <a class="mega-item" href="../../ai/index.html"><b>MCP server for AI agents <span class="tag live">new</span></b><span>Let Claude, ChatGPT or a local model build and run OGR Slip2D models.</span></a>
+            </div>
+            <div class="mega-col">
+              <span class="label">On the roadmap</span>
+              <a class="mega-item" href="../../products/index.html#ogr-data"><b>OGR Data</b><span>Soil and rock-mass property database</span></a>
+              <a class="mega-item" href="../../products/index.html#ogr-fem2d"><b>OGR FEM2D</b><span>2D elastoplastic finite elements</span></a>
+              <a class="mega-item" href="../../products/index.html#ogr-slip3d"><b>OGR Slip3D</b><span>3D limit equilibrium</span></a>
+              <a class="mega-item" href="../../products/index.html#ogr-fem3d"><b>OGR FEM3D</b><span>3D finite elements with coupled flow</span></a>
+            </div>
+            <div class="mega-col">
+              <span class="label">Use it from</span>
+              <a class="mega-item" href="../../docs/getting-started/interface.html"><b>The desktop program</b><span>Modeller, interpreter and Python terminal</span></a>
+              <a class="mega-item" href="../../docs/reference/python-api.html"><b>Python</b><span>Script analyses from your own code</span></a>
+              <a class="mega-item" href="../../docs/reference/cli.html"><b>The command line</b><span>Batch runs with ogr-slip2d-cli</span></a>
+            </div>
+          </div>
+          <div class="mega-foot"><span>Five programs, one open core.</span><a href="../../products/index.html">All products →</a></div>
+        </div>
+      </div>
+      <a href="../../examples/index.html" data-nav="examples">Examples</a>
+      <a href="../../ai/index.html" data-nav="ai">AI &amp; MCP</a>
+      <a href="../../docs/index.html" data-nav="docs" aria-current="page">Docs</a>
+      <a href="../../verification/index.html" data-nav="verification">Verification</a>
+      <a href="../../about/index.html" data-nav="about">About</a>
+    </nav>
+    <div class="top-right">
+      <span class="lang" role="group" aria-label="Language"><a href="../../docs/user-guide/surfaces.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../../es/docs/user-guide/surfaces.html" hreflang="es" lang="es">ES</a></span>
+      <a class="btn gh" href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener" aria-label="Source code on GitHub"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0C17.3 4.7 18.3 5 18.3 5c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0012 .5z"/></svg><span>GitHub</span></a>
+      <a class="btn primary" href="../../download/index.html" data-nav="download">Get OGR Slip2D</a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Main (mobile)">
+    <span class="label">Products</span>
+    <a href="../../products/slip2d.html">OGR Slip2D</a>
+    <div class="sub"><a href="../../products/index.html">The OpenGeoRock suite</a><a href="../../ai/index.html">MCP server for AI agents</a></div>
+    <span class="label">Learn</span>
+    <a href="../../examples/index.html">Examples</a>
+    <a href="../../docs/index.html">Documentation</a>
+    <a href="../../verification/index.html">Verification</a>
+    <span class="label">Project</span>
+    <a href="../../about/index.html">About</a>
+    <a href="../../download/index.html">Get OGR Slip2D</a>
+    <a href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener">Source on GitHub ↗</a>
+    <span class="lang" role="group" aria-label="Language"><a href="../../docs/user-guide/surfaces.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../../es/docs/user-guide/surfaces.html" hreflang="es" lang="es">ES</a></span>
+  </nav>
+</header>
+<!-- @end header -->
+
+<div class="doc-shell">
+  <aside class="doc-side" id="doc-side">
+<!-- @inc docnav -->
+<div class="doc-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input type="search" placeholder="Search the documentation  /" aria-label="Search the documentation" autocomplete="off"><div class="results" role="listbox"></div></div>
+<nav class="doc-nav" aria-label="Documentation">
+<a class="home" href="../../docs/index.html"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 016.5 3H20v15H6.5A2.5 2.5 0 004 20.5z"/><path d="M4 20.5A2.5 2.5 0 016.5 18H20v3H6.5A2.5 2.5 0 014 20.5z"/></svg> Documentation home</a>
+<details open><summary>1 · Getting started</summary><ul>
+<li><a href="../../docs/getting-started/installation.html"><span class="n">1.1</span><span>Installation</span></a></li>
+<li><a href="../../docs/getting-started/quick-start.html"><span class="n">1.2</span><span>Quick start: your first model</span></a></li>
+<li><a href="../../docs/getting-started/interface.html"><span class="n">1.3</span><span>The interface</span></a></li>
+</ul></details>
+<details open><summary>2 · User guide</summary><ul>
+<li><a href="../../docs/user-guide/project-settings.html"><span class="n">2.1</span><span>Project settings</span></a></li>
+<li><a href="../../docs/user-guide/geometry.html"><span class="n">2.2</span><span>Geometry and boundaries</span></a></li>
+<li><a href="../../docs/user-guide/materials.html"><span class="n">2.3</span><span>Materials</span></a></li>
+<li><a href="../../docs/user-guide/water.html"><span class="n">2.4</span><span>Water and pore pressure</span></a></li>
+<li><a href="../../docs/user-guide/loads.html"><span class="n">2.5</span><span>Loads and seismic loading</span></a></li>
+<li><a href="../../docs/user-guide/supports.html"><span class="n">2.6</span><span>Supports</span></a></li>
+<li><a href="../../docs/user-guide/surfaces.html" aria-current="page"><span class="n">2.7</span><span>Slip surfaces and search</span></a></li>
+<li><a href="../../docs/user-guide/results.html"><span class="n">2.8</span><span>Computing and interpreting results</span></a></li>
+<li><a href="../../docs/user-guide/groundwater.html"><span class="n">2.9</span><span>Finite-element groundwater</span></a></li>
+<li><a href="../../docs/user-guide/probabilistic.html"><span class="n">2.10</span><span>Probabilistic and sensitivity analysis</span></a></li>
+<li><a href="../../docs/user-guide/design-standards.html"><span class="n">2.11</span><span>Design standards</span></a></li>
+<li><a href="../../docs/user-guide/automation.html"><span class="n">2.12</span><span>Reports, scripting and the command line</span></a></li>
+</ul></details>
+<details open><summary>3 · Theory manual</summary><ul>
+<li><a href="../../docs/theory/limit-equilibrium.html"><span class="n">3.1</span><span>Limit equilibrium and the factor of safety</span></a></li>
+<li><a href="../../docs/theory/methods.html"><span class="n">3.2</span><span>Methods of slices</span></a></li>
+<li><a href="../../docs/theory/interslice.html"><span class="n">3.3</span><span>Interslice forces, convergence and admissibility</span></a></li>
+<li><a href="../../docs/theory/search.html"><span class="n">3.4</span><span>Slip-surface search</span></a></li>
+<li><a href="../../docs/theory/strength.html"><span class="n">3.5</span><span>Shear strength models</span></a></li>
+<li><a href="../../docs/theory/pore-pressure.html"><span class="n">3.6</span><span>Pore pressure and unsaturated strength</span></a></li>
+<li><a href="../../docs/theory/seepage.html"><span class="n">3.7</span><span>Finite-element seepage</span></a></li>
+<li><a href="../../docs/theory/rapid-drawdown.html"><span class="n">3.8</span><span>Rapid drawdown</span></a></li>
+<li><a href="../../docs/theory/seismic.html"><span class="n">3.9</span><span>Seismic analysis</span></a></li>
+<li><a href="../../docs/theory/supports.html"><span class="n">3.10</span><span>Support forces</span></a></li>
+<li><a href="../../docs/theory/probabilistic.html"><span class="n">3.11</span><span>Probabilistic analysis</span></a></li>
+<li><a href="../../docs/theory/partial-factors.html"><span class="n">3.12</span><span>Partial factors (Eurocode 7)</span></a></li>
+</ul></details>
+<details open><summary>4 · Verification</summary><ul>
+<li><a href="../../docs/verification/methodology.html"><span class="n">4.1</span><span>Verification methodology</span></a></li>
+<li><a href="../../docs/verification/slope-benchmarks.html"><span class="n">4.2</span><span>Limit-equilibrium benchmarks</span></a></li>
+<li><a href="../../docs/verification/analytic-checks.html"><span class="n">4.3</span><span>Groundwater and analytic checks</span></a></li>
+</ul></details>
+<details open><summary>5 · Reference</summary><ul>
+<li><a href="../../docs/reference/mcp.html"><span class="n">5.1</span><span>MCP server</span></a></li>
+<li><a href="../../docs/reference/cli.html"><span class="n">5.2</span><span>Command-line interface</span></a></li>
+<li><a href="../../docs/reference/python-api.html"><span class="n">5.3</span><span>Python API</span></a></li>
+<li><a href="../../docs/reference/file-format.html"><span class="n">5.4</span><span>The .ogr file format</span></a></li>
+<li><a href="../../docs/reference/error-codes.html"><span class="n">5.5</span><span>Error codes</span></a></li>
+<li><a href="../../docs/reference/notation.html"><span class="n">5.6</span><span>Notation and glossary</span></a></li>
+<li><a href="../../docs/reference/bibliography.html"><span class="n">5.7</span><span>Bibliography</span></a></li>
+</ul></details>
+</nav>
+<!-- @end docnav -->
+  </aside>
+
+  <main id="main" class="doc-main">
+    <header class="doc-head">
+<!-- @inc dochead -->
+<button class="doc-side-toggle" type="button" aria-controls="doc-side" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg> Contents</button>
+<nav class="crumbs label" aria-label="Breadcrumb"><a href="../../docs/index.html">Documentation</a><span aria-hidden="true">/</span><span>2 · User guide</span></nav>
+<div class="chapter label">2.7</div>
+<h1>Slip surfaces and search</h1>
+<div class="meta label"><span>Describes OGR Slip2D <span data-v>0.1.235</span></span></div>
+<!-- @end dochead -->
+    </header>
+
+    <article class="doc prose">
+      <p class="lede">The critical factor of safety is the lowest one among the surfaces the program tries, so the way those surfaces are generated decides the answer as much as the method of slices does. This page explains how to choose and configure the seven searches, how to aim them with grids, Block Search objects, focus objects and Slope Limits, how to add surfaces by hand, and how to filter and optimise the candidates. The algorithms themselves are described in <a class="xref" href="../theory/search.html">Section 3.4</a>.</p>
+
+      <h2 id="surface-options"><span class="secnum">2.7.1</span><span class="ht">Surface Options</span><a class="anchor" href="#surface-options" aria-label="Link to this section">#</a></h2>
+      <p>Every search setting is in <span class="ui">Surfaces → Surface Options…</span>. The top of the dialog holds the <strong>Surface Type</strong> (Circular or Non-Circular) and the <strong>Search Method</strong>; the list of methods follows the surface type, as <a class="xref" href="#tbl-searches">Table 2.7.1</a> shows. Below them are the options of the chosen search, the filters that apply to every candidate surface and the weak-layer options. A new project starts with Circular surfaces and Grid Search.</p>
+      <p><strong>Defaults</strong> restores the options of the search on screen only; the other searches keep their values. <strong>OK</strong> writes every panel back to the project, including those of searches you did not select, so switching between searches never loses what was typed.</p>
+
+      <figure class="tbl" id="tbl-searches">
+        <figcaption><span class="fignum">Table 2.7.1</span> The seven searches. Grid and Auto Refine enumerate their surfaces; the other five draw at random with the project seed.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Search Method</th><th>Surface Type</th><th>How the candidate surfaces are generated</th><th>Size of the population</th></tr></thead>
+            <tbody>
+              <tr><td>Grid Search</td><td>Circular</td><td>A rectangular grid of centres; at each centre a fan of radii between the nearest point of the slope surface and the nearer Slope Limit.</td><td>(nx + 1)(ny + 1)(Radius Increment + 1) circles</td></tr>
+              <tr><td>Slope Search</td><td>Circular</td><td>Two random points on the ground, one on the toe side and one on the crest side, and a random inclination at the toe define each circle; the eight best are then refined by a short random walk.</td><td>Number of Surfaces</td></tr>
+              <tr><td>Auto Refine Search</td><td>Both</td><td>The slope is divided into divisions and circles are fitted through the mid-points of every pair of them; the divisions with the lowest factors are kept and the process repeats on them. Under Non-Circular each circle is converted into a polyline.</td><td>Divisions, circles per division and iterations</td></tr>
+              <tr><td>Block Search</td><td>Non-Circular</td><td>Vertices taken from the Block Search objects you draw, joined in order of x and projected up to the ground at the projection angles.</td><td>Number of Surfaces</td></tr>
+              <tr><td>Path Search</td><td>Non-Circular</td><td>A path that starts at a random point near the toe and grows segment by segment towards the crest, always turning upwards, until it re-emerges at the ground.</td><td>Number of Surfaces (valid ones)</td></tr>
+              <tr><td>Simulated Annealing</td><td>Non-Circular</td><td>One surface whose vertices are moved by very fast simulated annealing and then refined locally, after <a class="cite" href="../reference/bibliography.html#su2009">Su (2009)</a> and <a class="cite" href="../reference/bibliography.html#greco1996">Greco (1996)</a>.</td><td>Generation steps and stopping criterion</td></tr>
+              <tr><td>Particle Swarm Search</td><td>Both</td><td>A swarm of circles that moves towards the lowest factors of safety <a class="cite" href="../reference/bibliography.html#kennedy1995">(Kennedy &amp; Eberhart, 1995)</a>; it can report one minimum or several. Non-circular surfaces come from the optimisation of the circles it finds.</td><td>Particles × iterations</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+
+      <figure class="fig shot-fig" id="fig-surface-options">
+        <div class="art"><img src="../../assets/img/shots/surface-options.webp" alt="The Surface Options dialog: Surface Type and Search Method at the top, the options of the selected search, the three surface filters and the Weak Layer Handling group" loading="lazy" width="1025" height="850"></div>
+        <figcaption><span class="fignum">Figure 2.7.1</span> The Surface Options dialog with its defaults: Circular surfaces, Grid Search and a Radius Increment of 10.</figcaption>
+      </figure>
+
+      <div class="impl">
+        <span class="label">In OGR Slip2D</span>
+        <p>The search settings are saved with the model in the <code>.ogr</code> file, and every search is built from them by the routine that the command line and the MCP server also use, so a model generates the same surfaces however it is run. The random searches (Slope, Block, Path, Simulated Annealing and Particle Swarm) take their seed from <span class="ui">Analysis → Project Settings →</span> <span class="ui">Random Numbers</span>: pseudo-random with seed 10116 by default, so two runs of one model give the same answer.</p>
+        <span class="src">Source: <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_gui/dialogs/grid_dialogs.py" target="_blank" rel="noopener">ogr_gui/dialogs/grid_dialogs.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_slip2d/analysis_runner.py" target="_blank" rel="noopener">ogr_slip2d/analysis_runner.py</a></span>
+      </div>
+
+      <h2 id="search-options"><span class="secnum">2.7.2</span><span class="ht">Options of each search</span><a class="anchor" href="#search-options" aria-label="Link to this section">#</a></h2>
+      <p>The tables give each option as it is labelled in the dialog, what it does and its default; the range accepted by the dialog is given where it matters. Three options appear on several panels but are <strong>one setting</strong> each, so ticking them on one panel ticks them on all:</p>
+      <ul>
+        <li><strong>Composite Surfaces</strong> (Grid, Slope and Auto Refine): where a circle would pass below the bottom of the External Boundary, the slip surface follows that bottom instead. Off by default.</li>
+        <li><strong>Create tension crack for reverse curvature</strong> (Grid and Slope): inserts a tension crack automatically where the surface has a concave stretch on its up-slope side. On by default.</li>
+        <li><strong>Optimize Surfaces</strong> (the non-circular searches and the swarm): runs the optimisation described in <a class="xref" href="#optimise">Section 2.7.10</a> on the result. Unless you change it, it is on for Simulated Annealing, Particle Swarm and the non-circular Auto Refine, and off for Block and Path Search.</li>
+      </ul>
+
+      <h3 id="grid-search-options"><span class="ht">Grid Search</span><a class="anchor" href="#grid-search-options" aria-label="Link to this section">#</a></h3>
+      <figure class="tbl" id="tbl-grid-options">
+        <figcaption><span class="fignum">Table 2.7.2</span> Grid Search options. The grid itself is set with Auto Grid or Add Grid (<a class="xref" href="#grids">Section 2.7.3</a>).</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Option</th><th>What it does</th><th>Default</th></tr></thead>
+            <tbody>
+              <tr><td>Radius Increment</td><td>Number of <em>intervals</em> between the smallest and the largest radius tried at each centre, so each centre gets Radius Increment + 1 circles (1 to 1000).</td><td class="n">10</td></tr>
+              <tr><td>Composite Surfaces</td><td>See above.</td><td>off</td></tr>
+              <tr><td>Create tension crack for reverse curvature</td><td>See above.</td><td>on</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+
+      <h3 id="slope-search-options"><span class="ht">Slope Search</span><a class="anchor" href="#slope-search-options" aria-label="Link to this section">#</a></h3>
+      <figure class="tbl" id="tbl-slope-options">
+        <figcaption><span class="fignum">Table 2.7.3</span> Slope Search options.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Option</th><th>What it does</th><th>Default</th></tr></thead>
+            <tbody>
+              <tr><td>Number of Surfaces</td><td>Circles generated at random (10 to 1 000 000). The eight best are then refined by a random walk of 120 steps each.</td><td class="n">5000</td></tr>
+              <tr><td>Upper Angle, Lower Angle</td><td>Limits of the <em>Initial Angle at Toe</em>, the inclination of the circle where it leaves the ground at the toe; each applies only when its box is ticked. Unticked, the angles are drawn from −70° up to β − 5° (at least 5°), where β is the inclination of the slope face.</td><td>off (−45°)</td></tr>
+              <tr><td>Composite Surfaces</td><td>See above.</td><td>off</td></tr>
+              <tr><td>Create tension crack for reverse curvature</td><td>See above.</td><td>on</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <div class="note warn"><span class="label">Two limits of the Slope Search</span><p>The window of toe angles is always widened down to −70°, so a ticked <strong>Lower Angle</strong> above −70° has no effect in version 0.1.235. And the Slope Search takes its entry and exit ranges from the ground profile, not from the Slope Limits: limits you set filter its surfaces, as they do for every search, but do not steer where it looks. The analysis notes say so when it happens.</p></div>
+
+      <h3 id="auto-refine-options"><span class="ht">Auto Refine Search</span><a class="anchor" href="#auto-refine-options" aria-label="Link to this section">#</a></h3>
+      <figure class="tbl" id="tbl-auto-refine-options">
+        <figcaption><span class="fignum">Table 2.7.4</span> Auto Refine Search options. Below them the dialog shows the number of surfaces the search will generate, in total and per iteration; that count is an upper bound, because a circle that cannot be built or that a focus object rejects is never analysed.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Option</th><th>What it does</th><th>Default</th></tr></thead>
+            <tbody>
+              <tr><td>Divisions along slope</td><td>Number of divisions of the slope surface between the Slope Limits, measured along the ground (2 to 200).</td><td class="n">10</td></tr>
+              <tr><td>Circles per division</td><td>Circles fitted through the mid-points of each pair of divisions, with their tangent swept from the line joining the two points to the vertical (1 to 200).</td><td class="n">10</td></tr>
+              <tr><td>Number of Iterations</td><td>Refinement cycles; all of them run (1 to 50).</td><td class="n">10</td></tr>
+              <tr><td>Divisions to use in next iteration</td><td>Share of divisions kept for the next cycle, those with the lowest factor of safety among the circles that end in them. The dialog accepts 1 to 100 %; the search uses at least 10 % and at most 95 %.</td><td class="n">50 %</td></tr>
+              <tr><td>Number of vertices along surface</td><td>Non-Circular only: each circle becomes a polyline with this many vertices, and the factor of safety is computed on the polyline (3 to 100). Every vertex is a compulsory slice boundary, so keep it below the number of slices.</td><td class="n">12</td></tr>
+              <tr><td>Optimize Surfaces</td><td>Non-Circular only. See above.</td><td>on</td></tr>
+              <tr><td>Composite Surfaces</td><td>See above.</td><td>off</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+
+      <h3 id="block-search-options"><span class="ht">Block Search</span><a class="anchor" href="#block-search-options" aria-label="Link to this section">#</a></h3>
+      <figure class="tbl" id="tbl-block-options">
+        <figcaption><span class="fignum">Table 2.7.5</span> Block Search options. The objects that give the surfaces their vertices are described in <a class="xref" href="#block-objects">Section 2.7.4</a>.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Option</th><th>What it does</th><th>Default</th></tr></thead>
+            <tbody>
+              <tr><td>Number of Surfaces</td><td>Trial surfaces generated (10 to 1 000 000).</td><td class="n">5000</td></tr>
+              <tr><td>Multiple Groups</td><td>Searches the objects of each Group ID on their own, with Number of Surfaces divided equally between the groups.</td><td>off</td></tr>
+              <tr><td>Implicit Region Bands</td><td>Used only when no Block Search object is drawn: the program then samples a box over the slope face divided into this many vertical bands, one vertex per band (1 to 20). With objects drawn it does nothing.</td><td class="n">3</td></tr>
+              <tr><td>Left Projection Angle: Start Angle, End Angle</td><td>Direction in which the surface rises from its leftmost vertex to the ground, counter-clockwise from the +x axis. Different start and end angles give a random angle between them for each surface (0 to 360°).</td><td class="n">135°, 135°</td></tr>
+              <tr><td>Right Projection Angle: Start Angle, End Angle</td><td>The same for the rightmost vertex.</td><td class="n">45°, 45°</td></tr>
+              <tr><td>Convex Surfaces Only</td><td>Rejects surfaces with a reflex (non-convex) vertex.</td><td>off</td></tr>
+              <tr><td>Optimize Surfaces</td><td>See above.</td><td>off</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+
+      <h3 id="path-search-options"><span class="ht">Path Search</span><a class="anchor" href="#path-search-options" aria-label="Link to this section">#</a></h3>
+      <figure class="tbl" id="tbl-path-options">
+        <figcaption><span class="fignum">Table 2.7.6</span> Path Search options. Each path starts at a random point of the ground in the toe-side half of the Slope Limits, has at most 30 segments, and is discarded unless it re-emerges within the Slope Limits.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Option</th><th>What it does</th><th>Default</th></tr></thead>
+            <tbody>
+              <tr><td>Number of Surfaces</td><td>Number of <em>valid</em> surfaces to generate; invalid ones are discarded and not counted. Generation stops in any case after 20 times that many attempts.</td><td class="n">5000</td></tr>
+              <tr><td>Upper Angle (Initial Angle at Toe), Lower Angle (Initial Angle at Toe)</td><td>Limits of the inclination of the first segment, as absolute angles counter-clockwise from the +x axis; each applies only when ticked. Unticked, the window runs from 45° below the horizontal to β − 5°, β being the inclination of the ground at the starting point.</td><td>off (45°)</td></tr>
+              <tr><td>Segment Length: Manual</td><td>Length of every segment. Unticked, it is automatic, about 0.3 H, where H is the height of the slope between the Slope Limits; the value shown means nothing until the box is ticked.</td><td>off</td></tr>
+              <tr><td>Convex Surfaces Only</td><td>Rejects surfaces with a reflex vertex.</td><td>off</td></tr>
+              <tr><td>Optimize Surfaces</td><td>See above.</td><td>off</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+
+      <h3 id="annealing-options"><span class="ht">Simulated Annealing</span><a class="anchor" href="#annealing-options" aria-label="Link to this section">#</a></h3>
+      <figure class="tbl" id="tbl-annealing-options">
+        <figcaption><span class="fignum">Table 2.7.7</span> Simulated Annealing options. During the local refinement the two ends of the surface move as well, along the ground and within the Slope Limits.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Option</th><th>What it does</th><th>Default</th></tr></thead>
+            <tbody>
+              <tr><td>Initial number of surface vertices</td><td>Vertices of the starting surface. The dialog accepts 3 to 100; the search uses at least 4.</td><td class="n">8</td></tr>
+              <tr><td>Number of annealing generation steps</td><td>Steps of the annealing stage (10 to 1 000 000).</td><td class="n">1000</td></tr>
+              <tr><td>Number of factors of safety compared before stopping</td><td>The search stops when the best factor of safety has not improved by more than the tolerance in this many consecutive runs (2 to 50).</td><td class="n">5</td></tr>
+              <tr><td>Tolerance for stopping criterion</td><td>Tolerance of that criterion.</td><td class="n">0.0001</td></tr>
+              <tr><td>Coefficient in temperature reduction</td><td>The coefficient <span class="m" data-tex="c"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>c</mi></mrow><annotation encoding="application/x-tex">c</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">c</span></span></span></span><!--/k--></span> of the cooling schedule <span class="m" data-tex="T_k = T_0 \exp(-c\,k^{1/n})"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>T</mi><mi>k</mi></msub><mo>=</mo><msub><mi>T</mi><mn>0</mn></msub><mi>exp</mi><mo>⁡</mo><mo stretchy="false">(</mo><mo>−</mo><mi>c</mi><mtext> </mtext><msup><mi>k</mi><mrow><mn>1</mn><mi mathvariant="normal">/</mi><mi>n</mi></mrow></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">T_k = T_0 \exp(-c\,k^{1/n})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.1389em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0315em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1.138em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.1389em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop">exp</span><span class="mopen">(</span><span class="mord">−</span><span class="mord mathnormal">c</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0315em;">k</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.888em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1/</span><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span><!--/k--></span> of <a class="cite" href="../reference/bibliography.html#su2009">Su (2009)</a>. The dialog accepts 0.5 to 50; the search clamps it to 1–10.</td><td class="n">8.0</td></tr>
+              <tr><td>Convex Surfaces Only</td><td>Rejects surfaces whose curvature changes sign.</td><td>off</td></tr>
+              <tr><td>Optimize Surfaces</td><td>See above.</td><td>on</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+
+      <h3 id="swarm-options"><span class="ht">Particle Swarm Search</span><a class="anchor" href="#swarm-options" aria-label="Link to this section">#</a></h3>
+      <figure class="tbl" id="tbl-swarm-options">
+        <figcaption><span class="fignum">Table 2.7.8</span> Particle Swarm Search options. Each particle is a circle defined by where it daylights on the toe side, where it enters on the crest side and its inclination at the toe.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Option</th><th>What it does</th><th>Default</th></tr></thead>
+            <tbody>
+              <tr><td>Number of particles</td><td>Size of the swarm (3 to 2000).</td><td class="n">50</td></tr>
+              <tr><td>Number of iterations</td><td>Moves of the swarm (1 to 10 000).</td><td class="n">50</td></tr>
+              <tr><td>Number of Mins: Report several minima</td><td>Reports the most critical surface of each region the swarm tells apart, instead of the single global minimum.</td><td>off</td></tr>
+              <tr><td>Grouping radius</td><td>Two minima closer than this, as a percentage of the span of the search space, are the same minimum. Active only with several minima.</td><td class="n">10 %</td></tr>
+              <tr><td>Optimize Surfaces</td><td>See above.</td><td>on</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p>Two settings outside this panel also act on the swarm. <span class="ui">Analysis → Project Settings →</span> <span class="ui">Advanced →</span> <span class="ui">Use enhanced particle swarm algorithm</span> (on by default) scatters again, at the end of each iteration, the fifth of the particles that sit on the highest factors of safety. And the swarm honours the Slope Search's <strong>Upper Angle</strong> and <strong>Lower Angle</strong> when those boxes are ticked; otherwise it searches toe angles between −85° and +85°.</p>
+
+      <h2 id="grids"><span class="secnum">2.7.3</span><span class="ht">Grids of slip centres</span><a class="anchor" href="#grids" aria-label="Link to this section">#</a></h2>
+      <p>The Grid Search needs a rectangle of centres above the slope. <span class="ui">Surfaces → Auto Grid</span> makes its extent automatic: horizontally from 20 % inside each end of the model, vertically from the top of the model up to 80 % of the model's height above it. Auto Grid changes only the extent; the number of intervals stays as it was.</p>
+      <p><span class="ui">Surfaces → Add Grid…</span> opens a small window that stays open while you work on the model. Enter <strong>X min</strong>, <strong>X max</strong>, <strong>Y min</strong> and <strong>Y max</strong>, or press <strong>Pick rectangle on canvas (2 clicks)</strong> and click two opposite corners; the boxes update and <strong>OK</strong> applies them. <strong>Reset to Auto</strong> fills in the automatic extent and 20 × 20. Both commands are greyed out unless the search method is Grid Search.</p>
+
+      <div class="note warn"><span class="label">nx and ny are intervals, not centres</span><p>The group of the Add Grid dialog is labelled <em>Number of centres</em>, but <strong>nx</strong> and <strong>ny</strong> are counted as <em>intervals</em>: the grid has <span class="m" data-tex="(n_x + 1)(n_y + 1)"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>n</mi><mi>x</mi></msub><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo><mo stretchy="false">(</mo><msub><mi>n</mi><mi>y</mi></msub><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(n_x + 1)(n_y + 1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">x</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1.0361em;vertical-align:-0.2861em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0359em;">y</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span><!--/k--></span> centres, as the status bar states when you press OK. The default 12 × 12 is therefore 13 × 13 = 169 centres, and with the default Radius Increment of 10 the search analyses up to 169 × 11 = 1859 circles.</p></div>
+
+      <p>At each centre the program measures the distance to the nearest point of the slope surface (the ground between the Slope Limits) and the distance to the nearer of the two limit points. The radii are spread evenly between the two, inset by 5 % of the difference at each end, so every circle cuts the slope (<a class="xref" href="#fig-grid">Figure 2.7.2</a>). The population of a grid is exactly</p>
+      <div class="eq" id="eq-grid-count" data-tex="N = (n_x + 1)\,(n_y + 1)\,(n_r + 1)" data-n="2.7.1"><!--k--><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>N</mi><mo>=</mo><mo stretchy="false">(</mo><msub><mi>n</mi><mi>x</mi></msub><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo><mtext> </mtext><mo stretchy="false">(</mo><msub><mi>n</mi><mi>y</mi></msub><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo><mtext> </mtext><mo stretchy="false">(</mo><msub><mi>n</mi><mi>r</mi></msub><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">N = (n_x + 1)\,(n_y + 1)\,(n_r + 1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.109em;">N</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">x</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1.0361em;vertical-align:-0.2861em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0359em;">y</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0278em;">r</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span></span><!--/k--></div>
+      <p class="where">where</p>
+      <dl class="symbols">
+        <dt><span class="m" data-tex="n_x,\ n_y"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>n</mi><mi>x</mi></msub><mo separator="true">,</mo><mtext> </mtext><msub><mi>n</mi><mi>y</mi></msub></mrow><annotation encoding="application/x-tex">n_x,\ n_y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.7167em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">x</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace"> </span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0359em;">y</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span></span></span></span><!--/k--></span></dt><dd>intervals of the grid in x and y (nx and ny in Add Grid)</dd>
+        <dt><span class="m" data-tex="n_r"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>n</mi><mi>r</mi></msub></mrow><annotation encoding="application/x-tex">n_r</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0278em;">r</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><!--/k--></span></dt><dd>Radius Increment</dd>
+      </dl>
+
+      <figure class="fig" id="fig-grid">
+        <div class="art">
+          <svg class="dg" viewBox="0 0 640 300" role="img" aria-labelledby="fig-grid-t">
+            <title id="fig-grid-t">A grid of 4 by 2 intervals gives 5 by 3 slip centres. At the highlighted centre the radii run from just beyond the nearest point of the slope surface to just short of the nearer Slope Limit; with a Radius Increment of 3 there are 4 circles.</title>
+            <defs><clipPath id="clip-grid-soil"><path d="M20 290H620V230H400L230 120H20Z"/></clipPath></defs>
+            <path class="s1" d="M20 290H620V230H400L230 120H20Z"/>
+            <g clip-path="url(#clip-grid-soil)">
+              <circle class="grn" cx="340" cy="60" r="114.59"/>
+              <circle class="grn" cx="340" cy="60" r="141.32"/>
+              <circle class="grn" cx="340" cy="60" r="168.06"/>
+              <circle class="grn" cx="340" cy="60" r="194.79"/>
+            </g>
+            <path class="ln" d="M20 290H620V230H400L230 120H20Z"/>
+            <path class="dash" d="M300 30V90M340 30V90M380 30V90M260 60H420"/>
+            <path class="thin" d="M260 30H420V90H260Z"/>
+            <g>
+              <circle class="pt" cx="260" cy="30" r="2.6"/><circle class="pt" cx="300" cy="30" r="2.6"/><circle class="pt" cx="340" cy="30" r="2.6"/><circle class="pt" cx="380" cy="30" r="2.6"/><circle class="pt" cx="420" cy="30" r="2.6"/>
+              <circle class="pt" cx="260" cy="60" r="2.6"/><circle class="pt" cx="300" cy="60" r="2.6"/><circle class="pt" cx="380" cy="60" r="2.6"/><circle class="pt" cx="420" cy="60" r="2.6"/>
+              <circle class="pt" cx="260" cy="90" r="2.6"/><circle class="pt" cx="300" cy="90" r="2.6"/><circle class="pt" cx="340" cy="90" r="2.6"/><circle class="pt" cx="380" cy="90" r="2.6"/><circle class="pt" cx="420" cy="90" r="2.6"/>
+              <circle class="pt" cx="340" cy="60" r="4.4"/>
+            </g>
+            <text x="226" y="19">nx = 4 intervals → 5 columns</text>
+            <text x="430" y="64">ny = 2 intervals → 3 rows</text>
+            <path class="pt" d="M144 106H156L150 117Z"/>
+            <path class="pt" d="M474 216H486L480 227Z"/>
+            <text class="mute" x="40" y="101">Slope Limit</text>
+            <text class="mute" x="492" y="222">Slope Limit</text>
+            <text class="mute" x="40" y="276">Radius Increment = 3: 4 circles per centre</text>
+          </svg>
+        </div>
+        <figcaption><span class="fignum">Figure 2.7.2</span> A grid of 4 × 2 intervals has 5 × 3 centres. At the highlighted centre the radii run from the nearest point of the slope surface to the nearer Slope Limit, inset by 5 % at each end; a Radius Increment of 3 gives 4 circles. Only the part of each circle inside the ground is drawn.</figcaption>
+      </figure>
+
+      <p>A minimum found on the edge of the grid is the best of what was searched, not necessarily the lowest factor of safety: the true minimum may lie outside. When the critical centre lies on the edge, the analysis notes say so and give the grid extent; widen the grid on that side and compute again.</p>
+
+      <h2 id="block-objects"><span class="secnum">2.7.4</span><span class="ht">Block Search objects</span><a class="anchor" href="#block-objects" aria-label="Link to this section">#</a></h2>
+      <p>A Block Search builds each trial surface from objects you draw on the model. Select <strong>Block Search</strong> in Surface Options first: the four commands of the <span class="ui">Surfaces</span> menu are greyed out with any other search method.</p>
+      <figure class="tbl" id="tbl-block-objects">
+        <figcaption><span class="fignum">Table 2.7.9</span> The four Block Search objects and what each gives a trial surface.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Command</th><th>How to draw it</th><th>What every trial surface takes from it</th></tr></thead>
+            <tbody>
+              <tr><td><span class="ui">Surfaces → Add Block Search Window</span></td><td>Click the corners; right-click or <kbd>Enter</kbd> closes it.</td><td>One vertex at a random point inside it.</td></tr>
+              <tr><td><span class="ui">Surfaces → Add Block Search Line</span></td><td>Click its two end points.</td><td>One vertex at a random point along it; the surface does not follow the line.</td></tr>
+              <tr><td><span class="ui">Surfaces → Add Block Search Point</span></td><td>Click the point.</td><td>The point itself: every surface passes through it.</td></tr>
+              <tr><td><span class="ui">Surfaces → Add Block Search Polyline</span></td><td>Click its vertices from one end to the other; right-click or <kbd>Enter</kbd> finishes it.</td><td>Two points generated on it and every vertex between them: the surface follows the polyline between its two points, which is how a surface runs along a weak layer.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p>The vertices from all the objects are sorted by x and joined; the two end vertices are then projected up to the ground at the <strong>Left</strong> and <strong>Right Projection Angle</strong> (<a class="xref" href="#fig-block">Figure 2.7.3</a>). A surface that does not reach the ground within the Slope Limits is discarded.</p>
+
+      <figure class="fig" id="fig-block">
+        <div class="art">
+          <svg class="dg" viewBox="0 70 640 228" role="img" aria-labelledby="fig-block-t">
+            <title id="fig-block-t">One Block Search trial surface built from a Window and a Polyline: a random vertex inside the window, two points generated on the polyline with the stretch between them, and the two ends projected to the ground at 135 and 45 degrees</title>
+            <path class="s1" d="M20 290H620V200H380L220 100H20Z"/>
+            <path class="ln" d="M20 290H620V200H380L220 100H20Z"/>
+            <path class="dash" d="M110 140H180V190H110Z"/>
+            <path class="thin" d="M200 242L300 246L420 239L530 243"/>
+            <circle class="pt" cx="200" cy="242" r="2.2"/><circle class="pt" cx="300" cy="246" r="2.2"/><circle class="pt" cx="420" cy="239" r="2.2"/><circle class="pt" cx="530" cy="243" r="2.2"/>
+            <path class="grn" style="stroke-width:2.2" d="M78 100L150 172L250 244L300 246L420 239L470 240.82L510.82 200"/>
+            <circle class="pt" cx="150" cy="172" r="3.4"/>
+            <circle class="pt" cx="250" cy="244" r="3.4"/>
+            <circle class="pt" cx="470" cy="240.82" r="3.4"/>
+            <path class="dash" d="M150 172H184"/>
+            <path class="thin" d="M172 172A22 22 0 0 0 134.44 156.44"/>
+            <path class="dash" d="M470 240.82H504"/>
+            <path class="thin" d="M492 240.82A22 22 0 0 0 485.56 225.26"/>
+            <text x="188" y="152">Window</text>
+            <text x="58" y="166">135°</text>
+            <text x="508" y="236">45°</text>
+            <text x="262" y="272">Block Search Polyline</text>
+            <text class="mute" x="44" y="92">entry</text>
+            <text class="mute" x="518" y="192">exit</text>
+          </svg>
+        </div>
+        <figcaption><span class="fignum">Figure 2.7.3</span> One trial surface of a Block Search with a Window and a Polyline. The window gives one random vertex; the polyline gives two generated points and the stretch between them. The leftmost vertex is projected to the ground at the Left Projection Angle (135°, counter-clockwise from +x) and the rightmost at the Right Projection Angle (45°).</figcaption>
+      </figure>
+
+      <p>When a polyline is drawn, the <strong>Block Search Object</strong> window opens. It shows the kind of object and, for a polyline, where each of its two points is generated: <strong>Left point</strong> — <em>Any Line Segment</em> (the default), <em>Left Line Segment</em> or <em>Left End Point</em>; <strong>Right point</strong> — <em>Any Line Segment</em>, <em>Right Line Segment</em> or <em>Right End Point</em>. Right-click an object and choose <span class="ui">Block Search Object…</span> to open the window again later.</p>
+      <p>With <strong>Multiple Groups</strong> ticked in Surface Options, the same window opens for every object you draw, and its <strong>Group ID</strong> (0 to 999) becomes editable: objects with the same Group ID are searched together, each group on its own, and Number of Surfaces is divided equally between the groups. The critical surface is the lowest of all of them. A typical use is one polyline per weak layer, each with its own Group ID.</p>
+      <p>The analysis refuses objects it cannot use, with the reason: a polyline that does not advance in x, another object inside the horizontal extent of a polyline, or a <em>Line Segment</em> option on a polyline of a single segment. With no object drawn the search still runs, over a region chosen by the program (the <strong>Implicit Region Bands</strong> option), and the analysis notes say that the region was not chosen by the model.</p>
+
+      <h2 id="user-surfaces"><span class="secnum">2.7.5</span><span class="ht">Surfaces defined by hand</span><a class="anchor" href="#user-surfaces" aria-label="Link to this section">#</a></h2>
+      <p>With Surface Type set to Circular you can add circles of your own; they are analysed in addition to the search and compete with it for the global minimum.</p>
+      <ul>
+        <li><span class="ui">Surfaces →</span> <span class="ui">Add Surface (centre and radius)…</span> asks for the centre as <code>x,y</code> and then the radius (20 by default).</li>
+        <li><span class="ui">Surfaces →</span> <span class="ui">Add Surface (three points)</span> enters a drawing mode: click three points of the circle on the model. Three points too close to a straight line are refused with a message.</li>
+        <li><span class="ui">Surfaces → Manage Surfaces…</span> lists the circles by centre and radius; choose one to delete it, or <em>(delete all)</em>. To change a circle, delete it and add it again.</li>
+      </ul>
+      <p>The three commands are greyed out under Non-Circular, because one analysis carries one surface type.</p>
+
+      <h2 id="focus"><span class="secnum">2.7.6</span><span class="ht">Focus objects</span><a class="anchor" href="#focus" aria-label="Link to this section">#</a></h2>
+      <p>A focus object narrows the search to the surfaces that interact with it. The four commands are in <span class="ui">Surfaces → Focus Search</span>; each asks for its points as text, <code>x,y x,y …</code>, which places them exactly.</p>
+      <figure class="tbl" id="tbl-focus">
+        <figcaption><span class="fignum">Table 2.7.10</span> Focus objects. A surface is kept only if it satisfies every enabled focus object.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Command</th><th>Points</th><th>A surface is kept when it…</th></tr></thead>
+            <tbody>
+              <tr><td>Add Focus Window…</td><td class="n">4</td><td>passes through the quadrilateral.</td></tr>
+              <tr><td>Add Focus Line…</td><td class="n">2</td><td>crosses the segment.</td></tr>
+              <tr><td>Add Focus Point…</td><td class="n">1</td><td>passes within the <strong>capture tolerance</strong> of the point (asked for after the point; 0.5 by default).</td></tr>
+              <tr><td>Add Focus Tangent…</td><td class="n">2</td><td>is tangent to the segment within the capture tolerance (0.5 by default).</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p><span class="ui">Surfaces → Focus Search →</span> <span class="ui">Manage Focus Objects…</span> lists them; choose one to enable or disable it, or to delete it, or choose <em>(delete all)</em>. A disabled object is kept in the model but filters nothing.</p>
+      <div class="impl">
+        <span class="label">In OGR Slip2D</span>
+        <p>Focus objects <strong>filter</strong> the candidate surfaces, and they do it <strong>before</strong> the factor of safety is computed, which is what makes them cheap. Every search honours them. The surfaces they remove are counted apart from the valid and invalid ones, as <em>rejected by the focus object</em>, so a focused run and an unfocused one keep comparable populations. Simulated Annealing and the Particle Swarm move from one surface to the next, so a narrow focus also narrows the path they walk and can leave them with no surface at all even where surfaces satisfying it exist; the analysis notes warn about this, and a Grid, Path or Block Search reaches a tightly focused region more reliably.</p>
+        <span class="src">Source: <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_slip2d/focus.py" target="_blank" rel="noopener">ogr_slip2d/focus.py</a></span>
+      </div>
+
+      <h2 id="slope-limits"><span class="secnum">2.7.7</span><span class="ht">Slope Limits and the moment axis</span><a class="anchor" href="#slope-limits" aria-label="Link to this section">#</a></h2>
+      <p>The Slope Limits are the stretch of ground within which a slip surface may daylight. They filter every surface, whatever the search, and they also define the ground used to generate surfaces by the searches that build them from the profile — the radii of the Grid Search, the divisions of Auto Refine, the starting points of the Path Search. By default they are automatic: the whole ground surface.</p>
+      <p><span class="ui">Surfaces → Slope Limits →</span> <span class="ui">Define Limits…</span> and <span class="ui">Move Slope Limits…</span> open the same <strong>Define Slope Limits</strong> dialog, with the positions as x coordinates:</p>
+      <ul>
+        <li><strong>First set of limits</strong> — <em>Left limit (x)</em> and <em>Right limit (x)</em>. On a model still on automatic limits the boxes start at its horizontal extent.</li>
+        <li><strong>Second set of limits</strong> — tick it to add a second window, for example one near the toe and one near the crest. It must lie entirely to the right of the first.</li>
+        <li><strong>Reset</strong> returns to automatic, as does <span class="ui">Surfaces → Slope Limits →</span> <span class="ui">Reset Slope Limits</span>, which clears both sets.</li>
+      </ul>
+      <p>A circle has a natural centre for moment equilibrium; a polyline does not. By default each non-circular surface takes moments about an axis built from its own entry–exit chord. <span class="ui">Surfaces → Slope Limits →</span> <span class="ui">Define Moment Axis…</span> asks for <em>Axis x</em> and <em>Axis y</em> and applies that single point to every non-circular surface; <span class="ui">Reset Moment Axis</span> returns to one axis per surface. The axis matters only to the methods that take moments (<a class="xref" href="../theory/limit-equilibrium.html">Section 3.1</a>).</p>
+
+      <h2 id="filters"><span class="secnum">2.7.8</span><span class="ht">Surface filters</span><a class="anchor" href="#filters" aria-label="Link to this section">#</a></h2>
+      <p>The <strong>Filters</strong> group of Surface Options applies to every candidate surface of every search; each filter acts only when its box is ticked.</p>
+      <figure class="tbl" id="tbl-filters">
+        <figcaption><span class="fignum">Table 2.7.11</span> Surface filters.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Filter</th><th>What it does</th><th>When unticked</th></tr></thead>
+            <tbody>
+              <tr><td>Minimum elevation</td><td>Discards surfaces whose lowest point lies below this elevation (m).</td><td>no limit</td></tr>
+              <tr><td>Minimum depth</td><td>Discards surfaces whose greatest vertical depth below the ground — the height of the tallest slice — does not exceed this value (m). It removes shallow skins.</td><td>no limit</td></tr>
+              <tr><td>Minimum area</td><td>Discards surfaces whose sliding mass, taken as the sum of the slice areas, is smaller than this (m²).</td><td>a default of the search: 0.5 m² for Auto Refine, 2.0 m² for Block Search, 1.0 m² for the other five</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <div class="note"><span class="label">Note</span><p>A Minimum area of zero cannot be set: a ticked value of 0 is treated as unticked, and the default of the search applies. The 0.5 m² the dialog shows while the box is unticked is only a starting value; the search uses its own default from the table.</p></div>
+
+      <h2 id="weak-layers"><span class="secnum">2.7.9</span><span class="ht">Weak layers</span><a class="anchor" href="#weak-layers" aria-label="Link to this section">#</a></h2>
+      <p>A weak layer is a polyline with a strength of its own, drawn with <span class="ui">Boundaries → Add Weak Layer</span> (<kbd>Ctrl</kbd>+<kbd>7</kbd>; see <a class="xref" href="geometry.html">Section 2.2</a>). A trial surface that reaches it is clipped to run along it instead of crossing it. The <strong>Weak Layer Handling</strong> group of Surface Options decides what happens when a surface touches several layers:</p>
+      <ul>
+        <li><strong>Always snap to highest layer</strong> (default) — every layer the surface touches clips it, and where they overlap the highest one wins. One analysis per surface.</li>
+        <li><strong>Automatic case generation</strong> — every combination of the touched layers being on or off is analysed, the case with all of them off included, and the worst is kept: 2<sup>n</sup> analyses of a surface that touches n layers.</li>
+        <li><strong>Most layers to combine (n in 2^n)</strong> — default 6. A surface that touches more layers than this falls back to the highest layer, and the run says so.</li>
+      </ul>
+      <p>A layer that ends abruptly can leave a clipped surface with a near-vertical step. <span class="ui">Analysis → Project Settings →</span> <span class="ui">Advanced →</span> <span class="ui">Maximum base angle on weak-layer clips</span> (80° by default) discards clipped surfaces whose steepest slice base exceeds it; it applies only to surfaces a weak layer has clipped, and a value of 90° removes the ceiling altogether.</p>
+
+      <h2 id="optimise"><span class="secnum">2.7.10</span><span class="ht">Optimising non-circular surfaces</span><a class="anchor" href="#optimise" aria-label="Link to this section">#</a></h2>
+      <p>The optimisation refines a non-circular surface by a random walk of its vertices <a class="cite" href="../reference/bibliography.html#greco1996">(Greco, 1996)</a>: it moves one vertex, recomputes the factor of safety, keeps the change if the factor falls, and stops when the surface no longer moves. It runs in two ways.</p>
+      <ul>
+        <li>As part of a search, with the <strong>Optimize Surfaces</strong> box of Surface Options. Its <strong>Settings…</strong> button opens the panel of <a class="xref" href="#tbl-optimise">Table 2.7.12</a>.</li>
+        <li>On demand, with <span class="ui">Surfaces → Optimize Surfaces…</span> after a Compute. It starts from the critical surface of the method you choose (it asks when several were computed), asks for the <em>Maximum evaluations</em> (the Maximum Iterations of the panel, 4000 by default) and, if it finds a lower factor, replaces that method's critical surface in the Results dock and the model view, and in the Interpret windows opened afterwards. A circular critical surface is refused: run a Block or Path Search first.</li>
+      </ul>
+      <figure class="tbl" id="tbl-optimise">
+        <figcaption><span class="fignum">Table 2.7.12</span> Optimize Surfaces Settings.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Option</th><th>What it does</th><th>Default</th></tr></thead>
+            <tbody>
+              <tr><td>Surfaces to Optimize</td><td><em>Global Minimum</em>, <em>All</em> (every surface the search generated, which takes far longer) or <em>Factor of Safety Less Than</em> a threshold.</td><td>Global Minimum (threshold 1.5)</td></tr>
+              <tr><td>Tolerance (factor of safety)</td><td>Converged when the factor of safety differs from the average of the last five passes by less than this.</td><td class="n">1 × 10⁻⁹</td></tr>
+              <tr><td>Maximum Iterations</td><td>Upper limit on the evaluations of the walk.</td><td class="n">4000</td></tr>
+              <tr><td>Step reduction factor (0 to 1)</td><td>How far the vertices move on each pass relative to the previous one.</td><td class="n">0.5</td></tr>
+              <tr><td>Maximum Concave Angle</td><td>Largest concave angle allowed between adjacent segments. Unticked means that no concave angle is allowed, not that there is no limit.</td><td>on, 5°</td></tr>
+              <tr><td>Explore all vertices before moving surface</td><td>Finds a direction of movement for every vertex first and then moves them all at once, instead of one vertex at a time.</td><td>off</td></tr>
+              <tr><td>Snap Shallow Surfaces to Slope</td><td>After the walk, lifts onto the ground the vertices that lie less than a minimum depth below it — which removes very shallow ends — and recomputes the factor of safety. With <em>Specify Distance</em> unticked, that depth is 0.1 % of the model's relief.</td><td>on; distance off</td></tr>
+              <tr><td>Use checks for depth, elevation, concave surface</td><td>Applies the Minimum depth and Minimum elevation filters and the concave-angle limit to the optimised surfaces too.</td><td>on</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <div class="note"><span class="label">Note</span><p>The Optimize Surfaces Settings panel writes its values to the project when you press its own <strong>OK</strong>; cancelling Surface Options afterwards does not undo them.</p></div>
+
+      <h2 id="checking"><span class="secnum">2.7.11</span><span class="ht">Checking that the search has found the minimum</span><a class="anchor" href="#checking" aria-label="Link to this section">#</a></h2>
+      <ul>
+        <li>Read <span class="ui">Analysis → Analysis Notes…</span> after every run: a critical centre on the edge of the grid, a focus that emptied a guided search or a setting the chosen search cannot honour are reported there (<a class="xref" href="results.html">Section 2.8</a>).</li>
+        <li>Run a second, different search on the same model — a Slope or Particle Swarm Search against a Grid Search, a Path Search against a Block Search — and compare the critical surfaces.</li>
+        <li>In the Interpret window, <span class="ui">Data → Graph SF Along Slope…</span> shows where along the ground the low factors of safety daylight, and <span class="ui">Data → Summary of Invalid Surfaces…</span> shows how many surfaces were rejected and why. Use them to move the grid, the Slope Limits or the focus objects towards the critical region.</li>
+      </ul>
+    </article>
+
+<!-- @inc docfoot -->
+<nav class="doc-pager" aria-label="Pages">
+<a class="prev" href="../../docs/user-guide/supports.html"><span class="label">← Previous · 2.6</span><b>Supports</b></a>
+<a class="next" href="../../docs/user-guide/results.html"><span class="label">2.8 · Next →</span><b>Computing and interpreting results</b></a>
+</nav>
+<div class="doc-edit label"><a href="https://github.com/samuelsl27/OpenGeoRock_Web.github.io/blob/main/docs/user-guide/surfaces.html" target="_blank" rel="noopener">Edit this page ↗</a><a href="https://github.com/samuelsl27/OGR-Slip2D/issues" target="_blank" rel="noopener">Report a problem ↗</a></div>
+<!-- @end docfoot -->
+  </main>
+
+  <aside class="doc-toc" aria-label="On this page">
+    <div class="toc-inner">
+<!-- @inc pagetoc -->
+<span class="label">On this page</span><ul><li class="h2"><a href="#surface-options">2.7.1 Surface Options</a></li><li class="h2"><a href="#search-options">2.7.2 Options of each search</a></li><li class="h3"><a href="#grid-search-options">Grid Search</a></li><li class="h3"><a href="#slope-search-options">Slope Search</a></li><li class="h3"><a href="#auto-refine-options">Auto Refine Search</a></li><li class="h3"><a href="#block-search-options">Block Search</a></li><li class="h3"><a href="#path-search-options">Path Search</a></li><li class="h3"><a href="#annealing-options">Simulated Annealing</a></li><li class="h3"><a href="#swarm-options">Particle Swarm Search</a></li><li class="h2"><a href="#grids">2.7.3 Grids of slip centres</a></li><li class="h2"><a href="#block-objects">2.7.4 Block Search objects</a></li><li class="h2"><a href="#user-surfaces">2.7.5 Surfaces defined by hand</a></li><li class="h2"><a href="#focus">2.7.6 Focus objects</a></li><li class="h2"><a href="#slope-limits">2.7.7 Slope Limits and the moment axis</a></li><li class="h2"><a href="#filters">2.7.8 Surface filters</a></li><li class="h2"><a href="#weak-layers">2.7.9 Weak layers</a></li><li class="h2"><a href="#optimise">2.7.10 Optimising non-circular surfaces</a></li><li class="h2"><a href="#checking">2.7.11 Checking that the search has found the minimum</a></li></ul><button class="print" type="button"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="1.5"/><path d="M6 14h12v7H6z"/></svg> Print this page</button>
+<!-- @end pagetoc -->
+    </div>
+  </aside>
+</div>
+
+<!-- @inc footer -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <a class="brand" href="../../index.html" aria-label="OpenGeoRock — home">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
+          <b>OpenGeoRock</b>
+        </a>
+        <p class="tagline">Open-source geotechnical software, built in the open at the Universidad Politécnica de Cartagena.</p>
+        <span class="lang" role="group" aria-label="Language"><a href="../../docs/user-guide/surfaces.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../../es/docs/user-guide/surfaces.html" hreflang="es" lang="es">ES</a></span>
+      </div>
+      <div>
+        <h5>Products</h5>
+        <ul>
+          <li><a href="../../products/slip2d.html">OGR Slip2D</a></li>
+          <li><a href="../../products/index.html">The suite</a></li>
+          <li><a href="../../ai/index.html">MCP server</a></li>
+          <li><a href="../../download/index.html">Download</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Learn</h5>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="../../docs/getting-started/quick-start.html">Quick start</a></li>
+          <li><a href="../../docs/theory/methods.html">Theory manual</a></li>
+          <li><a href="../../examples/index.html">Examples</a></li>
+          <li><a href="../../verification/index.html">Verification</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Project</h5>
+        <ul>
+          <li><a href="../../about/index.html">About</a></li>
+          <li><a href="../../about/index.html#team">Team</a></li>
+          <li><a href="../../about/index.html#cite">How to cite</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Contributing</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/LICENSE" target="_blank" rel="noopener">Licence · AGPL-3.0</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Connect</h5>
+        <ul>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/issues" target="_blank" rel="noopener">Issues</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/tree/main/docs/changelog" target="_blank" rel="noopener">Changelog</a></li>
+          <li><a href="mailto:samuel.saez@edu.upct.es">Email</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© 2026 Samuel Sáez López · OGR Slip2D is free software under AGPL-3.0-or-later, with no warranty of any kind.</span>
+      <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
+    </div>
+  </div>
+  <div class="lang-hint" role="dialog" aria-label="Idioma" lang="es">
+    ¿Prefieres leer esta web en español?
+    <div class="row"><a class="btn sm primary go" href="../../es/index.html">Ver en español</a><button class="btn sm" type="button" data-dismiss>No, gracias</button></div>
+  </div>
+</footer>
+<!-- @end footer -->
+</body>
+</html>

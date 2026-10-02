@@ -1,0 +1,388 @@
+<!doctype html>
+<html class="no-js" lang="en" data-root="../../">
+<head>
+<meta charset="utf-8">
+<title>Computing and interpreting results — OGR Slip2D documentation</title>
+<meta name="description" content="Run an analysis in OGR Slip2D and read its results: Compute, the Results dock, Analysis Notes, the Info Viewer and the Interpret window with its contours, queries, charts, invalid-surface summary and exports.">
+<!-- @inc head -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.replace("no-js", "js")</script>
+<link rel="canonical" href="https://opengeorock.org/docs/user-guide/results.html">
+<link rel="alternate" hreflang="en" href="https://opengeorock.org/docs/user-guide/results.html">
+<link rel="alternate" hreflang="es" href="https://opengeorock.org/es/docs/user-guide/results.html">
+<link rel="alternate" hreflang="x-default" href="https://opengeorock.org/docs/user-guide/results.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="OpenGeoRock">
+<meta property="og:title" content="Computing and interpreting results — OGR Slip2D documentation">
+<meta property="og:description" content="Run an analysis in OGR Slip2D and read its results: Compute, the Results dock, Analysis Notes, the Info Viewer and the Interpret window with its contours, queries, charts, invalid-surface summary and exports.">
+<meta property="og:url" content="https://opengeorock.org/docs/user-guide/results.html">
+<meta property="og:image" content="https://opengeorock.org/assets/img/og-image.png">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#f4efe6">
+<link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&amp;display=swap">
+<link rel="stylesheet" href="../../assets/css/site.css">
+<link rel="stylesheet" href="../../assets/css/docs.css">
+<script src="../../assets/js/site.js" defer></script>
+<!-- @end head -->
+</head>
+<body class="docs">
+<!-- @inc header -->
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="wrap top-inner">
+    <a class="brand" href="../../index.html" aria-label="OpenGeoRock — home">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
+      <b>OpenGeoRock</b>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <div class="has-menu" data-nav="products">
+        <button type="button" aria-expanded="false" aria-haspopup="true">Products <svg class="caret" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+        <div class="mega">
+          <div class="mega-cols">
+            <div class="mega-col">
+              <span class="label">Available today</span>
+              <a class="mega-item feature" href="../../products/slip2d.html"><b>OGR Slip2D</b><span>2D slope stability: limit equilibrium, finite-element groundwater and probabilistic analysis.</span></a>
+              <a class="mega-item" href="../../ai/index.html"><b>MCP server for AI agents <span class="tag live">new</span></b><span>Let Claude, ChatGPT or a local model build and run OGR Slip2D models.</span></a>
+            </div>
+            <div class="mega-col">
+              <span class="label">On the roadmap</span>
+              <a class="mega-item" href="../../products/index.html#ogr-data"><b>OGR Data</b><span>Soil and rock-mass property database</span></a>
+              <a class="mega-item" href="../../products/index.html#ogr-fem2d"><b>OGR FEM2D</b><span>2D elastoplastic finite elements</span></a>
+              <a class="mega-item" href="../../products/index.html#ogr-slip3d"><b>OGR Slip3D</b><span>3D limit equilibrium</span></a>
+              <a class="mega-item" href="../../products/index.html#ogr-fem3d"><b>OGR FEM3D</b><span>3D finite elements with coupled flow</span></a>
+            </div>
+            <div class="mega-col">
+              <span class="label">Use it from</span>
+              <a class="mega-item" href="../../docs/getting-started/interface.html"><b>The desktop program</b><span>Modeller, interpreter and Python terminal</span></a>
+              <a class="mega-item" href="../../docs/reference/python-api.html"><b>Python</b><span>Script analyses from your own code</span></a>
+              <a class="mega-item" href="../../docs/reference/cli.html"><b>The command line</b><span>Batch runs with ogr-slip2d-cli</span></a>
+            </div>
+          </div>
+          <div class="mega-foot"><span>Five programs, one open core.</span><a href="../../products/index.html">All products →</a></div>
+        </div>
+      </div>
+      <a href="../../examples/index.html" data-nav="examples">Examples</a>
+      <a href="../../ai/index.html" data-nav="ai">AI &amp; MCP</a>
+      <a href="../../docs/index.html" data-nav="docs" aria-current="page">Docs</a>
+      <a href="../../verification/index.html" data-nav="verification">Verification</a>
+      <a href="../../about/index.html" data-nav="about">About</a>
+    </nav>
+    <div class="top-right">
+      <span class="lang" role="group" aria-label="Language"><a href="../../docs/user-guide/results.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../../es/docs/user-guide/results.html" hreflang="es" lang="es">ES</a></span>
+      <a class="btn gh" href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener" aria-label="Source code on GitHub"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0C17.3 4.7 18.3 5 18.3 5c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0012 .5z"/></svg><span>GitHub</span></a>
+      <a class="btn primary" href="../../download/index.html" data-nav="download">Get OGR Slip2D</a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Main (mobile)">
+    <span class="label">Products</span>
+    <a href="../../products/slip2d.html">OGR Slip2D</a>
+    <div class="sub"><a href="../../products/index.html">The OpenGeoRock suite</a><a href="../../ai/index.html">MCP server for AI agents</a></div>
+    <span class="label">Learn</span>
+    <a href="../../examples/index.html">Examples</a>
+    <a href="../../docs/index.html">Documentation</a>
+    <a href="../../verification/index.html">Verification</a>
+    <span class="label">Project</span>
+    <a href="../../about/index.html">About</a>
+    <a href="../../download/index.html">Get OGR Slip2D</a>
+    <a href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener">Source on GitHub ↗</a>
+    <span class="lang" role="group" aria-label="Language"><a href="../../docs/user-guide/results.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../../es/docs/user-guide/results.html" hreflang="es" lang="es">ES</a></span>
+  </nav>
+</header>
+<!-- @end header -->
+
+<div class="doc-shell">
+  <aside class="doc-side" id="doc-side">
+<!-- @inc docnav -->
+<div class="doc-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input type="search" placeholder="Search the documentation  /" aria-label="Search the documentation" autocomplete="off"><div class="results" role="listbox"></div></div>
+<nav class="doc-nav" aria-label="Documentation">
+<a class="home" href="../../docs/index.html"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 016.5 3H20v15H6.5A2.5 2.5 0 004 20.5z"/><path d="M4 20.5A2.5 2.5 0 016.5 18H20v3H6.5A2.5 2.5 0 014 20.5z"/></svg> Documentation home</a>
+<details open><summary>1 · Getting started</summary><ul>
+<li><a href="../../docs/getting-started/installation.html"><span class="n">1.1</span><span>Installation</span></a></li>
+<li><a href="../../docs/getting-started/quick-start.html"><span class="n">1.2</span><span>Quick start: your first model</span></a></li>
+<li><a href="../../docs/getting-started/interface.html"><span class="n">1.3</span><span>The interface</span></a></li>
+</ul></details>
+<details open><summary>2 · User guide</summary><ul>
+<li><a href="../../docs/user-guide/project-settings.html"><span class="n">2.1</span><span>Project settings</span></a></li>
+<li><a href="../../docs/user-guide/geometry.html"><span class="n">2.2</span><span>Geometry and boundaries</span></a></li>
+<li><a href="../../docs/user-guide/materials.html"><span class="n">2.3</span><span>Materials</span></a></li>
+<li><a href="../../docs/user-guide/water.html"><span class="n">2.4</span><span>Water and pore pressure</span></a></li>
+<li><a href="../../docs/user-guide/loads.html"><span class="n">2.5</span><span>Loads and seismic loading</span></a></li>
+<li><a href="../../docs/user-guide/supports.html"><span class="n">2.6</span><span>Supports</span></a></li>
+<li><a href="../../docs/user-guide/surfaces.html"><span class="n">2.7</span><span>Slip surfaces and search</span></a></li>
+<li><a href="../../docs/user-guide/results.html" aria-current="page"><span class="n">2.8</span><span>Computing and interpreting results</span></a></li>
+<li><a href="../../docs/user-guide/groundwater.html"><span class="n">2.9</span><span>Finite-element groundwater</span></a></li>
+<li><a href="../../docs/user-guide/probabilistic.html"><span class="n">2.10</span><span>Probabilistic and sensitivity analysis</span></a></li>
+<li><a href="../../docs/user-guide/design-standards.html"><span class="n">2.11</span><span>Design standards</span></a></li>
+<li><a href="../../docs/user-guide/automation.html"><span class="n">2.12</span><span>Reports, scripting and the command line</span></a></li>
+</ul></details>
+<details open><summary>3 · Theory manual</summary><ul>
+<li><a href="../../docs/theory/limit-equilibrium.html"><span class="n">3.1</span><span>Limit equilibrium and the factor of safety</span></a></li>
+<li><a href="../../docs/theory/methods.html"><span class="n">3.2</span><span>Methods of slices</span></a></li>
+<li><a href="../../docs/theory/interslice.html"><span class="n">3.3</span><span>Interslice forces, convergence and admissibility</span></a></li>
+<li><a href="../../docs/theory/search.html"><span class="n">3.4</span><span>Slip-surface search</span></a></li>
+<li><a href="../../docs/theory/strength.html"><span class="n">3.5</span><span>Shear strength models</span></a></li>
+<li><a href="../../docs/theory/pore-pressure.html"><span class="n">3.6</span><span>Pore pressure and unsaturated strength</span></a></li>
+<li><a href="../../docs/theory/seepage.html"><span class="n">3.7</span><span>Finite-element seepage</span></a></li>
+<li><a href="../../docs/theory/rapid-drawdown.html"><span class="n">3.8</span><span>Rapid drawdown</span></a></li>
+<li><a href="../../docs/theory/seismic.html"><span class="n">3.9</span><span>Seismic analysis</span></a></li>
+<li><a href="../../docs/theory/supports.html"><span class="n">3.10</span><span>Support forces</span></a></li>
+<li><a href="../../docs/theory/probabilistic.html"><span class="n">3.11</span><span>Probabilistic analysis</span></a></li>
+<li><a href="../../docs/theory/partial-factors.html"><span class="n">3.12</span><span>Partial factors (Eurocode 7)</span></a></li>
+</ul></details>
+<details open><summary>4 · Verification</summary><ul>
+<li><a href="../../docs/verification/methodology.html"><span class="n">4.1</span><span>Verification methodology</span></a></li>
+<li><a href="../../docs/verification/slope-benchmarks.html"><span class="n">4.2</span><span>Limit-equilibrium benchmarks</span></a></li>
+<li><a href="../../docs/verification/analytic-checks.html"><span class="n">4.3</span><span>Groundwater and analytic checks</span></a></li>
+</ul></details>
+<details open><summary>5 · Reference</summary><ul>
+<li><a href="../../docs/reference/mcp.html"><span class="n">5.1</span><span>MCP server</span></a></li>
+<li><a href="../../docs/reference/cli.html"><span class="n">5.2</span><span>Command-line interface</span></a></li>
+<li><a href="../../docs/reference/python-api.html"><span class="n">5.3</span><span>Python API</span></a></li>
+<li><a href="../../docs/reference/file-format.html"><span class="n">5.4</span><span>The .ogr file format</span></a></li>
+<li><a href="../../docs/reference/error-codes.html"><span class="n">5.5</span><span>Error codes</span></a></li>
+<li><a href="../../docs/reference/notation.html"><span class="n">5.6</span><span>Notation and glossary</span></a></li>
+<li><a href="../../docs/reference/bibliography.html"><span class="n">5.7</span><span>Bibliography</span></a></li>
+</ul></details>
+</nav>
+<!-- @end docnav -->
+  </aside>
+
+  <main id="main" class="doc-main">
+    <header class="doc-head">
+<!-- @inc dochead -->
+<button class="doc-side-toggle" type="button" aria-controls="doc-side" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg> Contents</button>
+<nav class="crumbs label" aria-label="Breadcrumb"><a href="../../docs/index.html">Documentation</a><span aria-hidden="true">/</span><span>2 · User guide</span></nav>
+<div class="chapter label">2.8</div>
+<h1>Computing and interpreting results</h1>
+<div class="meta label"><span>Describes OGR Slip2D <span data-v>0.1.235</span></span></div>
+<!-- @end dochead -->
+    </header>
+
+    <article class="doc prose">
+      <p class="lede"><span class="ui">Analysis → Compute</span> runs one search for every method enabled in the project. The Results dock and the status bar give the headline number, <span class="ui">Analysis Notes</span> collects everything the run had to say, and the Interpret window lets you examine every surface and every slice. This page covers the four, and how to take results out of the program.</p>
+
+      <h2 id="compute"><span class="secnum">2.8.1</span><span class="ht">Running the analysis</span><a class="anchor" href="#compute" aria-label="Link to this section">#</a></h2>
+      <p>Choose <span class="ui">Analysis → Compute</span> (<kbd>Ctrl</kbd>+<kbd>T</kbd>, also on the toolbar). Before anything is computed the model is checked, and the run is refused, with the reasons, when the model has no boundaries, when it has no materials, or when a setting cannot be honoured — for example materials that take their pore pressure from a finite-element field that has not been computed, a rapid drawdown whose conditions are not met, or Block Search objects the search cannot use. A refusal is deliberate: the alternative would be a plausible number computed with part of the model ignored.</p>
+      <p>Every method ticked in <span class="ui">Analysis → Project Settings →</span> <span class="ui">Methods</span> is run with its own search (Bishop simplified and Janbu simplified in a new project), one after another, while a progress window shows how far the run has got.</p>
+      <div class="note warn"><span class="label">Cancel does not stop the run</span><p>In version 0.1.235 the <strong>Cancel</strong> button of the progress window only closes the window: the analysis continues in the background, and its results appear when it finishes.</p></div>
+      <p>When the run ends:</p>
+      <ul>
+        <li>the model view and the Results dock show the result of the <strong>first</strong> enabled method;</li>
+        <li>the status bar gives its critical value, for example <code>Critical FoS (bishop_simplified): 1.234</code>, and how many methods were computed. With a design standard active the caption reads <em>Over-design factor</em> (<a class="xref" href="design-standards.html">Section 2.11</a>);</li>
+        <li>everything else the run decided or could not do goes to <span class="ui">Analysis → Analysis Notes…</span>;</li>
+        <li>if the project has been saved or opened from a file, the result of the first method is also written beside it, with the project's name and the extension <code>.h5</code>.</li>
+      </ul>
+      <p>The results describe the model as it was when you computed. After editing the model, compute again; an Interpret window keeps showing the run it was opened after.</p>
+
+      <h2 id="results-dock"><span class="secnum">2.8.2</span><span class="ht">The Results dock</span><a class="anchor" href="#results-dock" aria-label="Link to this section">#</a></h2>
+      <p>The <strong>Results</strong> dock, under the model, shows the method, the number of valid surfaces and the critical value, followed by the 50 surfaces with the lowest factor of safety: <em>#</em>, <em>FoS</em>, <em>Method</em>, <em>Centre X</em>, <em>Centre Y</em> and <em>Radius</em>, with the first row highlighted. It covers the first enabled method only; the Interpret window has every method. The valid count excludes the surfaces that converged but were screened out by a post-analysis check (the m-alpha or the tensile stress check), because those can never be the critical surface.</p>
+      <div class="note"><span class="label">The list and the critical value</span><p>The list ranks every surface that converged, including those screened out by the m-alpha or tensile stress check. When such a surface has a lower factor of safety than the critical one, it appears above it, and the highlighted first row is then not the critical surface. The value in the header of the dock, and in the status bar, is always the critical one.</p></div>
+
+      <h2 id="analysis-notes"><span class="secnum">2.8.3</span><span class="ht">Analysis Notes</span><a class="anchor" href="#analysis-notes" aria-label="Link to this section">#</a></h2>
+      <p><span class="ui">Analysis → Analysis Notes…</span> opens a window that can stay open while you work. It lists every note of the last run — model-wide notes first, under <em>Model</em>, then the notes about each method's reported surface under the method's id — and <strong>Copy all</strong> puts them on the clipboard, one per line. Typical notes say that the critical centre lies on the edge of the grid, that a setting was not honoured by the chosen search, that a weak-layer case set had to be truncated or that a design standard was applied. None of them changes a factor of safety; read them before quoting one. The window refreshes after every run.</p>
+
+      <h2 id="info-viewer"><span class="secnum">2.8.4</span><span class="ht">Info Viewer</span><a class="anchor" href="#info-viewer" aria-label="Link to this section">#</a></h2>
+      <p><span class="ui">Analysis → Info Viewer</span> (<kbd>Ctrl</kbd>+<kbd>I</kbd>) summarises the model, not the results: the project name, the number of boundaries, materials, supports, distributed loads and line loads, the bounding box, the search method and the author.</p>
+
+      <h2 id="interpret"><span class="secnum">2.8.5</span><span class="ht">The Interpret window</span><a class="anchor" href="#interpret" aria-label="Link to this section">#</a></h2>
+      <p>After a Compute, <span class="ui">Analysis → Interpret</span> opens a separate, read-only window, <em>OGR Slip2D — Interpret — name</em>, on the results of that run. Each call opens a new window, so two can be compared side by side. It has its own menus and these panels:</p>
+      <ul>
+        <li><strong>Legend</strong> (left): the colour scale of the plotted field, with the critical value marked. <span class="ui">View → Show Legend</span> hides it.</li>
+        <li><strong>Summary</strong> (right): the method, the valid surfaces out of the total, the generation attempts (and how many a focus object rejected), the critical value, its iterations and, for a circle, its centre and radius.</li>
+        <li><strong>Surfaces</strong> (right): the 100 surfaces with the lowest factor of safety, ranked as in the Results dock. Selecting a row highlights the surface and shows its first slice in Slice Data.</li>
+        <li><strong>Slice Data</strong> (bottom): every quantity of one slice (see <a href="#slice-data">Slice data</a> below).</li>
+      </ul>
+      <p>The <span class="ui">Window</span> menu shows or hides Summary, Surfaces and Slice Data; <span class="ui">File → Close</span> (<kbd>Ctrl</kbd>+<kbd>W</kbd>) closes the window. When several methods were computed, the bar at the top has a <strong>Method</strong> list in which each method is shown with its critical value; choosing one switches every panel, the plot and the legend to that method. With a single method the bar only names it and gives its critical value.</p>
+
+      <figure class="fig shot-fig" id="fig-interpret">
+        <div class="art"><img src="../../assets/img/shots/interpret.webp" alt="The Interpret window after a Grid Search with Spencer: the slip centres coloured by factor of safety above the slope, the critical surface with its slices and one slice highlighted, the colour legend on the left, the Summary and Surfaces panels on the right and the Slice Data panel below" loading="lazy" width="1600" height="877"></div>
+        <figcaption><span class="fignum">Figure 2.8.1</span> The Interpret window after a Grid Search. Each slip centre is coloured by the lowest factor of safety found at it, and the Summary gives the valid surfaces out of those generated.</figcaption>
+      </figure>
+
+      <h3 id="colour-grid"><span class="ht">The coloured grid of centres</span><a class="anchor" href="#colour-grid" aria-label="Link to this section">#</a></h3>
+      <p>With a Grid Search, each centre of the grid is coloured by the lowest factor of safety found there. Move the pointer over the grid to preview the minimum surface of the nearest centre — the status bar gives its factor of safety — and click to select it. For the non-circular searches there is no grid: select surfaces from the Surfaces panel or with <span class="ui">Query → Add Query</span>.</p>
+      <p><span class="ui">View → Contour Options…</span> controls the plot: the field shown (<em>Factor of safety</em>, and, when a finite-element groundwater result exists, <em>Pore pressure</em>, <em>Total head</em> and <em>Pressure head</em>), an automatic range or a fixed <em>Minimum</em> and <em>Maximum</em>, the <em>Number of intervals</em>, the <em>Mode</em>, the <em>Palette</em>, reversed colours and the number format. For the factor of safety the default scale is fixed, from 0 to 6 in 24 bands, so that one deep surface with a high factor does not squash the range that matters. <span class="ui">View → Legend Options…</span> sets the decimals, the number of intervals and scientific notation of the legend, and <span class="ui">Data → Supplemental Contours</span> draws iso-lines over the filled bands.</p>
+
+      <h2 id="which-surfaces"><span class="secnum">2.8.6</span><span class="ht">Choosing which surfaces are drawn</span><a class="anchor" href="#which-surfaces" aria-label="Link to this section">#</a></h2>
+      <p>Three choices at the top of the <span class="ui">Data</span> menu decide what is drawn over the model:</p>
+      <ul>
+        <li><strong>Global Minimum</strong> (default): the critical surface only;</li>
+        <li><strong>Minimum Surfaces</strong>: the lowest surface at each slip centre of the grid;</li>
+        <li><strong>All Surfaces</strong>: every valid surface analysed.</li>
+      </ul>
+      <p><span class="ui">Data → Filter Surfaces…</span> restricts the last two: <em>By factor of safety</em> (a minimum and a maximum), <em>Only the N lowest</em>, or <em>Surfaces with error code</em>, which shows only the invalid surfaces rejected for one reason. <strong>Apply</strong> redraws without closing the dialog, <strong>Reset</strong> clears the filter and <strong>Cancel</strong> also undoes what Apply did. The global minimum is always drawn.</p>
+
+      <h2 id="queries"><span class="secnum">2.8.7</span><span class="ht">Queries</span><a class="anchor" href="#queries" aria-label="Link to this section">#</a></h2>
+      <p>A <em>query</em> is a surface you pick out for detailed inspection. <span class="ui">Query → Add Query</span> enters a picking mode: the surface under the pointer is previewed with its factor of safety (and, for a circle, its radius and centre), a click keeps it and <kbd>Esc</kbd> cancels. Several queries can be kept; each keeps its factor of safety written at its centre, or at the crest end of a non-circular surface. The options below act on the surface you selected last, then on the latest query, and otherwise on the global minimum, for which they create a query.</p>
+      <figure class="tbl" id="tbl-query-menu">
+        <figcaption><span class="fignum">Table 2.8.1</span> The Query menu of the Interpret window.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Command</th><th>What it shows</th></tr></thead>
+            <tbody>
+              <tr><td>Graph Query…</td><td>A slice quantity along every query — <em>Factor of safety</em>, <em>Slice weight</em>, <em>Base normal stress</em>, <em>Shear strength</em>, <em>Mobilised shear stress</em>, <em>Pore pressure</em> or <em>Base inclination</em> — against distance along the surface, slice number or x.</td></tr>
+              <tr><td>Delete Query…</td><td>Removes one query, or all of them.</td></tr>
+              <tr><td>Show Slices</td><td>The slice boundaries of every query.</td></tr>
+              <tr><td>Query Slice Data…</td><td>Click a slice to show its data in Slice Data and highlight it on the model, with arrows for its forces.</td></tr>
+              <tr><td>Show Line of Thrust</td><td>The line through the points of application of the interslice forces. Available only for the methods that solve those forces: Spencer, GLE / Morgenstern–Price, Lowe–Karafiath and Corps of Engineers #1 and #2.</td></tr>
+              <tr><td>Show Values Along Surface…</td><td>A chart of the effective normal stress, the available shear strength, the pore pressure and the base inclination along the surface, as the method computed them.</td></tr>
+              <tr><td>Free Body Diagram of Slice…</td><td>Asks for a slice number (counted from 0) and draws its weight, base normal and shear forces, pore-water force, any support force and the interslice resultants, to one scale and labelled with their values.</td></tr>
+              <tr><td>Surfaces Crossing Point…</td><td>Counts the surfaces that pass within a tolerance (0.5 m by default) of a point you enter and gives the lowest factor of safety among them.</td></tr>
+              <tr><td>Add Result Table (sortable)…</td><td>Every valid surface with its factor of safety, type, area of the sliding mass and number of slices; click a heading to sort.</td></tr>
+              <tr><td>Query Invalid Surfaces</td><td>On by default: while picking, a centre with no valid surface shows why.</td></tr>
+              <tr><td>Text during Query</td><td>On by default: the floating read-out while picking.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+
+      <h3 id="slice-data"><span class="ht">Slice data</span><a class="anchor" href="#slice-data" aria-label="Link to this section">#</a></h3>
+      <p>The Slice Data panel groups the quantities of one slice under <em>Geometry</em> (position, width, base length and angle, height), <em>Forces</em> (weight, pore pressure, surface load, base normal force and the driving shear W·sin α), <em>Stresses</em> (normal and effective normal stress, shear strength, the factor of safety at which equilibrium was solved and the mobilised shear τ<sub>f</sub>/F), <em>Material</em> (name, strength model, unit weight and the cohesion and friction angle at the base) and <em>Interslice forces</em>, which are filled only for the methods that solve them. <strong>Copy</strong> puts the table on the clipboard as tab-separated text, <strong>Zoom Slice</strong> centres the view on the slice and <strong>Hide Geometry</strong> leaves only the slice on screen, for a clean capture. The theory behind the numbers is in <a class="xref" href="../theory/methods.html">Section 3.2</a>.</p>
+
+      <h2 id="charts"><span class="secnum">2.8.8</span><span class="ht">Charts</span><a class="anchor" href="#charts" aria-label="Link to this section">#</a></h2>
+      <ul>
+        <li><span class="ui">Data → Graph SF Along Slope…</span> plots the factor of safety of every valid surface at its left and right intersections with the ground, against x — either the minimum in each of a number of bins (50 by default) or every point. It shows where along the slope the low factors daylight, which is where to aim the search.</li>
+        <li><span class="ui">Data → Graph SF with Time…</span> plots, for a transient groundwater analysis, the factor of safety of the stages marked <em>Calculate SF</em> against time (<a class="xref" href="groundwater.html">Section 2.9</a>). It is greyed out without one.</li>
+        <li>The <span class="ui">Statistics</span> menu holds the probabilistic and sensitivity charts (<a class="xref" href="probabilistic.html">Section 2.10</a>), and the <span class="ui">Groundwater</span> menu the iteration history and convergence plot of a groundwater analysis.</li>
+      </ul>
+
+      <h2 id="invalid-surfaces"><span class="secnum">2.8.9</span><span class="ht">Invalid surfaces and error codes</span><a class="anchor" href="#invalid-surfaces" aria-label="Link to this section">#</a></h2>
+      <p><span class="ui">Data → Summary of Invalid Surfaces…</span> says how many surfaces were rejected out of those generated, grouped by reason, how many were discarded before slicing (for example a circle that does not cut the ground twice), and how many a focus object removed. A surface that fails is not given a factor of safety; where a number is expected, it carries one of the codes of <a class="xref" href="#tbl-error-codes">Table 2.8.2</a>, described in full in <a class="xref" href="../reference/error-codes.html">Section 5.5</a>.</p>
+      <figure class="tbl" id="tbl-error-codes">
+        <figcaption><span class="fignum">Table 2.8.2</span> Codes written in place of the factor of safety of a rejected surface.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th class="n">Code</th><th>Reason</th></tr></thead>
+            <tbody>
+              <tr><td class="n">−120</td><td>Tensile stress at a slice base (Tensile stress check)</td></tr>
+              <tr><td class="n">−112</td><td>m-alpha below its limit (m-alpha check)</td></tr>
+              <tr><td class="n">−111</td><td>No converged factor of safety</td></tr>
+              <tr><td class="n">−101</td><td>Any other rejection</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p>To see where the rejected surfaces are, use <em>Surfaces with error code</em> in <span class="ui">Data → Filter Surfaces…</span>. A blank patch in the coloured grid is usually explained there.</p>
+
+      <h2 id="exports"><span class="secnum">2.8.10</span><span class="ht">Exporting results</span><a class="anchor" href="#exports" aria-label="Link to this section">#</a></h2>
+      <figure class="tbl" id="tbl-exports">
+        <figcaption><span class="fignum">Table 2.8.3</span> Exports of the Interpret window.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Command</th><th>Writes</th></tr></thead>
+            <tbody>
+              <tr><td>File → Export Image…</td><td>The view as it is on screen, as PNG or JPEG.</td></tr>
+              <tr><td>Edit → Copy Image</td><td>The same view to the clipboard, as a bitmap (also on the toolbar).</td></tr>
+              <tr><td>File → Export Data (CSV)…</td><td>One row per valid surface, sorted by factor of safety: rank, factor of safety, method, centre, radius, x of the two ends, iterations and convergence.</td></tr>
+              <tr><td>Data → Export Raw Data…</td><td>One row per analysed surface, valid or not: centre, radius, x of the two ends and the factor of safety or the error code in its place. <strong>Copy</strong> puts it on the clipboard as tab-separated text; <strong>Save…</strong> writes a <code>.txt</code> (tabs) or <code>.csv</code> (commas) file.</td></tr>
+              <tr><td>Data → Export Slice Data (CSV)…</td><td>The slices of the selected surface, or of the critical one, with the method's own per-slice results.</td></tr>
+              <tr><td>Statistics → Export Statistics Data…</td><td>The probabilistic samples (<a class="xref" href="probabilistic.html">Section 2.10</a>).</td></tr>
+              <tr><td>Groundwater → Export All Nodal Values…</td><td>Total head, pressure head and pore pressure at every node of the mesh (<a class="xref" href="groundwater.html">Section 2.9</a>).</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p>A PDF report of the analysis is produced from the main window with <span class="ui">File → Generate Report…</span>; images, DXF drawings and scripted runs are covered in <a class="xref" href="automation.html">Section 2.12</a>. The <span class="ui">Data</span> menu also holds two support commands, <em>Support Force Diagram…</em> and <em>Back Analysis…</em>; supports are covered in <a class="xref" href="supports.html">Section 2.6</a>.</p>
+
+      <h2 id="known-issues"><span class="secnum">2.8.11</span><span class="ht">Commands without effect in version 0.1.235</span><a class="anchor" href="#known-issues" aria-label="Link to this section">#</a></h2>
+      <div class="note warn"><span class="label">Present in the menus, not working</span>
+        <p>These Interpret-window commands do nothing, or less than their name says, in version 0.1.235:</p>
+        <ul>
+          <li><span class="ui">Groundwater → Phreatic Surface</span>, <span class="ui">Piezometric Lines</span>, <span class="ui">Flow Vectors</span> and <span class="ui">Streamlines</span> can be ticked but have no effect. Flow vectors and the free surface are drawn by <span class="ui">Groundwater → Interpret Groundwater</span> in the main window.</li>
+          <li><span class="ui">Groundwater → Contour Options…</span> stores its settings but nothing is drawn with them; contour the groundwater fields with <span class="ui">View → Contour Options…</span> instead. <span class="ui">Groundwater → Define User Data…</span> evaluates the expression at every node and reports its range, but does not plot it.</li>
+          <li><span class="ui">Tools → Measure</span> and <span class="ui">Tools → Dimension Length</span> have no effect.</li>
+          <li><span class="ui">View → Data Tips</span> and the <em>DATA TIPS</em> indicator of the status bar have no effect; the preview of the surface under the pointer is always on.</li>
+          <li><span class="ui">Data → Support Force Analysis…</span> lists every support of the model with its capacity; it does not compute the force each one takes on the critical surface.</li>
+        </ul>
+      </div>
+    </article>
+
+<!-- @inc docfoot -->
+<nav class="doc-pager" aria-label="Pages">
+<a class="prev" href="../../docs/user-guide/surfaces.html"><span class="label">← Previous · 2.7</span><b>Slip surfaces and search</b></a>
+<a class="next" href="../../docs/user-guide/groundwater.html"><span class="label">2.9 · Next →</span><b>Finite-element groundwater</b></a>
+</nav>
+<div class="doc-edit label"><a href="https://github.com/samuelsl27/OpenGeoRock_Web.github.io/blob/main/docs/user-guide/results.html" target="_blank" rel="noopener">Edit this page ↗</a><a href="https://github.com/samuelsl27/OGR-Slip2D/issues" target="_blank" rel="noopener">Report a problem ↗</a></div>
+<!-- @end docfoot -->
+  </main>
+
+  <aside class="doc-toc" aria-label="On this page">
+    <div class="toc-inner">
+<!-- @inc pagetoc -->
+<span class="label">On this page</span><ul><li class="h2"><a href="#compute">2.8.1 Running the analysis</a></li><li class="h2"><a href="#results-dock">2.8.2 The Results dock</a></li><li class="h2"><a href="#analysis-notes">2.8.3 Analysis Notes</a></li><li class="h2"><a href="#info-viewer">2.8.4 Info Viewer</a></li><li class="h2"><a href="#interpret">2.8.5 The Interpret window</a></li><li class="h3"><a href="#colour-grid">The coloured grid of centres</a></li><li class="h2"><a href="#which-surfaces">2.8.6 Choosing which surfaces are drawn</a></li><li class="h2"><a href="#queries">2.8.7 Queries</a></li><li class="h3"><a href="#slice-data">Slice data</a></li><li class="h2"><a href="#charts">2.8.8 Charts</a></li><li class="h2"><a href="#invalid-surfaces">2.8.9 Invalid surfaces and error codes</a></li><li class="h2"><a href="#exports">2.8.10 Exporting results</a></li><li class="h2"><a href="#known-issues">2.8.11 Commands without effect in version 0.1.235</a></li></ul><button class="print" type="button"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="1.5"/><path d="M6 14h12v7H6z"/></svg> Print this page</button>
+<!-- @end pagetoc -->
+    </div>
+  </aside>
+</div>
+
+<!-- @inc footer -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <a class="brand" href="../../index.html" aria-label="OpenGeoRock — home">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
+          <b>OpenGeoRock</b>
+        </a>
+        <p class="tagline">Open-source geotechnical software, built in the open at the Universidad Politécnica de Cartagena.</p>
+        <span class="lang" role="group" aria-label="Language"><a href="../../docs/user-guide/results.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../../es/docs/user-guide/results.html" hreflang="es" lang="es">ES</a></span>
+      </div>
+      <div>
+        <h5>Products</h5>
+        <ul>
+          <li><a href="../../products/slip2d.html">OGR Slip2D</a></li>
+          <li><a href="../../products/index.html">The suite</a></li>
+          <li><a href="../../ai/index.html">MCP server</a></li>
+          <li><a href="../../download/index.html">Download</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Learn</h5>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="../../docs/getting-started/quick-start.html">Quick start</a></li>
+          <li><a href="../../docs/theory/methods.html">Theory manual</a></li>
+          <li><a href="../../examples/index.html">Examples</a></li>
+          <li><a href="../../verification/index.html">Verification</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Project</h5>
+        <ul>
+          <li><a href="../../about/index.html">About</a></li>
+          <li><a href="../../about/index.html#team">Team</a></li>
+          <li><a href="../../about/index.html#cite">How to cite</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Contributing</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/LICENSE" target="_blank" rel="noopener">Licence · AGPL-3.0</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Connect</h5>
+        <ul>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/issues" target="_blank" rel="noopener">Issues</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/tree/main/docs/changelog" target="_blank" rel="noopener">Changelog</a></li>
+          <li><a href="mailto:samuel.saez@edu.upct.es">Email</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© 2026 Samuel Sáez López · OGR Slip2D is free software under AGPL-3.0-or-later, with no warranty of any kind.</span>
+      <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
+    </div>
+  </div>
+  <div class="lang-hint" role="dialog" aria-label="Idioma" lang="es">
+    ¿Prefieres leer esta web en español?
+    <div class="row"><a class="btn sm primary go" href="../../es/index.html">Ver en español</a><button class="btn sm" type="button" data-dismiss>No, gracias</button></div>
+  </div>
+</footer>
+<!-- @end footer -->
+</body>
+</html>

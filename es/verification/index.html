@@ -1,0 +1,286 @@
+<!doctype html>
+<html class="no-js" lang="es" data-root="../../">
+<head>
+<meta charset="utf-8">
+<title>Verificación — OGR Slip2D</title>
+<meta name="description" content="Cómo se verifica OGR Slip2D: casos de referencia publicados recalculados con la versión actual, comprobaciones en forma cerrada del motor de agua subterránea e identidades analíticas, y una batería de tests que nunca se compara con su propia salida.">
+<!-- @inc head -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.replace("no-js", "js")</script>
+<link rel="canonical" href="https://opengeorock.org/es/verification/">
+<link rel="alternate" hreflang="en" href="https://opengeorock.org/verification/">
+<link rel="alternate" hreflang="es" href="https://opengeorock.org/es/verification/">
+<link rel="alternate" hreflang="x-default" href="https://opengeorock.org/verification/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="OpenGeoRock">
+<meta property="og:title" content="Verificación — OGR Slip2D">
+<meta property="og:description" content="Cómo se verifica OGR Slip2D: casos de referencia publicados recalculados con la versión actual, comprobaciones en forma cerrada del motor de agua subterránea e identidades analíticas, y una batería de tests que nunca se compara con su propia salida.">
+<meta property="og:url" content="https://opengeorock.org/es/verification/">
+<meta property="og:image" content="https://opengeorock.org/assets/img/og-image.png">
+<meta property="og:locale" content="es_ES">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#f4efe6">
+<link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&amp;display=swap">
+<link rel="stylesheet" href="../../assets/css/site.css">
+
+<script src="../../assets/js/site.js" defer></script>
+<!-- @end head -->
+</head>
+<body>
+<!-- @inc header -->
+<a class="skip" href="#main">Saltar al contenido</a>
+<header class="top">
+  <div class="wrap top-inner">
+    <a class="brand" href="../../es/index.html" aria-label="OpenGeoRock — inicio">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
+      <b>OpenGeoRock</b>
+    </a>
+    <nav class="nav" aria-label="Principal">
+      <div class="has-menu" data-nav="products">
+        <button type="button" aria-expanded="false" aria-haspopup="true">Productos <svg class="caret" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+        <div class="mega">
+          <div class="mega-cols">
+            <div class="mega-col">
+              <span class="label">Disponible hoy</span>
+              <a class="mega-item feature" href="../../es/products/slip2d.html"><b>OGR Slip2D</b><span>Estabilidad de taludes 2D: equilibrio límite, agua subterránea por elementos finitos y análisis probabilístico.</span></a>
+              <a class="mega-item" href="../../es/ai/index.html"><b>Servidor MCP para agentes de IA <span class="tag live">nuevo</span></b><span>Claude, ChatGPT o un modelo local construyen y calculan modelos de OGR Slip2D.</span></a>
+            </div>
+            <div class="mega-col">
+              <span class="label">En la hoja de ruta</span>
+              <a class="mega-item" href="../../es/products/index.html#ogr-data"><b>OGR Data</b><span>Base de datos de propiedades de suelos y macizos rocosos</span></a>
+              <a class="mega-item" href="../../es/products/index.html#ogr-fem2d"><b>OGR FEM2D</b><span>Elementos finitos elastoplásticos 2D</span></a>
+              <a class="mega-item" href="../../es/products/index.html#ogr-slip3d"><b>OGR Slip3D</b><span>Equilibrio límite en 3D</span></a>
+              <a class="mega-item" href="../../es/products/index.html#ogr-fem3d"><b>OGR FEM3D</b><span>Elementos finitos 3D con flujo acoplado</span></a>
+            </div>
+            <div class="mega-col">
+              <span class="label">Úsalo desde</span>
+              <a class="mega-item" href="../../es/docs/getting-started/interface.html"><b>El programa de escritorio</b><span>Modelador, intérprete y terminal de Python</span></a>
+              <a class="mega-item" href="../../es/docs/reference/python-api.html"><b>Python</b><span>Automatiza análisis desde tu propio código</span></a>
+              <a class="mega-item" href="../../es/docs/reference/cli.html"><b>La línea de comandos</b><span>Cálculos por lotes con ogr-slip2d-cli</span></a>
+            </div>
+          </div>
+          <div class="mega-foot"><span>Cinco programas, un núcleo abierto.</span><a href="../../es/products/index.html">Todos los productos →</a></div>
+        </div>
+      </div>
+      <a href="../../es/examples/index.html" data-nav="examples">Ejemplos</a>
+      <a href="../../es/ai/index.html" data-nav="ai">IA y MCP</a>
+      <a href="../../es/docs/index.html" data-nav="docs">Documentación</a>
+      <a href="../../es/verification/index.html" data-nav="verification" aria-current="page">Verificación</a>
+      <a href="../../es/about/index.html" data-nav="about">Proyecto</a>
+    </nav>
+    <div class="top-right">
+      <span class="lang" role="group" aria-label="Idioma"><a href="../../verification/index.html" hreflang="en" lang="en">EN</a><a href="../../es/verification/index.html" hreflang="es" lang="es" aria-current="true">ES</a></span>
+      <a class="btn gh" href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener" aria-label="Código fuente en GitHub"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0C17.3 4.7 18.3 5 18.3 5c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0012 .5z"/></svg><span>GitHub</span></a>
+      <a class="btn primary" href="../../es/download/index.html" data-nav="download">Descargar OGR Slip2D</a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menú"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Principal (móvil)">
+    <span class="label">Productos</span>
+    <a href="../../es/products/slip2d.html">OGR Slip2D</a>
+    <div class="sub"><a href="../../es/products/index.html">La suite OpenGeoRock</a><a href="../../es/ai/index.html">Servidor MCP para agentes de IA</a></div>
+    <span class="label">Aprende</span>
+    <a href="../../es/examples/index.html">Ejemplos</a>
+    <a href="../../es/docs/index.html">Documentación</a>
+    <a href="../../es/verification/index.html">Verificación</a>
+    <span class="label">Proyecto</span>
+    <a href="../../es/about/index.html">El proyecto</a>
+    <a href="../../es/download/index.html">Descargar OGR Slip2D</a>
+    <a href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener">Código en GitHub ↗</a>
+    <span class="lang" role="group" aria-label="Idioma"><a href="../../verification/index.html" hreflang="en" lang="en">EN</a><a href="../../es/verification/index.html" hreflang="es" lang="es" aria-current="true">ES</a></span>
+  </nav>
+</header>
+<!-- @end header -->
+
+<main id="main">
+
+<section class="page-hero">
+  <div class="wrap grid-2" style="align-items:end">
+    <div>
+      <nav class="crumbs label" aria-label="Ruta de navegación"><a href="../index.html">Inicio</a><span aria-hidden="true">/</span><span>Verificación</span></nav>
+      <h1>Contrastado con referencias, <em>no dado por bueno.</em></h1>
+      <p class="lede">Un factor de seguridad es tan fiable como la evidencia que respalda al programa que lo calculó. OGR Slip2D se valida con casos publicados, soluciones en forma cerrada e identidades analíticas, nunca con instantáneas de su propia salida, porque una instantánea fija cualquier error que pueda haber.</p>
+    </div>
+    <div class="metrics" style="margin-top:0;grid-template-columns:repeat(3,1fr)">
+      <div class="metric"><div class="v">7</div><div class="k label">Casos publicados</div></div>
+      <div class="metric"><div class="v">12</div><div class="k label">Comprobaciones de método</div></div>
+      <div class="metric"><div class="v">5 265</div><div class="k label">Tests · v<span data-v>0.1.235</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== PRINCIPLE ====== -->
+<section class="section">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="sec-num label">§ 01 — La regla</div><h2>Cada cifra necesita una referencia <em>externa.</em></h2></div>
+      <p>Un método, un motor de cálculo o una fórmula se comprueba con algo que el programa no ha producido. Cuentan cuatro tipos de referencia; una grabación de la salida de hoy no cuenta.</p>
+    </div>
+    <div class="grid-4">
+      <div class="card"><span class="label">01</span><h3>Casos publicados</h3><p>Factores de seguridad de estudios comparativos, artículos y manuales de referencia, cada uno con su fuente y su propia tolerancia.</p></div>
+      <div class="card"><span class="label">02</span><h3>Soluciones en forma cerrada</h3><p>Flujo de Darcy, medios estratificados y la respuesta en función de error ante un escalón de altura, para el motor de agua subterránea.</p></div>
+      <div class="card"><span class="label">03</span><h3>Identidades analíticas</h3><p>Resultados que deben cumplirse exactamente: las fuerzas de soporte activa y pasiva coinciden con un factor objetivo de 1.0.</p></div>
+      <div class="card"><span class="label">04</span><h3>Coherencia</h3><p>Un transitorio largo debe reproducir el régimen permanente; una malla debe conservar el área de su región.</p></div>
+    </div>
+    <div class="note mt-l"><span class="label">Si un caso falla</span><p>El caso no se toca para que pase. El fallo está en el código o en el valor esperado, y averiguar cuál de los dos es precisamente para lo que existe un caso de validación. La tolerancia pertenece al caso, no al test, porque depende de la calidad de la fuente: un valor leído en una figura no merece la precisión de uno tabulado.</p></div>
+  </div>
+</section>
+
+<!-- ====== BENCHMARKS ====== -->
+<section class="section alt" id="benchmarks">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="sec-num label">§ 02 — Casos de referencia publicados</div><h2>Siete casos, <em>recalculados para esta versión.</em></h2></div>
+      <p>Cada caso se incluye en el repositorio con su modelo, sus valores esperados y su fuente, y se ejecuta en la batería de tests. Los valores siguientes se recalcularon con OGR Slip2D <span data-v>0.1.235</span> exactamente como los ejecuta la batería.</p>
+    </div>
+    <div class="table-wrap">
+      <table class="data">
+        <thead>
+          <tr><th>Caso</th><th>Qué comprueba</th><th>Método</th><th class="n">Referencia</th><th class="n">OGR Slip2D</th><th class="n">Diferencia</th><th class="n">Tolerancia</th></tr>
+        </thead>
+        <tbody>
+          <tr><td rowspan="2">ACADS 1(a)<br><span class="muted">Giam &amp; Donald (1989)</span></td><td rowspan="2">La búsqueda de rejilla encuentra el círculo crítico; talud homogéneo, tensiones totales. Referencia: media de 33 programas.</td><td>Bishop</td><td class="n">0.991</td><td class="n">0.9885</td><td class="n">−0.25 %</td><td class="n" rowspan="2">2.0 %</td></tr>
+          <tr><td>Janbu corregido</td><td class="n">0.991</td><td class="n">0.9897</td><td class="n">−0.14 %</td></tr>
+          <tr><td rowspan="2">Yamagami &amp; Ueta (1988)</td><td rowspan="2">Dos métodos a la vez, de modo que también queda fijada la diferencia entre ellos.</td><td>Bishop</td><td class="n">1.348</td><td class="n">1.3502</td><td class="n">+0.16 %</td><td class="n" rowspan="2">1.5 %</td></tr>
+          <tr><td>Ordinario</td><td class="n">1.282</td><td class="n">1.2852</td><td class="n">+0.25 %</td></tr>
+          <tr><td>ACADS 1(c)<br><span class="muted">Giam &amp; Donald (1989)</span></td><td>Tres capas: regiones y asignación de materiales. Referencia: media de 16 programas con Bishop.</td><td>Bishop</td><td class="n">1.406</td><td class="n">1.4083</td><td class="n">+0.16 %</td><td class="n">1.5 %</td></tr>
+          <tr><td>Arai &amp; Tagyo (1985), ej. 1</td><td>Un talud de 20 m con 1V:1.5H.</td><td>Bishop</td><td class="n">1.451</td><td class="n">1.4123</td><td class="n">−2.67 %</td><td class="n">3.5 %</td></tr>
+          <tr><td>Arai &amp; Tagyo (1985), ej. 3</td><td>El mismo talud con un nivel freático: aísla la presión intersticial.</td><td>Bishop</td><td class="n">1.138</td><td class="n">1.1200</td><td class="n">−1.58 %</td><td class="n">2.5 %</td></tr>
+          <tr><td>Ejemplo de refuerzo (1999)</td><td>El filtro de profundidad mínima de las superficies llega al motor de cálculo.</td><td>Bishop</td><td class="n">0.764</td><td class="n">0.7660</td><td class="n">+0.26 %</td><td class="n">1.0 %</td></tr>
+          <tr><td rowspan="4">ACADS 2(b), presa de Talbingo<br><span class="muted">Giam &amp; Donald (1989)</span></td><td rowspan="4">Los métodos por sí solos, sobre el círculo que fija el enunciado. Bishop frente a su media de 11 programas; los métodos rigurosos frente al valor del árbitro.</td><td>Bishop</td><td class="n">2.204</td><td class="n">2.2088</td><td class="n">+0.22 %</td><td class="n" rowspan="4">2.0 %</td></tr>
+          <tr><td>Spencer</td><td class="n">2.29</td><td class="n">2.2918</td><td class="n">+0.08 %</td></tr>
+          <tr><td>GLE / Morgenstern–Price</td><td class="n">2.29</td><td class="n">2.3019</td><td class="n">+0.52 %</td></tr>
+          <tr><td>Janbu corregido</td><td class="n">2.073</td><td class="n">2.0739</td><td class="n">+0.05 %</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-s muted" style="font-size:13.5px">Las diferencias se calculan con los factores de seguridad sin redondear.</p>
+    <div class="grid-2 mt-m" style="align-items:start;gap:24px">
+      <div class="note" style="margin:0"><span class="label">Por qué Arai y Tagyo queda más bajo</span><p>Los reanálisis modernos de los dos ejemplos de Arai y Tagyo coinciden entre sí y quedan alrededor de un 2–3 % por debajo de los valores publicados en 1985. Una búsqueda de 1985 empleaba menos dovelas y menos círculos; una búsqueda más fina encuentra un mínimo más bajo. Los casos conservan el valor publicado y una tolerancia que cubre esa diferencia conocida, de modo que detectan una regresión grave sin fingir que la fuente es más precisa de lo que es.</p></div>
+      <div class="note" style="margin:0"><span class="label">Método a método</span><p>Corps of Engineers #1 y #2 se comprueban dovela a dovela con el ejemplo resuelto de USACE EM 1110-2-1902, Apéndice G, cuyas tablas recogen las fuerzas entre dovelas y las fuerzas normales en las bases. Otras comprobaciones de método sobre superficies dadas están en la batería de tests.</p></div>
+    </div>
+    <div class="cta-row"><a class="btn primary" href="../docs/verification/slope-benchmarks.html">Cada caso en detalle <span class="arrow">→</span></a><a class="btn" href="https://github.com/samuelsl27/OGR-Slip2D/tree/main/validacion" target="_blank" rel="noopener">Los casos en GitHub ↗</a></div>
+  </div>
+</section>
+
+<!-- ====== ANALYTIC ====== -->
+<section class="section" id="analytic">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="sec-num label">§ 03 — Formas cerradas e identidades</div><h2>Donde la respuesta exacta <em>se conoce.</em></h2></div>
+      <p>El motor de agua subterránea y varias herramientas se comprueban con resultados que no admiten aproximación: o la cifra es exacta, o el test falla.</p>
+    </div>
+    <div class="table-wrap">
+      <table class="data">
+        <thead><tr><th>Qué</th><th>Comprobación</th><th class="n">Resultado</th></tr></thead>
+        <tbody>
+          <tr><td>Filtración confinada</td><td>Solución de Darcy en forma cerrada</td><td class="n">0.000 %</td></tr>
+          <tr><td>Medios estratificados</td><td>Medias armónica y aritmética de la conductividad</td><td class="n">0.000 %</td></tr>
+          <tr><td>Anisotropía</td><td>Prueba del parche (patch test) con K<sub>xy</sub> ≠ 0</td><td class="n">precisión de máquina</td></tr>
+          <tr><td>Filtración transitoria</td><td>Respuesta en función de error ante un escalón de altura</td><td class="n">0.11 %</td></tr>
+          <tr><td>Transitorio a tiempo largo</td><td>Debe reproducir el régimen permanente</td><td class="n">0.0000 m</td></tr>
+          <tr><td>Malla de elementos finitos</td><td>El área es igual a la de la región, en cada refinamiento</td><td class="n">exacto</td></tr>
+          <tr><td>Retroanálisis de la fuerza de soporte</td><td>Las fuerzas activa y pasiva coinciden con un factor objetivo de 1.0</td><td class="n">exacto</td></tr>
+          <tr><td>Parámetros de Hoek–Brown</td><td>GSI = 100, D = 0 da m<sub>b</sub> = m<sub>i</sub>, s = 1, a = 0.5</td><td class="n">exacto</td></tr>
+          <tr><td>Ida y vuelta de DXF</td><td>Misma área, vértices sobre los originales</td><td class="n">&lt; 10⁻⁶</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-m muted">El desembalse rápido reproduce el resultado clásico sin habérselo indicado: el factor de seguridad es mínimo justo después de que baje el nivel y se recupera a medida que se disipan las presiones intersticiales.</p>
+  </div>
+</section>
+
+<!-- ====== SUITE ====== -->
+<section class="section alt">
+  <div class="wrap grid-2" style="align-items:start">
+    <div>
+      <div class="sec-num label">§ 04 — La batería de tests</div>
+      <h2 class="mt-s">5 265 tests, <em>y por qué existe cada uno.</em></h2>
+    </div>
+    <div>
+      <ul class="ticks">
+        <li>Un archivo de tests por área funcional, cada uno con una cabecera que indica qué invariante protege y por qué.</li>
+        <li>Cada ajuste configurable va acompañado del test que demuestra que cambia el número: un control que no hace nada es peor que ninguno.</li>
+        <li>Los tests no arrastran estado —se restauran el idioma, las unidades y las cachés— porque ese arrastre hace que tests sin relación solo fallen en una ejecución completa.</li>
+        <li>La batería completa se ejecuta antes de cada versión; una ejecución filtrada lo indica en su salida y no cuenta como evidencia para una versión.</li>
+        <li>La integración continua se ejecuta con Python 3.11, 3.12 y 3.13 y comprueba la cabecera de licencia de cada archivo.</li>
+      </ul>
+      <div class="cta-row"><a class="btn" href="../docs/getting-started/installation.html#tests">Ejecuta tú mismo la batería</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="section ink">
+  <div class="wrap cta-band">
+    <div><div class="label">Contribuir</div><h2 class="mt-s">¿Conoces el factor de seguridad de un talud? <em>Envíalo.</em></h2><p class="mt-m">La contribución más valiosa al proyecto es un caso de validación: un talud cuyo factor de seguridad se conozca por una publicación o por un cálculo a mano, con su fuente.</p></div>
+    <div class="cta-row"><a class="btn primary lg" href="https://github.com/samuelsl27/OGR-Slip2D/issues/new/choose" target="_blank" rel="noopener">Abrir un caso de validación ↗</a><a class="btn lg" href="../docs/verification/methodology.html">Metodología</a></div>
+  </div>
+</section>
+
+</main>
+
+<!-- @inc footer -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <a class="brand" href="../../es/index.html" aria-label="OpenGeoRock — inicio">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
+          <b>OpenGeoRock</b>
+        </a>
+        <p class="tagline">Software geotécnico de código abierto, desarrollado a la vista de todos en la Universidad Politécnica de Cartagena.</p>
+        <span class="lang" role="group" aria-label="Idioma"><a href="../../verification/index.html" hreflang="en" lang="en">EN</a><a href="../../es/verification/index.html" hreflang="es" lang="es" aria-current="true">ES</a></span>
+      </div>
+      <div>
+        <h5>Productos</h5>
+        <ul>
+          <li><a href="../../es/products/slip2d.html">OGR Slip2D</a></li>
+          <li><a href="../../es/products/index.html">La suite</a></li>
+          <li><a href="../../es/ai/index.html">Servidor MCP</a></li>
+          <li><a href="../../es/download/index.html">Descargar</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Aprende</h5>
+        <ul>
+          <li><a href="../../es/docs/index.html">Documentación</a></li>
+          <li><a href="../../es/docs/getting-started/quick-start.html">Inicio rápido</a></li>
+          <li><a href="../../es/docs/theory/methods.html">Manual de teoría</a></li>
+          <li><a href="../../es/examples/index.html">Ejemplos</a></li>
+          <li><a href="../../es/verification/index.html">Verificación</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Proyecto</h5>
+        <ul>
+          <li><a href="../../es/about/index.html">El proyecto</a></li>
+          <li><a href="../../es/about/index.html#team">Equipo</a></li>
+          <li><a href="../../es/about/index.html#cite">Cómo citar</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Contribuir</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/LICENSE" target="_blank" rel="noopener">Licencia · AGPL-3.0</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contacto</h5>
+        <ul>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/issues" target="_blank" rel="noopener">Incidencias</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/tree/main/docs/changelog" target="_blank" rel="noopener">Historial de cambios</a></li>
+          <li><a href="mailto:samuel.saez@edu.upct.es">Correo</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© 2026 Samuel Sáez López · OGR Slip2D es software libre bajo AGPL-3.0-or-later, sin garantía de ningún tipo.</span>
+      <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
+    </div>
+  </div>
+</footer>
+<!-- @end footer -->
+</body>
+</html>

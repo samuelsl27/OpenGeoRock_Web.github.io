@@ -1,0 +1,391 @@
+<!doctype html>
+<html class="no-js" lang="en" data-root="../../">
+<head>
+<meta charset="utf-8">
+<title>Loads and seismic loading — OGR Slip2D documentation</title>
+<meta name="description" content="Distributed and line loads in OGR Slip2D — orientations, distributions, sign conventions, modifying and deleting them — the pseudo-static seismic load with its kh and kv conventions, and the acceleration records used by a Newmark displacement analysis.">
+<!-- @inc head -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.replace("no-js", "js")</script>
+<link rel="canonical" href="https://opengeorock.org/docs/user-guide/loads.html">
+<link rel="alternate" hreflang="en" href="https://opengeorock.org/docs/user-guide/loads.html">
+<link rel="alternate" hreflang="es" href="https://opengeorock.org/es/docs/user-guide/loads.html">
+<link rel="alternate" hreflang="x-default" href="https://opengeorock.org/docs/user-guide/loads.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="OpenGeoRock">
+<meta property="og:title" content="Loads and seismic loading — OGR Slip2D documentation">
+<meta property="og:description" content="Distributed and line loads in OGR Slip2D — orientations, distributions, sign conventions, modifying and deleting them — the pseudo-static seismic load with its kh and kv conventions, and the acceleration records used by a Newmark displacement analysis.">
+<meta property="og:url" content="https://opengeorock.org/docs/user-guide/loads.html">
+<meta property="og:image" content="https://opengeorock.org/assets/img/og-image.png">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#f4efe6">
+<link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&amp;display=swap">
+<link rel="stylesheet" href="../../assets/css/site.css">
+<link rel="stylesheet" href="../../assets/css/docs.css">
+<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
+<script src="../../assets/js/site.js" defer></script>
+<!-- @end head -->
+</head>
+<body class="docs">
+<!-- @inc header -->
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="wrap top-inner">
+    <a class="brand" href="../../index.html" aria-label="OpenGeoRock — home">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
+      <b>OpenGeoRock</b>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <div class="has-menu" data-nav="products">
+        <button type="button" aria-expanded="false" aria-haspopup="true">Products <svg class="caret" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+        <div class="mega">
+          <div class="mega-cols">
+            <div class="mega-col">
+              <span class="label">Available today</span>
+              <a class="mega-item feature" href="../../products/slip2d.html"><b>OGR Slip2D</b><span>2D slope stability: limit equilibrium, finite-element groundwater and probabilistic analysis.</span></a>
+              <a class="mega-item" href="../../ai/index.html"><b>MCP server for AI agents <span class="tag live">new</span></b><span>Let Claude, ChatGPT or a local model build and run OGR Slip2D models.</span></a>
+            </div>
+            <div class="mega-col">
+              <span class="label">On the roadmap</span>
+              <a class="mega-item" href="../../products/index.html#ogr-data"><b>OGR Data</b><span>Soil and rock-mass property database</span></a>
+              <a class="mega-item" href="../../products/index.html#ogr-fem2d"><b>OGR FEM2D</b><span>2D elastoplastic finite elements</span></a>
+              <a class="mega-item" href="../../products/index.html#ogr-slip3d"><b>OGR Slip3D</b><span>3D limit equilibrium</span></a>
+              <a class="mega-item" href="../../products/index.html#ogr-fem3d"><b>OGR FEM3D</b><span>3D finite elements with coupled flow</span></a>
+            </div>
+            <div class="mega-col">
+              <span class="label">Use it from</span>
+              <a class="mega-item" href="../../docs/getting-started/interface.html"><b>The desktop program</b><span>Modeller, interpreter and Python terminal</span></a>
+              <a class="mega-item" href="../../docs/reference/python-api.html"><b>Python</b><span>Script analyses from your own code</span></a>
+              <a class="mega-item" href="../../docs/reference/cli.html"><b>The command line</b><span>Batch runs with ogr-slip2d-cli</span></a>
+            </div>
+          </div>
+          <div class="mega-foot"><span>Five programs, one open core.</span><a href="../../products/index.html">All products →</a></div>
+        </div>
+      </div>
+      <a href="../../examples/index.html" data-nav="examples">Examples</a>
+      <a href="../../ai/index.html" data-nav="ai">AI &amp; MCP</a>
+      <a href="../../docs/index.html" data-nav="docs" aria-current="page">Docs</a>
+      <a href="../../verification/index.html" data-nav="verification">Verification</a>
+      <a href="../../about/index.html" data-nav="about">About</a>
+    </nav>
+    <div class="top-right">
+      <span class="lang" role="group" aria-label="Language"><a href="../../docs/user-guide/loads.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../../es/docs/user-guide/loads.html" hreflang="es" lang="es">ES</a></span>
+      <a class="btn gh" href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener" aria-label="Source code on GitHub"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0C17.3 4.7 18.3 5 18.3 5c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0012 .5z"/></svg><span>GitHub</span></a>
+      <a class="btn primary" href="../../download/index.html" data-nav="download">Get OGR Slip2D</a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Main (mobile)">
+    <span class="label">Products</span>
+    <a href="../../products/slip2d.html">OGR Slip2D</a>
+    <div class="sub"><a href="../../products/index.html">The OpenGeoRock suite</a><a href="../../ai/index.html">MCP server for AI agents</a></div>
+    <span class="label">Learn</span>
+    <a href="../../examples/index.html">Examples</a>
+    <a href="../../docs/index.html">Documentation</a>
+    <a href="../../verification/index.html">Verification</a>
+    <span class="label">Project</span>
+    <a href="../../about/index.html">About</a>
+    <a href="../../download/index.html">Get OGR Slip2D</a>
+    <a href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener">Source on GitHub ↗</a>
+    <span class="lang" role="group" aria-label="Language"><a href="../../docs/user-guide/loads.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../../es/docs/user-guide/loads.html" hreflang="es" lang="es">ES</a></span>
+  </nav>
+</header>
+<!-- @end header -->
+
+<div class="doc-shell">
+  <aside class="doc-side" id="doc-side">
+<!-- @inc docnav -->
+<div class="doc-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input type="search" placeholder="Search the documentation  /" aria-label="Search the documentation" autocomplete="off"><div class="results" role="listbox"></div></div>
+<nav class="doc-nav" aria-label="Documentation">
+<a class="home" href="../../docs/index.html"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 016.5 3H20v15H6.5A2.5 2.5 0 004 20.5z"/><path d="M4 20.5A2.5 2.5 0 016.5 18H20v3H6.5A2.5 2.5 0 014 20.5z"/></svg> Documentation home</a>
+<details open><summary>1 · Getting started</summary><ul>
+<li><a href="../../docs/getting-started/installation.html"><span class="n">1.1</span><span>Installation</span></a></li>
+<li><a href="../../docs/getting-started/quick-start.html"><span class="n">1.2</span><span>Quick start: your first model</span></a></li>
+<li><a href="../../docs/getting-started/interface.html"><span class="n">1.3</span><span>The interface</span></a></li>
+</ul></details>
+<details open><summary>2 · User guide</summary><ul>
+<li><a href="../../docs/user-guide/project-settings.html"><span class="n">2.1</span><span>Project settings</span></a></li>
+<li><a href="../../docs/user-guide/geometry.html"><span class="n">2.2</span><span>Geometry and boundaries</span></a></li>
+<li><a href="../../docs/user-guide/materials.html"><span class="n">2.3</span><span>Materials</span></a></li>
+<li><a href="../../docs/user-guide/water.html"><span class="n">2.4</span><span>Water and pore pressure</span></a></li>
+<li><a href="../../docs/user-guide/loads.html" aria-current="page"><span class="n">2.5</span><span>Loads and seismic loading</span></a></li>
+<li><a href="../../docs/user-guide/supports.html"><span class="n">2.6</span><span>Supports</span></a></li>
+<li><a href="../../docs/user-guide/surfaces.html"><span class="n">2.7</span><span>Slip surfaces and search</span></a></li>
+<li><a href="../../docs/user-guide/results.html"><span class="n">2.8</span><span>Computing and interpreting results</span></a></li>
+<li><a href="../../docs/user-guide/groundwater.html"><span class="n">2.9</span><span>Finite-element groundwater</span></a></li>
+<li><a href="../../docs/user-guide/probabilistic.html"><span class="n">2.10</span><span>Probabilistic and sensitivity analysis</span></a></li>
+<li><a href="../../docs/user-guide/design-standards.html"><span class="n">2.11</span><span>Design standards</span></a></li>
+<li><a href="../../docs/user-guide/automation.html"><span class="n">2.12</span><span>Reports, scripting and the command line</span></a></li>
+</ul></details>
+<details open><summary>3 · Theory manual</summary><ul>
+<li><a href="../../docs/theory/limit-equilibrium.html"><span class="n">3.1</span><span>Limit equilibrium and the factor of safety</span></a></li>
+<li><a href="../../docs/theory/methods.html"><span class="n">3.2</span><span>Methods of slices</span></a></li>
+<li><a href="../../docs/theory/interslice.html"><span class="n">3.3</span><span>Interslice forces, convergence and admissibility</span></a></li>
+<li><a href="../../docs/theory/search.html"><span class="n">3.4</span><span>Slip-surface search</span></a></li>
+<li><a href="../../docs/theory/strength.html"><span class="n">3.5</span><span>Shear strength models</span></a></li>
+<li><a href="../../docs/theory/pore-pressure.html"><span class="n">3.6</span><span>Pore pressure and unsaturated strength</span></a></li>
+<li><a href="../../docs/theory/seepage.html"><span class="n">3.7</span><span>Finite-element seepage</span></a></li>
+<li><a href="../../docs/theory/rapid-drawdown.html"><span class="n">3.8</span><span>Rapid drawdown</span></a></li>
+<li><a href="../../docs/theory/seismic.html"><span class="n">3.9</span><span>Seismic analysis</span></a></li>
+<li><a href="../../docs/theory/supports.html"><span class="n">3.10</span><span>Support forces</span></a></li>
+<li><a href="../../docs/theory/probabilistic.html"><span class="n">3.11</span><span>Probabilistic analysis</span></a></li>
+<li><a href="../../docs/theory/partial-factors.html"><span class="n">3.12</span><span>Partial factors (Eurocode 7)</span></a></li>
+</ul></details>
+<details open><summary>4 · Verification</summary><ul>
+<li><a href="../../docs/verification/methodology.html"><span class="n">4.1</span><span>Verification methodology</span></a></li>
+<li><a href="../../docs/verification/slope-benchmarks.html"><span class="n">4.2</span><span>Limit-equilibrium benchmarks</span></a></li>
+<li><a href="../../docs/verification/analytic-checks.html"><span class="n">4.3</span><span>Groundwater and analytic checks</span></a></li>
+</ul></details>
+<details open><summary>5 · Reference</summary><ul>
+<li><a href="../../docs/reference/mcp.html"><span class="n">5.1</span><span>MCP server</span></a></li>
+<li><a href="../../docs/reference/cli.html"><span class="n">5.2</span><span>Command-line interface</span></a></li>
+<li><a href="../../docs/reference/python-api.html"><span class="n">5.3</span><span>Python API</span></a></li>
+<li><a href="../../docs/reference/file-format.html"><span class="n">5.4</span><span>The .ogr file format</span></a></li>
+<li><a href="../../docs/reference/error-codes.html"><span class="n">5.5</span><span>Error codes</span></a></li>
+<li><a href="../../docs/reference/notation.html"><span class="n">5.6</span><span>Notation and glossary</span></a></li>
+<li><a href="../../docs/reference/bibliography.html"><span class="n">5.7</span><span>Bibliography</span></a></li>
+</ul></details>
+</nav>
+<!-- @end docnav -->
+  </aside>
+
+  <main id="main" class="doc-main">
+    <header class="doc-head">
+<!-- @inc dochead -->
+<button class="doc-side-toggle" type="button" aria-controls="doc-side" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg> Contents</button>
+<nav class="crumbs label" aria-label="Breadcrumb"><a href="../../docs/index.html">Documentation</a><span aria-hidden="true">/</span><span>2 · User guide</span></nav>
+<div class="chapter label">2.5</div>
+<h1>Loads and seismic loading</h1>
+<div class="meta label"><span>Describes OGR Slip2D <span data-v>0.1.235</span></span></div>
+<!-- @end dochead -->
+    </header>
+
+    <article class="doc prose">
+      <p class="lede">External loads are applied on the ground surface — a surcharge over a stretch of boundary or a force at a point — and an earthquake is represented by a pseudo-static coefficient that acts on the soil of every slice. This page describes how to add distributed and line loads and what their orientations mean, how to change and delete them, how to set the seismic coefficients, and how to bring in the acceleration records that a Newmark displacement analysis integrates.</p>
+
+      <h2 id="distributed"><span class="secnum">2.5.1</span><span class="ht">Distributed loads</span><a class="anchor" href="#distributed" aria-label="Link to this section">#</a></h2>
+      <p>A distributed load is a pressure on a stretch of boundary — a surcharge, a foundation, the thrust of water or fill on a face. To add one:</p>
+      <ol>
+        <li>Choose <span class="ui">Loading → Add Distributed Load…</span> and fill in the dialog (<a class="xref" href="#tbl-distributed">Table 2.5.1</a>).</li>
+        <li>Press <span class="ui">OK</span>, then click the start point and the end point of the load on the boundary; the clicks are snapped to the boundary. <kbd>Esc</kbd> cancels.</li>
+      </ol>
+      <figure class="tbl" id="tbl-distributed">
+        <figcaption><span class="fignum">Table 2.5.1</span> Add Distributed Load dialog. The magnitudes are always in kN/m², whatever the unit system of the project.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Field</th><th>Meaning</th><th>Default</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Magnitude</strong></td><td>Pressure at the start point; always positive, the direction is set by the orientation</td><td class="n">0</td></tr>
+              <tr><td><strong>Distribution</strong></td><td><em>Constant</em>, or <em>Triangular</em> and <em>Trapezoidal</em>, which vary linearly from <strong>Magnitude</strong> at the start point to <strong>Magnitude (end)</strong> at the end point</td><td>Constant</td></tr>
+              <tr><td><strong>Magnitude (end)</strong></td><td>Pressure at the end point; enabled for a varying distribution</td><td class="n">0</td></tr>
+              <tr><td><strong>Orientation</strong></td><td>Direction of the load (<a class="xref" href="#tbl-orientation">Table 2.5.2</a>)</td><td>Normal to Boundary</td></tr>
+              <tr><td><strong>Angle</strong></td><td>For the two angle orientations; positive counter-clockwise</td><td>0°</td></tr>
+              <tr><td><strong>Load creates excess pore pressure (B-bar method)</strong></td><td>The vertical component of the load raises the pore pressure of undrained materials beneath it (<a class="xref" href="water.html#excess">Section 2.4.6</a>)</td><td>off</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <figure class="tbl" id="tbl-orientation">
+        <figcaption><span class="fignum">Table 2.5.2</span> Orientations of a distributed load.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Orientation</th><th>Direction of the load</th></tr></thead>
+            <tbody>
+              <tr><td>Normal to Boundary</td><td>Perpendicular to the segment from the start point to the end point, turned clockwise from it: into the ground when the load is drawn from left to right along the surface</td></tr>
+              <tr><td>Vertical (default downward)</td><td>Downwards</td></tr>
+              <tr><td>Horizontal (against failure dir.)</td><td>Horizontal, towards increasing <span class="m" data-tex="x"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span></span></span></span><!--/k--></span></td></tr>
+              <tr><td>Angle from Horizontal</td><td>At <strong>Angle</strong> from the positive <span class="m" data-tex="x"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span></span></span></span><!--/k--></span> axis, counter-clockwise</td></tr>
+              <tr><td>Angle to Boundary</td><td>At <strong>Angle</strong> from the segment start → end, counter-clockwise; for a load drawn from left to right, −90° is the normal into the ground</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p><strong>Click the two points from left to right.</strong> The orientations relative to the boundary are built from the order of the clicks, and only a load drawn from left to right along the surface has its normal pointing into the ground.</p>
+      <p>The magnitude is a pressure on the horizontal projection of the loaded segment: on a slice of width <span class="m" data-tex="b"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6944em;"></span><span class="mord mathnormal">b</span></span></span></span><!--/k--></span> under the load the force is <span class="m" data-tex="p\,b"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mtext> </mtext><mi>b</mi></mrow><annotation encoding="application/x-tex">p\,b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">p</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">b</span></span></span></span><!--/k--></span>, in the direction of the load. A load on a vertical segment, such as the face of a wall, has no horizontal projection; it is integrated along the segment and applied as one force at the centroid of the pressure diagram.</p>
+      <div class="note warn"><span class="label">Version 0.1.235</span><p>The vertical component of a distributed load always acts downwards, whatever its orientation: a distributed load cannot pull upwards. <strong>Horizontal (against failure dir.)</strong> always pushes towards increasing <span class="m" data-tex="x"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span></span></span></span><!--/k--></span>, which is against the failure direction only for the default Right to Left; for a slope that fails from left to right use <strong>Angle from Horizontal</strong> with 180°.</p></div>
+
+      <h2 id="line"><span class="secnum">2.5.2</span><span class="ht">Line loads</span><a class="anchor" href="#line" aria-label="Link to this section">#</a></h2>
+      <p>A line load is a force per metre of slope at a point — a wall, a strip footing seen in section, the reaction of a structure. Choose <span class="ui">Loading → Add Line Load…</span>, fill in <strong>Magnitude</strong> (kN/m), <strong>Orientation</strong>, <strong>Angle</strong> and the excess pore pressure box, which mean the same as for a distributed load, press <span class="ui">OK</span> and click the point.</p>
+      <ul>
+        <li><strong>Normal to Boundary</strong> and <strong>Angle to Boundary</strong> are taken from the ground surface at the point: the normal points into the ground, and the angle is measured from the ground surface running left to right, so −90° is that normal. The point must be on the ground surface — within 0.1 % of the extent of the ground profile — or the load is not added and the status bar says why.</li>
+        <li><strong>Vertical</strong>, <strong>Horizontal</strong> and <strong>Angle from Horizontal</strong> are absolute and can be placed anywhere; with an angle, a line load can act upwards.</li>
+      </ul>
+      <p>A line load enters the slice that contains its abscissa. The status bar confirms the point and the magnitude.</p>
+
+      <h2 id="modify"><span class="secnum">2.5.3</span><span class="ht">Modifying and deleting loads</span><a class="anchor" href="#modify" aria-label="Link to this section">#</a></h2>
+      <ul>
+        <li><strong>Right-click a load</strong> on the canvas and choose <span class="ui">Modify…</span> to reopen its dialog with every field, or <span class="ui">Delete</span>.</li>
+        <li><span class="ui">Loading → Modify Load…</span> lists the loads (<em>Distributed n</em>, <em>Line n</em>), then asks only for the magnitude — and, for a distributed load with an end value, the magnitude at the far end.</li>
+        <li><span class="ui">Loading → Delete Load</span> lists every load with its magnitude, position and orientation; select one or more and press <span class="ui">OK</span>.</li>
+      </ul>
+      <p>Changes to loads are not on the undo stack. Loads are not moved when the geometry is edited — Change Slope Angle, for instance, leaves them where they were — so check their position after reshaping the slope. With the data tips on, hovering over a load shows its magnitude, orientation and distribution. With a design standard switched on, every distributed and line load is multiplied by the variable-action factor (<a class="xref" href="project-settings.html#design-standard">Section 2.1.8</a>).</p>
+
+      <h2 id="seismic"><span class="secnum">2.5.4</span><span class="ht">Seismic load</span><a class="anchor" href="#seismic" aria-label="Link to this section">#</a></h2>
+      <p>The pseudo-static method represents an earthquake by an inertial force proportional to the weight of the soil of each slice <a class="cite" href="../reference/bibliography.html#kramer1996">(Kramer, 1996)</a>. Choose <span class="ui">Loading → Seismic Load…</span>:</p>
+      <figure class="tbl" id="tbl-seismic">
+        <figcaption><span class="fignum">Table 2.5.3</span> Seismic Load dialog.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Field</th><th>Meaning</th><th>Default</th><th>Range</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Apply seismic load to compute</strong></td><td>Switches the seismic load on</td><td>off</td><td>—</td></tr>
+              <tr><td><strong>k_h (horizontal)</strong></td><td>Horizontal seismic coefficient, a fraction of <span class="m" data-tex="g"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>g</mi></mrow><annotation encoding="application/x-tex">g</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">g</span></span></span></span><!--/k--></span></td><td class="n">0</td><td>0 to 0.999</td></tr>
+              <tr><td><strong>k_v (vertical)</strong></td><td>Vertical seismic coefficient, positive downwards</td><td class="n">0</td><td>−0.999 to 0.999</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+
+      <figure class="fig" id="fig-seismic">
+        <div class="art">
+          <svg class="dg" viewBox="0 0 560 230" role="img" aria-labelledby="fig-seismic-t"><title id="fig-seismic-t">A slice of a slope that fails from right to left: its weight W acts downwards, the horizontal seismic force kh times W acts towards the toe, in the direction of failure, and the vertical seismic force kv times W acts downwards for positive kv</title>
+            <defs>
+              <marker id="arrow-seis" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arrowhead" d="M0,0 L10,5 L0,10 z"/></marker>
+              <marker id="arrow-seis-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arrowhead ink" d="M0,0 L10,5 L0,10 z"/></marker>
+            </defs>
+            <polygon class="s0" points="20,210 540,210 540,50 360,50 200,150 20,150"/>
+            <polygon class="ln" points="20,210 540,210 540,50 360,50 200,150 20,150"/>
+            <path class="dash" d="M150,150 Q300,240 470,50"/>
+            <polygon class="hl" points="300,87.5 340,62.5 340,155.8 300,171.5"/>
+            <polyline class="thin" points="300,87.5 300,171.5 340,155.8 340,62.5"/>
+            <line class="frc ink" x1="320" y1="118" x2="320" y2="156" marker-end="url(#arrow-seis-ink)"/>
+            <line class="frc" x1="320" y1="118" x2="250" y2="118" marker-end="url(#arrow-seis)"/>
+            <line class="frc" x1="334" y1="92" x2="334" y2="122" marker-end="url(#arrow-seis)"/>
+            <circle class="pt" cx="320" cy="118" r="3"/>
+            <text x="314" y="186" class="it">W</text>
+            <text x="236" y="108" class="crit-t">kh·W</text>
+            <text x="346" y="112" class="crit-t">kv·W</text>
+            <text x="30" y="140" class="mute">toe</text>
+            <text x="470" y="40" class="mute">crest</text>
+            <text x="30" y="40" class="mute">failure direction: right to left</text>
+          </svg>
+        </div>
+        <figcaption><span class="fignum">Figure 2.5.1</span> Pseudo-static forces on a slice, for a slope that fails from right to left. <span class="m" data-tex="k_h W"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>k</mi><mi>h</mi></msub><mi>W</mi></mrow><annotation encoding="application/x-tex">k_h W</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0315em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.0315em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">h</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathnormal" style="margin-right:0.1389em;">W</span></span></span></span><!--/k--></span> always acts in the direction of failure; <span class="m" data-tex="k_v W"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>k</mi><mi>v</mi></msub><mi>W</mi></mrow><annotation encoding="application/x-tex">k_v W</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0315em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0315em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0359em;">v</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathnormal" style="margin-right:0.1389em;">W</span></span></span></span><!--/k--></span> acts downwards for a positive <span class="m" data-tex="k_v"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>k</mi><mi>v</mi></msub></mrow><annotation encoding="application/x-tex">k_v</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0315em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0315em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0359em;">v</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><!--/k--></span>.</figcaption>
+      </figure>
+
+      <ul>
+        <li><span class="m" data-tex="k_h"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>k</mi><mi>h</mi></msub></mrow><annotation encoding="application/x-tex">k_h</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0315em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.0315em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">h</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><!--/k--></span> is a magnitude. Its force always acts in the direction of failure of each surface — out of the slope, the unfavourable sense — so a negative value is refused rather than read as a force into the slope.</li>
+        <li><span class="m" data-tex="k_v"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>k</mi><mi>v</mi></msub></mrow><annotation encoding="application/x-tex">k_v</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0315em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0315em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0359em;">v</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><!--/k--></span> keeps its sign: positive downwards, so that the soil weighs <span class="m" data-tex="W(1 + k_v)"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>W</mi><mo stretchy="false">(</mo><mn>1</mn><mo>+</mo><msub><mi>k</mi><mi>v</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">W(1 + k_v)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">W</span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0315em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0315em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0359em;">v</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span><!--/k--></span>; negative upwards. Both coefficients must stay below 1 in magnitude.</li>
+        <li>The forces act on the weight of the <em>soil</em> of each slice. Distributed and line loads and ponded water carry no seismic force.</li>
+      </ul>
+      <p>The coefficients come from the seismic code that applies to the project, for slopes for instance <a class="cite" href="../reference/bibliography.html#en1998">EN 1998-5</a>. After <span class="ui">OK</span> the status bar repeats the values in force. To report, for every surface, the coefficient that would bring it to failure — the critical acceleration <span class="m" data-tex="k_y"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>k</mi><mi>y</mi></msub></mrow><annotation encoding="application/x-tex">k_y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.9805em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0315em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0315em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0359em;">y</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span></span></span></span><!--/k--></span> — or a Newmark displacement, use the Seismic page of Project Settings (<a class="xref" href="project-settings.html#seismic">Section 2.1.10</a>). The methods are described in <a class="xref" href="../theory/seismic.html">Section 3.9</a>.</p>
+
+      <h2 id="records"><span class="secnum">2.5.5</span><span class="ht">Seismic records</span><a class="anchor" href="#records" aria-label="Link to this section">#</a></h2>
+      <p>A Newmark analysis integrates an acceleration record over the part of each pulse that exceeds the critical acceleration of the sliding mass <a class="cite" href="../reference/bibliography.html#newmark1965">(Newmark, 1965)</a>. Records belong to the project, like materials: they are defined once in <span class="ui">Loading → Seismic Records…</span> and then chosen on the Seismic page of Project Settings.</p>
+      <figure class="tbl" id="tbl-records">
+        <figcaption><span class="fignum">Table 2.5.4</span> Seismic Records dialog.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Field</th><th>Meaning</th><th>Default</th></tr></thead>
+            <tbody>
+              <tr><td><span class="ui">Import from file…</span></td><td>Reads a record from a text file (<code>.txt</code>, <code>.dat</code>, <code>.csv</code>) and adds it to the list, named after the file</td><td>—</td></tr>
+              <tr><td><span class="ui">Delete record</span></td><td>Removes the selected record</td><td>—</td></tr>
+              <tr><td><strong>Name</strong></td><td>Name of the selected record</td><td>File name</td></tr>
+              <tr><td><strong>Time interval (s)</strong></td><td>Sampling interval. For a file with one value per line it is the interval of the record; editing it restates the interval of the samples, it does not resample them.</td><td class="n">0.02</td></tr>
+              <tr><td><strong>File units</strong></td><td>Unit of the accelerations in the file to import: g, cm/s² or m/s². Records are stored in g.</td><td>g</td></tr>
+              <tr><td><strong>Record</strong></td><td>Read-only summary: number of samples, duration and peak acceleration (PGA, in g)</td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p>The file is plain text in either of the two layouts used for Newmark integration programs <a class="cite" href="../reference/bibliography.html#jibson1993">(Jibson, 1993)</a>: <strong>pairs of time and acceleration</strong>, one pair per line, or <strong>one acceleration per line</strong> at the constant interval set in <strong>Time interval (s)</strong>. The layout is decided by the number of values on the first line of data. Lines that are not numbers — headers, and lines starting with <code>#</code>, <code>;</code> or <code>%</code> — are skipped, and commas are read as separators, so decimals must use a point. With paired data the interval is taken from the first two times; a record whose time step is not constant is imported with a note saying so, because the integration assumes a constant step and the program does not resample.</p>
+      <p>Choose <strong>File units</strong> before importing. Deleting a record that the Seismic page had selected leaves the selection empty, and the next Newmark run says that no record is chosen.</p>
+
+      <h2 id="excess"><span class="secnum">2.5.6</span><span class="ht">Loads and excess pore pressure</span><a class="anchor" href="#excess" aria-label="Link to this section">#</a></h2>
+      <p>With <strong>Calculate Excess Pore Pressure (B-bar method)</strong> chosen in Project Settings, a distributed or line load whose box <strong>Load creates excess pore pressure (B-bar method)</strong> is ticked raises the pore pressure of the undrained materials beneath it by <span class="m" data-tex="\bar B\,\Delta\sigma_v"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>B</mi><mo>ˉ</mo></mover><mtext> </mtext><mi mathvariant="normal">Δ</mi><msub><mi>σ</mi><mi>v</mi></msub></mrow><annotation encoding="application/x-tex">\bar B\,\Delta\sigma_v</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.9701em;vertical-align:-0.15em;"></span><span class="mord katex-accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8201em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.0502em;">B</span></span><span style="top:-3.2523em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1667em;"><span class="mord">ˉ</span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">Δ</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">σ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0359em;">v</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><!--/k--></span>. Only the vertical component of the load counts. The procedure, and why a line load is a poor model of a surcharge for this purpose, are explained in <a class="xref" href="water.html#excess">Section 2.4.6</a>.</p>
+
+      <div class="impl">
+        <span class="label">In OGR Slip2D</span>
+        <p>Loads are stored in SI units with their two end points (distributed) or their point (line), magnitude, orientation and angle. Their direction is resolved in one place for every method of slices, and the seismic coefficients are checked by the same rule in the dialog, the scripting interface and the analysis.</p>
+        <span class="src">Source: <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_core/loads/loads.py" target="_blank" rel="noopener">ogr_core/loads/loads.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_core/loads/seismic_record.py" target="_blank" rel="noopener">ogr_core/loads/seismic_record.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_slip2d/slicer.py" target="_blank" rel="noopener">ogr_slip2d/slicer.py</a></span>
+      </div>
+    </article>
+
+<!-- @inc docfoot -->
+<nav class="doc-pager" aria-label="Pages">
+<a class="prev" href="../../docs/user-guide/water.html"><span class="label">← Previous · 2.4</span><b>Water and pore pressure</b></a>
+<a class="next" href="../../docs/user-guide/supports.html"><span class="label">2.6 · Next →</span><b>Supports</b></a>
+</nav>
+<div class="doc-edit label"><a href="https://github.com/samuelsl27/OpenGeoRock_Web.github.io/blob/main/docs/user-guide/loads.html" target="_blank" rel="noopener">Edit this page ↗</a><a href="https://github.com/samuelsl27/OGR-Slip2D/issues" target="_blank" rel="noopener">Report a problem ↗</a></div>
+<!-- @end docfoot -->
+  </main>
+
+  <aside class="doc-toc" aria-label="On this page">
+    <div class="toc-inner">
+<!-- @inc pagetoc -->
+<span class="label">On this page</span><ul><li class="h2"><a href="#distributed">2.5.1 Distributed loads</a></li><li class="h2"><a href="#line">2.5.2 Line loads</a></li><li class="h2"><a href="#modify">2.5.3 Modifying and deleting loads</a></li><li class="h2"><a href="#seismic">2.5.4 Seismic load</a></li><li class="h2"><a href="#records">2.5.5 Seismic records</a></li><li class="h2"><a href="#excess">2.5.6 Loads and excess pore pressure</a></li></ul><button class="print" type="button"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="1.5"/><path d="M6 14h12v7H6z"/></svg> Print this page</button>
+<!-- @end pagetoc -->
+    </div>
+  </aside>
+</div>
+
+<!-- @inc footer -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <a class="brand" href="../../index.html" aria-label="OpenGeoRock — home">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
+          <b>OpenGeoRock</b>
+        </a>
+        <p class="tagline">Open-source geotechnical software, built in the open at the Universidad Politécnica de Cartagena.</p>
+        <span class="lang" role="group" aria-label="Language"><a href="../../docs/user-guide/loads.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../../es/docs/user-guide/loads.html" hreflang="es" lang="es">ES</a></span>
+      </div>
+      <div>
+        <h5>Products</h5>
+        <ul>
+          <li><a href="../../products/slip2d.html">OGR Slip2D</a></li>
+          <li><a href="../../products/index.html">The suite</a></li>
+          <li><a href="../../ai/index.html">MCP server</a></li>
+          <li><a href="../../download/index.html">Download</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Learn</h5>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="../../docs/getting-started/quick-start.html">Quick start</a></li>
+          <li><a href="../../docs/theory/methods.html">Theory manual</a></li>
+          <li><a href="../../examples/index.html">Examples</a></li>
+          <li><a href="../../verification/index.html">Verification</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Project</h5>
+        <ul>
+          <li><a href="../../about/index.html">About</a></li>
+          <li><a href="../../about/index.html#team">Team</a></li>
+          <li><a href="../../about/index.html#cite">How to cite</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Contributing</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/LICENSE" target="_blank" rel="noopener">Licence · AGPL-3.0</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Connect</h5>
+        <ul>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/issues" target="_blank" rel="noopener">Issues</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/tree/main/docs/changelog" target="_blank" rel="noopener">Changelog</a></li>
+          <li><a href="mailto:samuel.saez@edu.upct.es">Email</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© 2026 Samuel Sáez López · OGR Slip2D is free software under AGPL-3.0-or-later, with no warranty of any kind.</span>
+      <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
+    </div>
+  </div>
+  <div class="lang-hint" role="dialog" aria-label="Idioma" lang="es">
+    ¿Prefieres leer esta web en español?
+    <div class="row"><a class="btn sm primary go" href="../../es/index.html">Ver en español</a><button class="btn sm" type="button" data-dismiss>No, gracias</button></div>
+  </div>
+</footer>
+<!-- @end footer -->
+</body>
+</html>

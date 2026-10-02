@@ -1,0 +1,702 @@
+<!doctype html>
+<html class="no-js" lang="es" data-root="../../../">
+<head>
+<meta charset="utf-8">
+<title>Servidor MCP — documentación de OGR Slip2D</title>
+<meta name="description" content="Referencia de ogr-slip2d-mcp, el servidor oficial de Model Context Protocol de OGR Slip2D: instalación, opciones de línea de comandos, transportes, perfiles, las 74 herramientas, recursos, trabajo sobre la ventana abierta del programa y modelo de seguridad.">
+<!-- @inc head -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.replace("no-js", "js")</script>
+<link rel="canonical" href="https://opengeorock.org/es/docs/reference/mcp.html">
+<link rel="alternate" hreflang="en" href="https://opengeorock.org/docs/reference/mcp.html">
+<link rel="alternate" hreflang="es" href="https://opengeorock.org/es/docs/reference/mcp.html">
+<link rel="alternate" hreflang="x-default" href="https://opengeorock.org/docs/reference/mcp.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="OpenGeoRock">
+<meta property="og:title" content="Servidor MCP — documentación de OGR Slip2D">
+<meta property="og:description" content="Referencia de ogr-slip2d-mcp, el servidor oficial de Model Context Protocol de OGR Slip2D: instalación, opciones de línea de comandos, transportes, perfiles, las 74 herramientas, recursos, trabajo sobre la ventana abierta del programa y modelo de seguridad.">
+<meta property="og:url" content="https://opengeorock.org/es/docs/reference/mcp.html">
+<meta property="og:image" content="https://opengeorock.org/assets/img/og-image.png">
+<meta property="og:locale" content="es_ES">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#f4efe6">
+<link rel="icon" href="../../../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../../assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../../assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&amp;display=swap">
+<link rel="stylesheet" href="../../../assets/css/site.css">
+<link rel="stylesheet" href="../../../assets/css/docs.css">
+<link rel="stylesheet" href="../../../assets/vendor/katex/katex.min.css">
+<script src="../../../assets/js/site.js" defer></script>
+<!-- @end head -->
+</head>
+<body class="docs">
+<!-- @inc header -->
+<a class="skip" href="#main">Saltar al contenido</a>
+<header class="top">
+  <div class="wrap top-inner">
+    <a class="brand" href="../../../es/index.html" aria-label="OpenGeoRock — inicio">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
+      <b>OpenGeoRock</b>
+    </a>
+    <nav class="nav" aria-label="Principal">
+      <div class="has-menu" data-nav="products">
+        <button type="button" aria-expanded="false" aria-haspopup="true">Productos <svg class="caret" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+        <div class="mega">
+          <div class="mega-cols">
+            <div class="mega-col">
+              <span class="label">Disponible hoy</span>
+              <a class="mega-item feature" href="../../../es/products/slip2d.html"><b>OGR Slip2D</b><span>Estabilidad de taludes 2D: equilibrio límite, agua subterránea por elementos finitos y análisis probabilístico.</span></a>
+              <a class="mega-item" href="../../../es/ai/index.html"><b>Servidor MCP para agentes de IA <span class="tag live">nuevo</span></b><span>Claude, ChatGPT o un modelo local construyen y calculan modelos de OGR Slip2D.</span></a>
+            </div>
+            <div class="mega-col">
+              <span class="label">En la hoja de ruta</span>
+              <a class="mega-item" href="../../../es/products/index.html#ogr-data"><b>OGR Data</b><span>Base de datos de propiedades de suelos y macizos rocosos</span></a>
+              <a class="mega-item" href="../../../es/products/index.html#ogr-fem2d"><b>OGR FEM2D</b><span>Elementos finitos elastoplásticos 2D</span></a>
+              <a class="mega-item" href="../../../es/products/index.html#ogr-slip3d"><b>OGR Slip3D</b><span>Equilibrio límite en 3D</span></a>
+              <a class="mega-item" href="../../../es/products/index.html#ogr-fem3d"><b>OGR FEM3D</b><span>Elementos finitos 3D con flujo acoplado</span></a>
+            </div>
+            <div class="mega-col">
+              <span class="label">Úsalo desde</span>
+              <a class="mega-item" href="../../../es/docs/getting-started/interface.html"><b>El programa de escritorio</b><span>Modelador, intérprete y terminal de Python</span></a>
+              <a class="mega-item" href="../../../es/docs/reference/python-api.html"><b>Python</b><span>Automatiza análisis desde tu propio código</span></a>
+              <a class="mega-item" href="../../../es/docs/reference/cli.html"><b>La línea de comandos</b><span>Cálculos por lotes con ogr-slip2d-cli</span></a>
+            </div>
+          </div>
+          <div class="mega-foot"><span>Cinco programas, un núcleo abierto.</span><a href="../../../es/products/index.html">Todos los productos →</a></div>
+        </div>
+      </div>
+      <a href="../../../es/examples/index.html" data-nav="examples">Ejemplos</a>
+      <a href="../../../es/ai/index.html" data-nav="ai">IA y MCP</a>
+      <a href="../../../es/docs/index.html" data-nav="docs" aria-current="page">Documentación</a>
+      <a href="../../../es/verification/index.html" data-nav="verification">Verificación</a>
+      <a href="../../../es/about/index.html" data-nav="about">Proyecto</a>
+    </nav>
+    <div class="top-right">
+      <span class="lang" role="group" aria-label="Idioma"><a href="../../../docs/reference/mcp.html" hreflang="en" lang="en">EN</a><a href="../../../es/docs/reference/mcp.html" hreflang="es" lang="es" aria-current="true">ES</a></span>
+      <a class="btn gh" href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener" aria-label="Código fuente en GitHub"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0C17.3 4.7 18.3 5 18.3 5c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0012 .5z"/></svg><span>GitHub</span></a>
+      <a class="btn primary" href="../../../es/download/index.html" data-nav="download">Descargar OGR Slip2D</a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menú"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Principal (móvil)">
+    <span class="label">Productos</span>
+    <a href="../../../es/products/slip2d.html">OGR Slip2D</a>
+    <div class="sub"><a href="../../../es/products/index.html">La suite OpenGeoRock</a><a href="../../../es/ai/index.html">Servidor MCP para agentes de IA</a></div>
+    <span class="label">Aprende</span>
+    <a href="../../../es/examples/index.html">Ejemplos</a>
+    <a href="../../../es/docs/index.html">Documentación</a>
+    <a href="../../../es/verification/index.html">Verificación</a>
+    <span class="label">Proyecto</span>
+    <a href="../../../es/about/index.html">El proyecto</a>
+    <a href="../../../es/download/index.html">Descargar OGR Slip2D</a>
+    <a href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener">Código en GitHub ↗</a>
+    <span class="lang" role="group" aria-label="Idioma"><a href="../../../docs/reference/mcp.html" hreflang="en" lang="en">EN</a><a href="../../../es/docs/reference/mcp.html" hreflang="es" lang="es" aria-current="true">ES</a></span>
+  </nav>
+</header>
+<!-- @end header -->
+
+<div class="doc-shell">
+  <aside class="doc-side" id="doc-side">
+<!-- @inc docnav -->
+<div class="doc-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input type="search" placeholder="Buscar en la documentación  /" aria-label="Buscar en la documentación" autocomplete="off"><div class="results" role="listbox"></div></div>
+<nav class="doc-nav" aria-label="Documentación">
+<a class="home" href="../../../es/docs/index.html"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 016.5 3H20v15H6.5A2.5 2.5 0 004 20.5z"/><path d="M4 20.5A2.5 2.5 0 016.5 18H20v3H6.5A2.5 2.5 0 014 20.5z"/></svg> Portada de la documentación</a>
+<details open><summary>1 · Primeros pasos</summary><ul>
+<li><a href="../../../es/docs/getting-started/installation.html"><span class="n">1.1</span><span>Instalación</span></a></li>
+<li><a href="../../../es/docs/getting-started/quick-start.html"><span class="n">1.2</span><span>Inicio rápido: tu primer modelo</span></a></li>
+<li><a href="../../../es/docs/getting-started/interface.html"><span class="n">1.3</span><span>La interfaz</span></a></li>
+</ul></details>
+<details open><summary>2 · Guía de usuario</summary><ul>
+<li><a href="../../../es/docs/user-guide/project-settings.html"><span class="n">2.1</span><span>Configuración del proyecto</span></a></li>
+<li><a href="../../../es/docs/user-guide/geometry.html"><span class="n">2.2</span><span>Geometría y contornos</span></a></li>
+<li><a href="../../../es/docs/user-guide/materials.html"><span class="n">2.3</span><span>Materiales</span></a></li>
+<li><a href="../../../es/docs/user-guide/water.html"><span class="n">2.4</span><span>Agua y presión intersticial</span></a></li>
+<li><a href="../../../es/docs/user-guide/loads.html"><span class="n">2.5</span><span>Cargas y carga sísmica</span></a></li>
+<li><a href="../../../es/docs/user-guide/supports.html"><span class="n">2.6</span><span>Soportes</span></a></li>
+<li><a href="../../../es/docs/user-guide/surfaces.html"><span class="n">2.7</span><span>Superficies de rotura y búsqueda</span></a></li>
+<li><a href="../../../es/docs/user-guide/results.html"><span class="n">2.8</span><span>Cálculo e interpretación de resultados</span></a></li>
+<li><a href="../../../es/docs/user-guide/groundwater.html"><span class="n">2.9</span><span>Agua subterránea por elementos finitos</span></a></li>
+<li><a href="../../../es/docs/user-guide/probabilistic.html"><span class="n">2.10</span><span>Análisis probabilístico y de sensibilidad</span></a></li>
+<li><a href="../../../es/docs/user-guide/design-standards.html"><span class="n">2.11</span><span>Normas de diseño</span></a></li>
+<li><a href="../../../es/docs/user-guide/automation.html"><span class="n">2.12</span><span>Informes, scripting y línea de comandos</span></a></li>
+</ul></details>
+<details open><summary>3 · Manual de teoría</summary><ul>
+<li><a href="../../../es/docs/theory/limit-equilibrium.html"><span class="n">3.1</span><span>Equilibrio límite y factor de seguridad</span></a></li>
+<li><a href="../../../es/docs/theory/methods.html"><span class="n">3.2</span><span>Métodos de dovelas</span></a></li>
+<li><a href="../../../es/docs/theory/interslice.html"><span class="n">3.3</span><span>Fuerzas entre dovelas, convergencia y admisibilidad</span></a></li>
+<li><a href="../../../es/docs/theory/search.html"><span class="n">3.4</span><span>Búsqueda de la superficie de rotura</span></a></li>
+<li><a href="../../../es/docs/theory/strength.html"><span class="n">3.5</span><span>Modelos de resistencia al corte</span></a></li>
+<li><a href="../../../es/docs/theory/pore-pressure.html"><span class="n">3.6</span><span>Presión intersticial y resistencia no saturada</span></a></li>
+<li><a href="../../../es/docs/theory/seepage.html"><span class="n">3.7</span><span>Filtración por elementos finitos</span></a></li>
+<li><a href="../../../es/docs/theory/rapid-drawdown.html"><span class="n">3.8</span><span>Desembalse rápido</span></a></li>
+<li><a href="../../../es/docs/theory/seismic.html"><span class="n">3.9</span><span>Análisis sísmico</span></a></li>
+<li><a href="../../../es/docs/theory/supports.html"><span class="n">3.10</span><span>Fuerzas de los soportes</span></a></li>
+<li><a href="../../../es/docs/theory/probabilistic.html"><span class="n">3.11</span><span>Análisis probabilístico</span></a></li>
+<li><a href="../../../es/docs/theory/partial-factors.html"><span class="n">3.12</span><span>Coeficientes parciales (Eurocódigo 7)</span></a></li>
+</ul></details>
+<details open><summary>4 · Verificación</summary><ul>
+<li><a href="../../../es/docs/verification/methodology.html"><span class="n">4.1</span><span>Metodología de verificación</span></a></li>
+<li><a href="../../../es/docs/verification/slope-benchmarks.html"><span class="n">4.2</span><span>Casos de referencia de equilibrio límite</span></a></li>
+<li><a href="../../../es/docs/verification/analytic-checks.html"><span class="n">4.3</span><span>Agua subterránea y comprobaciones analíticas</span></a></li>
+</ul></details>
+<details open><summary>5 · Referencia</summary><ul>
+<li><a href="../../../es/docs/reference/mcp.html" aria-current="page"><span class="n">5.1</span><span>Servidor MCP</span></a></li>
+<li><a href="../../../es/docs/reference/cli.html"><span class="n">5.2</span><span>Interfaz de línea de comandos</span></a></li>
+<li><a href="../../../es/docs/reference/python-api.html"><span class="n">5.3</span><span>API de Python</span></a></li>
+<li><a href="../../../es/docs/reference/file-format.html"><span class="n">5.4</span><span>El formato .ogr</span></a></li>
+<li><a href="../../../es/docs/reference/error-codes.html"><span class="n">5.5</span><span>Códigos de error</span></a></li>
+<li><a href="../../../es/docs/reference/notation.html"><span class="n">5.6</span><span>Notación y glosario</span></a></li>
+<li><a href="../../../es/docs/reference/bibliography.html"><span class="n">5.7</span><span>Bibliografía</span></a></li>
+</ul></details>
+</nav>
+<!-- @end docnav -->
+  </aside>
+
+  <main id="main" class="doc-main">
+    <header class="doc-head">
+<!-- @inc dochead -->
+<button class="doc-side-toggle" type="button" aria-controls="doc-side" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg> Contenido</button>
+<nav class="crumbs label" aria-label="Ruta de navegación"><a href="../../../es/docs/index.html">Documentación</a><span aria-hidden="true">/</span><span>5 · Referencia</span></nav>
+<div class="chapter label">5.1</div>
+<h1>Servidor MCP</h1>
+<div class="meta label"><span>Describe OGR Slip2D <span data-v>0.1.235</span></span></div>
+<!-- @end dochead -->
+    </header>
+
+    <article class="doc prose">
+      <p class="lede"><code>ogr-slip2d-mcp</code> es el servidor oficial de Model Context Protocol (MCP) de OGR Slip2D. A través de él, un agente de IA construye un modelo de talud, ejecuta el análisis, lee los resultados y los dibuja, ya sea sobre modelos propios del servidor o sobre el modelo abierto en la ventana del programa, donde el usuario ve cada edición y puede deshacerla. Esta página es la referencia técnica: opciones, transportes, las 74 herramientas, los recursos y el modelo de seguridad. Cómo conectar un cliente concreto se explica en la <a href="../../ai/index.html#install">página de IA</a>.</p>
+
+      <h2 id="overview"><span class="secnum">5.1.1</span><span class="ht">Qué es</span><a class="anchor" href="#overview" aria-label="Enlace a esta sección">#</a></h2>
+      <ul>
+        <li><strong>Una capa fina sobre la capa de operaciones.</strong> Cada herramienta es una operación de <code>ogr_api</code> (73 operaciones), más <code>server_info</code>, que solo tiene el servidor. Las herramientas están escritas a mano, porque la descripción de una herramienta y los tipos de sus parámetros son toda la interfaz que ve un modelo de lenguaje; un test mantiene unas y otras en correspondencia: cada operación tiene una herramienta, cada herramienta llama a una operación y cada parámetro de una herramienta es un parámetro de su operación. Las mismas operaciones se pueden llamar desde Python (<a class="xref" href="python-api.html">Sección 5.3</a>).</li>
+        <li><strong>El SDK oficial.</strong> El servidor está construido sobre el SDK de MCP para Python (<code>mcp</code> ≥ 2.1 y &lt; 3, licencia MIT), que instala el extra <code>[mcp]</code>. El programa de escritorio no lo necesita.</li>
+        <li><strong>Dos transportes.</strong> Entrada/salida estándar (el predeterminado) y HTTP transmisible (streamable HTTP), con token de portador y, para los clientes que llegan a él por Internet, OAuth 2.1.</li>
+        <li><strong>Unidades SI en todo</strong> (m, kN, kPa, kN/m³, grados), <em>x</em> hacia la derecha e <em>y</em> hacia arriba, sea cual sea el sistema de unidades que muestre la ventana.</li>
+        <li><strong>Los análisis son trabajos.</strong> Un análisis se ejecuta en un proceso hijo que se puede cancelar; cada edición de un modelo es un paso de deshacer.</li>
+        <li><strong>Primero, la ventana abierta.</strong> Si OGR Slip2D está abierto, las llamadas actúan sobre su ventana (<a class="xref" href="#window">Sección 5.1.6</a>).</li>
+      </ul>
+
+      <h2 id="installation"><span class="secnum">5.1.2</span><span class="ht">Instalación</span><a class="anchor" href="#installation" aria-label="Enlace a esta sección">#</a></h2>
+      <p>Desde un clon del repositorio, con Python 3.11 o posterior:</p>
+      <div class="code"><pre><code>pip install -e ".[mcp]"
+ogr-slip2d-mcp --version        <span class="c"># ogr-slip2d-mcp <span data-v>0.1.235</span>, on standard error</span>
+python -m ogr_mcp --version     <span class="c"># the same program, if the command is not on PATH</span></code></pre></div>
+      <p>Sin el SDK, el servidor se detiene con el código de salida 3 y pide el extra (<code>pip install "ogr-slip2d[mcp]"</code>). <code>ogr-slip2d-mcp --help</code> enumera todas las opciones. Los archivos de configuración de clientes, para aplicaciones de chat de escritorio, modelos locales y clientes HTTP, están en la <a href="../../ai/index.html#install">página de IA</a>.</p>
+
+      <h2 id="options"><span class="secnum">5.1.3</span><span class="ht">Opciones de línea de comandos</span><a class="anchor" href="#options" aria-label="Enlace a esta sección">#</a></h2>
+      <figure class="tbl" id="tbl-options">
+        <figcaption><span class="fignum">Tabla 5.1.1</span> Opciones de <code>ogr-slip2d-mcp</code>.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Opción</th><th>Por defecto</th><th>Significado</th></tr></thead>
+            <tbody>
+              <tr><td><code>--transport {stdio,http}</code></td><td><code>stdio</code></td><td>Transporte (<a class="xref" href="#transports">Sección 5.1.4</a>).</td></tr>
+              <tr><td><code>--host HOST</code></td><td><code>127.0.0.1</code></td><td>HTTP: interfaz en la que escuchar. Un host que no sea una dirección de bucle local (loopback) necesita un token explícito.</td></tr>
+              <tr><td><code>--port PORT</code></td><td><code>8765</code></td><td>HTTP: puerto.</td></tr>
+              <tr><td><code>--token TOKEN</code></td><td>—</td><td>HTTP: token de portador. En la línea de comandos queda visible para otros usuarios de la máquina: es preferible <code>--token-file</code> u <code>OGR_MCP_TOKEN</code>.</td></tr>
+              <tr><td><code>--token-file FILE</code></td><td>—</td><td>HTTP: archivo que contiene el token de portador (UTF-8; se ignoran los espacios en blanco que lo rodeen).</td></tr>
+              <tr><td><code>--no-auth</code></td><td>desactivada</td><td>Solo HTTP en un host de bucle local: sin token. Como <code>python_exec</code> está siempre disponible, cualquier programa local puede entonces ejecutar código con tu usuario. Se rechaza con cualquier otro host y con <code>--public-url</code>.</td></tr>
+              <tr><td><code>--allow-origin ORIGIN</code></td><td>—</td><td>HTTP: un <code>Origin</code> permitido más; se puede repetir.</td></tr>
+              <tr><td><code>--public-url URL</code></td><td>—</td><td>HTTP: la dirección <code>https://</code> por la que se llega al servidor desde fuera, a través de un túnel o un proxy inverso. Activa OAuth 2.1; el acceso se aprueba con el token del servidor. Una dirección <code>http://</code> solo se acepta en un host de bucle local, para pruebas.</td></tr>
+              <tr><td><code>--oauth-redirect URI</code></td><td>—</td><td>Con <code>--public-url</code>: una URI de redirección de OAuth permitida más; se puede repetir.</td></tr>
+              <tr><td><code>--tls-cert FILE</code></td><td>—</td><td>HTTP: servir HTTPS directamente con este certificado (PEM). Va con <code>--tls-key</code>.</td></tr>
+              <tr><td><code>--tls-key FILE</code></td><td>—</td><td>HTTP: la clave privada de <code>--tls-cert</code> (PEM).</td></tr>
+              <tr><td><code>--profile {full,compact}</code></td><td><code>full</code></td><td>Conjunto de herramientas (<a class="xref" href="#profiles">Sección 5.1.5</a>); también se lee de <code>OGR_MCP_PROFILE</code>.</td></tr>
+              <tr><td><code>--toolsets LIST</code></td><td>—</td><td>Conjuntos de herramientas separados por comas, en lugar de un perfil.</td></tr>
+              <tr><td><code>--attach [PID]</code></td><td>—</td><td>Trabajar solo sobre una ventana abierta del programa, nunca sobre un modelo propio del servidor; con un id de proceso, sobre esa ventana.</td></tr>
+              <tr><td><code>--headless</code></td><td>desactivada</td><td>No usar nunca una ventana abierta: trabajar siempre sobre los modelos propios del servidor (el comportamiento anterior a v0.1.207).</td></tr>
+              <tr><td><code>--workdir DIR</code></td><td>—</td><td>Carpeta respecto a la que se resuelven las rutas relativas (abrir y guardar archivos <code>.ogr</code>, imágenes, informes). Sin ella, las rutas deben ser absolutas.</td></tr>
+              <tr><td><code>--max-wait SECONDS</code></td><td><code>50</code></td><td>Tiempo máximo que una herramienta espera a un trabajo antes de devolver su <code>job_id</code>.</td></tr>
+              <tr><td><code>--max-jobs N</code></td><td><code>1</code></td><td>Trabajos que pueden ejecutarse a la vez; uno más se rechaza con <code>E_BUSY</code>.</td></tr>
+              <tr><td><code>--log-file FILE</code></td><td>salida de error estándar</td><td>Destino de los mensajes de registro.</td></tr>
+              <tr><td><code>--version</code></td><td>—</td><td>Escribir la versión en la salida de error estándar y terminar.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+
+      <figure class="tbl" id="tbl-env">
+        <figcaption><span class="fignum">Tabla 5.1.2</span> Variables de entorno que lee el servidor.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Variable</th><th>Significado</th></tr></thead>
+            <tbody>
+              <tr><td><code>OGR_MCP_TOKEN</code></td><td>Token de portador de HTTP, que se usa cuando no se da ni <code>--token</code> ni <code>--token-file</code>.</td></tr>
+              <tr><td><code>OGR_MCP_PROFILE</code></td><td>Perfil, que se usa cuando no se da <code>--profile</code>.</td></tr>
+              <tr><td><code>OGR_BRIDGE_DIR</code></td><td>Carpeta en la que las ventanas abiertas anuncian su puente para agentes (por defecto, <code>~/.ogr-slip2d/bridges</code>). El programa y el servidor deben ver el mismo valor.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+
+      <figure class="tbl" id="tbl-exit">
+        <figcaption><span class="fignum">Tabla 5.1.3</span> Códigos de salida de <code>ogr-slip2d-mcp</code>.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th class="n">Código</th><th>Significado</th></tr></thead>
+            <tbody>
+              <tr><td class="n">0</td><td>Fin normal.</td></tr>
+              <tr><td class="n">2</td><td>Una configuración con la que el servidor se niega a arrancar: un host que no es de bucle local sin token; <code>--no-auth</code> con un host que no es de bucle local o con <code>--public-url</code>; una opción exclusiva de HTTP (<code>--public-url</code>, <code>--tls-cert</code>, <code>--tls-key</code>, <code>--oauth-redirect</code>) con stdio; <code>--oauth-redirect</code> sin <code>--public-url</code>; <code>--tls-cert</code> sin <code>--tls-key</code> o un archivo que no existe; una URL pública que no es <code>https://</code>; un token de menos de 32 caracteres con <code>--public-url</code>; <code>--attach</code> junto con <code>--headless</code> o con un id de proceso que no es un número; un perfil o un conjunto de herramientas desconocido.</td></tr>
+              <tr><td class="n">3</td><td>El SDK de MCP no está instalado.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p>No se escribe nada en la salida estándar: con stdio, ese flujo es el protocolo. Los mensajes van a la salida de error estándar o a <code>--log-file</code>.</p>
+      <div class="impl">
+        <span class="label">En OGR Slip2D</span>
+        <p>Las opciones, las reglas de exposición y los códigos de salida se comprueban en un único lugar antes de que nada escuche. El <code>--max-wait</code> por defecto de 50 s se mantiene por debajo de los 60 s a los que muchos clientes cortan una petición.</p>
+        <span class="src">Código: <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_mcp/cli.py" target="_blank" rel="noopener">ogr_mcp/cli.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_mcp/server.py" target="_blank" rel="noopener">ogr_mcp/server.py</a></span>
+      </div>
+
+      <h2 id="transports"><span class="secnum">5.1.4</span><span class="ht">Transportes</span><a class="anchor" href="#transports" aria-label="Enlace a esta sección">#</a></h2>
+      <h3 id="stdio"><span class="ht">Entrada/salida estándar</span><a class="anchor" href="#stdio" aria-label="Enlace a esta sección">#</a></h3>
+      <p>El cliente arranca el servidor como proceso hijo y se comunica con él a través de sus flujos estándar; no se abre ningún puerto. Es el transporte de las aplicaciones de chat de escritorio, los agentes de programación y los clientes de modelos locales.</p>
+      <div class="code"><pre><code>ogr-slip2d-mcp --workdir "C:\models"
+ogr-slip2d-mcp --profile compact --workdir "C:\models"     <span class="c"># small local models</span></code></pre></div>
+
+      <h3 id="http"><span class="ht">HTTP transmisible (streamable HTTP)</span><a class="anchor" href="#http" aria-label="Enlace a esta sección">#</a></h3>
+      <p>Con <code>--transport http</code>, el servidor responde en <code>http://HOST:PORT/mcp</code>, sin estado y con respuestas JSON. Cada petición necesita <code>Authorization: Bearer &lt;token&gt;</code>; a un token ausente o incorrecto se responde con 401. El token se toma de <code>--token</code>, <code>--token-file</code> u <code>OGR_MCP_TOKEN</code>, por ese orden. Si no se da ninguno en un host de bucle local, el servidor genera uno (43 caracteres) y lo escribe en la salida de error estándar al arrancar.</p>
+      <div class="code"><pre><code>ogr-slip2d-mcp --transport http --port 8765 --token-file token.txt --workdir "C:\models"</code></pre></div>
+      <p>Las cabeceras <code>Host</code> y <code>Origin</code> se comprueban aunque el token sea correcto: a un <code>Host</code> que no es el de este servidor se responde con 421, y a un <code>Origin</code> ajeno, con 403. Los hosts permitidos son <code>127.0.0.1</code>, <code>localhost</code>, <code>[::1]</code> y <code>--host</code>, en el puerto; los orígenes permitidos son <code>127.0.0.1</code> y <code>localhost</code> en el puerto, más cada <code>--allow-origin</code>. Con <code>--tls-cert</code> y <code>--tls-key</code>, el mismo punto de acceso se sirve por HTTPS.</p>
+
+      <h3 id="oauth"><span class="ht">OAuth 2.1 para clientes en Internet</span><a class="anchor" href="#oauth" aria-label="Enlace a esta sección">#</a></h3>
+      <p>Algunos clientes alojados solo se conectan a un servidor HTTPS público y solo mediante OAuth. Para ellos, el servidor sigue escuchando en <code>127.0.0.1</code>, se coloca delante un túnel o un proxy inverso que termina HTTPS y se indica al servidor su dirección pública con <code>--public-url</code>. Entonces actúa como su propio servidor de autorización OAuth 2.1: PKCE con S256, registro dinámico de clientes y tokens vinculados al recurso <code>&lt;public-url&gt;/mcp</code>. El acceso se concede tecleando el token del servidor en su página <code>&lt;public-url&gt;/approve</code>: conocer el token equivale a ser el propietario. El token estático sigue funcionando como cabecera de portador para los clientes que pueden enviarla. Los límites se enumeran en la <a class="xref" href="#security">Sección 5.1.11</a>.</p>
+      <div class="code"><pre><code>ogr-slip2d-mcp --transport http --port 8765 --token-file token.txt \
+               --public-url https://your-tunnel.example --workdir "C:\models"</code></pre></div>
+      <div class="note warn"><span class="label">Exposición</span><p>Un servidor accesible desde Internet expone <code>python_exec</code>, es decir, la máquina. Exponlo solo cuando un cliente lo necesite, y detén el túnel y el servidor al terminar. El servidor no abre ningún túnel por sí mismo.</p></div>
+
+      <h2 id="profiles"><span class="secnum">5.1.5</span><span class="ht">Perfiles y conjuntos de herramientas</span><a class="anchor" href="#profiles" aria-label="Enlace a esta sección">#</a></h2>
+      <p>Un modelo local pequeño se pierde entre muchas herramientas, y la descripción de cada herramienta consume contexto en cada petición. Por eso el servidor ofrece dos perfiles:</p>
+      <ul>
+        <li><strong><code>full</code></strong> (por defecto): las 74 herramientas.</li>
+        <li><strong><code>compact</code></strong>: las 14 herramientas que necesita un ciclo completo de construcción–cálculo–lectura: <code>server_info</code>, <code>catalog</code>, <code>project_new</code>, <code>project_open</code>, <code>project_save</code>, <code>project_summary</code>, <code>model_define</code>, <code>analysis_configure</code>, <code>analysis_run</code>, <code>job_get</code>, <code>job_cancel</code>, <code>results_get</code>, <code>model_render</code> y <code>python_exec</code>. <code>model_define</code> construye toda la geometría en una sola llamada y <code>python_exec</code> cubre el resto. Están marcadas con C en las tablas de la <a class="xref" href="#tools">Sección 5.1.7</a>.</li>
+      </ul>
+      <p><code>--toolsets</code> sustituye el perfil por una lista de conjuntos de herramientas: <code>core</code> (10 herramientas), <code>model</code> (9), <code>settings</code> (3), <code>analysis</code> (7), <code>loads</code> (5), <code>supports</code> (6), <code>search</code> (5), <code>annotations</code> (4), <code>files</code> (5), <code>groundwater</code> (11), <code>statistics</code> (6), <code>view</code> (1), <code>history</code> (1) y <code>python</code> (1). <code>server_info</code> se incluye siempre. Las herramientas se publican en un orden fijo, de modo que un cliente puede guardar la lista en caché.</p>
+      <div class="code"><pre><code>ogr-slip2d-mcp --toolsets core,model,settings,analysis,view --workdir "C:\models"</code></pre></div>
+
+      <h2 id="window"><span class="secnum">5.1.6</span><span class="ht">Trabajo sobre la ventana abierta del programa</span><a class="anchor" href="#window" aria-label="Enlace a esta sección">#</a></h2>
+      <p>Desde v0.1.207, el programa abre su <em>puente para agentes</em> al arrancar (<span class="ui">Tools → Agent bridge (MCP)</span>, marcado por defecto). Si OGR Slip2D está abierto, una llamada va a su ventana; si no lo está, a modelos propios del servidor. No importa en qué orden se abran el programa y el cliente, y una ventana que se cierra y se vuelve a abrir se encuentra de nuevo.</p>
+      <ul>
+        <li><strong>Qué llamada va adónde.</strong> Una llamada que nombra un <code>project_id</code>, <code>job_id</code> o <code>result_id</code> que tiene el servidor se queda en el servidor, de modo que no se pierde un modelo empezado antes de abrir la ventana. Cualquier otra llamada va a la ventana si alguna responde (la arrancada más recientemente, cuando hay varias abiertas) y, si no, a los modelos propios del servidor. <code>server_info</code> dice adónde va la siguiente llamada (<code>attached_to_window</code>: modo, si hay una ventana abierta, su id de proceso y su título, <code>next_call_goes_to</code>), y cada entrada de <code>open_models</code> indica <code>in_window</code>.</li>
+        <li><strong>Es el modelo del usuario.</strong> El usuario ve cada edición; cada edición del agente es un paso de <span class="ui">Edit → Undo</span>, y el agente puede deshacer los pasos del propio usuario; el lienzo se redibuja tras cada edición. Un análisis que ejecuta el agente aparece en el panel de resultados y en el lienzo, igual que al ejecutar Compute. <code>model_render(source="window")</code> devuelve una captura del lienzo tal como está en pantalla.</li>
+        <li><strong>El trabajo sin guardar está protegido.</strong> <code>project_new</code> y <code>project_open</code> abren en la ventana y se niegan (<code>E_CONFLICT</code>) mientras esta tenga cambios sin guardar: el agente tiene que guardarlos con <code>project_save</code> o preguntar al usuario. <code>project_close</code> nunca cierra el modelo de la ventana.</li>
+        <li><strong>Ocupada.</strong> Mientras la ventana está calculando (su propio Compute o su barrido de niveles de desembalse, que usan el modelo en vivo en otro hilo), una edición responde <code>E_BUSY</code>, y hay que repetirla cuando la ventana haya terminado.</li>
+        <li><strong>Las rutas relativas</strong> se resuelven respecto al <code>--workdir</code> del servidor, que el servidor envía a la ventana al conectarse (lo fija el último servidor que se conecta).</li>
+        <li><strong>Una ventana que se cierra a mitad de una llamada.</strong> Una llamada que la ventana estaba respondiendo cuando se cerró no se repite, porque no se puede saber si llegó a ejecutarse: responde <code>E_CONFLICT</code>, y conviene revisar el modelo con <code>project_summary</code> antes de repetirla.</li>
+      </ul>
+      <figure class="tbl" id="tbl-window-modes">
+        <figcaption><span class="fignum">Tabla 5.1.4</span> Cómo usa el servidor una ventana abierta.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Modo</th><th>Con ventana abierta</th><th>Sin ventana abierta</th></tr></thead>
+            <tbody>
+              <tr><td>por defecto</td><td>las llamadas van a la ventana (la más reciente)</td><td>las llamadas van a los modelos propios del servidor</td></tr>
+              <tr><td><code>--attach</code></td><td>las llamadas van a la ventana</td><td>las llamadas responden <code>E_NOT_CONFIGURED</code>, indicando qué abrir</td></tr>
+              <tr><td><code>--attach PID</code></td><td>las llamadas van a la ventana de ese proceso</td><td>como <code>--attach</code></td></tr>
+              <tr><td><code>--headless</code></td><td>la ventana no se usa nunca</td><td>las llamadas van a los modelos propios del servidor</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p>El puente escucha solo en <code>127.0.0.1</code>, en un puerto que elige el sistema, con un token aleatorio nuevo cada vez que arranca. La ventana anuncia ambos en <code>~/.ogr-slip2d/bridges/&lt;pid&gt;.json</code> (puerto, token, id de proceso y título de la ventana); en sistemas POSIX, solo el usuario puede leer ese archivo. Se borra cuando se desactiva el puente o se cierra la ventana, y el siguiente servidor que lo consulta elimina un archivo cuyo puerto ya no responde. A una conexión cuya primera línea no lleva el token correcto se le responde <code>E_UNAUTHORIZED</code> y se cierra. Para mantener el puente desactivado, desmarca <span class="ui">Tools → Agent bridge (MCP)</span> o arranca el programa con <code>python -m ogr_gui --no-agent-bridge</code> (<a class="xref" href="cli.html">Sección 5.2</a>).</p>
+      <div class="impl">
+        <span class="label">En OGR Slip2D</span>
+        <p>El puente transporta las mismas operaciones que el servidor sin ventana, como líneas JSON (protocolo <code>ogr-slip2d-bridge/1</code>), y las ejecuta en el hilo de la ventana, de modo que una edición del agente y otra del usuario nunca compiten. El modelo de la ventana se lee en cada llamada, así que <span class="ui">File → New</span> y <span class="ui">File → Open</span> en la ventana se ven al instante.</p>
+        <span class="src">Código: <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_api/bridge.py" target="_blank" rel="noopener">ogr_api/bridge.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_gui/agent_bridge.py" target="_blank" rel="noopener">ogr_gui/agent_bridge.py</a></span>
+      </div>
+
+      <h2 id="tools"><span class="secnum">5.1.7</span><span class="ht">Herramientas</span><a class="anchor" href="#tools" aria-label="Enlace a esta sección">#</a></h2>
+      <p>Las 74 herramientas del perfil <code>full</code>, agrupadas como en la lista de herramientas del propio programa. <strong>C</strong> marca las 14 herramientas del perfil <code>compact</code>. <strong>Indicación</strong> es la anotación MCP que el servidor declara para la herramienta (solo lectura, edición o destructiva), que pueden usar los clientes que piden confirmación. Los parámetros exactos y sus descripciones los publica el propio servidor (<code>tools/list</code>).</p>
+
+      <h3 id="tools-core"><span class="ht">Proyecto (<code>core</code>)</span><a class="anchor" href="#tools-core" aria-label="Enlace a esta sección">#</a></h3>
+      <figure class="tbl" id="tbl-tools-core">
+        <figcaption><span class="fignum">Tabla 5.1.5</span> Herramientas de proyecto.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Herramienta</th><th>C</th><th>Indicación</th><th>Qué hace</th></tr></thead>
+            <tbody>
+              <tr><td><code>server_info</code></td><td>C</td><td>solo lectura</td><td>Versión, unidades, reglas de modelado, modelos abiertos y cobertura del programa. La primera llamada.</td></tr>
+              <tr><td><code>catalog</code></td><td>C</td><td>solo lectura</td><td>Lo que ofrece el programa: modelos de resistencia con sus parámetros, métodos, búsquedas, tipos de contorno, ajustes con sus opciones.</td></tr>
+              <tr><td><code>project_new</code></td><td>C</td><td>edición</td><td>Crea un modelo vacío o el talud de ejemplo; devuelve su <code>project_id</code>.</td></tr>
+              <tr><td><code>project_open</code></td><td>C</td><td>edición</td><td>Abre un archivo <code>.ogr</code>.</td></tr>
+              <tr><td><code>project_save</code></td><td>C</td><td>edición</td><td>Guarda en <code>.ogr</code>, el formato que abre el programa de escritorio.</td></tr>
+              <tr><td><code>project_close</code></td><td></td><td>destructiva</td><td>Cierra un modelo; se niega a perder cambios sin guardar salvo que se le indique.</td></tr>
+              <tr><td><code>project_list</code></td><td></td><td>solo lectura</td><td>Los modelos abiertos.</td></tr>
+              <tr><td><code>project_summary</code></td><td>C</td><td>solo lectura</td><td>El modelo: contornos, materiales, qué material ocupa cada región y <em>cómo</em> (asignado, heredado o el primero por defecto), estado, historial y resultados.</td></tr>
+              <tr><td><code>project_validate</code></td><td></td><td>solo lectura</td><td>Lo que comprobaría un análisis, sin calcular.</td></tr>
+              <tr><td><code>project_get</code></td><td></td><td>solo lectura</td><td>Una sección del modelo tal como la guarda el archivo <code>.ogr</code> (<a class="xref" href="file-format.html">Sección 5.4</a>).</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+
+      <h3 id="tools-model"><span class="ht">Modelo (<code>model</code>)</span><a class="anchor" href="#tools-model" aria-label="Enlace a esta sección">#</a></h3>
+      <figure class="tbl" id="tbl-tools-model">
+        <figcaption><span class="fignum">Tabla 5.1.6</span> Herramientas de modelo.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Herramienta</th><th>C</th><th>Indicación</th><th>Qué hace</th></tr></thead>
+            <tbody>
+              <tr><td><code>model_define</code></td><td>C</td><td>edición</td><td>Todo el modelo en una sola llamada: contornos, materiales, un punto dentro de la región de cada uno, nivel freático y ajustes.</td></tr>
+              <tr><td><code>boundary_add</code></td><td></td><td>edición</td><td>Un contorno: externo, de material, nivel freático, línea piezométrica, línea de desembalse, grieta de tracción, objeto de Block Search, capa débil o superficie anisótropa (detalles más abajo).</td></tr>
+              <tr><td><code>boundary_edit</code></td><td></td><td>destructiva</td><td>Edita o borra un contorno: vértices, traslación, tipo, nombre; <code>op=block_object</code> cambia la clase de un objeto de Block Search. También copia, escala, gira y simplifica.</td></tr>
+              <tr><td><code>material_set</code></td><td></td><td>edición</td><td>Crea o modifica un material, también su envolvente de desembalse rápido (<code>drawdown_envelope</code>, desde v0.1.200); las propiedades hidráulicas van por <code>hydraulic_set</code>. Un tramo de un material Generalized Anisotropic toma un material del modelo por su nombre (<code>"material": "Clay"</code>, desde v0.1.228), y el análisis usa la resistencia de ese material tal como esté en el momento de ejecutarse.</td></tr>
+              <tr><td><code>material_delete</code></td><td></td><td>destructiva</td><td>Borra un material; se rechaza mientras lo usen regiones, capas débiles o tramos de un material Generalized Anisotropic, salvo que se dé <code>reassign_to</code> o <code>force</code>.</td></tr>
+              <tr><td><code>material_assign</code></td><td></td><td>edición</td><td>Asigna un material a la región que contiene un punto.</td></tr>
+              <tr><td><code>external_reshape</code></td><td></td><td>edición</td><td>Expande o contrae el contorno externo: un desplazamiento paralelo, o una polilínea de relleno o de excavación con ambos extremos sobre él.</td></tr>
+              <tr><td><code>slope_angle_change</code></td><td></td><td>edición</td><td>Cambia el ángulo global de la cara del talud entre dos vértices del contorno externo (pie y coronación). Solo se mueve la cara, proyectando en horizontal (por defecto), en vertical o por giro; <code>keep_benches</code> conserva el ancho de los bancos. Los contornos que terminan en la cara la siguen; los soportes y las cargas no se mueven, y un aviso lo indica.</td></tr>
+              <tr><td><code>geometry_cleanup</code></td><td></td><td>edición</td><td>Informa de vértices duplicados, autointersecciones y cruces entre contornos; con <code>apply</code>, los corrige.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p>Detalles de <code>boundary_add</code>. Un contorno de material <em>cerrado</em> (<code>closed=true</code>) es un lentejón: una región propia y un hueco en la región que lo rodea (desde v0.1.197). Un objeto de Block Search lleva su clase en <code>block_object</code> (desde v0.1.232): <code>window</code>, <code>line</code>, <code>point</code> o <code>polyline</code>. Una polilínea da a cada superficie de tanteo dos puntos <em>y</em> el tramo de polilínea comprendido entre ellos, y admite <code>left_point</code> y <code>right_point</code> (<code>any</code>, <code>segment</code>, <code>end_point</code>); dos puntos abiertos sin clase son una línea, no una polilínea. Desde v0.1.233, un objeto lleva además un <code>group_id</code> (un entero, 0 por defecto) que solo se lee con <code>search.block_multiple_groups</code> activado: entonces cada grupo se busca por separado, el número de superficies se reparte entre los grupos y las polilíneas de grupos distintos pueden solaparse en <em>x</em>.</p>
+
+      <h3 id="tools-loads"><span class="ht">Cargas (<code>loads</code>)</span><a class="anchor" href="#tools-loads" aria-label="Enlace a esta sección">#</a></h3>
+      <figure class="tbl" id="tbl-tools-loads">
+        <figcaption><span class="fignum">Tabla 5.1.7</span> Herramientas de cargas.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Herramienta</th><th>C</th><th>Indicación</th><th>Qué hace</th></tr></thead>
+            <tbody>
+              <tr><td><code>load_set</code></td><td></td><td>edición</td><td>Añade o cambia una carga distribuida (kPa entre dos puntos) o una carga lineal (kN/m en un punto).</td></tr>
+              <tr><td><code>load_delete</code></td><td></td><td>destructiva</td><td>Borra cargas.</td></tr>
+              <tr><td><code>seismic_set</code></td><td></td><td>edición</td><td>Carga sísmica pseudoestática: <span class="m" data-tex="k_h"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>k</mi><mi>h</mi></msub></mrow><annotation encoding="application/x-tex">k_h</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0315em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.0315em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">h</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><!--/k--></span>, <span class="m" data-tex="k_v"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>k</mi><mi>v</mi></msub></mrow><annotation encoding="application/x-tex">k_v</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0315em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0315em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0359em;">v</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><!--/k--></span> y si se aplica. Ambas fuerzas actúan sobre el peso estático del <em>terreno</em> (las cargas y el agua embalsada no llevan fuerza sísmica); <span class="m" data-tex="k_v"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>k</mi><mi>v</mi></msub></mrow><annotation encoding="application/x-tex">k_v</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0315em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0315em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0359em;">v</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><!--/k--></span> es positivo hacia abajo (el terreno pesa <span class="m" data-tex="W(1 + k_v)"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>W</mi><mo stretchy="false">(</mo><mn>1</mn><mo>+</mo><msub><mi>k</mi><mi>v</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">W(1 + k_v)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">W</span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0315em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0315em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0359em;">v</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span><!--/k--></span>); <span class="m" data-tex="k_h \ge 0"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>k</mi><mi>h</mi></msub><mo>≥</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">k_h \ge 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0315em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.0315em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">h</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≥</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span><!--/k--></span> es una magnitud que actúa siempre en el sentido de la rotura; y <span class="m" data-tex="|k| &lt; 1"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∣</mi><mi>k</mi><mi mathvariant="normal">∣</mi><mo>&lt;</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">|k| &lt; 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∣</span><span class="mord mathnormal" style="margin-right:0.0315em;">k</span><span class="mord">∣</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span><!--/k--></span>.</td></tr>
+              <tr><td><code>seismic_record_set</code></td><td></td><td>edición</td><td>Añade un registro de aceleraciones (archivo, texto o valores) para el análisis de Newmark, o le cambia el nombre.</td></tr>
+              <tr><td><code>seismic_record_delete</code></td><td></td><td>destructiva</td><td>Borra un registro de aceleraciones.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p>Una carga lineal <em>normal al contorno</em> o <em>en ángulo con el contorno</em> toma su dirección de la superficie del terreno en su punto (desde v0.1.199): la normal apunta hacia el interior del terreno (en un vértice, según la bisectriz), y el ángulo se mide en sentido antihorario desde la superficie del terreno recorrida de izquierda a derecha, de modo que −90° es la normal. Fuera de la superficie del terreno, una carga así se rechaza.</p>
+
+      <h3 id="tools-supports"><span class="ht">Soportes (<code>supports</code>)</span><a class="anchor" href="#tools-supports" aria-label="Enlace a esta sección">#</a></h3>
+      <figure class="tbl" id="tbl-tools-supports">
+        <figcaption><span class="fignum">Tabla 5.1.8</span> Herramientas de soportes.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Herramienta</th><th>C</th><th>Indicación</th><th>Qué hace</th></tr></thead>
+            <tbody>
+              <tr><td><code>support_type_set</code></td><td></td><td>edición</td><td>Define o cambia un tipo de soporte (el conjunto de propiedades de una clase).</td></tr>
+              <tr><td><code>support_type_delete</code></td><td></td><td>destructiva</td><td>Borra un tipo; se rechaza mientras lo usen soportes.</td></tr>
+              <tr><td><code>support_set</code></td><td></td><td>edición</td><td>Coloca un soporte (cabeza en la cara del talud, cola dentro del terreno), o mueve, alarga o edita uno.</td></tr>
+              <tr><td><code>support_pattern_add</code></td><td></td><td>edición</td><td>Una fila de soportes a lo largo de un segmento.</td></tr>
+              <tr><td><code>support_delete</code></td><td></td><td>destructiva</td><td>Borra soportes o un patrón entero.</td></tr>
+              <tr><td><code>support_ungroup</code></td><td></td><td>edición</td><td>Desagrupa un patrón.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+
+      <h3 id="tools-search"><span class="ht">Búsqueda (<code>search</code>)</span><a class="anchor" href="#tools-search" aria-label="Enlace a esta sección">#</a></h3>
+      <figure class="tbl" id="tbl-tools-search">
+        <figcaption><span class="fignum">Tabla 5.1.9</span> Herramientas de búsqueda.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Herramienta</th><th>C</th><th>Indicación</th><th>Qué hace</th></tr></thead>
+            <tbody>
+              <tr><td><code>tension_crack_set</code></td><td></td><td>edición</td><td>Agua en la grieta de tracción.</td></tr>
+              <tr><td><code>focus_set</code></td><td></td><td>edición</td><td>Objetos de foco (ventana, línea, punto, tangente) que restringen la búsqueda.</td></tr>
+              <tr><td><code>focus_delete</code></td><td></td><td>destructiva</td><td>Borra objetos de foco.</td></tr>
+              <tr><td><code>user_surface_add</code></td><td></td><td>edición</td><td>Un círculo definido por el usuario, que se analiza junto con la búsqueda.</td></tr>
+              <tr><td><code>user_surface_delete</code></td><td></td><td>destructiva</td><td>Borra esos círculos.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+
+      <h3 id="tools-annotations"><span class="ht">Anotaciones (<code>annotations</code>)</span><a class="anchor" href="#tools-annotations" aria-label="Enlace a esta sección">#</a></h3>
+      <figure class="tbl" id="tbl-tools-annotations">
+        <figcaption><span class="fignum">Tabla 5.1.10</span> Herramientas de anotación.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Herramienta</th><th>C</th><th>Indicación</th><th>Qué hace</th></tr></thead>
+            <tbody>
+              <tr><td><code>annotation_set</code></td><td></td><td>edición</td><td>Dibuja líneas, flechas, textos, cotas, ejes e imágenes, o los cambia u oculta. El análisis nunca los lee.</td></tr>
+              <tr><td><code>annotation_delete</code></td><td></td><td>destructiva</td><td>Borra anotaciones.</td></tr>
+              <tr><td><code>annotation_to_boundary</code></td><td></td><td>edición</td><td>El único puente, y explícito, entre un dibujo y el modelo.</td></tr>
+              <tr><td><code>properties_table</code></td><td></td><td>solo lectura</td><td>Tablas de materiales, soportes o propiedades hidráulicas.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+
+      <h3 id="tools-files"><span class="ht">Archivos (<code>files</code>)</span><a class="anchor" href="#tools-files" aria-label="Enlace a esta sección">#</a></h3>
+      <figure class="tbl" id="tbl-tools-files">
+        <figcaption><span class="fignum">Tabla 5.1.11</span> Herramientas de archivos.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Herramienta</th><th>C</th><th>Indicación</th><th>Qué hace</th></tr></thead>
+            <tbody>
+              <tr><td><code>dxf_inspect</code></td><td></td><td>solo lectura</td><td>Lee un archivo DXF sin importarlo: capas, tipo propuesto, unidad y problemas.</td></tr>
+              <tr><td><code>dxf_import</code></td><td></td><td>edición</td><td>Importa su geometría (un paso de deshacer).</td></tr>
+              <tr><td><code>dxf_export</code></td><td></td><td>edición</td><td>Exporta el modelo y las superficies críticas de un resultado.</td></tr>
+              <tr><td><code>report_generate</code></td><td></td><td>edición</td><td>Informe en PDF de un análisis.</td></tr>
+              <tr><td><code>properties_import</code></td><td></td><td>edición</td><td>Copia materiales o tipos de soporte de otro archivo <code>.ogr</code>. Un tramo de un material Generalized Anisotropic que tomaba un material se vincula a su copia importada o al material del mismo nombre; si no hay ninguno de los dos, conserva su resistencia sin vínculo y una nota lo indica.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+
+      <h3 id="tools-groundwater"><span class="ht">Agua subterránea (<code>groundwater</code>, desde v0.1.200)</span><a class="anchor" href="#tools-groundwater" aria-label="Enlace a esta sección">#</a></h3>
+      <figure class="tbl" id="tbl-tools-groundwater">
+        <figcaption><span class="fignum">Tabla 5.1.12</span> Herramientas de agua subterránea.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Herramienta</th><th>C</th><th>Indicación</th><th>Qué hace</th></tr></thead>
+            <tbody>
+              <tr><td><code>hydraulic_set</code></td><td></td><td>edición</td><td>Propiedades hidráulicas de un material: permeabilidad saturada y anisotropía, modelo de la zona no saturada (con su biblioteca de suelos), contenidos de agua y almacenamiento. Se rechaza un parámetro de otro modelo.</td></tr>
+              <tr><td><code>mesh_generate</code></td><td></td><td>destructiva</td><td>Malla de elementos finitos. Sustituye a la anterior y borra sus condiciones de contorno y sus campos, también los de las etapas transitorias, porque van indexados por número de nodo.</td></tr>
+              <tr><td><code>mesh_reset</code></td><td></td><td>destructiva</td><td>Elimina la malla y todo lo calculado sobre ella.</td></tr>
+              <tr><td><code>seepage_bc_set</code></td><td></td><td>edición</td><td>Una condición de contorno en un lado (<code>left</code>, <code>right</code>, <code>bottom</code>, <code>ground</code>), en nodos, a lo largo de una polilínea del contorno, o un embalse a una cota.</td></tr>
+              <tr><td><code>seepage_bc_clear</code></td><td></td><td>destructiva</td><td>Vuelve a las condiciones por defecto (desconocida en la superficie del terreno, sin flujo en el resto), que no prescriben ninguna altura piezométrica.</td></tr>
+              <tr><td><code>transient_set</code></td><td></td><td>edición</td><td>El análisis transitorio por etapas: tiempos, condiciones de cada etapa, <em>Calculate SF</em> y estado inicial.</td></tr>
+              <tr><td><code>water_grid_set</code></td><td></td><td>edición</td><td>Malla de presiones de agua (puntos o un archivo CSV) y sus opciones de interpolación.</td></tr>
+              <tr><td><code>water_grid_delete</code></td><td></td><td>destructiva</td><td>Elimina la malla de presiones de agua.</td></tr>
+              <tr><td><code>groundwater_run</code></td><td></td><td>edición</td><td>Resuelve el agua subterránea (régimen permanente, o las etapas transitorias con su factor de seguridad) en segundo plano. El campo se escribe de vuelta en el modelo como un paso de deshacer, salvo que el modelo haya cambiado entretanto.</td></tr>
+              <tr><td><code>groundwater_results</code></td><td></td><td>edición</td><td>Lee el campo: resumen, valores en un punto, caudal a través de una sección, superficie freática, etapas con sus factores, o todos los nodos en CSV. También funciona después de reabrir el proyecto.</td></tr>
+              <tr><td><code>drawdown_sweep_run</code></td><td></td><td>edición</td><td>Desembalse rápido a varios niveles de embalse, porque el desembalse total no siempre es el caso más desfavorable; por la misma vía que un análisis (coeficientes de diseño y comprobaciones).</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p>Unidades: alturas piezométricas en m y presión intersticial en kPa; permeabilidad, infiltración y caudal nodal en una misma unidad coherente (m/s). Desde v0.1.200, cada modelo de permeabilidad toma la succión en la unidad de su propia definición: van Genuchten y Gardner, en altura de succión (α en 1/m); Brooks–Corey, Fredlund–Xing, Simple y la curva definida por el usuario, en succión matricial (kPa).</p>
+
+      <h3 id="tools-statistics"><span class="ht">Estadística, retroanálisis y optimización (<code>statistics</code>, desde v0.1.201)</span><a class="anchor" href="#tools-statistics" aria-label="Enlace a esta sección">#</a></h3>
+      <figure class="tbl" id="tbl-tools-statistics">
+        <figcaption><span class="fignum">Tabla 5.1.13</span> Herramientas de estadística, retroanálisis y optimización.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Herramienta</th><th>C</th><th>Indicación</th><th>Qué hace</th></tr></thead>
+            <tbody>
+              <tr><td><code>random_variable_list</code></td><td></td><td>solo lectura</td><td>Los datos del modelo que pueden ser variables aleatorias, con su clave y su valor, y las ya definidas.</td></tr>
+              <tr><td><code>random_variable_set</code></td><td></td><td>edición</td><td>Hace aleatorio un dato o lo cambia: distribución, desviación típica, rango, correlación. La media es siempre el valor del modelo.</td></tr>
+              <tr><td><code>random_variable_delete</code></td><td></td><td>destructiva</td><td>Elimina una variable; se borran las correlaciones que apuntaban a ella.</td></tr>
+              <tr><td><code>statistics_run</code></td><td></td><td>edición</td><td><em>Compute Statistics</em> en segundo plano: el cálculo determinista y después el análisis probabilístico (probabilidad de rotura, índice de fiabilidad) o el de sensibilidad, con los coeficientes de diseño y la semilla del modelo.</td></tr>
+              <tr><td><code>back_analysis_run</code></td><td></td><td>edición</td><td>La fuerza de soporte horizontal necesaria para un factor de seguridad objetivo, sobre la búsqueda configurada.</td></tr>
+              <tr><td><code>optimize_run</code></td><td></td><td>edición</td><td>Optimiza la superficie crítica no circular de un resultado con los ajustes y la semilla del modelo; el producto es un resultado <em>nuevo</em>.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p>Los tres cálculos pasan por la misma vía que <code>analysis_run</code>: sin norma de diseño dan exactamente lo que daban antes; con ella, analizan el modelo con los coeficientes parciales aplicados.</p>
+
+      <h3 id="tools-settings"><span class="ht">Ajustes (<code>settings</code>)</span><a class="anchor" href="#tools-settings" aria-label="Enlace a esta sección">#</a></h3>
+      <figure class="tbl" id="tbl-tools-settings">
+        <figcaption><span class="fignum">Tabla 5.1.14</span> Herramientas de ajustes.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Herramienta</th><th>C</th><th>Indicación</th><th>Qué hace</th></tr></thead>
+            <tbody>
+              <tr><td><code>settings_get</code></td><td></td><td>solo lectura</td><td>Todos los ajustes con su valor, tipo y opciones.</td></tr>
+              <tr><td><code>settings_set</code></td><td></td><td>edición</td><td>Cualquier ajuste por su ruta (<code>search.search_method</code>); todo o nada.</td></tr>
+              <tr><td><code>analysis_configure</code></td><td>C</td><td>edición</td><td>Los ajustes de análisis más habituales en una sola llamada: métodos, tipo de superficie, búsqueda, dovelas, rejilla, dirección de rotura, norma de diseño.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+
+      <h3 id="tools-analysis"><span class="ht">Análisis (<code>analysis</code>)</span><a class="anchor" href="#tools-analysis" aria-label="Enlace a esta sección">#</a></h3>
+      <figure class="tbl" id="tbl-tools-analysis">
+        <figcaption><span class="fignum">Tabla 5.1.15</span> Herramientas de análisis.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Herramienta</th><th>C</th><th>Indicación</th><th>Qué hace</th></tr></thead>
+            <tbody>
+              <tr><td><code>analysis_run</code></td><td>C</td><td>edición</td><td>Lanza el análisis en segundo plano; devuelve el resultado o un <code>job_id</code>.</td></tr>
+              <tr><td><code>job_get</code></td><td>C</td><td>solo lectura</td><td>Estado y progreso de un trabajo; su resultado, cuando ha terminado.</td></tr>
+              <tr><td><code>job_cancel</code></td><td>C</td><td>destructiva</td><td>Detiene un análisis y todos los procesos que lanzó.</td></tr>
+              <tr><td><code>job_list</code></td><td></td><td>solo lectura</td><td>Los trabajos de la sesión.</td></tr>
+              <tr><td><code>results_get</code></td><td>C</td><td>solo lectura</td><td>Lee un resultado: resumen, superficie crítica con sus dovelas, mejores superficies, mínimos, avisos.</td></tr>
+              <tr><td><code>results_query</code></td><td></td><td>edición</td><td>Lo que consulta la ventana Interpret (desde v0.1.201): códigos de error (−120 tracción, −112 m-alfa, −111 sin convergencia, −101 otros) y recuento de superficies rechazadas, datos brutos, superficies que pasan por un punto (medido sobre la superficie que se calculó, no sobre el círculo completo), mínimo por centro, factor a lo largo del talud, dovelas con los valores del método, filtros; y, de un resultado estadístico, histograma, convergencia, muestras con su índice y sensibilidad.</td></tr>
+              <tr><td><code>surface_evaluate</code></td><td></td><td>solo lectura</td><td>El factor de seguridad de <em>una</em> superficie dada (círculo, tres puntos o polilínea), sin búsqueda.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+
+      <h3 id="tools-view"><span class="ht">Vista, historial y Python (<code>view</code>, <code>history</code>, <code>python</code>)</span><a class="anchor" href="#tools-view" aria-label="Enlace a esta sección">#</a></h3>
+      <figure class="tbl" id="tbl-tools-view">
+        <figcaption><span class="fignum">Tabla 5.1.16</span> Herramientas de vista, historial y Python.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Herramienta</th><th>C</th><th>Indicación</th><th>Qué hace</th></tr></thead>
+            <tbody>
+              <tr><td><code>model_render</code></td><td>C</td><td>solo lectura</td><td>Imagen PNG del modelo, con las superficies críticas de un resultado, o con isolíneas del campo de agua subterránea (<code>field</code>) y su superficie freática; con el programa abierto, <code>source="window"</code> captura el lienzo real de la ventana.</td></tr>
+              <tr><td><code>project_history</code></td><td></td><td>edición</td><td>Deshace, rehace o enumera las ediciones.</td></tr>
+              <tr><td><code>python_exec</code></td><td>C</td><td>destructiva</td><td>Python sobre el modelo, para lo que aún no tiene herramienta (<a class="xref" href="#security">Sección 5.1.11</a>).</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <div class="impl">
+        <span class="label">En OGR Slip2D</span>
+        <p><code>server_info</code> también informa de cuánto del programa puede alcanzar un agente (<code>program_coverage</code>): en v<span data-v>0.1.235</span>, 116 de las 140 acciones de la ventana principal corresponden a una operación, ninguna está pendiente y las otras 24 solo tienen sentido en la interfaz (zoom, encuadre, impresión, preferencias y similares), cada una con su motivo por escrito.</p>
+        <span class="src">Código: <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_mcp/server.py" target="_blank" rel="noopener">ogr_mcp/server.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_mcp/profiles.py" target="_blank" rel="noopener">ogr_mcp/profiles.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_api/inventory.py" target="_blank" rel="noopener">ogr_api/inventory.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/docs/mcp/herramientas.md" target="_blank" rel="noopener">docs/mcp/herramientas.md</a></span>
+      </div>
+
+      <h2 id="resources"><span class="secnum">5.1.8</span><span class="ht">Recursos</span><a class="anchor" href="#resources" aria-label="Enlace a esta sección">#</a></h2>
+      <figure class="tbl" id="tbl-resources">
+        <figcaption><span class="fignum">Tabla 5.1.17</span> Recursos que publica el servidor.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>URI</th><th>Tipo</th><th>Contenido</th></tr></thead>
+            <tbody>
+              <tr><td><code>ogr://guide</code></td><td>Markdown</td><td>La guía de modelado completa que lee el agente: unidades y ejes, geometría, agua, agua subterránea por elementos finitos, estadística, materiales, búsqueda y métodos, ejecución y lectura de resultados, deshacer y scripts, trabajo sobre la ventana, archivos.</td></tr>
+              <tr><td><code>ogr://catalog/{kind}</code></td><td>JSON</td><td><code>catalog(kind)</code> como recurso. Clases: <code>strength_models</code>, <code>methods</code>, <code>search_methods</code>, <code>surface_types</code>, <code>boundary_types</code>, <code>pore_pressure_types</code>, <code>groundwater_methods</code>, <code>interslice_functions</code>, <code>failure_directions</code>, <code>unit_systems</code>, <code>design_standards</code>, <code>settings</code>.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p>Muchos clientes nunca leen los recursos. Por eso, una versión corta de la guía viaja con cada conexión como instrucciones del servidor, y cada regla que cambia un número está en ella y se repite en las descripciones de las herramientas a las que se aplica.</p>
+
+      <h2 id="workflow"><span class="secnum">5.1.9</span><span class="ht">Flujo de trabajo de modelado</span><a class="anchor" href="#workflow" aria-label="Enlace a esta sección">#</a></h2>
+      <div class="code"><pre><code>project_new → model_define → project_validate → analysis_configure
+            → analysis_run → results_get / model_render → project_save</code></pre></div>
+      <ul>
+        <li>Cada llamada devuelve o recibe un <code>project_id</code>; puede omitirse mientras solo haya un modelo abierto.</li>
+        <li><code>analysis_run</code> ejecuta cada método activado como un trabajo en segundo plano y espera hasta <code>wait_seconds</code> (30 s por defecto, con <code>--max-wait</code> como tope). Si responde <code>state: "running"</code> con un <code>job_id</code>, consulta <code>job_get</code> (con espera) hasta <code>done</code>; <code>job_cancel</code> mata todo el árbol de procesos del trabajo. Un trabajo está <code>queued</code>, <code>running</code>, <code>done</code>, <code>failed</code>, <code>cancelled</code> o <code>crashed</code>.</li>
+        <li>Un trabajo terminado lleva un <code>result_id</code>: <code>results_get(result_id, view=…)</code> con <code>summary</code>, <code>critical</code> (con dovelas), <code>top</code>, <code>minima</code> o <code>warnings</code>, y <code>model_render(result_id=…)</code> dibuja sus superficies críticas. El servidor guarda los cinco últimos resultados de cada modelo.</li>
+        <li>Los avisos son el programa hablando: hay que leerlos, no saltárselos.</li>
+      </ul>
+      <h3 id="rules"><span class="ht">Reglas que cambian el número</span><a class="anchor" href="#rules" aria-label="Enlace a esta sección">#</a></h3>
+      <p>Las reglas que el servidor da a todo agente, porque cada una de ellas cambia un factor de seguridad sin que se produzca ningún error:</p>
+      <ol>
+        <li>Una región a la que nadie asignó material toma el <strong>primer</strong> material de la lista. La convención es silenciosa: <code>project_summary</code> indica para cada región si su material fue <code>assigned</code>, <code>inherited</code> o el <code>default_first_material</code>.</li>
+        <li>Un nivel freático o una línea piezométrica no hace nada hasta que hay materiales que apuntan a ella (<code>model_define</code> <code>water_table.materials</code>, o <code>boundary_add</code> <code>assign_to</code>).</li>
+        <li>Los <code>nx</code> y <code>ny</code> de la búsqueda de rejilla son <strong>intervalos</strong>: puntos = <code>nx</code> + 1; <code>radius_increment</code> 10 significa 11 radios por centro. Círculos totales = (<code>nx</code> + 1)(<code>ny</code> + 1)(<code>radius_increment</code> + 1).</li>
+        <li><code>analysis_run</code> puede devolver <code>state: "running"</code> con un <code>job_id</code>: consulta <code>job_get</code>.</li>
+        <li>Un resultado marcado como <code>stale</code> se calculó sobre un modelo que ha cambiado desde entonces.</li>
+        <li>Un campo de agua subterránea por elementos finitos (<code>groundwater_run</code>) solo llega a los materiales cuya <code>pore_pressure</code> es <code>fem</code>.</li>
+      </ol>
+      <p>La guía completa añade que, con una norma de diseño activada, el número que se da es un <strong>factor de sobredimensionamiento</strong>, que debe superar 1, y no un factor de seguridad (los resultados dicen cuál es en <code>caption</code>); que <code>failure_direction</code> es <code>left_to_right</code> cuando el talud baja hacia la derecha; y que el sistema de unidades de los ajustes solo cambia lo que muestra la interfaz.</p>
+
+      <h2 id="errors"><span class="secnum">5.1.10</span><span class="ht">Errores</span><a class="anchor" href="#errors" aria-label="Enlace a esta sección">#</a></h2>
+      <p>Una herramienta que falla responde con un mensaje codificado, <code>[E_CODE] message Hint: …</code>; un nombre desconocido viene con los nombres conocidos más parecidos (<em>Did you mean …?</em>). Los códigos se enumeran en la <a class="xref" href="error-codes.html#api-errors">Sección 5.5.4</a>. Un ajuste que el análisis no leería se rechaza con el motivo en lugar de guardarse, y un trabajo fallido o caído se notifica como <code>E_JOB_FAILED</code> con su error.</p>
+
+      <h2 id="security"><span class="secnum">5.1.11</span><span class="ht">Modelo de seguridad</span><a class="anchor" href="#security" aria-label="Enlace a esta sección">#</a></h2>
+      <h3 id="python-exec"><span class="ht">python_exec es ejecución de código, por diseño</span><a class="anchor" href="#python-exec" aria-label="Enlace a esta sección">#</a></h3>
+      <p>El servidor publica siempre <code>python_exec</code>, que ejecuta Python arbitrario en el proceso del servidor con los permisos del usuario que lo arrancó; a través del puente, se ejecuta dentro del proceso de la ventana del programa. Es una decisión del propietario (2026-09-24), para cubrir lo que aún no tiene herramienta. La consecuencia es sencilla: <strong>quien puede hablar con el servidor puede ejecutar código en la máquina</strong>, y todo lo que sigue se deriva de ello.</p>
+      <ul>
+        <li>El script ve <code>project</code> (el modelo en vivo), <code>api</code> (todas las operaciones: <code>api.material_set(...)</code>), <code>np</code>, <code>ogr_core</code>, <code>ogr_slip2d</code> y <code>result(result_id)</code>; se devuelve el valor de su última expresión.</li>
+        <li>Todo el script es un paso de deshacer, que se revierte si lanza una excepción. La salida se corta a los 20 000 caracteres, y el valor devuelto, a los 5 000.</li>
+        <li>Un script no se puede detener: uno que no termina nunca retiene el bloqueo de su modelo hasta que el proceso sale. Por eso los análisis son trabajos y los scripts no.</li>
+      </ul>
+      <h3 id="security-stdio"><span class="ht">Con stdio</span><a class="anchor" href="#security-stdio" aria-label="Enlace a esta sección">#</a></h3>
+      <p>El servidor es un proceso hijo del cliente y no abre ningún puerto. El riesgo que queda es la inyección de instrucciones (prompt injection): un texto que lee el modelo (un archivo, una página web) puede pedirle que ejecute algo. La defensa son los clientes que piden confirmación antes de cada herramienta; esa confirmación debería seguir activada para <code>python_exec</code>, que el servidor declara destructiva.</p>
+      <h3 id="security-http"><span class="ht">Con HTTP</span><a class="anchor" href="#security-http" aria-label="Enlace a esta sección">#</a></h3>
+      <ul>
+        <li><strong>Siempre un token, también en 127.0.0.1.</strong> «Solo local» no es una frontera: cualquier página web puede hacer que el navegador envíe peticiones a <code>localhost</code>. El token se compara en tiempo constante.</li>
+        <li><strong>Se comprueban Host y Origin</strong> (la protección del SDK contra DNS rebinding, activada): 421 para un <code>Host</code> ajeno y 403 para un <code>Origin</code> ajeno, incluso con el token.</li>
+        <li><strong>Sin token, no hay red.</strong> En un host que no es de bucle local, el servidor exige un token explícito (<code>--token</code>, <code>--token-file</code> u <code>OGR_MCP_TOKEN</code>) y se niega a arrancar sin él (código de salida 2). <code>--no-auth</code> solo se acepta en bucle local.</li>
+        <li>Un token en la línea de comandos es visible para otros usuarios de la máquina: son preferibles <code>--token-file</code> u <code>OGR_MCP_TOKEN</code>.</li>
+      </ul>
+      <h3 id="security-bridge"><span class="ht">El puente a la ventana</span><a class="anchor" href="#security-bridge" aria-label="Enlace a esta sección">#</a></h3>
+      <p>El puente escucha solo en 127.0.0.1, con un token aleatorio nuevo en cada arranque, escrito en un archivo de la carpeta personal del usuario. Quien tiene el puente maneja la ventana, <code>python_exec</code> incluido. No abre ningún acceso nuevo, porque leer ese archivo ya exige ser ese usuario en esa máquina; aun así, se puede desactivar en <span class="ui">Tools → Agent bridge (MCP)</span> o con <code>--no-agent-bridge</code>. Los tests del programa se ejecutan con una carpeta de descubrimiento propia y vacía, de modo que un test que arranca un servidor no puede editar un modelo que el usuario tenga abierto.</p>
+      <h3 id="security-internet"><span class="ht">En Internet (<code>--public-url</code>)</span><a class="anchor" href="#security-internet" aria-label="Enlace a esta sección">#</a></h3>
+      <ul>
+        <li>El servidor no abre ningún túnel por sí mismo; delante de él va un túnel o un proxy que termina HTTPS, o bien <code>--tls-cert</code> y <code>--tls-key</code> sirven HTTPS directamente.</li>
+        <li>La aprobación se concede tecleando el token del servidor en <code>/approve</code>, una página que nombra al cliente que la pide y adónde se le devolverá, y advierte de que aprobar le permite ejecutar todas las herramientas, <code>python_exec</code> incluido. A un token incorrecto se responde con un retardo de un segundo; tras 5 tokens incorrectos, una solicitud queda bloqueada; tras 20 tokens incorrectos en 10 minutos, contando todas las solicitudes, todas las aprobaciones se detienen durante un tiempo (cualquiera puede abrir una solicitud nueva, así que un límite por solicitud no bastaría por sí solo para acotar los intentos de adivinarlo).</li>
+        <li>Por la misma razón, con <code>--public-url</code> el token debe tener al menos 32 caracteres; uno generado tiene 43.</li>
+        <li>Ningún otro sitio puede incrustar la página de aprobación en un marco (<code>X-Frame-Options: DENY</code>, <code>frame-ancestors 'none'</code>), y no se conservan ni la página ni su procedencia (<code>no-store</code>, <code>no-referrer</code>).</li>
+        <li>Una aprobación produce un código de autorización (PKCE S256, de un solo uso, válido durante 5 minutos); una solicitud pendiente caduca a los 10 minutos. Los tokens emitidos son opacos y viven en memoria, así que reiniciar el servidor los revoca todos: los tokens de acceso duran una hora, y los de actualización, treinta días, y se rotan en cada uso. La revocación está habilitada; las concesiones por aserción de identidad se rechazan.</li>
+        <li>El token propio del servidor sigue funcionando como <code>Authorization: Bearer</code> para los clientes que envían cabeceras.</li>
+        <li>Los clientes se registran dinámicamente (RFC 7591), y solo con URI de redirección de una lista de permitidas: las direcciones de retorno de los clientes alojados enumerados en <code>ogr_mcp/oauth.py</code>, las direcciones de bucle local y las añadidas con <code>--oauth-redirect</code>.</li>
+        <li>No se ofrecen documentos de metadatos de ID de cliente (Client ID Metadata Documents): obligarían al servidor a descargar un documento de otro sitio, y el servidor no hace llamadas de red.</li>
+        <li><code>--no-auth</code> nunca va con <code>--public-url</code>, y una URL pública <code>http://</code> solo se acepta en bucle local, para pruebas. El <code>Host</code> y el <code>Origin</code> públicos se suman a los permitidos; cualquier otro sigue recibiendo 421 o 403.</li>
+      </ul>
+      <h3 id="security-files"><span class="ht">Archivos, red y telemetría</span><a class="anchor" href="#security-files" aria-label="Enlace a esta sección">#</a></h3>
+      <ul>
+        <li>Las rutas relativas se resuelven respecto a <code>--workdir</code>. Guardar nunca sobrescribe un archivo existente sin <code>overwrite=true</code>, salvo el propio archivo del modelo, que es lo que significa guardar.</li>
+        <li>El servidor no hace ninguna llamada de red por su cuenta. La dependencia <code>opentelemetry-api</code> que trae el SDK es solo la API: sin un SDK de telemetría configurado, no exporta nada.</li>
+      </ul>
+      <div class="impl">
+        <span class="label">En OGR Slip2D</span>
+        <p>Las reglas de seguridad están escritas en la documentación del propio programa y se aplican en el código que se enumera aquí; esta sección las sigue.</p>
+        <span class="src">Código: <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/docs/mcp/seguridad.md" target="_blank" rel="noopener">docs/mcp/seguridad.md</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_mcp/security.py" target="_blank" rel="noopener">ogr_mcp/security.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_mcp/oauth.py" target="_blank" rel="noopener">ogr_mcp/oauth.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_api/pyexec.py" target="_blank" rel="noopener">ogr_api/pyexec.py</a></span>
+      </div>
+      <div class="note warn"><span class="label">Criterio de ingeniería</span><p>Un agente que construye y calcula un modelo es una forma rápida de cometer errores, además de hacer modelos. Revisa la geometría, los materiales de cada región y las presiones intersticiales que haya fijado antes de fiarte de un número: un proyecto lo firma un ingeniero, no un programa ni un agente.</p></div>
+    </article>
+
+<!-- @inc docfoot -->
+<nav class="doc-pager" aria-label="Páginas">
+<a class="prev" href="../../../es/docs/verification/analytic-checks.html"><span class="label">← Anterior · 4.3</span><b>Agua subterránea y comprobaciones analíticas</b></a>
+<a class="next" href="../../../es/docs/reference/cli.html"><span class="label">5.2 · Siguiente →</span><b>Interfaz de línea de comandos</b></a>
+</nav>
+<div class="doc-edit label"><a href="https://github.com/samuelsl27/OpenGeoRock_Web.github.io/blob/main/es/docs/reference/mcp.html" target="_blank" rel="noopener">Editar esta página ↗</a><a href="https://github.com/samuelsl27/OGR-Slip2D/issues" target="_blank" rel="noopener">Informar de un problema ↗</a></div>
+<!-- @end docfoot -->
+  </main>
+
+  <aside class="doc-toc" aria-label="En esta página">
+    <div class="toc-inner">
+<!-- @inc pagetoc -->
+<span class="label">En esta página</span><ul><li class="h2"><a href="#overview">5.1.1 Qué es</a></li><li class="h2"><a href="#installation">5.1.2 Instalación</a></li><li class="h2"><a href="#options">5.1.3 Opciones de línea de comandos</a></li><li class="h2"><a href="#transports">5.1.4 Transportes</a></li><li class="h3"><a href="#stdio">Entrada/salida estándar</a></li><li class="h3"><a href="#http">HTTP transmisible (streamable HTTP)</a></li><li class="h3"><a href="#oauth">OAuth 2.1 para clientes en Internet</a></li><li class="h2"><a href="#profiles">5.1.5 Perfiles y conjuntos de herramientas</a></li><li class="h2"><a href="#window">5.1.6 Trabajo sobre la ventana abierta del programa</a></li><li class="h2"><a href="#tools">5.1.7 Herramientas</a></li><li class="h3"><a href="#tools-core">Proyecto ( core )</a></li><li class="h3"><a href="#tools-model">Modelo ( model )</a></li><li class="h3"><a href="#tools-loads">Cargas ( loads )</a></li><li class="h3"><a href="#tools-supports">Soportes ( supports )</a></li><li class="h3"><a href="#tools-search">Búsqueda ( search )</a></li><li class="h3"><a href="#tools-annotations">Anotaciones ( annotations )</a></li><li class="h3"><a href="#tools-files">Archivos ( files )</a></li><li class="h3"><a href="#tools-groundwater">Agua subterránea ( groundwater , desde v0.1.200)</a></li><li class="h3"><a href="#tools-statistics">Estadística, retroanálisis y optimización ( statistics , desde v0.1.201)</a></li><li class="h3"><a href="#tools-settings">Ajustes ( settings )</a></li><li class="h3"><a href="#tools-analysis">Análisis ( analysis )</a></li><li class="h3"><a href="#tools-view">Vista, historial y Python ( view , history , python )</a></li><li class="h2"><a href="#resources">5.1.8 Recursos</a></li><li class="h2"><a href="#workflow">5.1.9 Flujo de trabajo de modelado</a></li><li class="h3"><a href="#rules">Reglas que cambian el número</a></li><li class="h2"><a href="#errors">5.1.10 Errores</a></li><li class="h2"><a href="#security">5.1.11 Modelo de seguridad</a></li><li class="h3"><a href="#python-exec">python_exec es ejecución de código, por diseño</a></li><li class="h3"><a href="#security-stdio">Con stdio</a></li><li class="h3"><a href="#security-http">Con HTTP</a></li><li class="h3"><a href="#security-bridge">El puente a la ventana</a></li><li class="h3"><a href="#security-internet">En Internet ( --public-url )</a></li><li class="h3"><a href="#security-files">Archivos, red y telemetría</a></li></ul><button class="print" type="button"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="1.5"/><path d="M6 14h12v7H6z"/></svg> Imprimir esta página</button>
+<!-- @end pagetoc -->
+    </div>
+  </aside>
+</div>
+
+<!-- @inc footer -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <a class="brand" href="../../../es/index.html" aria-label="OpenGeoRock — inicio">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
+          <b>OpenGeoRock</b>
+        </a>
+        <p class="tagline">Software geotécnico de código abierto, desarrollado a la vista de todos en la Universidad Politécnica de Cartagena.</p>
+        <span class="lang" role="group" aria-label="Idioma"><a href="../../../docs/reference/mcp.html" hreflang="en" lang="en">EN</a><a href="../../../es/docs/reference/mcp.html" hreflang="es" lang="es" aria-current="true">ES</a></span>
+      </div>
+      <div>
+        <h5>Productos</h5>
+        <ul>
+          <li><a href="../../../es/products/slip2d.html">OGR Slip2D</a></li>
+          <li><a href="../../../es/products/index.html">La suite</a></li>
+          <li><a href="../../../es/ai/index.html">Servidor MCP</a></li>
+          <li><a href="../../../es/download/index.html">Descargar</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Aprende</h5>
+        <ul>
+          <li><a href="../../../es/docs/index.html">Documentación</a></li>
+          <li><a href="../../../es/docs/getting-started/quick-start.html">Inicio rápido</a></li>
+          <li><a href="../../../es/docs/theory/methods.html">Manual de teoría</a></li>
+          <li><a href="../../../es/examples/index.html">Ejemplos</a></li>
+          <li><a href="../../../es/verification/index.html">Verificación</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Proyecto</h5>
+        <ul>
+          <li><a href="../../../es/about/index.html">El proyecto</a></li>
+          <li><a href="../../../es/about/index.html#team">Equipo</a></li>
+          <li><a href="../../../es/about/index.html#cite">Cómo citar</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Contribuir</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/LICENSE" target="_blank" rel="noopener">Licencia · AGPL-3.0</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contacto</h5>
+        <ul>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/issues" target="_blank" rel="noopener">Incidencias</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/tree/main/docs/changelog" target="_blank" rel="noopener">Historial de cambios</a></li>
+          <li><a href="mailto:samuel.saez@edu.upct.es">Correo</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© 2026 Samuel Sáez López · OGR Slip2D es software libre bajo AGPL-3.0-or-later, sin garantía de ningún tipo.</span>
+      <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
+    </div>
+  </div>
+</footer>
+<!-- @end footer -->
+</body>
+</html>

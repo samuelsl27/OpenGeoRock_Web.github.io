@@ -1,0 +1,385 @@
+<!doctype html>
+<html class="no-js" lang="en" data-root="../../">
+<head>
+<meta charset="utf-8">
+<title>Probabilistic and sensitivity analysis — OGR Slip2D documentation</title>
+<meta name="description" content="Set up a probabilistic or sensitivity analysis in OGR Slip2D: random variables and their distributions, correlation, sampling and seed, Compute Statistics, the Statistics window and the Statistics menu of the Interpret window, with the limitations of version 0.1.235.">
+<!-- @inc head -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.replace("no-js", "js")</script>
+<link rel="canonical" href="https://opengeorock.org/docs/user-guide/probabilistic.html">
+<link rel="alternate" hreflang="en" href="https://opengeorock.org/docs/user-guide/probabilistic.html">
+<link rel="alternate" hreflang="es" href="https://opengeorock.org/es/docs/user-guide/probabilistic.html">
+<link rel="alternate" hreflang="x-default" href="https://opengeorock.org/docs/user-guide/probabilistic.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="OpenGeoRock">
+<meta property="og:title" content="Probabilistic and sensitivity analysis — OGR Slip2D documentation">
+<meta property="og:description" content="Set up a probabilistic or sensitivity analysis in OGR Slip2D: random variables and their distributions, correlation, sampling and seed, Compute Statistics, the Statistics window and the Statistics menu of the Interpret window, with the limitations of version 0.1.235.">
+<meta property="og:url" content="https://opengeorock.org/docs/user-guide/probabilistic.html">
+<meta property="og:image" content="https://opengeorock.org/assets/img/og-image.png">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#f4efe6">
+<link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&amp;display=swap">
+<link rel="stylesheet" href="../../assets/css/site.css">
+<link rel="stylesheet" href="../../assets/css/docs.css">
+<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
+<script src="../../assets/js/site.js" defer></script>
+<!-- @end head -->
+</head>
+<body class="docs">
+<!-- @inc header -->
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="wrap top-inner">
+    <a class="brand" href="../../index.html" aria-label="OpenGeoRock — home">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
+      <b>OpenGeoRock</b>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <div class="has-menu" data-nav="products">
+        <button type="button" aria-expanded="false" aria-haspopup="true">Products <svg class="caret" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+        <div class="mega">
+          <div class="mega-cols">
+            <div class="mega-col">
+              <span class="label">Available today</span>
+              <a class="mega-item feature" href="../../products/slip2d.html"><b>OGR Slip2D</b><span>2D slope stability: limit equilibrium, finite-element groundwater and probabilistic analysis.</span></a>
+              <a class="mega-item" href="../../ai/index.html"><b>MCP server for AI agents <span class="tag live">new</span></b><span>Let Claude, ChatGPT or a local model build and run OGR Slip2D models.</span></a>
+            </div>
+            <div class="mega-col">
+              <span class="label">On the roadmap</span>
+              <a class="mega-item" href="../../products/index.html#ogr-data"><b>OGR Data</b><span>Soil and rock-mass property database</span></a>
+              <a class="mega-item" href="../../products/index.html#ogr-fem2d"><b>OGR FEM2D</b><span>2D elastoplastic finite elements</span></a>
+              <a class="mega-item" href="../../products/index.html#ogr-slip3d"><b>OGR Slip3D</b><span>3D limit equilibrium</span></a>
+              <a class="mega-item" href="../../products/index.html#ogr-fem3d"><b>OGR FEM3D</b><span>3D finite elements with coupled flow</span></a>
+            </div>
+            <div class="mega-col">
+              <span class="label">Use it from</span>
+              <a class="mega-item" href="../../docs/getting-started/interface.html"><b>The desktop program</b><span>Modeller, interpreter and Python terminal</span></a>
+              <a class="mega-item" href="../../docs/reference/python-api.html"><b>Python</b><span>Script analyses from your own code</span></a>
+              <a class="mega-item" href="../../docs/reference/cli.html"><b>The command line</b><span>Batch runs with ogr-slip2d-cli</span></a>
+            </div>
+          </div>
+          <div class="mega-foot"><span>Five programs, one open core.</span><a href="../../products/index.html">All products →</a></div>
+        </div>
+      </div>
+      <a href="../../examples/index.html" data-nav="examples">Examples</a>
+      <a href="../../ai/index.html" data-nav="ai">AI &amp; MCP</a>
+      <a href="../../docs/index.html" data-nav="docs" aria-current="page">Docs</a>
+      <a href="../../verification/index.html" data-nav="verification">Verification</a>
+      <a href="../../about/index.html" data-nav="about">About</a>
+    </nav>
+    <div class="top-right">
+      <span class="lang" role="group" aria-label="Language"><a href="../../docs/user-guide/probabilistic.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../../es/docs/user-guide/probabilistic.html" hreflang="es" lang="es">ES</a></span>
+      <a class="btn gh" href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener" aria-label="Source code on GitHub"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0C17.3 4.7 18.3 5 18.3 5c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0012 .5z"/></svg><span>GitHub</span></a>
+      <a class="btn primary" href="../../download/index.html" data-nav="download">Get OGR Slip2D</a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Main (mobile)">
+    <span class="label">Products</span>
+    <a href="../../products/slip2d.html">OGR Slip2D</a>
+    <div class="sub"><a href="../../products/index.html">The OpenGeoRock suite</a><a href="../../ai/index.html">MCP server for AI agents</a></div>
+    <span class="label">Learn</span>
+    <a href="../../examples/index.html">Examples</a>
+    <a href="../../docs/index.html">Documentation</a>
+    <a href="../../verification/index.html">Verification</a>
+    <span class="label">Project</span>
+    <a href="../../about/index.html">About</a>
+    <a href="../../download/index.html">Get OGR Slip2D</a>
+    <a href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener">Source on GitHub ↗</a>
+    <span class="lang" role="group" aria-label="Language"><a href="../../docs/user-guide/probabilistic.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../../es/docs/user-guide/probabilistic.html" hreflang="es" lang="es">ES</a></span>
+  </nav>
+</header>
+<!-- @end header -->
+
+<div class="doc-shell">
+  <aside class="doc-side" id="doc-side">
+<!-- @inc docnav -->
+<div class="doc-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input type="search" placeholder="Search the documentation  /" aria-label="Search the documentation" autocomplete="off"><div class="results" role="listbox"></div></div>
+<nav class="doc-nav" aria-label="Documentation">
+<a class="home" href="../../docs/index.html"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 016.5 3H20v15H6.5A2.5 2.5 0 004 20.5z"/><path d="M4 20.5A2.5 2.5 0 016.5 18H20v3H6.5A2.5 2.5 0 014 20.5z"/></svg> Documentation home</a>
+<details open><summary>1 · Getting started</summary><ul>
+<li><a href="../../docs/getting-started/installation.html"><span class="n">1.1</span><span>Installation</span></a></li>
+<li><a href="../../docs/getting-started/quick-start.html"><span class="n">1.2</span><span>Quick start: your first model</span></a></li>
+<li><a href="../../docs/getting-started/interface.html"><span class="n">1.3</span><span>The interface</span></a></li>
+</ul></details>
+<details open><summary>2 · User guide</summary><ul>
+<li><a href="../../docs/user-guide/project-settings.html"><span class="n">2.1</span><span>Project settings</span></a></li>
+<li><a href="../../docs/user-guide/geometry.html"><span class="n">2.2</span><span>Geometry and boundaries</span></a></li>
+<li><a href="../../docs/user-guide/materials.html"><span class="n">2.3</span><span>Materials</span></a></li>
+<li><a href="../../docs/user-guide/water.html"><span class="n">2.4</span><span>Water and pore pressure</span></a></li>
+<li><a href="../../docs/user-guide/loads.html"><span class="n">2.5</span><span>Loads and seismic loading</span></a></li>
+<li><a href="../../docs/user-guide/supports.html"><span class="n">2.6</span><span>Supports</span></a></li>
+<li><a href="../../docs/user-guide/surfaces.html"><span class="n">2.7</span><span>Slip surfaces and search</span></a></li>
+<li><a href="../../docs/user-guide/results.html"><span class="n">2.8</span><span>Computing and interpreting results</span></a></li>
+<li><a href="../../docs/user-guide/groundwater.html"><span class="n">2.9</span><span>Finite-element groundwater</span></a></li>
+<li><a href="../../docs/user-guide/probabilistic.html" aria-current="page"><span class="n">2.10</span><span>Probabilistic and sensitivity analysis</span></a></li>
+<li><a href="../../docs/user-guide/design-standards.html"><span class="n">2.11</span><span>Design standards</span></a></li>
+<li><a href="../../docs/user-guide/automation.html"><span class="n">2.12</span><span>Reports, scripting and the command line</span></a></li>
+</ul></details>
+<details open><summary>3 · Theory manual</summary><ul>
+<li><a href="../../docs/theory/limit-equilibrium.html"><span class="n">3.1</span><span>Limit equilibrium and the factor of safety</span></a></li>
+<li><a href="../../docs/theory/methods.html"><span class="n">3.2</span><span>Methods of slices</span></a></li>
+<li><a href="../../docs/theory/interslice.html"><span class="n">3.3</span><span>Interslice forces, convergence and admissibility</span></a></li>
+<li><a href="../../docs/theory/search.html"><span class="n">3.4</span><span>Slip-surface search</span></a></li>
+<li><a href="../../docs/theory/strength.html"><span class="n">3.5</span><span>Shear strength models</span></a></li>
+<li><a href="../../docs/theory/pore-pressure.html"><span class="n">3.6</span><span>Pore pressure and unsaturated strength</span></a></li>
+<li><a href="../../docs/theory/seepage.html"><span class="n">3.7</span><span>Finite-element seepage</span></a></li>
+<li><a href="../../docs/theory/rapid-drawdown.html"><span class="n">3.8</span><span>Rapid drawdown</span></a></li>
+<li><a href="../../docs/theory/seismic.html"><span class="n">3.9</span><span>Seismic analysis</span></a></li>
+<li><a href="../../docs/theory/supports.html"><span class="n">3.10</span><span>Support forces</span></a></li>
+<li><a href="../../docs/theory/probabilistic.html"><span class="n">3.11</span><span>Probabilistic analysis</span></a></li>
+<li><a href="../../docs/theory/partial-factors.html"><span class="n">3.12</span><span>Partial factors (Eurocode 7)</span></a></li>
+</ul></details>
+<details open><summary>4 · Verification</summary><ul>
+<li><a href="../../docs/verification/methodology.html"><span class="n">4.1</span><span>Verification methodology</span></a></li>
+<li><a href="../../docs/verification/slope-benchmarks.html"><span class="n">4.2</span><span>Limit-equilibrium benchmarks</span></a></li>
+<li><a href="../../docs/verification/analytic-checks.html"><span class="n">4.3</span><span>Groundwater and analytic checks</span></a></li>
+</ul></details>
+<details open><summary>5 · Reference</summary><ul>
+<li><a href="../../docs/reference/mcp.html"><span class="n">5.1</span><span>MCP server</span></a></li>
+<li><a href="../../docs/reference/cli.html"><span class="n">5.2</span><span>Command-line interface</span></a></li>
+<li><a href="../../docs/reference/python-api.html"><span class="n">5.3</span><span>Python API</span></a></li>
+<li><a href="../../docs/reference/file-format.html"><span class="n">5.4</span><span>The .ogr file format</span></a></li>
+<li><a href="../../docs/reference/error-codes.html"><span class="n">5.5</span><span>Error codes</span></a></li>
+<li><a href="../../docs/reference/notation.html"><span class="n">5.6</span><span>Notation and glossary</span></a></li>
+<li><a href="../../docs/reference/bibliography.html"><span class="n">5.7</span><span>Bibliography</span></a></li>
+</ul></details>
+</nav>
+<!-- @end docnav -->
+  </aside>
+
+  <main id="main" class="doc-main">
+    <header class="doc-head">
+<!-- @inc dochead -->
+<button class="doc-side-toggle" type="button" aria-controls="doc-side" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg> Contents</button>
+<nav class="crumbs label" aria-label="Breadcrumb"><a href="../../docs/index.html">Documentation</a><span aria-hidden="true">/</span><span>2 · User guide</span></nav>
+<div class="chapter label">2.10</div>
+<h1>Probabilistic and sensitivity analysis</h1>
+<div class="meta label"><span>Describes OGR Slip2D <span data-v>0.1.235</span></span></div>
+<!-- @end dochead -->
+    </header>
+
+    <article class="doc prose">
+      <p class="lede">A probabilistic analysis treats some inputs of the model as random variables, draws samples of them and recomputes the factor of safety for each sample, which gives its distribution, the probability of failure and the reliability index. A sensitivity analysis instead sweeps one input at a time across its range. This page explains how to set up both and how to read their output; the statistics behind them are in <a class="xref" href="../theory/probabilistic.html">Section 3.11</a>.</p>
+      <div class="note warn"><span class="label">Version 0.1.235</span><p>In this version the run cannot be completed from the window's menu: see <a class="xref" href="#compute-statistics">Section 2.10.4</a>. The settings below are still the ones the analysis uses when it is run through the MCP server or the Python API.</p></div>
+
+      <h2 id="enable"><span class="secnum">2.10.1</span><span class="ht">Enabling the analysis</span><a class="anchor" href="#enable" aria-label="Link to this section">#</a></h2>
+      <p>Both analyses are switched on in <span class="ui">Analysis → Project Settings →</span> <span class="ui">Statistics</span>. Until one of them is ticked, the commands of the <span class="ui">Statistics</span> menu stay greyed out: <span class="ui">Random Variables…</span> becomes available first, <span class="ui">Compute Statistics</span> once at least one random variable is defined, and <span class="ui">Show Statistics</span> once there are results to show.</p>
+      <figure class="tbl" id="tbl-statistics-page">
+        <figcaption><span class="fignum">Table 2.10.1</span> The Statistics page of Project Settings.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Field</th><th>What it does</th><th>Default</th></tr></thead>
+            <tbody>
+              <tr><td>Probabilistic analysis</td><td>Samples the random variables and recomputes the factor of safety for each sample.</td><td>off</td></tr>
+              <tr><td>Sensitivity analysis</td><td>Sweeps each random variable across its range, one at a time.</td><td>off</td></tr>
+              <tr><td>Analysis type</td><td><em>Global Minimum</em> evaluates every sample on the critical surface of the deterministic analysis. <em>Overall Slope</em> repeats the whole search for every sample, so the location of the critical surface is not assumed fixed; it is much slower.</td><td>Global Minimum</td></tr>
+              <tr><td>Sampling method</td><td><em>Monte Carlo</em> or <em>Latin Hypercube</em>.</td><td>Monte Carlo</td></tr>
+              <tr><td>Number of samples</td><td>N (1 to 1 000 000).</td><td class="n">1000</td></tr>
+              <tr><td>Sensitivity intervals</td><td>Equal intervals into which each variable's range is divided for the sensitivity sweep (2 to 500); intervals + 1 values are evaluated.</td><td class="n">50</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+
+      <h2 id="random-variables"><span class="secnum">2.10.2</span><span class="ht">Random variables</span><a class="anchor" href="#random-variables" aria-label="Link to this section">#</a></h2>
+      <p><span class="ui">Statistics → Random Variables…</span> opens a dialog in three columns. <strong>Available parameters</strong> lists every input of the model that can become random; select one and press <strong>Add →</strong> to move it to <strong>Random variables</strong> (<strong>Remove</strong> takes it back). The selected variable's distribution is edited on the right. The parameters on offer are:</p>
+      <ul>
+        <li>the parameters of each material's strength model (cohesion, friction angle and the parameters of the other models);</li>
+        <li>each material's unit weight and saturated unit weight, r<sub>u</sub>, constant pore pressure, unsaturated shear strength angle φ<sup>b</sup> and air entry value;</li>
+        <li>the hydraulic parameters of each material that has them;</li>
+        <li>the parameters of each support;</li>
+        <li>the magnitudes of the distributed and line loads;</li>
+        <li>the seismic coefficients k<sub>h</sub> and k<sub>v</sub>;</li>
+        <li>a vertical offset of the water table, when the model has one.</li>
+      </ul>
+      <figure class="tbl" id="tbl-random-variable">
+        <figcaption><span class="fignum">Table 2.10.2</span> Statistical parameters of a random variable.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Field</th><th>What it does</th></tr></thead>
+            <tbody>
+              <tr><td>Distribution</td><td><em>Normal</em>, <em>Uniform</em>, <em>Triangular</em>, <em>Beta</em>, <em>Exponential</em>, <em>Lognormal</em> or <em>Gamma</em>.</td></tr>
+              <tr><td>Mean (deterministic)</td><td>The value in the model; read-only. To change the mean, change the model.</td></tr>
+              <tr><td>Standard deviation</td><td>Used by Normal, Lognormal, Beta and Gamma; greyed out for the others.</td></tr>
+              <tr><td>Relative minimum, Relative maximum</td><td>How far below and above the mean the variable may go. <em>Actual range</em> shows the result, from mean − relative minimum to mean + relative maximum.</td></tr>
+              <tr><td>Correlated with, Correlation coefficient</td><td>Another random variable of the model and a coefficient between −1 and 1. A negative coefficient between cohesion and friction angle is the usual case.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p>A variable just added is Normal, with a standard deviation of 10 % of its mean and relative limits of 30 % of the mean on each side (0.1 and 0.3 when the mean is zero, as for a seismic coefficient or the water-table offset). <strong>Plot distribution…</strong> draws the probability density that will be sampled, with the mean marked.</p>
+      <figure class="fig shot-fig" id="fig-random-variables">
+        <div class="art"><img src="../../assets/img/shots/random-variables.webp" alt="The Random Variables dialog: available parameters on the left, the random variables in the middle and the distribution, standard deviation, relative limits and correlation of the selected variable on the right" loading="lazy" width="1075" height="700"></div>
+        <figcaption><span class="fignum">Figure 2.10.1</span> Statistics → Random Variables.</figcaption>
+      </figure>
+      <div class="impl">
+        <span class="label">In OGR Slip2D</span>
+        <p>Every distribution is <strong>truncated</strong> to its actual range: samples are drawn by inverting the distribution between the two limits, so no value falls outside them and Latin Hypercube strata survive the truncation. A declared correlation is imposed by reordering the ranks of the second variable, which keeps both marginal distributions exactly <a class="cite" href="../reference/bibliography.html#iman1982">(Iman &amp; Conover, 1982)</a>. Each sample is applied to a copy of the model; your project is never changed by the run.</p>
+        <span class="src">Source: <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_core/statistics/distributions.py" target="_blank" rel="noopener">ogr_core/statistics/distributions.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_core/statistics/random_variables.py" target="_blank" rel="noopener">ogr_core/statistics/random_variables.py</a></span>
+      </div>
+
+      <h2 id="sampling"><span class="secnum">2.10.3</span><span class="ht">Sampling and the seed</span><a class="anchor" href="#sampling" aria-label="Link to this section">#</a></h2>
+      <p><em>Monte Carlo</em> draws every sample independently. <em>Latin Hypercube</em> divides the probability range of each variable into N strata and draws one sample in each, which usually needs fewer samples for the same accuracy <a class="cite" href="../reference/bibliography.html#mckay1979">(McKay, Beckman &amp; Conover, 1979)</a>.</p>
+      <p>The random numbers are set in <span class="ui">Analysis → Project Settings →</span> <span class="ui">Random Numbers</span>:</p>
+      <ul>
+        <li><strong>Generation</strong>: <em>Pseudo-random</em> (default) is reproducible — the same <strong>Seed</strong> (10116 by default) gives the same samples, and therefore the same answer, every time; <em>Random</em> takes the seed from the clock, so successive runs differ, which is a way to check that a conclusion is not an artefact of one seed. The Seed box is greyed out under Random.</li>
+        <li><strong>Share one Latin Hypercube stratification across variables</strong> (off): sample <em>i</em> then sits in the same stratum of every variable, so all of them are unfavourable together. It answers a different question from the independent case and usually widens the spread. It does nothing under Monte Carlo.</li>
+      </ul>
+      <p>The same page also seeds the random slip-surface searches (<a class="xref" href="surfaces.html">Section 2.7</a>).</p>
+
+      <h2 id="compute-statistics"><span class="secnum">2.10.4</span><span class="ht">Computing the statistics</span><a class="anchor" href="#compute-statistics" aria-label="Link to this section">#</a></h2>
+      <p><span class="ui">Statistics → Compute Statistics</span> first runs the deterministic analysis, with every enabled method and its search, to find the critical surface of each method. Then:</p>
+      <ul>
+        <li>a <strong>Global Minimum</strong> analysis evaluates the N samples on the critical surface of each method — each method keeps its own;</li>
+        <li>an <strong>Overall Slope</strong> analysis repeats the whole search N times. Besides the distribution of the minimum factor of safety, it records the critical surface of every sample and the <em>critical probabilistic surface</em>: the individual surface with the highest probability of failure among those evaluated at least five times, which need not be the deterministic critical surface;</li>
+        <li>a <strong>sensitivity</strong> analysis is computed as described below.</li>
+      </ul>
+      <p>With a design standard active, every sample is factored like the deterministic model, so the statistics describe the over-design factor (<a class="xref" href="design-standards.html">Section 2.11</a>). With a seismic analysis mode on (critical seismic coefficient or Newmark displacement), the statistics are taken on the factor of safety of the surface with the lowest critical seismic coefficient, which is not necessarily the lowest factor of safety of the sample; the analysis notes say so.</p>
+      <div class="note warn"><span class="label">Compute Statistics fails from the menu in version 0.1.235</span><p>Started from the window, the run stops with an internal error (<code>TypeError: cannot pickle 'MainWindow' object</code>) when it tries to copy the model for the first sample, after the deterministic analysis. The window shows no message, no statistics are produced and Show Statistics stays greyed out. The same analysis runs through the MCP server (its <code>statistics_run</code> tool) and through the operations of the Python API, which copy the model in a way that works (<a class="xref" href="../reference/mcp.html">Section 5.1</a>, <a class="xref" href="../reference/python-api.html">Section 5.3</a>).</p></div>
+
+      <h2 id="statistics-window"><span class="secnum">2.10.5</span><span class="ht">The Statistics window</span><a class="anchor" href="#statistics-window" aria-label="Link to this section">#</a></h2>
+      <p>After a successful run the <strong>Statistics</strong> window opens by itself; <span class="ui">Statistics → Show Statistics</span> opens it again. Choose the <strong>Method</strong> and the <strong>Plot</strong>:</p>
+      <ul>
+        <li><strong>Histogram of FoS</strong>: the factors of safety of the samples, with the failure threshold (F = 1) and the mean marked. The line below gives the number of samples, mean, standard deviation, minimum and maximum, the probability of failure, the reliability index (normal and lognormal) and the deterministic factor of safety.</li>
+        <li><strong>Convergence</strong>: the mean factor of safety and the probability of failure against the number of samples. A flat tail means the sample count is sufficient; a curve still drifting means more samples are needed.</li>
+        <li><strong>Sensitivity</strong>: the factor of safety against each variable, as a percentage of its range, with the variables ranked by how much they move it.</li>
+      </ul>
+      <p>When a run could not sample every variable — for example because a variable refers to a material that has since been deleted — the window says so in red above the plot.</p>
+      <figure class="fig shot-fig" id="fig-statistics-window">
+        <div class="art"><img src="../../assets/img/shots/statistics-window.webp" alt="The Statistics window showing the histogram of the sampled factors of safety with the failure threshold and the mean marked, and the summary statistics below" loading="lazy" width="1500" height="900"></div>
+        <figcaption><span class="fignum">Figure 2.10.2</span> The Statistics window with the histogram of the factor of safety.</figcaption>
+      </figure>
+      <p>The probability of failure and the reliability indices are computed from the N valid samples:</p>
+      <div class="eq" id="eq-pf" data-tex="P_f = \dfrac{n(F &lt; 1)}{N}" data-n="2.10.1"><!--k--><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>P</mi><mi>f</mi></msub><mo>=</mo><mstyle scriptlevel="0" displaystyle="true"><mfrac><mrow><mi>n</mi><mo stretchy="false">(</mo><mi>F</mi><mo>&lt;</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><mi>N</mi></mfrac></mstyle></mrow><annotation encoding="application/x-tex">P_f = \dfrac{n(F &lt; 1)}{N}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.9694em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.1389em;">P</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.1076em;">f</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:2.113em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.109em;">N</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">n</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.1389em;">F</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span><!--/k--></div>
+      <div class="eq" id="eq-beta" data-tex="\beta = \dfrac{\mu_F - 1}{\sigma_F} \qquad \beta_{\mathrm{LN}} = \dfrac{\mu_{\ln F}}{\sigma_{\ln F}}" data-n="2.10.2"><!--k--><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>β</mi><mo>=</mo><mstyle scriptlevel="0" displaystyle="true"><mfrac><mrow><msub><mi>μ</mi><mi>F</mi></msub><mo>−</mo><mn>1</mn></mrow><msub><mi>σ</mi><mi>F</mi></msub></mfrac></mstyle><mspace width="2em"/><msub><mi>β</mi><mrow><mi mathvariant="normal">L</mi><mi mathvariant="normal">N</mi></mrow></msub><mo>=</mo><mstyle scriptlevel="0" displaystyle="true"><mfrac><msub><mi>μ</mi><mrow><mi>ln</mi><mo>⁡</mo><mi>F</mi></mrow></msub><msub><mi>σ</mi><mrow><mi>ln</mi><mo>⁡</mo><mi>F</mi></mrow></msub></mfrac></mstyle></mrow><annotation encoding="application/x-tex">\beta = \dfrac{\mu_F - 1}{\sigma_F} \qquad \beta_{\mathrm{LN}} = \dfrac{\mu_{\ln F}}{\sigma_{\ln F}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.0528em;">β</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:2.1574em;vertical-align:-0.836em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">σ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.1389em;">F</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">μ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.1389em;">F</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.836em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:2em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0528em;">β</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.0528em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight">LN</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1.9436em;vertical-align:-0.836em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.1076em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">σ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mop mtight"><span class="mtight">l</span><span class="mtight">n</span></span><span class="mspace mtight" style="margin-right:0.1952em;"></span><span class="mord mathnormal mtight" style="margin-right:0.1389em;">F</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">μ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mop mtight"><span class="mtight">l</span><span class="mtight">n</span></span><span class="mspace mtight" style="margin-right:0.1952em;"></span><span class="mord mathnormal mtight" style="margin-right:0.1389em;">F</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.836em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span><!--/k--></div>
+      <p class="where">where</p>
+      <dl class="symbols">
+        <dt><span class="m" data-tex="n(F &lt; 1)"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo stretchy="false">(</mo><mi>F</mi><mo>&lt;</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">n(F &lt; 1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">n</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.1389em;">F</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span><!--/k--></span></dt><dd>number of samples with a factor of safety below 1</dd>
+        <dt><span class="m" data-tex="\mu_F,\ \sigma_F"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>μ</mi><mi>F</mi></msub><mo separator="true">,</mo><mtext> </mtext><msub><mi>σ</mi><mi>F</mi></msub></mrow><annotation encoding="application/x-tex">\mu_F,\ \sigma_F</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal">μ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.1389em;">F</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace"> </span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">σ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.1389em;">F</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><!--/k--></span></dt><dd>mean and standard deviation of the factors of safety</dd>
+        <dt><span class="m" data-tex="\mu_{\ln F},\ \sigma_{\ln F}"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>μ</mi><mrow><mi>ln</mi><mo>⁡</mo><mi>F</mi></mrow></msub><mo separator="true">,</mo><mtext> </mtext><msub><mi>σ</mi><mrow><mi>ln</mi><mo>⁡</mo><mi>F</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\mu_{\ln F},\ \sigma_{\ln F}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal">μ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mop mtight"><span class="mtight">l</span><span class="mtight">n</span></span><span class="mspace mtight" style="margin-right:0.1952em;"></span><span class="mord mathnormal mtight" style="margin-right:0.1389em;">F</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace"> </span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">σ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mop mtight"><span class="mtight">l</span><span class="mtight">n</span></span><span class="mspace mtight" style="margin-right:0.1952em;"></span><span class="mord mathnormal mtight" style="margin-right:0.1389em;">F</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><!--/k--></span></dt><dd>mean and standard deviation of their natural logarithms, for the lognormal index</dd>
+      </dl>
+
+      <h2 id="interpret-statistics"><span class="secnum">2.10.6</span><span class="ht">The Statistics menu of the Interpret window</span><a class="anchor" href="#interpret-statistics" aria-label="Link to this section">#</a></h2>
+      <p>The Interpret window (<a class="xref" href="results.html">Section 2.8</a>) has its own <span class="ui">Statistics</span> menu. Its first three plots do <strong>not</strong> use the probabilistic samples: they are drawn from the factors of safety of the surfaces analysed by the search, and are available after any Compute.</p>
+      <figure class="tbl" id="tbl-interpret-statistics">
+        <figcaption><span class="fignum">Table 2.10.3</span> The Statistics menu of the Interpret window.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Command</th><th>What it shows</th><th>Needs</th></tr></thead>
+            <tbody>
+              <tr><td>Histogram Plot…</td><td>Histogram of the factors of safety of the valid surfaces of the search (25 bins, adjustable).</td><td>a Compute</td></tr>
+              <tr><td>Cumulative Plot…</td><td>Cumulative distribution of the same factors of safety.</td><td>a Compute</td></tr>
+              <tr><td>Scatter Plot…</td><td>Factor of safety against radius, for the valid surfaces of the search.</td><td>a Compute</td></tr>
+              <tr><td>Sensitivity Plot…</td><td>The sensitivity curves of the first method.</td><td>statistics results</td></tr>
+              <tr><td>Convergence Plot…</td><td>Mean factor of safety and probability of failure against the number of samples.</td><td>statistics results</td></tr>
+              <tr><td>Export Statistics Data…</td><td>A CSV file with one row per sample: its number, the value of every random variable and the factor of safety.</td><td>statistics results</td></tr>
+              <tr><td>Show GM Surfaces, Pick GM Surfaces</td><td>Draws, or lists for selection, every minimum the result reports: the critical surface of each sample of an Overall Slope run, or the regions a Particle Swarm Search with several minima told apart.</td><td>either of those</td></tr>
+              <tr><td>Critical Probabilistic Surface</td><td>Gives the probability of failure and the reliability index of the critical probabilistic surface in the status bar.</td><td>an Overall Slope run</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p>Commands that need statistics results are greyed out until there are some, with a tooltip saying so. Show GM Surfaces and Pick GM Surfaces do not need them: they also work after a Particle Swarm Search with <em>Report several minima</em> ticked, which in version 0.1.235 is the only way to use them from the window.</p>
+
+      <h2 id="sensitivity"><span class="secnum">2.10.7</span><span class="ht">Sensitivity analysis</span><a class="anchor" href="#sensitivity" aria-label="Link to this section">#</a></h2>
+      <p>For each random variable in turn, the sensitivity analysis divides its actual range into the number of <strong>Sensitivity intervals</strong> (50 by default, so 51 values) and recomputes the factor of safety on the critical surface of each method at every value, with all the other variables held at their means. Only the minimum and maximum of each variable are used: the distribution, the standard deviation and the correlations play no part, and no probability of failure comes out of it. Its result shows which inputs matter most, and how far one of them can move before the factor of safety reaches 1.</p>
+
+      <h2 id="reading"><span class="secnum">2.10.8</span><span class="ht">Reading the results</span><a class="anchor" href="#reading" aria-label="Link to this section">#</a></h2>
+      <ul>
+        <li>Check the convergence plot before quoting a probability of failure: a value that still drifts with the number of samples is not yet a result.</li>
+        <li>A Global Minimum run assumes that the critical surface does not move with the samples. When the inputs could change the mechanism — a weak layer whose strength varies, for instance — compare with an Overall Slope run.</li>
+        <li>The reliability index assumes a normal or lognormal distribution of the factor of safety; the probability of failure assumes nothing but counts samples, so with few samples a small probability is poorly resolved.</li>
+        <li>A sample that cannot be evaluated is left out, and the run reports how many were.</li>
+      </ul>
+    </article>
+
+<!-- @inc docfoot -->
+<nav class="doc-pager" aria-label="Pages">
+<a class="prev" href="../../docs/user-guide/groundwater.html"><span class="label">← Previous · 2.9</span><b>Finite-element groundwater</b></a>
+<a class="next" href="../../docs/user-guide/design-standards.html"><span class="label">2.11 · Next →</span><b>Design standards</b></a>
+</nav>
+<div class="doc-edit label"><a href="https://github.com/samuelsl27/OpenGeoRock_Web.github.io/blob/main/docs/user-guide/probabilistic.html" target="_blank" rel="noopener">Edit this page ↗</a><a href="https://github.com/samuelsl27/OGR-Slip2D/issues" target="_blank" rel="noopener">Report a problem ↗</a></div>
+<!-- @end docfoot -->
+  </main>
+
+  <aside class="doc-toc" aria-label="On this page">
+    <div class="toc-inner">
+<!-- @inc pagetoc -->
+<span class="label">On this page</span><ul><li class="h2"><a href="#enable">2.10.1 Enabling the analysis</a></li><li class="h2"><a href="#random-variables">2.10.2 Random variables</a></li><li class="h2"><a href="#sampling">2.10.3 Sampling and the seed</a></li><li class="h2"><a href="#compute-statistics">2.10.4 Computing the statistics</a></li><li class="h2"><a href="#statistics-window">2.10.5 The Statistics window</a></li><li class="h2"><a href="#interpret-statistics">2.10.6 The Statistics menu of the Interpret window</a></li><li class="h2"><a href="#sensitivity">2.10.7 Sensitivity analysis</a></li><li class="h2"><a href="#reading">2.10.8 Reading the results</a></li></ul><button class="print" type="button"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="1.5"/><path d="M6 14h12v7H6z"/></svg> Print this page</button>
+<!-- @end pagetoc -->
+    </div>
+  </aside>
+</div>
+
+<!-- @inc footer -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <a class="brand" href="../../index.html" aria-label="OpenGeoRock — home">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
+          <b>OpenGeoRock</b>
+        </a>
+        <p class="tagline">Open-source geotechnical software, built in the open at the Universidad Politécnica de Cartagena.</p>
+        <span class="lang" role="group" aria-label="Language"><a href="../../docs/user-guide/probabilistic.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../../es/docs/user-guide/probabilistic.html" hreflang="es" lang="es">ES</a></span>
+      </div>
+      <div>
+        <h5>Products</h5>
+        <ul>
+          <li><a href="../../products/slip2d.html">OGR Slip2D</a></li>
+          <li><a href="../../products/index.html">The suite</a></li>
+          <li><a href="../../ai/index.html">MCP server</a></li>
+          <li><a href="../../download/index.html">Download</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Learn</h5>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="../../docs/getting-started/quick-start.html">Quick start</a></li>
+          <li><a href="../../docs/theory/methods.html">Theory manual</a></li>
+          <li><a href="../../examples/index.html">Examples</a></li>
+          <li><a href="../../verification/index.html">Verification</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Project</h5>
+        <ul>
+          <li><a href="../../about/index.html">About</a></li>
+          <li><a href="../../about/index.html#team">Team</a></li>
+          <li><a href="../../about/index.html#cite">How to cite</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Contributing</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/LICENSE" target="_blank" rel="noopener">Licence · AGPL-3.0</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Connect</h5>
+        <ul>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/issues" target="_blank" rel="noopener">Issues</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/tree/main/docs/changelog" target="_blank" rel="noopener">Changelog</a></li>
+          <li><a href="mailto:samuel.saez@edu.upct.es">Email</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© 2026 Samuel Sáez López · OGR Slip2D is free software under AGPL-3.0-or-later, with no warranty of any kind.</span>
+      <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
+    </div>
+  </div>
+  <div class="lang-hint" role="dialog" aria-label="Idioma" lang="es">
+    ¿Prefieres leer esta web en español?
+    <div class="row"><a class="btn sm primary go" href="../../es/index.html">Ver en español</a><button class="btn sm" type="button" data-dismiss>No, gracias</button></div>
+  </div>
+</footer>
+<!-- @end footer -->
+</body>
+</html>

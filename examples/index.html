@@ -1,0 +1,1091 @@
+<!doctype html>
+<html class="no-js" lang="en" data-root="../">
+<head>
+<meta charset="utf-8">
+<title>Worked examples — OGR Slip2D</title>
+<meta name="description" content="Five slope-stability models solved with OGR Slip2D, with the figures computed by the program, their data and the .ogr files: a two-layer slope, an embankment on a weak seam, an earth dam with steady seepage, a probabilistic analysis and a rapid drawdown.">
+<!-- @inc head -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.replace("no-js", "js")</script>
+<link rel="canonical" href="https://opengeorock.org/examples/">
+<link rel="alternate" hreflang="en" href="https://opengeorock.org/examples/">
+<link rel="alternate" hreflang="es" href="https://opengeorock.org/es/examples/">
+<link rel="alternate" hreflang="x-default" href="https://opengeorock.org/examples/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="OpenGeoRock">
+<meta property="og:title" content="Worked examples — OGR Slip2D">
+<meta property="og:description" content="Five slope-stability models solved with OGR Slip2D, with the figures computed by the program, their data and the .ogr files: a two-layer slope, an embankment on a weak seam, an earth dam with steady seepage, a probabilistic analysis and a rapid drawdown.">
+<meta property="og:url" content="https://opengeorock.org/examples/">
+<meta property="og:image" content="https://opengeorock.org/assets/img/og-image.png">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#f4efe6">
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&amp;display=swap">
+<link rel="stylesheet" href="../assets/css/site.css">
+
+<script src="../assets/js/site.js" defer></script>
+<!-- @end head -->
+</head>
+<body>
+<!-- @inc header -->
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="wrap top-inner">
+    <a class="brand" href="../index.html" aria-label="OpenGeoRock — home">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
+      <b>OpenGeoRock</b>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <div class="has-menu" data-nav="products">
+        <button type="button" aria-expanded="false" aria-haspopup="true">Products <svg class="caret" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+        <div class="mega">
+          <div class="mega-cols">
+            <div class="mega-col">
+              <span class="label">Available today</span>
+              <a class="mega-item feature" href="../products/slip2d.html"><b>OGR Slip2D</b><span>2D slope stability: limit equilibrium, finite-element groundwater and probabilistic analysis.</span></a>
+              <a class="mega-item" href="../ai/index.html"><b>MCP server for AI agents <span class="tag live">new</span></b><span>Let Claude, ChatGPT or a local model build and run OGR Slip2D models.</span></a>
+            </div>
+            <div class="mega-col">
+              <span class="label">On the roadmap</span>
+              <a class="mega-item" href="../products/index.html#ogr-data"><b>OGR Data</b><span>Soil and rock-mass property database</span></a>
+              <a class="mega-item" href="../products/index.html#ogr-fem2d"><b>OGR FEM2D</b><span>2D elastoplastic finite elements</span></a>
+              <a class="mega-item" href="../products/index.html#ogr-slip3d"><b>OGR Slip3D</b><span>3D limit equilibrium</span></a>
+              <a class="mega-item" href="../products/index.html#ogr-fem3d"><b>OGR FEM3D</b><span>3D finite elements with coupled flow</span></a>
+            </div>
+            <div class="mega-col">
+              <span class="label">Use it from</span>
+              <a class="mega-item" href="../docs/getting-started/interface.html"><b>The desktop program</b><span>Modeller, interpreter and Python terminal</span></a>
+              <a class="mega-item" href="../docs/reference/python-api.html"><b>Python</b><span>Script analyses from your own code</span></a>
+              <a class="mega-item" href="../docs/reference/cli.html"><b>The command line</b><span>Batch runs with ogr-slip2d-cli</span></a>
+            </div>
+          </div>
+          <div class="mega-foot"><span>Five programs, one open core.</span><a href="../products/index.html">All products →</a></div>
+        </div>
+      </div>
+      <a href="../examples/index.html" data-nav="examples" aria-current="page">Examples</a>
+      <a href="../ai/index.html" data-nav="ai">AI &amp; MCP</a>
+      <a href="../docs/index.html" data-nav="docs">Docs</a>
+      <a href="../verification/index.html" data-nav="verification">Verification</a>
+      <a href="../about/index.html" data-nav="about">About</a>
+    </nav>
+    <div class="top-right">
+      <span class="lang" role="group" aria-label="Language"><a href="../examples/index.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../es/examples/index.html" hreflang="es" lang="es">ES</a></span>
+      <a class="btn gh" href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener" aria-label="Source code on GitHub"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0C17.3 4.7 18.3 5 18.3 5c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0012 .5z"/></svg><span>GitHub</span></a>
+      <a class="btn primary" href="../download/index.html" data-nav="download">Get OGR Slip2D</a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Main (mobile)">
+    <span class="label">Products</span>
+    <a href="../products/slip2d.html">OGR Slip2D</a>
+    <div class="sub"><a href="../products/index.html">The OpenGeoRock suite</a><a href="../ai/index.html">MCP server for AI agents</a></div>
+    <span class="label">Learn</span>
+    <a href="../examples/index.html">Examples</a>
+    <a href="../docs/index.html">Documentation</a>
+    <a href="../verification/index.html">Verification</a>
+    <span class="label">Project</span>
+    <a href="../about/index.html">About</a>
+    <a href="../download/index.html">Get OGR Slip2D</a>
+    <a href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener">Source on GitHub ↗</a>
+    <span class="lang" role="group" aria-label="Language"><a href="../examples/index.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../es/examples/index.html" hreflang="es" lang="es">ES</a></span>
+  </nav>
+</header>
+<!-- @end header -->
+
+<main id="main">
+
+<!-- ====== HERO ====== -->
+<section class="page-hero">
+  <div class="wrap">
+    <nav class="crumbs label" aria-label="Breadcrumb"><a href="../index.html">Home</a><span aria-hidden="true">/</span><span>Examples</span></nav>
+    <h1>Worked examples, <em>with the files.</em></h1>
+    <p class="lede">Five models solved with OGR Slip2D <span data-v>0.1.235</span>. Each comes with the figure the program computed, the data you need to check it and the <code>.ogr</code> file to open it yourself. Every number on this page is the program's output.</p>
+    <nav class="chips mt-m" aria-label="Examples on this page">
+      <a class="tag" href="#ex1">1 · Two-layer slope</a>
+      <a class="tag" href="#ex2">2 · Embankment on a weak seam</a>
+      <a class="tag" href="#ex3">3 · Earth dam, steady seepage</a>
+      <a class="tag" href="#ex4">4 · Probabilistic analysis</a>
+      <a class="tag" href="#ex5">5 · Rapid drawdown</a>
+    </nav>
+  </div>
+</section>
+
+<!-- ====== EJEMPLO 1 ====== -->
+<section class="section" id="ex1">
+  <div class="wrap grid-2" style="align-items:start">
+    <div>
+      <div class="sec-num label">Example 1</div>
+      <h2 class="mt-s">A two-layer slope <em>with a water table.</em></h2>
+      <p>A 16 m high cut with a bench, in silty sand over clay, on a base of dense gravel, with a water table through the slope. It is the model of the <a href="../docs/getting-started/quick-start.html">quick start</a>, where it is built step by step. The automatic grid places 169 centres above the slope and tries 11 radii from each, 1 859 circles in all.</p>
+      <dl class="spec-list one mt-m">
+        <div><dt class="label">Silty sand</dt><dd>c′ = 5 kPa · φ′ = 32° · γ = 19 kN/m³</dd></div>
+        <div><dt class="label">Clay</dt><dd>c′ = 12 kPa · φ′ = 24° · γ = 19.5 kN/m³</dd></div>
+        <div><dt class="label">Dense gravel</dt><dd>c′ = 0 · φ′ = 40° · γ = 21 kN/m³</dd></div>
+        <div><dt class="label">Search</dt><dd>Grid 12 × 12, 11 radii per centre, 30 slices</dd></div>
+      </dl>
+      <div class="table-wrap mt-m">
+        <table class="data">
+          <thead><tr><th>Method</th><th>F</th></tr></thead>
+          <tbody>
+            <tr><td>Bishop simplified</td><td>1.300</td></tr>
+            <tr><td>Spencer (λ = 0.343)</td><td><strong>1.290</strong></td></tr>
+            <tr><td>GLE / Morgenstern–Price</td><td>1.292</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="cta-row">
+        <a class="btn primary" href="../assets/models/ej01-two-layer-slope.ogr" download>Download the model</a><span class="label muted" style="align-self:center">.ogr · 8 KB</span>
+        <a class="btn" href="../docs/getting-started/quick-start.html">Build it step by step <span class="arrow">→</span></a>
+      </div>
+    </div>
+    <figure class="sheet" style="margin:0" data-animate>
+      <div class="fig"><!-- svg:ex1 --><svg class="slope-svg" id="ex1-svg" viewBox="0 0 1060 672" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="ex1-svg-t">
+<title id="ex1-svg-t">Limit-equilibrium analysis computed by OGR Slip2D: 156 of 169 grid centres with a valid circle, critical factor of safety 1.290 (spencer)</title>
+<defs>
+<clipPath id="ex1-svg-clip"><polygon points="30,642 1030,642 1030,462 690,462 570,382 510,382 390,302 30,302"/></clipPath>
+</defs>
+<g class="strata" clip-path="url(#ex1-svg-clip)">
+<polygon class="st st-0" points="30,642 1030,642 1030,462 690,462 570,382 510,382 390,302 30,302"/>
+<polygon class="st st-1" points="-100,402 30,402 600,402 1160,402 1160,772 -100,772"/>
+<polygon class="st st-2" points="-100,522 30,522 1030,522 1160,522 1160,772 -100,772"/>
+</g>
+<polyline class="contact" points="30,402 600,402"/>
+<polyline class="contact" points="30,522 1030,522"/>
+<polyline class="wt" points="30,362 480,392 630,452 730,477 1030,482"/>
+<path class="wt-mark" d="M141,356h18l-9,12z"/><path class="wt-tick" d="M143,375h14M146,379h8"/>
+<g class="centres">
+<circle cx="280" cy="302" r="5.5" style="--f:1.000"/>
+<circle cx="280" cy="279.33" r="5.5" style="--f:1.000"/>
+<circle cx="280" cy="256.67" r="5.5" style="--f:1.000"/>
+<circle cx="280" cy="234" r="5.5" style="--f:1.000"/>
+<circle cx="280" cy="211.33" r="5.5" style="--f:1.000"/>
+<circle cx="280" cy="188.67" r="5.5" style="--f:1.000"/>
+<circle cx="280" cy="166" r="5.5" style="--f:1.000"/>
+<circle cx="280" cy="143.33" r="5.5" style="--f:1.000"/>
+<circle cx="280" cy="120.67" r="5.5" style="--f:1.000"/>
+<circle cx="280" cy="98" r="5.5" style="--f:1.000"/>
+<circle cx="280" cy="75.33" r="5.5" style="--f:1.000"/>
+<circle cx="280" cy="52.67" r="5.5" style="--f:1.000"/>
+<circle cx="280" cy="30" r="5.5" style="--f:1.000"/>
+<circle cx="330" cy="302" r="5.5" style="--f:1.000"/>
+<circle cx="330" cy="279.33" r="5.5" style="--f:1.000"/>
+<circle cx="330" cy="256.67" r="5.5" style="--f:1.000"/>
+<circle cx="330" cy="234" r="5.5" style="--f:1.000"/>
+<circle cx="330" cy="211.33" r="5.5" style="--f:1.000"/>
+<circle cx="330" cy="188.67" r="5.5" style="--f:1.000"/>
+<circle cx="330" cy="166" r="5.5" style="--f:1.000"/>
+<circle cx="330" cy="143.33" r="5.5" style="--f:1.000"/>
+<circle cx="330" cy="120.67" r="5.5" style="--f:1.000"/>
+<circle cx="330" cy="98" r="5.5" style="--f:1.000"/>
+<circle cx="330" cy="75.33" r="5.5" style="--f:1.000"/>
+<circle cx="330" cy="52.67" r="5.5" style="--f:1.000"/>
+<circle cx="330" cy="30" r="5.5" style="--f:1.000"/>
+<circle cx="380" cy="302" r="5.5" style="--f:1.000"/>
+<circle cx="380" cy="279.33" r="5.5" style="--f:1.000"/>
+<circle cx="380" cy="256.67" r="5.5" style="--f:1.000"/>
+<circle cx="380" cy="234" r="5.5" style="--f:1.000"/>
+<circle cx="380" cy="211.33" r="5.5" style="--f:1.000"/>
+<circle cx="380" cy="188.67" r="5.5" style="--f:1.000"/>
+<circle cx="380" cy="166" r="5.5" style="--f:1.000"/>
+<circle cx="380" cy="143.33" r="5.5" style="--f:1.000"/>
+<circle cx="380" cy="120.67" r="5.5" style="--f:1.000"/>
+<circle cx="380" cy="98" r="5.5" style="--f:1.000"/>
+<circle cx="380" cy="75.33" r="5.5" style="--f:1.000"/>
+<circle cx="380" cy="52.67" r="5.5" style="--f:1.000"/>
+<circle cx="380" cy="30" r="5.5" style="--f:1.000"/>
+<circle cx="430" cy="302" r="5.5" style="--f:0.911"/>
+<circle cx="430" cy="279.33" r="5.5" style="--f:0.750"/>
+<circle cx="430" cy="256.67" r="5.5" style="--f:0.908"/>
+<circle cx="430" cy="234" r="5.5" style="--f:1.000"/>
+<circle cx="430" cy="211.33" r="5.5" style="--f:1.000"/>
+<circle cx="430" cy="188.67" r="5.5" style="--f:1.000"/>
+<circle cx="430" cy="166" r="5.5" style="--f:1.000"/>
+<circle cx="430" cy="143.33" r="5.5" style="--f:1.000"/>
+<circle cx="430" cy="120.67" r="5.5" style="--f:1.000"/>
+<circle cx="430" cy="98" r="5.5" style="--f:1.000"/>
+<circle cx="430" cy="75.33" r="5.5" style="--f:1.000"/>
+<circle cx="430" cy="52.67" r="5.5" style="--f:1.000"/>
+<circle cx="430" cy="30" r="5.5" style="--f:1.000"/>
+<circle cx="480" cy="302" r="5.5" style="--f:0.483"/>
+<circle cx="480" cy="279.33" r="5.5" style="--f:0.375"/>
+<circle cx="480" cy="256.67" r="5.5" style="--f:0.318"/>
+<circle cx="480" cy="234" r="5.5" style="--f:0.351"/>
+<circle cx="480" cy="211.33" r="5.5" style="--f:0.442"/>
+<circle cx="480" cy="188.67" r="5.5" style="--f:0.576"/>
+<circle cx="480" cy="166" r="5.5" style="--f:0.639"/>
+<circle cx="480" cy="143.33" r="5.5" style="--f:0.656"/>
+<circle cx="480" cy="120.67" r="5.5" style="--f:0.617"/>
+<circle cx="480" cy="98" r="5.5" style="--f:0.643"/>
+<circle cx="480" cy="75.33" r="5.5" style="--f:0.610"/>
+<circle cx="480" cy="52.67" r="5.5" style="--f:0.639"/>
+<circle cx="480" cy="30" r="5.5" style="--f:0.678"/>
+<circle cx="530" cy="302" r="5.5" style="--f:0.468"/>
+<circle cx="530" cy="279.33" r="5.5" style="--f:0.387"/>
+<circle cx="530" cy="256.67" r="5.5" style="--f:0.346"/>
+<circle cx="530" cy="234" r="5.5" style="--f:0.295"/>
+<circle cx="530" cy="211.33" r="5.5" style="--f:0.209"/>
+<circle cx="530" cy="188.67" r="5.5" style="--f:0.232"/>
+<circle cx="530" cy="166" r="5.5" style="--f:0.287"/>
+<circle cx="530" cy="143.33" r="5.5" style="--f:0.287"/>
+<circle cx="530" cy="120.67" r="5.5" style="--f:0.302"/>
+<circle cx="530" cy="98" r="5.5" style="--f:0.321"/>
+<circle cx="530" cy="75.33" r="5.5" style="--f:0.331"/>
+<circle cx="530" cy="52.67" r="5.5" style="--f:0.352"/>
+<circle cx="530" cy="30" r="5.5" style="--f:0.373"/>
+<circle cx="580" cy="302" r="5.5" style="--f:0.205"/>
+<circle cx="580" cy="279.33" r="5.5" style="--f:0.122"/>
+<circle cx="580" cy="256.67" r="5.5" style="--f:0.081"/>
+<circle cx="580" cy="234" r="5.5" style="--f:0.062"/>
+<circle cx="580" cy="211.33" r="5.5" style="--f:0.053"/>
+<circle cx="580" cy="188.67" r="5.5" style="--f:0.057"/>
+<circle cx="580" cy="166" r="5.5" style="--f:0.068"/>
+<circle cx="580" cy="143.33" r="5.5" style="--f:0.086"/>
+<circle cx="580" cy="120.67" r="5.5" style="--f:0.112"/>
+<circle cx="580" cy="98" r="5.5" style="--f:0.123"/>
+<circle cx="580" cy="75.33" r="5.5" style="--f:0.139"/>
+<circle cx="580" cy="52.67" r="5.5" style="--f:0.162"/>
+<circle cx="580" cy="30" r="5.5" style="--f:0.196"/>
+<circle cx="630" cy="302" r="5.5" style="--f:0.220"/>
+<circle cx="630" cy="279.33" r="5.5" style="--f:0.139"/>
+<circle cx="630" cy="256.67" r="5.5" style="--f:0.083"/>
+<circle cx="630" cy="234" r="5.5" style="--f:0.039"/>
+<circle cx="630" cy="211.33" r="5.5" style="--f:0.012"/>
+<circle cx="630" cy="188.67" r="5.5" style="--f:0.001"/>
+<circle cx="630" cy="166" r="5.5" style="--f:0.000"/>
+<circle cx="630" cy="143.33" r="5.5" style="--f:0.007"/>
+<circle cx="630" cy="120.67" r="5.5" style="--f:0.021"/>
+<circle cx="630" cy="98" r="5.5" style="--f:0.039"/>
+<circle cx="630" cy="75.33" r="5.5" style="--f:0.053"/>
+<circle cx="630" cy="52.67" r="5.5" style="--f:0.070"/>
+<circle cx="630" cy="30" r="5.5" style="--f:0.088"/>
+<circle cx="680" cy="302" r="5.5" style="--f:0.260"/>
+<circle cx="680" cy="279.33" r="5.5" style="--f:0.266"/>
+<circle cx="680" cy="256.67" r="5.5" style="--f:0.346"/>
+<circle cx="680" cy="234" r="5.5" style="--f:0.307"/>
+<circle cx="680" cy="211.33" r="5.5" style="--f:0.251"/>
+<circle cx="680" cy="188.67" r="5.5" style="--f:0.201"/>
+<circle cx="680" cy="166" r="5.5" style="--f:0.163"/>
+<circle cx="680" cy="143.33" r="5.5" style="--f:0.138"/>
+<circle cx="680" cy="120.67" r="5.5" style="--f:0.122"/>
+<circle cx="680" cy="98" r="5.5" style="--f:0.113"/>
+<circle cx="680" cy="75.33" r="5.5" style="--f:0.110"/>
+<circle cx="680" cy="52.67" r="5.5" style="--f:0.106"/>
+<circle cx="680" cy="30" r="5.5" style="--f:0.118"/>
+<circle cx="730" cy="302" r="5.5" style="--f:1.000"/>
+<circle cx="730" cy="279.33" r="5.5" style="--f:0.946"/>
+<circle cx="730" cy="256.67" r="5.5" style="--f:0.890"/>
+<circle cx="730" cy="234" r="5.5" style="--f:0.857"/>
+<circle cx="730" cy="211.33" r="5.5" style="--f:0.340"/>
+<circle cx="730" cy="188.67" r="5.5" style="--f:0.426"/>
+<circle cx="730" cy="166" r="5.5" style="--f:0.527"/>
+<circle cx="730" cy="143.33" r="5.5" style="--f:0.525"/>
+<circle cx="730" cy="120.67" r="5.5" style="--f:0.468"/>
+<circle cx="730" cy="98" r="5.5" style="--f:0.426"/>
+<circle cx="730" cy="75.33" r="5.5" style="--f:0.389"/>
+<circle cx="730" cy="52.67" r="5.5" style="--f:0.367"/>
+<circle cx="730" cy="30" r="5.5" style="--f:0.352"/>
+<circle cx="780" cy="302" r="5.5" style="--f:1.000"/>
+<circle cx="780" cy="279.33" r="5.5" style="--f:1.000"/>
+<circle cx="780" cy="256.67" r="5.5" style="--f:1.000"/>
+<circle cx="780" cy="234" r="5.5" style="--f:1.000"/>
+<circle cx="780" cy="211.33" r="5.5" style="--f:1.000"/>
+<circle cx="780" cy="188.67" r="5.5" style="--f:1.000"/>
+<circle cx="780" cy="166" r="5.5" style="--f:0.698"/>
+<circle cx="780" cy="143.33" r="5.5" style="--f:0.739"/>
+<circle cx="780" cy="120.67" r="5.5" style="--f:0.816"/>
+<circle cx="780" cy="98" r="5.5" style="--f:0.486"/>
+<circle cx="780" cy="75.33" r="5.5" style="--f:0.572"/>
+<circle cx="780" cy="52.67" r="5.5" style="--f:0.444"/>
+<circle cx="780" cy="30" r="5.5" style="--f:0.519"/>
+<circle cx="830" cy="302" r="5.5" style="--f:1.000"/>
+<circle cx="830" cy="279.33" r="5.5" style="--f:1.000"/>
+<circle cx="830" cy="256.67" r="5.5" style="--f:1.000"/>
+<circle cx="830" cy="234" r="5.5" style="--f:1.000"/>
+<circle cx="830" cy="211.33" r="5.5" style="--f:1.000"/>
+<circle cx="830" cy="188.67" r="5.5" style="--f:1.000"/>
+<circle cx="830" cy="166" r="5.5" style="--f:1.000"/>
+<circle cx="830" cy="143.33" r="5.5" style="--f:1.000"/>
+<circle cx="830" cy="120.67" r="5.5" style="--f:1.000"/>
+<circle cx="830" cy="98" r="5.5" style="--f:1.000"/>
+<circle cx="830" cy="75.33" r="5.5" style="--f:0.812"/>
+<circle cx="830" cy="52.67" r="5.5" style="--f:0.662"/>
+<circle cx="830" cy="30" r="5.5" style="--f:0.579"/>
+</g>
+<g class="surfaces">
+<path class="sf" style="--f:0.442;--i:0" d="M370.65,302A142.05 142.05 0 0 0 466.04,352.69"/>
+<path class="sf" style="--f:0.426;--i:1" d="M372.11,302A411.95 411.95 0 0 0 922.88,462"/>
+<path class="sf" style="--f:0.426;--i:2" d="M539.4,382A271.49 271.49 0 0 0 680.37,455.58"/>
+<path class="sf" style="--f:0.389;--i:3" d="M348.82,302A443.48 443.48 0 0 0 947.17,462"/>
+<path class="sf" style="--f:0.387;--i:4" d="M305.34,301.99A225.8 225.8 0 0 0 675.28,452.19"/>
+<path class="sf" style="--f:0.375;--i:5" d="M396.35,306.23A87.87 87.87 0 0 0 487.35,366.9"/>
+<path class="sf" style="--f:0.373;--i:6" d="M128.52,302A484.95 484.95 0 0 0 750.34,462"/>
+<path class="sf" style="--f:0.367;--i:7" d="M340.74,302A462.26 462.26 0 0 0 944.79,462"/>
+<path class="sf" style="--f:0.352;--i:8" d="M159.14,302A446.88 446.88 0 0 0 709.31,462"/>
+<path class="sf" style="--f:0.352;--i:9" d="M332.84,302A481.38 481.38 0 0 0 942.37,462"/>
+<path class="sf" style="--f:0.351;--i:10" d="M376.39,302A123.93 123.93 0 0 0 473.65,357.77"/>
+<path class="sf" style="--f:0.346;--i:11" d="M295.22,302A239.11 239.11 0 0 0 671.32,449.55"/>
+<path class="sf" style="--f:0.346;--i:12" d="M489.89,368.59A220.61 220.61 0 0 0 760.67,462"/>
+<path class="sf" style="--f:0.340;--i:13" d="M542.99,382A253.18 253.18 0 0 0 688.68,461.12"/>
+<path class="sf" style="--f:0.331;--i:14" d="M160.92,302A433.13 433.13 0 0 0 725.16,462"/>
+<path class="sf" style="--f:0.321;--i:15" d="M162.82,302A420.04 420.04 0 0 0 739.62,462"/>
+<path class="sf" style="--f:0.318;--i:16" d="M384.32,302A105.87 105.87 0 0 0 480.81,362.54"/>
+<path class="sf" style="--f:0.307;--i:17" d="M412.72,317.14A279.92 279.92 0 0 0 842.39,462"/>
+<path class="sf" style="--f:0.302;--i:18" d="M195.83,302A380.2 380.2 0 0 0 697.46,462"/>
+<path class="sf" style="--f:0.295;--i:19" d="M252.11,302A286.09 286.09 0 0 0 702.81,462"/>
+<path class="sf" style="--f:0.287;--i:20" d="M198.93,302A367.12 367.12 0 0 0 712.3,462"/>
+<path class="sf" style="--f:0.287;--i:21" d="M202.63,302A354.49 354.49 0 0 0 725.06,462"/>
+<path class="sf" style="--f:0.266;--i:22" d="M530.68,382A181.21 181.21 0 0 0 687.58,460.39"/>
+<path class="sf" style="--f:0.260;--i:23" d="M537.3,382A163.6 163.6 0 0 0 714.12,462"/>
+<path class="sf" style="--f:0.251;--i:24" d="M400.18,308.79A296.3 296.3 0 0 0 837.99,462"/>
+<path class="sf" style="--f:0.232;--i:25" d="M378.76,302A188.99 188.99 0 0 0 499.86,375.24"/>
+<path class="sf" style="--f:0.220;--i:26" d="M425.62,325.75A205.76 205.76 0 0 0 759.37,462"/>
+<path class="sf" style="--f:0.209;--i:27" d="M385.19,302A170.85 170.85 0 0 0 508.18,380.78"/>
+<path class="sf" style="--f:0.205;--i:28" d="M372.34,302A207.66 207.66 0 0 0 712.37,462"/>
+<path class="sf" style="--f:0.201;--i:29" d="M387.9,302A313.31 313.31 0 0 0 833.14,462"/>
+<path class="sf" style="--f:0.196;--i:30" d="M224.93,302A447.28 447.28 0 0 0 695.91,462"/>
+<path class="sf" style="--f:0.163;--i:31" d="M378.28,302A330.95 330.95 0 0 0 828.03,462"/>
+<path class="sf" style="--f:0.162;--i:32" d="M227.01,302A432.17 432.17 0 0 0 718.63,462"/>
+<path class="sf" style="--f:0.139;--i:33" d="M411.54,316.36A221.58 221.58 0 0 0 755.42,462"/>
+<path class="sf" style="--f:0.139;--i:34" d="M230.33,302A416.71 416.71 0 0 0 735.36,462"/>
+<path class="sf" style="--f:0.138;--i:35" d="M369.02,302A349.12 349.12 0 0 0 822.6,462"/>
+<path class="sf" style="--f:0.123;--i:36" d="M236.36,302A399.63 399.63 0 0 0 744.95,462"/>
+<path class="sf" style="--f:0.122;--i:37" d="M355.59,301.99A225.55 225.55 0 0 0 712.32,462"/>
+<path class="sf" style="--f:0.122;--i:38" d="M360.09,302A367.73 367.73 0 0 0 816.81,462"/>
+<path class="sf" style="--f:0.118;--i:39" d="M327.12,302A445.54 445.54 0 0 0 789,462"/>
+<path class="sf" style="--f:0.113;--i:40" d="M351.45,302A386.73 386.73 0 0 0 810.62,462"/>
+<path class="sf" style="--f:0.112;--i:41" d="M242.91,302A382.77 382.77 0 0 0 753.22,462"/>
+<path class="sf" style="--f:0.110;--i:42" d="M343.1,302A406.06 406.06 0 0 0 803.97,462"/>
+<path class="sf" style="--f:0.106;--i:43" d="M356.48,302A408.45 408.45 0 0 0 688.54,461.03"/>
+<path class="sf" style="--f:0.088;--i:44" d="M268.92,302A452.06 452.06 0 0 0 763.18,462"/>
+<path class="sf" style="--f:0.086;--i:45" d="M281.68,302A337.89 337.89 0 0 0 692.34,462"/>
+<path class="sf" style="--f:0.083;--i:46" d="M396.92,306.62A238.37 238.37 0 0 0 751.07,462"/>
+<path class="sf" style="--f:0.081;--i:47" d="M340.47,302A243.78 243.78 0 0 0 711.4,462"/>
+<path class="sf" style="--f:0.070;--i:48" d="M277.02,302A432.16 432.16 0 0 0 768.59,462"/>
+<path class="sf" style="--f:0.068;--i:49" d="M291,302A319.4 319.4 0 0 0 699.99,462"/>
+<path class="sf" style="--f:0.062;--i:50" d="M326.67,302A262.3 262.3 0 0 0 709.68,462"/>
+<path class="sf" style="--f:0.057;--i:51" d="M302.1,302A300.12 300.12 0 0 0 703.95,462"/>
+<path class="sf" style="--f:0.053;--i:52" d="M285.4,302A412.46 412.46 0 0 0 773.58,462"/>
+<path class="sf" style="--f:0.053;--i:53" d="M313.94,302A281.09 281.09 0 0 0 707.18,462"/>
+<path class="sf" style="--f:0.039;--i:54" d="M383.27,302A255.93 255.93 0 0 0 746.26,462"/>
+<path class="sf" style="--f:0.039;--i:55" d="M320.78,302A370.45 370.45 0 0 0 698.82,462"/>
+<path class="sf" style="--f:0.021;--i:56" d="M329.94,302A350.6 350.6 0 0 0 710.07,462"/>
+<path class="sf" style="--f:0.012;--i:57" d="M371.36,302A274.07 274.07 0 0 0 740.83,462"/>
+<path class="sf" style="--f:0.007;--i:58" d="M339.51,302A331 331 0 0 0 719.5,462"/>
+<path class="sf" style="--f:0.001;--i:59" d="M360.15,302A292.68 292.68 0 0 0 734.65,462"/>
+</g>
+<g class="slices">
+<path d="M349.56,302V302"/>
+<path d="M361.77,324.73V302"/>
+<path d="M373.98,343.75V302"/>
+<path d="M386.18,360.16V302"/>
+<path d="M398.39,374.57V307.6"/>
+<path d="M410.6,387.37V315.73"/>
+<path d="M426.42,402V326.28"/>
+<path d="M438.87,412.2V334.58"/>
+<path d="M451.33,421.38V342.88"/>
+<path d="M463.78,429.66V351.19"/>
+<path d="M476.24,437.11V359.49"/>
+<path d="M488.7,443.8V367.8"/>
+<path d="M501.15,449.8V376.1"/>
+<path d="M513.61,455.13V382"/>
+<path d="M526.06,459.84V382"/>
+<path d="M538.52,463.95V382"/>
+<path d="M550.97,467.49V382"/>
+<path d="M563.43,470.49V382"/>
+<path d="M575.89,472.94V385.92"/>
+<path d="M588.34,474.88V394.23"/>
+<path d="M600.8,476.31V402.53"/>
+<path d="M613.25,477.23V410.84"/>
+<path d="M625.71,477.65V419.14"/>
+<path d="M638.17,477.57V427.44"/>
+<path d="M650.62,476.99V435.75"/>
+<path d="M663.08,475.92V444.05"/>
+<path d="M675.53,474.33V452.36"/>
+<path d="M687.99,472.24V460.66"/>
+<path d="M700.44,469.61V462"/>
+<path d="M714.02,466.14V462"/>
+<path d="M727.6,462V462"/>
+</g>
+<path class="critical" pathLength="1" d="M349.56,302A311.68 311.68 0 0 0 727.6,462"/>
+<g class="crit-centre"><path class="radius" d="M630,166L349.56,302M630,166L727.6,462"/><circle cx="630" cy="166" r="6"/></g>
+<polygon class="outline" points="30,642 1030,642 1030,462 690,462 570,382 510,382 390,302 30,302"/>
+</svg><!-- /svg:ex1 --></div>
+      <div class="titleblock" style="--cols:3">
+        <div><div class="k">Search</div><div class="v">Grid · 169 centres</div></div>
+        <div><div class="k">Spencer</div><div class="v fos">1.290</div></div>
+        <div><div class="k">Bishop · GLE</div><div class="v">1.300 · 1.292</div></div>
+      </div>
+    </figure>
+  </div>
+</section>
+
+<!-- ====== EJEMPLO 2 ====== -->
+<section class="section alt" id="ex2">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="sec-num label">Example 2</div><h2>An embankment on soft clay <em>with a weak seam.</em></h2></div>
+      <p>A 6 m embankment on soft clay whose undrained strength grows with depth, with a thin weak seam 4.5 m below the ground. The critical surface is not a circle: it runs along the seam. A berm at the toe is the classic remedy, and the two models show how much it gains.</p>
+    </div>
+    <div class="grid-2" style="align-items:start;gap:36px">
+      <figure class="sheet" style="margin:0" data-animate>
+        <div class="fig"><!-- svg:ex2a --><svg class="slope-svg" id="ex2a-svg" viewBox="0 0 1066 429" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="ex2a-svg-t">
+<title id="ex2a-svg-t">Limit-equilibrium analysis computed by OGR Slip2D: 1324 valid non-circular surfaces, critical factor of safety 0.988 (spencer)</title>
+<defs>
+<clipPath id="ex2a-svg-clip"><polygon points="26,507 1586,507 1586,195 598,195 286,39 26,39"/></clipPath>
+</defs>
+<g class="strata" clip-path="url(#ex2a-svg-clip)">
+<polygon class="st st-0" points="26,507 1586,507 1586,195 598,195 286,39 26,39"/>
+<polygon class="st st-1" points="-260,195 26,195 598,195 1326,195 1326,689 -260,689"/>
+<polygon class="st st-2" points="-260,403 26,403 1586,403 1326,403 1326,689 -260,689"/>
+</g>
+<polyline class="contact" points="26,195 598,195"/>
+<polyline class="contact" points="26,403 1586,403"/>
+<polyline class="weak" points="26,312 1586,312"/>
+<g class="surfaces">
+<polyline class="sf" style="--f:0.096;--i:0" points="58.71,39 76.05,56.34 93.39,73.66 110.73,91 128.08,108.34 145.42,125.66 162.76,143 180.1,160.34 197.44,177.66 214.79,195 231.53,211.72 248.25,228.44 264.97,245.15 281.68,261.85 298.43,278.56 315.15,295.28 331.86,312 349.78,312 367.69,312 385.61,312 403.52,312 421.43,312 439.35,312 457.26,312 475.18,312 493.09,312 511,312 528.92,312 546.83,312 564.75,312 582.66,312 600.57,312 618.49,312 636.4,312 654.39,295.28 672.36,278.56 690.35,261.85 708.34,245.15 726.34,228.44 744.3,211.72 762.29,195"/>
+<polyline class="sf" style="--f:0.096;--i:1" points="57.56,39 74.93,56.34 92.27,73.66 109.62,91 126.96,108.34 144.3,125.66 161.64,143 178.98,160.34 196.33,177.66 213.67,195 230.39,211.72 247.13,228.44 263.85,245.15 280.57,261.85 297.28,278.56 314.03,295.28 330.75,312 348.79,312 366.83,312 384.85,312 402.9,312 420.94,312 438.98,312 457.03,312 475.05,312 493.09,312 511.13,312 529.18,312 547.22,312 565.24,312 583.28,312 601.33,312 619.37,312 637.42,312 655.38,295.28 673.37,278.56 691.37,261.85 709.36,245.15 727.32,228.44 745.32,211.72 763.31,195"/>
+<polyline class="sf" style="--f:0.095;--i:2" points="27.74,39 43.34,54.6 58.97,70.2 74.57,85.8 90.17,101.4 105.79,117 121.39,132.6 137.02,148.2 152.62,163.8 168.22,179.4 183.85,195 198.48,209.61 213.1,224.25 227.73,238.89 242.37,253.5 257.01,268.11 271.65,282.75 286.29,297.39 300.92,312 316.68,312 332.46,312 348.22,312 364,312 379.76,312 395.54,312 411.29,312 427.08,312 442.83,312 458.61,312 474.4,312 490.15,312 505.93,312 521.69,312 537.42,297.36 553.18,282.75 568.91,268.14 584.64,253.5 600.37,238.86 616.12,224.25 631.85,209.64 647.58,195"/>
+<polyline class="sf" style="--f:0.094;--i:3" points="29.07,39 48.57,58.5 68.07,78 87.59,97.5 107.09,117 126.62,136.5 146.12,156 165.65,175.5 185.15,195 204.67,214.5 224.17,234 243.7,253.5 263.2,273 282.72,292.5 302.22,312 320.27,312 338.29,312 356.33,312 374.35,312 392.39,312 410.41,312 428.45,312 446.47,312 464.52,312 482.53,312 500.58,312 518.6,312 536.64,312 554.66,312 572.7,312 590.72,312 608.76,312 626.78,312 644.83,312 662.79,295.28 680.78,278.56 698.78,261.85 716.74,245.15 734.73,228.44 752.73,211.72 770.72,195"/>
+<polyline class="sf" style="--f:0.090;--i:4" points="85.44,39 101.04,54.6 116.66,70.2 132.26,85.8 147.89,101.4 163.49,117 179.09,132.6 194.71,148.2 210.31,163.8 225.91,179.4 241.54,195 256.18,209.64 270.79,224.25 285.43,238.89 300.07,253.5 314.7,268.11 329.34,282.75 343.98,297.39 358.62,312 374.27,312 389.92,312 405.55,312 421.2,312 436.85,312 452.5,312 468.16,312 483.81,312 499.46,312 515.11,312 530.76,312 546.42,312 562.07,312 577.72,312 593.45,297.36 609.21,282.75 624.94,268.14 640.67,253.5 656.4,238.86 672.15,224.25 687.88,209.64 703.61,195"/>
+<polyline class="sf" style="--f:0.089;--i:5" points="85.18,39 100.78,54.6 116.4,70.2 132,85.8 147.6,101.4 163.23,117 178.83,132.6 194.45,148.2 210.05,163.8 225.65,179.4 241.28,195 258,211.72 274.72,228.44 291.43,245.15 308.18,261.85 324.9,278.56 341.61,295.28 358.33,312 373.7,312 389.06,312 404.43,312 419.8,312 435.16,312 450.53,312 465.89,312 481.26,312 496.63,312 511.99,312 527.36,312 542.72,312 558.09,312 573.46,312 588.82,312 604.55,297.36 620.31,282.75 636.04,268.14 651.77,253.5 667.52,238.86 683.25,224.25 698.98,209.64 714.71,195"/>
+<polyline class="sf" style="--f:0.086;--i:6" points="80.52,39 96.15,54.6 111.75,70.2 127.35,85.8 142.97,101.4 158.57,117 174.17,132.6 189.8,148.2 205.4,163.8 221.03,179.4 236.63,195 251.26,209.64 265.9,224.25 280.51,238.89 295.15,253.5 309.79,268.11 324.43,282.75 339.07,297.39 353.7,312 368.42,312 383.16,312 397.9,312 412.62,312 427.36,312 442.08,312 456.82,312 471.56,312 486.28,312 501.02,312 515.76,312 530.48,312 545.22,312 559.96,312 575.69,297.39 591.42,282.75 607.15,268.11 622.91,253.5 638.64,238.89 654.37,224.25 670.1,209.61 685.85,195"/>
+<polyline class="sf" style="--f:0.086;--i:7" points="52.34,39 69.68,56.34 87.02,73.66 104.36,91 121.71,108.34 139.05,125.66 156.39,143 173.73,160.34 191.07,177.66 208.44,195 225.16,211.72 241.88,228.44 258.6,245.15 275.34,261.85 292.06,278.56 308.78,295.28 325.49,312 343.77,312 362.05,312 380.3,312 398.58,312 416.86,312 435.11,312 453.39,312 471.64,312 489.92,312 508.2,312 526.45,312 544.73,312 563,312 581.26,312 599.53,312 617.81,312 636.06,312 654.06,295.28 672.05,278.56 690.01,261.85 708.01,245.15 726,228.44 743.99,211.72 761.96,195"/>
+<polyline class="sf" style="--f:0.083;--i:8" points="83.23,39 98.83,54.6 114.45,70.2 130.05,85.8 145.68,101.4 161.28,117 176.88,132.6 192.5,148.2 208.1,163.8 223.7,179.4 239.33,195 256.05,211.72 272.77,228.44 289.51,245.15 306.23,261.85 322.95,278.56 339.66,295.28 356.41,312 371.98,312 387.56,312 403.13,312 418.7,312 434.28,312 449.85,312 465.43,312 481,312 496.57,312 512.15,312 527.72,312 543.3,312 558.9,312 574.47,312 590.04,312 605.77,297.36 621.5,282.75 637.23,268.14 652.99,253.5 668.72,238.86 684.45,224.25 700.21,209.64 715.94,195"/>
+<polyline class="sf" style="--f:0.083;--i:9" points="38.48,39 55.82,56.34 73.16,73.66 90.51,91 107.85,108.34 125.19,125.66 142.53,143 159.87,160.34 177.22,177.66 194.56,195 214.08,214.5 233.58,234 253.11,253.5 272.61,273 292.14,292.5 311.64,312 329.81,312 348.01,312 366.18,312 384.38,312 402.56,312 420.73,312 438.93,312 457.11,312 475.31,312 493.48,312 511.65,312 529.85,312 548.03,312 566.23,312 584.4,312 602.58,312 620.78,312 638.95,312 656.94,295.28 674.93,278.56 692.9,261.85 710.89,245.15 728.88,228.44 746.88,211.72 764.84,195"/>
+<polyline class="sf" style="--f:0.080;--i:10" points="39.81,39 57.15,56.34 74.49,73.66 91.83,91 109.17,108.34 126.52,125.66 143.86,143 161.2,160.34 178.54,177.66 195.88,195 215.41,214.5 234.91,234 254.44,253.5 273.94,273 293.46,292.5 312.96,312 330.98,312 348.97,312 366.99,312 384.98,312 403,312 420.99,312 439.01,312 457.03,312 475.02,312 493.04,312 511.03,312 529.05,312 547.04,312 565.06,312 583.08,312 601.07,312 619.09,312 637.08,312 655.07,295.28 673.06,278.56 691.03,261.85 709.02,245.15 727.01,228.44 745,211.72 762.97,195"/>
+<polyline class="sf" style="--f:0.076;--i:11" points="72.07,39 89.41,56.34 106.76,73.66 124.1,91 141.44,108.34 158.78,125.66 176.12,143 193.47,160.34 210.81,177.66 228.18,195 244.89,211.72 261.61,228.44 278.33,245.15 295.07,261.85 311.79,278.56 328.51,295.28 345.23,312 361.63,312 378.04,312 394.45,312 410.85,312 427.26,312 443.66,312 460.07,312 476.48,312 492.86,312 509.26,312 525.67,312 542.07,312 558.48,312 574.89,312 591.29,312 607.7,312 623.43,297.39 639.16,282.75 654.91,268.11 670.64,253.5 686.37,238.89 702.1,224.25 717.86,209.61 733.59,195"/>
+<polyline class="sf" style="--f:0.074;--i:12" points="75.27,39 90.9,54.6 106.5,70.2 122.12,85.8 137.72,101.4 153.32,117 168.95,132.6 184.55,148.2 200.15,163.8 215.77,179.4 231.37,195 248.09,211.72 264.84,228.44 281.55,245.15 298.27,261.85 314.99,278.56 331.73,295.28 348.45,312 365.3,312 382.17,312 399.02,312 415.9,312 432.74,312 449.59,312 466.47,312 483.31,312 500.19,312 517.04,312 533.91,312 550.76,312 567.61,312 584.48,312 601.33,312 617.08,297.36 632.81,282.75 648.54,268.14 664.27,253.5 680.03,238.86 695.76,224.25 711.49,209.64 727.22,195"/>
+<polyline class="sf" style="--f:0.073;--i:13" points="73.22,39 88.84,54.6 104.44,70.2 120.04,85.8 135.67,101.4 151.27,117 166.87,132.6 182.49,148.2 198.09,163.8 213.72,179.4 229.32,195 243.96,209.61 258.6,224.25 273.23,238.86 287.85,253.5 302.48,268.11 317.12,282.75 331.76,297.39 346.4,312 361.17,312 375.93,312 390.68,312 405.44,312 420.21,312 434.98,312 449.75,312 464.52,312 479.28,312 494.05,312 508.79,312 523.56,312 538.33,312 553.1,312 568.83,297.36 584.58,282.75 600.31,268.14 616.04,253.5 631.77,238.86 647.53,224.25 663.26,209.64 678.99,195"/>
+<polyline class="sf" style="--f:0.070;--i:14" points="27.53,39 44.88,56.34 62.22,73.66 79.56,91 96.9,108.34 114.24,125.66 131.59,143 148.93,160.34 166.27,177.66 183.61,195 203.14,214.5 222.64,234 242.16,253.5 261.66,273 281.19,292.5 300.69,312 318.94,312 337.17,312 355.42,312 373.65,312 391.9,312 410.15,312 428.38,312 446.63,312 464.85,312 483.11,312 501.33,312 519.58,312 537.84,312 556.06,312 574.31,312 592.54,312 610.79,312 629.02,312 647.01,295.28 665,278.56 682.99,261.85 700.96,245.15 718.95,228.44 736.94,211.72 754.94,195"/>
+<polyline class="sf" style="--f:0.069;--i:15" points="68.77,39 86.14,56.34 103.48,73.66 120.82,91 138.16,108.34 155.51,125.66 172.85,143 190.19,160.34 207.53,177.66 224.87,195 241.59,211.72 258.34,228.44 275.05,245.15 291.77,261.85 308.52,278.56 325.23,295.28 341.95,312 358.57,312 375.21,312 391.82,312 408.46,312 425.07,312 441.71,312 458.33,312 474.94,312 491.58,312 508.2,312 524.84,312 541.45,312 558.06,312 574.7,312 591.32,312 607.96,312 623.69,297.39 639.42,282.75 655.15,268.11 670.9,253.5 686.63,238.89 702.36,224.25 718.12,209.61 733.85,195"/>
+<polyline class="sf" style="--f:0.069;--i:16" points="76.21,39 91.81,54.6 107.41,70.2 123.03,85.8 138.63,101.4 154.23,117 169.86,132.6 185.46,148.2 201.08,163.8 216.68,179.4 232.28,195 246.92,209.64 261.56,224.25 276.2,238.89 290.84,253.5 305.47,268.11 320.09,282.75 334.72,297.39 349.36,312 364.47,312 379.6,312 394.71,312 409.81,312 424.92,312 440.05,312 455.16,312 470.26,312 485.37,312 500.5,312 515.61,312 530.71,312 545.82,312 560.95,312 576.68,297.36 592.41,282.75 608.14,268.14 623.9,253.5 639.63,238.86 655.36,224.25 671.11,209.64 686.84,195"/>
+<polyline class="sf" style="--f:0.069;--i:17" points="52.78,39 68.38,54.6 83.98,70.2 99.61,85.8 115.21,101.4 130.81,117 146.43,132.6 162.03,148.2 177.66,163.8 193.26,179.4 208.86,195 223.5,209.61 238.13,224.25 252.77,238.89 267.41,253.5 282.05,268.11 296.66,282.75 311.3,297.39 325.94,312 340.91,312 355.86,312 370.84,312 385.79,312 400.76,312 415.71,312 430.69,312 445.64,312 460.62,312 475.57,312 490.54,312 505.49,312 520.47,312 535.42,312 551.15,297.39 566.9,282.75 582.63,268.11 598.36,253.5 614.12,238.89 629.85,224.25 645.58,209.61 661.31,195"/>
+<polyline class="sf" style="--f:0.068;--i:18" points="68.82,39 84.45,54.6 100.05,70.2 115.65,85.8 131.27,101.4 146.87,117 162.5,132.6 178.1,148.2 193.7,163.8 209.33,179.4 224.93,195 239.56,209.64 254.2,224.25 268.84,238.89 283.45,253.5 298.09,268.11 312.73,282.75 327.37,297.39 342,312 356.82,312 371.62,312 386.44,312 401.26,312 416.08,312 430.87,312 445.69,312 460.51,312 475.33,312 490.13,312 504.95,312 519.77,312 534.59,312 549.38,312 565.14,297.39 580.87,282.75 596.6,268.11 612.35,253.5 628.08,238.89 643.81,224.25 659.54,209.61 675.3,195"/>
+<polyline class="sf" style="--f:0.066;--i:19" points="41.81,39 59.15,56.34 76.49,73.66 93.83,91 111.18,108.34 128.52,125.66 145.86,143 163.2,160.34 180.57,177.66 197.91,195 214.63,211.72 231.35,228.44 248.07,245.15 264.81,261.85 281.53,278.56 298.25,295.28 314.96,312 333.37,312 351.78,312 370.19,312 388.57,312 406.98,312 425.39,312 443.79,312 462.18,312 480.58,312 498.99,312 517.4,312 535.78,312 554.19,312 572.6,312 590.98,312 609.39,312 627.8,312 645.79,295.28 663.75,278.56 681.75,261.85 699.74,245.15 717.73,228.44 735.7,211.72 753.69,195"/>
+<polyline class="sf" style="--f:0.063;--i:20" points="26.6,39 43.94,56.34 61.28,73.66 78.62,91 95.97,108.34 113.33,125.66 130.68,143 148.02,160.34 165.36,177.66 182.7,195 202.2,214.5 221.73,234 241.23,253.5 260.75,273 280.25,292.5 299.78,312 317.8,312 335.84,312 353.89,312 371.9,312 389.95,312 407.97,312 426.01,312 444.05,312 462.07,312 480.12,312 498.13,312 516.18,312 534.22,312 552.24,312 570.28,312 588.3,312 606.35,312 624.39,312 642.36,295.28 660.35,278.56 678.34,261.85 696.33,245.15 714.3,228.44 732.29,211.72 750.28,195"/>
+<polyline class="sf" style="--f:0.061;--i:21" points="35.1,39 52.44,56.34 69.81,73.66 87.15,91 104.49,108.34 121.84,125.66 139.18,143 156.52,160.34 173.86,177.66 191.2,195 210.73,214.5 230.23,234 249.76,253.5 269.26,273 288.76,292.5 308.28,312 325.88,312 343.49,312 361.09,312 378.69,312 396.29,312 413.92,312 431.52,312 449.12,312 466.73,312 484.33,312 501.93,312 519.53,312 537.13,312 554.74,312 572.34,312 589.97,312 607.57,312 625.17,312 643.16,295.28 661.13,278.56 679.12,261.85 697.11,245.15 715.08,228.44 733.07,211.72 751.06,195"/>
+<polyline class="sf" style="--f:0.060;--i:22" points="59.62,39 76.99,56.34 94.33,73.66 111.67,91 129.01,108.34 146.35,125.66 163.7,143 181.04,160.34 198.38,177.66 215.72,195 232.44,211.72 249.18,228.44 265.9,245.15 282.62,261.85 299.36,278.56 316.08,295.28 332.8,312 349.34,312 365.87,312 382.41,312 398.94,312 415.45,312 431.99,312 448.53,312 465.06,312 481.6,312 498.13,312 514.67,312 531.21,312 547.72,312 564.25,312 580.79,312 597.32,312 613.86,312 631.85,295.28 649.82,278.56 667.81,261.85 685.8,245.15 703.79,228.44 721.76,211.72 739.75,195"/>
+<polyline class="sf" style="--f:0.060;--i:23" points="43.63,39 60.97,56.34 78.34,73.66 95.68,91 113.02,108.34 130.36,125.66 147.71,143 165.05,160.34 182.39,177.66 199.73,195 216.45,211.72 233.19,228.44 249.91,245.15 266.63,261.85 283.35,278.56 300.09,295.28 316.81,312 334.85,312 352.9,312 370.94,312 389.01,312 407.06,312 425.1,312 443.14,312 461.19,312 479.23,312 497.28,312 515.35,312 533.39,312 551.43,312 569.48,312 587.52,312 605.57,312 623.64,312 641.6,295.28 659.59,278.56 677.59,261.85 695.55,245.15 713.54,228.44 731.54,211.72 749.53,195"/>
+<polyline class="sf" style="--f:0.059;--i:24" points="45.11,39 62.45,56.34 79.79,73.66 97.14,91 114.48,108.34 131.85,125.66 149.19,143 166.53,160.34 183.87,177.66 201.21,195 217.93,211.72 234.65,228.44 251.39,245.15 268.11,261.85 284.83,278.56 301.55,295.28 318.29,312 336.18,312 354.09,312 372.01,312 389.92,312 407.84,312 425.75,312 443.64,312 461.55,312 479.47,312 497.38,312 515.29,312 533.18,312 551.1,312 569.01,312 586.92,312 604.84,312 622.75,312 640.72,295.28 658.71,278.56 676.7,261.85 694.67,245.15 712.66,228.44 730.65,211.72 748.64,195"/>
+<polyline class="sf" style="--f:0.059;--i:25" points="68.15,39 85.49,56.34 102.83,73.66 120.17,91 137.51,108.34 154.86,125.66 172.2,143 189.57,160.34 206.91,177.66 224.25,195 240.97,211.72 257.69,228.44 274.43,245.15 291.15,261.85 307.87,278.56 324.58,295.28 341.33,312 357.5,312 373.7,312 389.87,312 406.07,312 422.24,312 438.44,312 454.61,312 470.81,312 486.98,312 503.18,312 519.38,312 535.55,312 551.75,312 567.92,312 584.12,312 600.29,312 616.04,297.36 631.77,282.75 647.5,268.14 663.23,253.5 678.99,238.86 694.72,224.25 710.45,209.64 726.18,195"/>
+<polyline class="sf" style="--f:0.058;--i:26" points="74.36,39 89.96,54.6 105.56,70.2 121.19,85.8 136.79,101.4 152.39,117 168.01,132.6 183.61,148.2 199.24,163.8 214.84,179.4 230.44,195 245.08,209.61 259.71,224.25 274.35,238.86 288.99,253.5 303.63,268.11 318.24,282.75 332.88,297.39 347.52,312 363.06,312 378.61,312 394.13,312 409.68,312 425.23,312 440.78,312 456.33,312 471.85,312 487.4,312 502.94,312 518.49,312 534.01,312 549.56,312 565.11,312 580.84,297.36 596.57,282.75 612.33,268.14 628.06,253.5 643.79,238.86 659.52,224.25 675.27,209.64 691,195"/>
+<polyline class="sf" style="--f:0.056;--i:27" points="66.92,39 84.27,56.34 101.61,73.66 118.98,91 136.32,108.34 153.66,125.66 171,143 188.34,160.34 205.69,177.66 223.03,195 239.75,211.72 256.49,228.44 273.21,245.15 289.93,261.85 306.64,278.56 323.39,295.28 340.11,312 356.38,312 372.66,312 388.93,312 405.21,312 421.49,312 437.76,312 454.04,312 470.31,312 486.59,312 502.87,312 519.14,312 535.42,312 551.69,312 567.97,312 584.25,312 600.52,312 616.25,297.36 631.98,282.75 647.71,268.14 663.47,253.5 679.2,238.86 694.93,224.25 710.68,209.64 726.41,195"/>
+<polyline class="sf" style="--f:0.055;--i:28" points="28.89,39 46.23,56.34 63.57,73.66 80.91,91 98.25,108.34 115.6,125.66 132.94,143 150.28,160.34 167.62,177.66 184.96,195 204.49,214.5 223.99,234 243.52,253.5 263.02,273 282.54,292.5 302.04,312 319.72,312 337.43,312 355.11,312 372.79,312 390.49,312 408.17,312 425.85,312 443.56,312 461.24,312 478.92,312 496.63,312 514.31,312 531.99,312 549.69,312 567.37,312 585.05,312 602.76,312 620.44,312 638.43,295.28 656.4,278.56 674.39,261.85 692.38,245.15 710.37,228.44 728.34,211.72 746.33,195"/>
+<polyline class="sf" style="--f:0.049;--i:29" points="73.14,39 88.76,54.6 104.36,70.2 119.96,85.8 135.59,101.4 151.19,117 166.82,132.6 182.42,148.2 198.02,163.8 213.64,179.4 229.24,195 245.96,211.72 262.7,228.44 279.42,245.15 296.14,261.85 312.86,278.56 329.6,295.28 346.32,312 361.48,312 376.64,312 391.79,312 406.95,312 422.11,312 437.27,312 452.4,312 467.56,312 482.72,312 497.87,312 513.03,312 528.19,312 543.35,312 558.51,312 573.66,312 589.39,297.36 605.12,282.75 620.88,268.14 636.61,253.5 652.34,238.86 668.1,224.25 683.83,209.64 699.56,195"/>
+<polyline class="sf" style="--f:0.047;--i:30" points="64.09,39 81.43,56.34 98.77,73.66 116.12,91 133.46,108.34 150.8,125.66 168.14,143 185.48,160.34 202.83,177.66 220.19,195 236.91,211.72 253.63,228.44 270.35,245.15 287.09,261.85 303.81,278.56 320.53,295.28 337.25,312 353.6,312 369.95,312 386.31,312 402.66,312 419.02,312 435.37,312 451.7,312 468.05,312 484.41,312 500.76,312 517.11,312 533.47,312 549.82,312 566.18,312 582.5,312 598.86,312 614.61,297.36 630.34,282.75 646.07,268.14 661.8,253.5 677.56,238.86 693.29,224.25 709.02,209.64 724.75,195"/>
+<polyline class="sf" style="--f:0.047;--i:31" points="71.29,39 86.89,54.6 102.49,70.2 118.12,85.8 133.72,101.4 149.32,117 164.94,132.6 180.54,148.2 196.17,163.8 211.77,179.4 227.37,195 244.11,211.72 260.83,228.44 277.55,245.15 294.27,261.85 311.01,278.56 327.73,295.28 344.45,312 360.54,312 376.64,312 392.73,312 408.82,312 424.92,312 441.01,312 457.11,312 473.2,312 489.29,312 505.39,312 521.48,312 537.58,312 553.67,312 569.76,312 585.86,312 601.59,297.36 617.32,282.75 633.05,268.14 648.8,253.5 664.53,238.86 680.26,224.25 695.99,209.64 711.75,195"/>
+<polyline class="sf" style="--f:0.044;--i:32" points="36.48,39 52.08,54.6 67.68,70.2 83.3,85.8 98.9,101.4 114.5,117 130.13,132.6 145.73,148.2 161.36,163.8 176.96,179.4 192.56,195 209.3,211.72 226.02,228.44 242.74,245.15 259.45,261.85 276.2,278.56 292.92,295.28 309.63,312 324.9,312 340.16,312 355.42,312 370.68,312 385.94,312 401.21,312 416.47,312 431.73,312 446.99,312 462.28,312 477.54,312 492.8,312 508.07,312 523.33,312 538.59,312 554.32,297.36 570.05,282.75 585.81,268.14 601.54,253.5 617.27,238.86 633,224.25 648.75,209.64 664.48,195"/>
+<polyline class="sf" style="--f:0.040;--i:33" points="52.68,39 68.3,54.6 83.9,70.2 99.5,85.8 115.13,101.4 130.73,117 146.33,132.6 161.95,148.2 177.55,163.8 193.18,179.4 208.78,195 223.42,209.61 238.06,224.25 252.67,238.89 267.31,253.5 281.94,268.11 296.58,282.75 311.22,297.39 325.86,312 341.56,312 357.27,312 372.97,312 388.67,312 404.35,312 420.06,312 435.76,312 451.46,312 467.17,312 482.87,312 498.58,312 514.28,312 529.98,312 545.69,312 561.42,297.36 577.17,282.75 592.9,268.14 608.63,253.5 624.36,238.86 640.12,224.25 655.85,209.64 671.58,195"/>
+<polyline class="sf" style="--f:0.036;--i:34" points="50.88,39 68.22,56.34 85.57,73.66 102.91,91 120.25,108.34 137.59,125.66 154.93,143 172.28,160.34 189.62,177.66 206.99,195 223.7,211.72 240.42,228.44 257.14,245.15 273.88,261.85 290.6,278.56 307.32,295.28 324.04,312 340.52,312 357.01,312 373.52,312 390,312 406.48,312 422.97,312 439.45,312 455.94,312 472.42,312 488.9,312 505.39,312 521.87,312 538.36,312 554.84,312 571.32,312 587.81,312 604.32,312 622.28,295.28 640.28,278.56 658.27,261.85 676.23,245.15 694.23,228.44 712.22,211.72 730.21,195"/>
+<polyline class="sf" style="--f:0.032;--i:35" points="65.23,39 80.83,54.6 96.46,70.2 112.06,85.8 127.66,101.4 143.29,117 158.89,132.6 174.51,148.2 190.11,163.8 205.71,179.4 221.34,195 238.06,211.72 254.77,228.44 271.49,245.15 288.24,261.85 304.95,278.56 321.67,295.28 338.39,312 354.48,312 370.55,312 386.62,312 402.69,312 418.76,312 434.82,312 450.89,312 466.96,312 483.03,312 499.1,312 515.16,312 531.23,312 547.3,312 563.37,312 579.46,312 595.19,297.36 610.92,282.75 626.65,268.14 642.41,253.5 658.14,238.86 673.87,224.25 689.6,209.64 705.35,195"/>
+<polyline class="sf" style="--f:0.031;--i:36" points="43.58,39 59.2,54.6 74.8,70.2 90.4,85.8 106.03,101.4 121.63,117 137.23,132.6 152.85,148.2 168.45,163.8 184.08,179.4 199.68,195 216.4,211.72 233.12,228.44 249.86,245.15 266.58,261.85 283.3,278.56 300.01,295.28 316.76,312 331.99,312 347.23,312 362.47,312 377.7,312 392.94,312 408.15,312 423.38,312 438.62,312 453.86,312 469.09,312 484.33,312 499.56,312 514.8,312 530.04,312 545.27,312 561,297.36 576.76,282.75 592.49,268.14 608.22,253.5 623.97,238.86 639.7,224.25 655.43,209.64 671.16,195"/>
+<polyline class="sf" style="--f:0.029;--i:37" points="46.31,39 61.91,54.6 77.53,70.2 93.13,85.8 108.73,101.4 124.36,117 139.96,132.6 155.56,148.2 171.18,163.8 186.78,179.4 202.41,195 219.13,211.72 235.85,228.44 252.56,245.15 269.31,261.85 286.03,278.56 302.74,295.28 319.46,312 334.67,312 349.88,312 365.09,312 380.3,312 395.51,312 410.72,312 425.93,312 441.14,312 456.35,312 471.56,312 486.77,312 501.98,312 517.19,312 532.38,312 547.59,312 563.34,297.36 579.07,282.75 594.8,268.14 610.53,253.5 626.29,238.86 642.02,224.25 657.75,209.64 673.5,195"/>
+<polyline class="sf" style="--f:0.029;--i:38" points="61.23,39 76.86,54.6 92.46,70.2 108.06,85.8 123.68,101.4 139.28,117 154.88,132.6 170.51,148.2 186.11,163.8 201.73,179.4 217.33,195 234.05,211.72 250.77,228.44 267.51,245.15 284.23,261.85 300.95,278.56 317.69,295.28 334.41,312 349.65,312 364.91,312 380.17,312 395.41,312 410.67,312 425.93,312 441.17,312 456.43,312 471.69,312 486.93,312 502.19,312 517.43,312 532.69,312 547.95,312 563.19,312 578.94,297.39 594.67,282.75 610.4,268.11 626.13,253.5 641.89,238.89 657.62,224.25 673.35,209.61 689.1,195"/>
+<polyline class="sf" style="--f:0.029;--i:39" points="64.14,39 79.74,54.6 95.34,70.2 110.97,85.8 126.57,101.4 142.19,117 157.79,132.6 173.39,148.2 189.02,163.8 204.62,179.4 220.22,195 236.96,211.72 253.68,228.44 270.4,245.15 287.12,261.85 303.86,278.56 320.58,295.28 337.3,312 353.29,312 369.25,312 385.24,312 401.21,312 417.2,312 433.16,312 449.15,312 465.14,312 481.1,312 497.09,312 513.06,312 529.05,312 545.01,312 561,312 576.97,312 592.72,297.36 608.45,282.75 624.18,268.14 639.91,253.5 655.67,238.86 671.4,224.25 687.13,209.64 702.88,195"/>
+<polyline class="sf" style="--f:0.027;--i:40" points="60.03,39 77.38,56.34 94.72,73.66 112.06,91 129.4,108.34 146.77,125.66 164.11,143 181.45,160.34 198.8,177.66 216.14,195 232.86,211.72 249.57,228.44 266.32,245.15 283.04,261.85 299.75,278.56 316.47,295.28 333.22,312 349.28,312 365.38,312 381.47,312 397.54,312 413.63,312 429.73,312 445.8,312 461.89,312 477.98,312 494.05,312 510.15,312 526.24,312 542.33,312 558.4,312 574.5,312 590.59,312 606.32,297.36 622.05,282.75 637.78,268.14 653.54,253.5 669.27,238.86 685,224.25 700.73,209.64 716.48,195"/>
+<polyline class="sf" style="--f:0.026;--i:41" points="62.92,39 78.52,54.6 94.15,70.2 109.75,85.8 125.37,101.4 140.97,117 156.57,132.6 172.2,148.2 187.8,163.8 203.4,179.4 219.02,195 235.74,211.72 252.46,228.44 269.2,245.15 285.92,261.85 302.64,278.56 319.36,295.28 336.1,312 352.17,312 368.24,312 384.31,312 400.37,312 416.47,312 432.54,312 448.6,312 464.67,312 480.74,312 496.83,312 512.9,312 528.97,312 545.04,312 561.11,312 577.17,312 592.93,297.36 608.66,282.75 624.39,268.14 640.15,253.5 655.88,238.86 671.61,224.25 687.34,209.64 703.09,195"/>
+<polyline class="sf" style="--f:0.023;--i:42" points="60.4,39 76.02,54.6 91.62,70.2 107.22,85.8 122.85,101.4 138.45,117 154.05,132.6 169.68,148.2 185.28,163.8 200.9,179.4 216.5,195 233.22,211.72 249.94,228.44 266.68,245.15 283.4,261.85 300.12,278.56 316.84,295.28 333.58,312 350.09,312 366.63,312 383.14,312 399.67,312 416.18,312 432.72,312 449.23,312 465.74,312 482.27,312 498.78,312 515.32,312 531.83,312 548.37,312 564.88,312 581.41,312 597.14,297.36 612.87,282.75 628.63,268.14 644.36,253.5 660.09,238.86 675.82,224.25 691.57,209.64 707.3,195"/>
+<polyline class="sf" style="--f:0.021;--i:43" points="58.76,39 74.39,54.6 89.99,70.2 105.59,85.8 121.21,101.4 136.81,117 152.41,132.6 168.04,148.2 183.64,163.8 199.26,179.4 214.86,195 231.58,211.72 248.3,228.44 265.04,245.15 281.76,261.85 298.48,278.56 315.2,295.28 331.94,312 348.66,312 365.4,312 382.12,312 398.87,312 415.61,312 432.33,312 449.07,312 465.79,312 482.53,312 499.25,312 516,312 532.71,312 549.46,312 566.2,312 582.92,312 598.65,297.36 614.41,282.75 630.14,268.14 645.87,253.5 661.6,238.86 677.35,224.25 693.08,209.64 708.81,195"/>
+<polyline class="sf" style="--f:0.019;--i:44" points="41.63,39 57.23,54.6 72.85,70.2 88.45,85.8 104.05,101.4 119.68,117 135.28,132.6 150.88,148.2 166.5,163.8 182.1,179.4 197.73,195 214.45,211.72 231.17,228.44 247.88,245.15 264.63,261.85 281.35,278.56 298.06,295.28 314.78,312 330.54,312 346.29,312 362.05,312 377.81,312 393.56,312 409.32,312 425.07,312 440.83,312 456.59,312 472.34,312 488.1,312 503.85,312 519.61,312 535.37,312 551.12,312 566.88,297.36 582.61,282.75 598.34,268.14 614.07,253.5 629.82,238.86 645.55,224.25 661.28,209.64 677.01,195"/>
+<polyline class="sf" style="--f:0.019;--i:45" points="46.18,39 63.52,56.34 80.86,73.66 98.2,91 115.57,108.34 132.91,125.66 150.25,143 167.6,160.34 184.94,177.66 202.28,195 219,211.72 235.72,228.44 252.46,245.15 269.18,261.85 285.9,278.56 302.61,295.28 319.36,312 336.57,312 353.78,312 371.02,312 388.23,312 405.44,312 422.66,312 439.89,312 457.11,312 474.32,312 491.56,312 508.77,312 525.98,312 543.19,312 560.43,312 577.64,312 594.85,312 610.61,297.36 626.34,282.75 642.07,268.14 657.8,253.5 673.56,238.86 689.29,224.25 705.02,209.64 720.75,195"/>
+<polyline class="sf" style="--f:0.018;--i:46" points="36.71,39 54.05,56.34 71.4,73.66 88.74,91 106.08,108.34 123.42,125.66 140.76,143 158.11,160.34 175.47,177.66 192.82,195 209.53,211.72 226.25,228.44 242.97,245.15 259.71,261.85 276.43,278.56 293.15,295.28 309.87,312 326.77,312 343.67,312 360.57,312 377.47,312 394.37,312 411.27,312 428.17,312 445.04,312 461.94,312 478.84,312 495.74,312 512.64,312 529.54,312 546.44,312 563.34,312 580.22,312 597.12,312 615.11,295.28 633.1,278.56 651.07,261.85 669.06,245.15 687.05,228.44 705.04,211.72 723.01,195"/>
+<polyline class="sf" style="--f:0.016;--i:47" points="31.59,39 47.19,54.6 62.82,70.2 78.42,85.8 94.02,101.4 109.64,117 125.24,132.6 140.87,148.2 156.47,163.8 172.07,179.4 187.69,195 204.41,211.72 221.13,228.44 237.85,245.15 254.59,261.85 271.31,278.56 288.03,295.28 304.77,312 321.2,312 337.66,312 354.12,312 370.58,312 387.01,312 403.47,312 419.93,312 436.38,312 452.84,312 469.27,312 485.73,312 502.19,312 518.65,312 535.08,312 551.54,312 567.27,297.36 583.02,282.75 598.75,268.14 614.48,253.5 630.24,238.86 645.97,224.25 661.7,209.64 677.43,195"/>
+<polyline class="sf" style="--f:0.015;--i:48" points="49.92,39 67.26,56.34 84.6,73.66 101.95,91 119.29,108.34 136.63,125.66 153.97,143 171.34,160.34 188.68,177.66 206.02,195 222.74,211.72 239.46,228.44 256.18,245.15 272.92,261.85 289.64,278.56 306.36,295.28 323.08,312 339.77,312 356.43,312 373.1,312 389.77,312 406.46,312 423.12,312 439.79,312 456.46,312 473.12,312 489.81,312 506.48,312 523.15,312 539.81,312 556.48,312 573.17,312 589.84,312 605.57,297.39 621.3,282.75 637.05,268.11 652.78,253.5 668.51,238.89 684.24,224.25 700,209.61 715.73,195"/>
+<polyline class="sf" style="--f:0.011;--i:49" points="45.53,39 61.15,54.6 76.75,70.2 92.35,85.8 107.98,101.4 123.58,117 139.18,132.6 154.8,148.2 170.4,163.8 186.03,179.4 201.63,195 218.35,211.72 235.07,228.44 251.81,245.15 268.53,261.85 285.25,278.56 301.96,295.28 318.71,312 334.83,312 350.92,312 367.04,312 383.16,312 399.28,312 415.4,312 431.52,312 447.64,312 463.74,312 479.86,312 495.98,312 512.1,312 528.22,312 544.34,312 560.43,312 576.19,297.36 591.92,282.75 607.65,268.14 623.4,253.5 639.13,238.86 654.86,224.25 670.59,209.64 686.35,195"/>
+<polyline class="sf" style="--f:0.009;--i:50" points="38.74,39 54.34,54.6 69.94,70.2 85.57,85.8 101.17,101.4 116.79,117 132.39,132.6 147.99,148.2 163.62,163.8 179.22,179.4 194.82,195 211.56,211.72 228.28,228.44 245,245.15 261.72,261.85 278.46,278.56 295.18,295.28 311.9,312 328.38,312 344.86,312 361.32,312 377.81,312 394.29,312 410.75,312 427.23,312 443.72,312 460.2,312 476.66,312 493.14,312 509.63,312 526.08,312 542.57,312 559.05,312 574.78,297.39 590.51,282.75 606.27,268.11 622,253.5 637.73,238.89 653.48,224.25 669.21,209.61 684.94,195"/>
+<polyline class="sf" style="--f:0.009;--i:51" points="31.51,39 47.11,54.6 62.71,70.2 78.34,85.8 93.94,101.4 109.54,117 125.16,132.6 140.76,148.2 156.39,163.8 171.99,179.4 187.59,195 204.33,211.72 221.05,228.44 237.77,245.15 254.49,261.85 271.23,278.56 287.95,295.28 304.67,312 321.59,312 338.49,312 355.42,312 372.35,312 389.25,312 406.17,312 423.1,312 440,312 456.92,312 473.82,312 490.75,312 507.68,312 524.58,312 541.5,312 558.43,312 574.16,297.36 589.89,282.75 605.62,268.14 621.37,253.5 637.1,238.86 652.83,224.25 668.56,209.64 684.32,195"/>
+<polyline class="sf" style="--f:0.009;--i:52" points="40.43,39 57.77,56.34 75.11,73.66 92.46,91 109.8,108.34 127.17,125.66 144.51,143 161.85,160.34 179.19,177.66 196.53,195 213.25,211.72 229.97,228.44 246.71,245.15 263.43,261.85 280.15,278.56 296.87,295.28 313.61,312 330.82,312 348.04,312 365.27,312 382.49,312 399.7,312 416.94,312 434.15,312 451.39,312 468.6,312 485.81,312 503.05,312 520.26,312 537.47,312 554.71,312 571.92,312 589.13,312 604.89,297.36 620.62,282.75 636.35,268.14 652.08,253.5 667.84,238.86 683.57,224.25 699.3,209.64 715.05,195"/>
+<polyline class="sf" style="--f:0.008;--i:53" points="36.89,39 54.24,56.34 71.6,73.66 88.95,91 106.29,108.34 123.63,125.66 140.97,143 158.31,160.34 175.66,177.66 193,195 209.72,211.72 226.46,228.44 243.18,245.15 259.9,261.85 276.61,278.56 293.36,295.28 310.08,312 327.44,312 344.81,312 362.18,312 379.57,312 396.94,312 414.31,312 431.68,312 449.05,312 466.41,312 483.78,312 501.18,312 518.54,312 535.91,312 553.28,312 570.65,312 588.02,312 603.77,297.36 619.5,282.75 635.23,268.14 650.96,253.5 666.72,238.86 682.45,224.25 698.18,209.64 713.91,195"/>
+<polyline class="sf" style="--f:0.007;--i:54" points="47.16,39 62.79,54.6 78.39,70.2 94.02,85.8 109.62,101.4 125.22,117 140.84,132.6 156.44,148.2 172.04,163.8 187.67,179.4 203.27,195 219.99,211.72 236.73,228.44 253.45,245.15 270.17,261.85 286.88,278.56 303.63,295.28 320.35,312 336.88,312 353.42,312 369.95,312 386.49,312 403.05,312 419.59,312 436.12,312 452.66,312 469.2,312 485.73,312 502.27,312 518.8,312 535.37,312 551.9,312 568.44,312 584.17,297.36 599.9,282.75 615.65,268.14 631.38,253.5 647.11,238.86 662.84,224.25 678.6,209.64 694.33,195"/>
+<polyline class="sf" style="--f:0.003;--i:55" points="26.44,39 43.81,56.34 61.15,73.66 78.49,91 95.84,108.34 113.18,125.66 130.52,143 147.86,160.34 165.2,177.66 182.55,195 199.26,211.72 216.01,228.44 232.73,245.15 249.44,261.85 266.16,278.56 282.91,295.28 299.62,312 316.73,312 333.81,312 350.92,312 368,312 385.11,312 402.19,312 419.3,312 436.41,312 453.49,312 470.6,312 487.68,312 504.79,312 521.9,312 538.98,312 556.09,312 573.17,312 588.93,297.36 604.66,282.75 620.39,268.14 636.12,253.5 651.87,238.86 667.6,224.25 683.33,209.64 699.06,195"/>
+<polyline class="sf" style="--f:0.003;--i:56" points="36.5,39 53.85,56.34 71.19,73.66 88.56,91 105.9,108.34 123.24,125.66 140.58,143 157.92,160.34 175.27,177.66 192.61,195 209.33,211.72 226.07,228.44 242.79,245.15 259.51,261.85 276.22,278.56 292.97,295.28 309.69,312 326.69,312 343.67,312 360.67,312 377.68,312 394.65,312 411.66,312 428.66,312 445.67,312 462.64,312 479.65,312 496.65,312 513.66,312 530.63,312 547.64,312 564.64,312 581.62,312 597.38,297.39 613.11,282.75 628.84,268.11 644.59,253.5 660.32,238.89 676.05,224.25 691.78,209.61 707.54,195"/>
+<polyline class="sf" style="--f:0.003;--i:57" points="33.98,39 51.32,56.34 68.67,73.66 86.01,91 103.35,108.34 120.69,125.66 138.03,143 155.38,160.34 172.72,177.66 190.06,195 206.8,211.72 223.52,228.44 240.24,245.15 256.96,261.85 273.7,278.56 290.42,295.28 307.14,312 323.34,312 339.56,312 355.76,312 371.96,312 388.15,312 404.38,312 420.58,312 436.77,312 452.97,312 469.17,312 485.39,312 501.59,312 517.79,312 533.99,312 550.21,312 566.41,312 582.14,297.36 597.87,282.75 613.63,268.14 629.36,253.5 645.09,238.86 660.82,224.25 676.57,209.64 692.3,195"/>
+<polyline class="sf" style="--f:0.003;--i:58" points="30.78,39 48.13,56.34 65.47,73.66 82.81,91 100.15,108.34 117.49,125.66 134.84,143 152.18,160.34 169.52,177.66 186.86,195 203.61,211.72 220.32,228.44 237.04,245.15 253.79,261.85 270.5,278.56 287.22,295.28 303.94,312 321.1,312 338.29,312 355.45,312 372.61,312 389.77,312 406.93,312 424.09,312 441.27,312 458.43,312 475.59,312 492.75,312 509.91,312 527.07,312 544.23,312 561.42,312 578.58,312 594.31,297.39 610.04,282.75 625.79,268.11 641.52,253.5 657.25,238.89 672.98,224.25 688.74,209.61 704.47,195"/>
+<polyline class="sf" style="--f:0.001;--i:59" points="39.91,39 57.25,56.34 74.59,73.66 91.94,91 109.28,108.34 126.62,125.66 143.99,143 161.33,160.34 178.67,177.66 196.01,195 212.73,211.72 229.45,228.44 246.19,245.15 262.91,261.85 279.63,278.56 296.35,295.28 313.09,312 329.13,312 345.18,312 361.24,312 377.29,312 393.33,312 409.37,312 425.44,312 441.48,312 457.52,312 473.59,312 489.63,312 505.67,312 521.74,312 537.78,312 553.83,312 569.89,312 585.62,297.36 601.35,282.75 617.08,268.14 632.84,253.5 648.57,238.86 664.3,224.25 680.03,209.64 695.79,195"/>
+</g>
+<g class="slices">
+<path d="M36.61,39V39"/>
+<path d="M53.95,56.33V39"/>
+<path d="M71.3,73.67V39"/>
+<path d="M88.64,91V39"/>
+<path d="M105.99,108.33V39"/>
+<path d="M123.33,125.67V39"/>
+<path d="M140.67,143V39"/>
+<path d="M158.02,160.33V39"/>
+<path d="M175.36,177.67V39"/>
+<path d="M192.71,195V39"/>
+<path d="M209.43,211.72V39"/>
+<path d="M226.16,228.43V39"/>
+<path d="M242.88,245.14V39"/>
+<path d="M259.6,261.86V39"/>
+<path d="M276.33,278.57V39"/>
+<path d="M293.05,295.28V42.53"/>
+<path d="M309.78,312V50.89"/>
+<path d="M326.27,312V59.13"/>
+<path d="M342.75,312V67.38"/>
+<path d="M359.24,312V75.62"/>
+<path d="M375.73,312V83.86"/>
+<path d="M392.21,312V92.11"/>
+<path d="M408.7,312V100.35"/>
+<path d="M425.19,312V108.59"/>
+<path d="M441.68,312V116.84"/>
+<path d="M458.16,312V125.08"/>
+<path d="M474.65,312V133.32"/>
+<path d="M491.13,312V141.57"/>
+<path d="M507.62,312V149.81"/>
+<path d="M524.11,312V158.05"/>
+<path d="M540.59,312V166.3"/>
+<path d="M557.08,312V174.54"/>
+<path d="M573.57,312V182.79"/>
+<path d="M589.31,297.38V190.65"/>
+<path d="M605.04,282.75V195"/>
+<path d="M620.78,268.12V195"/>
+<path d="M636.52,253.5V195"/>
+<path d="M652.25,238.88V195"/>
+<path d="M667.99,224.25V195"/>
+<path d="M683.73,209.62V195"/>
+<path d="M699.47,195V195"/>
+</g>
+<path class="critical" pathLength="1" d="M36.61,39L53.95,56.34L71.29,73.66L88.63,91L105.98,108.34L123.32,125.66L140.69,143L158.03,160.34L175.37,177.66L192.71,195L209.43,211.72L226.15,228.44L242.89,245.15L259.61,261.85L276.33,278.56L293.05,295.28L309.79,312L326.27,312L342.76,312L359.24,312L375.73,312L392.21,312L408.69,312L425.18,312L441.66,312L458.17,312L474.66,312L491.14,312L507.62,312L524.11,312L540.59,312L557.08,312L573.56,312L589.32,297.36L605.05,282.75L620.78,268.14L636.51,253.5L652.26,238.86L667.99,224.25L683.72,209.64L699.45,195"/>
+<polygon class="outline" points="26,507 1586,507 1586,195 598,195 286,39 26,39"/>
+</svg><!-- /svg:ex2a --></div>
+        <div class="titleblock" style="--cols:3">
+          <div><div class="k">Model</div><div class="v">2a · no berm</div></div>
+          <div><div class="k">Search</div><div class="v">Block · non-circular</div></div>
+          <div><div class="k">Spencer</div><div class="v fos">0.988</div></div>
+        </div>
+      </figure>
+      <figure class="sheet" style="margin:0" data-animate>
+        <div class="fig"><!-- svg:ex2b --><svg class="slope-svg" id="ex2b-svg" viewBox="0 0 1066 429" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="ex2b-svg-t">
+<title id="ex2b-svg-t">Limit-equilibrium analysis computed by OGR Slip2D: 1541 valid non-circular surfaces, critical factor of safety 1.180 (spencer)</title>
+<defs>
+<clipPath id="ex2b-svg-clip"><polygon points="26,507 1586,507 1586,195 910,195 806,143 494,143 286,39 26,39"/></clipPath>
+</defs>
+<g class="strata" clip-path="url(#ex2b-svg-clip)">
+<polygon class="st st-0" points="26,507 1586,507 1586,195 910,195 806,143 494,143 286,39 26,39"/>
+<polygon class="st st-1" points="-260,195 26,195 910,195 1326,195 1326,689 -260,689"/>
+<polygon class="st st-2" points="-260,403 26,403 1586,403 1326,403 1326,689 -260,689"/>
+</g>
+<polyline class="contact" points="26,195 910,195"/>
+<polyline class="contact" points="26,403 1586,403"/>
+<polyline class="weak" points="26,312 1586,312"/>
+<g class="surfaces">
+<polyline class="sf" style="--f:0.249;--i:0" points="27.79,39 50.1,61.28 72.41,83.56 94.69,105.85 117,128.15 139.31,150.44 161.59,172.72 183.9,195 207.32,218.4 230.72,241.8 254.15,265.2 277.55,288.6 300.98,312 323.57,312 346.14,312 368.73,312 391.33,312 413.92,312 436.49,312 459.08,312 481.68,312 504.27,312 526.84,312 549.43,312 572.03,312 594.62,312 617.19,312 639.78,312 662.38,312 684.97,312 707.54,312 730.13,312 752.73,312 775.32,312 797.89,312 820.48,312 845.65,288.6 870.84,265.2 896.01,241.8 921.21,218.4 946.37,195"/>
+<polyline class="sf" style="--f:0.234;--i:1" points="39.03,39 61.33,61.28 83.64,83.56 105.92,105.85 128.23,128.15 150.54,150.44 172.82,172.72 195.13,195 218.56,218.4 241.96,241.8 265.38,265.2 288.78,288.6 312.21,312 335.43,312 358.64,312 381.86,312 405.11,312 428.32,312 451.54,312 474.76,312 497.98,312 521.2,312 544.44,312 567.66,312 590.88,312 614.09,312 637.31,312 660.53,312 683.77,312 706.99,312 730.21,312 753.43,312 776.65,312 799.89,312 823.11,312 844.09,292.5 865.07,273 886.05,253.5 907.04,234 928.02,214.5 949,195"/>
+<polyline class="sf" style="--f:0.232;--i:2" points="52.94,39 75.24,61.28 97.55,83.56 119.83,105.85 142.14,128.15 164.45,150.44 186.76,172.72 209.04,195 232.47,218.4 255.87,241.8 279.29,265.2 302.69,288.6 326.12,312 348.87,312 371.62,312 394.37,312 417.12,312 439.87,312 462.64,312 485.39,312 508.14,312 530.89,312 553.64,312 576.39,312 599.14,312 621.89,312 644.64,312 667.39,312 690.17,312 712.92,312 735.67,312 758.42,312 781.17,312 803.92,312 826.67,312 847.65,292.5 868.63,273 889.62,253.5 910.6,234 931.58,214.5 952.56,195"/>
+<polyline class="sf" style="--f:0.225;--i:3" points="76.05,39 98.36,61.28 120.64,83.56 142.95,105.85 165.26,128.15 187.54,150.44 209.85,172.72 232.15,195 255.55,218.4 278.98,241.8 302.38,265.2 325.81,288.6 349.21,312 371.64,312 394.08,312 416.52,312 438.96,312 461.4,312 483.83,312 506.27,312 528.71,312 551.15,312 573.59,312 596.02,312 618.46,312 640.9,312 663.34,312 685.78,312 708.21,312 730.65,312 753.09,312 775.53,312 797.97,312 820.4,312 842.84,312 863.82,292.5 884.81,273 905.79,253.5 926.77,234 947.75,214.5 968.73,195"/>
+<polyline class="sf" style="--f:0.225;--i:4" points="59.88,39 82.19,61.28 104.47,83.56 126.78,105.85 149.08,128.15 171.37,150.44 193.67,172.72 215.98,195 239.38,218.4 262.81,241.8 286.21,265.2 309.63,288.6 333.03,312 355.68,312 378.3,312 400.92,312 423.57,312 446.19,312 468.81,312 491.43,312 514.07,312 536.69,312 559.31,312 581.93,312 604.58,312 627.2,312 649.82,312 672.46,312 695.08,312 717.7,312 740.32,312 762.97,312 785.59,312 808.21,312 830.83,312 851.81,292.5 872.82,273 893.8,253.5 914.78,234 935.77,214.5 956.75,195"/>
+<polyline class="sf" style="--f:0.216;--i:5" points="41.76,39 64.06,61.28 86.35,83.56 108.65,105.85 130.96,128.15 153.24,150.44 175.55,172.72 197.86,195 221.26,218.4 244.69,241.8 268.09,265.2 291.51,288.6 314.94,312 338.16,312 361.37,312 384.59,312 407.81,312 431.03,312 454.25,312 477.46,312 500.68,312 523.9,312 547.12,312 570.34,312 593.55,312 616.77,312 639.99,312 663.21,312 686.43,312 709.64,312 732.86,312 756.08,312 779.3,312 802.52,312 825.76,312 846.74,292.5 867.72,273 888.71,253.5 909.69,234 930.67,214.5 951.65,195"/>
+<polyline class="sf" style="--f:0.213;--i:6" points="87.67,39 109.98,61.28 132.29,83.56 154.57,105.85 176.88,128.15 199.19,150.44 221.47,172.72 243.78,195 267.18,218.4 290.6,241.8 314.03,265.2 337.43,288.6 360.85,312 385.01,312 409.16,312 433.34,312 457.5,312 481.65,312 505.83,312 529.98,312 554.14,312 578.32,312 602.47,312 626.63,312 650.81,312 674.96,312 699.11,312 723.27,312 747.45,312 771.6,312 795.76,312 819.94,312 844.09,312 868.24,312 892.42,312 916.58,312 941.75,288.6 966.94,265.2 992.11,241.8 1017.3,218.4 1042.47,195"/>
+<polyline class="sf" style="--f:0.211;--i:7" points="86.42,39 108.73,61.28 131.04,83.56 153.32,105.85 175.63,128.15 197.94,150.44 220.22,172.72 242.53,195 265.93,218.4 289.35,241.8 312.78,265.2 336.18,288.6 359.61,312 382.33,312 405.05,312 427.8,312 450.53,312 473.28,312 496,312 518.73,312 541.48,312 564.2,312 586.95,312 609.67,312 632.4,312 655.15,312 677.87,312 700.6,312 723.35,312 746.07,312 768.82,312 791.54,312 814.27,312 837.02,312 859.74,312 880.72,292.5 901.71,273 922.69,253.5 943.67,234 964.65,214.5 985.63,195"/>
+<polyline class="sf" style="--f:0.210;--i:8" points="91.23,39 113.52,61.28 135.82,83.56 158.13,105.85 180.44,128.15 202.72,150.44 225.03,172.72 247.34,195 270.74,218.4 294.16,241.8 317.56,265.2 340.99,288.6 364.39,312 387.97,312 411.53,312 435.08,312 458.64,312 482.2,312 505.75,312 529.33,312 552.89,312 576.45,312 600,312 623.56,312 647.11,312 670.7,312 694.25,312 717.81,312 741.36,312 764.92,312 788.48,312 812.06,312 835.61,312 859.17,312 882.73,312 906.28,312 931.48,288.6 956.64,265.2 981.84,241.8 1007.01,218.4 1032.17,195"/>
+<polyline class="sf" style="--f:0.201;--i:9" points="63.18,39 89.18,65 115.21,91 141.23,117 167.23,143 193.26,169 219.26,195 242.68,218.4 266.11,241.8 289.51,265.2 312.94,288.6 336.34,312 362.21,312 388.08,312 413.95,312 439.82,312 465.69,312 491.56,312 517.43,312 543.3,312 569.17,312 595.04,312 620.91,312 646.78,312 672.65,312 698.54,312 724.41,312 750.28,312 776.15,312 802.02,312 827.89,312 853.76,312 879.63,312 905.5,312 931.37,312 957.24,312 982.41,288.6 1007.6,265.2 1032.77,241.8 1057.94,218.4 1083.13,195"/>
+<polyline class="sf" style="--f:0.197;--i:10" points="72.41,39 98.44,65 124.46,91 150.46,117 176.49,143 202.51,169 228.51,195 251.94,218.4 275.34,241.8 298.77,265.2 322.17,288.6 345.59,312 370.42,312 395.28,312 420.11,312 444.94,312 469.79,312 494.62,312 519.45,312 544.31,312 569.14,312 593.97,312 618.83,312 643.66,312 668.49,312 693.34,312 718.17,312 743,312 767.83,312 792.69,312 817.52,312 842.35,312 867.2,312 892.03,312 916.86,312 941.72,312 966.89,288.6 992.08,265.2 1017.25,241.8 1042.42,218.4 1067.61,195"/>
+<polyline class="sf" style="--f:0.188;--i:11" points="72.75,39 98.75,65 124.77,91 150.77,117 176.8,143 202.83,169 228.83,195 252.25,218.4 275.65,241.8 299.08,265.2 322.5,288.6 345.9,312 370.58,312 395.25,312 419.93,312 444.6,312 469.27,312 493.95,312 518.62,312 543.3,312 567.97,312 592.64,312 617.32,312 641.97,312 666.64,312 691.31,312 715.99,312 740.66,312 765.34,312 790.01,312 814.68,312 839.36,312 864.03,312 888.71,312 913.38,312 938.05,312 963.22,288.6 988.42,265.2 1013.58,241.8 1038.75,218.4 1063.95,195"/>
+<polyline class="sf" style="--f:0.183;--i:12" points="64.82,39 87.13,61.28 109.43,83.56 131.72,105.85 154.02,128.15 176.33,150.44 198.64,172.72 220.92,195 244.35,218.4 267.75,241.8 291.17,265.2 314.57,288.6 338,312 360.83,312 383.66,312 406.51,312 429.34,312 452.17,312 474.99,312 497.85,312 520.68,312 543.5,312 566.33,312 589.19,312 612.01,312 634.84,312 657.67,312 680.52,312 703.35,312 726.18,312 749.01,312 771.86,312 794.69,312 817.52,312 840.35,312 861.33,292.5 882.31,273 903.29,253.5 924.27,234 945.26,214.5 966.24,195"/>
+<polyline class="sf" style="--f:0.182;--i:13" points="57.07,39 79.38,61.28 101.66,83.56 123.97,105.85 146.28,128.15 168.56,150.44 190.87,172.72 213.17,195 236.57,218.4 260,241.8 283.4,265.2 306.83,288.6 330.25,312 353.21,312 376.17,312 399.15,312 422.11,312 445.07,312 468.05,312 491.01,312 513.99,312 536.95,312 559.91,312 582.89,312 605.85,312 628.84,312 651.79,312 674.75,312 697.74,312 720.69,312 743.65,312 766.64,312 789.59,312 812.58,312 835.54,312 856.52,292.5 877.5,273 898.48,253.5 919.46,234 940.45,214.5 961.43,195"/>
+<polyline class="sf" style="--f:0.173;--i:14" points="32.58,39 58.6,65 84.63,91 110.63,117 136.66,143 162.66,169 188.68,195 217.96,224.25 247.21,253.5 276.48,282.75 305.76,312 332.1,312 358.44,312 384.8,312 411.14,312 437.48,312 463.81,312 490.18,312 516.52,312 542.85,312 569.19,312 595.56,312 621.89,312 648.23,312 674.57,312 700.93,312 727.27,312 753.61,312 779.95,312 806.31,312 832.65,312 858.99,312 885.33,312 911.69,312 938.03,312 964.37,312 989.56,288.6 1014.73,265.2 1039.9,241.8 1065.09,218.4 1090.26,195"/>
+<polyline class="sf" style="--f:0.170;--i:15" points="32.84,39 58.84,65 84.86,91 110.86,117 136.89,143 162.92,169 188.92,195 218.19,224.25 247.47,253.5 276.72,282.75 305.99,312 332.28,312 358.59,312 384.88,312 411.16,312 437.48,312 463.76,312 490.05,312 516.33,312 542.65,312 568.93,312 595.22,312 621.5,312 647.82,312 674.1,312 700.39,312 726.67,312 752.99,312 779.27,312 805.56,312 831.87,312 858.16,312 884.44,312 910.73,312 937.04,312 963.33,312 988.49,288.6 1013.69,265.2 1038.86,241.8 1064.05,218.4 1089.22,195"/>
+<polyline class="sf" style="--f:0.164;--i:16" points="74.18,39 100.18,65 126.2,91 152.23,117 178.23,143 204.26,169 230.28,195 253.68,218.4 277.11,241.8 300.51,265.2 323.93,288.6 347.33,312 371.49,312 395.62,312 419.74,312 443.9,312 468.03,312 492.15,312 516.28,312 540.44,312 564.56,312 588.69,312 612.85,312 636.97,312 661.1,312 685.23,312 709.38,312 733.51,312 757.64,312 781.77,312 805.92,312 830.05,312 854.18,312 878.33,312 902.46,312 926.59,312 951.78,288.6 976.95,265.2 1002.12,241.8 1027.31,218.4 1052.48,195"/>
+<polyline class="sf" style="--f:0.161;--i:17" points="80.34,39 102.62,61.28 124.93,83.56 147.24,105.85 169.55,128.15 191.83,150.44 214.14,172.72 236.44,195 259.84,218.4 283.27,241.8 306.67,265.2 330.1,288.6 353.5,312 377.88,312 402.25,312 426.63,312 451.02,312 475.38,312 499.77,312 524.13,312 548.52,312 572.88,312 597.27,312 621.63,312 646.02,312 670.38,312 694.77,312 719.13,312 743.52,312 767.91,312 792.27,312 816.66,312 841.02,312 865.41,312 889.77,312 914.16,312 939.33,288.6 964.52,265.2 989.69,241.8 1014.88,218.4 1040.05,195"/>
+<polyline class="sf" style="--f:0.161;--i:18" points="82.97,39 105.27,61.28 127.58,83.56 149.86,105.85 172.17,128.15 194.48,150.44 216.76,172.72 239.07,195 262.5,218.4 285.9,241.8 309.32,265.2 332.72,288.6 356.15,312 379.44,312 402.74,312 426.04,312 449.33,312 472.63,312 495.92,312 519.22,312 542.49,312 565.79,312 589.08,312 612.38,312 635.67,312 658.97,312 682.27,312 705.56,312 728.86,312 752.15,312 775.45,312 798.75,312 822.04,312 845.34,312 868.63,312 889.62,292.5 910.6,273 931.58,253.5 952.56,234 973.54,214.5 994.53,195"/>
+<polyline class="sf" style="--f:0.160;--i:19" points="48.75,39 74.78,65 100.78,91 126.8,117 152.83,143 178.83,169 204.85,195 234.13,224.25 263.38,253.5 292.66,282.75 321.93,312 347.26,312 372.61,312 397.93,312 423.28,312 448.6,312 473.95,312 499.28,312 524.63,312 549.98,312 575.3,312 600.65,312 625.98,312 651.33,312 676.65,312 702,312 727.32,312 752.67,312 778,312 803.35,312 828.7,312 854.02,312 879.37,312 904.7,312 930.05,312 955.37,312 980.56,288.6 1005.73,265.2 1030.93,241.8 1056.09,218.4 1081.26,195"/>
+<polyline class="sf" style="--f:0.150;--i:20" points="82.34,39 104.62,61.28 126.93,83.56 149.24,105.85 171.52,128.15 193.83,150.44 216.14,172.72 238.42,195 261.85,218.4 285.27,241.8 308.67,265.2 332.1,288.6 355.5,312 379.39,312 403.29,312 427.18,312 451.1,312 474.99,312 498.89,312 522.78,312 546.68,312 570.57,312 594.46,312 618.36,312 642.25,312 666.15,312 690.04,312 713.93,312 737.83,312 761.72,312 785.62,312 809.51,312 833.4,312 857.32,312 881.22,312 905.11,312 930.28,288.6 955.47,265.2 980.64,241.8 1005.81,218.4 1031,195"/>
+<polyline class="sf" style="--f:0.145;--i:21" points="82.94,39 105.25,61.28 127.56,83.56 149.84,105.85 172.15,128.15 194.45,150.44 216.74,172.72 239.04,195 262.44,218.4 285.87,241.8 309.3,265.2 332.7,288.6 356.12,312 378.66,312 401.23,312 423.8,312 446.34,312 468.91,312 491.45,312 514.02,312 536.59,312 559.13,312 581.7,312 604.24,312 626.81,312 649.38,312 671.92,312 694.49,312 717.03,312 739.6,312 762.16,312 784.71,312 807.27,312 829.82,312 852.38,312 874.95,312 900.12,288.6 925.29,265.2 950.48,241.8 975.65,218.4 1000.84,195"/>
+<polyline class="sf" style="--f:0.138;--i:22" points="83.33,39 105.64,61.28 127.95,83.56 150.25,105.85 172.54,128.15 194.84,150.44 217.15,172.72 239.43,195 262.86,218.4 286.26,241.8 309.69,265.2 333.09,288.6 356.51,312 379.78,312 403.05,312 426.32,312 449.59,312 472.86,312 496.13,312 519.43,312 542.7,312 565.97,312 589.24,312 612.51,312 635.78,312 659.05,312 682.32,312 705.59,312 728.86,312 752.13,312 775.4,312 798.67,312 821.96,312 845.23,312 868.5,312 891.77,312 916.94,288.6 942.14,265.2 967.3,241.8 992.47,218.4 1017.67,195"/>
+<polyline class="sf" style="--f:0.137;--i:23" points="35.75,39 58.06,61.28 80.37,83.56 102.65,105.85 124.96,128.15 147.26,150.44 169.55,172.72 191.85,195 215.28,218.4 238.68,241.8 262.11,265.2 285.51,288.6 308.93,312 331.89,312 354.82,312 377.78,312 400.74,312 423.7,312 446.63,312 469.59,312 492.54,312 515.48,312 538.43,312 561.39,312 584.35,312 607.28,312 630.24,312 653.2,312 676.13,312 699.09,312 722.05,312 745,312 767.94,312 790.89,312 813.85,312 836.81,312 861.98,288.6 887.15,265.2 912.34,241.8 937.51,218.4 962.7,195"/>
+<polyline class="sf" style="--f:0.135;--i:24" points="79.98,39 102.28,61.28 124.59,83.56 146.87,105.85 169.18,128.15 191.49,150.44 213.77,172.72 236.08,195 259.51,218.4 282.91,241.8 306.33,265.2 329.73,288.6 353.16,312 377.13,312 401.13,312 425.1,312 449.1,312 473.07,312 497.07,312 521.04,312 545.04,312 569.01,312 593.01,312 616.98,312 640.98,312 664.95,312 688.95,312 712.92,312 736.92,312 760.89,312 784.89,312 808.86,312 832.86,312 856.83,312 880.83,312 904.8,312 929.99,288.6 955.16,265.2 980.36,241.8 1005.52,218.4 1030.72,195"/>
+<polyline class="sf" style="--f:0.133;--i:25" points="34.58,39 60.61,65 86.61,91 112.63,117 138.66,143 164.66,169 190.68,195 219.96,224.25 249.21,253.5 278.49,282.75 307.76,312 333.42,312 359.11,312 384.77,312 410.46,312 436.12,312 461.81,312 487.47,312 513.16,312 538.82,312 564.51,312 590.17,312 615.86,312 641.52,312 667.21,312 692.87,312 718.56,312 744.22,312 769.91,312 795.57,312 821.26,312 846.92,312 872.61,312 898.27,312 923.96,312 949.62,312 974.79,288.6 999.99,265.2 1025.15,241.8 1050.35,218.4 1075.52,195"/>
+<polyline class="sf" style="--f:0.126;--i:26" points="76.99,39 99.27,61.28 121.58,83.56 143.88,105.85 166.19,128.15 188.47,150.44 210.78,172.72 233.09,195 256.49,218.4 279.92,241.8 303.32,265.2 326.74,288.6 350.14,312 374.4,312 398.63,312 422.89,312 447.12,312 471.38,312 495.61,312 519.87,312 544.1,312 568.36,312 592.59,312 616.85,312 641.08,312 665.34,312 689.57,312 713.83,312 738.06,312 762.32,312 786.58,312 810.81,312 835.07,312 859.3,312 883.56,312 907.79,312 932.96,288.6 958.15,265.2 983.32,241.8 1008.51,218.4 1033.68,195"/>
+<polyline class="sf" style="--f:0.125;--i:27" points="61.36,39 87.39,65 113.39,91 139.41,117 165.41,143 191.44,169 217.46,195 240.86,218.4 264.29,241.8 287.69,265.2 311.12,288.6 334.52,312 359.4,312 384.25,312 409.11,312 433.99,312 458.85,312 483.7,312 508.56,312 533.44,312 558.3,312 583.15,312 608.01,312 632.89,312 657.75,312 682.6,312 707.49,312 732.34,312 757.2,312 782.05,312 806.94,312 831.79,312 856.65,312 881.5,312 906.39,312 931.24,312 956.41,288.6 981.6,265.2 1006.77,241.8 1031.97,218.4 1057.13,195"/>
+<polyline class="sf" style="--f:0.117;--i:28" points="43.68,39 69.71,65 95.73,91 121.73,117 147.76,143 173.78,169 199.78,195 223.21,218.4 246.61,241.8 270.04,265.2 293.44,288.6 316.86,312 342.91,312 368.97,312 395.02,312 421.07,312 447.1,312 473.15,312 499.2,312 525.25,312 551.3,312 577.36,312 603.41,312 629.46,312 655.51,312 681.56,312 707.62,312 733.64,312 759.69,312 785.75,312 811.8,312 837.85,312 863.9,312 889.95,312 916.01,312 942.06,312 967.23,288.6 992.42,265.2 1017.59,241.8 1042.76,218.4 1067.95,195"/>
+<polyline class="sf" style="--f:0.115;--i:29" points="51.56,39 73.87,61.28 96.17,83.56 118.46,105.85 140.76,128.15 163.07,150.44 185.35,172.72 207.66,195 231.06,218.4 254.49,241.8 277.91,265.2 301.31,288.6 324.74,312 347.33,312 369.93,312 392.55,312 415.14,312 437.76,312 460.36,312 482.95,312 505.57,312 528.16,312 550.76,312 573.38,312 595.97,312 618.57,312 641.19,312 663.78,312 686.4,312 708.99,312 731.59,312 754.21,312 776.8,312 799.4,312 822.02,312 844.61,312 869.78,288.6 894.97,265.2 920.14,241.8 945.33,218.4 970.5,195"/>
+<polyline class="sf" style="--f:0.114;--i:30" points="63.02,39 89.02,65 115.05,91 141.05,117 167.08,143 193.1,169 219.1,195 242.53,218.4 265.93,241.8 289.35,265.2 312.78,288.6 336.18,312 360.72,312 385.24,312 409.79,312 434.33,312 458.85,312 483.39,312 507.91,312 532.45,312 557,312 581.52,312 606.06,312 630.6,312 655.12,312 679.67,312 704.18,312 728.73,312 753.27,312 777.79,312 802.33,312 826.88,312 851.4,312 875.94,312 900.46,312 925,312 950.17,288.6 975.36,265.2 1000.53,241.8 1025.73,218.4 1050.89,195"/>
+<polyline class="sf" style="--f:0.109;--i:31" points="33.49,39 59.51,65 85.51,91 111.54,117 137.57,143 163.57,169 189.59,195 218.84,224.25 248.12,253.5 277.39,282.75 306.67,312 332.02,312 357.37,312 382.72,312 408.07,312 433.45,312 458.8,312 484.15,312 509.5,312 534.85,312 560.22,312 585.57,312 610.92,312 636.27,312 661.62,312 686.97,312 712.35,312 737.7,312 763.05,312 788.4,312 813.75,312 839.12,312 864.47,312 889.82,312 915.17,312 940.52,312 965.72,288.6 990.89,265.2 1016.08,241.8 1041.25,218.4 1066.44,195"/>
+<polyline class="sf" style="--f:0.108;--i:32" points="50.49,39 72.8,61.28 95.08,83.56 117.39,105.85 139.7,128.15 161.98,150.44 184.29,172.72 206.6,195 230,218.4 253.42,241.8 276.82,265.2 300.25,288.6 323.65,312 346.32,312 368.99,312 391.66,312 414.34,312 437.01,312 459.68,312 482.35,312 505.02,312 527.7,312 550.37,312 573.04,312 595.74,312 618.41,312 641.08,312 663.75,312 686.43,312 709.1,312 731.77,312 754.44,312 777.11,312 799.79,312 822.46,312 845.13,312 870.3,288.6 895.47,265.2 920.66,241.8 945.83,218.4 971.02,195"/>
+<polyline class="sf" style="--f:0.108;--i:33" points="36.17,39 62.19,65 88.22,91 114.22,117 140.24,143 166.27,169 192.27,195 215.7,218.4 239.1,241.8 262.52,265.2 285.92,288.6 309.35,312 335.63,312 361.92,312 388.21,312 414.49,312 440.78,312 467.06,312 493.38,312 519.66,312 545.95,312 572.23,312 598.52,312 624.81,312 651.09,312 677.38,312 703.66,312 729.95,312 756.24,312 782.55,312 808.83,312 835.12,312 861.41,312 887.69,312 913.98,312 940.26,312 965.43,288.6 990.63,265.2 1015.79,241.8 1040.99,218.4 1066.16,195"/>
+<polyline class="sf" style="--f:0.103;--i:34" points="45.37,39 67.68,61.28 89.96,83.56 112.27,105.85 134.58,128.15 156.86,150.44 179.17,172.72 201.47,195 224.87,218.4 248.3,241.8 271.7,265.2 295.13,288.6 318.55,312 341.41,312 364.29,312 387.17,312 410.05,312 432.9,312 455.78,312 478.66,312 501.54,312 524.42,312 547.27,312 570.15,312 593.03,312 615.91,312 638.77,312 661.65,312 684.53,312 707.41,312 730.29,312 753.14,312 776.02,312 798.9,312 821.78,312 844.64,312 869.83,288.6 895,265.2 920.19,241.8 945.36,218.4 970.55,195"/>
+<polyline class="sf" style="--f:0.101;--i:35" points="69.78,39 95.81,65 121.84,91 147.84,117 173.86,143 199.86,169 225.89,195 249.31,218.4 272.71,241.8 296.14,265.2 319.54,288.6 342.97,312 366.63,312 390.31,312 413.97,312 437.63,312 461.32,312 484.98,312 508.66,312 532.32,312 555.98,312 579.67,312 603.33,312 626.99,312 650.68,312 674.34,312 698.02,312 721.68,312 745.34,312 769.03,312 792.69,312 816.37,312 840.03,312 863.69,312 887.38,312 911.04,312 936.23,288.6 961.4,265.2 986.57,241.8 1011.76,218.4 1036.93,195"/>
+<polyline class="sf" style="--f:0.095;--i:36" points="68.33,39 94.33,65 120.35,91 146.38,117 172.38,143 198.41,169 224.41,195 247.83,218.4 271.26,241.8 294.66,265.2 318.08,288.6 341.48,312 365.22,312 388.96,312 412.67,312 436.41,312 460.12,312 483.86,312 507.6,312 531.31,312 555.05,312 578.79,312 602.5,312 626.24,312 649.95,312 673.69,312 697.42,312 721.14,312 744.87,312 768.61,312 792.32,312 816.06,312 839.77,312 863.51,312 887.25,312 910.96,312 936.16,288.6 961.32,265.2 986.52,241.8 1011.69,218.4 1036.88,195"/>
+<polyline class="sf" style="--f:0.093;--i:37" points="26.44,39 48.72,61.28 71.03,83.56 93.34,105.85 115.62,128.15 137.93,150.44 160.24,172.72 182.52,195 205.95,218.4 229.37,241.8 252.77,265.2 276.2,288.6 299.6,312 323.34,312 347.05,312 370.79,312 394.5,312 418.24,312 441.97,312 465.69,312 489.42,312 513.14,312 536.87,312 560.59,312 584.32,312 608.06,312 631.77,312 655.51,312 679.22,312 702.96,312 726.67,312 750.41,312 774.15,312 797.86,312 821.6,312 845.31,312 870.51,288.6 895.67,265.2 920.84,241.8 946.04,218.4 971.2,195"/>
+<polyline class="sf" style="--f:0.085;--i:38" points="68.2,39 90.51,61.28 112.79,83.56 135.1,105.85 157.4,128.15 179.71,150.44 201.99,172.72 224.3,195 247.7,218.4 271.13,241.8 294.55,265.2 317.95,288.6 341.38,312 366,312 390.62,312 415.25,312 439.87,312 464.49,312 489.11,312 513.73,312 538.36,312 562.98,312 587.6,312 612.22,312 636.84,312 661.47,312 686.09,312 710.71,312 735.33,312 759.95,312 784.58,312 809.2,312 833.82,312 858.44,312 883.06,312 907.69,312 932.88,288.6 958.05,265.2 983.24,241.8 1008.41,218.4 1033.58,195"/>
+<polyline class="sf" style="--f:0.083;--i:39" points="47.37,39 73.37,65 99.4,91 125.4,117 151.42,143 177.45,169 203.45,195 226.88,218.4 250.28,241.8 273.7,265.2 297.13,288.6 320.53,312 345.83,312 371.12,312 396.42,312 421.72,312 447.02,312 472.32,312 497.61,312 522.91,312 548.21,312 573.51,312 598.78,312 624.08,312 649.38,312 674.67,312 699.97,312 725.27,312 750.57,312 775.87,312 801.16,312 826.46,312 851.76,312 877.06,312 902.36,312 927.65,312 952.82,288.6 978.02,265.2 1003.18,241.8 1028.35,218.4 1053.55,195"/>
+<polyline class="sf" style="--f:0.082;--i:40" points="59.1,39 85.12,65 111.15,91 137.15,117 163.18,143 189.18,169 215.2,195 238.63,218.4 262.03,241.8 285.45,265.2 308.85,288.6 332.28,312 356.67,312 381.08,312 405.47,312 429.88,312 454.27,312 478.69,312 503.07,312 527.49,312 551.88,312 576.29,312 600.68,312 625.07,312 649.48,312 673.87,312 698.28,312 722.67,312 747.08,312 771.47,312 795.89,312 820.27,312 844.69,312 869.08,312 893.49,312 917.88,312 943.07,288.6 968.24,265.2 993.41,241.8 1018.6,218.4 1043.77,195"/>
+<polyline class="sf" style="--f:0.070;--i:41" points="52.57,39 78.57,65 104.6,91 130.62,117 156.62,143 182.65,169 208.65,195 232.08,218.4 255.5,241.8 278.9,265.2 302.33,288.6 325.73,312 350.48,312 375.23,312 399.98,312 424.74,312 449.49,312 474.24,312 498.99,312 523.74,312 548.47,312 573.22,312 597.97,312 622.73,312 647.48,312 672.23,312 696.98,312 721.73,312 746.49,312 771.24,312 795.99,312 820.72,312 845.47,312 870.22,312 894.97,312 919.72,312 944.89,288.6 970.09,265.2 995.25,241.8 1020.45,218.4 1045.62,195"/>
+<polyline class="sf" style="--f:0.069;--i:42" points="49.66,39 71.97,61.28 94.28,83.56 116.56,105.85 138.87,128.15 161.17,150.44 183.46,172.72 205.76,195 229.19,218.4 252.59,241.8 276.02,265.2 299.42,288.6 322.84,312 345.96,312 369.07,312 392.18,312 415.3,312 438.41,312 461.5,312 484.61,312 507.73,312 530.84,312 553.96,312 577.07,312 600.18,312 623.3,312 646.41,312 669.53,312 692.64,312 715.75,312 738.87,312 761.98,312 785.1,312 808.21,312 831.32,312 854.44,312 879.61,288.6 904.77,265.2 929.97,241.8 955.14,218.4 980.33,195"/>
+<polyline class="sf" style="--f:0.066;--i:43" points="53.69,39 79.69,65 105.72,91 131.72,117 157.74,143 183.77,169 209.77,195 233.19,218.4 256.59,241.8 280.02,265.2 303.42,288.6 326.85,312 351.44,312 376.04,312 400.63,312 425.26,312 449.85,312 474.45,312 499.04,312 523.64,312 548.24,312 572.83,312 597.43,312 622.02,312 646.65,312 671.24,312 695.84,312 720.43,312 745.03,312 769.63,312 794.22,312 818.82,312 843.44,312 868.04,312 892.63,312 917.23,312 942.4,288.6 967.59,265.2 992.76,241.8 1017.95,218.4 1043.12,195"/>
+<polyline class="sf" style="--f:0.064;--i:44" points="61.83,39 84.14,61.28 106.44,83.56 128.73,105.85 151.03,128.15 173.34,150.44 195.62,172.72 217.93,195 241.36,218.4 264.76,241.8 288.18,265.2 311.58,288.6 335.01,312 358.12,312 381.21,312 404.33,312 427.44,312 450.55,312 473.64,312 496.76,312 519.87,312 542.98,312 566.1,312 589.19,312 612.3,312 635.41,312 658.53,312 681.62,312 704.73,312 727.84,312 750.96,312 774.05,312 797.16,312 820.27,312 843.39,312 866.5,312 891.67,288.6 916.84,265.2 942.03,241.8 967.2,218.4 992.39,195"/>
+<polyline class="sf" style="--f:0.064;--i:45" points="34.16,39 56.45,61.28 78.75,83.56 101.06,105.85 123.34,128.15 145.65,150.44 167.96,172.72 190.24,195 213.67,218.4 237.07,241.8 260.49,265.2 283.92,288.6 307.32,312 330.98,312 354.64,312 378.3,312 401.96,312 425.59,312 449.25,312 472.91,312 496.57,312 520.23,312 543.89,312 567.55,312 591.21,312 614.85,312 638.51,312 662.17,312 685.83,312 709.49,312 733.15,312 756.81,312 780.47,312 804.1,312 827.76,312 851.42,312 876.62,288.6 901.78,265.2 926.98,241.8 952.15,218.4 977.31,195"/>
+<polyline class="sf" style="--f:0.054;--i:46" points="56.21,39 82.24,65 108.24,91 134.26,117 160.29,143 186.29,169 212.32,195 235.72,218.4 259.14,241.8 282.54,265.2 305.97,288.6 329.39,312 353.6,312 377.83,312 402.04,312 426.27,312 450.48,312 474.71,312 498.94,312 523.15,312 547.38,312 571.58,312 595.82,312 620.02,312 644.25,312 668.46,312 692.69,312 716.92,312 741.13,312 765.36,312 789.57,312 813.8,312 838.01,312 862.24,312 886.47,312 910.68,312 935.87,288.6 961.04,265.2 986.21,241.8 1011.4,218.4 1036.57,195"/>
+<polyline class="sf" style="--f:0.054;--i:47" points="65.96,39 88.27,61.28 110.58,83.56 132.86,105.85 155.17,128.15 177.48,150.44 199.76,172.72 222.07,195 245.47,218.4 268.89,241.8 292.32,265.2 315.72,288.6 339.14,312 363.25,312 387.32,312 411.42,312 435.53,312 459.63,312 483.7,312 507.81,312 531.91,312 556.01,312 580.11,312 604.19,312 628.29,312 652.39,312 676.49,312 700.57,312 724.67,312 748.77,312 772.88,312 796.95,312 821.05,312 845.16,312 869.26,312 893.36,312 918.53,288.6 943.7,265.2 968.89,241.8 994.06,218.4 1019.25,195"/>
+<polyline class="sf" style="--f:0.045;--i:48" points="32.94,39 55.25,61.28 77.53,83.56 99.84,105.85 122.15,128.15 144.43,150.44 166.74,172.72 189.05,195 212.45,218.4 235.87,241.8 259.27,265.2 282.7,288.6 306.1,312 330.04,312 353.99,312 377.94,312 401.88,312 425.8,312 449.75,312 473.69,312 497.64,312 521.56,312 545.51,312 569.45,312 593.4,312 617.32,312 641.26,312 665.21,312 689.16,312 713.1,312 737.02,312 760.97,312 784.91,312 808.86,312 832.78,312 856.73,312 881.92,288.6 907.09,265.2 932.26,241.8 957.45,218.4 982.62,195"/>
+<polyline class="sf" style="--f:0.043;--i:49" points="41.65,39 63.96,61.28 86.27,83.56 108.55,105.85 130.86,128.15 153.17,150.44 175.45,172.72 197.76,195 221.18,218.4 244.58,241.8 268.01,265.2 291.41,288.6 314.83,312 338.44,312 362.08,312 385.68,312 409.29,312 432.93,312 456.53,312 480.17,312 503.78,312 527.38,312 551.02,312 574.63,312 598.26,312 621.87,312 645.48,312 669.11,312 692.72,312 716.35,312 739.96,312 763.59,312 787.2,312 810.81,312 834.44,312 858.05,312 883.25,288.6 908.41,265.2 933.58,241.8 958.78,218.4 983.94,195"/>
+<polyline class="sf" style="--f:0.037;--i:50" points="61.02,39 83.3,61.28 105.61,83.56 127.92,105.85 150.2,128.15 172.51,150.44 194.82,172.72 217.1,195 240.53,218.4 263.95,241.8 287.35,265.2 310.78,288.6 334.18,312 358.46,312 382.77,312 407.06,312 431.34,312 455.62,312 479.93,312 504.22,312 528.5,312 552.79,312 577.07,312 601.38,312 625.66,312 649.95,312 674.23,312 698.52,312 722.83,312 747.11,312 771.39,312 795.68,312 819.96,312 844.27,312 868.56,312 892.84,312 918.01,288.6 943.2,265.2 968.37,241.8 993.56,218.4 1018.73,195"/>
+<polyline class="sf" style="--f:0.029;--i:51" points="48.07,39 74.07,65 100.1,91 126.13,117 152.13,143 178.15,169 204.15,195 227.58,218.4 250.98,241.8 274.4,265.2 297.83,288.6 321.23,312 345.64,312 370.06,312 394.47,312 418.89,312 443.3,312 467.71,312 492.13,312 516.54,312 540.96,312 565.37,312 589.78,312 614.2,312 638.64,312 663.05,312 687.47,312 711.88,312 736.29,312 760.71,312 785.12,312 809.54,312 833.95,312 858.36,312 882.78,312 907.19,312 932.36,288.6 957.55,265.2 982.72,241.8 1007.92,218.4 1033.08,195"/>
+<polyline class="sf" style="--f:0.018;--i:52" points="32.19,39 58.21,65 84.21,91 110.24,117 136.24,143 162.27,169 188.29,195 211.69,218.4 235.12,241.8 258.52,265.2 281.94,288.6 305.34,312 330.38,312 355.42,312 380.46,312 405.5,312 430.53,312 455.57,312 480.61,312 505.65,312 530.69,312 555.7,312 580.74,312 605.77,312 630.81,312 655.85,312 680.89,312 705.93,312 730.96,312 756,312 781.04,312 806.05,312 831.09,312 856.13,312 881.17,312 906.2,312 931.37,288.6 956.57,265.2 981.73,241.8 1006.93,218.4 1032.1,195"/>
+<polyline class="sf" style="--f:0.015;--i:53" points="37.13,39 59.44,61.28 81.74,83.56 104.03,105.85 126.33,128.15 148.64,150.44 170.92,172.72 193.23,195 216.66,218.4 240.06,241.8 263.48,265.2 286.88,288.6 310.31,312 334.54,312 358.75,312 382.98,312 407.21,312 431.42,312 455.65,312 479.88,312 504.09,312 528.32,312 552.55,312 576.78,312 600.99,312 625.22,312 649.45,312 673.66,312 697.89,312 722.12,312 746.33,312 770.56,312 794.79,312 819,312 843.23,312 867.46,312 892.63,288.6 917.83,265.2 942.99,241.8 968.19,218.4 993.36,195"/>
+<polyline class="sf" style="--f:0.013;--i:54" points="45.53,39 67.81,61.28 90.12,83.56 112.42,105.85 134.71,128.15 157.01,150.44 179.32,172.72 201.6,195 225.03,218.4 248.46,241.8 271.86,265.2 295.28,288.6 318.68,312 342.68,312 366.7,312 390.7,312 414.7,312 438.7,312 462.7,312 486.69,312 510.72,312 534.72,312 558.71,312 582.71,312 606.71,312 630.71,312 654.73,312 678.73,312 702.73,312 726.73,312 750.72,312 774.72,312 798.75,312 822.74,312 846.74,312 870.74,312 895.91,288.6 921.1,265.2 946.27,241.8 971.46,218.4 996.63,195"/>
+<polyline class="sf" style="--f:0.009;--i:55" points="49.45,39 71.73,61.28 94.04,83.56 116.35,105.85 138.63,128.15 160.94,150.44 183.25,172.72 205.53,195 228.96,218.4 252.36,241.8 275.78,265.2 299.21,288.6 322.61,312 346.84,312 371.07,312 395.3,312 419.54,312 443.77,312 467.97,312 492.21,312 516.44,312 540.67,312 564.9,312 589.13,312 613.37,312 637.57,312 661.8,312 686.04,312 710.27,312 734.5,312 758.73,312 782.96,312 807.2,312 831.4,312 855.63,312 879.87,312 905.06,288.6 930.23,265.2 955.4,241.8 980.59,218.4 1005.76,195"/>
+<polyline class="sf" style="--f:0.007;--i:56" points="27.77,39 53.79,65 79.79,91 105.82,117 131.85,143 157.85,169 183.87,195 207.27,218.4 230.7,241.8 254.1,265.2 277.52,288.6 300.95,312 324.77,312 348.61,312 372.42,312 396.27,312 420.08,312 443.92,312 467.74,312 491.58,312 515.4,312 539.24,312 563.06,312 586.9,312 610.71,312 634.56,312 658.4,312 682.21,312 706.06,312 729.87,312 753.71,312 777.53,312 801.37,312 825.19,312 849.03,312 872.85,312 898.04,288.6 923.21,265.2 948.4,241.8 973.57,218.4 998.74,195"/>
+<polyline class="sf" style="--f:0.005;--i:57" points="46.85,39 72.85,65 98.88,91 124.88,117 150.9,143 176.93,169 202.93,195 226.36,218.4 249.76,241.8 273.18,265.2 296.61,288.6 320.01,312 343.98,312 367.98,312 391.95,312 415.92,312 439.92,312 463.89,312 487.86,312 511.86,312 535.83,312 559.81,312 583.8,312 607.78,312 631.77,312 655.75,312 679.72,312 703.72,312 727.69,312 751.66,312 775.66,312 799.63,312 823.6,312 847.6,312 871.57,312 895.54,312 920.74,288.6 945.91,265.2 971.1,241.8 996.27,218.4 1021.44,195"/>
+<polyline class="sf" style="--f:0.005;--i:58" points="32.68,39 58.68,65 84.71,91 110.73,117 136.73,143 162.76,169 188.76,195 212.19,218.4 235.61,241.8 259.01,265.2 282.44,288.6 305.84,312 330.62,312 355.39,312 380.17,312 404.92,312 429.7,312 454.48,312 479.26,312 504.04,312 528.79,312 553.57,312 578.34,312 603.12,312 627.87,312 652.65,312 677.43,312 702.21,312 726.99,312 751.74,312 776.52,312 801.29,312 826.07,312 850.82,312 875.6,312 900.38,312 925.55,288.6 950.74,265.2 975.91,241.8 1001.1,218.4 1026.27,195"/>
+<polyline class="sf" style="--f:0.001;--i:59" points="45.27,39 71.29,65 97.32,91 123.32,117 149.34,143 175.37,169 201.37,195 224.8,218.4 248.2,241.8 271.62,265.2 295.02,288.6 318.45,312 342.21,312 365.98,312 389.74,312 413.5,312 437.27,312 461.01,312 484.77,312 508.53,312 532.3,312 556.06,312 579.83,312 603.59,312 627.35,312 651.12,312 674.88,312 698.62,312 722.38,312 746.15,312 769.91,312 793.68,312 817.44,312 841.2,312 864.97,312 888.73,312 913.9,288.6 939.07,265.2 964.26,241.8 989.43,218.4 1014.62,195"/>
+</g>
+<g class="slices">
+<path d="M31.52,39V39"/>
+<path d="M57.54,65V39"/>
+<path d="M83.56,91V39"/>
+<path d="M109.57,117V39"/>
+<path d="M135.59,143V39"/>
+<path d="M161.6,169V39"/>
+<path d="M187.62,195V39"/>
+<path d="M211.03,218.4V39"/>
+<path d="M234.45,241.8V39"/>
+<path d="M257.86,265.2V39"/>
+<path d="M281.28,288.6V39"/>
+<path d="M304.69,312V48.35"/>
+<path d="M328.56,312V60.28"/>
+<path d="M352.42,312V72.21"/>
+<path d="M376.29,312V84.14"/>
+<path d="M400.15,312V96.08"/>
+<path d="M424.02,312V108.01"/>
+<path d="M447.88,312V119.94"/>
+<path d="M471.75,312V131.87"/>
+<path d="M495.61,312V143"/>
+<path d="M519.47,312V143"/>
+<path d="M543.34,312V143"/>
+<path d="M567.2,312V143"/>
+<path d="M591.07,312V143"/>
+<path d="M614.93,312V143"/>
+<path d="M638.8,312V143"/>
+<path d="M662.66,312V143"/>
+<path d="M686.53,312V143"/>
+<path d="M710.39,312V143"/>
+<path d="M734.26,312V143"/>
+<path d="M758.12,312V143"/>
+<path d="M781.99,312V143"/>
+<path d="M805.85,312V143"/>
+<path d="M829.71,312V154.86"/>
+<path d="M853.58,312V166.79"/>
+<path d="M877.44,312V178.72"/>
+<path d="M902.62,288.6V191.31"/>
+<path d="M927.8,265.2V195"/>
+<path d="M952.98,241.8V195"/>
+<path d="M978.16,218.4V195"/>
+<path d="M1003.34,195V195"/>
+</g>
+<path class="critical" pathLength="1" d="M31.51,39L57.54,65L83.56,91L109.56,117L135.59,143L161.62,169L187.62,195L211.04,218.4L234.44,241.8L257.87,265.2L281.27,288.6L304.69,312L328.56,312L352.43,312L376.3,312L400.14,312L424.01,312L447.88,312L471.74,312L495.61,312L519.48,312L543.35,312L567.22,312L591.06,312L614.93,312L638.79,312L662.66,312L686.53,312L710.4,312L734.27,312L758.11,312L781.98,312L805.84,312L829.71,312L853.58,312L877.45,312L902.62,288.6L927.81,265.2L952.98,241.8L978.17,218.4L1003.34,195"/>
+<polygon class="outline" points="26,507 1586,507 1586,195 910,195 806,143 494,143 286,39 26,39"/>
+</svg><!-- /svg:ex2b --></div>
+        <div class="titleblock" style="--cols:3">
+          <div><div class="k">Model</div><div class="v">2b · berm 12 × 2 m</div></div>
+          <div><div class="k">Search</div><div class="v">Block · non-circular</div></div>
+          <div><div class="k">Spencer</div><div class="v fos">1.180</div></div>
+        </div>
+      </figure>
+    </div>
+    <div class="grid-2 mt-l" style="align-items:start;gap:36px">
+      <dl class="spec-list one">
+        <div><dt class="label">Fill</dt><dd>c′ = 5 kPa · φ′ = 32° · γ = 20 kN/m³ · slope 2H:1V</dd></div>
+        <div><dt class="label">Soft clay</dt><dd>s<sub>u</sub> = 18 kPa at the ground, + 1.5 kPa/m with depth · γ = 16.5 kN/m³</dd></div>
+        <div><dt class="label">Weak seam</dt><dd>s<sub>u</sub> = 12 kPa · γ = 16 kN/m³ · at y = −4.5 m</dd></div>
+        <div><dt class="label">Firm clay</dt><dd>s<sub>u</sub> = 60 kPa · γ = 19 kN/m³ · below y = −8 m</dd></div>
+      </dl>
+      <div>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Model</th><th>Search</th><th>Spencer</th><th>GLE</th></tr></thead>
+            <tbody>
+              <tr><td>2a · no berm</td><td>Block, polyline along the seam</td><td><strong>0.988</strong></td><td>0.990</td></tr>
+              <tr><td>2a · no berm</td><td>Path, 5 000 surfaces</td><td>0.978</td><td>0.985</td></tr>
+              <tr><td>2b · berm</td><td>Block, polyline along the seam</td><td><strong>1.180</strong></td><td>1.168</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="mt-s" style="font-size:14.5px;color:var(--ink-2)">The two searches find the same mechanism: <a class="xref" href="../docs/theory/search.html#fig-path-example">Figure 3.4.5</a> shows the path search. Total-stress analysis, no pore pressure.</p>
+        <div class="cta-row">
+          <a class="btn primary" href="../assets/models/ej02a-embankment-no-berm.ogr" download>Model 2a</a><span class="label muted" style="align-self:center">.ogr · 9 KB</span>
+          <a class="btn" href="../assets/models/ej02b-embankment-berm.ogr" download>Model 2b</a><span class="label muted" style="align-self:center">.ogr · 9 KB</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== EJEMPLO 3 ====== -->
+<section class="section" id="ex3">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="sec-num label">Example 3</div><h2>An earth dam: <em>steady seepage and stability.</em></h2></div>
+      <p>A homogeneous dam 15 m high with the reservoir at 13 m and a toe drain 16 m long. The finite-element seepage gives the free surface and the pore pressure at every slice base; the drain keeps the water off the downstream face.</p>
+    </div>
+    <figure class="sheet" style="margin:0" data-animate>
+      <div class="fig"><!-- svg:ex3 --><svg class="slope-svg" id="ex3-svg" viewBox="0 0 945 195" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="ex3-svg-t">
+<title id="ex3-svg-t">Limit-equilibrium analysis computed by OGR Slip2D: 449 of 506 grid centres with a valid circle, critical factor of safety 1.799 (spencer)</title>
+<defs>
+<clipPath id="ex3-svg-clip"><polygon points="30,175 915,175 540,25 480,25"/></clipPath>
+</defs>
+<g class="strata" clip-path="url(#ex3-svg-clip)">
+<polygon class="st st-0" points="30,175 915,175 540,25 480,25"/>
+</g>
+<polyline class="wt" points="416.12,46.29 421.64,48.84 433.23,52.5 437.42,53.62 449.51,57.25 452.87,58.09 459.13,59.6 468.22,61.17 476.97,63.33 483.87,64.79 492.21,66.75 494.66,67.34 503.71,68.98 512.55,70.99 518.09,72.1 529.76,75 531.56,75.41 539.04,77.07 548.14,78.62 556.86,80.84 564.21,82.7 569.6,84.07 575.9,85.63 583.33,86.96 591.94,89.37 599.2,91.34 609.19,94.13 618.14,95.96 622.56,97.15 634.9,101.22 643.8,103.47 652.12,106.38 659.09,108.48 669.08,111.63 677.2,114.9 684.03,117.03 689.04,118.71 693.94,120.54 701.9,124.07 708.59,127.37 717.38,131.9 724.55,135.24 732.88,139.69 739.54,143.9 747.58,148.89 753.64,155.71"/>
+<path class="wt-mark" d="M447.62,45h18l-9,12z"/><path class="wt-tick" d="M449.62,64h14M452.62,68h8"/>
+<polygon class="pond" points="0,175 30,175 420,45 0,45"/>
+<path class="pond-line" d="M0,45H420"/>
+<path class="wt-mark" d="M159,31h18l-9,12z"/><path class="wt-tick" d="M161,50h14M164,54h8"/>
+<polyline class="drain" points="755.9,175 915,175"/>
+<g class="surfaces">
+<path class="sf" style="--f:0.599;--i:0" d="M569.67,36.87A419.23 419.23 0 0 0 910.33,173.13"/>
+<path class="sf" style="--f:0.583;--i:1" d="M576.95,39.78A357.55 357.55 0 0 0 901.33,169.53"/>
+<path class="sf" style="--f:0.582;--i:2" d="M519.89,25A228.58 228.58 0 0 0 829.48,140.79"/>
+<path class="sf" style="--f:0.580;--i:3" d="M458.49,32.17A347.68 347.68 0 0 0 839.75,144.9"/>
+<path class="sf" style="--f:0.568;--i:4" d="M432.03,40.99A596.87 596.87 0 0 0 891.45,165.58"/>
+<path class="sf" style="--f:0.551;--i:5" d="M439.13,38.62A513.19 513.19 0 0 0 875.54,159.22"/>
+<path class="sf" style="--f:0.542;--i:6" d="M447.61,35.8A430.08 430.08 0 0 0 858.57,152.43"/>
+<path class="sf" style="--f:0.536;--i:7" d="M557.67,32.07A251.26 251.26 0 0 0 860.26,153.1"/>
+<path class="sf" style="--f:0.531;--i:8" d="M569.82,36.93A274.68 274.68 0 0 0 877.42,159.97"/>
+<path class="sf" style="--f:0.515;--i:9" d="M572.3,37.92A316.02 316.02 0 0 0 890.46,165.18"/>
+<path class="sf" style="--f:0.508;--i:10" d="M534.44,25A537.97 537.97 0 0 0 909.87,172.95"/>
+<path class="sf" style="--f:0.507;--i:11" d="M464.38,30.21A329.63 329.63 0 0 0 840.98,145.39"/>
+<path class="sf" style="--f:0.504;--i:12" d="M535.56,25A237.18 237.18 0 0 0 853.92,150.57"/>
+<path class="sf" style="--f:0.497;--i:13" d="M510.08,25A245.9 245.9 0 0 0 828.39,140.36"/>
+<path class="sf" style="--f:0.493;--i:14" d="M556.06,31.42A439.1 439.1 0 0 0 910.15,173.06"/>
+<path class="sf" style="--f:0.480;--i:15" d="M563.66,34.46A377.12 377.12 0 0 0 900.82,169.33"/>
+<path class="sf" style="--f:0.477;--i:16" d="M436.52,39.49A577.36 577.36 0 0 0 891.95,165.78"/>
+<path class="sf" style="--f:0.459;--i:17" d="M443.86,37.05A494.03 494.03 0 0 0 876.35,159.54"/>
+<path class="sf" style="--f:0.453;--i:18" d="M470.74,28.09A311.73 311.73 0 0 0 842.14,145.86"/>
+<path class="sf" style="--f:0.451;--i:19" d="M452.75,34.08A411.39 411.39 0 0 0 859.65,152.86"/>
+<path class="sf" style="--f:0.447;--i:20" d="M486.06,25A276.42 276.42 0 0 0 844.26,146.7"/>
+<path class="sf" style="--f:0.434;--i:21" d="M477.64,25.79A293.98 293.98 0 0 0 843.24,146.3"/>
+<path class="sf" style="--f:0.424;--i:22" d="M526.65,25A557.9 557.9 0 0 0 909.69,172.88"/>
+<path class="sf" style="--f:0.417;--i:23" d="M557.11,31.84A293.34 293.34 0 0 0 876.34,159.54"/>
+<path class="sf" style="--f:0.410;--i:24" d="M559.33,32.73A335.2 335.2 0 0 0 889.64,164.86"/>
+<path class="sf" style="--f:0.394;--i:25" d="M441.2,37.93A557.88 557.88 0 0 0 892.45,165.98"/>
+<path class="sf" style="--f:0.394;--i:26" d="M542.44,25.98A458.97 458.97 0 0 0 909.97,172.99"/>
+<path class="sf" style="--f:0.382;--i:27" d="M550.37,29.15A396.72 396.72 0 0 0 900.32,169.13"/>
+<path class="sf" style="--f:0.372;--i:28" d="M448.83,35.39A474.91 474.91 0 0 0 877.16,159.87"/>
+<path class="sf" style="--f:0.367;--i:29" d="M458.2,32.27A392.78 392.78 0 0 0 860.72,153.29"/>
+<path class="sf" style="--f:0.366;--i:30" d="M519.02,25A577.82 577.82 0 0 0 909.51,172.8"/>
+<path class="sf" style="--f:0.358;--i:31" d="M525.24,25A254.73 254.73 0 0 0 852.91,150.16"/>
+<path class="sf" style="--f:0.341;--i:32" d="M452.16,34.28A594.72 594.72 0 0 0 893.35,166.34"/>
+<path class="sf" style="--f:0.331;--i:33" d="M511.55,25A597.75 597.75 0 0 0 909.33,172.73"/>
+<path class="sf" style="--f:0.317;--i:34" d="M546.36,27.54A354.44 354.44 0 0 0 888.81,164.53"/>
+<path class="sf" style="--f:0.316;--i:35" d="M446.06,36.31A538.41 538.41 0 0 0 892.95,166.18"/>
+<path class="sf" style="--f:0.295;--i:36" d="M463.99,30.34A374.26 374.26 0 0 0 861.77,153.71"/>
+<path class="sf" style="--f:0.292;--i:37" d="M533.02,25A478.84 478.84 0 0 0 909.79,172.92"/>
+<path class="sf" style="--f:0.292;--i:38" d="M454.04,33.65A455.84 455.84 0 0 0 877.97,160.19"/>
+<path class="sf" style="--f:0.288;--i:39" d="M538.08,25A416.34 416.34 0 0 0 899.81,168.92"/>
+<path class="sf" style="--f:0.279;--i:40" d="M515.51,25A272.5 272.5 0 0 0 851.8,149.72"/>
+<path class="sf" style="--f:0.273;--i:41" d="M456.94,32.69A575.1 575.1 0 0 0 893.86,166.54"/>
+<path class="sf" style="--f:0.255;--i:42" d="M533.68,25A278.52 278.52 0 0 0 872.12,157.85"/>
+<path class="sf" style="--f:0.245;--i:43" d="M451.14,34.62A518.97 518.97 0 0 0 893.44,166.38"/>
+<path class="sf" style="--f:0.243;--i:44" d="M470.17,28.28A355.83 355.83 0 0 0 862.79,154.12"/>
+<path class="sf" style="--f:0.241;--i:45" d="M506.29,25A290.44 290.44 0 0 0 850.62,149.25"/>
+<path class="sf" style="--f:0.222;--i:46" d="M524.72,25A498.72 498.72 0 0 0 909.61,172.84"/>
+<path class="sf" style="--f:0.213;--i:47" d="M459.52,31.83A436.82 436.82 0 0 0 878.77,160.51"/>
+<path class="sf" style="--f:0.212;--i:48" d="M476.77,26.08A337.52 337.52 0 0 0 863.78,154.51"/>
+<path class="sf" style="--f:0.211;--i:49" d="M461.91,31.03A555.49 555.49 0 0 0 894.37,166.75"/>
+<path class="sf" style="--f:0.209;--i:50" d="M529.46,25A435.98 435.98 0 0 0 899.3,168.72"/>
+<path class="sf" style="--f:0.201;--i:51" d="M484.66,25A319.35 319.35 0 0 0 864.74,154.9"/>
+<path class="sf" style="--f:0.179;--i:52" d="M516.61,25A518.61 518.61 0 0 0 909.43,172.77"/>
+<path class="sf" style="--f:0.174;--i:53" d="M456.44,32.85A499.56 499.56 0 0 0 893.94,166.58"/>
+<path class="sf" style="--f:0.168;--i:54" d="M470.31,28.23A472.29 472.29 0 0 0 880.53,161.21"/>
+<path class="sf" style="--f:0.166;--i:55" d="M485.9,25A598.17 598.17 0 0 0 908.71,172.48"/>
+<path class="sf" style="--f:0.160;--i:56" d="M523.9,25A296.79 296.79 0 0 0 871.14,157.45"/>
+<path class="sf" style="--f:0.157;--i:57" d="M521.09,25A455.63 455.63 0 0 0 898.79,168.52"/>
+<path class="sf" style="--f:0.155;--i:58" d="M508.68,25A538.5 538.5 0 0 0 909.25,172.7"/>
+<path class="sf" style="--f:0.154;--i:59" d="M534.49,25A319.49 319.49 0 0 0 886.98,163.79"/>
+<path class="sf" style="--f:0.151;--i:60" d="M467.09,29.3A535.89 535.89 0 0 0 894.87,166.95"/>
+<path class="sf" style="--f:0.150;--i:61" d="M493.34,25A578.28 578.28 0 0 0 908.89,172.56"/>
+<path class="sf" style="--f:0.150;--i:62" d="M489.75,25A534.33 534.33 0 0 0 896.74,167.7"/>
+<path class="sf" style="--f:0.148;--i:63" d="M464.65,30.12A599.58 599.58 0 0 0 908.07,172.23"/>
+<path class="sf" style="--f:0.148;--i:64" d="M465.3,29.9A417.85 417.85 0 0 0 879.55,160.82"/>
+<path class="sf" style="--f:0.145;--i:65" d="M500.93,25A558.39 558.39 0 0 0 909.07,172.63"/>
+<path class="sf" style="--f:0.133;--i:66" d="M497.29,25A514.64 514.64 0 0 0 897.26,167.9"/>
+<path class="sf" style="--f:0.132;--i:67" d="M512.95,25A475.29 475.29 0 0 0 898.28,168.31"/>
+<path class="sf" style="--f:0.125;--i:68" d="M505.02,25A494.96 494.96 0 0 0 897.77,168.11"/>
+<path class="sf" style="--f:0.122;--i:69" d="M488.79,25A371.08 371.08 0 0 0 866.9,155.76"/>
+<path class="sf" style="--f:0.117;--i:70" d="M475.93,26.36A453.02 453.02 0 0 0 881.36,161.54"/>
+<path class="sf" style="--f:0.114;--i:71" d="M514.57,25A315.2 315.2 0 0 0 870.12,157.05"/>
+<path class="sf" style="--f:0.104;--i:72" d="M469.9,28.37A579.75 579.75 0 0 0 908.25,172.3"/>
+<path class="sf" style="--f:0.100;--i:73" d="M472.49,27.5A516.31 516.31 0 0 0 895.38,167.15"/>
+<path class="sf" style="--f:0.099;--i:74" d="M497.05,25A352.36 352.36 0 0 0 868,156.2"/>
+<path class="sf" style="--f:0.098;--i:75" d="M471.41,27.86A398.96 398.96 0 0 0 880.33,161.13"/>
+<path class="sf" style="--f:0.098;--i:76" d="M505.63,25A333.73 333.73 0 0 0 869.07,156.63"/>
+<path class="sf" style="--f:0.079;--i:77" d="M482.39,25A433.79 433.79 0 0 0 882.18,161.87"/>
+<path class="sf" style="--f:0.077;--i:78" d="M525.01,25A338.37 338.37 0 0 0 886.21,163.48"/>
+<path class="sf" style="--f:0.070;--i:79" d="M527.7,25A379.85 379.85 0 0 0 898.88,168.55"/>
+<path class="sf" style="--f:0.069;--i:80" d="M475.34,26.55A559.93 559.93 0 0 0 908.43,172.37"/>
+<path class="sf" style="--f:0.063;--i:81" d="M478.13,25.62A496.74 496.74 0 0 0 895.89,167.35"/>
+<path class="sf" style="--f:0.047;--i:82" d="M490.37,25A414.6 414.6 0 0 0 883,162.2"/>
+<path class="sf" style="--f:0.042;--i:83" d="M515.89,25A357.33 357.33 0 0 0 885.42,163.17"/>
+<path class="sf" style="--f:0.036;--i:84" d="M485.3,25A477.2 477.2 0 0 0 896.39,167.56"/>
+<path class="sf" style="--f:0.027;--i:85" d="M507.09,25A376.37 376.37 0 0 0 884.62,162.85"/>
+<path class="sf" style="--f:0.026;--i:86" d="M518.7,25A399.26 399.26 0 0 0 898.39,168.36"/>
+<path class="sf" style="--f:0.025;--i:87" d="M498.59,25A395.46 395.46 0 0 0 883.81,162.52"/>
+<path class="sf" style="--f:0.015;--i:88" d="M493.31,25A457.67 457.67 0 0 0 896.89,167.76"/>
+<path class="sf" style="--f:0.001;--i:89" d="M501.53,25A438.17 438.17 0 0 0 897.39,167.96"/>
+</g>
+<g class="slices">
+<path d="M509.99,25V25"/>
+<path d="M522.92,39.62V25"/>
+<path d="M535.85,52.96V25"/>
+<path d="M548.78,65.2V28.51"/>
+<path d="M561.71,76.45V33.68"/>
+<path d="M574.64,86.81V38.86"/>
+<path d="M587.57,96.37V44.03"/>
+<path d="M600.5,105.2V49.2"/>
+<path d="M613.43,113.34V54.37"/>
+<path d="M626.36,120.84V59.54"/>
+<path d="M639.29,127.74V64.72"/>
+<path d="M652.22,134.08V69.89"/>
+<path d="M665.15,139.88V75.06"/>
+<path d="M678.08,145.16V80.23"/>
+<path d="M691.01,149.95V85.4"/>
+<path d="M703.94,154.27V90.58"/>
+<path d="M716.87,158.12V95.75"/>
+<path d="M729.8,161.53V100.92"/>
+<path d="M742.73,164.5V106.09"/>
+<path d="M755.66,167.05V111.26"/>
+<path d="M768.59,169.17V116.44"/>
+<path d="M781.52,170.88V121.61"/>
+<path d="M794.45,172.19V126.78"/>
+<path d="M807.38,173.09V131.95"/>
+<path d="M820.31,173.59V137.12"/>
+<path d="M833.24,173.69V142.3"/>
+<path d="M846.17,173.39V147.47"/>
+<path d="M859.1,172.69V152.64"/>
+<path d="M872.03,171.58V157.81"/>
+<path d="M884.96,170.07V162.98"/>
+<path d="M897.89,168.16V168.16"/>
+</g>
+<path class="critical" pathLength="1" d="M509.99,25A418.7 418.7 0 0 0 897.89,168.16"/>
+<polygon class="outline" points="30,175 915,175 540,25 480,25"/>
+</svg><!-- /svg:ex3 --></div>
+      <div class="titleblock" style="--cols:4">
+        <div><div class="k">Seepage</div><div class="v">FE · 1 562 triangles</div></div>
+        <div><div class="k">Iterations</div><div class="v">25 · converged</div></div>
+        <div><div class="k">Slope</div><div class="v">Downstream · grid 23 × 22</div></div>
+        <div><div class="k">Spencer</div><div class="v fos">1.799</div></div>
+      </div>
+    </figure>
+    <div class="grid-2 mt-l" style="align-items:start;gap:36px">
+      <dl class="spec-list one">
+        <div><dt class="label">Section</dt><dd>Crest 6 m · upstream 3H:1V · downstream 2.5H:1V · on an impervious base</dd></div>
+        <div><dt class="label">Fill</dt><dd>c′ = 8 kPa · φ′ = 30° · γ = 20 kN/m³</dd></div>
+        <div><dt class="label">Hydraulics</dt><dd>K<sub>s</sub> = 10⁻⁶ m/s, isotropic · van Genuchten α = 3.6 m⁻¹, n = 1.56</dd></div>
+        <div><dt class="label">Conditions</dt><dd>H = 13 m on the upstream face · P = 0 on the drain · seepage face elsewhere · no flow through the base</dd></div>
+      </dl>
+      <div>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Result</th><th>Value</th></tr></thead>
+            <tbody>
+              <tr><td>Pore pressure in the dam</td><td>up to 127.5 kPa</td></tr>
+              <tr><td>Seepage-face nodes</td><td>0</td></tr>
+              <tr><td>Downstream slope, Bishop simplified</td><td>1.800</td></tr>
+              <tr><td>Downstream slope, Spencer (λ = 0.322)</td><td><strong>1.799</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="mt-s" style="font-size:14.5px;color:var(--ink-2)">The mesh and the head field are in <a class="xref" href="../docs/theory/seepage.html#fig-dam-mesh">Figure 3.7.1</a>, the pore pressure on the slices of the critical surface in <a class="xref" href="../docs/theory/seepage.html#fig-dam-u">Figure 3.7.5</a>.</p>
+        <div class="cta-row">
+          <a class="btn primary" href="../assets/models/ej03-earth-dam-toe-drain.ogr" download>Download the model</a><span class="label muted" style="align-self:center">.ogr · 157 KB, with mesh and field</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== EJEMPLO 4 ====== -->
+<section class="section alt" id="ex4">
+  <div class="wrap grid-2" style="align-items:start">
+    <figure class="shot" style="margin:0">
+      <div class="bar label"><i></i><i></i><i></i>&nbsp; statistics · histogram</div>
+      <img src="../assets/img/shots/histogram.webp" alt="The Statistics window: histogram of 1 000 sampled factors of safety of the two-layer slope, with the failure threshold, the mean and the summary line" width="1075" height="675" loading="lazy">
+    </figure>
+    <div>
+      <div class="sec-num label">Example 4</div>
+      <h2 class="mt-s">The same slope, <em>with uncertain strengths.</em></h2>
+      <p>Example 1 with three strength parameters as random variables, each normal and truncated at three standard deviations. 1 000 Monte Carlo samples are evaluated on the deterministic critical surface of each method (global minimum).</p>
+      <dl class="spec-list one mt-m">
+        <div><dt class="label">Clay c′</dt><dd>mean 12 kPa · σ = 3 kPa · 3 to 21 kPa</dd></div>
+        <div><dt class="label">Clay φ′</dt><dd>mean 24° · σ = 2.4° · 16.8° to 31.2°</dd></div>
+        <div><dt class="label">Silty sand φ′</dt><dd>mean 32° · σ = 2° · 26° to 38°</dd></div>
+      </dl>
+      <div class="table-wrap mt-m">
+        <table class="data">
+          <thead><tr><th>Method</th><th>Mean F</th><th>σ<sub>F</sub></th><th>P<sub>F</sub></th><th>β</th><th>β<sub>ln</sub></th></tr></thead>
+          <tbody>
+            <tr><td>Bishop simplified</td><td>1.305</td><td>0.113</td><td>0.5 %</td><td>2.69</td><td>2.99</td></tr>
+            <tr><td>Spencer</td><td>1.295</td><td>0.114</td><td>0.5 %</td><td>2.60</td><td>2.88</td></tr>
+            <tr><td>GLE / Morgenstern–Price</td><td>1.298</td><td>0.113</td><td>0.5 %</td><td>2.63</td><td>2.91</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-s" style="font-size:14.5px;color:var(--ink-2)">Five samples in 1 000 fall below 1: too few to pin the probability down, as the <a href="../docs/theory/probabilistic.html#fig-prob-convergence">convergence plot</a> shows.</p>
+      <div class="cta-row">
+        <a class="btn primary" href="../assets/models/ej04-two-layer-slope-probabilistic.ogr" download>Download the model</a><span class="label muted" style="align-self:center">.ogr · 9 KB</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== EJEMPLO 5 ====== -->
+<section class="section" id="ex5">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="sec-num label">Example 5</div><h2>Rapid drawdown, <em>as a transient seepage problem.</em></h2></div>
+      <p>The dam of example 3, now looking at its upstream slope while the reservoir is lowered from 13 m to 1 m in eight days. The finite-element analysis follows the water as it drains out of the fill, and a full search finds the factor of safety at the end of every stage. The lowest value does not come with the lowest level, but two days later.</p>
+    </div>
+    <div class="grid-2" style="align-items:start;gap:36px">
+      <figure class="sheet" style="margin:0">
+        <div class="fig"><!-- svg:ex5 --><svg class="dg" id="ex5-svg" viewBox="0 0 640 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="ex5-svg-t">
+<title id="ex5-svg-t">Factor of safety of the upstream slope of the earth dam against time during a drawdown from 13 m to 1 m: it falls from 2.60 to a minimum of 1.47 at 10 days and recovers to 1.64 at 50 days</title>
+<path class="thin" d="M70,30V290H555V30"/>
+<path class="thin" d="M70.0,290v5"/><text class="mute" x="70.0" y="310" text-anchor="middle">0</text>
+<path class="thin" d="M167.0,290v5"/><text class="mute" x="167.0" y="310" text-anchor="middle">10</text>
+<path class="thin" d="M264.0,290v5"/><text class="mute" x="264.0" y="310" text-anchor="middle">20</text>
+<path class="thin" d="M361.0,290v5"/><text class="mute" x="361.0" y="310" text-anchor="middle">30</text>
+<path class="thin" d="M458.0,290v5"/><text class="mute" x="458.0" y="310" text-anchor="middle">40</text>
+<path class="thin" d="M555.0,290v5"/><text class="mute" x="555.0" y="310" text-anchor="middle">50</text>
+<path class="dash" style="opacity:.3" d="M70,290.0H555"/><text class="mute" x="62" y="294.0" text-anchor="end">1.2</text>
+<path class="dash" style="opacity:.3" d="M70,257.5H555"/><text class="mute" x="62" y="261.5" text-anchor="end">1.4</text>
+<path class="dash" style="opacity:.3" d="M70,225.0H555"/><text class="mute" x="62" y="229.0" text-anchor="end">1.6</text>
+<path class="dash" style="opacity:.3" d="M70,192.5H555"/><text class="mute" x="62" y="196.5" text-anchor="end">1.8</text>
+<path class="dash" style="opacity:.3" d="M70,160.0H555"/><text class="mute" x="62" y="164.0" text-anchor="end">2.0</text>
+<path class="dash" style="opacity:.3" d="M70,127.5H555"/><text class="mute" x="62" y="131.5" text-anchor="end">2.2</text>
+<path class="dash" style="opacity:.3" d="M70,95.0H555"/><text class="mute" x="62" y="99.0" text-anchor="end">2.4</text>
+<path class="dash" style="opacity:.3" d="M70,62.5H555"/><text class="mute" x="62" y="66.5" text-anchor="end">2.6</text>
+<path class="dash" style="opacity:.3" d="M70,30.0H555"/><text class="mute" x="62" y="34.0" text-anchor="end">2.8</text>
+<path class="thin" style="stroke:var(--water)" d="M555,290.0h5"/><text x="564" y="294.0" style="fill:var(--water);font-size:12px">0</text>
+<path class="thin" style="stroke:var(--water)" d="M555,215.7h5"/><text x="564" y="219.7" style="fill:var(--water);font-size:12px">4</text>
+<path class="thin" style="stroke:var(--water)" d="M555,141.4h5"/><text x="564" y="145.4" style="fill:var(--water);font-size:12px">8</text>
+<path class="thin" style="stroke:var(--water)" d="M555,67.1h5"/><text x="564" y="71.1" style="fill:var(--water);font-size:12px">12</text>
+<text class="mute" x="555" y="330" text-anchor="end">time (days)</text>
+<text class="it" x="62" y="18" text-anchor="end">F</text>
+<text x="564" y="18" style="fill:var(--water);font-size:12px">level (m)</text>
+<path class="frc wat2" style="stroke-width:1.6;opacity:.8" d="M70.0,48.6L70.0,93.1L89.4,93.1L89.4,137.7L108.8,137.7L108.8,182.3L128.2,182.3L128.2,226.9L147.6,226.9L147.6,271.4L167.0,271.4L167.0,271.4L264.0,271.4L264.0,271.4L555.0,271.4"/>
+<path class="ln" d="M70.0,61.9L89.4,128.7L108.8,184.2L128.2,216.8L147.6,238.2L167.0,246.3L264.0,237.0L555.0,218.3"/>
+<circle cx="70.0" cy="61.9" r="3.6" class="pt"/>
+<circle cx="89.4" cy="128.7" r="3.6" class="pt"/>
+<circle cx="108.8" cy="184.2" r="3.6" class="pt"/>
+<circle cx="128.2" cy="216.8" r="3.6" class="pt"/>
+<circle cx="147.6" cy="238.2" r="3.6" class="pt"/>
+<circle cx="167.0" cy="246.3" r="5.5" style="fill:var(--crit);stroke:var(--white);stroke-width:2"/>
+<circle cx="264.0" cy="237.0" r="3.6" class="pt"/>
+<circle cx="555.0" cy="218.3" r="3.6" class="pt"/>
+<text x="80.0" y="65.9">2.60 · full reservoir</text>
+<text class="crit-t" x="171.0" y="268.3">1.47 · day 10</text>
+<text x="549.0" y="206.3" text-anchor="end">1.64</text>
+</svg><!-- /svg:ex5 --></div>
+        <div class="titleblock" style="--cols:3">
+          <div><div class="k">Seepage</div><div class="v">Transient · 7 stages</div></div>
+          <div><div class="k">Slope</div><div class="v">Upstream · grid 13 × 13</div></div>
+          <div><div class="k">Minimum F</div><div class="v fos">1.469</div></div>
+        </div>
+      </figure>
+      <div>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Day</th><th>Reservoir</th><th>F (Spencer)</th></tr></thead>
+            <tbody>
+              <tr><td>0</td><td>13.0 m · steady</td><td>2.604</td></tr>
+              <tr><td>2</td><td>10.6 m</td><td>2.193</td></tr>
+              <tr><td>4</td><td>8.2 m</td><td>1.851</td></tr>
+              <tr><td>6</td><td>5.8 m</td><td>1.651</td></tr>
+              <tr><td>8</td><td>3.4 m</td><td>1.519</td></tr>
+              <tr><td>10</td><td>1.0 m</td><td><strong>1.469</strong></td></tr>
+              <tr><td>20</td><td>1.0 m</td><td>1.526</td></tr>
+              <tr><td>50</td><td>1.0 m</td><td>1.641</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="mt-s" style="font-size:14.5px;color:var(--ink-2)">Seven stages with 20 time steps each. A stage applies its level from the end of the previous stage, so the level drops by 2.4 m on days 0, 2, 4, 6 and 8, and each factor of safety is computed at the end of its stage. The stages at 10 and 20 days report time steps that did not reach the tolerance of 10<sup>−5</sup>; with the automatic number of steps instead, every factor above changed by less than 0.002. The same curve is <a class="xref" href="../docs/theory/rapid-drawdown.html#fig-dd-time">Figure 3.8.4</a> of the theory.</p>
+        <div class="cta-row">
+          <a class="btn primary" href="../assets/models/ej05-earth-dam-drawdown.ogr" download>Download the model</a><span class="label muted" style="align-self:center">.ogr · 392 KB, with the stages</span>
+          <a class="btn" href="../docs/theory/rapid-drawdown.html#transient-alternative">The theory <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section ink">
+  <div class="wrap cta-band">
+    <div><div class="label">Reproduce them</div><h2 class="mt-s">Open a model, press Compute, <em>compare.</em></h2><p class="mt-m">The files open in OGR Slip2D <span data-v>0.1.235</span> with every setting used here. An AI agent connected through the MCP server can open them as well and explain each result.</p></div>
+    <div class="cta-row"><a class="btn primary lg" href="../download/index.html">Get OGR Slip2D</a><a class="btn lg" href="../ai/index.html">Connect an AI agent</a></div>
+  </div>
+</section>
+
+</main>
+
+<!-- @inc footer -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <a class="brand" href="../index.html" aria-label="OpenGeoRock — home">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
+          <b>OpenGeoRock</b>
+        </a>
+        <p class="tagline">Open-source geotechnical software, built in the open at the Universidad Politécnica de Cartagena.</p>
+        <span class="lang" role="group" aria-label="Language"><a href="../examples/index.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../es/examples/index.html" hreflang="es" lang="es">ES</a></span>
+      </div>
+      <div>
+        <h5>Products</h5>
+        <ul>
+          <li><a href="../products/slip2d.html">OGR Slip2D</a></li>
+          <li><a href="../products/index.html">The suite</a></li>
+          <li><a href="../ai/index.html">MCP server</a></li>
+          <li><a href="../download/index.html">Download</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Learn</h5>
+        <ul>
+          <li><a href="../docs/index.html">Documentation</a></li>
+          <li><a href="../docs/getting-started/quick-start.html">Quick start</a></li>
+          <li><a href="../docs/theory/methods.html">Theory manual</a></li>
+          <li><a href="../examples/index.html">Examples</a></li>
+          <li><a href="../verification/index.html">Verification</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Project</h5>
+        <ul>
+          <li><a href="../about/index.html">About</a></li>
+          <li><a href="../about/index.html#team">Team</a></li>
+          <li><a href="../about/index.html#cite">How to cite</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Contributing</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/LICENSE" target="_blank" rel="noopener">Licence · AGPL-3.0</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Connect</h5>
+        <ul>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/issues" target="_blank" rel="noopener">Issues</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/tree/main/docs/changelog" target="_blank" rel="noopener">Changelog</a></li>
+          <li><a href="mailto:samuel.saez@edu.upct.es">Email</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© 2026 Samuel Sáez López · OGR Slip2D is free software under AGPL-3.0-or-later, with no warranty of any kind.</span>
+      <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
+    </div>
+  </div>
+  <div class="lang-hint" role="dialog" aria-label="Idioma" lang="es">
+    ¿Prefieres leer esta web en español?
+    <div class="row"><a class="btn sm primary go" href="../es/index.html">Ver en español</a><button class="btn sm" type="button" data-dismiss>No, gracias</button></div>
+  </div>
+</footer>
+<!-- @end footer -->
+</body>
+</html>

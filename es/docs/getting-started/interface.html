@@ -1,0 +1,487 @@
+<!doctype html>
+<html class="no-js" lang="es" data-root="../../../">
+<head>
+<meta charset="utf-8">
+<title>La interfaz — documentación de OGR Slip2D</title>
+<meta name="description" content="La ventana del modelador de OGR Slip2D: menús, barra de herramientas, lienzo, convenciones de dibujo, barra de estado y datos al pasar el cursor, los paneles Results y Terminal, la ventana Interpret y otras ventanas de resultados, preferencias, el puente para agentes y los atajos de teclado.">
+<!-- @inc head -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.replace("no-js", "js")</script>
+<link rel="canonical" href="https://opengeorock.org/es/docs/getting-started/interface.html">
+<link rel="alternate" hreflang="en" href="https://opengeorock.org/docs/getting-started/interface.html">
+<link rel="alternate" hreflang="es" href="https://opengeorock.org/es/docs/getting-started/interface.html">
+<link rel="alternate" hreflang="x-default" href="https://opengeorock.org/docs/getting-started/interface.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="OpenGeoRock">
+<meta property="og:title" content="La interfaz — documentación de OGR Slip2D">
+<meta property="og:description" content="La ventana del modelador de OGR Slip2D: menús, barra de herramientas, lienzo, convenciones de dibujo, barra de estado y datos al pasar el cursor, los paneles Results y Terminal, la ventana Interpret y otras ventanas de resultados, preferencias, el puente para agentes y los atajos de teclado.">
+<meta property="og:url" content="https://opengeorock.org/es/docs/getting-started/interface.html">
+<meta property="og:image" content="https://opengeorock.org/assets/img/og-image.png">
+<meta property="og:locale" content="es_ES">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#f4efe6">
+<link rel="icon" href="../../../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../../assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../../assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&amp;display=swap">
+<link rel="stylesheet" href="../../../assets/css/site.css">
+<link rel="stylesheet" href="../../../assets/css/docs.css">
+<link rel="stylesheet" href="../../../assets/vendor/katex/katex.min.css">
+<script src="../../../assets/js/site.js" defer></script>
+<!-- @end head -->
+</head>
+<body class="docs">
+<!-- @inc header -->
+<a class="skip" href="#main">Saltar al contenido</a>
+<header class="top">
+  <div class="wrap top-inner">
+    <a class="brand" href="../../../es/index.html" aria-label="OpenGeoRock — inicio">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
+      <b>OpenGeoRock</b>
+    </a>
+    <nav class="nav" aria-label="Principal">
+      <div class="has-menu" data-nav="products">
+        <button type="button" aria-expanded="false" aria-haspopup="true">Productos <svg class="caret" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+        <div class="mega">
+          <div class="mega-cols">
+            <div class="mega-col">
+              <span class="label">Disponible hoy</span>
+              <a class="mega-item feature" href="../../../es/products/slip2d.html"><b>OGR Slip2D</b><span>Estabilidad de taludes 2D: equilibrio límite, agua subterránea por elementos finitos y análisis probabilístico.</span></a>
+              <a class="mega-item" href="../../../es/ai/index.html"><b>Servidor MCP para agentes de IA <span class="tag live">nuevo</span></b><span>Claude, ChatGPT o un modelo local construyen y calculan modelos de OGR Slip2D.</span></a>
+            </div>
+            <div class="mega-col">
+              <span class="label">En la hoja de ruta</span>
+              <a class="mega-item" href="../../../es/products/index.html#ogr-data"><b>OGR Data</b><span>Base de datos de propiedades de suelos y macizos rocosos</span></a>
+              <a class="mega-item" href="../../../es/products/index.html#ogr-fem2d"><b>OGR FEM2D</b><span>Elementos finitos elastoplásticos 2D</span></a>
+              <a class="mega-item" href="../../../es/products/index.html#ogr-slip3d"><b>OGR Slip3D</b><span>Equilibrio límite en 3D</span></a>
+              <a class="mega-item" href="../../../es/products/index.html#ogr-fem3d"><b>OGR FEM3D</b><span>Elementos finitos 3D con flujo acoplado</span></a>
+            </div>
+            <div class="mega-col">
+              <span class="label">Úsalo desde</span>
+              <a class="mega-item" href="../../../es/docs/getting-started/interface.html"><b>El programa de escritorio</b><span>Modelador, intérprete y terminal de Python</span></a>
+              <a class="mega-item" href="../../../es/docs/reference/python-api.html"><b>Python</b><span>Automatiza análisis desde tu propio código</span></a>
+              <a class="mega-item" href="../../../es/docs/reference/cli.html"><b>La línea de comandos</b><span>Cálculos por lotes con ogr-slip2d-cli</span></a>
+            </div>
+          </div>
+          <div class="mega-foot"><span>Cinco programas, un núcleo abierto.</span><a href="../../../es/products/index.html">Todos los productos →</a></div>
+        </div>
+      </div>
+      <a href="../../../es/examples/index.html" data-nav="examples">Ejemplos</a>
+      <a href="../../../es/ai/index.html" data-nav="ai">IA y MCP</a>
+      <a href="../../../es/docs/index.html" data-nav="docs" aria-current="page">Documentación</a>
+      <a href="../../../es/verification/index.html" data-nav="verification">Verificación</a>
+      <a href="../../../es/about/index.html" data-nav="about">Proyecto</a>
+    </nav>
+    <div class="top-right">
+      <span class="lang" role="group" aria-label="Idioma"><a href="../../../docs/getting-started/interface.html" hreflang="en" lang="en">EN</a><a href="../../../es/docs/getting-started/interface.html" hreflang="es" lang="es" aria-current="true">ES</a></span>
+      <a class="btn gh" href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener" aria-label="Código fuente en GitHub"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0C17.3 4.7 18.3 5 18.3 5c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0012 .5z"/></svg><span>GitHub</span></a>
+      <a class="btn primary" href="../../../es/download/index.html" data-nav="download">Descargar OGR Slip2D</a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menú"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Principal (móvil)">
+    <span class="label">Productos</span>
+    <a href="../../../es/products/slip2d.html">OGR Slip2D</a>
+    <div class="sub"><a href="../../../es/products/index.html">La suite OpenGeoRock</a><a href="../../../es/ai/index.html">Servidor MCP para agentes de IA</a></div>
+    <span class="label">Aprende</span>
+    <a href="../../../es/examples/index.html">Ejemplos</a>
+    <a href="../../../es/docs/index.html">Documentación</a>
+    <a href="../../../es/verification/index.html">Verificación</a>
+    <span class="label">Proyecto</span>
+    <a href="../../../es/about/index.html">El proyecto</a>
+    <a href="../../../es/download/index.html">Descargar OGR Slip2D</a>
+    <a href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener">Código en GitHub ↗</a>
+    <span class="lang" role="group" aria-label="Idioma"><a href="../../../docs/getting-started/interface.html" hreflang="en" lang="en">EN</a><a href="../../../es/docs/getting-started/interface.html" hreflang="es" lang="es" aria-current="true">ES</a></span>
+  </nav>
+</header>
+<!-- @end header -->
+
+<div class="doc-shell">
+  <aside class="doc-side" id="doc-side">
+<!-- @inc docnav -->
+<div class="doc-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input type="search" placeholder="Buscar en la documentación  /" aria-label="Buscar en la documentación" autocomplete="off"><div class="results" role="listbox"></div></div>
+<nav class="doc-nav" aria-label="Documentación">
+<a class="home" href="../../../es/docs/index.html"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 016.5 3H20v15H6.5A2.5 2.5 0 004 20.5z"/><path d="M4 20.5A2.5 2.5 0 016.5 18H20v3H6.5A2.5 2.5 0 014 20.5z"/></svg> Portada de la documentación</a>
+<details open><summary>1 · Primeros pasos</summary><ul>
+<li><a href="../../../es/docs/getting-started/installation.html"><span class="n">1.1</span><span>Instalación</span></a></li>
+<li><a href="../../../es/docs/getting-started/quick-start.html"><span class="n">1.2</span><span>Inicio rápido: tu primer modelo</span></a></li>
+<li><a href="../../../es/docs/getting-started/interface.html" aria-current="page"><span class="n">1.3</span><span>La interfaz</span></a></li>
+</ul></details>
+<details open><summary>2 · Guía de usuario</summary><ul>
+<li><a href="../../../es/docs/user-guide/project-settings.html"><span class="n">2.1</span><span>Configuración del proyecto</span></a></li>
+<li><a href="../../../es/docs/user-guide/geometry.html"><span class="n">2.2</span><span>Geometría y contornos</span></a></li>
+<li><a href="../../../es/docs/user-guide/materials.html"><span class="n">2.3</span><span>Materiales</span></a></li>
+<li><a href="../../../es/docs/user-guide/water.html"><span class="n">2.4</span><span>Agua y presión intersticial</span></a></li>
+<li><a href="../../../es/docs/user-guide/loads.html"><span class="n">2.5</span><span>Cargas y carga sísmica</span></a></li>
+<li><a href="../../../es/docs/user-guide/supports.html"><span class="n">2.6</span><span>Soportes</span></a></li>
+<li><a href="../../../es/docs/user-guide/surfaces.html"><span class="n">2.7</span><span>Superficies de rotura y búsqueda</span></a></li>
+<li><a href="../../../es/docs/user-guide/results.html"><span class="n">2.8</span><span>Cálculo e interpretación de resultados</span></a></li>
+<li><a href="../../../es/docs/user-guide/groundwater.html"><span class="n">2.9</span><span>Agua subterránea por elementos finitos</span></a></li>
+<li><a href="../../../es/docs/user-guide/probabilistic.html"><span class="n">2.10</span><span>Análisis probabilístico y de sensibilidad</span></a></li>
+<li><a href="../../../es/docs/user-guide/design-standards.html"><span class="n">2.11</span><span>Normas de diseño</span></a></li>
+<li><a href="../../../es/docs/user-guide/automation.html"><span class="n">2.12</span><span>Informes, scripting y línea de comandos</span></a></li>
+</ul></details>
+<details open><summary>3 · Manual de teoría</summary><ul>
+<li><a href="../../../es/docs/theory/limit-equilibrium.html"><span class="n">3.1</span><span>Equilibrio límite y factor de seguridad</span></a></li>
+<li><a href="../../../es/docs/theory/methods.html"><span class="n">3.2</span><span>Métodos de dovelas</span></a></li>
+<li><a href="../../../es/docs/theory/interslice.html"><span class="n">3.3</span><span>Fuerzas entre dovelas, convergencia y admisibilidad</span></a></li>
+<li><a href="../../../es/docs/theory/search.html"><span class="n">3.4</span><span>Búsqueda de la superficie de rotura</span></a></li>
+<li><a href="../../../es/docs/theory/strength.html"><span class="n">3.5</span><span>Modelos de resistencia al corte</span></a></li>
+<li><a href="../../../es/docs/theory/pore-pressure.html"><span class="n">3.6</span><span>Presión intersticial y resistencia no saturada</span></a></li>
+<li><a href="../../../es/docs/theory/seepage.html"><span class="n">3.7</span><span>Filtración por elementos finitos</span></a></li>
+<li><a href="../../../es/docs/theory/rapid-drawdown.html"><span class="n">3.8</span><span>Desembalse rápido</span></a></li>
+<li><a href="../../../es/docs/theory/seismic.html"><span class="n">3.9</span><span>Análisis sísmico</span></a></li>
+<li><a href="../../../es/docs/theory/supports.html"><span class="n">3.10</span><span>Fuerzas de los soportes</span></a></li>
+<li><a href="../../../es/docs/theory/probabilistic.html"><span class="n">3.11</span><span>Análisis probabilístico</span></a></li>
+<li><a href="../../../es/docs/theory/partial-factors.html"><span class="n">3.12</span><span>Coeficientes parciales (Eurocódigo 7)</span></a></li>
+</ul></details>
+<details open><summary>4 · Verificación</summary><ul>
+<li><a href="../../../es/docs/verification/methodology.html"><span class="n">4.1</span><span>Metodología de verificación</span></a></li>
+<li><a href="../../../es/docs/verification/slope-benchmarks.html"><span class="n">4.2</span><span>Casos de referencia de equilibrio límite</span></a></li>
+<li><a href="../../../es/docs/verification/analytic-checks.html"><span class="n">4.3</span><span>Agua subterránea y comprobaciones analíticas</span></a></li>
+</ul></details>
+<details open><summary>5 · Referencia</summary><ul>
+<li><a href="../../../es/docs/reference/mcp.html"><span class="n">5.1</span><span>Servidor MCP</span></a></li>
+<li><a href="../../../es/docs/reference/cli.html"><span class="n">5.2</span><span>Interfaz de línea de comandos</span></a></li>
+<li><a href="../../../es/docs/reference/python-api.html"><span class="n">5.3</span><span>API de Python</span></a></li>
+<li><a href="../../../es/docs/reference/file-format.html"><span class="n">5.4</span><span>El formato .ogr</span></a></li>
+<li><a href="../../../es/docs/reference/error-codes.html"><span class="n">5.5</span><span>Códigos de error</span></a></li>
+<li><a href="../../../es/docs/reference/notation.html"><span class="n">5.6</span><span>Notación y glosario</span></a></li>
+<li><a href="../../../es/docs/reference/bibliography.html"><span class="n">5.7</span><span>Bibliografía</span></a></li>
+</ul></details>
+</nav>
+<!-- @end docnav -->
+  </aside>
+
+  <main id="main" class="doc-main">
+    <header class="doc-head">
+<!-- @inc dochead -->
+<button class="doc-side-toggle" type="button" aria-controls="doc-side" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg> Contenido</button>
+<nav class="crumbs label" aria-label="Ruta de navegación"><a href="../../../es/docs/index.html">Documentación</a><span aria-hidden="true">/</span><span>1 · Primeros pasos</span></nav>
+<div class="chapter label">1.3</div>
+<h1>La interfaz</h1>
+<div class="meta label"><span>Describe OGR Slip2D <span data-v>0.1.235</span></span></div>
+<!-- @end dochead -->
+    </header>
+
+    <article class="doc prose">
+      <p class="lede">OGR Slip2D tiene una ventana en la que se dibuja, se configura y se calcula el modelo —el modelador— y ventanas aparte que presentan los resultados. Esta página recorre las partes del modelador, las convenciones para dibujar en el lienzo, las ventanas de resultados, las preferencias y los atajos de teclado. El resto de la guía del usuario sigue los menús de izquierda a derecha.</p>
+
+      <h2 id="main-window"><span class="secnum">1.3.1</span><span class="ht">La ventana principal</span><a class="anchor" href="#main-window" aria-label="Enlace a esta sección">#</a></h2>
+      <p>El programa arranca con un proyecto vacío llamado <em>Untitled</em>; la barra de estado sugiere <span class="ui">File → Load Demo Slope</span> para partir, en su lugar, de un pequeño modelo de ejemplo. La barra de título muestra la versión y, una vez guardado o abierto el proyecto, el nombre de su archivo.</p>
+
+      <figure class="fig shot-fig" id="fig-main-window">
+        <div class="art"><img src="../../../assets/img/shots/main-window.webp" alt="El modelador de OGR Slip2D tras un análisis: barra de menús y barra de herramientas en la parte superior, el modelo del talud con su superficie de rotura crítica en el lienzo, los paneles Results y Terminal a lo largo de la parte inferior y la barra de estado" loading="lazy" width="1600" height="1000"></div>
+        <figcaption><span class="fignum">Figura 1.3.1</span> El modelador tras un análisis, con los paneles Results y Terminal abiertos.</figcaption>
+      </figure>
+
+      <p>De arriba abajo, la ventana contiene:</p>
+      <ul>
+        <li><strong>La barra de menús</strong>, con todos los comandos del programa (<a class="xref" href="#menus">Sección 1.3.2</a>).</li>
+        <li><strong>La barra de herramientas</strong>, con los comandos más usados en forma de botones (<a class="xref" href="#toolbar">Sección 1.3.3</a>).</li>
+        <li><strong>El lienzo</strong>, donde se dibuja el modelo y se muestran los resultados del último análisis (<a class="xref" href="#canvas">Sección 1.3.4</a>).</li>
+        <li><strong>El panel Results</strong>, que enumera los factores de seguridad más bajos del último análisis, y el <strong>panel Terminal</strong>, una consola de Python integrada que permanece oculta hasta que se elige <span class="ui">Window → Terminal</span> (<a class="xref" href="#docks">Sección 1.3.6</a>).</li>
+        <li><strong>La barra de estado</strong>, con mensajes a la izquierda y, a la derecha, las ayudas de dibujo, las coordenadas del cursor y un campo para introducir coordenadas (<a class="xref" href="#status-bar">Sección 1.3.5</a>).</li>
+      </ul>
+
+      <h2 id="menus"><span class="secnum">1.3.2</span><span class="ht">La barra de menús</span><a class="anchor" href="#menus" aria-label="Enlace a esta sección">#</a></h2>
+      <p>Los catorce menús siguen, a grandes rasgos, el orden en que se construye un modelo: primero la geometría, las cargas y los soportes, y después las superficies de rotura, las propiedades, el agua subterránea y la estadística.</p>
+
+      <figure class="tbl" id="tbl-menus">
+        <figcaption><span class="fignum">Tabla 1.3.1</span> Los menús del modelador y dónde se describe cada uno.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Menú</th><th>Contenido</th><th>Se describe en</th></tr></thead>
+            <tbody>
+              <tr><td><span class="ui">File</span></td><td>Crear, abrir y guardar proyectos (<code>.ogr</code>); <span class="ui">Load Demo Slope</span>; <span class="ui">Import Properties…</span>, <span class="ui">Import DXF…</span>, <span class="ui">Export DXF…</span>; <span class="ui">Generate Report…</span> (PDF) y <span class="ui">Export Image…</span> (PNG); configuración de página, vista previa de impresión e impresión; <span class="ui">Preferences…</span>; <span class="ui">Exit</span></td><td><a class="xref" href="../user-guide/geometry.html#dxf">Sección 2.2.5</a>, <a class="xref" href="../user-guide/automation.html">Sección 2.12</a></td></tr>
+              <tr><td><span class="ui">Edit</span></td><td><span class="ui">Undo</span>, <span class="ui">Redo</span>, <span class="ui">Copy Image</span> y <span class="ui">Picture Format</span></td><td><a href="#undo">Deshacer y rehacer</a></td></tr>
+              <tr><td><span class="ui">View</span></td><td>Herramientas de zoom y de desplazamiento, rejilla, <span class="ui">Snap…</span>, regla, visualización en escala de grises y <span class="ui">Display Options…</span></td><td><a class="xref" href="#canvas">Sección 1.3.4</a></td></tr>
+              <tr><td><span class="ui">Analysis</span></td><td><span class="ui">Project Settings…</span>, <span class="ui">Info Viewer</span>, <span class="ui">Compute</span>, <span class="ui">Interpret</span>, <span class="ui">Analysis Notes…</span></td><td><a class="xref" href="../user-guide/project-settings.html">Sección 2.1</a>, <a class="xref" href="../user-guide/results.html">Sección 2.8</a></td></tr>
+              <tr><td><span class="ui">Boundaries</span></td><td>Los ocho tipos de contorno, las herramientas del contorno externo, la edición, la conversión y la limpieza</td><td><a class="xref" href="../user-guide/geometry.html">Sección 2.2</a></td></tr>
+              <tr><td><span class="ui">Loading</span></td><td>Cargas distribuidas y lineales, carga sísmica y registros sísmicos</td><td><a class="xref" href="../user-guide/loads.html">Sección 2.5</a></td></tr>
+              <tr><td><span class="ui">Support</span></td><td>Colocación, edición y borrado de soportes; retroanálisis de la fuerza del soporte</td><td><a class="xref" href="../user-guide/supports.html">Sección 2.6</a></td></tr>
+              <tr><td><span class="ui">Surfaces</span></td><td><span class="ui">Surface Options…</span>, rejillas de búsqueda y objetos de Block Search, superficies definidas por el usuario, objetos de foco, optimización y límites del talud</td><td><a class="xref" href="../user-guide/surfaces.html">Sección 2.7</a></td></tr>
+              <tr><td><span class="ui">Properties</span></td><td><span class="ui">Define Materials…</span>, <span class="ui">Define Support…</span>, <span class="ui">Assign Materials</span>, <span class="ui">Assign Material</span>, <span class="ui">Define Tension Crack…</span>, <span class="ui">Assign Water Surface…</span></td><td><a class="xref" href="../user-guide/materials.html">Sección 2.3</a>, <a class="xref" href="../user-guide/water.html">Sección 2.4</a></td></tr>
+              <tr><td><span class="ui">Groundwater</span></td><td>Propiedades hidráulicas, la rejilla de presiones de agua, la malla de elementos finitos, las condiciones de contorno, las etapas transitorias, el barrido de niveles de desembalse, y el cálculo y la interpretación de la filtración</td><td><a class="xref" href="../user-guide/water.html">Sección 2.4</a>, <a class="xref" href="../user-guide/groundwater.html">Sección 2.9</a></td></tr>
+              <tr><td><span class="ui">Statistics</span></td><td><span class="ui">Random Variables…</span>, <span class="ui">Compute Statistics</span>, <span class="ui">Show Statistics</span></td><td><a class="xref" href="../user-guide/probabilistic.html">Sección 2.10</a></td></tr>
+              <tr><td><span class="ui">Tools</span></td><td>Anotaciones de dibujo y de cotas, medición, tablas de propiedades, <span class="ui">Convert Tool to Boundary…</span>, <span class="ui">Agent bridge (MCP)</span> y gestión de anotaciones</td><td><a href="#annotations">Anotaciones</a>, <a class="xref" href="#agent-bridge">Sección 1.3.10</a></td></tr>
+              <tr><td><span class="ui">Window</span></td><td><span class="ui">New Window</span>, <span class="ui">Terminal</span>, la lista de ventanas abiertas y <span class="ui">Close Window</span></td><td><a href="#windows">Varios proyectos a la vez</a></td></tr>
+              <tr><td><span class="ui">Help</span></td><td><span class="ui">Help Topics</span>, <span class="ui">Check for Updates…</span>, <span class="ui">About OGR Slip2D</span></td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+
+      <p>Los comandos cuyas condiciones previas no se cumplen siguen en el menú, pero aparecen en gris, y su información emergente explica el motivo: <span class="ui">Boundaries → Add Water Table</span> cuando el modelo ya tiene un nivel freático, <span class="ui">Boundaries → Add Drawdown Line</span> mientras no esté activado un análisis de desembalse rápido, los comandos de rejilla del menú <span class="ui">Surfaces</span> si el método de búsqueda no usa una rejilla de centros, y los comandos de agua subterránea y de estadística hasta que se activa en Project Settings el análisis al que pertenecen.</p>
+      <p><span class="ui">Help → Help Topics</span> (<kbd>F1</kbd>) muestra la dirección del repositorio del código fuente; esta documentación es el manual del usuario. <span class="ui">Help → Check for Updates…</span> muestra la versión instalada y dónde se publican las versiones; no contacta con ningún servidor.</p>
+      <div class="note warn"><span class="label">Versión 0.1.235</span><p><span class="ui">File → Print…</span> solo muestra un mensaje que indica que la impresión está prevista. Para imprimir la vista del modelo, usa <span class="ui">File → Print Preview…</span>, cuya ventana tiene su propio botón de impresión, o expórtala con <span class="ui">File → Export Image…</span>. <span class="ui">Edit → Picture Format → Vector (SVG)</span> se registra, pero no se utiliza: <span class="ui">Edit → Copy Image</span> siempre copia un mapa de bits del lienzo.</p></div>
+
+      <h2 id="toolbar"><span class="secnum">1.3.3</span><span class="ht">La barra de herramientas</span><a class="anchor" href="#toolbar" aria-label="Enlace a esta sección">#</a></h2>
+      <p>La barra de herramientas está fija bajo la barra de menús. Sus botones repiten comandos de los menús, en trece grupos separados por una línea fina; al pasar el cursor sobre un botón se muestra su nombre.</p>
+
+      <figure class="tbl" id="tbl-toolbar">
+        <figcaption><span class="fignum">Tabla 1.3.2</span> Grupos de la barra de herramientas, de izquierda a derecha.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th class="n">#</th><th>Grupo</th><th>Botones</th></tr></thead>
+            <tbody>
+              <tr><td class="n">1</td><td>File</td><td>New Project, Open Project, Save, Save As, Print</td></tr>
+              <tr><td class="n">2</td><td>Edit</td><td>Undo, Redo</td></tr>
+              <tr><td class="n">3</td><td>Analysis</td><td>Project Settings, Compute, Interpret</td></tr>
+              <tr><td class="n">4</td><td>View</td><td>Zoom All, Zoom In, Zoom Out, Zoom Window, Zoom Mouse, Pan, Select</td></tr>
+              <tr><td class="n">5</td><td>Display</td><td>Display Options</td></tr>
+              <tr><td class="n">6</td><td>Boundaries</td><td>Add External, Material, Water Table, Drawdown Line, Piezometric Line y Tension Crack; Expand / Shrink External; Change Slope Angle; Delete Boundary</td></tr>
+              <tr><td class="n">7</td><td>Vertices</td><td>Move Vertex, Insert Vertex, Delete Vertex</td></tr>
+              <tr><td class="n">8</td><td>Loading</td><td>Add Distributed Load, Add Line Load, Seismic Load, Delete Load</td></tr>
+              <tr><td class="n">9</td><td>Support</td><td>Add Support, Add Support Pattern, Stretch Support, Delete Support</td></tr>
+              <tr><td class="n">10</td><td>Surfaces</td><td>Auto Grid, Add Block Search Window, Surface Options, Define Limits</td></tr>
+              <tr><td class="n">11</td><td>Properties</td><td>Define Materials, Define Support, Assign Materials</td></tr>
+              <tr><td class="n">12</td><td>Tools</td><td>Add Text, Measure, Dimension Length, Dimension Angle, Material Properties Table</td></tr>
+              <tr><td class="n">13</td><td>Help</td><td>Help Topics, About OGR Slip2D</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+
+      <h2 id="canvas"><span class="secnum">1.3.4</span><span class="ht">El lienzo</span><a class="anchor" href="#canvas" aria-label="Enlace a esta sección">#</a></h2>
+      <p>El lienzo muestra la sección del modelo con el eje <span class="m" data-tex="x"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span></span></span></span><!--/k--></span> hacia la derecha y el eje <span class="m" data-tex="y"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi></mrow><annotation encoding="application/x-tex">y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">y</span></span></span></span><!--/k--></span> hacia arriba, en la unidad de longitud del proyecto (metros, salvo que se elija otro sistema de unidades en la <a class="xref" href="../user-guide/project-settings.html#general">Sección 2.1.2</a>). La posición del cursor se lee en la barra de estado.</p>
+      <ul>
+        <li><strong>Haz zoom</strong> con la rueda del ratón, centrado en el cursor, o con <span class="ui">View → Zoom</span>: <span class="ui">Zoom All</span> (<kbd>F2</kbd>), <span class="ui">Zoom In</span> (<kbd>F5</kbd>), <span class="ui">Zoom Out</span> (<kbd>F4</kbd>), <span class="ui">Zoom Window</span> (arrastrar un rectángulo) y <span class="ui">Zoom Mouse</span> (el clic izquierdo acerca y el derecho aleja).</li>
+        <li><strong>Desplaza la vista</strong> arrastrando con el botón central del ratón en cualquier momento, arrastrando con <kbd>Shift</kbd> pulsada en la herramienta Select, o con <span class="ui">View → Zoom → Pan</span> (<kbd>F10</kbd>).</li>
+        <li><span class="ui">View → Grid</span> (<kbd>F7</kbd>), <span class="ui">View → Ruler</span> y <span class="ui">View → Grayscale</span> activan o desactivan la rejilla de fondo, las reglas y una representación en escala de grises.</li>
+        <li><span class="ui">View → Display Options…</span> (<kbd>Ctrl</kbd>+<kbd>D</kbd>) elige lo que se dibuja: cada tipo de contorno, los vértices de los contornos, el grosor de línea, la regla y la rejilla, las placas de los soportes, la malla de elementos finitos y su numeración, los valores de la rejilla de presiones de agua, los vectores de flujo, el agua embalsada y las condiciones de contorno.</li>
+      </ul>
+      <p>Cada tipo de contorno tiene su propio color, y las superficies de agua llevan una letra en su punto medio: <strong>W</strong> en el nivel freático, <strong>P</strong> en una línea piezométrica y <strong>D</strong> en la línea de desembalse.</p>
+
+      <h3 id="drawing"><span class="ht">Dibujar en el lienzo</span><a class="anchor" href="#drawing" aria-label="Enlace a esta sección">#</a></h3>
+      <p>Un comando de dibujo —<span class="ui">Boundaries → Add External Boundary</span>, por ejemplo— pone el lienzo en un <em>modo de herramienta</em>, y la barra de estado indica qué espera la herramienta. Las convenciones son las mismas para todos los contornos:</p>
+      <ul>
+        <li><strong>Haz clic</strong> para añadir un vértice. El punto se ajusta a los vértices, las líneas y la rejilla cuando las ayudas de dibujo están activadas (<a href="#snap">Forzado del cursor</a>).</li>
+        <li><strong>Teclea</strong> el vértice en su lugar: escribe <code>x, y</code> en el campo <strong>Enter X,Y:</strong> de la barra de estado y pulsa <kbd>Enter</kbd>. Se aceptan como separadores comas, espacios y puntos y comas (<code>12.5, 3.2</code>, <code>12.5 3.2</code>, <code>12.5;3.2</code>), con el punto como separador decimal.</li>
+        <li><strong>Enter</strong> termina el dibujo en cuanto tiene dos vértices. El contorno externo y la ventana de Block Search son polígonos cerrados y se cierran automáticamente; cualquier otro contorno es una polilínea abierta. Un nuevo clic sobre el primer vértice también cierra el contorno externo.</li>
+        <li><strong>El clic derecho</strong> durante el dibujo abre un menú con <span class="ui">Done</span>, <span class="ui">Close Boundary</span> (solo para el contorno externo y la ventana de Block Search), <span class="ui">Undo last vertex</span>, los interruptores <span class="ui">Snap</span>, <span class="ui">Ortho</span> y <span class="ui">OSnap</span>, <span class="ui">Coordinate Table…</span> —una tabla de los vértices dibujados hasta el momento, para corregirla o ampliarla tecleando— y <span class="ui">Cancel</span>.</li>
+        <li><strong>Esc</strong> cancela el dibujo en curso y vuelve a la herramienta Select.</li>
+      </ul>
+      <p>Las herramientas que marcan puntos funcionan del mismo modo, con un número fijo de clics: dos para una carga distribuida, un rectángulo de rejilla de búsqueda, un soporte (primero la cabeza y después la cola) o un patrón de soportes, y uno para una carga lineal. Algunos comandos piden, en cambio, las coordenadas tecleadas en un pequeño diálogo, como <code>x,y  x,y …</code>: las herramientas de anotación del menú <span class="ui">Tools</span>, los objetos de foco y <span class="ui">Add Surface (centre and radius)…</span>.</p>
+      <p>Con la herramienta Select, el clic derecho sobre un objeto abre su menú contextual. El objeto que hay bajo el cursor se elige en este orden: un vértice (<span class="ui">Move Vertex</span>, <span class="ui">Insert Vertex (after)</span>, <span class="ui">Edit Coordinates…</span>, <span class="ui">Delete Vertex</span>), una carga (<span class="ui">Modify…</span>, <span class="ui">Delete</span>), un soporte (<span class="ui">Properties…</span>, <span class="ui">Stretch</span>, <span class="ui">Modify Pattern…</span>, <span class="ui">Delete</span>), un contorno (<span class="ui">Move Boundary</span>, <span class="ui">Edit Coordinates…</span>, <span class="ui">Convert Boundary…</span>, <span class="ui">Delete Boundary</span>, más algunos comandos propios de su tipo) y, en una parte vacía de una región, un menú para asignar un material a esa región. <span class="ui">Boundaries → Selection Filter…</span> (<kbd>Ctrl</kbd>+<kbd>F</kbd>) elige qué tipos de objeto se pueden seleccionar: contornos, vértices, materiales, soportes, cargas y superficies de rotura, todos activados por defecto.</p>
+
+      <h3 id="snap"><span class="ht">Forzado del cursor</span><a class="anchor" href="#snap" aria-label="Enlace a esta sección">#</a></h3>
+      <p>Tres ayudas de dibujo se activan y se desactivan desde la barra de estado, desde el teclado o desde el menú del clic derecho durante el dibujo:</p>
+      <ul>
+        <li><strong>SNAP</strong> (<kbd>F9</kbd>, activado por defecto) atrae el cursor hacia los vértices próximos, hacia las líneas y hacia la rejilla. Un círculo marca un vértice, una cruz un punto de una línea y un punto un nodo de la rejilla.</li>
+        <li><strong>ORTHO</strong> (<kbd>F8</kbd>, desactivado) fija el segmento que se está dibujando a la horizontal o a la vertical cuando está a pocos grados de cualquiera de las dos.</li>
+        <li><strong>OSNAP</strong> (<kbd>F3</kbd>, desactivado) dibuja líneas de prolongación temporales a partir de los lados y los vértices de los contornos próximos; con SNAP activado, el cursor puede ajustarse a ellas.</li>
+      </ul>
+      <p><span class="ui">View → Snap…</span> fija las tolerancias de captura —en píxeles de pantalla, para que el forzado sea igual de cómodo con cualquier zoom (vértice 12 px, línea 10 px, nodo de rejilla 8 px, prolongación 8 px)—, la ventana angular de ORTHO (5°) y el modo de los datos al pasar el cursor, y tiene un botón <span class="ui">Restore Defaults</span>. La rejilla de forzado sigue el zoom: su espaciado es un número redondo (1, 2 o 5 veces una potencia de diez) de unos 60 píxeles en pantalla.</p>
+      <div class="note warn"><span class="label">Versión 0.1.235</span><p>Los campos <strong>Grid spacing</strong> del diálogo Snap no tienen un efecto duradero: el lienzo los sustituye por el espaciado que depende del zoom en cuanto se mueve el cursor. El atajo <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>S</kbd> está asignado tanto a <span class="ui">View → Snap…</span> como a <span class="ui">File → Save As…</span>; usa los menús para cualquiera de los dos.</p></div>
+
+      <h3 id="undo"><span class="ht">Deshacer y rehacer</span><a class="anchor" href="#undo" aria-label="Enlace a esta sección">#</a></h3>
+      <p><span class="ui">Edit → Undo</span> (<kbd>Ctrl</kbd>+<kbd>Z</kbd>) y <span class="ui">Edit → Redo</span> (<kbd>Ctrl</kbd>+<kbd>Y</kbd>) recorren las ediciones de la geometría —añadir, borrar, mover, convertir y remodelar contornos y sus vértices— y el pintado de materiales en las regiones con <span class="ui">Properties → Assign Materials</span>. Las ediciones hechas en diálogos (materiales, cargas, soportes, ajustes) no están en la pila de deshacer: mientras el diálogo está abierto, la forma de volver atrás es <span class="ui">Cancel</span>. La pila se vacía cuando se crea o se abre un proyecto, o cuando este se sustituye por el talud de demostración.</p>
+
+      <h2 id="status-bar"><span class="secnum">1.3.5</span><span class="ht">La barra de estado</span><a class="anchor" href="#status-bar" aria-label="Enlace a esta sección">#</a></h2>
+      <p>La parte izquierda de la barra de estado muestra mensajes: qué espera la herramienta activa, qué hizo el último comando y el factor de seguridad del último análisis. Un mensaje permanece unos segundos y lo sustituye el siguiente; la lista completa de notas de un análisis está en <span class="ui">Analysis → Analysis Notes…</span> (<a class="xref" href="#docks">Sección 1.3.6</a>). La parte derecha contiene los indicadores permanentes.</p>
+
+      <figure class="tbl" id="tbl-status">
+        <figcaption><span class="fignum">Tabla 1.3.3</span> Indicadores a la derecha de la barra de estado, de izquierda a derecha. Una palabra resaltada significa activado; al hacer clic en ella se cambia su estado.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Indicador</th><th>Significado</th><th>Tecla</th><th>Al inicio</th></tr></thead>
+            <tbody>
+              <tr><td><strong>SNAP</strong></td><td>Forzado del cursor a vértices, líneas y nodos de la rejilla</td><td><kbd>F9</kbd></td><td>activado</td></tr>
+              <tr><td><strong>GRID</strong></td><td>Muestra la rejilla de fondo (el mismo interruptor que <span class="ui">View → Grid</span>)</td><td><kbd>F7</kbd></td><td>activado</td></tr>
+              <tr><td><strong>ORTHO</strong></td><td>Solo segmentos horizontales y verticales</td><td><kbd>F8</kbd></td><td>desactivado</td></tr>
+              <tr><td><strong>OSNAP</strong></td><td>Líneas de prolongación a partir de los contornos próximos</td><td><kbd>F3</kbd></td><td>desactivado</td></tr>
+              <tr><td><strong>X, Y</strong></td><td>Coordenadas del cursor, con tres decimales</td><td>—</td><td>—</td></tr>
+              <tr><td><strong>Enter X,Y:</strong></td><td>Vértice tecleado para el dibujo en curso (<a href="#drawing">Dibujar en el lienzo</a>)</td><td><kbd>Enter</kbd></td><td>—</td></tr>
+              <tr><td><strong>DATA TIPS</strong></td><td>Datos de las propiedades bajo el cursor (<a href="#data-tips">Datos al pasar el cursor</a>)</td><td>—</td><td>activado</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+
+      <h3 id="data-tips"><span class="ht">Datos al pasar el cursor</span><a class="anchor" href="#data-tips" aria-label="Enlace a esta sección">#</a></h3>
+      <p>Con <strong>DATA TIPS</strong> activado, al pasar el cursor sobre una región de material, un soporte o una carga con la herramienta Select se muestran sus propiedades, con sus unidades, como información emergente. El diálogo <span class="ui">View → Snap…</span> ofrece tres niveles: <strong>None</strong>, <strong>Minimum</strong> (solo la identidad: el nombre del material, el tipo de soporte, la magnitud de la carga) y <strong>Maximum</strong> (todas las propiedades, el valor por defecto). El interruptor de la barra de estado alterna entre Maximum y None.</p>
+
+      <h2 id="docks"><span class="secnum">1.3.6</span><span class="ht">Paneles acoplables y otros paneles</span><a class="anchor" href="#docks" aria-label="Enlace a esta sección">#</a></h2>
+      <p><strong>Panel Results.</strong> Tras <span class="ui">Analysis → Compute</span> (<kbd>Ctrl</kbd>+<kbd>T</kbd>), el panel de la parte inferior muestra, para el primero de los métodos activados, el número de superficies válidas y el factor de seguridad crítico, seguidos de una tabla con las 50 superficies de menor factor: orden, factor de seguridad, método, centro <span class="m" data-tex="x"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span></span></span></span><!--/k--></span>, centro <span class="m" data-tex="y"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi></mrow><annotation encoding="application/x-tex">y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">y</span></span></span></span><!--/k--></span> y radio. La superficie crítica es la primera fila, resaltada. Con una norma de diseño activada, el rótulo dice <em>Over-design factor</em> (factor de sobredimensionamiento) en lugar de <em>Critical FoS</em> (<a class="xref" href="../user-guide/design-standards.html">Sección 2.11</a>). Los resultados de los demás métodos están en la ventana Interpret.</p>
+      <p>Los paneles se pueden mover, hacer flotantes y cerrar. Un panel cerrado se recupera haciendo clic con el botón derecho en la barra de herramientas, que enumera la propia barra y los paneles, cada uno con una marca de verificación.</p>
+      <div class="note"><span class="label">Versión 0.1.235</span><p>Al seleccionar una fila del panel Results todavía no se resalta su superficie en el lienzo; usa <span class="ui">Analysis → Interpret</span> para inspeccionar superficies concretas.</p></div>
+      <p><strong>Panel Terminal.</strong> <span class="ui">Window → Terminal</span> (<kbd>Ctrl</kbd>+<kbd>`</kbd>) abre una consola de Python integrada que se ejecuta dentro del programa, con el modelo abierto como <code>project</code>, el lienzo como <code>canvas</code>, la ventana como <code>mainwindow</code>, NumPy como <code>np</code> y los paquetes <code>ogr_core</code> y <code>ogr_slip2d</code>; <code>help_ogr()</code> imprime unos ejemplos. <kbd>Enter</kbd> ejecuta la entrada, <kbd>Shift</kbd>+<kbd>Enter</kbd> inicia una línea nueva, <kbd>Ctrl</kbd>+<kbd>↑</kbd> y <kbd>Ctrl</kbd>+<kbd>↓</kbd> recorren el historial y <kbd>Ctrl</kbd>+<kbd>L</kbd> borra la consola. El código escrito ahí puede cambiar cualquier cosa del modelo; la automatización mediante scripts se describe en la <a class="xref" href="../user-guide/automation.html">Sección 2.12</a>.</p>
+      <p><strong>Notas del análisis.</strong> Un análisis puede producir varias notas: un método que no se pudo ejecutar, un ajuste que la búsqueda elegida no lee, una norma de diseño que convierte el resultado en un factor de sobredimensionamiento. La barra de estado muestra la primera, seguida de <em>[+n more — Analysis &gt; Analysis Notes]</em>; <span class="ui">Analysis → Analysis Notes…</span> abre un panel con todas ellas, incluidas las notas de la última ejecución estadística.</p>
+      <p><strong>Info Viewer.</strong> <span class="ui">Analysis → Info Viewer</span> (<kbd>Ctrl</kbd>+<kbd>I</kbd>) resume el modelo: el número de contornos, materiales, soportes y cargas, el rectángulo envolvente, el método de búsqueda y el autor.</p>
+      <p><strong>Panel Assign Materials.</strong> <span class="ui">Properties → Assign Materials</span> abre un panel flotante con la lista de materiales; véase la <a class="xref" href="../user-guide/materials.html#assign">Sección 2.3.3</a>.</p>
+
+      <h2 id="interpret"><span class="secnum">1.3.7</span><span class="ht">La ventana Interpret</span><a class="anchor" href="#interpret" aria-label="Enlace a esta sección">#</a></h2>
+      <p><span class="ui">Analysis → Interpret</span> abre los resultados del último análisis en una ventana aparte cuyo título es <em>OGR Slip2D — Interpret — </em>seguido del nombre del proyecto. Su lienzo es de solo lectura, de modo que el modelo no se puede cambiar desde ella; puede haber varias ventanas Interpret abiertas a la vez, y cada una conserva los resultados con los que se abrió. <span class="ui">File → Close</span> (<kbd>Ctrl</kbd>+<kbd>W</kbd>) la cierra.</p>
+
+      <figure class="fig shot-fig" id="fig-interpret">
+        <div class="art"><img src="../../../assets/img/shots/interpret.webp" alt="La ventana Interpret: la rejilla de búsqueda coloreada según el factor de seguridad con la superficie crítica, la leyenda a la izquierda, los paneles Summary y Surfaces a la derecha y el panel Slice Data en la parte inferior" loading="lazy" width="1600" height="877"></div>
+        <figcaption><span class="fignum">Figura 1.3.2</span> La ventana Interpret.</figcaption>
+      </figure>
+
+      <ul>
+        <li><strong>Paneles</strong>: la leyenda de colores (<strong>Legend</strong>) a la izquierda; <strong>Summary</strong> y <strong>Surfaces</strong> (las 100 superficies con menor factor de seguridad) a la derecha; <strong>Slice Data</strong> en la parte inferior. <span class="ui">Window</span> muestra u oculta los tres últimos y <span class="ui">View → Show Legend</span> el primero.</li>
+        <li><strong>Selector de método</strong>: cuando se han calculado varios métodos, una lista desplegable en la parte superior cambia toda la ventana de uno a otro.</li>
+        <li><strong>Vista previa al pasar el cursor</strong>: con una búsqueda de rejilla, al pasar el cursor sobre un centro de la rejilla se dibuja la superficie de menor factor de seguridad de ese centro y se indica su factor de seguridad en la barra de estado.</li>
+      </ul>
+      <p>Sus menús son <span class="ui">File</span> (exportar la imagen o los datos de las superficies como CSV), <span class="ui">Edit</span>, <span class="ui">View</span> (zoom, leyenda, opciones de isolíneas y de leyenda), <span class="ui">Data</span> (qué superficies se dibujan —mínimo global, mínimo por centro o todas—, filtros, el factor de seguridad a lo largo del talud, exportaciones de datos, superficies no válidas, fuerzas de los soportes y retroanálisis), <span class="ui">Query</span> (consultas, dovelas, línea de empujes, valores a lo largo de la superficie, diagrama de sólido libre de una dovela, superficies que pasan por un punto, tabla de resultados), <span class="ui">Groundwater</span>, <span class="ui">Statistics</span> (gráficos de histograma, acumulado, dispersión, sensibilidad y convergencia), <span class="ui">Tools</span>, <span class="ui">Window</span> y <span class="ui">Help</span>. Los comandos que necesitan algo que el proyecto no tiene —un análisis transitorio, soportes, resultados estadísticos— aparecen en gris y su información emergente dice qué falta. Todo lo que contiene esta ventana se describe en la <a class="xref" href="../user-guide/results.html">Sección 2.8</a>.</p>
+      <div class="note warn"><span class="label">Versión 0.1.235</span><p>Algunos comandos de la ventana Interpret todavía no hacen nada: <span class="ui">View → Data Tips</span>, los cuatro interruptores de visualización de la parte superior del menú <span class="ui">Groundwater</span> (<span class="ui">Phreatic Surface</span>, <span class="ui">Piezometric Lines</span>, <span class="ui">Flow Vectors</span>, <span class="ui">Streamlines</span>) y <span class="ui">Tools → Measure</span> y <span class="ui">Tools → Dimension Length</span>.</p></div>
+
+      <h2 id="other-windows"><span class="secnum">1.3.8</span><span class="ht">Otras ventanas de resultados</span><a class="anchor" href="#other-windows" aria-label="Enlace a esta sección">#</a></h2>
+      <p><strong>Interpret Groundwater</strong> (<span class="ui">Groundwater → Interpret Groundwater</span>, disponible una vez calculado un análisis de filtración por elementos finitos) muestra el campo de filtración sobre la malla: altura total <span class="m" data-tex="H"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi></mrow><annotation encoding="application/x-tex">H</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.0813em;">H</span></span></span></span><!--/k--></span>, altura de presión <span class="m" data-tex="P"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi></mrow><annotation encoding="application/x-tex">P</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">P</span></span></span></span><!--/k--></span> o presión intersticial <span class="m" data-tex="u"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>u</mi></mrow><annotation encoding="application/x-tex">u</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">u</span></span></span></span><!--/k--></span>, con interruptores para los vectores de flujo, la superficie libre (<span class="m" data-tex="P = 0"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">P = 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">P</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span><!--/k--></span>) y la malla, una herramienta <span class="ui">Discharge section…</span> para el caudal que atraviesa una sección y, en un análisis transitorio, un selector de etapa y un gráfico del factor de seguridad en función del tiempo. Véase la <a class="xref" href="../user-guide/groundwater.html">Sección 2.9</a>.</p>
+
+      <figure class="fig shot-fig" id="fig-groundwater-interpret">
+        <div class="art"><img src="../../../assets/img/shots/groundwater-interpret.webp" alt="La ventana Interpret Groundwater con isolíneas rellenas del campo de filtración sobre la malla de elementos finitos, con vectores de flujo y la superficie libre" loading="lazy" width="1600" height="635"></div>
+        <figcaption><span class="fignum">Figura 1.3.3</span> La ventana Interpret Groundwater.</figcaption>
+      </figure>
+
+      <p><strong>Statistics</strong> (<span class="ui">Statistics → Show Statistics</span>, que se abre automáticamente tras <span class="ui">Statistics → Compute Statistics</span>) presenta una ejecución probabilística o de sensibilidad: el histograma del factor de seguridad con la probabilidad de rotura y el índice de fiabilidad, la convergencia de la media y de la probabilidad de rotura con el número de muestras, diagramas de dispersión frente a cada variable aleatoria y el gráfico de sensibilidad. Véase la <a class="xref" href="../user-guide/probabilistic.html">Sección 2.10</a>.</p>
+
+      <figure class="fig shot-fig" id="fig-statistics-window">
+        <div class="art"><img src="../../../assets/img/shots/statistics-window.webp" alt="La ventana Statistics con el histograma del factor de seguridad y la probabilidad de rotura" loading="lazy" width="1500" height="900"></div>
+        <figcaption><span class="fignum">Figura 1.3.4</span> La ventana Statistics.</figcaption>
+      </figure>
+
+      <p><span class="ui">Groundwater → Drawdown Level Sweep…</span> termina con un gráfico del factor de seguridad en función del nivel de desembalse, y <span class="ui">Data → Support Force Diagram…</span> en la ventana Interpret abre el diagrama de fuerzas de un soporte. Estos gráficos se abren en ventanas propias.</p>
+
+      <h3 id="windows"><span class="ht">Varios proyectos a la vez</span><a class="anchor" href="#windows" aria-label="Enlace a esta sección">#</a></h3>
+      <p><span class="ui">Window → New Window</span> abre un segundo modelador, independiente, con su propio proyecto. El menú <span class="ui">Window</span> enumera las ventanas abiertas, marca la activa con un punto y las que tienen cambios sin guardar con un asterisco, y trae cualquiera de ellas al primer plano; <span class="ui">Window → Close Window</span> cierra la actual.</p>
+
+      <h3 id="annotations"><span class="ht">Anotaciones</span><a class="anchor" href="#annotations" aria-label="Enlace a esta sección">#</a></h3>
+      <p>El menú <span class="ui">Tools</span> dibuja sobre una capa de anotaciones aparte que el análisis nunca lee: líneas, flechas, polilíneas, polígonos, rectángulos, círculos y texto (<span class="ui">Tools → Draw</span>), cotas de longitud, de ángulo y horizontales o verticales (<span class="ui">Tools → Dimensions</span> y <span class="ui">Tools → Measure</span>), ejes y una imagen de fondo. Los puntos se teclean como coordenadas. <span class="ui">Tools → Annotations</span> las gestiona, las muestra, las oculta y las elimina. <span class="ui">Tools → Convert Tool to Boundary…</span> es la única manera de que una anotación pase a ser geometría del modelo: copia una línea, polilínea, polígono, rectángulo o círculo en un contorno externo, un contorno de material, un nivel freático, una línea piezométrica o una grieta de tracción, y conserva la anotación. <span class="ui">Tools → Property Tables</span> muestra tablas de solo lectura de los materiales, los soportes y las propiedades hidráulicas, con un botón para copiarlas al portapapeles.</p>
+
+      <h2 id="preferences"><span class="secnum">1.3.9</span><span class="ht">Preferencias</span><a class="anchor" href="#preferences" aria-label="Enlace a esta sección">#</a></h2>
+      <p><span class="ui">File → Preferences…</span> fija el <strong>idioma</strong> (English o Español) y el <strong>tema</strong> (Light o Dark) y los aplica con <span class="ui">Save</span>.</p>
+      <ul>
+        <li>El tema cambia al instante.</li>
+        <li>El idioma se aplica a los diálogos y las ventanas que se abren después (incluida una ventana abierta con <span class="ui">Window → New Window</span>); los menús de las ventanas ya abiertas conservan su idioma.</li>
+        <li>Ninguna de las dos opciones se guarda: el programa siempre arranca en inglés con el tema claro.</li>
+      </ul>
+      <p>Los nombres de los menús de esta documentación son los de la interfaz en inglés.</p>
+      <div class="note warn"><span class="label">Versión 0.1.235</span><p>Las tres casillas de verificación del grupo inferior del diálogo Preferences —<em>Show Tabs for Multiple Windows</em>, <em>Mark file as modified after importing</em> y <em>Default to compressed format when saving</em>— todavía no están conectadas a nada.</p></div>
+
+      <h2 id="agent-bridge"><span class="secnum">1.3.10</span><span class="ht">El puente para agentes</span><a class="anchor" href="#agent-bridge" aria-label="Enlace a esta sección">#</a></h2>
+      <p>Un agente de IA conectado mediante el servidor MCP puede trabajar sobre el modelo abierto en la ventana, donde cada edición se ve en el momento en que ocurre. <span class="ui">Tools → Agent bridge (MCP)</span> controla esta conexión. Se activa al arrancar el programa, salvo que este se arranque con <code>ogr-slip2d --no-agent-bridge</code>, y la barra de estado indica entonces el número de proceso y el puerto: <em>Agent bridge on (pid …, port …)</em>.</p>
+      <ul>
+        <li>El puente escucha solo en la máquina local (<code>127.0.0.1</code>) y exige un token aleatorio; el servidor del agente lo encuentra cuando se arranca con <code>ogr-slip2d-mcp --attach</code>.</li>
+        <li>Una edición hecha por el agente es un paso de <span class="ui">Edit → Undo</span>, y un análisis que ejecuta se muestra en el panel Results y en el lienzo, igual que al ejecutar Compute.</li>
+        <li>Mientras la ventana está calculando, se rechazan las ediciones del agente, para que el modelo no cambie durante el análisis.</li>
+        <li>Al desmarcar la entrada del menú se cierra el puente.</li>
+      </ul>
+      <p>La configuración de un agente se describe en la <a href="../../ai/index.html">página de IA y MCP</a> y las herramientas que puede usar, en la <a class="xref" href="../reference/mcp.html">Sección 5.1</a>.</p>
+
+      <h2 id="shortcuts"><span class="secnum">1.3.11</span><span class="ht">Atajos de teclado</span><a class="anchor" href="#shortcuts" aria-label="Enlace a esta sección">#</a></h2>
+      <figure class="tbl" id="tbl-shortcuts">
+        <figcaption><span class="fignum">Tabla 1.3.4</span> Atajos de teclado del modelador en la versión <span data-v>0.1.235</span>.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Teclas</th><th>Comando</th></tr></thead>
+            <tbody>
+              <tr><td><kbd>Ctrl</kbd>+<kbd>N</kbd></td><td><span class="ui">File → New Project</span></td></tr>
+              <tr><td><kbd>Ctrl</kbd>+<kbd>O</kbd></td><td><span class="ui">File → Open Project…</span></td></tr>
+              <tr><td><kbd>Ctrl</kbd>+<kbd>S</kbd></td><td><span class="ui">File → Save</span></td></tr>
+              <tr><td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>S</kbd></td><td>Asignado a la vez a <span class="ui">File → Save As…</span> y a <span class="ui">View → Snap…</span> (véase <a href="#snap">Forzado del cursor</a>)</td></tr>
+              <tr><td><kbd>Ctrl</kbd>+<kbd>P</kbd></td><td><span class="ui">File → Print…</span></td></tr>
+              <tr><td><kbd>Ctrl</kbd>+<kbd>Q</kbd></td><td><span class="ui">File → Exit</span></td></tr>
+              <tr><td><kbd>Ctrl</kbd>+<kbd>Z</kbd> / <kbd>Ctrl</kbd>+<kbd>Y</kbd></td><td><span class="ui">Edit → Undo</span> / <span class="ui">Edit → Redo</span></td></tr>
+              <tr><td><kbd>F2</kbd>, <kbd>F5</kbd>, <kbd>F4</kbd></td><td><span class="ui">Zoom All</span>, <span class="ui">Zoom In</span>, <span class="ui">Zoom Out</span></td></tr>
+              <tr><td><kbd>F10</kbd></td><td><span class="ui">View → Zoom → Pan</span></td></tr>
+              <tr><td><kbd>Esc</kbd></td><td>Cancelar el dibujo en curso y volver a <span class="ui">Select</span></td></tr>
+              <tr><td><kbd>F7</kbd></td><td><span class="ui">View → Grid</span></td></tr>
+              <tr><td><kbd>F9</kbd>, <kbd>F8</kbd>, <kbd>F3</kbd></td><td>Activar o desactivar SNAP, ORTHO y OSNAP</td></tr>
+              <tr><td><kbd>Ctrl</kbd>+<kbd>D</kbd></td><td><span class="ui">View → Display Options…</span></td></tr>
+              <tr><td><kbd>Ctrl</kbd>+<kbd>J</kbd></td><td><span class="ui">Analysis → Project Settings…</span></td></tr>
+              <tr><td><kbd>Ctrl</kbd>+<kbd>I</kbd></td><td><span class="ui">Analysis → Info Viewer</span></td></tr>
+              <tr><td><kbd>Ctrl</kbd>+<kbd>T</kbd></td><td><span class="ui">Analysis → Compute</span></td></tr>
+              <tr><td><kbd>Ctrl</kbd>+<kbd>1</kbd> … <kbd>Ctrl</kbd>+<kbd>8</kbd></td><td><span class="ui">Boundaries → Add External Boundary</span>, <span class="ui">Add Material Boundary</span>, <span class="ui">Add Water Table</span>, <span class="ui">Add Drawdown Line</span>, <span class="ui">Add Piezometric Line</span>, <span class="ui">Add Tension Crack</span>, <span class="ui">Add Weak Layer</span>, <span class="ui">Add Anisotropic Surface</span></td></tr>
+              <tr><td><kbd>Ctrl</kbd>+<kbd>F</kbd></td><td><span class="ui">Boundaries → Selection Filter…</span></td></tr>
+              <tr><td><kbd>Ctrl</kbd>+<kbd>`</kbd></td><td><span class="ui">Window → Terminal</span></td></tr>
+              <tr><td><kbd>F1</kbd></td><td><span class="ui">Help → Help Topics</span></td></tr>
+              <tr><td><kbd>Enter</kbd></td><td>Terminar el dibujo en curso; en el campo <strong>Enter X,Y:</strong>, añadir el vértice tecleado</td></tr>
+              <tr><td><kbd>Ctrl</kbd>+<kbd>W</kbd></td><td><span class="ui">File → Close</span>, en la ventana Interpret</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+    </article>
+
+<!-- @inc docfoot -->
+<nav class="doc-pager" aria-label="Páginas">
+<a class="prev" href="../../../es/docs/getting-started/quick-start.html"><span class="label">← Anterior · 1.2</span><b>Inicio rápido: tu primer modelo</b></a>
+<a class="next" href="../../../es/docs/user-guide/project-settings.html"><span class="label">2.1 · Siguiente →</span><b>Configuración del proyecto</b></a>
+</nav>
+<div class="doc-edit label"><a href="https://github.com/samuelsl27/OpenGeoRock_Web.github.io/blob/main/es/docs/getting-started/interface.html" target="_blank" rel="noopener">Editar esta página ↗</a><a href="https://github.com/samuelsl27/OGR-Slip2D/issues" target="_blank" rel="noopener">Informar de un problema ↗</a></div>
+<!-- @end docfoot -->
+  </main>
+
+  <aside class="doc-toc" aria-label="En esta página">
+    <div class="toc-inner">
+<!-- @inc pagetoc -->
+<span class="label">En esta página</span><ul><li class="h2"><a href="#main-window">1.3.1 La ventana principal</a></li><li class="h2"><a href="#menus">1.3.2 La barra de menús</a></li><li class="h2"><a href="#toolbar">1.3.3 La barra de herramientas</a></li><li class="h2"><a href="#canvas">1.3.4 El lienzo</a></li><li class="h3"><a href="#drawing">Dibujar en el lienzo</a></li><li class="h3"><a href="#snap">Forzado del cursor</a></li><li class="h3"><a href="#undo">Deshacer y rehacer</a></li><li class="h2"><a href="#status-bar">1.3.5 La barra de estado</a></li><li class="h3"><a href="#data-tips">Datos al pasar el cursor</a></li><li class="h2"><a href="#docks">1.3.6 Paneles acoplables y otros paneles</a></li><li class="h2"><a href="#interpret">1.3.7 La ventana Interpret</a></li><li class="h2"><a href="#other-windows">1.3.8 Otras ventanas de resultados</a></li><li class="h3"><a href="#windows">Varios proyectos a la vez</a></li><li class="h3"><a href="#annotations">Anotaciones</a></li><li class="h2"><a href="#preferences">1.3.9 Preferencias</a></li><li class="h2"><a href="#agent-bridge">1.3.10 El puente para agentes</a></li><li class="h2"><a href="#shortcuts">1.3.11 Atajos de teclado</a></li></ul><button class="print" type="button"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="1.5"/><path d="M6 14h12v7H6z"/></svg> Imprimir esta página</button>
+<!-- @end pagetoc -->
+    </div>
+  </aside>
+</div>
+
+<!-- @inc footer -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <a class="brand" href="../../../es/index.html" aria-label="OpenGeoRock — inicio">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
+          <b>OpenGeoRock</b>
+        </a>
+        <p class="tagline">Software geotécnico de código abierto, desarrollado a la vista de todos en la Universidad Politécnica de Cartagena.</p>
+        <span class="lang" role="group" aria-label="Idioma"><a href="../../../docs/getting-started/interface.html" hreflang="en" lang="en">EN</a><a href="../../../es/docs/getting-started/interface.html" hreflang="es" lang="es" aria-current="true">ES</a></span>
+      </div>
+      <div>
+        <h5>Productos</h5>
+        <ul>
+          <li><a href="../../../es/products/slip2d.html">OGR Slip2D</a></li>
+          <li><a href="../../../es/products/index.html">La suite</a></li>
+          <li><a href="../../../es/ai/index.html">Servidor MCP</a></li>
+          <li><a href="../../../es/download/index.html">Descargar</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Aprende</h5>
+        <ul>
+          <li><a href="../../../es/docs/index.html">Documentación</a></li>
+          <li><a href="../../../es/docs/getting-started/quick-start.html">Inicio rápido</a></li>
+          <li><a href="../../../es/docs/theory/methods.html">Manual de teoría</a></li>
+          <li><a href="../../../es/examples/index.html">Ejemplos</a></li>
+          <li><a href="../../../es/verification/index.html">Verificación</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Proyecto</h5>
+        <ul>
+          <li><a href="../../../es/about/index.html">El proyecto</a></li>
+          <li><a href="../../../es/about/index.html#team">Equipo</a></li>
+          <li><a href="../../../es/about/index.html#cite">Cómo citar</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Contribuir</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/LICENSE" target="_blank" rel="noopener">Licencia · AGPL-3.0</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contacto</h5>
+        <ul>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/issues" target="_blank" rel="noopener">Incidencias</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/tree/main/docs/changelog" target="_blank" rel="noopener">Historial de cambios</a></li>
+          <li><a href="mailto:samuel.saez@edu.upct.es">Correo</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© 2026 Samuel Sáez López · OGR Slip2D es software libre bajo AGPL-3.0-or-later, sin garantía de ningún tipo.</span>
+      <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
+    </div>
+  </div>
+</footer>
+<!-- @end footer -->
+</body>
+</html>

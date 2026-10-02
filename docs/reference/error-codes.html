@@ -1,0 +1,392 @@
+<!doctype html>
+<html class="no-js" lang="en" data-root="../../">
+<head>
+<meta charset="utf-8">
+<title>Error codes — OGR Slip2D documentation</title>
+<meta name="description" content="The error codes of OGR Slip2D: the four negative codes written in place of the factor of safety of a rejected surface, the machine-readable failure reasons, the admissibility checks, the errors of the operations layer and MCP server, and the exit codes.">
+<!-- @inc head -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.replace("no-js", "js")</script>
+<link rel="canonical" href="https://opengeorock.org/docs/reference/error-codes.html">
+<link rel="alternate" hreflang="en" href="https://opengeorock.org/docs/reference/error-codes.html">
+<link rel="alternate" hreflang="es" href="https://opengeorock.org/es/docs/reference/error-codes.html">
+<link rel="alternate" hreflang="x-default" href="https://opengeorock.org/docs/reference/error-codes.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="OpenGeoRock">
+<meta property="og:title" content="Error codes — OGR Slip2D documentation">
+<meta property="og:description" content="The error codes of OGR Slip2D: the four negative codes written in place of the factor of safety of a rejected surface, the machine-readable failure reasons, the admissibility checks, the errors of the operations layer and MCP server, and the exit codes.">
+<meta property="og:url" content="https://opengeorock.org/docs/reference/error-codes.html">
+<meta property="og:image" content="https://opengeorock.org/assets/img/og-image.png">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#f4efe6">
+<link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&amp;display=swap">
+<link rel="stylesheet" href="../../assets/css/site.css">
+<link rel="stylesheet" href="../../assets/css/docs.css">
+<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
+<script src="../../assets/js/site.js" defer></script>
+<!-- @end head -->
+</head>
+<body class="docs">
+<!-- @inc header -->
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="wrap top-inner">
+    <a class="brand" href="../../index.html" aria-label="OpenGeoRock — home">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
+      <b>OpenGeoRock</b>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <div class="has-menu" data-nav="products">
+        <button type="button" aria-expanded="false" aria-haspopup="true">Products <svg class="caret" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+        <div class="mega">
+          <div class="mega-cols">
+            <div class="mega-col">
+              <span class="label">Available today</span>
+              <a class="mega-item feature" href="../../products/slip2d.html"><b>OGR Slip2D</b><span>2D slope stability: limit equilibrium, finite-element groundwater and probabilistic analysis.</span></a>
+              <a class="mega-item" href="../../ai/index.html"><b>MCP server for AI agents <span class="tag live">new</span></b><span>Let Claude, ChatGPT or a local model build and run OGR Slip2D models.</span></a>
+            </div>
+            <div class="mega-col">
+              <span class="label">On the roadmap</span>
+              <a class="mega-item" href="../../products/index.html#ogr-data"><b>OGR Data</b><span>Soil and rock-mass property database</span></a>
+              <a class="mega-item" href="../../products/index.html#ogr-fem2d"><b>OGR FEM2D</b><span>2D elastoplastic finite elements</span></a>
+              <a class="mega-item" href="../../products/index.html#ogr-slip3d"><b>OGR Slip3D</b><span>3D limit equilibrium</span></a>
+              <a class="mega-item" href="../../products/index.html#ogr-fem3d"><b>OGR FEM3D</b><span>3D finite elements with coupled flow</span></a>
+            </div>
+            <div class="mega-col">
+              <span class="label">Use it from</span>
+              <a class="mega-item" href="../../docs/getting-started/interface.html"><b>The desktop program</b><span>Modeller, interpreter and Python terminal</span></a>
+              <a class="mega-item" href="../../docs/reference/python-api.html"><b>Python</b><span>Script analyses from your own code</span></a>
+              <a class="mega-item" href="../../docs/reference/cli.html"><b>The command line</b><span>Batch runs with ogr-slip2d-cli</span></a>
+            </div>
+          </div>
+          <div class="mega-foot"><span>Five programs, one open core.</span><a href="../../products/index.html">All products →</a></div>
+        </div>
+      </div>
+      <a href="../../examples/index.html" data-nav="examples">Examples</a>
+      <a href="../../ai/index.html" data-nav="ai">AI &amp; MCP</a>
+      <a href="../../docs/index.html" data-nav="docs" aria-current="page">Docs</a>
+      <a href="../../verification/index.html" data-nav="verification">Verification</a>
+      <a href="../../about/index.html" data-nav="about">About</a>
+    </nav>
+    <div class="top-right">
+      <span class="lang" role="group" aria-label="Language"><a href="../../docs/reference/error-codes.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../../es/docs/reference/error-codes.html" hreflang="es" lang="es">ES</a></span>
+      <a class="btn gh" href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener" aria-label="Source code on GitHub"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0C17.3 4.7 18.3 5 18.3 5c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0012 .5z"/></svg><span>GitHub</span></a>
+      <a class="btn primary" href="../../download/index.html" data-nav="download">Get OGR Slip2D</a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Main (mobile)">
+    <span class="label">Products</span>
+    <a href="../../products/slip2d.html">OGR Slip2D</a>
+    <div class="sub"><a href="../../products/index.html">The OpenGeoRock suite</a><a href="../../ai/index.html">MCP server for AI agents</a></div>
+    <span class="label">Learn</span>
+    <a href="../../examples/index.html">Examples</a>
+    <a href="../../docs/index.html">Documentation</a>
+    <a href="../../verification/index.html">Verification</a>
+    <span class="label">Project</span>
+    <a href="../../about/index.html">About</a>
+    <a href="../../download/index.html">Get OGR Slip2D</a>
+    <a href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener">Source on GitHub ↗</a>
+    <span class="lang" role="group" aria-label="Language"><a href="../../docs/reference/error-codes.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../../es/docs/reference/error-codes.html" hreflang="es" lang="es">ES</a></span>
+  </nav>
+</header>
+<!-- @end header -->
+
+<div class="doc-shell">
+  <aside class="doc-side" id="doc-side">
+<!-- @inc docnav -->
+<div class="doc-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input type="search" placeholder="Search the documentation  /" aria-label="Search the documentation" autocomplete="off"><div class="results" role="listbox"></div></div>
+<nav class="doc-nav" aria-label="Documentation">
+<a class="home" href="../../docs/index.html"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 016.5 3H20v15H6.5A2.5 2.5 0 004 20.5z"/><path d="M4 20.5A2.5 2.5 0 016.5 18H20v3H6.5A2.5 2.5 0 014 20.5z"/></svg> Documentation home</a>
+<details open><summary>1 · Getting started</summary><ul>
+<li><a href="../../docs/getting-started/installation.html"><span class="n">1.1</span><span>Installation</span></a></li>
+<li><a href="../../docs/getting-started/quick-start.html"><span class="n">1.2</span><span>Quick start: your first model</span></a></li>
+<li><a href="../../docs/getting-started/interface.html"><span class="n">1.3</span><span>The interface</span></a></li>
+</ul></details>
+<details open><summary>2 · User guide</summary><ul>
+<li><a href="../../docs/user-guide/project-settings.html"><span class="n">2.1</span><span>Project settings</span></a></li>
+<li><a href="../../docs/user-guide/geometry.html"><span class="n">2.2</span><span>Geometry and boundaries</span></a></li>
+<li><a href="../../docs/user-guide/materials.html"><span class="n">2.3</span><span>Materials</span></a></li>
+<li><a href="../../docs/user-guide/water.html"><span class="n">2.4</span><span>Water and pore pressure</span></a></li>
+<li><a href="../../docs/user-guide/loads.html"><span class="n">2.5</span><span>Loads and seismic loading</span></a></li>
+<li><a href="../../docs/user-guide/supports.html"><span class="n">2.6</span><span>Supports</span></a></li>
+<li><a href="../../docs/user-guide/surfaces.html"><span class="n">2.7</span><span>Slip surfaces and search</span></a></li>
+<li><a href="../../docs/user-guide/results.html"><span class="n">2.8</span><span>Computing and interpreting results</span></a></li>
+<li><a href="../../docs/user-guide/groundwater.html"><span class="n">2.9</span><span>Finite-element groundwater</span></a></li>
+<li><a href="../../docs/user-guide/probabilistic.html"><span class="n">2.10</span><span>Probabilistic and sensitivity analysis</span></a></li>
+<li><a href="../../docs/user-guide/design-standards.html"><span class="n">2.11</span><span>Design standards</span></a></li>
+<li><a href="../../docs/user-guide/automation.html"><span class="n">2.12</span><span>Reports, scripting and the command line</span></a></li>
+</ul></details>
+<details open><summary>3 · Theory manual</summary><ul>
+<li><a href="../../docs/theory/limit-equilibrium.html"><span class="n">3.1</span><span>Limit equilibrium and the factor of safety</span></a></li>
+<li><a href="../../docs/theory/methods.html"><span class="n">3.2</span><span>Methods of slices</span></a></li>
+<li><a href="../../docs/theory/interslice.html"><span class="n">3.3</span><span>Interslice forces, convergence and admissibility</span></a></li>
+<li><a href="../../docs/theory/search.html"><span class="n">3.4</span><span>Slip-surface search</span></a></li>
+<li><a href="../../docs/theory/strength.html"><span class="n">3.5</span><span>Shear strength models</span></a></li>
+<li><a href="../../docs/theory/pore-pressure.html"><span class="n">3.6</span><span>Pore pressure and unsaturated strength</span></a></li>
+<li><a href="../../docs/theory/seepage.html"><span class="n">3.7</span><span>Finite-element seepage</span></a></li>
+<li><a href="../../docs/theory/rapid-drawdown.html"><span class="n">3.8</span><span>Rapid drawdown</span></a></li>
+<li><a href="../../docs/theory/seismic.html"><span class="n">3.9</span><span>Seismic analysis</span></a></li>
+<li><a href="../../docs/theory/supports.html"><span class="n">3.10</span><span>Support forces</span></a></li>
+<li><a href="../../docs/theory/probabilistic.html"><span class="n">3.11</span><span>Probabilistic analysis</span></a></li>
+<li><a href="../../docs/theory/partial-factors.html"><span class="n">3.12</span><span>Partial factors (Eurocode 7)</span></a></li>
+</ul></details>
+<details open><summary>4 · Verification</summary><ul>
+<li><a href="../../docs/verification/methodology.html"><span class="n">4.1</span><span>Verification methodology</span></a></li>
+<li><a href="../../docs/verification/slope-benchmarks.html"><span class="n">4.2</span><span>Limit-equilibrium benchmarks</span></a></li>
+<li><a href="../../docs/verification/analytic-checks.html"><span class="n">4.3</span><span>Groundwater and analytic checks</span></a></li>
+</ul></details>
+<details open><summary>5 · Reference</summary><ul>
+<li><a href="../../docs/reference/mcp.html"><span class="n">5.1</span><span>MCP server</span></a></li>
+<li><a href="../../docs/reference/cli.html"><span class="n">5.2</span><span>Command-line interface</span></a></li>
+<li><a href="../../docs/reference/python-api.html"><span class="n">5.3</span><span>Python API</span></a></li>
+<li><a href="../../docs/reference/file-format.html"><span class="n">5.4</span><span>The .ogr file format</span></a></li>
+<li><a href="../../docs/reference/error-codes.html" aria-current="page"><span class="n">5.5</span><span>Error codes</span></a></li>
+<li><a href="../../docs/reference/notation.html"><span class="n">5.6</span><span>Notation and glossary</span></a></li>
+<li><a href="../../docs/reference/bibliography.html"><span class="n">5.7</span><span>Bibliography</span></a></li>
+</ul></details>
+</nav>
+<!-- @end docnav -->
+  </aside>
+
+  <main id="main" class="doc-main">
+    <header class="doc-head">
+<!-- @inc dochead -->
+<button class="doc-side-toggle" type="button" aria-controls="doc-side" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg> Contents</button>
+<nav class="crumbs label" aria-label="Breadcrumb"><a href="../../docs/index.html">Documentation</a><span aria-hidden="true">/</span><span>5 · Reference</span></nav>
+<div class="chapter label">5.5</div>
+<h1>Error codes</h1>
+<div class="meta label"><span>Describes OGR Slip2D <span data-v>0.1.235</span></span></div>
+<!-- @end dochead -->
+    </header>
+
+    <article class="doc prose">
+      <p class="lede">When OGR Slip2D cannot give a factor of safety, it says why, in a form a program can read as well as a person. This page lists the four negative codes written in place of the factor of safety of a rejected surface, the failure reasons behind them, the verdicts of the admissibility checks, the errors of the operations layer and the MCP server, and the exit codes of the command-line programs.</p>
+
+      <h2 id="surface-codes"><span class="secnum">5.5.1</span><span class="ht">Surface error codes</span><a class="anchor" href="#surface-codes" aria-label="Link to this section">#</a></h2>
+      <p>A surface that has no admissible factor of safety keeps its place among the results, and a negative code is written where its factor would be. How the checks behind −120 and −112 work is explained in <a class="xref" href="../theory/interslice.html">Section 3.3</a>.</p>
+      <figure class="tbl" id="tbl-surface-codes">
+        <figcaption><span class="fignum">Table 5.5.1</span> Codes written in place of the factor of safety of a rejected surface.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th class="n">Code</th><th>Meaning</th><th>When</th></tr></thead>
+            <tbody>
+              <tr><td class="n">−120</td><td>Tensile stress at a slice base</td><td>The Tensile Stress Check is on and rejected the surface.</td></tr>
+              <tr><td class="n">−112</td><td>m-alpha below its limit</td><td>The m-alpha check rejected the surface: <span class="m" data-tex="m_\alpha &lt; 0.2"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>m</mi><mi>α</mi></msub><mo>&lt;</mo><mn>0.2</mn></mrow><annotation encoding="application/x-tex">m_\alpha &lt; 0.2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6891em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">m</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0037em;">α</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">0.2</span></span></span></span><!--/k--></span> on a slice of a method it applies to.</td></tr>
+              <tr><td class="n">−111</td><td>No converged factor of safety</td><td>The calculation ended without a converged factor, <em>whatever the reason</em>: the iteration limit, a λ that could not be bracketed or closed, a collapsed <span class="m" data-tex="m_\alpha"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>m</mi><mi>α</mi></msub></mrow><annotation encoding="application/x-tex">m_\alpha</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">m</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0037em;">α</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><!--/k--></span> or <span class="m" data-tex="n_\alpha"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>n</mi><mi>α</mi></msub></mrow><annotation encoding="application/x-tex">n_\alpha</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0037em;">α</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><!--/k--></span>, a mass that does not slide, a surface to which rapid drawdown does not apply… The reason is recorded separately (<a class="xref" href="#reasons">Section 5.5.2</a>).</td></tr>
+              <tr><td class="n">−101</td><td>Any other rejection</td><td>A converged factor rejected by another criterion, such as a Spencer or GLE answer whose interslice thrust is inadmissible, or a surface the checks could not evaluate.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p>One function gives the code of every rejected evaluation, in this order:</p>
+      <ol>
+        <li>a valid surface that passed the checks has no code;</li>
+        <li>rejected by the Tensile Stress Check: −120 (tension is tested first, so a surface failing both checks is a tensile rejection);</li>
+        <li>the checks themselves could not be evaluated: −101;</li>
+        <li>rejected by the m-alpha check: −112;</li>
+        <li>no converged factor: −111;</li>
+        <li>anything else: −101.</li>
+      </ol>
+      <p>Because −111 covers every calculation that produced no converged factor, it is not only a convergence problem: circles whose mass does not slide (<code>zero_driving</code>) and, in a rapid-drawdown analysis, candidates to which the procedure does not apply (<code>drawdown_not_applicable</code>) are −111 too, and the reason tells them apart. A surface rejected before it could be sliced has no result, no code and no row; the census counts it as not sliced.</p>
+      <p>The codes appear in the Interpret window (<span class="ui">Data → Export Raw Data…</span>, whose last column holds the factor of safety or the code; <span class="ui">Data → Summary of Invalid Surfaces…</span>; <span class="ui">Query → Query Invalid Surfaces</span>, which shows the code of grid centres with no valid surface; and the <em>Surfaces with error code</em> option of the surface filter), and in the MCP tool <code>results_query</code> (views <code>error_codes</code>, <code>invalid_summary</code>, <code>raw_data</code> and <code>filter</code>). The HDF5 results file stores no code: a surface without a factor has no <code>fos</code> attribute and carries its <code>reason</code> (<a class="xref" href="file-format.html#results">Section 5.4.5</a>).</p>
+      <div class="impl">
+        <span class="label">In OGR Slip2D</span>
+        <p>The four codes are the constants <code>ERROR_TENSILE</code>, <code>ERROR_M_ALPHA</code>, <code>ERROR_NOT_CONVERGED</code> and <code>ERROR_OTHER</code>, and <code>error_code()</code> is the single mapping used by the raw-data export, the census of the Interpret window and the MCP server.</p>
+        <span class="src">Source: <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_slip2d/interpretation.py" target="_blank" rel="noopener">ogr_slip2d/interpretation.py</a></span>
+      </div>
+
+      <h2 id="reasons"><span class="secnum">5.5.2</span><span class="ht">Failure reasons</span><a class="anchor" href="#reasons" aria-label="Link to this section">#</a></h2>
+      <p>An evaluation that produced no factor of safety has <code>fos = None</code> (never NaN), an <code>error_message</code> written for a person and a <code>reason</code> written for a program: one of the strings below, so that a run can be summarised as "this reason, so many surfaces" without parsing prose. The reason is the <code>reason</code> attribute of a surface in the HDF5 results file and the <code>reason</code> key of a surface in the answers of the operations layer and the MCP server.</p>
+      <figure class="tbl" id="tbl-reasons">
+        <figcaption><span class="fignum">Table 5.5.2</span> Machine-readable reasons why a calculation has no factor of safety.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Reason</th><th>Meaning</th></tr></thead>
+            <tbody>
+              <tr><td><code>no_slices</code></td><td>The surface produced no slices at all.</td></tr>
+              <tr><td><code>no_shear_strength</code></td><td>No slice base offers any shear resistance.</td></tr>
+              <tr><td><code>zero_driving</code></td><td>The total driving moment (or force) vanishes: the mass does not slide, so there is no factor of safety to report. It keeps extremely high factors from being computed when the driving force is very small.</td></tr>
+              <tr><td><code>active_support_exceeds_driving</code></td><td>Active support alone exceeds the driving moment.</td></tr>
+              <tr><td><code>m_alpha_collapsed</code></td><td><span class="m" data-tex="m_\alpha"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>m</mi><mi>α</mi></msub></mrow><annotation encoding="application/x-tex">m_\alpha</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">m</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0037em;">α</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><!--/k--></span> collapsed towards zero on a slice base.</td></tr>
+              <tr><td><code>n_alpha_collapsed</code></td><td><span class="m" data-tex="n_\alpha"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>n</mi><mi>α</mi></msub></mrow><annotation encoding="application/x-tex">n_\alpha</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0037em;">α</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><!--/k--></span> collapsed towards zero on a slice base (the analogue in Janbu's methods).</td></tr>
+              <tr><td><code>non_physical_fos</code></td><td>The arithmetic produced a factor that is not a physical one: zero or negative, or not a finite number.</td></tr>
+              <tr><td><code>not_converged</code></td><td>The iteration ran out of passes before the factor settled. There is a number, the last iterate, but it is where the solver stopped, not where it was going; the iteration limit is the setting to look at.</td></tr>
+              <tr><td><code>all_lambda_diverged</code></td><td>Every sampled interslice ratio λ diverged, leaving no branch to solve on (Spencer, GLE).</td></tr>
+              <tr><td><code>no_lambda_bracket</code></td><td>The sampled range of λ never changed sign, so the root is not bracketed.</td></tr>
+              <tr><td><code>divergent_at_lambda</code></td><td>The solution diverged at the λ finally chosen.</td></tr>
+              <tr><td><code>lambda_not_closed</code></td><td>The bracket on λ was found and refined, but <span class="m" data-tex="|F_f - F_m|"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∣</mi><msub><mi>F</mi><mi>f</mi></msub><mo>−</mo><msub><mi>F</mi><mi>m</mi></msub><mi mathvariant="normal">∣</mi></mrow><annotation encoding="application/x-tex">|F_f - F_m|</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1.0361em;vertical-align:-0.2861em;"></span><span class="mord">∣</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.1389em;">F</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.1076em;">f</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.1389em;">F</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">m</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">∣</span></span></span></span><!--/k--></span> is still above the tolerance at the λ returned.</td></tr>
+              <tr><td><code>no_force_bracket</code></td><td>The force balance of the prescribed-inclination methods (Lowe–Karafiath, Corps of Engineers #1 and #2) found no bracket; what it has is the sampled factor of smallest residual, a fallback, not a solution.</td></tr>
+              <tr><td><code>force_balance_diverged</code></td><td>That force balance produced no usable factor.</td></tr>
+              <tr><td><code>drawdown_not_applicable</code></td><td>The rapid-drawdown procedure does not apply to this surface. Not an engine failure: in a search most candidates are like this.</td></tr>
+              <tr><td><code>unsliceable_at_drawdown</code></td><td>The surface could not be sliced at the drawn-down level.</td></tr>
+              <tr><td><code>envelope_not_converged</code></td><td>The strength envelope depends on the normal stress, and the stress it was read at never settled on the stress the method resolved, so the factor is not that of the envelope (since v0.1.213).</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <div class="impl">
+        <span class="label">In OGR Slip2D</span>
+        <p>The reasons are the <code>REASON_*</code> constants, and <code>ALL_REASONS</code> is the set every method's reason must belong to, so that a new reason cannot be born as a loose string. They are deliberately not translated: the interface translates the message where it shows it.</p>
+        <span class="src">Source: <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_slip2d/methods/base.py" target="_blank" rel="noopener">ogr_slip2d/methods/base.py</a></span>
+      </div>
+
+      <h2 id="screens"><span class="secnum">5.5.3</span><span class="ht">Admissibility checks</span><a class="anchor" href="#screens" aria-label="Link to this section">#</a></h2>
+      <p>A surface that fails an admissibility check has <em>not</em> failed to compute: its factor converged and is kept, because the searches that steer by the factor of safety need it, but the surface is judged inadmissible afterwards and is never reported as the critical one, unless every valid surface is inadmissible, in which case the checks are ignored and the result says so. The verdict is recorded in <code>admissible</code>, <code>admissibility_note</code> and <code>admissibility_reason</code>, with these values:</p>
+      <figure class="tbl" id="tbl-screens">
+        <figcaption><span class="fignum">Table 5.5.3</span> Admissibility checks, their code and their default.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Reason</th><th class="n">Code</th><th>Check</th><th>Default</th></tr></thead>
+            <tbody>
+              <tr><td><code>tensile_stress</code></td><td class="n">−120</td><td>Tensile Stress Check: the effective normal stress of the method's own solution on a tested slice base is a tension larger than the material's tensile strength, which is zero except for the two Hoek–Brown models (<span class="m" data-tex="s\,\sigma_{ci}/m_b"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><mtext> </mtext><msub><mi>σ</mi><mrow><mi>c</mi><mi>i</mi></mrow></msub><mi mathvariant="normal">/</mi><msub><mi>m</mi><mi>b</mi></msub></mrow><annotation encoding="application/x-tex">s\,\sigma_{ci}/m_b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">s</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">σ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">c</span><span class="mord mathnormal mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">/</span><span class="mord"><span class="mord mathnormal">m</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">b</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><!--/k--></span>). Only a percentage of the slices, counted from the toe, is tested (95 % by default), because the slices at the crest are legitimately in tension.</td><td>off</td></tr>
+              <tr><td><code>m_alpha</code></td><td class="n">−112</td><td>m-alpha check: <span class="m" data-tex="m_\alpha &lt; 0.2"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>m</mi><mi>α</mi></msub><mo>&lt;</mo><mn>0.2</mn></mrow><annotation encoding="application/x-tex">m_\alpha &lt; 0.2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6891em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">m</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0037em;">α</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">0.2</span></span></span></span><!--/k--></span> on any slice at the final iteration <a class="cite" href="bibliography.html#whitman1967">(Whitman &amp; Bailey, 1967)</a>, with Bishop's denominator, for Bishop simplified, Janbu simplified and corrected, Spencer and GLE. A value below the limit does not by itself mean the factor is wrong; it screens out surfaces whose arithmetic has become untrustworthy.</td><td>on</td></tr>
+              <tr><td><code>screen_error</code></td><td class="n">−101</td><td>The checks themselves raised an error, so the surface could not be judged; it is rejected rather than let through (since v0.1.211).</td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p>Both checks are set in <span class="ui">Analysis → Project Settings → Advanced</span> (<em>Tensile stress check</em> with its <em>Percentage of slices</em>, and <em>Check m-alpha &lt; 0.2</em>).</p>
+
+      <h2 id="api-errors"><span class="secnum">5.5.4</span><span class="ht">Errors of the operations layer and the MCP server</span><a class="anchor" href="#api-errors" aria-label="Link to this section">#</a></h2>
+      <p>An operation of <code>ogr_api</code> that fails on purpose raises an <code>OgrApiError</code> with a stable code, a message, a hint where there is one and, sometimes, details. An MCP client receives it as <code>[E_CODE] message Hint: hint</code>; a Python script catches it and reads <code>code</code>, <code>message</code>, <code>hint</code> and <code>details</code>. The codes are stable; the wording of the messages is not. An unknown name always comes with the closest known names (<em>Did you mean …?</em>).</p>
+      <figure class="tbl" id="tbl-api-errors">
+        <figcaption><span class="fignum">Table 5.5.4</span> Error codes of the operations layer, the MCP server and the agent bridge.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Code</th><th>Raised when</th></tr></thead>
+            <tbody>
+              <tr><td><code>E_NOT_FOUND</code></td><td>A handle, id or name that does not exist: a <code>project_id</code>, <code>result_id</code> or <code>job_id</code>, an operation, a file to open; also no model open at all.</td></tr>
+              <tr><td><code>E_INVALID_ARGUMENT</code></td><td>A value of the wrong type, out of range or not one of the choices, a setting that does not exist; also a relative path when no working folder was given, or several models open and no <code>project_id</code>.</td></tr>
+              <tr><td><code>E_CONFLICT</code></td><td>A valid request that the current model does not allow (a second water table, a factor on a design standard that is not <code>custom</code>…); an existing file without <code>overwrite=true</code>; unsaved changes, for <code>project_close</code> and, in the window, for <code>project_new</code> and <code>project_open</code>; a window that closed while answering a call.</td></tr>
+              <tr><td><code>E_NOT_CONFIGURED</code></td><td>The model cannot be analysed as configured; <code>details["problems"]</code> lists every reason. Also every call of a server started with <code>--attach</code> while no window is open.</td></tr>
+              <tr><td><code>E_BUSY</code></td><td>Another operation holds the model (after waiting 30 s for it), the window is computing, or the maximum number of jobs is already running.</td></tr>
+              <tr><td><code>E_JOB_FAILED</code></td><td>A background job failed or crashed; the message carries its error.</td></tr>
+              <tr><td><code>E_INTERNAL</code></td><td>Default code of the base class; also what the bridge to the window reports for an unexpected exception, with its type and message.</td></tr>
+              <tr><td><code>E_UNAUTHORIZED</code></td><td>The bridge to the window refused a connection with the wrong protocol or token.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p>An exception that is not an <code>OgrApiError</code> reaches an MCP client as its type and message, without a code. Over HTTP, the server itself answers 401 to a missing or wrong bearer token, 421 to a <code>Host</code> that is not its own and 403 to a foreign <code>Origin</code> (<a class="xref" href="mcp.html#security">Section 5.1.11</a>).</p>
+      <div class="impl">
+        <span class="label">In OGR Slip2D</span>
+        <p>The reader of these messages is very often a language model, and what lets it recover is being told what was wrong and what to do instead; hence the hint, and the suggestions for every unknown name.</p>
+        <span class="src">Source: <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_api/errors.py" target="_blank" rel="noopener">ogr_api/errors.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_api/workspace.py" target="_blank" rel="noopener">ogr_api/workspace.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_gui/agent_bridge.py" target="_blank" rel="noopener">ogr_gui/agent_bridge.py</a></span>
+      </div>
+
+      <h2 id="exit-codes"><span class="secnum">5.5.5</span><span class="ht">Exit codes</span><a class="anchor" href="#exit-codes" aria-label="Link to this section">#</a></h2>
+      <figure class="tbl" id="tbl-exit-codes">
+        <figcaption><span class="fignum">Table 5.5.5</span> Exit codes of the command-line programs.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Program</th><th class="n">Code</th><th>Meaning</th></tr></thead>
+            <tbody>
+              <tr><td rowspan="5"><code>ogr-slip2d-cli</code></td><td class="n">0</td><td>Success, also when a method found no valid surface.</td></tr>
+              <tr><td class="n">1</td><td>Project file not found.</td></tr>
+              <tr><td class="n">2</td><td>Unknown method name, or a usage error.</td></tr>
+              <tr><td class="n">3</td><td>The project cannot be analysed as configured.</td></tr>
+              <tr><td class="n">4</td><td>No result for any method.</td></tr>
+              <tr><td rowspan="3"><code>ogr-slip2d-mcp</code></td><td class="n">0</td><td>Normal end.</td></tr>
+              <tr><td class="n">2</td><td>A configuration the server refuses to run with.</td></tr>
+              <tr><td class="n">3</td><td>The MCP SDK is not installed.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p>The cases behind each code are listed in <a class="xref" href="cli.html">Section 5.2</a> and <a class="xref" href="mcp.html#options">Section 5.1.3</a>.</p>
+
+      <h2 id="references"><span class="secnum">5.5.6</span><span class="ht">References</span><a class="anchor" href="#references" aria-label="Link to this section">#</a></h2>
+      <ul class="refs">
+        <li><a href="bibliography.html#whitman1967">Whitman, R.V. &amp; Bailey, W.A. (1967)</a>. Use of computers for slope stability analysis. <em>Journal of the Soil Mechanics and Foundations Division</em>, ASCE, 93(SM4), 475–498.</li>
+      </ul>
+    </article>
+
+<!-- @inc docfoot -->
+<nav class="doc-pager" aria-label="Pages">
+<a class="prev" href="../../docs/reference/file-format.html"><span class="label">← Previous · 5.4</span><b>The .ogr file format</b></a>
+<a class="next" href="../../docs/reference/notation.html"><span class="label">5.6 · Next →</span><b>Notation and glossary</b></a>
+</nav>
+<div class="doc-edit label"><a href="https://github.com/samuelsl27/OpenGeoRock_Web.github.io/blob/main/docs/reference/error-codes.html" target="_blank" rel="noopener">Edit this page ↗</a><a href="https://github.com/samuelsl27/OGR-Slip2D/issues" target="_blank" rel="noopener">Report a problem ↗</a></div>
+<!-- @end docfoot -->
+  </main>
+
+  <aside class="doc-toc" aria-label="On this page">
+    <div class="toc-inner">
+<!-- @inc pagetoc -->
+<span class="label">On this page</span><ul><li class="h2"><a href="#surface-codes">5.5.1 Surface error codes</a></li><li class="h2"><a href="#reasons">5.5.2 Failure reasons</a></li><li class="h2"><a href="#screens">5.5.3 Admissibility checks</a></li><li class="h2"><a href="#api-errors">5.5.4 Errors of the operations layer and the MCP server</a></li><li class="h2"><a href="#exit-codes">5.5.5 Exit codes</a></li><li class="h2"><a href="#references">5.5.6 References</a></li></ul><button class="print" type="button"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="1.5"/><path d="M6 14h12v7H6z"/></svg> Print this page</button>
+<!-- @end pagetoc -->
+    </div>
+  </aside>
+</div>
+
+<!-- @inc footer -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <a class="brand" href="../../index.html" aria-label="OpenGeoRock — home">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
+          <b>OpenGeoRock</b>
+        </a>
+        <p class="tagline">Open-source geotechnical software, built in the open at the Universidad Politécnica de Cartagena.</p>
+        <span class="lang" role="group" aria-label="Language"><a href="../../docs/reference/error-codes.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../../es/docs/reference/error-codes.html" hreflang="es" lang="es">ES</a></span>
+      </div>
+      <div>
+        <h5>Products</h5>
+        <ul>
+          <li><a href="../../products/slip2d.html">OGR Slip2D</a></li>
+          <li><a href="../../products/index.html">The suite</a></li>
+          <li><a href="../../ai/index.html">MCP server</a></li>
+          <li><a href="../../download/index.html">Download</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Learn</h5>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="../../docs/getting-started/quick-start.html">Quick start</a></li>
+          <li><a href="../../docs/theory/methods.html">Theory manual</a></li>
+          <li><a href="../../examples/index.html">Examples</a></li>
+          <li><a href="../../verification/index.html">Verification</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Project</h5>
+        <ul>
+          <li><a href="../../about/index.html">About</a></li>
+          <li><a href="../../about/index.html#team">Team</a></li>
+          <li><a href="../../about/index.html#cite">How to cite</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Contributing</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/LICENSE" target="_blank" rel="noopener">Licence · AGPL-3.0</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Connect</h5>
+        <ul>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/issues" target="_blank" rel="noopener">Issues</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/tree/main/docs/changelog" target="_blank" rel="noopener">Changelog</a></li>
+          <li><a href="mailto:samuel.saez@edu.upct.es">Email</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© 2026 Samuel Sáez López · OGR Slip2D is free software under AGPL-3.0-or-later, with no warranty of any kind.</span>
+      <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
+    </div>
+  </div>
+  <div class="lang-hint" role="dialog" aria-label="Idioma" lang="es">
+    ¿Prefieres leer esta web en español?
+    <div class="row"><a class="btn sm primary go" href="../../es/index.html">Ver en español</a><button class="btn sm" type="button" data-dismiss>No, gracias</button></div>
+  </div>
+</footer>
+<!-- @end footer -->
+</body>
+</html>

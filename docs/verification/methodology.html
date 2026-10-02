@@ -1,0 +1,385 @@
+<!doctype html>
+<html class="no-js" lang="en" data-root="../../">
+<head>
+<meta charset="utf-8">
+<title>Verification methodology — OGR Slip2D documentation</title>
+<meta name="description" content="How OGR Slip2D is verified: every number is checked against a reference the program did not produce, in four kinds of reference, with a tolerance set by the quality of each source; what is done when a case fails, how the validation folder is organised and how to run the cases.">
+<!-- @inc head -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.replace("no-js", "js")</script>
+<link rel="canonical" href="https://opengeorock.org/docs/verification/methodology.html">
+<link rel="alternate" hreflang="en" href="https://opengeorock.org/docs/verification/methodology.html">
+<link rel="alternate" hreflang="es" href="https://opengeorock.org/es/docs/verification/methodology.html">
+<link rel="alternate" hreflang="x-default" href="https://opengeorock.org/docs/verification/methodology.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="OpenGeoRock">
+<meta property="og:title" content="Verification methodology — OGR Slip2D documentation">
+<meta property="og:description" content="How OGR Slip2D is verified: every number is checked against a reference the program did not produce, in four kinds of reference, with a tolerance set by the quality of each source; what is done when a case fails, how the validation folder is organised and how to run the cases.">
+<meta property="og:url" content="https://opengeorock.org/docs/verification/methodology.html">
+<meta property="og:image" content="https://opengeorock.org/assets/img/og-image.png">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#f4efe6">
+<link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&amp;display=swap">
+<link rel="stylesheet" href="../../assets/css/site.css">
+<link rel="stylesheet" href="../../assets/css/docs.css">
+<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
+<script src="../../assets/js/site.js" defer></script>
+<!-- @end head -->
+</head>
+<body class="docs">
+<!-- @inc header -->
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="wrap top-inner">
+    <a class="brand" href="../../index.html" aria-label="OpenGeoRock — home">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
+      <b>OpenGeoRock</b>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <div class="has-menu" data-nav="products">
+        <button type="button" aria-expanded="false" aria-haspopup="true">Products <svg class="caret" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+        <div class="mega">
+          <div class="mega-cols">
+            <div class="mega-col">
+              <span class="label">Available today</span>
+              <a class="mega-item feature" href="../../products/slip2d.html"><b>OGR Slip2D</b><span>2D slope stability: limit equilibrium, finite-element groundwater and probabilistic analysis.</span></a>
+              <a class="mega-item" href="../../ai/index.html"><b>MCP server for AI agents <span class="tag live">new</span></b><span>Let Claude, ChatGPT or a local model build and run OGR Slip2D models.</span></a>
+            </div>
+            <div class="mega-col">
+              <span class="label">On the roadmap</span>
+              <a class="mega-item" href="../../products/index.html#ogr-data"><b>OGR Data</b><span>Soil and rock-mass property database</span></a>
+              <a class="mega-item" href="../../products/index.html#ogr-fem2d"><b>OGR FEM2D</b><span>2D elastoplastic finite elements</span></a>
+              <a class="mega-item" href="../../products/index.html#ogr-slip3d"><b>OGR Slip3D</b><span>3D limit equilibrium</span></a>
+              <a class="mega-item" href="../../products/index.html#ogr-fem3d"><b>OGR FEM3D</b><span>3D finite elements with coupled flow</span></a>
+            </div>
+            <div class="mega-col">
+              <span class="label">Use it from</span>
+              <a class="mega-item" href="../../docs/getting-started/interface.html"><b>The desktop program</b><span>Modeller, interpreter and Python terminal</span></a>
+              <a class="mega-item" href="../../docs/reference/python-api.html"><b>Python</b><span>Script analyses from your own code</span></a>
+              <a class="mega-item" href="../../docs/reference/cli.html"><b>The command line</b><span>Batch runs with ogr-slip2d-cli</span></a>
+            </div>
+          </div>
+          <div class="mega-foot"><span>Five programs, one open core.</span><a href="../../products/index.html">All products →</a></div>
+        </div>
+      </div>
+      <a href="../../examples/index.html" data-nav="examples">Examples</a>
+      <a href="../../ai/index.html" data-nav="ai">AI &amp; MCP</a>
+      <a href="../../docs/index.html" data-nav="docs" aria-current="page">Docs</a>
+      <a href="../../verification/index.html" data-nav="verification">Verification</a>
+      <a href="../../about/index.html" data-nav="about">About</a>
+    </nav>
+    <div class="top-right">
+      <span class="lang" role="group" aria-label="Language"><a href="../../docs/verification/methodology.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../../es/docs/verification/methodology.html" hreflang="es" lang="es">ES</a></span>
+      <a class="btn gh" href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener" aria-label="Source code on GitHub"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0C17.3 4.7 18.3 5 18.3 5c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0012 .5z"/></svg><span>GitHub</span></a>
+      <a class="btn primary" href="../../download/index.html" data-nav="download">Get OGR Slip2D</a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Main (mobile)">
+    <span class="label">Products</span>
+    <a href="../../products/slip2d.html">OGR Slip2D</a>
+    <div class="sub"><a href="../../products/index.html">The OpenGeoRock suite</a><a href="../../ai/index.html">MCP server for AI agents</a></div>
+    <span class="label">Learn</span>
+    <a href="../../examples/index.html">Examples</a>
+    <a href="../../docs/index.html">Documentation</a>
+    <a href="../../verification/index.html">Verification</a>
+    <span class="label">Project</span>
+    <a href="../../about/index.html">About</a>
+    <a href="../../download/index.html">Get OGR Slip2D</a>
+    <a href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener">Source on GitHub ↗</a>
+    <span class="lang" role="group" aria-label="Language"><a href="../../docs/verification/methodology.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../../es/docs/verification/methodology.html" hreflang="es" lang="es">ES</a></span>
+  </nav>
+</header>
+<!-- @end header -->
+
+<div class="doc-shell">
+  <aside class="doc-side" id="doc-side">
+<!-- @inc docnav -->
+<div class="doc-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input type="search" placeholder="Search the documentation  /" aria-label="Search the documentation" autocomplete="off"><div class="results" role="listbox"></div></div>
+<nav class="doc-nav" aria-label="Documentation">
+<a class="home" href="../../docs/index.html"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 016.5 3H20v15H6.5A2.5 2.5 0 004 20.5z"/><path d="M4 20.5A2.5 2.5 0 016.5 18H20v3H6.5A2.5 2.5 0 014 20.5z"/></svg> Documentation home</a>
+<details open><summary>1 · Getting started</summary><ul>
+<li><a href="../../docs/getting-started/installation.html"><span class="n">1.1</span><span>Installation</span></a></li>
+<li><a href="../../docs/getting-started/quick-start.html"><span class="n">1.2</span><span>Quick start: your first model</span></a></li>
+<li><a href="../../docs/getting-started/interface.html"><span class="n">1.3</span><span>The interface</span></a></li>
+</ul></details>
+<details open><summary>2 · User guide</summary><ul>
+<li><a href="../../docs/user-guide/project-settings.html"><span class="n">2.1</span><span>Project settings</span></a></li>
+<li><a href="../../docs/user-guide/geometry.html"><span class="n">2.2</span><span>Geometry and boundaries</span></a></li>
+<li><a href="../../docs/user-guide/materials.html"><span class="n">2.3</span><span>Materials</span></a></li>
+<li><a href="../../docs/user-guide/water.html"><span class="n">2.4</span><span>Water and pore pressure</span></a></li>
+<li><a href="../../docs/user-guide/loads.html"><span class="n">2.5</span><span>Loads and seismic loading</span></a></li>
+<li><a href="../../docs/user-guide/supports.html"><span class="n">2.6</span><span>Supports</span></a></li>
+<li><a href="../../docs/user-guide/surfaces.html"><span class="n">2.7</span><span>Slip surfaces and search</span></a></li>
+<li><a href="../../docs/user-guide/results.html"><span class="n">2.8</span><span>Computing and interpreting results</span></a></li>
+<li><a href="../../docs/user-guide/groundwater.html"><span class="n">2.9</span><span>Finite-element groundwater</span></a></li>
+<li><a href="../../docs/user-guide/probabilistic.html"><span class="n">2.10</span><span>Probabilistic and sensitivity analysis</span></a></li>
+<li><a href="../../docs/user-guide/design-standards.html"><span class="n">2.11</span><span>Design standards</span></a></li>
+<li><a href="../../docs/user-guide/automation.html"><span class="n">2.12</span><span>Reports, scripting and the command line</span></a></li>
+</ul></details>
+<details open><summary>3 · Theory manual</summary><ul>
+<li><a href="../../docs/theory/limit-equilibrium.html"><span class="n">3.1</span><span>Limit equilibrium and the factor of safety</span></a></li>
+<li><a href="../../docs/theory/methods.html"><span class="n">3.2</span><span>Methods of slices</span></a></li>
+<li><a href="../../docs/theory/interslice.html"><span class="n">3.3</span><span>Interslice forces, convergence and admissibility</span></a></li>
+<li><a href="../../docs/theory/search.html"><span class="n">3.4</span><span>Slip-surface search</span></a></li>
+<li><a href="../../docs/theory/strength.html"><span class="n">3.5</span><span>Shear strength models</span></a></li>
+<li><a href="../../docs/theory/pore-pressure.html"><span class="n">3.6</span><span>Pore pressure and unsaturated strength</span></a></li>
+<li><a href="../../docs/theory/seepage.html"><span class="n">3.7</span><span>Finite-element seepage</span></a></li>
+<li><a href="../../docs/theory/rapid-drawdown.html"><span class="n">3.8</span><span>Rapid drawdown</span></a></li>
+<li><a href="../../docs/theory/seismic.html"><span class="n">3.9</span><span>Seismic analysis</span></a></li>
+<li><a href="../../docs/theory/supports.html"><span class="n">3.10</span><span>Support forces</span></a></li>
+<li><a href="../../docs/theory/probabilistic.html"><span class="n">3.11</span><span>Probabilistic analysis</span></a></li>
+<li><a href="../../docs/theory/partial-factors.html"><span class="n">3.12</span><span>Partial factors (Eurocode 7)</span></a></li>
+</ul></details>
+<details open><summary>4 · Verification</summary><ul>
+<li><a href="../../docs/verification/methodology.html" aria-current="page"><span class="n">4.1</span><span>Verification methodology</span></a></li>
+<li><a href="../../docs/verification/slope-benchmarks.html"><span class="n">4.2</span><span>Limit-equilibrium benchmarks</span></a></li>
+<li><a href="../../docs/verification/analytic-checks.html"><span class="n">4.3</span><span>Groundwater and analytic checks</span></a></li>
+</ul></details>
+<details open><summary>5 · Reference</summary><ul>
+<li><a href="../../docs/reference/mcp.html"><span class="n">5.1</span><span>MCP server</span></a></li>
+<li><a href="../../docs/reference/cli.html"><span class="n">5.2</span><span>Command-line interface</span></a></li>
+<li><a href="../../docs/reference/python-api.html"><span class="n">5.3</span><span>Python API</span></a></li>
+<li><a href="../../docs/reference/file-format.html"><span class="n">5.4</span><span>The .ogr file format</span></a></li>
+<li><a href="../../docs/reference/error-codes.html"><span class="n">5.5</span><span>Error codes</span></a></li>
+<li><a href="../../docs/reference/notation.html"><span class="n">5.6</span><span>Notation and glossary</span></a></li>
+<li><a href="../../docs/reference/bibliography.html"><span class="n">5.7</span><span>Bibliography</span></a></li>
+</ul></details>
+</nav>
+<!-- @end docnav -->
+  </aside>
+
+  <main id="main" class="doc-main">
+    <header class="doc-head">
+<!-- @inc dochead -->
+<button class="doc-side-toggle" type="button" aria-controls="doc-side" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg> Contents</button>
+<nav class="crumbs label" aria-label="Breadcrumb"><a href="../../docs/index.html">Documentation</a><span aria-hidden="true">/</span><span>4 · Verification</span></nav>
+<div class="chapter label">4.1</div>
+<h1>Verification methodology</h1>
+<div class="meta label"><span>Describes OGR Slip2D <span data-v>0.1.235</span></span></div>
+<!-- @end dochead -->
+    </header>
+
+    <article class="doc prose">
+      <p class="lede">OGR Slip2D is verified by comparing what it computes with something it did not produce: a factor of safety published in a paper, a survey or a reference manual, a closed-form solution, or an identity that has to hold exactly. This page explains the principle, the four kinds of reference, how the tolerance of each published case follows from the quality of its source, what is done when a case fails and how to run the cases. The cases themselves are set out in <a class="xref" href="slope-benchmarks.html">Section 4.2</a> and <a class="xref" href="analytic-checks.html">Section 4.3</a>.</p>
+
+      <h2 id="principle"><span class="secnum">4.1.1</span><span class="ht">The principle: an external reference</span><a class="anchor" href="#principle" aria-label="Link to this section">#</a></h2>
+      <p>A factor of safety is only as trustworthy as the evidence behind the program that computed it. The usual evidence, that the program gives today the number it gave yesterday, is weak: a test that compares the output with a recording of the program's own earlier output protects against change, not against error, and if the recording contains a fault the test enforces it. OGR Slip2D is therefore verified against references that it did not produce, and a comparison with its own output is not recorded as verification.</p>
+      <p>The rule is the first condition that the contribution rules of the project set for a new method, solver or formula: it needs a reference value — a published case, a closed-form solution or an analytic property — and not a snapshot of what the code currently prints (<a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">CONTRIBUTING.md</a>). The <a href="../../verification/index.html">Verification page</a> summarises the outcome for a first reading; this chapter gives it case by case.</p>
+
+      <h2 id="kinds"><span class="secnum">4.1.2</span><span class="ht">Four kinds of reference</span><a class="anchor" href="#kinds" aria-label="Link to this section">#</a></h2>
+      <p><a class="xref" href="#tbl-kinds">Table 4.1.1</a> lists the kinds of reference that count, with an example of each and the section where it is used.</p>
+      <figure class="tbl" id="tbl-kinds">
+        <figcaption><span class="fignum">Table 4.1.1</span> Kinds of reference used to verify OGR Slip2D.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Kind</th><th>What the reference is</th><th>Example</th><th>Where</th></tr></thead>
+            <tbody>
+              <tr><td>Published case</td><td>A factor of safety from a survey, a paper or a reference manual, with its source and its own tolerance.</td><td>The seven cases, from ACADS 1(a) to ACADS 2(b).</td><td><a class="xref" href="slope-benchmarks.html">Section 4.2</a></td></tr>
+              <tr><td>Closed-form solution</td><td>An exact solution of the equations the program solves.</td><td>Darcy's law, layered media, the response of an aquifer to a step in head, the discharge of a rectangular dam.</td><td><a class="xref" href="analytic-checks.html">Section 4.3</a></td></tr>
+              <tr><td>Analytic identity</td><td>A relation that holds exactly because of how the quantities are defined.</td><td>At a target factor of 1.0 the support forces required under the active and the passive assumption coincide; the Hoek–Brown constants for GSI = 100.</td><td><a class="xref" href="analytic-checks.html">Section 4.3</a>, <a class="xref" href="slope-benchmarks.html#method-checks">Section 4.2.9</a></td></tr>
+              <tr><td>Consistency</td><td>Agreement with a path of the program that is already verified, or with an invariant that every correct construction keeps.</td><td>A long transient must reproduce the steady state; a finite-element mesh keeps the area of its regions; a DXF round trip keeps the shape.</td><td><a class="xref" href="analytic-checks.html">Section 4.3</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <div class="note"><span class="label">What is not a reference</span><p>A comparison with another program is welcome as a cross-check, but it is not a validation: two programs can be wrong in the same way. When such a comparison is recorded, the number is cited as obtained with that program and its version, without attaching its files, and the case file says that it is a comparison. Only a published value, a closed-form solution or an analytic property is a reference of truth.</p></div>
+
+      <h2 id="search-and-method"><span class="secnum">4.1.3</span><span class="ht">Checking the search and checking the method</span><a class="anchor" href="#search-and-method" aria-label="Link to this section">#</a></h2>
+      <p>A published factor of safety can answer two different questions, and a case is built according to the one its source allows.</p>
+      <ul>
+        <li><strong>A search case.</strong> The source gives the minimum factor of safety of a slope. The case runs the search that its model declares and compares the critical factor of safety of each declared method with the published one, so the search and the method are checked together: a search that misses the critical circle returns a higher factor of safety and the case fails. Cases 001 to 006 are of this kind.</li>
+        <li><strong>A stated-surface case.</strong> The source states the slip surface and gives the factor of safety on it. The case evaluates each method on that surface, with no search, so the number measures the method alone. Case 007 is of this kind.</li>
+      </ul>
+      <p>Only the second kind can tell one method from another. On a critical circle that each method finds for itself, the difference between two methods mixes the method with the search, and a method that returned the answer of a simpler one could pass unnoticed (<a class="xref" href="#failure">Section 4.1.5</a>).</p>
+
+      <h2 id="tolerance"><span class="secnum">4.1.4</span><span class="ht">How the tolerance of a case is chosen</span><a class="anchor" href="#tolerance" aria-label="Link to this section">#</a></h2>
+      <p>The tolerance of a case is the relative difference it accepts between the factor of safety computed by OGR Slip2D and the reference value:</p>
+      <div class="eq" id="eq-difference" data-tex="\delta = \dfrac{F - F_{\mathrm{ref}}}{F_{\mathrm{ref}}}, \qquad \text{the case passes if } |\delta| \le \varepsilon" data-n="4.1.1"><!--k--><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>δ</mi><mo>=</mo><mstyle scriptlevel="0" displaystyle="true"><mfrac><mrow><mi>F</mi><mo>−</mo><msub><mi>F</mi><mrow><mi mathvariant="normal">r</mi><mi mathvariant="normal">e</mi><mi mathvariant="normal">f</mi></mrow></msub></mrow><msub><mi>F</mi><mrow><mi mathvariant="normal">r</mi><mi mathvariant="normal">e</mi><mi mathvariant="normal">f</mi></mrow></msub></mfrac></mstyle><mo separator="true">,</mo><mspace width="2em"/><mtext>the case passes if </mtext><mi mathvariant="normal">∣</mi><mi>δ</mi><mi mathvariant="normal">∣</mi><mo>≤</mo><mi>ε</mi></mrow><annotation encoding="application/x-tex">\delta = \dfrac{F - F_{\mathrm{ref}}}{F_{\mathrm{ref}}}, \qquad \text{the case passes if } |\delta| \le \varepsilon</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.0379em;">δ</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:2.1963em;vertical-align:-0.836em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3603em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.1389em;">F</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight" style="margin-right:0.0778em;">ref</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.1389em;">F</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.1389em;">F</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight" style="margin-right:0.0778em;">ref</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.836em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:2em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord text"><span class="mord">the case passes if </span></span><span class="mord">∣</span><span class="mord mathnormal" style="margin-right:0.0379em;">δ</span><span class="mord">∣</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">ε</span></span></span></span></span><!--/k--></div>
+      <p class="where">where</p>
+      <dl class="symbols">
+        <dt><span class="m" data-tex="F"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">F</span></span></span></span><!--/k--></span></dt><dd>factor of safety computed by OGR Slip2D</dd>
+        <dt><span class="m" data-tex="F_{\mathrm{ref}}"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mrow><mi mathvariant="normal">r</mi><mi mathvariant="normal">e</mi><mi mathvariant="normal">f</mi></mrow></msub></mrow><annotation encoding="application/x-tex">F_{\mathrm{ref}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.1389em;">F</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight" style="margin-right:0.0778em;">ref</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><!--/k--></span></dt><dd>reference value of the case (<code>fos</code> in its <code>esperado.json</code>)</dd>
+        <dt><span class="m" data-tex="\varepsilon"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ε</mi></mrow><annotation encoding="application/x-tex">\varepsilon</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">ε</span></span></span></span><!--/k--></span></dt><dd>tolerance of the case (<code>tolerancia_relativa</code>), as a fraction: 0.02 is 2 %</dd>
+      </dl>
+      <p>The tolerance lives in the case and not in the test, because it depends on the quality of the source: a value read from a figure does not deserve the precision of a tabulated one. It is chosen by asking three questions of the source.</p>
+      <ol>
+        <li><em>How far do the published numbers disagree with one another?</em> A survey publishes a referee value and the mean of the programs that took part, and they differ. A tolerance narrower than that spread would make the case fail because of the quality of the reference and not of the code.</li>
+        <li><em>What does the source leave unstated?</em> A parameter that the problem does not give has to be deduced or assumed, and the effect of that choice on the factor of safety is part of the tolerance.</li>
+        <li><em>Which published value has statistical or independent backing?</em> The mean of many programs is preferred to the result of one program, so that the output of no particular program is written into a case.</li>
+      </ol>
+      <p>The test of the case files fails a case that declares no tolerance, or one above 10 %, because beyond that a validation stops discriminating anything. <a class="xref" href="#tbl-tolerances">Table 4.1.2</a> gives the tolerance of each case with the reason recorded in its case file.</p>
+      <figure class="tbl" id="tbl-tolerances">
+        <figcaption><span class="fignum">Table 4.1.2</span> Tolerance of each published case and the reason for it.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Case</th><th>Reference value</th><th class="n">Tolerance</th><th>Reason</th></tr></thead>
+            <tbody>
+              <tr><td>001 · ACADS 1(a)</td><td>Mean of 33 programs, 0.991</td><td class="n">2.0 %</td><td>The referee value (1.00) and the mean (0.991) differ by 0.9 %; asking for 0.5 % would demand from the source a precision it does not have.</td></tr>
+              <tr><td>002 · Yamagami &amp; Ueta (1988)</td><td>Values calculated by the authors: Bishop 1.348, Ordinary 1.282</td><td class="n">1.5 %</td><td>A value calculated and published by the authors, not a mean between programs that disagree; two methods are checked together.</td></tr>
+              <tr><td>003 · ACADS 1(c)</td><td>Mean Bishop value of 16 programs, 1.406</td><td class="n">1.5 %</td><td>It covers the 1.1 % between the mean (1.406) and the referee value (1.39).</td></tr>
+              <tr><td>004 · Arai &amp; Tagyo (1985), ex. 1</td><td>Published value, 1.451</td><td class="n">3.5 %</td><td>The value of 1985 and the later reanalyses recorded in the case file differ by 2.6–2.9 %: the resolution of the case is set by the source, not by the code.</td></tr>
+              <tr><td>005 · Arai &amp; Tagyo (1985), ex. 3</td><td>Published value, 1.138</td><td class="n">2.5 %</td><td>The same reasoning; the difference between the value of 1985 and the reanalyses is 1.9 %.</td></tr>
+              <tr><td>006 · Reinforcement example (1999)</td><td>Published value, 0.764</td><td class="n">1.0 %</td><td>The unit weight is not stated, and over a plausible range it moves the factor of safety by about 1 %.</td></tr>
+              <tr><td>007 · ACADS 2(b)</td><td>Bishop mean of 11 programs, 2.204; referee value, 2.29</td><td class="n">2.0 %</td><td>The referee value (2.29) and the mean of 24 programs (2.239) differ by 2.2 %.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p>Where a source publishes several numbers, the case states which one it uses and why, and for a method that the source gives no value for the case declares none. The ACADS survey, for instance, gives for problems 1(a) and 1(c) a mean Bishop value and a mean of all the programs together, but none for the individual rigorous methods; Spencer and GLE / Morgenstern–Price are declared only in case 007, where the problem states the circle and the survey gives a referee value. A test of the suite guards the rule for cases 001 to 004 and requires that at least one case separates a rigorous method from Bishop's against a published number.</p>
+
+      <h2 id="failure"><span class="secnum">4.1.5</span><span class="ht">When a case fails</span><a class="anchor" href="#failure" aria-label="Link to this section">#</a></h2>
+      <p>A failing case is not edited until it passes. If a reference value is not reproduced, the fault is in the code or in the expected value, and working out which of the two is exactly the work a validation case exists to make possible. Neither the expected value nor the tolerance is adjusted to the output: the tolerance belongs to the source, and the expected value is a fact about a publication.</p>
+      <p>The converse also holds: a case is only worth what it can detect. Until version 0.1.106 the Spencer method (<a class="cite" href="../reference/bibliography.html#spencer1967">Spencer, 1967</a>) and the GLE / Morgenstern–Price method (<a class="cite" href="../reference/bibliography.html#morgenstern1965">Morgenstern &amp; Price, 1965</a>) returned, on a circular surface, the factor of safety of Bishop's simplified method (<a class="cite" href="../reference/bibliography.html#bishop1955">Bishop, 1955</a>) to six figures. No case of the folder could see it: each compared the minimum found by a search with a published minimum, and Bishop's value is a plausible answer. The defect, which was in fact three defects, lasted some eighty versions. Case 007 was written to make it visible. The circle is stated by the problem, and the two published references, a Bishop mean of 2.204 and a referee value of 2.29, differ by 3.9 %, so a method of complete equilibrium that returns Bishop's number fails. The Spencer method of version 0.1.105 gave 2.2088 on that circle, more than 3 % below the referee value and outside the 2 % tolerance of the case. The measurements are in the <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/docs/audits/spencer_gle_interslice_v179.md" target="_blank" rel="noopener">audit</a> kept in the repository.</p>
+
+      <h2 id="folder"><span class="secnum">4.1.6</span><span class="ht">The validation folder</span><a class="anchor" href="#folder" aria-label="Link to this section">#</a></h2>
+      <p>The cases live in the <code>validacion/</code> folder of the repository, one subfolder per case, numbered in the order in which they were added:</p>
+      <div class="code"><pre><code>validacion/
+├── README.md
+└── casos/
+    ├── 000-plantilla/         template; the runner skips it because it has no model
+    ├── 001-acads-1a/
+    │   ├── caso.md            what the case is and where its expected value comes from
+    │   ├── modelo.ogr         the model, ready to open in the program
+    │   └── esperado.json      expected values, tolerance and how to run the case
+    └── ...</code></pre></div>
+      <p>The <code>.ogr</code> file is the model of the case, as plain JSON (<a class="xref" href="../reference/file-format.html">Section 5.4</a>). <a class="xref" href="#tbl-esperado">Table 4.1.3</a> lists what <code>esperado.json</code> holds and what the runner does with it.</p>
+      <figure class="tbl" id="tbl-esperado">
+        <figcaption><span class="fignum">Table 4.1.3</span> Fields of <code>esperado.json</code>.</figcaption>
+        <div class="table-wrap">
+          <table class="data method-table">
+            <thead><tr><th>Field</th><th>Content</th><th>What the runner does</th></tr></thead>
+            <tbody>
+              <tr><td><code>id</code></td><td>Name of the case.</td><td>—</td></tr>
+              <tr><td><code>fuente</code></td><td>Full citation of the source, with the published numbers it offers.</td><td>A case whose source is missing or vague (ten characters or fewer) fails.</td></tr>
+              <tr><td><code>tipo_referencia</code></td><td>Kind of reference; <code>publicado</code> in the seven cases.</td><td>—</td></tr>
+              <tr><td><code>tolerancia_relativa</code></td><td>The tolerance <span class="m" data-tex="\varepsilon"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ε</mi></mrow><annotation encoding="application/x-tex">\varepsilon</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">ε</span></span></span></span><!--/k--></span>.</td><td>It must be a number above 0 and not above 0.10.</td></tr>
+              <tr><td><code>fos</code></td><td>The reference value of each method, by method identifier.</td><td>Each value is compared with the one computed; an identifier the program does not know fails the case.</td></tr>
+              <tr><td><code>busqueda</code></td><td>How to run the case: <code>tipo</code> of search (<code>grid</code>, <code>slope</code>, <code>auto_refine</code>, <code>block</code>, <code>path</code>, <code>simulated_annealing</code> or <code>particle_swarm</code>), <code>num_slices</code>, <code>num_surfaces</code> and <code>semilla</code> (seed).</td><td>Applied to a copy of the settings; whatever is not declared comes from <code>modelo.ogr</code>.</td></tr>
+              <tr><td><code>superficie</code></td><td>A slip circle stated by the problem: <code>centro</code> (x, y) and <code>radio</code>.</td><td>When present, each method is evaluated on that circle and nothing is searched.</td></tr>
+              <tr><td><code>notas</code></td><td>Conditions the case requires to be reproducible.</td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p>The model, the expected value and its source are versioned; project files of other programs, screenshots of other programs and third-party reports are not. The distinction is one of copyright: the <code>.ogr</code> file is the project's own, and the expected number is a fact that can be cited.</p>
+      <div class="impl">
+        <span class="label">In OGR Slip2D</span>
+        <p>A search case runs the search that the model declares, and the search is built by the same function that the interface and the command line use, so the case verifies the search the program actually runs and not a reconstruction of it. For a stated circle, the circle goes through the evaluation of a circle of a grid search, which walks the disjoint masses that a circle can cut and keeps the lowest factor of safety. The overrides of <code>busqueda</code> are applied to a copy: a verification run does not rewrite the model of the case.</p>
+        <span class="src">Source: <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/tests/test_validation_cases.py" target="_blank" rel="noopener">tests/test_validation_cases.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/tree/main/validacion" target="_blank" rel="noopener">validacion/</a></span>
+      </div>
+
+      <h2 id="running"><span class="secnum">4.1.7</span><span class="ht">Running the cases</span><a class="anchor" href="#running" aria-label="Link to this section">#</a></h2>
+      <p>One test, <code>tests/test_validation_cases.py</code>, walks every case folder that has a model and an <code>esperado.json</code>, so adding a case needs no code. The project uses its own test runner and pytest is not required; the test modules cannot be imported outside the runner. From a clone of the repository (<a class="xref" href="../getting-started/installation.html#tests">Section 1.1.5</a>):</p>
+      <div class="code"><pre><code>python tests/_runner.py validation_cases     # the seven cases and the checks of their files
+python tests/_runner.py published_cases      # the checks that accompany them</code></pre></div>
+      <p>A selection by file name prints a <code>FILTERED RUN</code> warning around its totals and is not evidence for a release; the whole suite, which is what a release needs, is run with no arguments. Besides reproducing the expected values, the test checks that every folder has its three files, that <code>esperado.json</code> is valid, that every case cites a source and declares a sane tolerance, that the method identifiers and the search types exist, and that at least one case actually runs, so that an empty folder cannot pass in silence.</p>
+      <p>To add a case: build the model in the program and save it as <code>modelo.ogr</code>; write <code>caso.md</code> with the geometry, the materials and, above all, where the expected number comes from, because without a source an expected value is only an opinion; fill in <code>esperado.json</code>; and run the test. New cases are welcome: a slope whose factor of safety is known from a publication or from a hand calculation, with its source (<a href="https://github.com/samuelsl27/OGR-Slip2D/issues/new/choose" target="_blank" rel="noopener">open a validation case</a>).</p>
+
+      <h2 id="rules"><span class="secnum">4.1.8</span><span class="ht">Rules that complement the cases</span><a class="anchor" href="#rules" aria-label="Link to this section">#</a></h2>
+      <p>A reference value cannot see every kind of fault, and the contribution rules of the project add three more habits to the cases.</p>
+      <ul>
+        <li><strong>No setting may do nothing.</strong> A control that does not change the result is worse than none, because the user believes the analysis honours it. A new option comes with a test that proves it moves the number.</li>
+        <li><strong>Anomalies are reported before they are corrected.</strong> A behaviour that looks wrong is described, with the evidence, before the code is changed.</li>
+        <li><strong>Tests do not leak state.</strong> The language, the units and the caches are restored, because a leak makes unrelated tests fail only in a full run.</li>
+      </ul>
+
+      <h2 id="scope"><span class="secnum">4.1.9</span><span class="ht">What the verification does not show</span><a class="anchor" href="#scope" aria-label="Link to this section">#</a></h2>
+      <div class="note warn"><span class="label">Scope</span><p>The seven published cases use circular surfaces and Mohr–Coulomb materials. Pore pressure enters one of them, as a water table, and a load another; none has supports, seismic loading, a finite-element pore-pressure field or a non-circular surface. Those features are exercised by other tests of the suite, by closed forms and identities where they exist, but not by a published factor of safety. A reproduced value is evidence for its case and not a guarantee for every slope, and the published values carry a scatter of their own, which the tolerances of <a class="xref" href="#tbl-tolerances">Table 4.1.2</a> reflect. Results must be checked against independent calculations before anything is based on them: a project is signed by a person, not by a program.</p></div>
+
+      <h2 id="references"><span class="secnum">4.1.10</span><span class="ht">References</span><a class="anchor" href="#references" aria-label="Link to this section">#</a></h2>
+      <ul class="refs">
+        <li><a href="../reference/bibliography.html#bishop1955">Bishop, A.W. (1955)</a>. The use of the slip circle in the stability analysis of slopes. <em>Géotechnique</em>, 5(1), 7–17.</li>
+        <li><a href="../reference/bibliography.html#morgenstern1965">Morgenstern, N.R. &amp; Price, V.E. (1965)</a>. The analysis of the stability of general slip surfaces. <em>Géotechnique</em>, 15(1), 79–93.</li>
+        <li><a href="../reference/bibliography.html#spencer1967">Spencer, E. (1967)</a>. A method of analysis of the stability of embankments assuming parallel inter-slice forces. <em>Géotechnique</em>, 17(1), 11–26.</li>
+      </ul>
+    </article>
+
+<!-- @inc docfoot -->
+<nav class="doc-pager" aria-label="Pages">
+<a class="prev" href="../../docs/theory/partial-factors.html"><span class="label">← Previous · 3.12</span><b>Partial factors (Eurocode 7)</b></a>
+<a class="next" href="../../docs/verification/slope-benchmarks.html"><span class="label">4.2 · Next →</span><b>Limit-equilibrium benchmarks</b></a>
+</nav>
+<div class="doc-edit label"><a href="https://github.com/samuelsl27/OpenGeoRock_Web.github.io/blob/main/docs/verification/methodology.html" target="_blank" rel="noopener">Edit this page ↗</a><a href="https://github.com/samuelsl27/OGR-Slip2D/issues" target="_blank" rel="noopener">Report a problem ↗</a></div>
+<!-- @end docfoot -->
+  </main>
+
+  <aside class="doc-toc" aria-label="On this page">
+    <div class="toc-inner">
+<!-- @inc pagetoc -->
+<span class="label">On this page</span><ul><li class="h2"><a href="#principle">4.1.1 The principle: an external reference</a></li><li class="h2"><a href="#kinds">4.1.2 Four kinds of reference</a></li><li class="h2"><a href="#search-and-method">4.1.3 Checking the search and checking the method</a></li><li class="h2"><a href="#tolerance">4.1.4 How the tolerance of a case is chosen</a></li><li class="h2"><a href="#failure">4.1.5 When a case fails</a></li><li class="h2"><a href="#folder">4.1.6 The validation folder</a></li><li class="h2"><a href="#running">4.1.7 Running the cases</a></li><li class="h2"><a href="#rules">4.1.8 Rules that complement the cases</a></li><li class="h2"><a href="#scope">4.1.9 What the verification does not show</a></li><li class="h2"><a href="#references">4.1.10 References</a></li></ul><button class="print" type="button"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="1.5"/><path d="M6 14h12v7H6z"/></svg> Print this page</button>
+<!-- @end pagetoc -->
+    </div>
+  </aside>
+</div>
+
+<!-- @inc footer -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <a class="brand" href="../../index.html" aria-label="OpenGeoRock — home">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
+          <b>OpenGeoRock</b>
+        </a>
+        <p class="tagline">Open-source geotechnical software, built in the open at the Universidad Politécnica de Cartagena.</p>
+        <span class="lang" role="group" aria-label="Language"><a href="../../docs/verification/methodology.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../../es/docs/verification/methodology.html" hreflang="es" lang="es">ES</a></span>
+      </div>
+      <div>
+        <h5>Products</h5>
+        <ul>
+          <li><a href="../../products/slip2d.html">OGR Slip2D</a></li>
+          <li><a href="../../products/index.html">The suite</a></li>
+          <li><a href="../../ai/index.html">MCP server</a></li>
+          <li><a href="../../download/index.html">Download</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Learn</h5>
+        <ul>
+          <li><a href="../../docs/index.html">Documentation</a></li>
+          <li><a href="../../docs/getting-started/quick-start.html">Quick start</a></li>
+          <li><a href="../../docs/theory/methods.html">Theory manual</a></li>
+          <li><a href="../../examples/index.html">Examples</a></li>
+          <li><a href="../../verification/index.html">Verification</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Project</h5>
+        <ul>
+          <li><a href="../../about/index.html">About</a></li>
+          <li><a href="../../about/index.html#team">Team</a></li>
+          <li><a href="../../about/index.html#cite">How to cite</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Contributing</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/LICENSE" target="_blank" rel="noopener">Licence · AGPL-3.0</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Connect</h5>
+        <ul>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/issues" target="_blank" rel="noopener">Issues</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/tree/main/docs/changelog" target="_blank" rel="noopener">Changelog</a></li>
+          <li><a href="mailto:samuel.saez@edu.upct.es">Email</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© 2026 Samuel Sáez López · OGR Slip2D is free software under AGPL-3.0-or-later, with no warranty of any kind.</span>
+      <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
+    </div>
+  </div>
+  <div class="lang-hint" role="dialog" aria-label="Idioma" lang="es">
+    ¿Prefieres leer esta web en español?
+    <div class="row"><a class="btn sm primary go" href="../../es/index.html">Ver en español</a><button class="btn sm" type="button" data-dismiss>No, gracias</button></div>
+  </div>
+</footer>
+<!-- @end footer -->
+</body>
+</html>

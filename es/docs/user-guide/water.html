@@ -1,0 +1,415 @@
+<!doctype html>
+<html class="no-js" lang="es" data-root="../../../">
+<head>
+<meta charset="utf-8">
+<title>Agua y presión intersticial — documentación de OGR Slip2D</title>
+<meta name="description" content="Cómo obtiene OGR Slip2D las presiones intersticiales: el método de agua subterránea y los parámetros del agua de cada material, niveles freáticos y líneas piezométricas, Assign Water Surface, agua embalsada, Hu y ru, la rejilla de presiones de agua y el exceso de presión intersticial por el método B-bar.">
+<!-- @inc head -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.replace("no-js", "js")</script>
+<link rel="canonical" href="https://opengeorock.org/es/docs/user-guide/water.html">
+<link rel="alternate" hreflang="en" href="https://opengeorock.org/docs/user-guide/water.html">
+<link rel="alternate" hreflang="es" href="https://opengeorock.org/es/docs/user-guide/water.html">
+<link rel="alternate" hreflang="x-default" href="https://opengeorock.org/docs/user-guide/water.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="OpenGeoRock">
+<meta property="og:title" content="Agua y presión intersticial — documentación de OGR Slip2D">
+<meta property="og:description" content="Cómo obtiene OGR Slip2D las presiones intersticiales: el método de agua subterránea y los parámetros del agua de cada material, niveles freáticos y líneas piezométricas, Assign Water Surface, agua embalsada, Hu y ru, la rejilla de presiones de agua y el exceso de presión intersticial por el método B-bar.">
+<meta property="og:url" content="https://opengeorock.org/es/docs/user-guide/water.html">
+<meta property="og:image" content="https://opengeorock.org/assets/img/og-image.png">
+<meta property="og:locale" content="es_ES">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#f4efe6">
+<link rel="icon" href="../../../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../../assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../../assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&amp;display=swap">
+<link rel="stylesheet" href="../../../assets/css/site.css">
+<link rel="stylesheet" href="../../../assets/css/docs.css">
+<link rel="stylesheet" href="../../../assets/vendor/katex/katex.min.css">
+<script src="../../../assets/js/site.js" defer></script>
+<!-- @end head -->
+</head>
+<body class="docs">
+<!-- @inc header -->
+<a class="skip" href="#main">Saltar al contenido</a>
+<header class="top">
+  <div class="wrap top-inner">
+    <a class="brand" href="../../../es/index.html" aria-label="OpenGeoRock — inicio">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
+      <b>OpenGeoRock</b>
+    </a>
+    <nav class="nav" aria-label="Principal">
+      <div class="has-menu" data-nav="products">
+        <button type="button" aria-expanded="false" aria-haspopup="true">Productos <svg class="caret" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+        <div class="mega">
+          <div class="mega-cols">
+            <div class="mega-col">
+              <span class="label">Disponible hoy</span>
+              <a class="mega-item feature" href="../../../es/products/slip2d.html"><b>OGR Slip2D</b><span>Estabilidad de taludes 2D: equilibrio límite, agua subterránea por elementos finitos y análisis probabilístico.</span></a>
+              <a class="mega-item" href="../../../es/ai/index.html"><b>Servidor MCP para agentes de IA <span class="tag live">nuevo</span></b><span>Claude, ChatGPT o un modelo local construyen y calculan modelos de OGR Slip2D.</span></a>
+            </div>
+            <div class="mega-col">
+              <span class="label">En la hoja de ruta</span>
+              <a class="mega-item" href="../../../es/products/index.html#ogr-data"><b>OGR Data</b><span>Base de datos de propiedades de suelos y macizos rocosos</span></a>
+              <a class="mega-item" href="../../../es/products/index.html#ogr-fem2d"><b>OGR FEM2D</b><span>Elementos finitos elastoplásticos 2D</span></a>
+              <a class="mega-item" href="../../../es/products/index.html#ogr-slip3d"><b>OGR Slip3D</b><span>Equilibrio límite en 3D</span></a>
+              <a class="mega-item" href="../../../es/products/index.html#ogr-fem3d"><b>OGR FEM3D</b><span>Elementos finitos 3D con flujo acoplado</span></a>
+            </div>
+            <div class="mega-col">
+              <span class="label">Úsalo desde</span>
+              <a class="mega-item" href="../../../es/docs/getting-started/interface.html"><b>El programa de escritorio</b><span>Modelador, intérprete y terminal de Python</span></a>
+              <a class="mega-item" href="../../../es/docs/reference/python-api.html"><b>Python</b><span>Automatiza análisis desde tu propio código</span></a>
+              <a class="mega-item" href="../../../es/docs/reference/cli.html"><b>La línea de comandos</b><span>Cálculos por lotes con ogr-slip2d-cli</span></a>
+            </div>
+          </div>
+          <div class="mega-foot"><span>Cinco programas, un núcleo abierto.</span><a href="../../../es/products/index.html">Todos los productos →</a></div>
+        </div>
+      </div>
+      <a href="../../../es/examples/index.html" data-nav="examples">Ejemplos</a>
+      <a href="../../../es/ai/index.html" data-nav="ai">IA y MCP</a>
+      <a href="../../../es/docs/index.html" data-nav="docs" aria-current="page">Documentación</a>
+      <a href="../../../es/verification/index.html" data-nav="verification">Verificación</a>
+      <a href="../../../es/about/index.html" data-nav="about">Proyecto</a>
+    </nav>
+    <div class="top-right">
+      <span class="lang" role="group" aria-label="Idioma"><a href="../../../docs/user-guide/water.html" hreflang="en" lang="en">EN</a><a href="../../../es/docs/user-guide/water.html" hreflang="es" lang="es" aria-current="true">ES</a></span>
+      <a class="btn gh" href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener" aria-label="Código fuente en GitHub"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0C17.3 4.7 18.3 5 18.3 5c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0012 .5z"/></svg><span>GitHub</span></a>
+      <a class="btn primary" href="../../../es/download/index.html" data-nav="download">Descargar OGR Slip2D</a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menú"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Principal (móvil)">
+    <span class="label">Productos</span>
+    <a href="../../../es/products/slip2d.html">OGR Slip2D</a>
+    <div class="sub"><a href="../../../es/products/index.html">La suite OpenGeoRock</a><a href="../../../es/ai/index.html">Servidor MCP para agentes de IA</a></div>
+    <span class="label">Aprende</span>
+    <a href="../../../es/examples/index.html">Ejemplos</a>
+    <a href="../../../es/docs/index.html">Documentación</a>
+    <a href="../../../es/verification/index.html">Verificación</a>
+    <span class="label">Proyecto</span>
+    <a href="../../../es/about/index.html">El proyecto</a>
+    <a href="../../../es/download/index.html">Descargar OGR Slip2D</a>
+    <a href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener">Código en GitHub ↗</a>
+    <span class="lang" role="group" aria-label="Idioma"><a href="../../../docs/user-guide/water.html" hreflang="en" lang="en">EN</a><a href="../../../es/docs/user-guide/water.html" hreflang="es" lang="es" aria-current="true">ES</a></span>
+  </nav>
+</header>
+<!-- @end header -->
+
+<div class="doc-shell">
+  <aside class="doc-side" id="doc-side">
+<!-- @inc docnav -->
+<div class="doc-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input type="search" placeholder="Buscar en la documentación  /" aria-label="Buscar en la documentación" autocomplete="off"><div class="results" role="listbox"></div></div>
+<nav class="doc-nav" aria-label="Documentación">
+<a class="home" href="../../../es/docs/index.html"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 016.5 3H20v15H6.5A2.5 2.5 0 004 20.5z"/><path d="M4 20.5A2.5 2.5 0 016.5 18H20v3H6.5A2.5 2.5 0 014 20.5z"/></svg> Portada de la documentación</a>
+<details open><summary>1 · Primeros pasos</summary><ul>
+<li><a href="../../../es/docs/getting-started/installation.html"><span class="n">1.1</span><span>Instalación</span></a></li>
+<li><a href="../../../es/docs/getting-started/quick-start.html"><span class="n">1.2</span><span>Inicio rápido: tu primer modelo</span></a></li>
+<li><a href="../../../es/docs/getting-started/interface.html"><span class="n">1.3</span><span>La interfaz</span></a></li>
+</ul></details>
+<details open><summary>2 · Guía de usuario</summary><ul>
+<li><a href="../../../es/docs/user-guide/project-settings.html"><span class="n">2.1</span><span>Configuración del proyecto</span></a></li>
+<li><a href="../../../es/docs/user-guide/geometry.html"><span class="n">2.2</span><span>Geometría y contornos</span></a></li>
+<li><a href="../../../es/docs/user-guide/materials.html"><span class="n">2.3</span><span>Materiales</span></a></li>
+<li><a href="../../../es/docs/user-guide/water.html" aria-current="page"><span class="n">2.4</span><span>Agua y presión intersticial</span></a></li>
+<li><a href="../../../es/docs/user-guide/loads.html"><span class="n">2.5</span><span>Cargas y carga sísmica</span></a></li>
+<li><a href="../../../es/docs/user-guide/supports.html"><span class="n">2.6</span><span>Soportes</span></a></li>
+<li><a href="../../../es/docs/user-guide/surfaces.html"><span class="n">2.7</span><span>Superficies de rotura y búsqueda</span></a></li>
+<li><a href="../../../es/docs/user-guide/results.html"><span class="n">2.8</span><span>Cálculo e interpretación de resultados</span></a></li>
+<li><a href="../../../es/docs/user-guide/groundwater.html"><span class="n">2.9</span><span>Agua subterránea por elementos finitos</span></a></li>
+<li><a href="../../../es/docs/user-guide/probabilistic.html"><span class="n">2.10</span><span>Análisis probabilístico y de sensibilidad</span></a></li>
+<li><a href="../../../es/docs/user-guide/design-standards.html"><span class="n">2.11</span><span>Normas de diseño</span></a></li>
+<li><a href="../../../es/docs/user-guide/automation.html"><span class="n">2.12</span><span>Informes, scripting y línea de comandos</span></a></li>
+</ul></details>
+<details open><summary>3 · Manual de teoría</summary><ul>
+<li><a href="../../../es/docs/theory/limit-equilibrium.html"><span class="n">3.1</span><span>Equilibrio límite y factor de seguridad</span></a></li>
+<li><a href="../../../es/docs/theory/methods.html"><span class="n">3.2</span><span>Métodos de dovelas</span></a></li>
+<li><a href="../../../es/docs/theory/interslice.html"><span class="n">3.3</span><span>Fuerzas entre dovelas, convergencia y admisibilidad</span></a></li>
+<li><a href="../../../es/docs/theory/search.html"><span class="n">3.4</span><span>Búsqueda de la superficie de rotura</span></a></li>
+<li><a href="../../../es/docs/theory/strength.html"><span class="n">3.5</span><span>Modelos de resistencia al corte</span></a></li>
+<li><a href="../../../es/docs/theory/pore-pressure.html"><span class="n">3.6</span><span>Presión intersticial y resistencia no saturada</span></a></li>
+<li><a href="../../../es/docs/theory/seepage.html"><span class="n">3.7</span><span>Filtración por elementos finitos</span></a></li>
+<li><a href="../../../es/docs/theory/rapid-drawdown.html"><span class="n">3.8</span><span>Desembalse rápido</span></a></li>
+<li><a href="../../../es/docs/theory/seismic.html"><span class="n">3.9</span><span>Análisis sísmico</span></a></li>
+<li><a href="../../../es/docs/theory/supports.html"><span class="n">3.10</span><span>Fuerzas de los soportes</span></a></li>
+<li><a href="../../../es/docs/theory/probabilistic.html"><span class="n">3.11</span><span>Análisis probabilístico</span></a></li>
+<li><a href="../../../es/docs/theory/partial-factors.html"><span class="n">3.12</span><span>Coeficientes parciales (Eurocódigo 7)</span></a></li>
+</ul></details>
+<details open><summary>4 · Verificación</summary><ul>
+<li><a href="../../../es/docs/verification/methodology.html"><span class="n">4.1</span><span>Metodología de verificación</span></a></li>
+<li><a href="../../../es/docs/verification/slope-benchmarks.html"><span class="n">4.2</span><span>Casos de referencia de equilibrio límite</span></a></li>
+<li><a href="../../../es/docs/verification/analytic-checks.html"><span class="n">4.3</span><span>Agua subterránea y comprobaciones analíticas</span></a></li>
+</ul></details>
+<details open><summary>5 · Referencia</summary><ul>
+<li><a href="../../../es/docs/reference/mcp.html"><span class="n">5.1</span><span>Servidor MCP</span></a></li>
+<li><a href="../../../es/docs/reference/cli.html"><span class="n">5.2</span><span>Interfaz de línea de comandos</span></a></li>
+<li><a href="../../../es/docs/reference/python-api.html"><span class="n">5.3</span><span>API de Python</span></a></li>
+<li><a href="../../../es/docs/reference/file-format.html"><span class="n">5.4</span><span>El formato .ogr</span></a></li>
+<li><a href="../../../es/docs/reference/error-codes.html"><span class="n">5.5</span><span>Códigos de error</span></a></li>
+<li><a href="../../../es/docs/reference/notation.html"><span class="n">5.6</span><span>Notación y glosario</span></a></li>
+<li><a href="../../../es/docs/reference/bibliography.html"><span class="n">5.7</span><span>Bibliografía</span></a></li>
+</ul></details>
+</nav>
+<!-- @end docnav -->
+  </aside>
+
+  <main id="main" class="doc-main">
+    <header class="doc-head">
+<!-- @inc dochead -->
+<button class="doc-side-toggle" type="button" aria-controls="doc-side" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg> Contenido</button>
+<nav class="crumbs label" aria-label="Ruta de navegación"><a href="../../../es/docs/index.html">Documentación</a><span aria-hidden="true">/</span><span>2 · Guía de usuario</span></nav>
+<div class="chapter label">2.4</div>
+<h1>Agua y presión intersticial</h1>
+<div class="meta label"><span>Describe OGR Slip2D <span data-v>0.1.235</span></span></div>
+<!-- @end dochead -->
+    </header>
+
+    <article class="doc prose">
+      <p class="lede">La presión intersticial interviene en todo factor de seguridad a través de la tensión normal efectiva en la base de cada dovela, de modo que una condición de agua errónea da una respuesta errónea por buenas que sean las resistencias. OGR Slip2D obtiene las presiones intersticiales de superficies de agua dibujadas en el modelo, de una relación de presión intersticial, de una constante, de una rejilla de valores medidos o calculados, o de un análisis de filtración por elementos finitos. Esta página explica cómo elegir entre ellos, cómo toma cada material su presión intersticial y cómo definir niveles freáticos, líneas piezométricas, agua embalsada, la rejilla de presiones de agua y el exceso de presión intersticial.</p>
+
+      <h2 id="choosing"><span class="secnum">2.4.1</span><span class="ht">Elección del método de agua subterránea</span><a class="anchor" href="#choosing" aria-label="Enlace a esta sección">#</a></h2>
+      <p>Dos elecciones funcionan juntas. El <strong>Method</strong> del proyecto, en la página Groundwater de <span class="ui">Analysis → Project Settings…</span> (<a class="xref" href="project-settings.html#groundwater">Sección 2.1.4</a>), dice si las presiones intersticiales proceden de una rejilla o de un análisis por elementos finitos. Los <strong>Water Parameters</strong> de cada material, en <span class="ui">Properties → Define Materials…</span> (<a href="materials.html#water-parameters">Parámetros del agua</a>), dicen de dónde toma <em>ese</em> material su presión intersticial. Un material nuevo está seco hasta que sus parámetros del agua apuntan a algo.</p>
+      <figure class="tbl" id="tbl-methods">
+        <figcaption><span class="fignum">Tabla 2.4.1</span> Métodos de agua subterránea y lo que necesita cada uno.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Método</th><th>Presión intersticial a partir de</th><th>Para configurarlo</th></tr></thead>
+            <tbody>
+              <tr><td><code>water_table</code> (por defecto), <code>piezo_line</code></td><td>Superficies de agua dibujadas en el modelo</td><td>Dibujar el nivel freático o las líneas piezométricas y asignarlos a los materiales (<a class="xref" href="#water-surfaces">Sección 2.4.3</a>)</td></tr>
+              <tr><td><code>ru</code></td><td>La relación de presión intersticial de cada material</td><td>Water Parameters: tipo <code>ru</code> y el <strong>Ru coefficient</strong> (<a href="#ru">La relación de presión intersticial ru</a>)</td></tr>
+              <tr><td><code>none</code></td><td>Los parámetros del agua de cada material</td><td>Dejar todos los materiales en <code>none</code> para un análisis en seco</td></tr>
+              <tr><td><code>grid_total_head</code>, <code>grid_pressure_head</code>, <code>grid_pore_pressure</code></td><td>Una rejilla de puntos, interpolada</td><td><span class="ui">Groundwater → Water Pressure Grid…</span> (<a class="xref" href="#grid">Sección 2.4.5</a>)</td></tr>
+              <tr><td><code>fea_steady</code>, <code>fea_transient</code></td><td>Un campo de filtración por elementos finitos</td><td>El menú Groundwater, paso a paso (<a class="xref" href="groundwater.html">Sección 2.9</a>)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <div class="note warn"><span class="label">Qué hace y qué no hace el método</span><p>En la versión <span data-v>0.1.235</span> los cuatro métodos <code>none</code>, <code>water_table</code>, <code>piezo_line</code> y <code>ru</code> no cambian cómo se calcula la presión intersticial: un material cuyo tipo es <code>water_table</code> lee el nivel freático con cualquiera de los cuatro métodos que se elija, y un material que se deja en <code>none</code> está seco con los cuatro. El método importa para los métodos de rejilla, para los métodos de elementos finitos y para un análisis de desembalse rápido, que solo se ejecuta con <code>water_table</code> o <code>piezo_line</code>. Elige el método que coincida con lo que usan los materiales, para que el proyecto diga lo que hace.</p></div>
+
+      <h2 id="material-water"><span class="secnum">2.4.2</span><span class="ht">Cómo toma un material su presión intersticial</span><a class="anchor" href="#material-water" aria-label="Enlace a esta sección">#</a></h2>
+      <p>El <strong>Type</strong> de los Water Parameters de un material decide la presión intersticial <span class="m" data-tex="u"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>u</mi></mrow><annotation encoding="application/x-tex">u</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">u</span></span></span></span><!--/k--></span> en cada punto del material y, por tanto, en la base de cada dovela que hay en él. La teoría de cada uno está en la <a class="xref" href="../theory/pore-pressure.html">Sección 3.6</a>.</p>
+      <figure class="tbl" id="tbl-types">
+        <figcaption><span class="fignum">Tabla 2.4.2</span> Tipos de Water Parameters.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Tipo</th><th>Presión intersticial</th></tr></thead>
+            <tbody>
+              <tr><td><code>none</code></td><td>Cero: el material está seco.</td></tr>
+              <tr><td><code>water_table</code></td><td>A partir del nivel freático asignado al material, según la <a class="xref" href="#eq-hu">Ec. (2.4.1)</a>. Cero por encima de él.</td></tr>
+              <tr><td><code>piezometric</code></td><td>A partir de la línea piezométrica asignada al material, con la misma ecuación.</td></tr>
+              <tr><td><code>ru</code></td><td>Una fracción de la tensión vertical, <a class="xref" href="#eq-ru">Ec. (2.4.2)</a>.</td></tr>
+              <tr><td><code>constant</code></td><td>El valor de <strong>Constant u</strong>, en todo el material.</td></tr>
+              <tr><td><code>fem</code></td><td>Interpolada a partir del campo de filtración por elementos finitos; los valores negativos (succión) se conservan y se tratan mediante los parámetros no saturados. Compute se niega a ejecutarse si no hay un campo calculado.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p>Con un método de rejilla, la rejilla sustituye a estos tipos, salvo <code>constant</code> y <code>ru</code>, en todo material cuya casilla <strong>Use the water pressure grid</strong> esté marcada (<a class="xref" href="#grid">Sección 2.4.5</a>).</p>
+      <div class="note warn"><span class="label">Métodos de elementos finitos en 0.1.235</span><p>El campo de filtración solo llega a los materiales cuyo tipo es <code>fem</code>, pero Define Materials oculta todo el grupo Water Parameters mientras <code>fea_steady</code> o <code>fea_transient</code> es el método del proyecto. Fija el tipo de los materiales en <code>fem</code> antes de cambiar el método en Project Settings. Una ejecución transitoria en la que ningún material usa el campo lo indica en sus notas.</p></div>
+
+      <h3 id="hu"><span class="ht">Superficies de agua y Hu</span><a class="anchor" href="#hu" aria-label="Enlace a esta sección">#</a></h3>
+      <p>Por debajo de un nivel freático o de una línea piezométrica, la presión intersticial es hidrostática, afectada por el coeficiente <span class="m" data-tex="H_u"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mi>u</mi></msub></mrow><annotation encoding="application/x-tex">H_u</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0813em;">H</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0813em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">u</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><!--/k--></span>:</p>
+      <div class="eq" id="eq-hu" data-tex="u = \gamma_w \, H_u \, h" data-n="2.4.1"><!--k--><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>u</mi><mo>=</mo><msub><mi>γ</mi><mi>w</mi></msub><mtext> </mtext><msub><mi>H</mi><mi>u</mi></msub><mtext> </mtext><mi>h</mi></mrow><annotation encoding="application/x-tex">u = \gamma_w \, H_u \, h</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">u</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0556em;">γ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0556em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0269em;">w</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0813em;">H</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0813em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">u</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">h</span></span></span></span></span><!--/k--></div>
+      <p class="where">donde</p>
+      <dl class="symbols">
+        <dt><span class="m" data-tex="\gamma_w"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>γ</mi><mi>w</mi></msub></mrow><annotation encoding="application/x-tex">\gamma_w</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0556em;">γ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0556em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0269em;">w</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><!--/k--></span></dt><dd>peso específico del fluido intersticial, <strong>Pore Fluid Unit Weight</strong> en Project Settings (9.81 kN/m³)</dd>
+        <dt><span class="m" data-tex="h"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>h</mi></mrow><annotation encoding="application/x-tex">h</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6944em;"></span><span class="mord mathnormal">h</span></span></span></span><!--/k--></span></dt><dd>distancia vertical desde el punto hasta la superficie de agua (m); <span class="m" data-tex="u = 0"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>u</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">u = 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">u</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span><!--/k--></span> donde el punto está por encima de ella</dd>
+        <dt><span class="m" data-tex="H_u"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mi>u</mi></msub></mrow><annotation encoding="application/x-tex">H_u</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0813em;">H</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0813em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">u</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><!--/k--></span></dt><dd>el <strong>Hu coefficient</strong> del material cuando está marcado y, en caso contrario, el <strong>Default Hu</strong> del proyecto (1.0); con <strong>Auto Hu</strong> marcado en el material o en el proyecto, <span class="m" data-tex="H_u = \cos^2\alpha"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mi>u</mi></msub><mo>=</mo><msup><mrow><mi>cos</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mi>α</mi></mrow><annotation encoding="application/x-tex">H_u = \cos^2\alpha</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0813em;">H</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0813em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">u</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.8141em;"></span><span class="mop"><span class="mop">cos</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0037em;">α</span></span></span></span><!--/k--></span>, siendo <span class="m" data-tex="\alpha"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi></mrow><annotation encoding="application/x-tex">\alpha</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.0037em;">α</span></span></span></span><!--/k--></span> la inclinación de la superficie de agua por encima del punto</dd>
+      </dl>
+      <p><span class="m" data-tex="H_u = 1"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mi>u</mi></msub><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">H_u = 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0813em;">H</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0813em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">u</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span><!--/k--></span> es la presión hidrostática bajo una superficie de agua horizontal. <span class="m" data-tex="H_u = \cos^2\alpha"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mi>u</mi></msub><mo>=</mo><msup><mrow><mi>cos</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mi>α</mi></mrow><annotation encoding="application/x-tex">H_u = \cos^2\alpha</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0813em;">H</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0813em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">u</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.8141em;"></span><span class="mop"><span class="mop">cos</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0037em;">α</span></span></span></span><!--/k--></span> supone que la equipotencial que pasa por el punto es recta, lo que solo es exacto para un talud infinito con filtración paralela a su superficie. La presión intersticial es nula en cualquier abscisa fuera de la extensión horizontal de la superficie de agua, así que dibuja las superficies de agua a todo lo ancho de los materiales a los que sirven.</p>
+
+      <figure class="fig" id="fig-water">
+        <div class="art">
+          <svg class="dg" viewBox="0 0 600 236" role="img" aria-labelledby="fig-water-t"><title id="fig-water-t">Un talud con un nivel freático que queda por encima del terreno en el pie, donde forma agua embalsada, y que discurre por el interior del talud más arriba; un punto del interior del talud está a una distancia vertical h por debajo del nivel freático</title>
+            <polygon class="s0" points="20,220 580,220 580,60 380,60 220,150 20,150"/>
+            <polygon class="ln" points="20,220 580,220 580,60 380,60 220,150 20,150"/>
+            <polyline class="wat" points="20,120 273,120 400,100 580,95"/>
+            <line class="wat" x1="30" y1="132" x2="230" y2="132"/>
+            <line class="wat" x1="30" y1="143" x2="210" y2="143"/>
+            <line class="thin" x1="450" y1="98" x2="450" y2="170"/>
+            <circle class="pt" cx="450" cy="170" r="3.5"/>
+            <text x="458" y="140" class="it">h</text>
+            <text x="462" y="190">u = γw·Hu·h</text>
+            <text x="30" y="104" class="mute">Agua embalsada: una carga sobre el terreno</text>
+            <text x="440" y="88" class="mute">Nivel freático</text>
+          </svg>
+        </div>
+        <figcaption><span class="fignum">Figura 2.4.1</span> Un nivel freático que se eleva por encima de la superficie del terreno forma agua embalsada, que se aplica como una carga; dentro del talud da a cada punto la presión de la <a class="xref" href="#eq-hu">Ec. (2.4.1)</a>.</figcaption>
+      </figure>
+
+      <h3 id="ru"><span class="ht">La relación de presión intersticial ru</span><a class="anchor" href="#ru" aria-label="Enlace a esta sección">#</a></h3>
+      <p>Con el tipo <code>ru</code>, la presión intersticial es una fracción fija de la tensión vertical en el punto:</p>
+      <div class="eq" id="eq-ru" data-tex="u = r_u \, \sigma_v, \qquad \sigma_v = \gamma \, z + \gamma_w \, d_w" data-n="2.4.2"><!--k--><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>u</mi><mo>=</mo><msub><mi>r</mi><mi>u</mi></msub><mtext> </mtext><msub><mi>σ</mi><mi>v</mi></msub><mo separator="true">,</mo><mspace width="2em"/><msub><mi>σ</mi><mi>v</mi></msub><mo>=</mo><mi>γ</mi><mtext> </mtext><mi>z</mi><mo>+</mo><msub><mi>γ</mi><mi>w</mi></msub><mtext> </mtext><msub><mi>d</mi><mi>w</mi></msub></mrow><annotation encoding="application/x-tex">u = r_u \, \sigma_v, \qquad \sigma_v = \gamma \, z + \gamma_w \, d_w</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">u</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0278em;">r</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">u</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">σ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0359em;">v</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:2em;"></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">σ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0359em;">v</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.7778em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.0556em;">γ</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.044em;">z</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0556em;">γ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0556em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0269em;">w</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0269em;">w</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span><!--/k--></div>
+      <p class="where">donde</p>
+      <dl class="symbols">
+        <dt><span class="m" data-tex="r_u"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>r</mi><mi>u</mi></msub></mrow><annotation encoding="application/x-tex">r_u</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0278em;">r</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">u</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><!--/k--></span></dt><dd>el <strong>Ru coefficient</strong> del material, de 0 a 1</dd>
+        <dt><span class="m" data-tex="\gamma, z"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>γ</mi><mo separator="true">,</mo><mi>z</mi></mrow><annotation encoding="application/x-tex">\gamma, z</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.0556em;">γ</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.044em;">z</span></span></span></span><!--/k--></span></dt><dd>peso específico del material que contiene el punto (su peso específico saturado cuando usa uno), aplicado en toda la profundidad, y profundidad <span class="m" data-tex="z"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>z</mi></mrow><annotation encoding="application/x-tex">z</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.044em;">z</span></span></span></span><!--/k--></span> del punto bajo la superficie del terreno</dd>
+        <dt><span class="m" data-tex="d_w"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>d</mi><mi>w</mi></msub></mrow><annotation encoding="application/x-tex">d_w</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0269em;">w</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><!--/k--></span></dt><dd>profundidad del agua embalsada que haya sobre el terreno en esa abscisa</dd>
+      </dl>
+      <p>Las cargas externas —distribuidas, lineales y sísmicas— no forman parte de <span class="m" data-tex="\sigma_v"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>σ</mi><mi>v</mi></msub></mrow><annotation encoding="application/x-tex">\sigma_v</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">σ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0359em;">v</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><!--/k--></span>.</p>
+
+      <h2 id="water-surfaces"><span class="secnum">2.4.3</span><span class="ht">Niveles freáticos y líneas piezométricas</span><a class="anchor" href="#water-surfaces" aria-label="Enlace a esta sección">#</a></h2>
+      <p>Un nivel freático es la superficie freática; una línea piezométrica recoge una altura de presión medida o estimada en algún punto del terreno. Ambos dan la presión intersticial mediante la <a class="xref" href="#eq-hu">Ec. (2.4.1)</a>, pero no son intercambiables:</p>
+      <ul>
+        <li>un modelo tiene <strong>un nivel freático</strong> como máximo y cualquier número de <strong>líneas piezométricas</strong>, numeradas 1, 2, … en el orden en que se dibujan;</li>
+        <li>solo el nivel freático forma <strong>agua embalsada</strong> donde se eleva por encima del terreno (<a class="xref" href="#ponded">Sección 2.4.4</a>);</li>
+        <li>solo el nivel freático permite un <strong>peso específico saturado</strong> distinto por debajo de él (<a href="materials.html#general">General</a>);</li>
+        <li>solo el nivel freático limita una <strong>rejilla de presiones de agua</strong>: con ambos, <span class="m" data-tex="u = 0"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>u</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">u = 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">u</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span><!--/k--></span> por encima del nivel freático.</li>
+      </ul>
+      <p>Para añadir uno:</p>
+      <ol>
+        <li>Elige <span class="ui">Boundaries → Add Water Table</span> (<kbd>Ctrl</kbd>+<kbd>3</kbd>) o <span class="ui">Boundaries → Add Piezometric Line</span> (<kbd>Ctrl</kbd>+<kbd>5</kbd>).</li>
+        <li>Haz clic en sus vértices de izquierda a derecha, cubriendo todo el ancho de los materiales a los que sirve, y termina con <kbd>Enter</kbd>.</li>
+        <li>Si el proyecto tiene materiales, se abre el diálogo <strong>Assign Water Surface</strong> sobre la línea recién dibujada: marca los materiales que toman de ella su presión intersticial y pulsa <span class="ui">OK</span>.</li>
+      </ol>
+
+      <h3 id="assign-water"><span class="ht">Assign Water Surface</span><a class="anchor" href="#assign-water" aria-label="Enlace a esta sección">#</a></h3>
+      <p>El diálogo también se abre desde <span class="ui">Properties → Assign Water Surface…</span> y asigna una superficie de agua a varios materiales a la vez. Elige la superficie en <strong>Water Surface</strong>; la tabla enumera todos los materiales con una casilla, marcada para los que ya están asignados a ella, y la <strong>Current Water Surface</strong> de cada uno. <span class="ui">Select All</span> y <span class="ui">Clear All</span> marcan o desmarcan toda la lista.</p>
+      <ul>
+        <li>Al marcar un material se le asigna la superficie y su tipo pasa a ser <code>water_table</code> o <code>piezometric</code>, según corresponda.</li>
+        <li>Al desmarcar un material que estaba asignado a esta superficie se elimina la asignación y el material vuelve a estar seco.</li>
+        <li>Los materiales asignados a una superficie <em>distinta</em> nunca se modifican al desmarcar.</li>
+      </ul>
+      <p>La misma asignación se puede hacer material por material con la lista <strong>Water Surface</strong> de Define Materials. Un material de tipo <code>water_table</code> o <code>piezometric</code> que se deje en <em>(first of this type)</em> lee la primera superficie de ese tipo en el orden de dibujo —lo mismo cuando solo hay una—; con varias líneas piezométricas, asigna cada material de forma explícita.</p>
+
+      <h2 id="ponded"><span class="secnum">2.4.4</span><span class="ht">Agua embalsada</span><a class="anchor" href="#ponded" aria-label="Enlace a esta sección">#</a></h2>
+      <p>Donde el nivel freático se dibuja por encima de la superficie del terreno —un embalse contra un terraplén, o un pie inundado—, el espacio entre ambos es agua en reposo. OGR Slip2D la aplica como una carga: una presión hidrostática normal a la superficie del terreno, sobre las dovelas que hay debajo. No hay que asignar nada para que actúe.</p>
+      <ul>
+        <li>Las líneas piezométricas nunca crean agua embalsada, y la línea de desembalse por sí sola tampoco.</li>
+        <li>Con un método de elementos finitos, el agua en reposo procede de las condiciones de contorno del análisis de filtración: allí donde la altura total prescrita queda por encima del contorno.</li>
+        <li>El agua embalsada no lleva fuerza sísmica (<a class="xref" href="loads.html#seismic">Sección 2.5.4</a>).</li>
+        <li>Se puede mostrar rellena o rayada en el lienzo con <span class="ui">View → Display Options…</span>, pestaña <strong>Water</strong>, <strong>Ponded water</strong>.</li>
+      </ul>
+
+      <h2 id="grid"><span class="secnum">2.4.5</span><span class="ht">Rejilla de presiones de agua</span><a class="anchor" href="#grid" aria-label="Enlace a esta sección">#</a></h2>
+      <p>Una rejilla da la presión intersticial por interpolación a partir de puntos de datos dispersos —lecturas de piezómetros o el resultado de un análisis de filtración realizado en otra parte—.</p>
+      <ol>
+        <li>En Project Settings → Groundwater elige <code>grid_total_head</code>, <code>grid_pressure_head</code> o <code>grid_pore_pressure</code>. El método indica qué son los valores de la rejilla: altura total <span class="m" data-tex="H"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi></mrow><annotation encoding="application/x-tex">H</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.0813em;">H</span></span></span></span><!--/k--></span> (entonces <span class="m" data-tex="u = \gamma_w (H - y)"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>u</mi><mo>=</mo><msub><mi>γ</mi><mi>w</mi></msub><mo stretchy="false">(</mo><mi>H</mi><mo>−</mo><mi>y</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">u = \gamma_w (H - y)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">u</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0556em;">γ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0556em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0269em;">w</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.0813em;">H</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">y</span><span class="mclose">)</span></span></span></span><!--/k--></span>), altura de presión <span class="m" data-tex="h_p"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>h</mi><mi>p</mi></msub></mrow><annotation encoding="application/x-tex">h_p</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.9805em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal">h</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">p</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span></span></span></span><!--/k--></span> (<span class="m" data-tex="u = \gamma_w h_p"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>u</mi><mo>=</mo><msub><mi>γ</mi><mi>w</mi></msub><msub><mi>h</mi><mi>p</mi></msub></mrow><annotation encoding="application/x-tex">u = \gamma_w h_p</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">u</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.9805em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0556em;">γ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0556em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0269em;">w</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal">h</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">p</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span></span></span></span><!--/k--></span>) o directamente la presión intersticial <span class="m" data-tex="u"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>u</mi></mrow><annotation encoding="application/x-tex">u</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">u</span></span></span></span><!--/k--></span>.</li>
+        <li>Abre <span class="ui">Groundwater → Water Pressure Grid…</span>, que aparece en gris con cualquier otro método, e introduce los puntos: tecléalos en la tabla (<span class="ui">Add row</span>, <span class="ui">Delete selected</span>, <span class="ui">Clear</span>) o léelos con <span class="ui">Import CSV…</span>.</li>
+        <li>Pulsa <span class="ui">OK</span>. La barra de estado indica el número de puntos; una tabla vacía elimina la rejilla.</li>
+      </ol>
+      <figure class="tbl" id="tbl-grid">
+        <figcaption><span class="fignum">Tabla 2.4.3</span> Diálogo Water Pressure Grid.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Campo</th><th>Significado</th><th>Por defecto</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Grid type</strong></td><td>Solo lectura: altura total, altura de presión o presión intersticial, según el método de agua subterránea</td><td>—</td></tr>
+              <tr><td><strong>Interpolation</strong></td><td><em>Thin Plate Spline</em>: una superficie suave que pasa por todos los puntos y reproduce exactamente un campo plano <a class="cite" href="../reference/bibliography.html#harder1972">(Harder y Desmarais, 1972)</a>. <em>Inverse Distance (IDW)</em>: media ponderada de los puntos más próximos, con pesos inversamente proporcionales al cuadrado de la distancia.</td><td>Thin Plate Spline</td></tr>
+              <tr><td><strong>IDW neighbours</strong></td><td>Número de puntos más próximos que usa la interpolación por inverso de la distancia (de 1 a 64)</td><td class="n">8</td></tr>
+              <tr><td><strong>Allow suction (keep u &lt; 0)</strong></td><td>Conservar las presiones intersticiales interpoladas negativas en lugar de anularlas</td><td>desactivado</td></tr>
+              <tr><td><strong>x</strong>, <strong>y</strong>, <strong>value</strong></td><td>Los puntos, en m y en la unidad del tipo de rejilla (m de altura o kPa)</td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p>Un archivo CSV contiene tres números por línea —<span class="m" data-tex="x"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span></span></span></span><!--/k--></span>, <span class="m" data-tex="y"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi></mrow><annotation encoding="application/x-tex">y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">y</span></span></span></span><!--/k--></span> y el valor—, separados por comas, puntos y comas, tabuladores o espacios, con el punto como separador decimal; se omiten las líneas de cabecera, las líneas en blanco y las que empiezan por <code>#</code>. Con más de 300 puntos, o cuando el sistema del spline está mal condicionado, el spline de placa delgada cede el paso a la interpolación por inverso de la distancia.</p>
+      <p>La rejilla rige todos los materiales cuya casilla <strong>Use the water pressure grid</strong> esté marcada en Define Materials (el valor por defecto), salvo los materiales de tipo <code>constant</code> o <code>ru</code>, que conservan su propio valor. Desmarca la casilla para que un material tome su presión intersticial de sus propios parámetros del agua. Un nivel freático en el mismo modelo fija <span class="m" data-tex="u = 0"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>u</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">u = 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">u</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span><!--/k--></span> por encima de sí mismo. <span class="ui">View → Display Options…</span>, pestaña <strong>Water</strong>, muestra los valores de la rejilla en el lienzo.</p>
+      <div class="note"><span class="label">Nota</span><p>Un campo interpolado es fiable dentro de la nube de puntos y mucho menos fuera de ella, donde se extrapola. Las superficies de rotura próximas a la coronación suelen llegar más allá del último piezómetro: añade puntos allí en lugar de fiarse de la extrapolación.</p></div>
+
+      <h2 id="excess"><span class="secnum">2.4.6</span><span class="ht">Exceso de presión intersticial (B-bar)</span><a class="anchor" href="#excess" aria-label="Enlace a esta sección">#</a></h2>
+      <p>Un suelo de baja permeabilidad cargado más deprisa de lo que puede drenar responde con un aumento de la presión intersticial, que <a class="cite" href="../reference/bibliography.html#skempton1954">Skempton (1954)</a> escribe como proporcional a la variación de la tensión vertical:</p>
+      <div class="eq" id="eq-bbar" data-tex="\Delta u = \bar{B} \, \Delta\sigma_v" data-n="2.4.3"><!--k--><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi mathvariant="normal">Δ</mi><mi>u</mi><mo>=</mo><mover accent="true"><mi>B</mi><mo>ˉ</mo></mover><mtext> </mtext><mi mathvariant="normal">Δ</mi><msub><mi>σ</mi><mi>v</mi></msub></mrow><annotation encoding="application/x-tex">\Delta u = \bar{B} \, \Delta\sigma_v</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6833em;"></span><span class="mord">Δ</span><span class="mord mathnormal">u</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.9701em;vertical-align:-0.15em;"></span><span class="mord katex-accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8201em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.0502em;">B</span></span><span style="top:-3.2523em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1667em;"><span class="mord">ˉ</span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">Δ</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">σ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0359em;">v</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span><!--/k--></div>
+      <p>La presión intersticial que se usa en el análisis es la que el material obtiene de sus parámetros del agua más este exceso. Para usarlo:</p>
+      <ol>
+        <li>En Project Settings → Groundwater → Advanced elige <strong>Calculate Excess Pore Pressure (B-bar method)</strong>. No se puede combinar con un desembalse rápido ni con un análisis transitorio.</li>
+        <li>En Define Materials aparece el grupo <strong>Excess Pore Pressure</strong>. Da un valor de <strong>B-bar</strong> mayor que 0 a todo material que desarrolle exceso de presión intersticial; un material con B-bar 0 es de drenaje libre y no desarrolla ninguno.</li>
+        <li>Indica qué los carga. Un material con <strong>Material weight creates excess pore pressure</strong> marcado carga con su propio peso los materiales que tiene debajo. Una carga distribuida o lineal con <strong>Load creates excess pore pressure (B-bar method)</strong> marcado carga los materiales que tiene debajo con la componente vertical de su fuerza (<a class="xref" href="loads.html#excess">Sección 2.5.6</a>).</li>
+      </ol>
+      <p>La tensión vertical añadida es la tensión aplicada directamente encima del punto, transmitida en vertical hacia abajo sin dispersarse, como supone el método. Una carga lineal es una fuerza concentrada, de modo que la tensión que añade depende del ancho de la dovela sobre la que cae, y su exceso de presión intersticial crece a medida que las dovelas se estrechan; modela como carga distribuida una sobrecarga cuyo exceso de presión intersticial importe.</p>
+
+      <h2 id="drawdown"><span class="secnum">2.4.7</span><span class="ht">Desembalse rápido y elementos finitos</span><a class="anchor" href="#drawdown" aria-label="Enlace a esta sección">#</a></h2>
+      <p>Otras dos formas de obtener presiones intersticiales tienen páginas propias:</p>
+      <div class="cards-doc">
+        <a href="../theory/rapid-drawdown.html"><b>Desembalse rápido</b><span>Un embalse que baja más deprisa de lo que puede drenar un terraplén: el nivel freático es el nivel anterior y la línea de desembalse, el nivel posterior.</span></a>
+        <a href="groundwater.html"><b>Agua subterránea por elementos finitos</b><span>Filtración estacionaria y transitoria resuelta sobre una malla, con propiedades hidráulicas y condiciones de contorno.</span></a>
+      </div>
+      <p>Para un desembalse rápido, elige <strong>Rapid Drawdown analysis</strong> y un procedimiento en la página Groundwater de Project Settings, dibuja el nivel final con <span class="ui">Boundaries → Add Drawdown Line</span> (<kbd>Ctrl</kbd>+<kbd>4</kbd>) y marca <strong>Undrained Behaviour</strong> en los materiales de baja permeabilidad, con un B-bar o una envolvente sin drenaje según el procedimiento (<a href="materials.html#drawdown-excess">Desembalse rápido y exceso de presión intersticial</a>). <span class="ui">Groundwater → Drawdown Level Sweep…</span> repite el análisis para una serie de niveles del embalse (11 por defecto, de 2 a 101), con o sin el desembalse total, e indica el nivel crítico, porque el desembalse total no siempre es el crítico.</p>
+
+      <div class="impl">
+        <span class="label">En OGR Slip2D</span>
+        <p>La presión intersticial en un punto se calcula en una sola función para todos los métodos de dovelas, a partir del material que contiene el punto y de los ajustes de agua subterránea del proyecto. El módulo de dovelado aplica el agua embalsada como una carga sobre la superficie del terreno, no como una presión intersticial.</p>
+        <span class="src">Código: <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_core/hydraulic/pore_pressure.py" target="_blank" rel="noopener">ogr_core/hydraulic/pore_pressure.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_core/hydraulic/ponded_water.py" target="_blank" rel="noopener">ogr_core/hydraulic/ponded_water.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_core/hydraulic/water_pressure_grid.py" target="_blank" rel="noopener">ogr_core/hydraulic/water_pressure_grid.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_core/hydraulic/excess_pore_pressure.py" target="_blank" rel="noopener">ogr_core/hydraulic/excess_pore_pressure.py</a></span>
+      </div>
+    </article>
+
+<!-- @inc docfoot -->
+<nav class="doc-pager" aria-label="Páginas">
+<a class="prev" href="../../../es/docs/user-guide/materials.html"><span class="label">← Anterior · 2.3</span><b>Materiales</b></a>
+<a class="next" href="../../../es/docs/user-guide/loads.html"><span class="label">2.5 · Siguiente →</span><b>Cargas y carga sísmica</b></a>
+</nav>
+<div class="doc-edit label"><a href="https://github.com/samuelsl27/OpenGeoRock_Web.github.io/blob/main/es/docs/user-guide/water.html" target="_blank" rel="noopener">Editar esta página ↗</a><a href="https://github.com/samuelsl27/OGR-Slip2D/issues" target="_blank" rel="noopener">Informar de un problema ↗</a></div>
+<!-- @end docfoot -->
+  </main>
+
+  <aside class="doc-toc" aria-label="En esta página">
+    <div class="toc-inner">
+<!-- @inc pagetoc -->
+<span class="label">En esta página</span><ul><li class="h2"><a href="#choosing">2.4.1 Elección del método de agua subterránea</a></li><li class="h2"><a href="#material-water">2.4.2 Cómo toma un material su presión intersticial</a></li><li class="h3"><a href="#hu">Superficies de agua y Hu</a></li><li class="h3"><a href="#ru">La relación de presión intersticial ru</a></li><li class="h2"><a href="#water-surfaces">2.4.3 Niveles freáticos y líneas piezométricas</a></li><li class="h3"><a href="#assign-water">Assign Water Surface</a></li><li class="h2"><a href="#ponded">2.4.4 Agua embalsada</a></li><li class="h2"><a href="#grid">2.4.5 Rejilla de presiones de agua</a></li><li class="h2"><a href="#excess">2.4.6 Exceso de presión intersticial (B-bar)</a></li><li class="h2"><a href="#drawdown">2.4.7 Desembalse rápido y elementos finitos</a></li></ul><button class="print" type="button"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="1.5"/><path d="M6 14h12v7H6z"/></svg> Imprimir esta página</button>
+<!-- @end pagetoc -->
+    </div>
+  </aside>
+</div>
+
+<!-- @inc footer -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <a class="brand" href="../../../es/index.html" aria-label="OpenGeoRock — inicio">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
+          <b>OpenGeoRock</b>
+        </a>
+        <p class="tagline">Software geotécnico de código abierto, desarrollado a la vista de todos en la Universidad Politécnica de Cartagena.</p>
+        <span class="lang" role="group" aria-label="Idioma"><a href="../../../docs/user-guide/water.html" hreflang="en" lang="en">EN</a><a href="../../../es/docs/user-guide/water.html" hreflang="es" lang="es" aria-current="true">ES</a></span>
+      </div>
+      <div>
+        <h5>Productos</h5>
+        <ul>
+          <li><a href="../../../es/products/slip2d.html">OGR Slip2D</a></li>
+          <li><a href="../../../es/products/index.html">La suite</a></li>
+          <li><a href="../../../es/ai/index.html">Servidor MCP</a></li>
+          <li><a href="../../../es/download/index.html">Descargar</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Aprende</h5>
+        <ul>
+          <li><a href="../../../es/docs/index.html">Documentación</a></li>
+          <li><a href="../../../es/docs/getting-started/quick-start.html">Inicio rápido</a></li>
+          <li><a href="../../../es/docs/theory/methods.html">Manual de teoría</a></li>
+          <li><a href="../../../es/examples/index.html">Ejemplos</a></li>
+          <li><a href="../../../es/verification/index.html">Verificación</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Proyecto</h5>
+        <ul>
+          <li><a href="../../../es/about/index.html">El proyecto</a></li>
+          <li><a href="../../../es/about/index.html#team">Equipo</a></li>
+          <li><a href="../../../es/about/index.html#cite">Cómo citar</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Contribuir</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/LICENSE" target="_blank" rel="noopener">Licencia · AGPL-3.0</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contacto</h5>
+        <ul>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/issues" target="_blank" rel="noopener">Incidencias</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/tree/main/docs/changelog" target="_blank" rel="noopener">Historial de cambios</a></li>
+          <li><a href="mailto:samuel.saez@edu.upct.es">Correo</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© 2026 Samuel Sáez López · OGR Slip2D es software libre bajo AGPL-3.0-or-later, sin garantía de ningún tipo.</span>
+      <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
+    </div>
+  </div>
+</footer>
+<!-- @end footer -->
+</body>
+</html>
