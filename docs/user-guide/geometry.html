@@ -65,7 +65,7 @@
               <a class="mega-item" href="../../docs/reference/cli.html"><b>The command line</b><span>Batch runs with ogr-slip2d-cli</span></a>
             </div>
           </div>
-          <div class="mega-foot"><span>Five programs, one open core.</span><a href="../../products/index.html">All products →</a></div>
+          <div class="mega-foot"><span>OGR Slip2D is available now; the other four programs are planned.</span><a href="../../products/index.html">All products →</a></div>
         </div>
       </div>
       <a href="../../examples/index.html" data-nav="examples">Examples</a>
@@ -168,7 +168,7 @@
     </header>
 
     <article class="doc prose">
-      <p class="lede">A model is a two-dimensional section built from boundaries: one external boundary that encloses the ground, material boundaries that divide it into regions, and lines that carry water, a tension crack, a weak layer or the orientation of bedding. This page describes each type of boundary and the rules it follows, how to draw, type and edit boundaries, the tools that reshape the external boundary, and how to bring geometry in from a DXF drawing and send it back.</p>
+      <p class="lede">A model is a two-dimensional section built from boundaries: one external boundary that encloses the ground, material boundaries that divide it into regions, and lines that carry water, a tension crack, a weak layer or the orientation of bedding.</p>
 
       <h2 id="boundary-types"><span class="secnum">2.2.1</span><span class="ht">Boundary types</span><a class="anchor" href="#boundary-types" aria-label="Link to this section">#</a></h2>
       <p>The <span class="ui">Boundaries</span> menu has one command per type, with the shortcuts <kbd>Ctrl</kbd>+<kbd>1</kbd> to <kbd>Ctrl</kbd>+<kbd>8</kbd>. <a class="xref" href="#fig-boundaries">Figure 2.2.1</a> shows the main ones on a slope section and <a class="xref" href="#tbl-boundaries">Table 2.2.1</a> lists all of them.</p>
@@ -216,7 +216,7 @@
         </div>
       </figure>
 
-      <p>The commands that would break a rule are greyed out, with a tooltip that says why — <span class="ui">Add Water Table</span> once the model has one, for instance.</p>
+      <p>The commands that would break a rule are greyed out, with a tooltip that says why, as with <span class="ui">Add Water Table</span> once the model has one.</p>
 
       <h2 id="drawing"><span class="secnum">2.2.2</span><span class="ht">Drawing and typing boundaries</span><a class="anchor" href="#drawing" aria-label="Link to this section">#</a></h2>
       <p>Draw the external boundary first, then the material boundaries, then the water and the other lines. Every drawing follows the conventions of the canvas (<a href="../getting-started/interface.html#drawing">Drawing on the canvas</a>):</p>
@@ -231,9 +231,9 @@
       <h3 id="material-boundaries"><span class="ht">Material boundaries and regions</span><a class="anchor" href="#material-boundaries" aria-label="Link to this section">#</a></h3>
       <p>The regions of the model are the pieces into which the material boundaries cut the external boundary. Each region takes one material (<a class="xref" href="materials.html#assign">Section 2.3.3</a>). For the regions to come out as intended:</p>
       <ul>
-        <li><strong>Run every material boundary from boundary to boundary</strong> — from one edge of the external boundary to another, or onto another material boundary. An end that lies within about 0.8 % of the model diagonal of another boundary is welded onto it, and a node is inserted there.</li>
+        <li><strong>Run every material boundary from boundary to boundary</strong>, that is, from one edge of the external boundary to another, or onto another material boundary. An end that lies within about 0.8 % of the model diagonal of another boundary is welded onto it, and a node is inserted there.</li>
         <li><strong>An end that stops inside the model is extended</strong> straight along its last segment until it leaves the model, cutting every region in its way. Extend the line on purpose instead of relying on this.</li>
-        <li><strong>A lens</strong> — a pocket of one material inside another — is a <em>closed</em> material boundary. It becomes a region of its own, and a hole in the region around it.</li>
+        <li><strong>A lens</strong> (a pocket of one material inside another) is a <em>closed</em> material boundary. It becomes a region of its own, and a hole in the region around it.</li>
       </ul>
       <div class="note warn"><span class="label">Drawing a lens in 0.1.235</span><p><span class="ui">Add Material Boundary</span> always produces an open polyline, even when the last click lands on the first vertex, and the two ends of such a loop are then extended across the model like any other loose end. Create a lens as a closed polygon instead: type it with <span class="ui">Tools → Draw → Polygon</span> and convert it with <span class="ui">Tools → Convert Tool to Boundary…</span> into a Material Boundary, or import it from a DXF drawing.</p></div>
       <p>A region to which no material has been assigned takes the <strong>first</strong> material of the project (<a href="materials.html#first-material">Regions without a material</a>).</p>
@@ -265,7 +265,7 @@
       <h3 id="weak-layers"><span class="ht">Weak layers and anisotropic surfaces</span><a class="anchor" href="#weak-layers" aria-label="Link to this section">#</a></h3>
       <p>A <strong>weak layer</strong> is a joint, a shear band or a thin layer along which a slip surface can travel. It does not divide the ground into regions; its strength is that of a material. When the line is finished and the project has materials, the <strong>Assign Material</strong> dialog asks which one: a weak layer without a material has no strength of its own. A trial surface that touches a weak layer is clipped to follow it; how a surface that touches several is treated is chosen in <span class="ui">Surfaces → Surface Options…</span> (<a class="xref" href="surfaces.html">Section 2.7</a>), and the steepest slice base allowed on such a surface in <a class="xref" href="project-settings.html#advanced">Section 2.1.9</a>.</p>
       <div class="note warn"><span class="label">Version 0.1.235</span><p>The material of a weak layer can only be chosen when the line is drawn: <span class="ui">Properties → Assign Material</span> does not reach weak layers. To give a weak layer another material, delete it and draw it again. Converting a material boundary into a weak layer with <span class="ui">Convert Boundary…</span> keeps the material it had.</p></div>
-      <p>An <strong>anisotropic surface</strong> carries no strength and divides nothing: it says which way the bedding runs at each point, for a material whose strength model is Anisotropic Linear or Snowden Modified Anisotropic Linear and that selects it in Define Materials (<a href="materials.html#strength">Strength type</a>). The orientation is read at the closest point of the polyline, not at the point vertically above, and the order in which the vertices are clicked decides the angle at a kink — so click them in order along the bedding.</p>
+      <p>An <strong>anisotropic surface</strong> carries no strength and divides nothing: it says which way the bedding runs at each point, for a material whose strength model is Anisotropic Linear or Snowden Modified Anisotropic Linear and that selects it in Define Materials (<a href="materials.html#strength">Strength type</a>). The orientation is read at the closest point of the polyline, not at the point vertically above, and the order in which the vertices are clicked decides the angle at a kink, so click them in order along the bedding.</p>
 
       <h3 id="block-objects"><span class="ht">Block Search objects</span><a class="anchor" href="#block-objects" aria-label="Link to this section">#</a></h3>
       <p>With <strong>Surface Type = Non-Circular</strong> and <strong>Search Method = Block Search</strong> in Surface Options, four commands of the <span class="ui">Surfaces</span> menu draw the objects the search builds its trial surfaces from: a <strong>Window</strong> (a closed polygon), a <strong>Line</strong> (two clicks), a <strong>Point</strong> (one click) and a <strong>Polyline</strong> (clicked from one end to the other, and advancing in <span class="m" data-tex="x"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span></span></span></span><!--/k--></span>). Right-clicking an object opens <span class="ui">Block Search Object…</span>, which shows its kind, the point options of a polyline and its Group ID. They are described with the search in <a class="xref" href="surfaces.html">Section 2.7</a>.</p>
@@ -295,7 +295,7 @@
           </table>
         </div>
       </figure>
-      <p>Scaling and rotation are about the pivot typed in the dialog, (0, 0) by default — not about the centre of the boundary.</p>
+      <p>Scaling and rotation are about the pivot typed in the dialog, (0, 0) by default, and not about the centre of the boundary.</p>
       <div class="note warn"><span class="label">Version 0.1.235</span><p><span class="ui">Convert Boundary…</span> does not check the one-per-model rules: it accepts converting a boundary into a second external boundary, water table, tension crack or drawdown line. Check the type you convert to. The <span class="ui">Convert Boundary…</span> entry of the right-click menu changes only the type, and keeps whether the polyline is closed; use the command of the Boundaries menu to convert a closed boundary into an open line.</p></div>
 
       <h2 id="external-tools"><span class="secnum">2.2.4</span><span class="ht">Reshaping the external boundary</span><a class="anchor" href="#external-tools" aria-label="Link to this section">#</a></h2>
@@ -303,12 +303,12 @@
       <h3 id="expand-shrink"><span class="ht">Expand / Shrink External</span><a class="anchor" href="#expand-shrink" aria-label="Link to this section">#</a></h3>
       <p><span class="ui">Boundaries → Expand / Shrink External…</span> (also in the right-click menu of the external boundary) adds ground to the model or removes it, as one undo step. It first asks for the method:</p>
       <ul>
-        <li><strong>Draw polyline (recommended)</strong>: click the first point <em>on</em> the external boundary (the snap shows it), then the intermediate points outside the model to expand it or inside to shrink it, and the last point on the external boundary again; finish with <kbd>Enter</kbd> or <span class="ui">Done</span>. The program then asks whether the part of the old external boundary that was removed should be kept as a material boundary — useful to keep the original ground surface as the base of a fill or the outline of an excavation.</li>
+        <li><strong>Draw polyline (recommended)</strong>: click the first point <em>on</em> the external boundary (the snap shows it), then the intermediate points outside the model to expand it or inside to shrink it, and the last point on the external boundary again; finish with <kbd>Enter</kbd> or <span class="ui">Done</span>. The program then asks whether the part of the old external boundary that was removed should be kept as a material boundary, which is useful to keep the original ground surface as the base of a fill or the outline of an excavation.</li>
         <li><strong>Numeric offset (all edges by a fixed distance)</strong>: moves every edge by the <strong>Offset distance</strong> (1.0 m by default): positive expands, negative shrinks.</li>
       </ul>
 
       <h3 id="slope-angle"><span class="ht">Change Slope Angle</span><a class="anchor" href="#slope-angle" aria-label="Link to this section">#</a></h3>
-      <p><span class="ui">Boundaries → Change Slope Angle…</span> changes the overall angle of the slope face — the chord from toe to crest — and moves nothing else. Click the <strong>toe</strong> vertex and then the <strong>crest</strong> vertex of the external boundary; the dialog shows the current overall angle and asks how to change it.</p>
+      <p><span class="ui">Boundaries → Change Slope Angle…</span> changes the overall angle of the slope face (the chord from toe to crest) and moves nothing else. Click the <strong>toe</strong> vertex and then the <strong>crest</strong> vertex of the external boundary; the dialog shows the current overall angle and asks how to change it.</p>
       <figure class="tbl" id="tbl-slope-angle">
         <figcaption><span class="fignum">Table 2.2.4</span> Change Slope Angle dialog.</figcaption>
         <div class="table-wrap">
@@ -346,7 +346,7 @@
         </div>
       </figure>
       <p>The layer table gives each layer's entities and vertex count; layers without a proposed role are highlighted for you to decide. A layer is proposed from its name, ignoring case and separators: <code>OGR_EXTERNAL</code>, <code>EXTERNAL</code>, <code>EXTERIOR</code> or <code>CONTORNO</code> as the external boundary; <code>OGR_MATERIAL</code>, <code>MATERIAL</code>, <code>SUELO</code> or <code>ESTRATO</code> as material boundaries; <code>OGR_WATER_TABLE</code>, <code>WATER_TABLE</code>, <code>WT</code> or <code>FREATICO</code> as the water table; <code>OGR_PIEZO</code> or <code>PIEZOMETRIC</code> as piezometric lines; <code>OGR_DRAWDOWN</code> or <code>DRAWDOWN</code> as the drawdown line; <code>OGR_CRACK</code> or <code>TENSION_CRACK</code> as the tension crack; and a few more aliases in English and Spanish.</p>
-      <p><span class="ui">Preview</span> runs the import without committing it and reports the vertex count before and after simplification, the number of regions found and — the decisive check — whether the areas of the regions add up to the area of the external boundary. If they do not, a region did not close: raise the welding tolerance a little and preview again. <span class="ui">Import</span> is never refused: what could not be resolved is listed, and when there are problems the non-modal <strong>DXF Import — Problems</strong> panel opens after the import. It groups the problems by kind, with their severity and a suggested remedy; selecting one centres the canvas on it, double-clicking zooms in, and <span class="ui">Go to problem</span> and <span class="ui">Zoom all</span> do the same from buttons.</p>
+      <p><span class="ui">Preview</span> runs the import without committing it and reports the vertex count before and after simplification, the number of regions found and whether the areas of the regions add up to the area of the external boundary, which is the decisive check. If they do not, a region did not close: raise the welding tolerance a little and preview again. <span class="ui">Import</span> is never refused: what could not be resolved is listed, and when there are problems the non-modal <strong>DXF Import — Problems</strong> panel opens after the import. It groups the problems by kind, with their severity and a suggested remedy; selecting one centres the canvas on it, double-clicking zooms in, and <span class="ui">Go to problem</span> and <span class="ui">Zoom all</span> do the same from buttons.</p>
       <div class="note warn"><span class="label">Version 0.1.235</span><p>The <strong>Support</strong> role imports nothing yet, and the dialog offers no role for weak layers or anisotropic surfaces: a layer named <code>OGR_WEAK_LAYER</code> or <code>OGR_ANISO_SURFACE</code>, as written by Export DXF, appears as <em>(ignore)</em>. Draw those lines in the program after importing the rest.</p></div>
 
       <h3 id="dxf-export"><span class="ht">Exporting a drawing</span><a class="anchor" href="#dxf-export" aria-label="Link to this section">#</a></h3>
@@ -369,7 +369,7 @@
           </table>
         </div>
       </figure>
-      <p>Options for things the model does not have — supports, loads, a mesh, results — are greyed out. DXF carries geometry only: materials, the material of a weak layer and the link from a material to an anisotropic surface are not exported. The status bar reports what was written and what was skipped.</p>
+      <p>Options for things the model does not have (supports, loads, a mesh, results) are greyed out. DXF carries geometry only: materials, the material of a weak layer and the link from a material to an anisotropic surface are not exported. The status bar reports what was written and what was skipped.</p>
 
       <div class="impl">
         <span class="label">In OGR Slip2D</span>
@@ -405,7 +405,7 @@
           <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
           <b>OpenGeoRock</b>
         </a>
-        <p class="tagline">Open-source geotechnical software, built in the open at the Universidad Politécnica de Cartagena.</p>
+        <p class="tagline">Open-source geotechnical software developed at the Universidad Politécnica de Cartagena.</p>
         <span class="lang" role="group" aria-label="Language"><a href="../../docs/user-guide/geometry.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../../es/docs/user-guide/geometry.html" hreflang="es" lang="es">ES</a></span>
       </div>
       <div>

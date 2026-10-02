@@ -2,8 +2,8 @@
 <html class="no-js" lang="en" data-root="../">
 <head>
 <meta charset="utf-8">
-<title>Get OGR Slip2D — install from source — OpenGeoRock</title>
-<meta name="description" content="How to install OGR Slip2D: requirements, step-by-step installation from source on Windows, macOS and Linux, the optional MCP extra and how to update.">
+<title>Get OGR Slip2D: install from source — OpenGeoRock</title>
+<meta name="description" content="How to install OGR Slip2D from source on Windows, macOS and Linux: requirements, the steps for each system, the optional MCP extra and how to update.">
 <!-- @inc head -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>document.documentElement.classList.replace("no-js", "js")</script>
@@ -13,8 +13,8 @@
 <link rel="alternate" hreflang="x-default" href="https://opengeorock.org/download/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="OpenGeoRock">
-<meta property="og:title" content="Get OGR Slip2D — install from source — OpenGeoRock">
-<meta property="og:description" content="How to install OGR Slip2D: requirements, step-by-step installation from source on Windows, macOS and Linux, the optional MCP extra and how to update.">
+<meta property="og:title" content="Get OGR Slip2D: install from source — OpenGeoRock">
+<meta property="og:description" content="How to install OGR Slip2D from source on Windows, macOS and Linux: requirements, the steps for each system, the optional MCP extra and how to update.">
 <meta property="og:url" content="https://opengeorock.org/download/">
 <meta property="og:image" content="https://opengeorock.org/assets/img/og-image.png">
 <meta property="og:locale" content="en_GB">
@@ -64,7 +64,7 @@
               <a class="mega-item" href="../docs/reference/cli.html"><b>The command line</b><span>Batch runs with ogr-slip2d-cli</span></a>
             </div>
           </div>
-          <div class="mega-foot"><span>Five programs, one open core.</span><a href="../products/index.html">All products →</a></div>
+          <div class="mega-foot"><span>OGR Slip2D is available now; the other four programs are planned.</span><a href="../products/index.html">All products →</a></div>
         </div>
       </div>
       <a href="../examples/index.html" data-nav="examples">Examples</a>
@@ -104,12 +104,12 @@
   <div class="wrap grid-2" style="align-items:end">
     <div>
       <nav class="crumbs label" aria-label="Breadcrumb"><a href="../index.html">Home</a><span aria-hidden="true">/</span><span>Get OGR Slip2D</span></nav>
-      <h1>Get <em>OGR Slip2D.</em></h1>
-      <p class="lede">OGR Slip2D is a pre-release in active development. Signed installers are not ready yet; today you install it from its public source code, which takes a few minutes with Python.</p>
+      <h1>Installing <em>OGR Slip2D</em></h1>
+      <p class="lede">OGR Slip2D is a pre-release and is still in active development. There are no signed installers yet, so for now you install it from its public source code, which takes a few minutes with Python.</p>
     </div>
     <div class="grid-2" style="gap:12px">
       <div class="card"><span class="tag live">Available now</span><h3>From source</h3><p>Version <span data-v>0.1.235</span>, the same code the tests run on.</p></div>
-      <div class="card planned"><span class="tag soon">Planned</span><h3>Installers</h3><p>Signed installers for Windows, macOS and Linux, next on the roadmap.</p></div>
+      <div class="card planned"><span class="tag soon">Planned</span><h3>Installers</h3><p>Signed installers for Windows, macOS and Linux. They are the next item on the roadmap.</p></div>
     </div>
   </div>
 </section>
@@ -118,7 +118,7 @@
   <div class="wrap">
     <div class="sec-head">
       <div><div class="sec-num label">§ 01 — Install</div><h2>Install from source</h2></div>
-      <p>You need <strong>Python 3.11 or newer</strong> and Git. pip installs every dependency — NumPy, SciPy, Shapely, PySide6 and the rest — into a virtual environment of its own.</p>
+      <p>You need <strong>Python 3.11 or newer</strong> and Git. pip installs all the dependencies (NumPy, SciPy, Shapely, PySide6 and the rest) into a separate virtual environment.</p>
     </div>
     <div class="tabs" data-group="os">
       <div class="tablist" role="tablist" aria-label="Operating system">
@@ -154,15 +154,15 @@ pip install -e .
 ogr-slip2d</code></pre></div>
       </div>
     </div>
-    <p class="mt-m muted">If the <code>ogr-slip2d</code> command is not found, <code>python -m ogr_gui</code> starts the same program. The program opens with an empty project; <span class="ui">File → Load Demo Slope</span> loads a sample model to try.</p>
+    <p class="mt-m muted">If the system cannot find the <code>ogr-slip2d</code> command, <code>python -m ogr_gui</code> starts the same program. It opens with an empty project; to try it out, <span class="ui">File → Load Demo Slope</span> loads a sample model.</p>
   </div>
 </section>
 
 <section class="section alt">
   <div class="wrap">
     <div class="sec-head">
-      <div><div class="sec-num label">§ 02 — What you get</div><h2>Three commands, <em>one package.</em></h2></div>
-      <p>The package is called <code>ogr-slip2d</code>. It installs the desktop program, a command-line interface and, with the <code>[mcp]</code> extra, the server for AI agents.</p>
+      <div><div class="sec-num label">§ 02 — What you get</div><h2>The package and <em>its three commands</em></h2></div>
+      <p>The package is called <code>ogr-slip2d</code>. It installs the desktop program and a command-line interface, plus the server for AI agents if you add the <code>[mcp]</code> extra.</p>
     </div>
     <div class="table-wrap">
       <table class="data">
@@ -175,9 +175,9 @@ ogr-slip2d</code></pre></div>
       </table>
     </div>
     <div class="grid-3 mt-l">
-      <div class="card"><span class="label">Update</span><h3>Stay current</h3><p>From the repository folder: <code>git pull</code>, then <code>pip install -e .</code> again to pick up any new dependency.</p></div>
-      <div class="card"><span class="label">Extras</span><h3>Optional parts</h3><p><code>[mcp]</code> adds the MCP server; <code>[dev]</code> the development tools. The program itself needs neither.</p></div>
-      <div class="card"><span class="label">Changes</span><h3>Every version, explained</h3><p>Each version has a changelog that records what was found as well as what was written.</p><div class="foot label"><a class="link" href="https://github.com/samuelsl27/OGR-Slip2D/tree/main/docs/changelog" target="_blank" rel="noopener">Changelog on GitHub ↗</a></div></div>
+      <div class="card"><span class="label">Update</span><h3>Updating an installation</h3><p>From the repository folder, run <code>git pull</code> and then <code>pip install -e .</code> again, so that any new dependencies are installed.</p></div>
+      <div class="card"><span class="label">Extras</span><h3>Optional components</h3><p><code>[mcp]</code> adds the MCP server and <code>[dev]</code> the development tools. Neither is needed to run the program.</p></div>
+      <div class="card"><span class="label">Changes</span><h3>Version history</h3><p>Each version has a changelog that records what was found during its development as well as what was written.</p><div class="foot label"><a class="link" href="https://github.com/samuelsl27/OGR-Slip2D/tree/main/docs/changelog" target="_blank" rel="noopener">Changelog on GitHub ↗</a></div></div>
     </div>
   </div>
 </section>
@@ -186,11 +186,11 @@ ogr-slip2d</code></pre></div>
   <div class="wrap grid-2" style="align-items:start">
     <div>
       <div class="sec-num label">§ 03 — Before you use it</div>
-      <h2 class="mt-s">Pre-release <em>means pre-release.</em></h2>
+      <h2 class="mt-s">About this <em>pre-release</em></h2>
     </div>
     <div>
-      <p>OGR Slip2D is research software in active development. Its methods are validated against published cases and its suite runs thousands of tests, but it has no warranty of any kind: results must be checked against independent calculations before anything is based on them. A project is signed by a person, not by a program.</p>
-      <p>Found something wrong — or a slope whose factor of safety you know? <a href="https://github.com/samuelsl27/OGR-Slip2D/issues" target="_blank" rel="noopener">Open an issue</a>. A validation case is the most valuable contribution there is.</p>
+      <p>OGR Slip2D is research software and is still in active development. Its methods are validated against published cases and its test suite runs thousands of tests, but the program comes with no warranty of any kind. Its results must be checked against independent calculations before anything is based on them, and responsibility for a project lies with the engineer who signs it.</p>
+      <p>If you find an error, or know the factor of safety of a slope, please <a href="https://github.com/samuelsl27/OGR-Slip2D/issues" target="_blank" rel="noopener">open an issue</a>. Validation cases are the contribution that helps us most.</p>
       <div class="cta-row"><a class="btn primary" href="../docs/getting-started/quick-start.html">Quick start <span class="arrow">→</span></a><a class="btn" href="../verification/index.html">Verification</a></div>
     </div>
   </div>
@@ -207,7 +207,7 @@ ogr-slip2d</code></pre></div>
           <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
           <b>OpenGeoRock</b>
         </a>
-        <p class="tagline">Open-source geotechnical software, built in the open at the Universidad Politécnica de Cartagena.</p>
+        <p class="tagline">Open-source geotechnical software developed at the Universidad Politécnica de Cartagena.</p>
         <span class="lang" role="group" aria-label="Language"><a href="../download/index.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../es/download/index.html" hreflang="es" lang="es">ES</a></span>
       </div>
       <div>

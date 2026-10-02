@@ -64,7 +64,7 @@
               <a class="mega-item" href="../../docs/reference/cli.html"><b>The command line</b><span>Batch runs with ogr-slip2d-cli</span></a>
             </div>
           </div>
-          <div class="mega-foot"><span>Five programs, one open core.</span><a href="../../products/index.html">All products →</a></div>
+          <div class="mega-foot"><span>OGR Slip2D is available now; the other four programs are planned.</span><a href="../../products/index.html">All products →</a></div>
         </div>
       </div>
       <a href="../../examples/index.html" data-nav="examples">Examples</a>
@@ -167,10 +167,10 @@
     </header>
 
     <article class="doc prose">
-      <p class="lede"><span class="ui">Analysis → Compute</span> runs one search for every method enabled in the project. The Results dock and the status bar give the headline number, <span class="ui">Analysis Notes</span> collects everything the run had to say, and the Interpret window lets you examine every surface and every slice. This page covers the four, and how to take results out of the program.</p>
+      <p class="lede"><span class="ui">Analysis → Compute</span> runs one search for every method enabled in the project. The critical value appears in the Results dock and in the status bar; the notes the run produced are in <span class="ui">Analysis Notes</span>, and the Interpret window lets you examine the surfaces and their slices. From there the results can be exported as images and CSV files.</p>
 
       <h2 id="compute"><span class="secnum">2.8.1</span><span class="ht">Running the analysis</span><a class="anchor" href="#compute" aria-label="Link to this section">#</a></h2>
-      <p>Choose <span class="ui">Analysis → Compute</span> (<kbd>Ctrl</kbd>+<kbd>T</kbd>, also on the toolbar). Before anything is computed the model is checked, and the run is refused, with the reasons, when the model has no boundaries, when it has no materials, or when a setting cannot be honoured — for example materials that take their pore pressure from a finite-element field that has not been computed, a rapid drawdown whose conditions are not met, or Block Search objects the search cannot use. A refusal is deliberate: the alternative would be a plausible number computed with part of the model ignored.</p>
+      <p>Choose <span class="ui">Analysis → Compute</span> (<kbd>Ctrl</kbd>+<kbd>T</kbd>, also on the toolbar). Before anything is computed the model is checked, and the run is refused, with the reasons, when the model has no boundaries, when it has no materials, or when a setting cannot be honoured. Examples are materials that take their pore pressure from a finite-element field that has not been computed, a rapid drawdown whose conditions are not met, and Block Search objects the search cannot use. The check avoids reporting a number computed with part of the model ignored.</p>
       <p>Every method ticked in <span class="ui">Analysis → Project Settings →</span> <span class="ui">Methods</span> is run with its own search (Bishop simplified and Janbu simplified in a new project), one after another, while a progress window shows how far the run has got.</p>
       <div class="note warn"><span class="label">Cancel does not stop the run</span><p>In version 0.1.235 the <strong>Cancel</strong> button of the progress window only closes the window: the analysis continues in the background, and its results appear when it finishes.</p></div>
       <p>When the run ends:</p>
@@ -187,7 +187,7 @@
       <div class="note"><span class="label">The list and the critical value</span><p>The list ranks every surface that converged, including those screened out by the m-alpha or tensile stress check. When such a surface has a lower factor of safety than the critical one, it appears above it, and the highlighted first row is then not the critical surface. The value in the header of the dock, and in the status bar, is always the critical one.</p></div>
 
       <h2 id="analysis-notes"><span class="secnum">2.8.3</span><span class="ht">Analysis Notes</span><a class="anchor" href="#analysis-notes" aria-label="Link to this section">#</a></h2>
-      <p><span class="ui">Analysis → Analysis Notes…</span> opens a window that can stay open while you work. It lists every note of the last run — model-wide notes first, under <em>Model</em>, then the notes about each method's reported surface under the method's id — and <strong>Copy all</strong> puts them on the clipboard, one per line. Typical notes say that the critical centre lies on the edge of the grid, that a setting was not honoured by the chosen search, that a weak-layer case set had to be truncated or that a design standard was applied. None of them changes a factor of safety; read them before quoting one. The window refreshes after every run.</p>
+      <p><span class="ui">Analysis → Analysis Notes…</span> opens a window that can stay open while you work. It lists every note of the last run (model-wide notes first, under <em>Model</em>, then the notes about each method's reported surface under the method's id), and <strong>Copy all</strong> puts them on the clipboard, one per line. Typical notes say that the critical centre lies on the edge of the grid, that a setting was not honoured by the chosen search, that a weak-layer case set had to be truncated or that a design standard was applied. None of them changes a factor of safety; read them before quoting one. The window refreshes after every run.</p>
 
       <h2 id="info-viewer"><span class="secnum">2.8.4</span><span class="ht">Info Viewer</span><a class="anchor" href="#info-viewer" aria-label="Link to this section">#</a></h2>
       <p><span class="ui">Analysis → Info Viewer</span> (<kbd>Ctrl</kbd>+<kbd>I</kbd>) summarises the model, not the results: the project name, the number of boundaries, materials, supports, distributed loads and line loads, the bounding box, the search method and the author.</p>
@@ -208,7 +208,7 @@
       </figure>
 
       <h3 id="colour-grid"><span class="ht">The coloured grid of centres</span><a class="anchor" href="#colour-grid" aria-label="Link to this section">#</a></h3>
-      <p>With a Grid Search, each centre of the grid is coloured by the lowest factor of safety found there. Move the pointer over the grid to preview the minimum surface of the nearest centre — the status bar gives its factor of safety — and click to select it. For the non-circular searches there is no grid: select surfaces from the Surfaces panel or with <span class="ui">Query → Add Query</span>.</p>
+      <p>With a Grid Search, each centre of the grid is coloured by the lowest factor of safety found there. Move the pointer over the grid to preview the minimum surface of the nearest centre (the status bar gives its factor of safety) and click to select it. For the non-circular searches there is no grid: select surfaces from the Surfaces panel or with <span class="ui">Query → Add Query</span>.</p>
       <p><span class="ui">View → Contour Options…</span> controls the plot: the field shown (<em>Factor of safety</em>, and, when a finite-element groundwater result exists, <em>Pore pressure</em>, <em>Total head</em> and <em>Pressure head</em>), an automatic range or a fixed <em>Minimum</em> and <em>Maximum</em>, the <em>Number of intervals</em>, the <em>Mode</em>, the <em>Palette</em>, reversed colours and the number format. For the factor of safety the default scale is fixed, from 0 to 6 in 24 bands, so that one deep surface with a high factor does not squash the range that matters. <span class="ui">View → Legend Options…</span> sets the decimals, the number of intervals and scientific notation of the legend, and <span class="ui">Data → Supplemental Contours</span> draws iso-lines over the filled bands.</p>
 
       <h2 id="which-surfaces"><span class="secnum">2.8.6</span><span class="ht">Choosing which surfaces are drawn</span><a class="anchor" href="#which-surfaces" aria-label="Link to this section">#</a></h2>
@@ -228,7 +228,7 @@
           <table class="data">
             <thead><tr><th>Command</th><th>What it shows</th></tr></thead>
             <tbody>
-              <tr><td>Graph Query…</td><td>A slice quantity along every query — <em>Factor of safety</em>, <em>Slice weight</em>, <em>Base normal stress</em>, <em>Shear strength</em>, <em>Mobilised shear stress</em>, <em>Pore pressure</em> or <em>Base inclination</em> — against distance along the surface, slice number or x.</td></tr>
+              <tr><td>Graph Query…</td><td>A slice quantity along every query (<em>Factor of safety</em>, <em>Slice weight</em>, <em>Base normal stress</em>, <em>Shear strength</em>, <em>Mobilised shear stress</em>, <em>Pore pressure</em> or <em>Base inclination</em>) against distance along the surface, slice number or x.</td></tr>
               <tr><td>Delete Query…</td><td>Removes one query, or all of them.</td></tr>
               <tr><td>Show Slices</td><td>The slice boundaries of every query.</td></tr>
               <tr><td>Query Slice Data…</td><td>Click a slice to show its data in Slice Data and highlight it on the model, with arrows for its forces.</td></tr>
@@ -249,7 +249,7 @@
 
       <h2 id="charts"><span class="secnum">2.8.8</span><span class="ht">Charts</span><a class="anchor" href="#charts" aria-label="Link to this section">#</a></h2>
       <ul>
-        <li><span class="ui">Data → Graph SF Along Slope…</span> plots the factor of safety of every valid surface at its left and right intersections with the ground, against x — either the minimum in each of a number of bins (50 by default) or every point. It shows where along the slope the low factors daylight, which is where to aim the search.</li>
+        <li><span class="ui">Data → Graph SF Along Slope…</span> plots the factor of safety of every valid surface at its left and right intersections with the ground, against x, either the minimum in each of a number of bins (50 by default) or every point. It shows where along the slope the low factors daylight, which is where to aim the search.</li>
         <li><span class="ui">Data → Graph SF with Time…</span> plots, for a transient groundwater analysis, the factor of safety of the stages marked <em>Calculate SF</em> against time (<a class="xref" href="groundwater.html">Section 2.9</a>). It is greyed out without one.</li>
         <li>The <span class="ui">Statistics</span> menu holds the probabilistic and sensitivity charts (<a class="xref" href="probabilistic.html">Section 2.10</a>), and the <span class="ui">Groundwater</span> menu the iteration history and convergence plot of a groundwater analysis.</li>
       </ul>
@@ -293,7 +293,7 @@
       <p>A PDF report of the analysis is produced from the main window with <span class="ui">File → Generate Report…</span>; images, DXF drawings and scripted runs are covered in <a class="xref" href="automation.html">Section 2.12</a>. The <span class="ui">Data</span> menu also holds two support commands, <em>Support Force Diagram…</em> and <em>Back Analysis…</em>; supports are covered in <a class="xref" href="supports.html">Section 2.6</a>.</p>
 
       <h2 id="known-issues"><span class="secnum">2.8.11</span><span class="ht">Commands without effect in version 0.1.235</span><a class="anchor" href="#known-issues" aria-label="Link to this section">#</a></h2>
-      <div class="note warn"><span class="label">Present in the menus, not working</span>
+      <div class="note warn"><span class="label">Known issues</span>
         <p>These Interpret-window commands do nothing, or less than their name says, in version 0.1.235:</p>
         <ul>
           <li><span class="ui">Groundwater → Phreatic Surface</span>, <span class="ui">Piezometric Lines</span>, <span class="ui">Flow Vectors</span> and <span class="ui">Streamlines</span> can be ticked but have no effect. Flow vectors and the free surface are drawn by <span class="ui">Groundwater → Interpret Groundwater</span> in the main window.</li>
@@ -332,7 +332,7 @@
           <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
           <b>OpenGeoRock</b>
         </a>
-        <p class="tagline">Open-source geotechnical software, built in the open at the Universidad Politécnica de Cartagena.</p>
+        <p class="tagline">Open-source geotechnical software developed at the Universidad Politécnica de Cartagena.</p>
         <span class="lang" role="group" aria-label="Language"><a href="../../docs/user-guide/results.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../../es/docs/user-guide/results.html" hreflang="es" lang="es">ES</a></span>
       </div>
       <div>

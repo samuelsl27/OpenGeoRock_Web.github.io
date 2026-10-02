@@ -65,7 +65,7 @@
               <a class="mega-item" href="../../../es/docs/reference/cli.html"><b>La línea de comandos</b><span>Cálculos por lotes con ogr-slip2d-cli</span></a>
             </div>
           </div>
-          <div class="mega-foot"><span>Cinco programas sobre un mismo núcleo abierto.</span><a href="../../../es/products/index.html">Todos los productos →</a></div>
+          <div class="mega-foot"><span>OGR Slip2D ya está disponible; los otros cuatro programas están previstos.</span><a href="../../../es/products/index.html">Todos los productos →</a></div>
         </div>
       </div>
       <a href="../../../es/examples/index.html" data-nav="examples">Ejemplos</a>
@@ -168,7 +168,7 @@
     </header>
 
     <article class="doc prose">
-      <p class="lede">Este tutorial construye, a partir de un proyecto vacío, el talud de la página de inicio (16 m de altura, una berma a media altura, tres suelos y un nivel freático) y lo analiza con tres métodos. Lleva unos quince minutos y recorre todas las etapas de un análisis habitual. También puedes descargar el modelo ya hecho: <a href="../../../assets/models/ej01-two-layer-slope.ogr" download>ej01-two-layer-slope.ogr</a>.</p>
+      <p class="lede">Este tutorial construye, a partir de un proyecto vacío, el talud de la página de inicio (16 m de altura, una berma a media altura, tres suelos y un nivel freático) y lo analiza con tres métodos. Lleva unos quince minutos y recorre las etapas habituales de un análisis. También puedes descargar el modelo ya hecho: <a href="../../../assets/models/ej01-two-layer-slope.ogr" download>ej01-two-layer-slope.ogr</a>.</p>
 
       <figure class="fig" id="fig-target">
         <div class="art"><!-- svg:qs-target --><svg class="slope-svg" id="qstarget" viewBox="0 0 850 652" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="qstarget-t">
@@ -494,7 +494,7 @@
         <div class="art"><img src="../../../assets/img/shots/qs-geometry.webp" alt="Lienzo con el contorno externo, dos contornos de material y el nivel freático" loading="lazy" width="1600" height="1000"></div>
         <figcaption><span class="fignum">Figura 1.2.3</span> Contorno externo, dos contornos de material y nivel freático. Cada región cerrada entre contornos recibirá un material.</figcaption>
       </figure>
-      <div class="note water"><span class="label">El agua no tiene efecto hasta que se asigna</span><p>Un nivel freático solo genera presión intersticial en los materiales que lo usan. Al terminar de dibujarlo, el programa propone asignarlo; si te saltas ese paso, hazlo más tarde con <span class="ui">Properties → Assign Water Surface…</span>.</p></div>
+      <div class="note water"><span class="label">Hay que asignar el nivel freático</span><p>Un nivel freático solo genera presión intersticial en los materiales que lo usan. Al terminar de dibujarlo, el programa propone asignarlo; si te saltas ese paso, hazlo más tarde con <span class="ui">Properties → Assign Water Surface…</span>.</p></div>
 
       <h2 id="materials"><span class="secnum">1.2.4</span><span class="ht">Define y asigna los materiales</span><a class="anchor" href="#materials" aria-label="Enlace a esta sección">#</a></h2>
       <ol>
@@ -505,7 +505,7 @@
         <div class="art"><img src="../../../assets/img/shots/define-materials.webp" alt="Diálogo Define Materials con los parámetros de Mohr-Coulomb" loading="lazy" width="900" height="783"></div>
         <figcaption><span class="fignum">Figura 1.2.4</span> Define Materials. Los parámetros de resistencia que aparecen dependen del tipo de resistencia elegido.</figcaption>
       </figure>
-      <div class="note warn"><span class="label">Una región sin asignar no está vacía</span><p>Una región a la que no se asigna ningún material toma el <strong>primer</strong> material de la lista. Antes de calcular, comprueba los colores en el lienzo; con <strong>DATA TIPS</strong> activado en la barra de estado, al pasar el cursor sobre una región aparece su material.</p></div>
+      <div class="note warn"><span class="label">Regiones sin asignar</span><p>Una región a la que no se asigna ningún material toma el <strong>primer</strong> material de la lista. Antes de calcular, comprueba los colores en el lienzo; con <strong>DATA TIPS</strong> activado en la barra de estado, al pasar el cursor sobre una región aparece su material.</p></div>
 
       <h2 id="search"><span class="secnum">1.2.5</span><span class="ht">Elige las superficies de rotura</span><a class="anchor" href="#search" aria-label="Enlace a esta sección">#</a></h2>
       <p>Por defecto, la búsqueda se hace con una rejilla de centros de círculos. <span class="ui">Surfaces → Auto Grid</span> coloca sobre el talud una rejilla cuyas dimensiones se calculan a partir de la geometría; <span class="ui">Surfaces → Surface Options…</span> muestra el tipo de superficie (circular) y el método de búsqueda (rejilla). Para cada centro, el programa prueba una serie de radios, desde el del círculo más pequeño que llega al talud hasta el del mayor que no sale de los límites del talud.</p>
@@ -547,10 +547,10 @@
       <h2 id="save"><span class="secnum">1.2.8</span><span class="ht">Guarda y sigue adelante</span><a class="anchor" href="#save" aria-label="Enlace a esta sección">#</a></h2>
       <p><span class="ui">File → Save</span> guarda el modelo en un archivo <code>.ogr</code>, un JSON de texto plano que pueden abrir el programa, la línea de comandos, la API de Python y el servidor MCP. Desde aquí puedes seguir por otros caminos:</p>
       <div class="cards-doc">
-        <a href="../user-guide/surfaces.html"><b>Prueba otra búsqueda</b><span>Superficies no circulares, objetos de foco y optimización.</span></a>
-        <a href="../user-guide/groundwater.html"><b>Calcula el agua en vez de dibujarla</b><span>Filtración por elementos finitos de la que se obtienen las presiones intersticiales.</span></a>
-        <a href="../user-guide/probabilistic.html"><b>Estima la probabilidad</b><span>Resistencias aleatorias y probabilidad de rotura.</span></a>
-        <a href="../../ai/index.html"><b>Deja que lo haga un agente</b><span>El mismo modelo, construido con MCP a partir de una sola frase.</span></a>
+        <a href="../user-guide/surfaces.html"><b>Superficies de rotura y búsqueda</b><span>Superficies no circulares, objetos de foco y optimización.</span></a>
+        <a href="../user-guide/groundwater.html"><b>Agua subterránea por elementos finitos</b><span>Filtración calculada por elementos finitos en lugar de un nivel freático dibujado; de ella se obtienen las presiones intersticiales.</span></a>
+        <a href="../user-guide/probabilistic.html"><b>Análisis probabilístico y de sensibilidad</b><span>Resistencias aleatorias y probabilidad de rotura.</span></a>
+        <a href="../../ai/index.html"><b>Agentes de IA y MCP</b><span>El mismo modelo, construido a partir de una sola frase.</span></a>
       </div>
     </article>
 

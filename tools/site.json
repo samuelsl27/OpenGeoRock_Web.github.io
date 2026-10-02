@@ -26,8 +26,8 @@
     },
     {
       "n": "2", "dir": "user-guide", "en": "User guide", "es": "Guía de usuario",
-      "d_en": "Every step of a model in the order you build it: geometry, materials, water, loads, supports, search and results.",
-      "d_es": "Cada paso de un modelo en el orden en que se construye: geometría, materiales, agua, cargas, soportes, búsqueda y resultados.",
+      "d_en": "The steps of a model in the order you build it: geometry, materials, water, loads, supports, search and results.",
+      "d_es": "Los pasos de un modelo, en el orden en que se construye: geometría, materiales, agua, cargas, soportes, búsqueda y resultados.",
       "pages": [
         { "n": "2.1", "slug": "project-settings", "en": "Project settings", "es": "Configuración del proyecto" },
         { "n": "2.2", "slug": "geometry", "en": "Geometry and boundaries", "es": "Geometría y contornos" },

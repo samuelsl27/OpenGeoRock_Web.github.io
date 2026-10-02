@@ -64,7 +64,7 @@
               <a class="mega-item" href="../../../es/docs/reference/cli.html"><b>La línea de comandos</b><span>Cálculos por lotes con ogr-slip2d-cli</span></a>
             </div>
           </div>
-          <div class="mega-foot"><span>Cinco programas sobre un mismo núcleo abierto.</span><a href="../../../es/products/index.html">Todos los productos →</a></div>
+          <div class="mega-foot"><span>OGR Slip2D ya está disponible; los otros cuatro programas están previstos.</span><a href="../../../es/products/index.html">Todos los productos →</a></div>
         </div>
       </div>
       <a href="../../../es/examples/index.html" data-nav="examples">Ejemplos</a>
@@ -298,8 +298,8 @@
       <div class="note"><span class="label">Nota</span><p>El análisis transitorio usa además los contenidos de agua saturado y residual (0.4 y 0.05) y el almacenamiento específico (1 × 10⁻⁵ 1/m) de cada material. Define Hydraulic Properties no los muestra en la versión 0.1.235; conservan estos valores por defecto salvo que se fijen con el servidor MCP o con la API de Python.</p></div>
 
       <h2 id="drawdown-sweep"><span class="secnum">2.9.10</span><span class="ht">Drawdown Level Sweep</span><a class="anchor" href="#drawdown-sweep" aria-label="Enlace a esta sección">#</a></h2>
-      <p><span class="ui">Groundwater → Drawdown Level Sweep…</span> pertenece al análisis de desembalse rápido por equilibrio límite, no al de elementos finitos: necesita tener seleccionado <em>Rapid Drawdown analysis</em> en el grupo Advanced, un método de agua subterránea basado en superficies de agua y al menos un material con comportamiento sin drenaje (<a class="xref" href="water.html">Sección 2.4</a>, <a class="xref" href="../theory/rapid-drawdown.html">Sección 3.8</a>). Responde a una pregunta que el desembalse total por sí solo no resuelve: el nivel crítico del embalse no es siempre el más bajo.</p>
-      <p>El diálogo pide el <strong>Number of levels</strong> (11 por defecto; de 2 a 101), repartidos uniformemente desde el nivel freático inicial hasta el punto más bajo del terreno del modelo, y si se incluye el desembalse total (<strong>Include total drawdown</strong>, marcado por defecto). Cada nivel es una búsqueda completa con todos los métodos activados, por lo que el coste de la ejecución depende del número de niveles. Después, la barra de estado indica el nivel crítico y su factor de seguridad (y, si el desembalse total lo sobrestimara, en cuánto), y un gráfico representa el factor de seguridad en función del nivel de desembalse.</p>
+      <p><span class="ui">Groundwater → Drawdown Level Sweep…</span> pertenece al análisis de desembalse rápido por equilibrio límite, no al de elementos finitos: necesita tener seleccionado <em>Rapid Drawdown analysis</em> en el grupo Advanced, un método de agua subterránea basado en superficies de agua y al menos un material con comportamiento sin drenaje (<a class="xref" href="water.html">Sección 2.4</a>, <a class="xref" href="../theory/rapid-drawdown.html">Sección 3.8</a>). El barrido es necesario porque el nivel crítico del embalse no siempre es el más bajo.</p>
+      <p>El diálogo pide el <strong>Number of levels</strong> (11 por defecto; de 2 a 101), repartidos uniformemente desde el nivel freático inicial hasta el punto más bajo del terreno del modelo, y si se incluye el desembalse total (<strong>Include total drawdown</strong>, marcado por defecto). Cada nivel es una búsqueda completa con todos los métodos activados, por lo que el coste de la ejecución crece con el número de niveles. Después, la barra de estado indica el nivel crítico y su factor de seguridad (y, si el desembalse total lo sobrestimara, en cuánto), y un gráfico representa el factor de seguridad en función del nivel de desembalse.</p>
     </article>
 
 <!-- @inc docfoot -->

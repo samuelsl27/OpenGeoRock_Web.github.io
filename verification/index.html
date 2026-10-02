@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>Verification — OGR Slip2D</title>
-<meta name="description" content="How OGR Slip2D is verified: published benchmark cases recomputed with the current version, closed-form checks of the groundwater engine and analytic identities, and a test suite that never compares against its own output.">
+<meta name="description" content="How we verify OGR Slip2D: published benchmark cases recomputed with the current version, closed-form checks of the groundwater engine, analytic identities and a test suite that takes its references from outside the program.">
 <!-- @inc head -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>document.documentElement.classList.replace("no-js", "js")</script>
@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="OpenGeoRock">
 <meta property="og:title" content="Verification — OGR Slip2D">
-<meta property="og:description" content="How OGR Slip2D is verified: published benchmark cases recomputed with the current version, closed-form checks of the groundwater engine and analytic identities, and a test suite that never compares against its own output.">
+<meta property="og:description" content="How we verify OGR Slip2D: published benchmark cases recomputed with the current version, closed-form checks of the groundwater engine, analytic identities and a test suite that takes its references from outside the program.">
 <meta property="og:url" content="https://opengeorock.org/verification/">
 <meta property="og:image" content="https://opengeorock.org/assets/img/og-image.png">
 <meta property="og:locale" content="en_GB">
@@ -64,7 +64,7 @@
               <a class="mega-item" href="../docs/reference/cli.html"><b>The command line</b><span>Batch runs with ogr-slip2d-cli</span></a>
             </div>
           </div>
-          <div class="mega-foot"><span>Five programs, one open core.</span><a href="../products/index.html">All products →</a></div>
+          <div class="mega-foot"><span>OGR Slip2D is available now; the other four programs are planned.</span><a href="../products/index.html">All products →</a></div>
         </div>
       </div>
       <a href="../examples/index.html" data-nav="examples">Examples</a>
@@ -104,8 +104,8 @@
   <div class="wrap grid-2" style="align-items:end">
     <div>
       <nav class="crumbs label" aria-label="Breadcrumb"><a href="../index.html">Home</a><span aria-hidden="true">/</span><span>Verification</span></nav>
-      <h1>Checked against references, <em>not believed.</em></h1>
-      <p class="lede">A factor of safety is only as trustworthy as the evidence behind the program that computed it. OGR Slip2D is validated against published cases, closed-form solutions and analytic identities — never against snapshots of its own output, because a snapshot locks in whatever bug may be there.</p>
+      <h1>How we verify <em>OGR Slip2D</em></h1>
+      <p class="lede">Before relying on a factor of safety, you need some evidence that the program behind it calculates correctly. We validate OGR Slip2D against published cases, closed-form solutions and analytic identities. Stored snapshots of the program's own output are not used as references, because a snapshot would preserve any bug present when it was taken.</p>
     </div>
     <div class="metrics" style="margin-top:0;grid-template-columns:repeat(3,1fr)">
       <div class="metric"><div class="v">7</div><div class="k label">Published cases</div></div>
@@ -119,16 +119,16 @@
 <section class="section">
   <div class="wrap">
     <div class="sec-head">
-      <div><div class="sec-num label">§ 01 — The rule</div><h2>Every number needs an <em>external</em> reference.</h2></div>
-      <p>A method, a solver or a formula is checked against something the program did not produce. Four kinds of reference count; a recording of today's output does not.</p>
+      <div><div class="sec-num label">§ 01 — The rule</div><h2>What counts as <em>a reference</em></h2></div>
+      <p>Methods, solvers and formulas are all checked against results that the program did not produce. Four kinds of reference are accepted; a recording of today's output is not one of them.</p>
     </div>
     <div class="grid-4">
-      <div class="card"><span class="label">01</span><h3>Published cases</h3><p>Factors of safety from surveys, papers and reference manuals, each with its source and its own tolerance.</p></div>
-      <div class="card"><span class="label">02</span><h3>Closed-form solutions</h3><p>Darcy flow, layered media and the error-function response to a step in head, for the groundwater engine.</p></div>
-      <div class="card"><span class="label">03</span><h3>Analytic identities</h3><p>Results that must hold exactly — active and passive support forces coincide at a target factor of 1.0.</p></div>
-      <div class="card"><span class="label">04</span><h3>Consistency</h3><p>A long transient must reproduce the steady state; a mesh must keep the area of its region.</p></div>
+      <div class="card"><span class="label">01</span><h3>Published cases</h3><p>Factors of safety from comparative surveys, papers and reference manuals, stored with their source and a tolerance of their own.</p></div>
+      <div class="card"><span class="label">02</span><h3>Closed-form solutions</h3><p>For the groundwater engine: Darcy flow, layered media and the error-function response to a step change in head.</p></div>
+      <div class="card"><span class="label">03</span><h3>Analytic identities</h3><p>Results that must hold exactly. For example, active and passive support forces coincide when the target factor is 1.0.</p></div>
+      <div class="card"><span class="label">04</span><h3>Consistency</h3><p>A long transient has to reproduce the steady state, and a mesh has to keep the area of its region.</p></div>
     </div>
-    <div class="note mt-l"><span class="label">If a case fails</span><p>The case is not touched to make it pass. The fault is in the code or in the expected value — and working out which is exactly what a validation case exists for. The tolerance belongs to the case, not to the test, because it depends on the quality of the source: a value read from a figure does not deserve the precision of a tabulated one.</p></div>
+    <div class="note mt-l"><span class="label">If a case fails</span><p>A failing case is not edited to make it pass. The fault is either in the code or in the expected value, and the case is there to find out which. Each case carries its own tolerance, set by the quality of its source: a value read off a figure cannot be held to the precision of a tabulated one.</p></div>
   </div>
 </section>
 
@@ -136,8 +136,8 @@
 <section class="section alt" id="benchmarks">
   <div class="wrap">
     <div class="sec-head">
-      <div><div class="sec-num label">§ 02 — Published benchmarks</div><h2>Seven cases, <em>recomputed for this version.</em></h2></div>
-      <p>Every case ships with its model, its expected values and their source in the repository, and runs in the test suite. The values below were recomputed with OGR Slip2D <span data-v>0.1.235</span> exactly as the suite runs them.</p>
+      <div><div class="sec-num label">§ 02 — Published benchmarks</div><h2>Results of the seven <em>published cases</em></h2></div>
+      <p>The repository holds each case with its model, its expected values and their source, and the test suite runs all of them. The values below were recomputed with OGR Slip2D <span data-v>0.1.235</span>, running each case the same way the suite does.</p>
     </div>
     <div class="table-wrap">
       <table class="data">
@@ -147,11 +147,11 @@
         <tbody>
           <tr><td rowspan="2">ACADS 1(a)<br><span class="muted">Giam &amp; Donald (1989)</span></td><td rowspan="2">The grid search finds the critical circle; homogeneous slope, total stress. Reference: mean of 33 programs.</td><td>Bishop</td><td class="n">0.991</td><td class="n">0.9885</td><td class="n">−0.25 %</td><td class="n" rowspan="2">2.0 %</td></tr>
           <tr><td>Janbu corrected</td><td class="n">0.991</td><td class="n">0.9897</td><td class="n">−0.14 %</td></tr>
-          <tr><td rowspan="2">Yamagami &amp; Ueta (1988)</td><td rowspan="2">Two methods at once, so the difference between them is fixed too.</td><td>Bishop</td><td class="n">1.348</td><td class="n">1.3502</td><td class="n">+0.16 %</td><td class="n" rowspan="2">1.5 %</td></tr>
+          <tr><td rowspan="2">Yamagami &amp; Ueta (1988)</td><td rowspan="2">Two methods at once, so the difference between them is checked as well.</td><td>Bishop</td><td class="n">1.348</td><td class="n">1.3502</td><td class="n">+0.16 %</td><td class="n" rowspan="2">1.5 %</td></tr>
           <tr><td>Ordinary</td><td class="n">1.282</td><td class="n">1.2852</td><td class="n">+0.25 %</td></tr>
           <tr><td>ACADS 1(c)<br><span class="muted">Giam &amp; Donald (1989)</span></td><td>Three layers: regions and material assignment. Reference: Bishop mean of 16 programs.</td><td>Bishop</td><td class="n">1.406</td><td class="n">1.4083</td><td class="n">+0.16 %</td><td class="n">1.5 %</td></tr>
           <tr><td>Arai &amp; Tagyo (1985), ex. 1</td><td>A 20 m slope at 1V:1.5H.</td><td>Bishop</td><td class="n">1.451</td><td class="n">1.4123</td><td class="n">−2.67 %</td><td class="n">3.5 %</td></tr>
-          <tr><td>Arai &amp; Tagyo (1985), ex. 3</td><td>The same slope with a water table: isolates the pore pressure.</td><td>Bishop</td><td class="n">1.138</td><td class="n">1.1200</td><td class="n">−1.58 %</td><td class="n">2.5 %</td></tr>
+          <tr><td>Arai &amp; Tagyo (1985), ex. 3</td><td>The same slope with a water table, which isolates the effect of pore pressure.</td><td>Bishop</td><td class="n">1.138</td><td class="n">1.1200</td><td class="n">−1.58 %</td><td class="n">2.5 %</td></tr>
           <tr><td>Reinforcement example (1999)</td><td>The minimum-depth surface filter reaches the engine.</td><td>Bishop</td><td class="n">0.764</td><td class="n">0.7660</td><td class="n">+0.26 %</td><td class="n">1.0 %</td></tr>
           <tr><td rowspan="4">ACADS 2(b), Talbingo dam<br><span class="muted">Giam &amp; Donald (1989)</span></td><td rowspan="4">The methods alone, on the circle the problem states. Bishop against its 11-program mean; the rigorous methods against the referee value.</td><td>Bishop</td><td class="n">2.204</td><td class="n">2.2088</td><td class="n">+0.22 %</td><td class="n" rowspan="4">2.0 %</td></tr>
           <tr><td>Spencer</td><td class="n">2.29</td><td class="n">2.2918</td><td class="n">+0.08 %</td></tr>
@@ -162,8 +162,8 @@
     </div>
     <p class="mt-s muted" style="font-size:13.5px">Differences are computed from the unrounded factors of safety.</p>
     <div class="grid-2 mt-m" style="align-items:start;gap:24px">
-      <div class="note" style="margin:0"><span class="label">Why Arai &amp; Tagyo sits lower</span><p>Modern reanalyses of both Arai &amp; Tagyo examples agree with each other and fall about 2–3 % below the values published in 1985. A search of 1985 used fewer slices and fewer circles; a finer search finds a lower minimum. The cases keep the published value and a tolerance that covers that known gap, so they catch a gross regression without pretending the source is more precise than it is.</p></div>
-      <div class="note" style="margin:0"><span class="label">Method by method</span><p>Corps of Engineers #1 and #2 are checked slice by slice against the worked example of USACE EM 1110-2-1902, Appendix G, whose tables print the interslice forces and base normals. Further method checks on stated surfaces live in the test suite.</p></div>
+      <div class="note" style="margin:0"><span class="label">Why the Arai &amp; Tagyo cases come out lower</span><p>Modern reanalyses of both Arai &amp; Tagyo examples agree with each other and give values about 2–3 % below those published in 1985. A search in 1985 used fewer slices and fewer circles, and a finer search finds a lower minimum. The cases keep the published value, with a tolerance that covers that known gap, so they still catch a gross regression without treating the source as more precise than it is.</p></div>
+      <div class="note" style="margin:0"><span class="label">Method by method</span><p>Corps of Engineers #1 and #2 are checked slice by slice against the worked example in Appendix G of USACE EM 1110-2-1902, whose tables give the interslice forces and the normal forces on the slice bases. The test suite contains further checks of the methods on given surfaces.</p></div>
     </div>
     <div class="cta-row"><a class="btn primary" href="../docs/verification/slope-benchmarks.html">Each case in detail <span class="arrow">→</span></a><a class="btn" href="https://github.com/samuelsl27/OGR-Slip2D/tree/main/validacion" target="_blank" rel="noopener">The cases on GitHub ↗</a></div>
   </div>
@@ -173,8 +173,8 @@
 <section class="section" id="analytic">
   <div class="wrap">
     <div class="sec-head">
-      <div><div class="sec-num label">§ 03 — Closed forms and identities</div><h2>Where the exact answer <em>is known.</em></h2></div>
-      <p>The groundwater engine and several tools are checked against results that admit no approximation: either the number is exact, or the test fails.</p>
+      <div><div class="sec-num label">§ 03 — Closed forms and identities</div><h2>Checks with a known <em>exact answer</em></h2></div>
+      <p>The groundwater engine and several tools are checked against results whose exact value is known. The last column gives the difference from that value in each check.</p>
     </div>
     <div class="table-wrap">
       <table class="data">
@@ -192,7 +192,7 @@
         </tbody>
       </table>
     </div>
-    <p class="mt-m muted">Rapid drawdown reproduces the classical result without being told to: the factor of safety is lowest right after the level drops, and recovers as the pore pressures dissipate.</p>
+    <p class="mt-m muted">Rapid drawdown also reproduces the classical result, although nothing in the model imposes it: the factor of safety is lowest just after the water level drops, and it recovers as the pore pressures dissipate.</p>
   </div>
 </section>
 
@@ -201,15 +201,15 @@
   <div class="wrap grid-2" style="align-items:start">
     <div>
       <div class="sec-num label">§ 04 — The test suite</div>
-      <h2 class="mt-s">5 265 tests, <em>and why each exists.</em></h2>
+      <h2 class="mt-s">How the <em>5 265 tests</em> are organised</h2>
     </div>
     <div>
       <ul class="ticks">
-        <li>One test file per feature area, each with a header that says which invariant it protects and why.</li>
-        <li>Every configurable setting comes with the test that proves it changes the number: a control that does nothing is worse than none.</li>
-        <li>Tests do not leak state — language, units or caches are restored — because a leak makes unrelated tests fail only in a full run.</li>
-        <li>The whole suite runs before every release; a filtered run says so on its output and is not evidence for one.</li>
-        <li>Continuous integration runs on Python 3.11, 3.12 and 3.13, and checks the licence header of every file.</li>
+        <li>There is one test file per feature area, and its header states which invariant it protects and why.</li>
+        <li>Each configurable setting has a test that checks it changes the result.</li>
+        <li>Tests restore any state they change, such as the language, the units or the caches. Otherwise unrelated tests could fail, and only when the whole suite is run.</li>
+        <li>The full suite runs before each release. A filtered run says so in its output and does not count as evidence for a release.</li>
+        <li>Continuous integration runs on Python 3.11, 3.12 and 3.13 and also checks the licence header of every file.</li>
       </ul>
       <div class="cta-row"><a class="btn" href="../docs/getting-started/installation.html#tests">Run the suite yourself</a></div>
     </div>
@@ -218,7 +218,7 @@
 
 <section class="section ink">
   <div class="wrap cta-band">
-    <div><div class="label">Contribute</div><h2 class="mt-s">Know a slope's factor of safety? <em>Send it.</em></h2><p class="mt-m">The most valuable contribution to the project is a validation case: a slope whose factor of safety you know from a publication or a hand calculation, with its source.</p></div>
+    <div><div class="label">Contribute</div><h2 class="mt-s">Contributing a <em>validation case</em></h2><p class="mt-m">For us, the most useful contribution is a validation case: a slope whose factor of safety you know from a publication or a hand calculation, together with its source.</p></div>
     <div class="cta-row"><a class="btn primary lg" href="https://github.com/samuelsl27/OGR-Slip2D/issues/new/choose" target="_blank" rel="noopener">Open a validation case ↗</a><a class="btn lg" href="../docs/verification/methodology.html">Methodology</a></div>
   </div>
 </section>
@@ -234,7 +234,7 @@
           <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
           <b>OpenGeoRock</b>
         </a>
-        <p class="tagline">Open-source geotechnical software, built in the open at the Universidad Politécnica de Cartagena.</p>
+        <p class="tagline">Open-source geotechnical software developed at the Universidad Politécnica de Cartagena.</p>
         <span class="lang" role="group" aria-label="Language"><a href="../verification/index.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../es/verification/index.html" hreflang="es" lang="es">ES</a></span>
       </div>
       <div>

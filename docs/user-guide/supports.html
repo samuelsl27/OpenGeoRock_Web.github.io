@@ -65,7 +65,7 @@
               <a class="mega-item" href="../../docs/reference/cli.html"><b>The command line</b><span>Batch runs with ogr-slip2d-cli</span></a>
             </div>
           </div>
-          <div class="mega-foot"><span>Five programs, one open core.</span><a href="../../products/index.html">All products →</a></div>
+          <div class="mega-foot"><span>OGR Slip2D is available now; the other four programs are planned.</span><a href="../../products/index.html">All products →</a></div>
         </div>
       </div>
       <a href="../../examples/index.html" data-nav="examples">Examples</a>
@@ -168,7 +168,7 @@
     </header>
 
     <article class="doc prose">
-      <p class="lede">Anchors, soil nails, piles, geosynthetics and walls add a force where a slip surface crosses them. In OGR Slip2D a support is a line from its <em>head</em>, at the slope face, to its <em>tail</em>, inside the ground, and it takes its properties from a named support type defined once for the project. This page explains how to define support types, place supports one by one or as a pattern, edit them, choose between active and passive forces, and find the support force a design needs with the back analysis. How each type develops its force is the subject of <a class="xref" href="../theory/supports.html">Section 3.10</a>.</p>
+      <p class="lede">Anchors, soil nails, piles, geosynthetics and walls add a force where a slip surface crosses them. In OGR Slip2D a support is a line from its <em>head</em>, at the slope face, to its <em>tail</em>, inside the ground, and it takes its properties from a named support type defined once for the project. The force of a support can enter the equilibrium as active or as passive, and the back analysis finds the force a design needs to reach a target factor of safety. How each type develops its force is described in <a class="xref" href="../theory/supports.html">Section 3.10</a>.</p>
 
       <h2 id="define"><span class="secnum">2.6.1</span><span class="ht">Defining support types</span><a class="anchor" href="#define" aria-label="Link to this section">#</a></h2>
       <p>Supports cannot be placed until the project has at least one support type. Choose <span class="ui">Properties → Define Support…</span> to open <strong>Define Support Properties</strong>. The list on the left, <strong>Support Types</strong>, holds the named property sets of the project, each shown with its kind in brackets; <span class="ui">+ Add</span> creates one, <span class="ui">Duplicate</span> copies the selected one and <span class="ui">− Remove</span> deletes it (the last one cannot be removed). Opened on a project without types, the dialog starts with <em>Type 1</em>, an End Anchored support.</p>
@@ -188,7 +188,7 @@
           </table>
         </div>
       </figure>
-      <p>Parameters are labelled with their stored names in words (<em>Out Of Plane Spacing</em>, <em>Bond Length Percent</em>…) and carry their units: kN, kN/m, kPa, m, degrees or per cent. These units are fixed — they are not converted to the unit system of the project. The capacities of anchors, tiebacks, nails and piles are per support, and the program divides them by the out-of-plane spacing to obtain a force per metre of slope; a geosynthetic is described per metre of sheet width, with its strip coverage.</p>
+      <p>Parameters are labelled with their stored names in words (<em>Out Of Plane Spacing</em>, <em>Bond Length Percent</em>…) and carry their units: kN, kN/m, kPa, m, degrees or per cent. These units are fixed and are not converted to the unit system of the project. The capacities of anchors, tiebacks, nails and piles are per support, and the program divides them by the out-of-plane spacing to obtain a force per metre of slope; a geosynthetic is described per metre of sheet width, with its strip coverage.</p>
 
       <figure class="tbl" id="tbl-types">
         <figcaption><span class="fignum">Table 2.6.2</span> The nine kinds of support, with their default force application and orientation and their parameters (default values).</figcaption>
@@ -209,8 +209,8 @@
           </table>
         </div>
       </figure>
-      <p>The tieback, nail, geosynthetic and anchor capacities combine several failure modes — tensile rupture, pullout behind the slip surface, stripping of the head or plate — and the force at a crossing is the smallest that applies there. The Ito &amp; Matsui mode of the pile derives its force from the soil flowing between the piles of a row <a class="cite" href="../reference/bibliography.html#ito1975">(Ito &amp; Matsui, 1975)</a>. The equations are in <a class="xref" href="../theory/supports.html">Section 3.10</a>.</p>
-      <p><span class="ui">OK</span> stores the list. Supports already placed follow their property set: a change of kind or of parameters applies to them at once. A support whose set has been removed falls back to the first set of the same kind — or, when there is none, to the default properties of that kind — and the analysis notes say so.</p>
+      <p>The tieback, nail, geosynthetic and anchor capacities combine several failure modes (tensile rupture, pullout behind the slip surface, stripping of the head or plate), and the force at a crossing is the smallest that applies there. The Ito &amp; Matsui mode of the pile derives its force from the soil flowing between the piles of a row <a class="cite" href="../reference/bibliography.html#ito1975">(Ito &amp; Matsui, 1975)</a>. The equations are in <a class="xref" href="../theory/supports.html">Section 3.10</a>.</p>
+      <p><span class="ui">OK</span> stores the list. Supports already placed follow their property set: a change of kind or of parameters applies to them at once. A support whose set has been removed falls back to the first set of the same kind or, when there is none, to the default properties of that kind, and the analysis notes say so.</p>
 
       <h2 id="force"><span class="secnum">2.6.2</span><span class="ht">Force application and orientation</span><a class="anchor" href="#force" aria-label="Link to this section">#</a></h2>
       <p>The force of a support can enter the equilibrium of the sliding mass in two ways <a class="cite" href="../reference/bibliography.html#duncan2005">(Duncan &amp; Wright, 2005)</a>:</p>
@@ -338,7 +338,7 @@
           <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
           <b>OpenGeoRock</b>
         </a>
-        <p class="tagline">Open-source geotechnical software, built in the open at the Universidad Politécnica de Cartagena.</p>
+        <p class="tagline">Open-source geotechnical software developed at the Universidad Politécnica de Cartagena.</p>
         <span class="lang" role="group" aria-label="Language"><a href="../../docs/user-guide/supports.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../../es/docs/user-guide/supports.html" hreflang="es" lang="es">ES</a></span>
       </div>
       <div>

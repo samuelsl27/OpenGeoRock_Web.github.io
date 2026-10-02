@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>About — OpenGeoRock</title>
-<meta name="description" content="Why OpenGeoRock exists, who builds it, the AGPL licence in practice, how to contribute a validation case and how to cite OGR Slip2D.">
+<meta name="description" content="Why OpenGeoRock exists and who develops it, what the AGPL licence means in practice, how to contribute a validation case and how to cite OGR Slip2D.">
 <!-- @inc head -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>document.documentElement.classList.replace("no-js", "js")</script>
@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="OpenGeoRock">
 <meta property="og:title" content="About — OpenGeoRock">
-<meta property="og:description" content="Why OpenGeoRock exists, who builds it, the AGPL licence in practice, how to contribute a validation case and how to cite OGR Slip2D.">
+<meta property="og:description" content="Why OpenGeoRock exists and who develops it, what the AGPL licence means in practice, how to contribute a validation case and how to cite OGR Slip2D.">
 <meta property="og:url" content="https://opengeorock.org/about/">
 <meta property="og:image" content="https://opengeorock.org/assets/img/og-image.png">
 <meta property="og:locale" content="en_GB">
@@ -64,7 +64,7 @@
               <a class="mega-item" href="../docs/reference/cli.html"><b>The command line</b><span>Batch runs with ogr-slip2d-cli</span></a>
             </div>
           </div>
-          <div class="mega-foot"><span>Five programs, one open core.</span><a href="../products/index.html">All products →</a></div>
+          <div class="mega-foot"><span>OGR Slip2D is available now; the other four programs are planned.</span><a href="../products/index.html">All products →</a></div>
         </div>
       </div>
       <a href="../examples/index.html" data-nav="examples">Examples</a>
@@ -103,8 +103,8 @@
 <section class="page-hero">
   <div class="wrap">
     <nav class="crumbs label" aria-label="Breadcrumb"><a href="../index.html">Home</a><span aria-hidden="true">/</span><span>About</span></nav>
-    <h1>Open-source geotechnical software, <em>built in the open.</em></h1>
-    <p class="lede">Almost every program a geotechnical engineer depends on is closed, expensive and opaque — a black box at the centre of decisions about dams, slopes, tunnels and foundations. OpenGeoRock rebuilds those tools in the open: a computation core in plain Python, a modern desktop interface, and a test suite anyone can inspect.</p>
+    <h1>The <em>OpenGeoRock</em> project</h1>
+    <p class="lede">Almost all the programs a geotechnical engineer relies on are closed and expensive, and their users cannot see how they reach their results, even though decisions about dams, slopes, tunnels and foundations depend on them. OpenGeoRock rebuilds those tools as open-source software. The computation core is written in plain Python and has a desktop interface on top; the test suite is published with the rest of the code, so anyone can inspect it.</p>
   </div>
 </section>
 
@@ -112,16 +112,16 @@
 <section class="section">
   <div class="wrap">
     <div class="sec-head">
-      <div><div class="sec-num label">§ 01 — Principles</div><h2>Results you can <em>check</em>, not believe.</h2></div>
-      <p>Every method ships with the reference case it was validated against, so results can be checked instead of believed. The rest follows from there.</p>
+      <div><div class="sec-num label">§ 01 — Principles</div><h2>The principles behind <em>the project</em></h2></div>
+      <p>Each method comes with the reference case it was validated against, so its results can be compared with a known answer. The other principles follow from that one.</p>
     </div>
     <div class="feature-grid">
-      <div class="feature"><span class="n label">01</span><h4>Readable engines</h4><p>Computation cores in pure Python, documented and decoupled from the interface, so they can be read, scripted or embedded.</p></div>
-      <div class="feature"><span class="n label">02</span><h4>Verifiable results</h4><p>Numerical work is validated against something external — a published case, a closed-form solution, an analytic identity — never against a snapshot of its own output.</p></div>
-      <div class="feature"><span class="n label">03</span><h4>No setting that does nothing</h4><p>A control that does not move the result is worse than none, because the user believes the analysis respects it. Every option comes with the test that proves it changes the number.</p></div>
-      <div class="feature"><span class="n label">04</span><h4>A modern desktop</h4><p>A PySide6 interface with a proper modeller, an interpretation window and an embedded Python terminal.</p></div>
-      <div class="feature"><span class="n label">05</span><h4>Open to agents</h4><p>The same operations the interface uses are published through an MCP server, so AI agents work with the engineer, on the same model.</p></div>
-      <div class="feature"><span class="n label">06</span><h4>Built for contribution</h4><p>Small, well-scoped modules and an explicit contract for contributors — human or assisted — with the reason behind every rule.</p></div>
+      <div class="feature"><span class="n label">01</span><h4>Readable engines</h4><p>The computation cores are pure Python, documented and independent of the interface, so they can be read like any other code and called from your own scripts or programs.</p></div>
+      <div class="feature"><span class="n label">02</span><h4>Verifiable results</h4><p>Numerical results are validated against an external reference: a published case, a closed-form solution or an analytic identity. We do not use stored snapshots of the program's own output for this.</p></div>
+      <div class="feature"><span class="n label">03</span><h4>No setting that does nothing</h4><p>If a control does not change the result, the user still assumes the analysis takes it into account. That is why each option has a test that checks it changes the result.</p></div>
+      <div class="feature"><span class="n label">04</span><h4>A desktop interface</h4><p>The PySide6 interface has a modeller, an interpretation window for the results and a built-in Python terminal.</p></div>
+      <div class="feature"><span class="n label">05</span><h4>Open to AI agents</h4><p>The operations the interface uses are also published through an MCP server, so an AI agent can work on the same model as the engineer.</p></div>
+      <div class="feature"><span class="n label">06</span><h4>Designed for contributors</h4><p>The modules are small and have a clear scope. Contributors, with or without AI assistance, follow a written contract that gives the reason for each rule.</p></div>
     </div>
   </div>
 </section>
@@ -130,7 +130,7 @@
 <section class="section alt" id="team">
   <div class="wrap">
     <div class="sec-head">
-      <div><div class="sec-num label">§ 02 — Team</div><h2>A small team, <em>at the Universidad Politécnica de Cartagena.</em></h2></div>
+      <div><div class="sec-num label">§ 02 — Team</div><h2>A small team at the <em>Universidad Politécnica de Cartagena</em></h2></div>
       <p>OpenGeoRock is written by Samuel Sáez López as part of his doctoral research at UPCT, under the academic supervision of Prof. Emilio Trigueros Tornero.</p>
     </div>
     <div class="people">
@@ -140,7 +140,7 @@
           <div class="role label">Author · maintainer · copyright holder</div>
           <h3>Samuel Sáez López</h3>
           <div class="aff">Mining engineer · PhD candidate, Universidad Politécnica de Cartagena (UPCT)</div>
-          <p class="bio">PhD candidate in the <em>Technology and Modelling in Civil, Mining and Environmental Engineering</em> programme at UPCT. He writes and maintains the OpenGeoRock code and leads the design of both its computation engine and its interface; his doctoral research on slope stability and rock mechanics feeds directly into the numerical methods published here.</p>
+          <p class="bio">PhD candidate in the <em>Technology and Modelling in Civil, Mining and Environmental Engineering</em> programme at UPCT. He writes and maintains the OpenGeoRock code and leads the design of both the computation engine and the interface. His doctoral research on slope stability and rock mechanics feeds directly into the numerical methods published here.</p>
           <div class="links">
             <a class="btn sm" href="https://www.linkedin.com/in/samuel-saez-lopez-7603091a2/" target="_blank" rel="noopener">LinkedIn</a>
             <a class="btn sm" href="mailto:samuel.saez@edu.upct.es">samuel.saez@edu.upct.es</a>
@@ -154,7 +154,7 @@
             <div class="role label">Academic supervisor · scientific collaborator</div>
             <div class="split" style="justify-content:flex-start;gap:16px;margin-top:8px"><img class="avatar" src="../assets/img/people/emilio.webp" alt="Emilio Trigueros Tornero" width="64" height="64" loading="lazy"><h3 style="margin:0">Emilio Trigueros Tornero</h3></div>
             <div class="aff">Professor · Universidad Politécnica de Cartagena (UPCT)</div>
-            <p class="bio">Academic supervisor of the doctoral research at UPCT and collaborator in the scientific direction of the project, contributing judgement in rock mechanics and research methodology.</p>
+            <p class="bio">Academic supervisor of the doctoral research at UPCT. He also collaborates in the scientific direction of the project, where he contributes his judgement in rock mechanics and research methodology.</p>
             <div class="links">
               <a class="btn sm" href="https://www.linkedin.com/in/emilio-trigueros-a0ba0a40/" target="_blank" rel="noopener">LinkedIn</a>
               <a class="btn sm" href="https://personas.upct.es/perfil/emilio.trigueros" target="_blank" rel="noopener">UPCT profile</a>
@@ -163,7 +163,7 @@
         </article>
         <div class="note" style="margin:0">
           <span class="label">Authorship</span>
-          <p>So that the split of contributions leaves no room for doubt: Samuel Sáez López is the <strong>author and copyright holder</strong> of the source code; Emilio Trigueros Tornero contributes <strong>academic supervision and scientific collaboration</strong>. Contributions are accepted under the project's <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/CLA.md" target="_blank" rel="noopener">CLA</a>.</p>
+          <p>To be clear about who contributes what: Samuel Sáez López is the <strong>author and copyright holder</strong> of the source code, and Emilio Trigueros Tornero contributes <strong>academic supervision and scientific collaboration</strong>. Contributions are accepted under the project's <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/CLA.md" target="_blank" rel="noopener">CLA</a>.</p>
         </div>
       </div>
     </div>
@@ -185,17 +185,17 @@
   <div class="wrap grid-2" style="align-items:start">
     <div>
       <div class="sec-num label">§ 03 — Licence</div>
-      <h2 class="mt-s">AGPL-3.0-or-later, <em>in practice.</em></h2>
-      <p class="lede mt-m">The GNU Affero General Public License v3.0 or later. Every source file carries its SPDX identifier, and a test fails if any is missing.</p>
+      <h2 class="mt-s">The AGPL-3.0-or-later licence <em>in practice</em></h2>
+      <p class="lede mt-m">The project is distributed under the GNU Affero General Public License, version 3.0 or later. Each source file carries its SPDX identifier, and a test fails if one is missing.</p>
       <div class="cta-row"><a class="btn" href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/LICENSE" target="_blank" rel="noopener">Full licence text ↗</a></div>
     </div>
     <div>
       <ul class="ticks">
-        <li>You may use OpenGeoRock freely, <strong>including for professional engineering work</strong>, and bill that work without paying or publishing anything. Running a program is not a restricted activity.</li>
-        <li>If you <strong>modify</strong> it and let others use your version <strong>remotely over a network</strong> — a web service or SaaS — you must offer them the source of your version. Charging for that service is allowed; keeping it closed is not.</li>
-        <li><strong>There is no warranty of any kind.</strong> Results must be checked against independent calculations before anything is based on them. A project is signed by a person, not by a program.</li>
+        <li>You may use OpenGeoRock freely, <strong>including for professional engineering work</strong>, and bill for that work without paying or publishing anything. The licence places no restrictions on running the program.</li>
+        <li>If you <strong>modify</strong> it and let others use your version <strong>remotely over a network</strong> (as a web service or SaaS), you must offer them the source code of your version. You may charge for that service, as long as its users can obtain the source.</li>
+        <li><strong>There is no warranty of any kind.</strong> Results must be checked against independent calculations before anything is based on them, and responsibility for a design lies with the engineer who signs it.</li>
       </ul>
-      <div class="note mt-m"><span class="label">A change of licence</span><p>Until v0.1.42 the project was GPL-3.0. It moved to AGPL in v0.1.43 so that a modified version offered as a network service has to publish its source — something the GPL does not require, because serving a program is not distributing it.</p></div>
+      <div class="note mt-m"><span class="label">A change of licence</span><p>Up to v0.1.42 the project was licensed under GPL-3.0. We moved it to the AGPL in v0.1.43 so that a modified version offered as a network service has to publish its source. The GPL does not require this, because serving a program over a network does not count as distributing it.</p></div>
     </div>
   </div>
 </section>
@@ -204,13 +204,13 @@
 <section class="section ink" id="contribute">
   <div class="wrap">
     <div class="sec-head">
-      <div><div class="label">§ 04 — Contribute</div><h2 class="mt-s" style="color:var(--paper)">Good geotechnical software is <em style="color:#9bd8a8">built collectively.</em></h2></div>
-      <p>Code, validation against real cases, bug reports — or simply running the program on an actual project and reporting what broke.</p>
+      <div><div class="label">§ 04 — Contribute</div><h2 class="mt-s" style="color:var(--paper)">Ways to <em style="color:#9bd8a8">contribute</em></h2></div>
+      <p>Code, validation cases and bug reports are all welcome. It also helps a great deal if you use the program on an actual project and tell us what went wrong.</p>
     </div>
     <div class="grid-3">
       <a class="card ink" style="border-color:#ffffff22" href="https://github.com/samuelsl27/OGR-Slip2D/issues/new/choose" target="_blank" rel="noopener"><span class="label">Most valuable</span><h3 style="color:var(--paper)">A validation case</h3><p>A slope whose factor of safety you know from a publication, another program or a hand calculation. Open an issue with the <em>Validation case</em> template.</p><div class="foot label"><span>Open an issue</span><span>↗</span></div></a>
-      <a class="card ink" style="border-color:#ffffff22" href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener"><span class="label">Code</span><h3 style="color:var(--paper)">Read CONTRIBUTING first</h3><p>The conditions a change must satisfy, and why each one exists: every one of them traces back to a real problem in the project's history.</p><div class="foot label"><span>CONTRIBUTING.md</span><span>↗</span></div></a>
-      <a class="card ink" style="border-color:#ffffff22" href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/AGENTS.md" target="_blank" rel="noopener"><span class="label">With AI agents</span><h3 style="color:var(--paper)">Same standard for everyone</h3><p>AI-assisted code is accepted by the same standard as everything else: if you cannot explain why a line is there, do not submit it.</p><div class="foot label"><span>Rules for agents</span><span>↗</span></div></a>
+      <a class="card ink" style="border-color:#ffffff22" href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener"><span class="label">Code</span><h3 style="color:var(--paper)">Read CONTRIBUTING first</h3><p>It sets out the conditions a change must meet and why each one is there. Each condition was added after a specific problem in the history of the project.</p><div class="foot label"><span>CONTRIBUTING.md</span><span>↗</span></div></a>
+      <a class="card ink" style="border-color:#ffffff22" href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/AGENTS.md" target="_blank" rel="noopener"><span class="label">With AI agents</span><h3 style="color:var(--paper)">Same standard for everyone</h3><p>Code written with AI assistance is accepted by the same standard as any other: if you cannot explain why a line is there, do not submit it.</p><div class="foot label"><span>Rules for agents</span><span>↗</span></div></a>
     </div>
   </div>
 </section>
@@ -220,9 +220,9 @@
   <div class="wrap grid-2" style="align-items:start">
     <div>
       <div class="sec-num label">§ 05 — Cite</div>
-      <h2 class="mt-s">If it helped <em>your work.</em></h2>
-      <p class="lede mt-m">If OGR Slip2D contributes to published work, please cite it. Naming the version you used makes the result reproducible.</p>
-      <p>Questions about the project: <a href="mailto:samuel.saez@edu.upct.es">samuel.saez@edu.upct.es</a>.</p>
+      <h2 class="mt-s">Citing <em>OGR Slip2D</em></h2>
+      <p class="lede mt-m">If OGR Slip2D contributes to published work, please cite it, and give the version you used so that the results can be reproduced.</p>
+      <p>For questions about the project, write to <a href="mailto:samuel.saez@edu.upct.es">samuel.saez@edu.upct.es</a>.</p>
     </div>
     <div class="code"><pre><code>@software{ogr_suite,
   author  = {Sáez López, Samuel},
@@ -246,7 +246,7 @@
           <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
           <b>OpenGeoRock</b>
         </a>
-        <p class="tagline">Open-source geotechnical software, built in the open at the Universidad Politécnica de Cartagena.</p>
+        <p class="tagline">Open-source geotechnical software developed at the Universidad Politécnica de Cartagena.</p>
         <span class="lang" role="group" aria-label="Language"><a href="../about/index.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../es/about/index.html" hreflang="es" lang="es">ES</a></span>
       </div>
       <div>

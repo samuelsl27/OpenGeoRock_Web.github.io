@@ -65,7 +65,7 @@
               <a class="mega-item" href="../../docs/reference/cli.html"><b>The command line</b><span>Batch runs with ogr-slip2d-cli</span></a>
             </div>
           </div>
-          <div class="mega-foot"><span>Five programs, one open core.</span><a href="../../products/index.html">All products →</a></div>
+          <div class="mega-foot"><span>OGR Slip2D is available now; the other four programs are planned.</span><a href="../../products/index.html">All products →</a></div>
         </div>
       </div>
       <a href="../../examples/index.html" data-nav="examples">Examples</a>
@@ -196,7 +196,7 @@
       <h2 id="compute"><span class="secnum">5.2.3</span><span class="ht">compute</span><a class="anchor" href="#compute" aria-label="Link to this section">#</a></h2>
       <div class="code"><pre><code>ogr-slip2d-cli compute PROJECT [--method M] [--slices N] [--nx N] [--ny N]
                                [--dr N] [--search S] [--samples N] [--output FILE]</code></pre></div>
-      <p>Every option defaults to the value stored in the project; an option given overrides that one setting for this run and nothing else. The overrides are written on the copy loaded in memory: the <code>.ogr</code> file is never modified by a calculation.</p>
+      <p>Every option defaults to the value stored in the project; an option given overrides only that setting, and only for this run. The overrides are applied to the copy loaded in memory, so a calculation does not modify the <code>.ogr</code> file.</p>
       <figure class="tbl" id="tbl-compute-options">
         <figcaption><span class="fignum">Table 5.2.2</span> Options of <code>compute</code> and the project setting each one overrides.</figcaption>
         <div class="table-wrap">
@@ -381,7 +381,7 @@ python -m ogr_gui --no-agent-bridge</code></pre></div>
           <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
           <b>OpenGeoRock</b>
         </a>
-        <p class="tagline">Open-source geotechnical software, built in the open at the Universidad Politécnica de Cartagena.</p>
+        <p class="tagline">Open-source geotechnical software developed at the Universidad Politécnica de Cartagena.</p>
         <span class="lang" role="group" aria-label="Language"><a href="../../docs/reference/cli.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../../es/docs/reference/cli.html" hreflang="es" lang="es">ES</a></span>
       </div>
       <div>

@@ -64,7 +64,7 @@
               <a class="mega-item" href="../../../es/docs/reference/cli.html"><b>La línea de comandos</b><span>Cálculos por lotes con ogr-slip2d-cli</span></a>
             </div>
           </div>
-          <div class="mega-foot"><span>Cinco programas sobre un mismo núcleo abierto.</span><a href="../../../es/products/index.html">Todos los productos →</a></div>
+          <div class="mega-foot"><span>OGR Slip2D ya está disponible; los otros cuatro programas están previstos.</span><a href="../../../es/products/index.html">Todos los productos →</a></div>
         </div>
       </div>
       <a href="../../../es/examples/index.html" data-nav="examples">Ejemplos</a>
@@ -167,7 +167,7 @@
     </header>
 
     <article class="doc prose">
-      <p class="lede">Esta página trata de lo que se puede sacar del programa (el informe en PDF, las imágenes, la impresión y los dibujos DXF) y de las formas de manejarlo sin ratón: la consola de Python dentro de la ventana, la línea de comandos, la API de Python y los agentes de IA conectados mediante el servidor MCP. Los tres últimos tienen su propio capítulo de referencia; aquí solo se presentan desde el programa de escritorio.</p>
+      <p class="lede">Los resultados salen del programa en forma de informe en PDF, imágenes, impresiones y dibujos DXF. Además, el programa se puede manejar sin ratón desde la consola de Python de la ventana, la línea de comandos, la API de Python o un agente de IA conectado mediante el servidor MCP. Los tres últimos tienen su propio capítulo de referencia; aquí solo se presentan desde el programa de escritorio.</p>
 
       <h2 id="report"><span class="secnum">2.12.1</span><span class="ht">El informe en PDF</span><a class="anchor" href="#report" aria-label="Enlace a esta sección">#</a></h2>
       <p><span class="ui">File → Generate Report…</span> genera un PDF en formato A4 con el último cálculo y todos los métodos que se ejecutaron en él; si todavía no se ha calculado, el programa lo rechaza con un mensaje. El nombre de archivo propuesto es el del proyecto seguido de <code>_report.pdf</code>. El informe consta de ocho secciones:</p>
@@ -203,7 +203,7 @@
       <p><span class="ui">File → Page Setup…</span> permite elegir el papel y los márgenes, y <span class="ui">File → Print Preview…</span> muestra el modelo completo dibujado en esa página; la impresión se lanza desde la ventana de vista previa. En la versión 0.1.235, <span class="ui">File → Print…</span> (<kbd>Ctrl</kbd>+<kbd>P</kbd>) solo muestra un mensaje.</p>
 
       <h2 id="dxf"><span class="secnum">2.12.4</span><span class="ht">Dibujos DXF</span><a class="anchor" href="#dxf" aria-label="Enlace a esta sección">#</a></h2>
-      <p><span class="ui">File → Export DXF…</span> exporta el modelo a un dibujo DXF para CAD. En el diálogo se elige la unidad de las coordenadas (m, cm, mm, km, ft o in; el modelo está en metros y la unidad se anota en el archivo), el <em>Load arrow size</em>, como porcentaje de la diagonal del modelo (2 %), y lo que se incluye en el dibujo: <em>Boundaries (geometry)</em>, <em>Supports</em>, <em>Loads (as arrows)</em>, <em>Finite element mesh</em> (desactivada por defecto, porque escribe una línea por cada lado de elemento), <em>Critical slip surface</em> (tras un cálculo) y <em>Annotations (title, factor of safety)</em>. La geometría va a las capas que reconoce el importador de DXF, de modo que el dibujo se puede editar y volver a importar. Las cargas, la malla, la superficie de rotura y las anotaciones van a capas distintas, cuyos nombres empiezan por <code>OGR_X_</code> y que el importador ignora, así que una flecha de carga nunca puede volver como contorno. La importación de un DXF se describe en la <a class="xref" href="geometry.html">Sección 2.2</a>.</p>
+      <p><span class="ui">File → Export DXF…</span> exporta el modelo a un dibujo DXF para CAD. En el diálogo se elige la unidad de las coordenadas (m, cm, mm, km, ft o in; el modelo está en metros y la unidad se anota en el archivo), el <em>Load arrow size</em>, como porcentaje de la diagonal del modelo (2 %), y lo que se incluye en el dibujo: <em>Boundaries (geometry)</em>, <em>Supports</em>, <em>Loads (as arrows)</em>, <em>Finite element mesh</em> (desactivada por defecto, porque escribe una línea por cada lado de elemento), <em>Critical slip surface</em> (tras un cálculo) y <em>Annotations (title, factor of safety)</em>. La geometría va a las capas que reconoce el importador de DXF, de modo que el dibujo se puede editar y volver a importar. Las cargas, la malla, la superficie de rotura y las anotaciones van a capas distintas, cuyos nombres empiezan por <code>OGR_X_</code> y que el importador ignora, así que una flecha de carga no puede volver como contorno. La importación de un DXF se describe en la <a class="xref" href="geometry.html">Sección 2.2</a>.</p>
 
       <h2 id="terminal"><span class="secnum">2.12.5</span><span class="ht">La consola de Python</span><a class="anchor" href="#terminal" aria-label="Enlace a esta sección">#</a></h2>
       <p><span class="ui">Window → Terminal</span> (<kbd>Ctrl</kbd>+<kbd>`</kbd>) abre una consola de Python dentro de la ventana, conectada al modelo abierto. En ella se definen estos nombres:</p>
@@ -223,7 +223,7 @@
           </table>
         </div>
       </figure>
-      <p><kbd>Enter</kbd> ejecuta lo escrito, <kbd>Shift</kbd>+<kbd>Enter</kbd> añade una línea nueva a la misma entrada, <kbd>Ctrl</kbd>+<kbd>↑</kbd> y <kbd>Ctrl</kbd>+<kbd>↓</kbd> recorren el historial y <kbd>Ctrl</kbd>+<kbd>L</kbd> borra la consola. Para ejecutar el análisis exactamente como está configurado el proyecto, igual que hace Compute, usa el ejecutor de análisis:</p>
+      <p><kbd>Enter</kbd> ejecuta lo escrito, <kbd>Shift</kbd>+<kbd>Enter</kbd> añade una línea nueva a la misma entrada, <kbd>Ctrl</kbd>+<kbd>↑</kbd> y <kbd>Ctrl</kbd>+<kbd>↓</kbd> recorren el historial y <kbd>Ctrl</kbd>+<kbd>L</kbd> borra la consola. Para ejecutar el análisis tal como está configurado el proyecto, igual que hace Compute, usa el ejecutor de análisis:</p>
       <div class="code"><pre><code>&gt;&gt;&gt; [m.name for m in project.materials]
 &gt;&gt;&gt; from ogr_slip2d.analysis_runner import run_analysis
 &gt;&gt;&gt; out = run_analysis(project)            # los métodos activados en el proyecto
@@ -232,7 +232,7 @@
       <div class="note"><span class="label">Nota</span><p>Los cambios que se hacen en <code>project</code> desde la consola no pasan por <span class="ui">Edit → Undo</span>, y la vista no se redibuja sola: hay que llamar a <code>canvas.refresh_scene()</code>. Un cálculo lanzado desde aquí se ejecuta en el propio hilo de la ventana, por lo que esta no responde hasta que termina. Una búsqueda construida a mano a partir de su clase, como en el ejemplo de <code>help_ogr()</code>, usa los valores por defecto de esa clase y no los ajustes del proyecto; <code>run_analysis</code> sí usa los del proyecto.</p></div>
 
       <h2 id="cli"><span class="secnum">2.12.6</span><span class="ht">La línea de comandos</span><a class="anchor" href="#cli" aria-label="Enlace a esta sección">#</a></h2>
-      <p><code>ogr-slip2d-cli</code> ejecuta un proyecto guardado sin abrir la ventana. Calcula el análisis que describe el proyecto con el mismo ejecutor que el programa de escritorio; cada opción sustituye en memoria un ajuste del proyecto, y el archivo nunca se modifica.</p>
+      <p><code>ogr-slip2d-cli</code> ejecuta un proyecto guardado sin abrir la ventana. Calcula el análisis que describe el proyecto con el mismo ejecutor que el programa de escritorio; cada opción sustituye en memoria un ajuste del proyecto, y el archivo no se modifica.</p>
       <figure class="tbl" id="tbl-cli">
         <figcaption><span class="fignum">Tabla 2.12.2</span> Comandos de <code>ogr-slip2d-cli</code>. La referencia completa está en la <a class="xref" href="../reference/cli.html">Sección 5.2</a>.</figcaption>
         <div class="table-wrap">
@@ -251,7 +251,7 @@
       <p>Si el proyecto contiene algo que el análisis no puede respetar, se rechaza con los motivos y el código de salida 3, como hace Compute en la ventana. La versión 0.1.235 no incluye ningún comando para los análisis estadísticos. <code>--search</code> acepta los identificadores de búsqueda <code>grid</code>, <code>slope</code>, <code>auto_refine</code>, <code>block</code>, <code>path</code>, <code>simulated_annealing</code> y <code>particle_swarm</code>; un identificador que no reconoce no provoca ningún rechazo, y el cálculo se hace con una Grid Search.</p>
 
       <h2 id="python-api"><span class="secnum">2.12.7</span><span class="ht">API de Python</span><a class="anchor" href="#python-api" aria-label="Enlace a esta sección">#</a></h2>
-      <p>Todas las partes del programa se pueden importar desde Python. La manera más breve de analizar un proyecto guardado es recurrir al mismo ejecutor que usan la ventana y la línea de comandos:</p>
+      <p>Los paquetes del programa se pueden importar desde Python. La manera más breve de analizar un proyecto guardado es recurrir al mismo ejecutor que usan la ventana y la línea de comandos:</p>
       <div class="code"><pre><code>from ogr_core.project import Project
 from ogr_slip2d.analysis_runner import run_analysis
 

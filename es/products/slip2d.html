@@ -64,7 +64,7 @@
               <a class="mega-item" href="../../es/docs/reference/cli.html"><b>La línea de comandos</b><span>Cálculos por lotes con ogr-slip2d-cli</span></a>
             </div>
           </div>
-          <div class="mega-foot"><span>Cinco programas sobre un mismo núcleo abierto.</span><a href="../../es/products/index.html">Todos los productos →</a></div>
+          <div class="mega-foot"><span>OGR Slip2D ya está disponible; los otros cuatro programas están previstos.</span><a href="../../es/products/index.html">Todos los productos →</a></div>
         </div>
       </div>
       <a href="../../es/examples/index.html" data-nav="examples">Ejemplos</a>
@@ -108,7 +108,7 @@
       <div>
         <div class="chips mt-m"><span class="tag live">Código fuente disponible · v<span data-v>0.1.235</span></span><span class="tag">Versión preliminar</span><span class="tag">AGPL-3.0-or-later</span></div>
         <h1 style="max-width:none">OGR Slip2D</h1>
-        <p class="lede">Estabilidad de taludes en 2D por equilibrio límite, con un módulo de agua subterránea por elementos finitos, análisis probabilístico y servidor MCP oficial. Todo en un programa de escritorio cuyas ecuaciones puedes leer una a una.</p>
+        <p class="lede">Programa de escritorio para estabilidad de taludes en 2D por equilibrio límite, con un módulo de agua subterránea por elementos finitos, análisis probabilístico y servidor MCP oficial. El código fuente es público, así que puedes leer todas las ecuaciones que utiliza el programa.</p>
         <div class="cta-row">
           <a class="btn primary lg" href="../download/index.html">Descargar OGR Slip2D <span class="arrow">→</span></a>
           <a class="btn lg" href="../docs/getting-started/quick-start.html">Inicio rápido</a>
@@ -140,8 +140,8 @@
 <section class="section" id="overview">
   <div class="wrap">
     <div class="sec-head">
-      <div><div class="sec-num label">Resumen</div><h2>El análisis más habitual de la práctica geotécnica, <em>hecho en abierto.</em></h2></div>
-      <p>Casi todo el software en el que se apoya un ingeniero geotécnico es cerrado: si un factor de seguridad sale 1.32, no hay forma de ver de dónde sale. OGR Slip2D reescribe el análisis de estabilidad de taludes en Python puro, con una interfaz moderna y una batería de tests que cualquiera puede revisar. Además, cada método va acompañado del caso de referencia con el que se validó.</p>
+      <div><div class="sec-num label">Resumen</div><h2>Por qué hemos desarrollado OGR Slip2D</h2></div>
+      <p>Casi todo el software en el que se apoya un ingeniero geotécnico es cerrado: si un factor de seguridad sale 1.32, no hay forma de ver cómo ha llegado el programa a ese valor. OGR Slip2D es una implementación nueva, en Python puro, del análisis más habitual en la práctica geotécnica. Tiene interfaz gráfica y una batería de tests que cualquiera puede revisar, y cada método va acompañado del caso de referencia con el que se validó.</p>
     </div>
     <div class="metrics" style="margin-top:0">
       <div class="metric"><div class="v">9</div><div class="k label">Métodos de dovelas</div></div>
@@ -158,8 +158,8 @@
 <section class="section alt" id="lem">
   <div class="wrap">
     <div class="sec-head">
-      <div><div class="sec-num label">Equilibrio límite</div><h2>Nueve métodos, <em>siete formas de buscar.</em></h2></div>
-      <p>Calcula con varios métodos en un mismo análisis y compara sus superficies críticas. Superficies circulares, no circulares y compuestas, capas débiles, objetos de foco que descartan superficies antes de calcularlas, límites del talud y optimización de la superficie crítica.</p>
+      <div><div class="sec-num label">Equilibrio límite</div><h2>Nueve métodos y <em>siete algoritmos de búsqueda</em></h2></div>
+      <p>Puedes calcular con varios métodos en un mismo análisis y comparar sus superficies críticas. El programa admite superficies circulares, no circulares y compuestas, capas débiles, límites del talud y optimización de la superficie crítica, y sus objetos de foco filtran la búsqueda antes de que se calcule ninguna superficie.</p>
     </div>
     <div class="tabs" data-group="lem">
       <div class="tablist" role="tablist" aria-label="Equilibrio límite">
@@ -171,7 +171,7 @@
       <div class="tabpanel" role="tabpanel" id="p-methods" aria-labelledby="t-methods">
         <div class="grid-2" style="align-items:start;gap:36px">
           <div>
-            <p>Del más sencillo al más riguroso, y cada uno validado con un caso publicado o con las tablas de dovelas de un manual de referencia:</p>
+            <p>Cada método se ha validado con un caso publicado o con las tablas de dovelas de un manual de referencia. Del más sencillo al más riguroso:</p>
             <div class="table-wrap">
               <table class="data">
                 <thead><tr><th>Método</th><th>Equilibrio</th></tr></thead>
@@ -303,7 +303,7 @@
         <div class="grid-2" style="align-items:start;gap:36px">
           <div>
             <p><strong>Circulares:</strong> por rejilla, de talud, con refinado automático y por enjambre de partículas. <strong>No circulares:</strong> por bloques (con objetos de ventana, línea, punto y polilínea), de camino, por recocido simulado, con refinado automático y por enjambre de partículas.</p>
-            <p>Los objetos de foco (ventana, línea, punto o tangente) descartan superficies candidatas antes de calcularlas: en el caso de referencia, una tangente a una capa débil reduce de 206 a 17 las superficies que llegan a calcularse. Las superficies críticas no circulares pueden optimizarse con un paseo aleatorio.</p>
+            <p>Los objetos de foco (ventana, línea, punto o tangente) descartan superficies candidatas antes de calcularlas. En el caso de referencia, una tangente a una capa débil reduce las evaluaciones de 206 a 17. Las superficies críticas no circulares pueden optimizarse con un paseo aleatorio.</p>
             <a class="link" href="../docs/theory/search.html">Cómo funciona cada búsqueda →</a>
           </div>
           <figure class="sheet" style="margin:0">
@@ -462,21 +462,21 @@
   <div class="wrap grid-2">
     <div>
       <div class="sec-num label">Agua subterránea</div>
-      <h2 class="mt-s">La filtración se calcula por elementos finitos, <em>no se toma de valores tabulados.</em></h2>
+      <h2 class="mt-s">Filtración calculada por <em>elementos finitos</em></h2>
       <ul class="ticks">
-        <li>Mallas de triángulos que se adaptan a cada región de material y comparten nodos en los contactos.</li>
+        <li>Mallas de triángulos sobre las regiones de material, que comparten nodos en los contactos entre materiales.</li>
         <li>Flujo saturado en régimen permanente, con un tensor de conductividad anisótropo para cada material.</li>
         <li>Flujo no saturado con seis funciones de permeabilidad: simple, Brooks-Corey, Fredlund-Xing, Gardner, van Genuchten y definida por el usuario.</li>
-        <li>La superficie freática y las superficies de rezume se obtienen conmutando la condición de contorno de cada nodo.</li>
-        <li>Análisis transitorio por etapas con la forma mixta de la ecuación de Richards y un factor de seguridad en cada etapa: un desembalse rápido se estudia como una evolución de la estabilidad en el tiempo.</li>
-        <li>Y, cuando no hace falta calcular la filtración: niveles freáticos, líneas piezométricas, coeficiente r<sub>u</sub>, rejillas de presiones, agua embalsada y exceso de presión intersticial con B̄.</li>
+        <li>La superficie freática y las superficies de rezume se obtienen conmutando la condición de contorno nodo a nodo.</li>
+        <li>Análisis transitorio por etapas, con la forma mixta de la ecuación de Richards y un factor de seguridad para cada etapa. En un desembalse rápido, eso permite seguir el factor de seguridad a lo largo del tiempo.</li>
+        <li>Cuando no hace falta calcular la filtración: niveles freáticos, líneas piezométricas, coeficiente r<sub>u</sub>, rejillas de presiones, agua embalsada y exceso de presión intersticial con B̄.</li>
       </ul>
       <div class="cta-row"><a class="btn" href="../docs/theory/seepage.html">Teoría de la filtración <span class="arrow">→</span></a></div>
     </div>
     <figure class="shot">
       <div class="bar label"><i></i><i></i><i></i>&nbsp; agua subterránea · altura total</div>
       <!-- img:seepage --><img src="../../assets/img/shots/seepage.webp" alt="La ventana Interpret Groundwater con una presa de tierra homogénea con dren de pie: isolíneas de altura total sobre la malla de elementos finitos, vectores de flujo que convergen en el dren y la superficie libre" width="1250" height="550" loading="lazy">
-      <figcaption>Filtración en régimen permanente a través de una presa homogénea de 15 m con dren de pie: altura total, vectores de flujo y superficie libre que obtiene el motor de cálculo (873 nodos; converge en 25 iteraciones).</figcaption><!-- /img:seepage -->
+      <figcaption>Filtración en régimen permanente a través de una presa homogénea de 15 m con dren de pie. El motor de cálculo da la altura total, los vectores de flujo y la superficie libre; la malla tiene 873 nodos y la solución converge en 25 iteraciones.</figcaption><!-- /img:seepage -->
     </figure>
   </div>
 </section>
@@ -487,14 +487,14 @@
     <figure class="shot">
       <div class="bar label"><i></i><i></i><i></i>&nbsp; estadística · histograma</div>
       <!-- img:histogram --><img src="../../assets/img/shots/histogram.webp" alt="La ventana Statistics: histograma de 1 000 factores de seguridad muestreados, con el umbral de rotura y la media señalados, y el resumen con la probabilidad de rotura y el índice de fiabilidad" width="1075" height="675" loading="lazy">
-      <figcaption>Análisis de Monte Carlo del talud de dos capas con 1 000 muestras de tres parámetros de resistencia: factor de seguridad medio 1.305, probabilidad de rotura 0.5 % e índice de fiabilidad 2.69 (Bishop).</figcaption><!-- /img:histogram -->
+      <figcaption>Análisis de Monte Carlo del talud de dos capas con 1 000 muestras de tres parámetros de resistencia. Con el método de Bishop, el factor de seguridad medio es 1.305, la probabilidad de rotura del 0.5 % y el índice de fiabilidad 2.69.</figcaption><!-- /img:histogram -->
     </figure>
     <div>
       <div class="sec-num label">Análisis probabilístico</div>
-      <h2 class="mt-s">La probabilidad de rotura, <em>no solo el factor de seguridad.</em></h2>
+      <h2 class="mt-s">Probabilidad de rotura y <em>análisis de sensibilidad</em></h2>
       <ul class="ticks">
         <li>Variables aleatorias para resistencias, pesos específicos, propiedades hidráulicas, soportes, cargas, coeficientes sísmicos y el nivel freático.</li>
-        <li>Siete distribuciones con truncamiento relativo, muestreo de Monte Carlo o por hipercubo latino y correlación entre cohesión y rozamiento.</li>
+        <li>Siete distribuciones con truncamiento relativo, muestreo de Monte Carlo o por hipercubo latino, y correlación entre cohesión y rozamiento.</li>
         <li>Análisis del mínimo global y del talud completo, probabilidad de rotura, índice de fiabilidad, gráficos de convergencia y superficie crítica probabilística.</li>
         <li>Barridos de sensibilidad que ordenan los datos de entrada según su influencia en el factor de seguridad.</li>
       </ul>
@@ -507,16 +507,16 @@
 <section class="section" id="design">
   <div class="wrap">
     <div class="sec-head">
-      <div><div class="sec-num label">Cargas y normativa</div><h2>De las cargas <em>a la norma de diseño.</em></h2></div>
-      <p>Todo lo que actúa sobre una sección real y las comprobaciones que exige un proyecto.</p>
+      <div><div class="sec-num label">Cargas y normativa</div><h2>Cargas, soportes y <em>normas de diseño</em></h2></div>
+      <p>La sección puede llevar soportes, cargas exteriores y acción sísmica, y las comprobaciones pueden seguir el Eurocódigo 7. El programa, además, lee y escribe planos en DXF, genera informes y se puede manejar con scripts.</p>
     </div>
     <div class="feature-grid">
-      <div class="feature"><h4>Soportes</h4><p>Anclaje de extremo, anclaje inyectado (con y sin rozamiento), bulón, pilote o micropilote, geosintético, anclaje helicoidal, muro de contención por presión de fluido equivalente y soporte definido por el usuario, en modo activo o pasivo. Retroanálisis de la fuerza necesaria para alcanzar un factor de seguridad objetivo.</p></div>
-      <div class="feature"><h4>Cargas y sismo</h4><p>Cargas distribuidas y lineales con cinco orientaciones, coeficientes sísmicos pseudoestáticos, aceleración de fluencia y desplazamiento del bloque deslizante de Newmark a partir de acelerogramas, y grietas de tracción con agua.</p></div>
-      <div class="feature"><h4>Eurocódigo 7</h4><p>Coeficientes parciales de los enfoques de proyecto DA1-C1, DA1-C2, DA2 y DA3, o los que definas tú, aplicados sobre una copia del modelo: ningún cálculo modifica tu proyecto.</p></div>
-      <div class="feature"><h4>Importación y exportación de planos</h4><p>Importación de DXF con detección de capas y limpieza de la geometría, exportación a DXF del modelo y de las superficies críticas, y anotaciones, cotas e imágenes en el área de dibujo.</p></div>
+      <div class="feature"><h4>Soportes</h4><p>Anclaje de extremo, anclaje inyectado (con y sin rozamiento), bulón, pilote o micropilote, geosintético, anclaje helicoidal, muro de contención por presión de fluido equivalente y soporte definido por el usuario. Los soportes pueden ser activos o pasivos, y el retroanálisis da la fuerza necesaria para alcanzar un factor de seguridad objetivo.</p></div>
+      <div class="feature"><h4>Cargas y sismo</h4><p>Cargas distribuidas y lineales con cinco orientaciones, coeficientes sísmicos pseudoestáticos y grietas de tracción con agua. El programa calcula también la aceleración de fluencia y, a partir de acelerogramas, el desplazamiento del bloque deslizante de Newmark.</p></div>
+      <div class="feature"><h4>Eurocódigo 7</h4><p>Coeficientes parciales de los enfoques de proyecto DA1-C1, DA1-C2, DA2 y DA3, o los que definas tú. Se aplican sobre una copia del modelo, de modo que el cálculo no modifica tu proyecto.</p></div>
+      <div class="feature"><h4>Importación y exportación de DXF</h4><p>Importación de DXF con detección de capas y limpieza de la geometría, y exportación a DXF del modelo y de las superficies críticas. En el área de dibujo se pueden añadir anotaciones, cotas e imágenes.</p></div>
       <div class="feature"><h4>Informes</h4><p>Informes del análisis en PDF, tablas de propiedades, imágenes del área de dibujo en mapa de bits o SVG, y exportación a CSV de superficies y dovelas.</p></div>
-      <div class="feature"><h4>Automatización</h4><p>Terminal de Python integrado con acceso directo al modelo abierto, línea de comandos para cálculos por lotes, API de Python y el servidor MCP para agentes de IA.</p></div>
+      <div class="feature"><h4>Automatización</h4><p>Terminal de Python integrado con acceso al modelo abierto, línea de comandos para cálculos por lotes, API de Python y el servidor MCP para agentes de IA.</p></div>
     </div>
   </div>
 </section>
@@ -525,11 +525,11 @@
 <section class="section alt" id="workflow">
   <div class="wrap">
     <div class="sec-head">
-      <div><div class="sec-num label">Flujo de trabajo</div><h2>Modelar. Calcular. <em>Interpretar.</em></h2></div>
-      <p>Son los mismos tres pasos en el programa de escritorio, desde Python o desde un agente. Cada modelo se guarda en un archivo <code>.ogr</code>, JSON en texto plano, que los tres pueden abrir.</p>
+      <div><div class="sec-num label">Flujo de trabajo</div><h2>Las tres fases de un análisis</h2></div>
+      <p>Son las mismas en el programa de escritorio, desde Python o a través de un agente. El modelo se guarda en un archivo <code>.ogr</code>, JSON en texto plano, que pueden abrir los tres.</p>
     </div>
     <div class="grid-3">
-      <div class="card"><span class="label">01 · Modelar</span><h3>Dibujar o importar</h3><p>Contornos dibujados con el ratón, introducidos por coordenadas o importados de un DXF; materiales asignados por regiones; agua, cargas y soportes.</p></div>
+      <div class="card"><span class="label">01 · Modelar</span><h3>Dibujar o importar</h3><p>Los contornos se dibujan con el ratón, se introducen por coordenadas o se importan de un DXF. Después se asignan los materiales por regiones y se añaden el agua, las cargas y los soportes.</p></div>
       <div class="card"><span class="label">02 · Calcular</span><h3>Buscar y resolver</h3><p>Cada método activado hace su búsqueda en segundo plano, en paralelo cuando es posible, con barra de progreso y botón para cancelar.</p></div>
       <div class="card"><span class="label">03 · Interpretar</span><h3>Leer el resultado</h3><p>Superficies críticas y su clasificación, datos de cada dovela, diagramas de sólido libre, línea de empujes, gráficas a lo largo del talud e informes.</p></div>
     </div>
@@ -540,8 +540,8 @@
 <section class="section" id="specs">
   <div class="wrap">
     <div class="sec-head">
-      <div><div class="sec-num label">Especificaciones</div><h2>Ficha técnica.</h2></div>
-      <p>Datos extraídos del código fuente de la versión <span data-v>0.1.235</span>. Si alguna vez esta página y el programa no coinciden, manda el programa: el error está en la página.</p>
+      <div><div class="sec-num label">Especificaciones</div><h2>Ficha técnica</h2></div>
+      <p>Datos tomados del código fuente de la versión <span data-v>0.1.235</span>. Si encuentras alguna diferencia entre esta página y el programa, vale lo que diga el programa; avísanos y corregiremos la página.</p>
     </div>
     <dl class="spec-list">
       <div><dt class="label">Análisis</dt><dd>Equilibrio límite 2D, deformación plana</dd></div>
@@ -569,8 +569,8 @@
   <div class="wrap cta-band">
     <div>
       <div class="label">Verificación</div>
-      <h2 class="mt-s">5 265 tests, <em>contrastados con referencias.</em></h2>
-      <p class="mt-m">La batería de tests compara los resultados con casos publicados, soluciones analíticas e identidades exactas, nunca con resultados guardados del propio programa, que perpetuarían cualquier error que contuvieran.</p>
+      <h2 class="mt-s">Una batería de <em>5 265 tests</em></h2>
+      <p class="mt-m">Los tests comparan los resultados con casos publicados, soluciones analíticas e identidades exactas. No usamos como referencia resultados guardados del propio programa, porque conservarían cualquier error que contuvieran.</p>
     </div>
     <div class="cta-row"><a class="btn primary lg" href="../verification/index.html">Ver la verificación</a><a class="btn lg" href="../docs/verification/slope-benchmarks.html">Casos de referencia</a></div>
   </div>

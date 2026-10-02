@@ -65,7 +65,7 @@
               <a class="mega-item" href="../../../es/docs/reference/cli.html"><b>La línea de comandos</b><span>Cálculos por lotes con ogr-slip2d-cli</span></a>
             </div>
           </div>
-          <div class="mega-foot"><span>Cinco programas sobre un mismo núcleo abierto.</span><a href="../../../es/products/index.html">Todos los productos →</a></div>
+          <div class="mega-foot"><span>OGR Slip2D ya está disponible; los otros cuatro programas están previstos.</span><a href="../../../es/products/index.html">Todos los productos →</a></div>
         </div>
       </div>
       <a href="../../../es/examples/index.html" data-nav="examples">Ejemplos</a>
@@ -168,7 +168,7 @@
     </header>
 
     <article class="doc prose">
-      <p class="lede">Los anclajes, los bulones, los pilotes, los geosintéticos y los muros aportan una fuerza allí donde los corta una superficie de rotura. En OGR Slip2D, un soporte es una línea que va desde su <em>cabeza</em>, en la cara del talud, hasta su <em>cola</em>, dentro del terreno, y toma sus propiedades de un tipo de soporte con nombre, definido una sola vez para todo el proyecto. Esta página explica cómo definir los tipos de soporte, colocar soportes uno a uno o en patrón, editarlos, elegir entre fuerzas activas y pasivas y obtener con el retroanálisis la fuerza de soporte que exige un diseño. En la <a class="xref" href="../theory/supports.html">Sección 3.10</a> se explica cómo desarrolla su fuerza cada tipo.</p>
+      <p class="lede">Los anclajes, los bulones, los pilotes, los geosintéticos y los muros aportan una fuerza allí donde los corta una superficie de rotura. En OGR Slip2D, un soporte es una línea que va desde su <em>cabeza</em>, en la cara del talud, hasta su <em>cola</em>, dentro del terreno, y toma sus propiedades de un tipo de soporte con nombre, definido una sola vez para todo el proyecto. La fuerza de un soporte puede intervenir en el equilibrio como activa o como pasiva, y el retroanálisis permite obtener la fuerza que necesita un diseño para alcanzar un factor de seguridad objetivo. En la <a class="xref" href="../theory/supports.html">Sección 3.10</a> se explica cómo desarrolla su fuerza cada tipo.</p>
 
       <h2 id="define"><span class="secnum">2.6.1</span><span class="ht">Definición de tipos de soporte</span><a class="anchor" href="#define" aria-label="Enlace a esta sección">#</a></h2>
       <p>No se pueden colocar soportes mientras el proyecto no tenga al menos un tipo de soporte. Elige <span class="ui">Properties → Define Support…</span> para abrir <strong>Define Support Properties</strong>. La lista de la izquierda, <strong>Support Types</strong>, contiene los conjuntos de propiedades con nombre del proyecto, cada uno con su clase entre corchetes; <span class="ui">+ Add</span> crea uno, <span class="ui">Duplicate</span> copia el seleccionado y <span class="ui">− Remove</span> lo elimina (el último no se puede eliminar). Si el proyecto no tiene tipos, el diálogo se abre con <em>Type 1</em>, un soporte End Anchored.</p>

@@ -65,7 +65,7 @@
               <a class="mega-item" href="../../docs/reference/cli.html"><b>The command line</b><span>Batch runs with ogr-slip2d-cli</span></a>
             </div>
           </div>
-          <div class="mega-foot"><span>Five programs, one open core.</span><a href="../../products/index.html">All products →</a></div>
+          <div class="mega-foot"><span>OGR Slip2D is available now; the other four programs are planned.</span><a href="../../products/index.html">All products →</a></div>
         </div>
       </div>
       <a href="../../examples/index.html" data-nav="examples">Examples</a>
@@ -168,7 +168,7 @@
     </header>
 
     <article class="doc prose">
-      <p class="lede">A probabilistic analysis treats some inputs of the model as random variables, draws samples of them and recomputes the factor of safety for each sample, which gives its distribution, the probability of failure and the reliability index. A sensitivity analysis instead sweeps one input at a time across its range. This page explains how to set up both and how to read their output; the statistics behind them are in <a class="xref" href="../theory/probabilistic.html">Section 3.11</a>.</p>
+      <p class="lede">A probabilistic analysis treats some inputs of the model as random variables, draws samples of them and recomputes the factor of safety for each sample, which gives its distribution, the probability of failure and the reliability index. A sensitivity analysis instead sweeps one input at a time across its range. Both are set up in Project Settings and in the Statistics menu, and their output is read in the Statistics window; the statistics behind them are in <a class="xref" href="../theory/probabilistic.html">Section 3.11</a>.</p>
       <div class="note warn"><span class="label">Version 0.1.235</span><p>In this version the run cannot be completed from the window's menu: see <a class="xref" href="#compute-statistics">Section 2.10.4</a>. The settings below are still the ones the analysis uses when it is run through the MCP server or the Python API.</p></div>
 
       <h2 id="enable"><span class="secnum">2.10.1</span><span class="ht">Enabling the analysis</span><a class="anchor" href="#enable" aria-label="Link to this section">#</a></h2>
@@ -223,7 +223,7 @@
       </figure>
       <div class="impl">
         <span class="label">In OGR Slip2D</span>
-        <p>Every distribution is <strong>truncated</strong> to its actual range: samples are drawn by inverting the distribution between the two limits, so no value falls outside them and Latin Hypercube strata survive the truncation. A declared correlation is imposed by reordering the ranks of the second variable, which keeps both marginal distributions exactly <a class="cite" href="../reference/bibliography.html#iman1982">(Iman &amp; Conover, 1982)</a>. Each sample is applied to a copy of the model; your project is never changed by the run.</p>
+        <p>Distributions are <strong>truncated</strong> to their actual range: samples are drawn by inverting the distribution between the two limits, so no value falls outside them and Latin Hypercube strata survive the truncation. A declared correlation is imposed by reordering the ranks of the second variable, which leaves both marginal distributions unchanged <a class="cite" href="../reference/bibliography.html#iman1982">(Iman &amp; Conover, 1982)</a>. Each sample is applied to a copy of the model, so the run does not modify your project.</p>
         <span class="src">Source: <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_core/statistics/distributions.py" target="_blank" rel="noopener">ogr_core/statistics/distributions.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_core/statistics/random_variables.py" target="_blank" rel="noopener">ogr_core/statistics/random_variables.py</a></span>
       </div>
 
@@ -231,7 +231,7 @@
       <p><em>Monte Carlo</em> draws every sample independently. <em>Latin Hypercube</em> divides the probability range of each variable into N strata and draws one sample in each, which usually needs fewer samples for the same accuracy <a class="cite" href="../reference/bibliography.html#mckay1979">(McKay, Beckman &amp; Conover, 1979)</a>.</p>
       <p>The random numbers are set in <span class="ui">Analysis → Project Settings →</span> <span class="ui">Random Numbers</span>:</p>
       <ul>
-        <li><strong>Generation</strong>: <em>Pseudo-random</em> (default) is reproducible — the same <strong>Seed</strong> (10116 by default) gives the same samples, and therefore the same answer, every time; <em>Random</em> takes the seed from the clock, so successive runs differ, which is a way to check that a conclusion is not an artefact of one seed. The Seed box is greyed out under Random.</li>
+        <li><strong>Generation</strong>: <em>Pseudo-random</em> (default) is reproducible: the same <strong>Seed</strong> (10116 by default) gives the same samples, and therefore the same answer, every time; <em>Random</em> takes the seed from the clock, so successive runs differ, which is a way to check that a conclusion is not an artefact of one seed. The Seed box is greyed out under Random.</li>
         <li><strong>Share one Latin Hypercube stratification across variables</strong> (off): sample <em>i</em> then sits in the same stratum of every variable, so all of them are unfavourable together. It answers a different question from the independent case and usually widens the spread. It does nothing under Monte Carlo.</li>
       </ul>
       <p>The same page also seeds the random slip-surface searches (<a class="xref" href="surfaces.html">Section 2.7</a>).</p>
@@ -239,7 +239,7 @@
       <h2 id="compute-statistics"><span class="secnum">2.10.4</span><span class="ht">Computing the statistics</span><a class="anchor" href="#compute-statistics" aria-label="Link to this section">#</a></h2>
       <p><span class="ui">Statistics → Compute Statistics</span> first runs the deterministic analysis, with every enabled method and its search, to find the critical surface of each method. Then:</p>
       <ul>
-        <li>a <strong>Global Minimum</strong> analysis evaluates the N samples on the critical surface of each method — each method keeps its own;</li>
+        <li>a <strong>Global Minimum</strong> analysis evaluates the N samples on the critical surface of each method (each method keeps its own);</li>
         <li>an <strong>Overall Slope</strong> analysis repeats the whole search N times. Besides the distribution of the minimum factor of safety, it records the critical surface of every sample and the <em>critical probabilistic surface</em>: the individual surface with the highest probability of failure among those evaluated at least five times, which need not be the deterministic critical surface;</li>
         <li>a <strong>sensitivity</strong> analysis is computed as described below.</li>
       </ul>
@@ -253,7 +253,7 @@
         <li><strong>Convergence</strong>: the mean factor of safety and the probability of failure against the number of samples. A flat tail means the sample count is sufficient; a curve still drifting means more samples are needed.</li>
         <li><strong>Sensitivity</strong>: the factor of safety against each variable, as a percentage of its range, with the variables ranked by how much they move it.</li>
       </ul>
-      <p>When a run could not sample every variable — for example because a variable refers to a material that has since been deleted — the window says so in red above the plot.</p>
+      <p>When a run could not sample every variable (for example, because a variable refers to a material that has since been deleted), the window says so in red above the plot.</p>
       <figure class="fig shot-fig" id="fig-statistics-window">
         <div class="art"><img src="../../assets/img/shots/statistics-window.webp" alt="The Statistics window showing the histogram of the sampled factors of safety with the failure threshold and the mean marked, and the summary statistics below" loading="lazy" width="1500" height="900"></div>
         <figcaption><span class="fignum">Figure 2.10.2</span> The Statistics window with the histogram of the factor of safety.</figcaption>
@@ -295,9 +295,9 @@
 
       <h2 id="reading"><span class="secnum">2.10.8</span><span class="ht">Reading the results</span><a class="anchor" href="#reading" aria-label="Link to this section">#</a></h2>
       <ul>
-        <li>Check the convergence plot before quoting a probability of failure: a value that still drifts with the number of samples is not yet a result.</li>
-        <li>A Global Minimum run assumes that the critical surface does not move with the samples. When the inputs could change the mechanism — a weak layer whose strength varies, for instance — compare with an Overall Slope run.</li>
-        <li>The reliability index assumes a normal or lognormal distribution of the factor of safety; the probability of failure assumes nothing but counts samples, so with few samples a small probability is poorly resolved.</li>
+        <li>Check the convergence plot before quoting a probability of failure: if the value still changes as samples are added, more samples are needed.</li>
+        <li>A Global Minimum run assumes that the critical surface does not move with the samples. When the inputs could change the mechanism (a weak layer whose strength varies, for instance), compare with an Overall Slope run.</li>
+        <li>The reliability index assumes a normal or lognormal distribution of the factor of safety. The probability of failure is the fraction of samples with <span class="m" data-tex="F &lt; 1"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi><mo>&lt;</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">F &lt; 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.7224em;vertical-align:-0.0391em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">F</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span><!--/k--></span> and assumes no distribution, so with few samples a small probability is poorly resolved.</li>
         <li>A sample that cannot be evaluated is left out, and the run reports how many were.</li>
       </ul>
     </article>
@@ -329,7 +329,7 @@
           <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
           <b>OpenGeoRock</b>
         </a>
-        <p class="tagline">Open-source geotechnical software, built in the open at the Universidad Politécnica de Cartagena.</p>
+        <p class="tagline">Open-source geotechnical software developed at the Universidad Politécnica de Cartagena.</p>
         <span class="lang" role="group" aria-label="Language"><a href="../../docs/user-guide/probabilistic.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../../es/docs/user-guide/probabilistic.html" hreflang="es" lang="es">ES</a></span>
       </div>
       <div>

@@ -65,7 +65,7 @@
               <a class="mega-item" href="../../docs/reference/cli.html"><b>The command line</b><span>Batch runs with ogr-slip2d-cli</span></a>
             </div>
           </div>
-          <div class="mega-foot"><span>Five programs, one open core.</span><a href="../../products/index.html">All products →</a></div>
+          <div class="mega-foot"><span>OGR Slip2D is available now; the other four programs are planned.</span><a href="../../products/index.html">All products →</a></div>
         </div>
       </div>
       <a href="../../examples/index.html" data-nav="examples">Examples</a>
@@ -168,7 +168,7 @@
     </header>
 
     <article class="doc prose">
-      <p class="lede">When OGR Slip2D cannot give a factor of safety, it says why, in a form a program can read as well as a person. This page lists the four negative codes written in place of the factor of safety of a rejected surface, the failure reasons behind them, the verdicts of the admissibility checks, the errors of the operations layer and the MCP server, and the exit codes of the command-line programs.</p>
+      <p class="lede">When OGR Slip2D cannot give a factor of safety, it says why, in a form a program can read as well as a person. A rejected surface carries one of four negative codes in place of its factor of safety, with a failure reason behind it. The admissibility checks, the errors of the operations layer and the MCP server, and the exit codes of the command-line programs follow.</p>
 
       <h2 id="surface-codes"><span class="secnum">5.5.1</span><span class="ht">Surface error codes</span><a class="anchor" href="#surface-codes" aria-label="Link to this section">#</a></h2>
       <p>A surface that has no admissible factor of safety keeps its place among the results, and a negative code is written where its factor would be. How the checks behind −120 and −112 work is explained in <a class="xref" href="../theory/interslice.html">Section 3.3</a>.</p>
@@ -218,7 +218,7 @@
               <tr><td><code>m_alpha_collapsed</code></td><td><span class="m" data-tex="m_\alpha"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>m</mi><mi>α</mi></msub></mrow><annotation encoding="application/x-tex">m_\alpha</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">m</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0037em;">α</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><!--/k--></span> collapsed towards zero on a slice base.</td></tr>
               <tr><td><code>n_alpha_collapsed</code></td><td><span class="m" data-tex="n_\alpha"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>n</mi><mi>α</mi></msub></mrow><annotation encoding="application/x-tex">n_\alpha</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0037em;">α</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><!--/k--></span> collapsed towards zero on a slice base (the analogue in Janbu's methods).</td></tr>
               <tr><td><code>non_physical_fos</code></td><td>The arithmetic produced a factor that is not a physical one: zero or negative, or not a finite number.</td></tr>
-              <tr><td><code>not_converged</code></td><td>The iteration ran out of passes before the factor settled. There is a number, the last iterate, but it is where the solver stopped, not where it was going; the iteration limit is the setting to look at.</td></tr>
+              <tr><td><code>not_converged</code></td><td>The iteration ran out of passes before the factor settled. There is a number, the last iterate, but it is not a converged value; the iteration limit is the setting to look at.</td></tr>
               <tr><td><code>all_lambda_diverged</code></td><td>Every sampled interslice ratio λ diverged, leaving no branch to solve on (Spencer, GLE).</td></tr>
               <tr><td><code>no_lambda_bracket</code></td><td>The sampled range of λ never changed sign, so the root is not bracketed.</td></tr>
               <tr><td><code>divergent_at_lambda</code></td><td>The solution diverged at the λ finally chosen.</td></tr>
@@ -234,12 +234,12 @@
       </figure>
       <div class="impl">
         <span class="label">In OGR Slip2D</span>
-        <p>The reasons are the <code>REASON_*</code> constants, and <code>ALL_REASONS</code> is the set every method's reason must belong to, so that a new reason cannot be born as a loose string. They are deliberately not translated: the interface translates the message where it shows it.</p>
+        <p>The reasons are the <code>REASON_*</code> constants, and <code>ALL_REASONS</code> is the set every method's reason must belong to, so that a new reason cannot be introduced as a loose string. They are deliberately not translated: the interface translates the message where it shows it.</p>
         <span class="src">Source: <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_slip2d/methods/base.py" target="_blank" rel="noopener">ogr_slip2d/methods/base.py</a></span>
       </div>
 
       <h2 id="screens"><span class="secnum">5.5.3</span><span class="ht">Admissibility checks</span><a class="anchor" href="#screens" aria-label="Link to this section">#</a></h2>
-      <p>A surface that fails an admissibility check has <em>not</em> failed to compute: its factor converged and is kept, because the searches that steer by the factor of safety need it, but the surface is judged inadmissible afterwards and is never reported as the critical one, unless every valid surface is inadmissible, in which case the checks are ignored and the result says so. The verdict is recorded in <code>admissible</code>, <code>admissibility_note</code> and <code>admissibility_reason</code>, with these values:</p>
+      <p>A surface that fails an admissibility check has <em>not</em> failed to compute: its factor converged and is kept, because the searches that steer by the factor of safety need it. The surface is judged inadmissible afterwards and is not reported as the critical one, unless every valid surface is inadmissible; in that case the checks are ignored and the result says so. The verdict is recorded in <code>admissible</code>, <code>admissibility_note</code> and <code>admissibility_reason</code>, with these values:</p>
       <figure class="tbl" id="tbl-screens">
         <figcaption><span class="fignum">Table 5.5.3</span> Admissibility checks, their code and their default.</figcaption>
         <div class="table-wrap">
@@ -336,7 +336,7 @@
           <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
           <b>OpenGeoRock</b>
         </a>
-        <p class="tagline">Open-source geotechnical software, built in the open at the Universidad Politécnica de Cartagena.</p>
+        <p class="tagline">Open-source geotechnical software developed at the Universidad Politécnica de Cartagena.</p>
         <span class="lang" role="group" aria-label="Language"><a href="../../docs/reference/error-codes.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../../es/docs/reference/error-codes.html" hreflang="es" lang="es">ES</a></span>
       </div>
       <div>

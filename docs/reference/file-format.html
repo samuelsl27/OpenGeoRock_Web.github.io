@@ -65,7 +65,7 @@
               <a class="mega-item" href="../../docs/reference/cli.html"><b>The command line</b><span>Batch runs with ogr-slip2d-cli</span></a>
             </div>
           </div>
-          <div class="mega-foot"><span>Five programs, one open core.</span><a href="../../products/index.html">All products →</a></div>
+          <div class="mega-foot"><span>OGR Slip2D is available now; the other four programs are planned.</span><a href="../../products/index.html">All products →</a></div>
         </div>
       </div>
       <a href="../../examples/index.html" data-nav="examples">Examples</a>
@@ -168,7 +168,7 @@
     </header>
 
     <article class="doc prose">
-      <p class="lede">An OGR Slip2D project is one plain JSON file with the extension <code>.ogr</code>: the geometry, the materials, the loads, the supports, every setting and, once computed, the finite-element groundwater field. It can be read, compared and kept under version control like any text file. The results of a search, which can run to thousands of surfaces with their slices, go to a separate HDF5 file. This page lists the keys of the first and the layout of the second.</p>
+      <p class="lede">An OGR Slip2D project is one plain JSON file with the extension <code>.ogr</code>: the geometry, the materials, the loads, the supports, every setting and, once computed, the finite-element groundwater field. It can be read, compared and kept under version control like any text file. The results of a search, which can run to thousands of surfaces with their slices, go to a separate HDF5 file. The keys of the first are listed below, followed by the layout of the second.</p>
 
       <h2 id="json"><span class="secnum">5.4.1</span><span class="ht">A plain JSON document</span><a class="anchor" href="#json" aria-label="Link to this section">#</a></h2>
       <ul>
@@ -176,9 +176,9 @@
         <li><strong>Units.</strong> Values are stored in SI (m, kN per metre of slope, kPa, kN/m³, degrees), whatever unit system the window displays: units are converted only where the interface shows or reads them.</li>
         <li><strong>Identifiers.</strong> Objects carry UUID strings, and references between them use those ids: a material points at its water surface with <code>water_surface_id</code>, a region assignment at its material with <code>material_id</code>.</li>
         <li><strong>Regions are not stored as such.</strong> The regions are computed from the external and material boundaries; what the file keeps is each assignment as a point inside a region (<code>region_assignments</code>), which is re-located in the recomputed regions after every geometry change.</li>
-        <li><strong>The same document everywhere.</strong> The window, <code>ogr-slip2d-cli</code>, the operations layer and the MCP server read and write the same file; <code>project_get</code> returns one section of it to an agent (<a class="xref" href="mcp.html">Section 5.1</a>).</li>
+        <li><strong>Shared by all components.</strong> The window, <code>ogr-slip2d-cli</code>, the operations layer and the MCP server read and write the same file; <code>project_get</code> returns one section of it to an agent (<a class="xref" href="mcp.html">Section 5.1</a>).</li>
       </ul>
-      <p>Saving writes the whole document, so a file saved by the current version carries every key below. A file is never modified by a calculation.</p>
+      <p>Saving writes the whole document, so a file saved by the current version carries every key below; a calculation does not modify the file.</p>
 
       <h3 id="excerpt"><span class="ht">An excerpt</span><a class="anchor" href="#excerpt" aria-label="Link to this section">#</a></h3>
       <p>The beginning of a two-layer slope with a water table, as saved by v<span data-v>0.1.235</span>; <code>…</code> marks lines left out.</p>
@@ -264,7 +264,7 @@
               <tr><td><code>fem_mesh</code>, <code>seepage_bcs</code></td><td>The finite-element mesh and the seepage boundary conditions, or <code>null</code>.</td></tr>
               <tr><td><code>seepage_result</code>, <code>transient_results</code></td><td>The computed steady groundwater field (or <code>null</code>) and the fields of the transient stages. Only the irreducible data are written; the derived fields are rebuilt when the file is read.</td></tr>
               <tr><td><code>random_variables</code></td><td>The inputs made random for the probabilistic and sensitivity analyses.</td></tr>
-              <tr><td><code>annotations</code></td><td>Drawings, texts and dimensions; the analysis never reads them.</td></tr>
+              <tr><td><code>annotations</code></td><td>Drawings, texts and dimensions; the analysis does not read them.</td></tr>
               <tr><td><code>focus_objects</code></td><td>Focus objects that restrict the search.</td></tr>
               <tr><td><code>user_surfaces</code></td><td>Circles defined by hand and analysed together with the search. Their ends where they meet the ground are not meaningful in the file: they are a result of the analysis, not an input.</td></tr>
             </tbody>
@@ -306,7 +306,7 @@
         <li>a B̄ rapid-drawdown project drawn with the drawdown convention used before v0.1.69 has its water table and drawdown line exchanged, so that the model means what it meant;</li>
         <li>a water pressure grid that also declares its own value type sets the groundwater method accordingly (v0.1.202).</li>
       </ul>
-      <p>The conversion of v0.1.69 changes, on purpose, the factor of safety of the files it applies to, and the changelog of that version says so. Nothing guarantees that an older version of the program opens a file written by a newer one.</p>
+      <p>The conversion of v0.1.69 changes, on purpose, the factor of safety of the files it applies to, and the changelog of that version says so. An older version of the program is not guaranteed to open a file written by a newer one.</p>
 
       <h2 id="results"><span class="secnum">5.4.5</span><span class="ht">Results in HDF5</span><a class="anchor" href="#results" aria-label="Link to this section">#</a></h2>
       <p>The results of a search are written to an HDF5 file, normally beside the project with the same name and the extension <code>.h5</code>. The window writes the result of the first method after each Compute once the project has a file; <code>ogr-slip2d-cli compute</code> writes one file per method (<a class="xref" href="cli.html">Section 5.2</a>); a script uses <code>save_results</code> (<a class="xref" href="python-api.html">Section 5.3</a>). Each file holds one search; an existing file is replaced.</p>
@@ -361,7 +361,7 @@
           <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
           <b>OpenGeoRock</b>
         </a>
-        <p class="tagline">Open-source geotechnical software, built in the open at the Universidad Politécnica de Cartagena.</p>
+        <p class="tagline">Open-source geotechnical software developed at the Universidad Politécnica de Cartagena.</p>
         <span class="lang" role="group" aria-label="Language"><a href="../../docs/reference/file-format.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../../es/docs/reference/file-format.html" hreflang="es" lang="es">ES</a></span>
       </div>
       <div>

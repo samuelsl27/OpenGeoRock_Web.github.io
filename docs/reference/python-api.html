@@ -64,7 +64,7 @@
               <a class="mega-item" href="../../docs/reference/cli.html"><b>The command line</b><span>Batch runs with ogr-slip2d-cli</span></a>
             </div>
           </div>
-          <div class="mega-foot"><span>Five programs, one open core.</span><a href="../../products/index.html">All products →</a></div>
+          <div class="mega-foot"><span>OGR Slip2D is available now; the other four programs are planned.</span><a href="../../products/index.html">All products →</a></div>
         </div>
       </div>
       <a href="../../examples/index.html" data-nav="examples">Examples</a>
@@ -167,7 +167,7 @@
     </header>
 
     <article class="doc prose">
-      <p class="lede">OGR Slip2D is a Python program, and everything it computes can be driven from a script. There are two levels: the <strong>engine</strong>, whose objects (<code>Project</code>, the searches and the methods) give full control and full responsibility, and the <strong>operations layer</strong> <code>ogr_api</code>, the named, validated and undoable operations that the MCP server publishes as tools. The program's window also has a Python terminal connected to the live project. This page shows a short example of each, all checked against v<span data-v>0.1.235</span>.</p>
+      <p class="lede">OGR Slip2D is a Python program, and its calculations can be driven from a script. There are two levels: the <strong>engine</strong>, whose objects (<code>Project</code>, the searches and the methods) give full control and leave the checking to you, and the <strong>operations layer</strong> <code>ogr_api</code>, the named, validated and undoable operations that the MCP server publishes as tools. The program's window also has a Python terminal connected to the live project. A short example of each follows, all checked against v<span data-v>0.1.235</span>.</p>
 
       <h2 id="levels"><span class="secnum">5.3.1</span><span class="ht">Two levels</span><a class="anchor" href="#levels" aria-label="Link to this section">#</a></h2>
       <figure class="tbl" id="tbl-levels">
@@ -194,7 +194,7 @@
       <p>A model is a <code>Project</code> (<code>ogr_core.project</code>). <code>Project.load(path)</code> reads a <code>.ogr</code> file and <code>project.save(path)</code> writes one (<a class="xref" href="file-format.html">Section 5.4</a>); <code>Project(name)</code> starts an empty one, to which boundaries and materials are added with <code>add_boundary</code> and <code>add_material</code>, as <code>examples/quick_slope.py</code> does. <code>ogr_core.project.demo.<wbr>build_demo_project()</code> returns the demo slope.</p>
 
       <h3 id="run-analysis"><span class="ht">The analysis the project describes</span><a class="anchor" href="#run-analysis" aria-label="Link to this section">#</a></h3>
-      <p><code>run_analysis(project, method_ids=None, progress_cb=None, *, allow_unconfigured=False)</code>, in <code>ogr_slip2d.analysis_runner</code>, is the analysis that <span class="ui">Analysis → Compute</span>, the command line and the operations layer run: one search per method, built from the project's settings, with the design-standard partial factors applied to a copy (the project passed in is never modified), rapid drawdown, slope limits, surface filters, focus objects, the seismic mode, the convergence settings, the seed and the admissibility checks.</p>
+      <p><code>run_analysis(project, method_ids=None, progress_cb=None, *, allow_unconfigured=False)</code>, in <code>ogr_slip2d.analysis_runner</code>, is the analysis that <span class="ui">Analysis → Compute</span>, the command line and the operations layer run: one search per method, built from the project's settings. It applies the design-standard partial factors to a copy (the project passed in is not modified) and takes into account rapid drawdown, slope limits, surface filters, focus objects, the seismic mode, the convergence settings, the seed and the admissibility checks.</p>
       <div class="code"><pre><code>from ogr_core.project import Project
 from ogr_slip2d.analysis_runner import run_analysis
 
@@ -233,7 +233,7 @@ search = GridSearch(method=BishopSimplified(), grid_nx=6, grid_ny=6,
 result = search.run(project)               <span class="c"># 7 × 7 centres × 6 radii = 294 circles</span>
 print(result.critical.fos, result.attempts)
 save_results("slope_bishop.h5", result, project_id=project.id)</code></pre></div>
-      <div class="note warn"><span class="label">A hand-built search is not Compute</span><p>An object built by hand uses its own defaults and reads from the project only the model itself. A method takes a tolerance of 0.001, 75 iterations and no Steffensen acceleration (the project defaults are 0.005, 50 and Steffensen on); <code>GridSearch</code> takes 10 × 10 intervals, a radius increment of 10, 30 slices and a minimum area of 0.5 m², and places the grid itself when <code>grid_x</code> and <code>grid_y</code> are not given. The project's slope limits, surface filters, focus objects and seismic Ky mode reach a hand-built search only if they are passed to it, and rapid drawdown and the design standard are applied only by the analysis runner. To get what the window computes, use <code>run_analysis</code>. <code>build_search(project, method_id)</code> returns the search the project configures for one method, rapid drawdown included; the design standard is applied by <code>run_analysis</code>, to a copy of the project.</p></div>
+      <div class="note warn"><span class="label">A hand-built search differs from Compute</span><p>An object built by hand uses its own defaults and reads from the project only the model itself. A method takes a tolerance of 0.001, 75 iterations and no Steffensen acceleration (the project defaults are 0.005, 50 and Steffensen on); <code>GridSearch</code> takes 10 × 10 intervals, a radius increment of 10, 30 slices and a minimum area of 0.5 m², and places the grid itself when <code>grid_x</code> and <code>grid_y</code> are not given. The project's slope limits, surface filters, focus objects and seismic Ky mode reach a hand-built search only if they are passed to it, and rapid drawdown and the design standard are applied only by the analysis runner. To get what the window computes, use <code>run_analysis</code>. <code>build_search(project, method_id)</code> returns the search the project configures for one method, rapid drawdown included; the design standard is applied by <code>run_analysis</code>, to a copy of the project.</p></div>
       <figure class="tbl" id="tbl-search-result">
         <figcaption><span class="fignum">Table 5.3.2</span> What a search returns (<code>SearchResult</code>) and what each evaluated surface carries (<code>LEMResult</code>).</figcaption>
         <div class="table-wrap">
@@ -277,7 +277,7 @@ for method_id, res in outcome.results.items():
       <p>A Grid Search of 400 circles or more is evaluated in a pool of worker processes (at most 8, using by default 50 % of the logical processors; <span class="ui">Project Settings → Advanced</span> can switch it off). On Windows each worker imports the script again, so a script that runs a search should keep its top-level code under <code>if __name__ == "__main__":</code>, as the examples on this page and in the repository do. A pool that cannot start does not stop the analysis: the search falls back to one process.</p>
 
       <h2 id="operations"><span class="secnum">5.3.3</span><span class="ht">The operations layer</span><a class="anchor" href="#operations" aria-label="Link to this section">#</a></h2>
-      <p><code>ogr_api</code> holds everything the program can do to a model as named operations with typed arguments and JSON-safe answers, without Qt and without the MCP SDK. There are 73 operations: the MCP tools except <code>server_info</code>, under the same names, and every parameter of a tool is a parameter of its operation, so the tool tables of <a class="xref" href="mcp.html#tools">Section 5.1.7</a> describe them too. <code>ogr_api.OPERATIONS</code> is the registry.</p>
+      <p><code>ogr_api</code> holds what the program can do to a model as named operations with typed arguments and JSON-safe answers, without Qt and without the MCP SDK. There are 73 operations: the MCP tools except <code>server_info</code>, under the same names, and every parameter of a tool is a parameter of its operation, so the tool tables of <a class="xref" href="mcp.html#tools">Section 5.1.7</a> describe them too. <code>ogr_api.OPERATIONS</code> is the registry.</p>
       <div class="code"><pre><code>from pathlib import Path
 
 from ogr_api import OgrApiError, Workspace, call
@@ -322,7 +322,7 @@ if __name__ == "__main__":
       </div>
 
       <h2 id="terminal"><span class="secnum">5.3.4</span><span class="ht">The embedded terminal</span><a class="anchor" href="#terminal" aria-label="Link to this section">#</a></h2>
-      <p><span class="ui">Window → Terminal</span> (<kbd>Ctrl</kbd>+<kbd>`</kbd>) opens a Python console inside the program, connected to the live project. It runs in the program's own process: whatever it does, it does to the model on screen.</p>
+      <p><span class="ui">Window → Terminal</span> (<kbd>Ctrl</kbd>+<kbd>`</kbd>) opens a Python console inside the program, connected to the live project. It runs in the program's own process and acts directly on the model on screen.</p>
       <figure class="tbl" id="tbl-terminal">
         <figcaption><span class="fignum">Table 5.3.3</span> Names available in the embedded terminal.</figcaption>
         <div class="table-wrap">
@@ -383,7 +383,7 @@ if __name__ == "__main__":
           <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
           <b>OpenGeoRock</b>
         </a>
-        <p class="tagline">Open-source geotechnical software, built in the open at the Universidad Politécnica de Cartagena.</p>
+        <p class="tagline">Open-source geotechnical software developed at the Universidad Politécnica de Cartagena.</p>
         <span class="lang" role="group" aria-label="Language"><a href="../../docs/reference/python-api.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../../es/docs/reference/python-api.html" hreflang="es" lang="es">ES</a></span>
       </div>
       <div>

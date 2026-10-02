@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>OGR Slip2D — 2D slope stability, open source — OpenGeoRock</title>
-<meta name="description" content="OGR Slip2D: open-source 2D slope stability by limit equilibrium, with finite-element groundwater, probabilistic analysis, supports, seismic loading, Eurocode 7 partial factors and an MCP server for AI agents.">
+<meta name="description" content="OGR Slip2D is an open-source program for 2D slope stability by limit equilibrium, with finite-element groundwater, probabilistic analysis, supports, seismic loading, Eurocode 7 partial factors and an MCP server for AI agents.">
 <!-- @inc head -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>document.documentElement.classList.replace("no-js", "js")</script>
@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="OpenGeoRock">
 <meta property="og:title" content="OGR Slip2D — 2D slope stability, open source — OpenGeoRock">
-<meta property="og:description" content="OGR Slip2D: open-source 2D slope stability by limit equilibrium, with finite-element groundwater, probabilistic analysis, supports, seismic loading, Eurocode 7 partial factors and an MCP server for AI agents.">
+<meta property="og:description" content="OGR Slip2D is an open-source program for 2D slope stability by limit equilibrium, with finite-element groundwater, probabilistic analysis, supports, seismic loading, Eurocode 7 partial factors and an MCP server for AI agents.">
 <meta property="og:url" content="https://opengeorock.org/products/slip2d.html">
 <meta property="og:image" content="https://opengeorock.org/assets/img/og-image.png">
 <meta property="og:locale" content="en_GB">
@@ -64,7 +64,7 @@
               <a class="mega-item" href="../docs/reference/cli.html"><b>The command line</b><span>Batch runs with ogr-slip2d-cli</span></a>
             </div>
           </div>
-          <div class="mega-foot"><span>Five programs, one open core.</span><a href="../products/index.html">All products →</a></div>
+          <div class="mega-foot"><span>OGR Slip2D is available now; the other four programs are planned.</span><a href="../products/index.html">All products →</a></div>
         </div>
       </div>
       <a href="../examples/index.html" data-nav="examples">Examples</a>
@@ -108,7 +108,7 @@
       <div>
         <div class="chips mt-m"><span class="tag live">Source available · v<span data-v>0.1.235</span></span><span class="tag">Pre-release</span><span class="tag">AGPL-3.0-or-later</span></div>
         <h1 style="max-width:none">OGR Slip2D</h1>
-        <p class="lede">Two-dimensional slope stability by limit equilibrium, with a finite-element groundwater engine, probabilistic analysis and an official MCP server — in a desktop program whose every equation you can read.</p>
+        <p class="lede">A desktop program for two-dimensional slope stability by limit equilibrium, with a finite-element groundwater engine, probabilistic analysis and an official MCP server. The source code is public, so you can read every equation the program uses.</p>
         <div class="cta-row">
           <a class="btn primary lg" href="../download/index.html">Get OGR Slip2D <span class="arrow">→</span></a>
           <a class="btn lg" href="../docs/getting-started/quick-start.html">Quick start</a>
@@ -140,8 +140,8 @@
 <section class="section" id="overview">
   <div class="wrap">
     <div class="sec-head">
-      <div><div class="sec-num label">Overview</div><h2>The analysis practitioners run most, <em>done in the open.</em></h2></div>
-      <p>Most of the software a geotechnical engineer relies on is closed: when a factor of safety comes out at 1.32, there is no way to read why. OGR Slip2D rebuilds slope-stability analysis in plain Python, with a modern interface and a test suite anyone can inspect — and every method ships with the reference case it was validated against.</p>
+      <div><div class="sec-num label">Overview</div><h2>Why we developed OGR Slip2D</h2></div>
+      <p>Most of the software geotechnical engineers rely on is closed: if a factor of safety comes out at 1.32, there is no way to see how the program got there. OGR Slip2D is a new implementation, in plain Python, of the analysis practitioners run most often. It has a graphical interface and a test suite that anyone can inspect, and each method comes with the reference case it was validated against.</p>
     </div>
     <div class="metrics" style="margin-top:0">
       <div class="metric"><div class="v">9</div><div class="k label">Methods of slices</div></div>
@@ -158,8 +158,8 @@
 <section class="section alt" id="lem">
   <div class="wrap">
     <div class="sec-head">
-      <div><div class="sec-num label">Limit equilibrium</div><h2>Nine methods, <em>seven ways to search.</em></h2></div>
-      <p>Run several methods in one analysis and compare their critical surfaces. Circular and non-circular surfaces, composite surfaces, weak layers, focus objects that filter the search before it evaluates, slope limits and optimisation of the critical surface.</p>
+      <div><div class="sec-num label">Limit equilibrium</div><h2>Nine methods and <em>seven search algorithms</em></h2></div>
+      <p>You can run several methods in one analysis and compare their critical surfaces. The program handles circular, non-circular and composite surfaces, weak layers, slope limits and optimisation of the critical surface, and its focus objects filter the search before any surface is evaluated.</p>
     </div>
     <div class="tabs" data-group="lem">
       <div class="tablist" role="tablist" aria-label="Limit equilibrium">
@@ -171,7 +171,7 @@
       <div class="tabpanel" role="tabpanel" id="p-methods" aria-labelledby="t-methods">
         <div class="grid-2" style="align-items:start;gap:36px">
           <div>
-            <p>From the simplest to the most rigorous, each validated against a published case or the slice tables of a reference manual:</p>
+            <p>Each method has been validated against a published case or the slice tables of a reference manual. From the simplest to the most rigorous:</p>
             <div class="table-wrap">
               <table class="data">
                 <thead><tr><th>Method</th><th>Equilibrium</th></tr></thead>
@@ -303,7 +303,7 @@
         <div class="grid-2" style="align-items:start;gap:36px">
           <div>
             <p><strong>Circular:</strong> grid, slope, auto-refine and particle swarm. <strong>Non-circular:</strong> block (with window, line, point and polyline objects), path, simulated annealing, auto-refine and particle swarm.</p>
-            <p>Focus objects — window, line, point or tangent — discard candidate surfaces before they are evaluated; on the reference case, a tangent to a weak layer leaves 17 evaluations out of 206. Non-circular critical surfaces can be optimised by a random walk.</p>
+            <p>Focus objects (a window, a line, a point or a tangent) discard candidate surfaces before they are evaluated. In the reference case, a tangent to a weak layer cuts the evaluations from 206 to 17. Non-circular critical surfaces can be optimised by a random walk.</p>
             <a class="link" href="../docs/theory/search.html">How each search works →</a>
           </div>
           <figure class="sheet" style="margin:0">
@@ -450,7 +450,7 @@
         <figure class="shot" style="margin:0">
           <div class="bar label"><i></i><i></i><i></i>&nbsp; OGR Slip2D · interpret</div>
           <img src="../assets/img/shots/interpret.webp" alt="The Interpret window showing the Spencer result: factor-of-safety colour grid and legend, the critical circle with one slice queried and its forces, the summary, the ranked surfaces and the slice data table" width="1600" height="877" loading="lazy">
-          <figcaption>The interpretation window: the grid of centres coloured by factor of safety, the critical surface, the ranked surfaces and the data of every slice — normal and shear forces, stresses, pore pressure and interslice forces.</figcaption>
+          <figcaption>The interpretation window shows the grid of centres coloured by factor of safety, the critical surface, the ranked surfaces and the data of each slice (normal and shear forces, stresses, pore pressure and interslice forces).</figcaption>
         </figure>
       </div>
     </div>
@@ -462,21 +462,21 @@
   <div class="wrap grid-2">
     <div>
       <div class="sec-num label">Groundwater</div>
-      <h2 class="mt-s">A finite-element seepage engine, <em>not a lookup table.</em></h2>
+      <h2 class="mt-s">Seepage computed by <em>finite elements</em></h2>
       <ul class="ticks">
-        <li>Triangular meshes over the material regions, conforming across interfaces by construction.</li>
-        <li>Saturated steady flow with an anisotropic conductivity tensor per material.</li>
-        <li>Unsaturated flow with six permeability functions — simple, Brooks–Corey, Fredlund–Xing, Gardner, van Genuchten and user-defined.</li>
-        <li>Phreatic surface and seepage faces found by nodal switching.</li>
-        <li>Transient analysis in stages with the mixed form of Richards' equation, and a factor of safety per stage: a rapid drawdown becomes a stability history.</li>
-        <li>Water tables, piezometric lines, r<sub>u</sub>, pressure grids, ponded water and B̄ excess pore pressure for everything else.</li>
+        <li>Triangular meshes over the material regions, with shared nodes along the interfaces between materials.</li>
+        <li>Saturated steady flow with an anisotropic conductivity tensor for each material.</li>
+        <li>Unsaturated flow with six permeability functions: simple, Brooks–Corey, Fredlund–Xing, Gardner, van Genuchten and user-defined.</li>
+        <li>The phreatic surface and the seepage faces are found by switching the boundary condition node by node.</li>
+        <li>Transient analysis in stages, with the mixed form of Richards' equation and a factor of safety for each stage. In a rapid drawdown, this gives the factor of safety as a function of time.</li>
+        <li>When no seepage analysis is needed: water tables, piezometric lines, r<sub>u</sub>, pressure grids, ponded water and B̄ excess pore pressure.</li>
       </ul>
       <div class="cta-row"><a class="btn" href="../docs/theory/seepage.html">Seepage theory <span class="arrow">→</span></a></div>
     </div>
     <figure class="shot">
       <div class="bar label"><i></i><i></i><i></i>&nbsp; groundwater · total head</div>
       <!-- img:seepage --><img src="../assets/img/shots/seepage.webp" alt="The Interpret Groundwater window on a homogeneous earth dam with a toe drain: total-head contours over the finite-element mesh, flow vectors converging on the drain and the free surface" width="1250" height="550" loading="lazy">
-      <figcaption>Steady seepage through a 15 m homogeneous dam with a toe drain: total head, flow vectors and the free surface found by the solver — 873 nodes, converged in 25 iterations.</figcaption><!-- /img:seepage -->
+      <figcaption>Steady seepage through a 15 m homogeneous dam with a toe drain. The solver gives the total head, the flow vectors and the free surface; the mesh has 873 nodes and the solution converged in 25 iterations.</figcaption><!-- /img:seepage -->
     </figure>
   </div>
 </section>
@@ -487,14 +487,14 @@
     <figure class="shot">
       <div class="bar label"><i></i><i></i><i></i>&nbsp; statistics · histogram</div>
       <!-- img:histogram --><img src="../assets/img/shots/histogram.webp" alt="The Statistics window: histogram of 1 000 sampled factors of safety with the failure threshold and the mean marked, and the summary with the probability of failure and the reliability index" width="1075" height="675" loading="lazy">
-      <figcaption>Monte Carlo analysis of the two-layer slope, 1 000 samples of three strength parameters: mean factor of safety 1.305, probability of failure 0.5 %, reliability index 2.69 (Bishop).</figcaption><!-- /img:histogram -->
+      <figcaption>Monte Carlo analysis of the two-layer slope with 1 000 samples of three strength parameters. With Bishop's method, the mean factor of safety is 1.305, the probability of failure 0.5 % and the reliability index 2.69.</figcaption><!-- /img:histogram -->
     </figure>
     <div>
       <div class="sec-num label">Probabilistic</div>
-      <h2 class="mt-s">How likely, <em>not only how safe.</em></h2>
+      <h2 class="mt-s">Probability of failure and <em>sensitivity analysis</em></h2>
       <ul class="ticks">
         <li>Random variables for strengths, unit weights, hydraulic properties, supports, loads, seismic coefficients and the water table.</li>
-        <li>Seven distributions with relative truncation; Monte Carlo or Latin hypercube sampling; cohesion–friction correlation.</li>
+        <li>Seven distributions with relative truncation, Monte Carlo or Latin hypercube sampling, and correlation between cohesion and friction.</li>
         <li>Global-minimum and overall-slope analyses, probability of failure, reliability index, convergence plots and the critical probabilistic surface.</li>
         <li>Sensitivity sweeps that rank the inputs by their influence on the factor of safety.</li>
       </ul>
@@ -507,16 +507,16 @@
 <section class="section" id="design">
   <div class="wrap">
     <div class="sec-head">
-      <div><div class="sec-num label">Loads &amp; design</div><h2>From the loads <em>to the design code.</em></h2></div>
-      <p>Everything a real section carries, and the checks a design needs.</p>
+      <div><div class="sec-num label">Loads &amp; design</div><h2>Loads, supports and <em>design codes</em></h2></div>
+      <p>A section can carry supports, external loads and seismic action, and the design checks can follow Eurocode 7. The program also reads and writes DXF drawings, produces reports and can be driven by scripts.</p>
     </div>
     <div class="feature-grid">
-      <div class="feature"><h4>Supports</h4><p>End-anchored, grouted tieback (with and without friction), soil nail, pile or micropile, geosynthetic, helical anchor, retaining wall by equivalent fluid pressure and user-defined; active or passive; back analysis of the force needed for a target factor of safety.</p></div>
-      <div class="feature"><h4>Loads and seismic</h4><p>Distributed and line loads with five orientations; pseudo-static seismic coefficients; yield acceleration and Newmark sliding-block displacement from acceleration records; tension cracks with water.</p></div>
-      <div class="feature"><h4>Eurocode 7</h4><p>Partial factors for design approaches DA1-C1, DA1-C2, DA2 and DA3, or your own, applied to a copy of the model so your project is never changed by a calculation.</p></div>
-      <div class="feature"><h4>Drawings in, drawings out</h4><p>DXF import with layer detection and geometry clean-up; DXF export of the model and the critical surfaces; annotations, dimensions and images on the canvas.</p></div>
+      <div class="feature"><h4>Supports</h4><p>End-anchored, grouted tieback (with and without friction), soil nail, pile or micropile, geosynthetic, helical anchor, retaining wall by equivalent fluid pressure, and user-defined. Supports can be active or passive, and a back analysis finds the force needed for a target factor of safety.</p></div>
+      <div class="feature"><h4>Loads and seismic</h4><p>Distributed and line loads with five orientations, pseudo-static seismic coefficients and tension cracks with water. The program also finds the yield acceleration and, from acceleration records, the Newmark sliding-block displacement.</p></div>
+      <div class="feature"><h4>Eurocode 7</h4><p>Partial factors for design approaches DA1-C1, DA1-C2, DA2 and DA3, or factors of your own. They are applied to a copy of the model, so the calculation does not modify your project.</p></div>
+      <div class="feature"><h4>DXF import and export</h4><p>DXF import with layer detection and geometry clean-up, and DXF export of the model and the critical surfaces. Annotations, dimensions and images can be added on the canvas.</p></div>
       <div class="feature"><h4>Reports</h4><p>PDF reports of an analysis, property tables, images of the canvas in bitmap or SVG, and CSV exports of surfaces and slices.</p></div>
-      <div class="feature"><h4>Scripting</h4><p>An embedded Python terminal with the live model, a command-line interface for batch runs, a Python API — and the MCP server for AI agents.</p></div>
+      <div class="feature"><h4>Scripting</h4><p>An embedded Python terminal with access to the open model, a command-line interface for batch runs, a Python API and the MCP server for AI agents.</p></div>
     </div>
   </div>
 </section>
@@ -525,12 +525,12 @@
 <section class="section alt" id="workflow">
   <div class="wrap">
     <div class="sec-head">
-      <div><div class="sec-num label">Workflow</div><h2>Model. Compute. <em>Interpret.</em></h2></div>
-      <p>The same three steps in the desktop program, from Python or from an agent. A model is a plain JSON <code>.ogr</code> file that any of them can open.</p>
+      <div><div class="sec-num label">Workflow</div><h2>The three steps of an analysis</h2></div>
+      <p>They are the same in the desktop program, from Python or through an agent. The model is a plain JSON <code>.ogr</code> file that all three can open.</p>
     </div>
     <div class="grid-3">
-      <div class="card"><span class="label">01 · Model</span><h3>Draw or import</h3><p>Boundaries by clicking or typing coordinates, or imported from DXF; materials assigned by region; water, loads and supports.</p></div>
-      <div class="card"><span class="label">02 · Compute</span><h3>Search and solve</h3><p>Each enabled method runs its search in the background, in parallel where it can, with progress and a cancel button.</p></div>
+      <div class="card"><span class="label">01 · Model</span><h3>Draw or import</h3><p>Boundaries are drawn with the mouse, typed in as coordinates or imported from DXF. Then you assign materials to regions and add water, loads and supports.</p></div>
+      <div class="card"><span class="label">02 · Compute</span><h3>Search and solve</h3><p>Each enabled method runs its search in the background, in parallel where possible, with a progress bar and a cancel button.</p></div>
       <div class="card"><span class="label">03 · Interpret</span><h3>Read the result</h3><p>Critical and ranked surfaces, slice data, free-body diagrams, line of thrust, charts along the slope and reports.</p></div>
     </div>
   </div>
@@ -540,8 +540,8 @@
 <section class="section" id="specs">
   <div class="wrap">
     <div class="sec-head">
-      <div><div class="sec-num label">Specifications</div><h2>The technical sheet.</h2></div>
-      <p>Taken from the source code of version <span data-v>0.1.235</span>. If the program and this page ever disagree, the program is right and this page is a bug.</p>
+      <div><div class="sec-num label">Specifications</div><h2>Data sheet</h2></div>
+      <p>Taken from the source code of version <span data-v>0.1.235</span>. If you find a difference between this page and the program, the program is right; let us know and we will correct the page.</p>
     </div>
     <dl class="spec-list">
       <div><dt class="label">Analysis</dt><dd>2D limit equilibrium, plane strain</dd></div>
@@ -569,8 +569,8 @@
   <div class="wrap cta-band">
     <div>
       <div class="label">Verification</div>
-      <h2 class="mt-s">5 265 tests, <em>checked against references.</em></h2>
-      <p class="mt-m">The suite compares results with published cases, closed-form solutions and analytic identities — never with snapshots of its own output, because a snapshot locks in whatever bug may be there.</p>
+      <h2 class="mt-s">A suite of <em>5 265 tests</em></h2>
+      <p class="mt-m">The tests compare results with published cases, closed-form solutions and analytic identities. We do not use stored outputs of the program as references, because a stored output would also preserve any error it contained.</p>
     </div>
     <div class="cta-row"><a class="btn primary lg" href="../verification/index.html">See the verification</a><a class="btn lg" href="../docs/verification/slope-benchmarks.html">Benchmark cases</a></div>
   </div>
@@ -587,7 +587,7 @@
           <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
           <b>OpenGeoRock</b>
         </a>
-        <p class="tagline">Open-source geotechnical software, built in the open at the Universidad Politécnica de Cartagena.</p>
+        <p class="tagline">Open-source geotechnical software developed at the Universidad Politécnica de Cartagena.</p>
         <span class="lang" role="group" aria-label="Language"><a href="../products/slip2d.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../es/products/slip2d.html" hreflang="es" lang="es">ES</a></span>
       </div>
       <div>

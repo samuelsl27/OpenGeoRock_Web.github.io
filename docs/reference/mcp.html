@@ -65,7 +65,7 @@
               <a class="mega-item" href="../../docs/reference/cli.html"><b>The command line</b><span>Batch runs with ogr-slip2d-cli</span></a>
             </div>
           </div>
-          <div class="mega-foot"><span>Five programs, one open core.</span><a href="../../products/index.html">All products →</a></div>
+          <div class="mega-foot"><span>OGR Slip2D is available now; the other four programs are planned.</span><a href="../../products/index.html">All products →</a></div>
         </div>
       </div>
       <a href="../../examples/index.html" data-nav="examples">Examples</a>
@@ -168,7 +168,7 @@
     </header>
 
     <article class="doc prose">
-      <p class="lede"><code>ogr-slip2d-mcp</code> is the official Model Context Protocol (MCP) server of OGR Slip2D. Through it an AI agent builds a slope model, runs the analysis, reads the results and draws them, either on models of the server's own or on the model open in the program window, where the user sees and can undo every edit. This page is the technical reference: options, transports, the 74 tools, the resources and the security model. How to connect a particular client is explained on the <a href="../../ai/index.html#install">AI page</a>.</p>
+      <p class="lede"><code>ogr-slip2d-mcp</code> is the official Model Context Protocol (MCP) server of OGR Slip2D. With it, an AI agent can build a slope model, run the analysis and read and draw the results, either on models of the server's own or on the model open in the program window, where the user sees each edit and can undo it. This page is the technical reference (options, transports, the 74 tools, resources and the security model); how to connect a particular client is explained on the <a href="../../ai/index.html#install">AI page</a>.</p>
 
       <h2 id="overview"><span class="secnum">5.1.1</span><span class="ht">What it is</span><a class="anchor" href="#overview" aria-label="Link to this section">#</a></h2>
       <ul>
@@ -246,7 +246,7 @@ python -m ogr_mcp --version     <span class="c"># the same program, if the comma
           </table>
         </div>
       </figure>
-      <p>Nothing is written on standard output: over stdio that stream is the protocol. Messages go to standard error, or to <code>--log-file</code>.</p>
+      <p>Nothing is written on standard output, because over stdio that stream carries the protocol. Messages go to standard error, or to <code>--log-file</code>.</p>
       <div class="impl">
         <span class="label">In OGR Slip2D</span>
         <p>The options, the exposure rules and the exit codes are checked in one place before anything listens. The default <code>--max-wait</code> of 50 s is kept below the 60 s at which many clients cut a request.</p>
@@ -265,7 +265,7 @@ ogr-slip2d-mcp --profile compact --workdir "C:\models"     <span class="c"># sma
       <p>The <code>Host</code> and <code>Origin</code> headers are checked even when the token is right: a <code>Host</code> that is not this server's is answered 421 and a foreign <code>Origin</code> 403. Allowed hosts are <code>127.0.0.1</code>, <code>localhost</code>, <code>[::1]</code> and <code>--host</code>, at the port; allowed origins are <code>127.0.0.1</code> and <code>localhost</code> at the port, plus each <code>--allow-origin</code>. With <code>--tls-cert</code> and <code>--tls-key</code> the same endpoint is served over HTTPS.</p>
 
       <h3 id="oauth"><span class="ht">OAuth 2.1 for clients on the Internet</span><a class="anchor" href="#oauth" aria-label="Link to this section">#</a></h3>
-      <p>Some hosted clients connect only to a public HTTPS server and only through OAuth. For them, the server keeps listening on <code>127.0.0.1</code>, a tunnel or reverse proxy that terminates HTTPS is placed in front of it, and the server is told its public address with <code>--public-url</code>. It then acts as its own OAuth 2.1 authorization server: PKCE with S256, dynamic client registration and tokens bound to the resource <code>&lt;public-url&gt;/mcp</code>. Access is granted by typing the server's token on its page <code>&lt;public-url&gt;/approve</code>: knowing the token is being the owner. The static token keeps working as a bearer header for clients that can send one. The limits are listed under <a class="xref" href="#security">Section 5.1.11</a>.</p>
+      <p>Some hosted clients connect only to a public HTTPS server and only through OAuth. For them, the server keeps listening on <code>127.0.0.1</code>, a tunnel or reverse proxy that terminates HTTPS is placed in front of it, and the server is told its public address with <code>--public-url</code>. It then acts as its own OAuth 2.1 authorization server: PKCE with S256, dynamic client registration and tokens bound to the resource <code>&lt;public-url&gt;/mcp</code>. Access is granted by typing the server's token on its page <code>&lt;public-url&gt;/approve</code>; whoever knows the token is taken to be the owner. The static token keeps working as a bearer header for clients that can send one. The limits are listed under <a class="xref" href="#security">Section 5.1.11</a>.</p>
       <div class="code"><pre><code>ogr-slip2d-mcp --transport http --port 8765 --token-file token.txt \
                --public-url https://your-tunnel.example --workdir "C:\models"</code></pre></div>
       <div class="note warn"><span class="label">Exposure</span><p>A server reachable from the Internet exposes <code>python_exec</code>, that is, the machine. Expose it only when a client needs it, and stop the tunnel and the server when finished. The server opens no tunnel by itself.</p></div>
@@ -484,7 +484,7 @@ ogr-slip2d-mcp --profile compact --workdir "C:\models"     <span class="c"># sma
           </table>
         </div>
       </figure>
-      <p>The three runs go through the same door as <code>analysis_run</code>: without a design standard they give exactly what they gave before; with one, they analyse the factored model.</p>
+      <p>The three runs go through the same door as <code>analysis_run</code>: without a design standard they give the same results as before; with one, they analyse the factored model.</p>
 
       <h3 id="tools-settings"><span class="ht">Settings (<code>settings</code>)</span><a class="anchor" href="#tools-settings" aria-label="Link to this section">#</a></h3>
       <figure class="tbl" id="tbl-tools-settings">
@@ -527,7 +527,7 @@ ogr-slip2d-mcp --profile compact --workdir "C:\models"     <span class="c"># sma
           <table class="data">
             <thead><tr><th>Tool</th><th>C</th><th>Hint</th><th>What it does</th></tr></thead>
             <tbody>
-              <tr><td><code>model_render</code></td><td>C</td><td>read-only</td><td>PNG image of the model, with the critical surfaces of a result, or with contours of the groundwater field (<code>field</code>) and its free surface; with the program open, <code>source="window"</code> captures the real canvas of the window.</td></tr>
+              <tr><td><code>model_render</code></td><td>C</td><td>read-only</td><td>PNG image of the model, with the critical surfaces of a result, or with contours of the groundwater field (<code>field</code>) and its free surface; with the program open, <code>source="window"</code> captures the canvas of the window.</td></tr>
               <tr><td><code>project_history</code></td><td></td><td>edit</td><td>Undoes, redoes or lists the edits.</td></tr>
               <tr><td><code>python_exec</code></td><td>C</td><td>destructive</td><td>Python against the model, for what has no tool yet (<a class="xref" href="#security">Section 5.1.11</a>).</td></tr>
             </tbody>
@@ -562,7 +562,7 @@ ogr-slip2d-mcp --profile compact --workdir "C:\models"     <span class="c"># sma
         <li>Each call returns or takes a <code>project_id</code>; it may be omitted while only one model is open.</li>
         <li><code>analysis_run</code> runs every enabled method as a background job and waits up to <code>wait_seconds</code> (30 s by default, capped at <code>--max-wait</code>). If it answers <code>state: "running"</code> with a <code>job_id</code>, poll <code>job_get</code> (with a wait) until <code>done</code>; <code>job_cancel</code> kills the job's whole process tree. A job is <code>queued</code>, <code>running</code>, <code>done</code>, <code>failed</code>, <code>cancelled</code> or <code>crashed</code>.</li>
         <li>A finished job carries a <code>result_id</code>: <code>results_get(result_id, view=…)</code> with <code>summary</code>, <code>critical</code> (with slices), <code>top</code>, <code>minima</code> or <code>warnings</code>, and <code>model_render(result_id=…)</code> draws its critical surfaces. The server keeps the last five results of each model.</li>
-        <li>Warnings are the program speaking: they should be read, not skipped.</li>
+        <li>Warnings are how the program reports a problem it has noticed, so they should be read before a result is relied on.</li>
       </ul>
       <h3 id="rules"><span class="ht">Rules that change the number</span><a class="anchor" href="#rules" aria-label="Link to this section">#</a></h3>
       <p>The rules the server gives every agent, because each of them changes a factor of safety without an error:</p>
@@ -580,8 +580,8 @@ ogr-slip2d-mcp --profile compact --workdir "C:\models"     <span class="c"># sma
       <p>A tool that fails answers with a coded message, <code>[E_CODE] message Hint: …</code>; an unknown name comes with the closest known names (<em>Did you mean …?</em>). The codes are listed in <a class="xref" href="error-codes.html#api-errors">Section 5.5.4</a>. A setting that the analysis would not read is refused with the reason instead of being stored, and a failed or crashed job is reported as <code>E_JOB_FAILED</code> with its error.</p>
 
       <h2 id="security"><span class="secnum">5.1.11</span><span class="ht">Security model</span><a class="anchor" href="#security" aria-label="Link to this section">#</a></h2>
-      <h3 id="python-exec"><span class="ht">python_exec is code execution, by design</span><a class="anchor" href="#python-exec" aria-label="Link to this section">#</a></h3>
-      <p>The server always publishes <code>python_exec</code>, which runs arbitrary Python in the server process with the permissions of the user who started it; through the bridge, it runs inside the program window's process. It is the owner's decision (2026-09-24), to cover whatever has no tool yet. The consequence is simple: <strong>whoever can talk to the server can run code on the machine</strong>, and everything below follows from that.</p>
+      <h3 id="python-exec"><span class="ht">python_exec: arbitrary code execution</span><a class="anchor" href="#python-exec" aria-label="Link to this section">#</a></h3>
+      <p>The server always publishes <code>python_exec</code>, which runs arbitrary Python in the server process with the permissions of the user who started it; through the bridge, it runs inside the program window's process. It is the owner's decision (2026-09-24), to cover whatever has no tool yet. As a result, <strong>whoever can talk to the server can run code on the machine</strong>, and everything below follows from that.</p>
       <ul>
         <li>The script sees <code>project</code> (the live model), <code>api</code> (every operation: <code>api.material_set(...)</code>), <code>np</code>, <code>ogr_core</code>, <code>ogr_slip2d</code> and <code>result(result_id)</code>; the value of its last expression is returned.</li>
         <li>The whole script is one undo step, rolled back if it raises. Output is cut at 20 000 characters, and the returned value at 5 000.</li>
@@ -593,7 +593,7 @@ ogr-slip2d-mcp --profile compact --workdir "C:\models"     <span class="c"># sma
       <ul>
         <li><strong>A token always, also on 127.0.0.1.</strong> "Only local" is not a boundary: any web page can make the browser send requests to <code>localhost</code>. The token is compared in constant time.</li>
         <li><strong>Host and Origin are checked</strong> (the SDK's DNS-rebinding protection, switched on): 421 for a foreign <code>Host</code>, 403 for a foreign <code>Origin</code>, even with the token.</li>
-        <li><strong>No token, no network.</strong> On a host that is not loopback the server requires an explicit token (<code>--token</code>, <code>--token-file</code> or <code>OGR_MCP_TOKEN</code>) and refuses to start without one (exit code 2). <code>--no-auth</code> is accepted only on loopback.</li>
+        <li><strong>An explicit token off loopback.</strong> On a host that is not loopback the server requires an explicit token (<code>--token</code>, <code>--token-file</code> or <code>OGR_MCP_TOKEN</code>) and refuses to start without one (exit code 2). <code>--no-auth</code> is accepted only on loopback.</li>
         <li>A token on the command line is visible to other users of the machine: <code>--token-file</code> or <code>OGR_MCP_TOKEN</code> are preferable.</li>
       </ul>
       <h3 id="security-bridge"><span class="ht">The bridge to the window</span><a class="anchor" href="#security-bridge" aria-label="Link to this section">#</a></h3>
@@ -620,7 +620,7 @@ ogr-slip2d-mcp --profile compact --workdir "C:\models"     <span class="c"># sma
         <p>The security rules are written in the program's own documentation and enforced in the code listed here; this section follows them.</p>
         <span class="src">Source: <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/docs/mcp/seguridad.md" target="_blank" rel="noopener">docs/mcp/seguridad.md</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_mcp/security.py" target="_blank" rel="noopener">ogr_mcp/security.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_mcp/oauth.py" target="_blank" rel="noopener">ogr_mcp/oauth.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_api/pyexec.py" target="_blank" rel="noopener">ogr_api/pyexec.py</a></span>
       </div>
-      <div class="note warn"><span class="label">Engineering judgement</span><p>An agent that builds and runs a model is a fast way to make mistakes as well as models. Check the geometry, the materials of each region and the pore pressures it set before relying on a number: a design is signed by an engineer, not by a program or an agent.</p></div>
+      <div class="note warn"><span class="label">Engineering judgement</span><p>An agent can build and run a model quickly, and can also get it wrong quickly. Before relying on a number, check the geometry, the materials of each region and the pore pressures it set. The responsibility for a design stays with the engineer who signs it.</p></div>
     </article>
 
 <!-- @inc docfoot -->
@@ -635,7 +635,7 @@ ogr-slip2d-mcp --profile compact --workdir "C:\models"     <span class="c"># sma
   <aside class="doc-toc" aria-label="On this page">
     <div class="toc-inner">
 <!-- @inc pagetoc -->
-<span class="label">On this page</span><ul><li class="h2"><a href="#overview">5.1.1 What it is</a></li><li class="h2"><a href="#installation">5.1.2 Installation</a></li><li class="h2"><a href="#options">5.1.3 Command-line options</a></li><li class="h2"><a href="#transports">5.1.4 Transports</a></li><li class="h3"><a href="#stdio">Standard input/output</a></li><li class="h3"><a href="#http">Streamable HTTP</a></li><li class="h3"><a href="#oauth">OAuth 2.1 for clients on the Internet</a></li><li class="h2"><a href="#profiles">5.1.5 Profiles and toolsets</a></li><li class="h2"><a href="#window">5.1.6 Working on the open program window</a></li><li class="h2"><a href="#tools">5.1.7 Tools</a></li><li class="h3"><a href="#tools-core">Project ( core )</a></li><li class="h3"><a href="#tools-model">Model ( model )</a></li><li class="h3"><a href="#tools-loads">Loads ( loads )</a></li><li class="h3"><a href="#tools-supports">Supports ( supports )</a></li><li class="h3"><a href="#tools-search">Search ( search )</a></li><li class="h3"><a href="#tools-annotations">Annotations ( annotations )</a></li><li class="h3"><a href="#tools-files">Files ( files )</a></li><li class="h3"><a href="#tools-groundwater">Groundwater ( groundwater , since v0.1.200)</a></li><li class="h3"><a href="#tools-statistics">Statistics, back analysis and optimisation ( statistics , since v0.1.201)</a></li><li class="h3"><a href="#tools-settings">Settings ( settings )</a></li><li class="h3"><a href="#tools-analysis">Analysis ( analysis )</a></li><li class="h3"><a href="#tools-view">View, history and Python ( view , history , python )</a></li><li class="h2"><a href="#resources">5.1.8 Resources</a></li><li class="h2"><a href="#workflow">5.1.9 Modelling workflow</a></li><li class="h3"><a href="#rules">Rules that change the number</a></li><li class="h2"><a href="#errors">5.1.10 Errors</a></li><li class="h2"><a href="#security">5.1.11 Security model</a></li><li class="h3"><a href="#python-exec">python_exec is code execution, by design</a></li><li class="h3"><a href="#security-stdio">Over stdio</a></li><li class="h3"><a href="#security-http">Over HTTP</a></li><li class="h3"><a href="#security-bridge">The bridge to the window</a></li><li class="h3"><a href="#security-internet">On the Internet ( --public-url )</a></li><li class="h3"><a href="#security-files">Files, network and telemetry</a></li></ul><button class="print" type="button"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="1.5"/><path d="M6 14h12v7H6z"/></svg> Print this page</button>
+<span class="label">On this page</span><ul><li class="h2"><a href="#overview">5.1.1 What it is</a></li><li class="h2"><a href="#installation">5.1.2 Installation</a></li><li class="h2"><a href="#options">5.1.3 Command-line options</a></li><li class="h2"><a href="#transports">5.1.4 Transports</a></li><li class="h3"><a href="#stdio">Standard input/output</a></li><li class="h3"><a href="#http">Streamable HTTP</a></li><li class="h3"><a href="#oauth">OAuth 2.1 for clients on the Internet</a></li><li class="h2"><a href="#profiles">5.1.5 Profiles and toolsets</a></li><li class="h2"><a href="#window">5.1.6 Working on the open program window</a></li><li class="h2"><a href="#tools">5.1.7 Tools</a></li><li class="h3"><a href="#tools-core">Project ( core )</a></li><li class="h3"><a href="#tools-model">Model ( model )</a></li><li class="h3"><a href="#tools-loads">Loads ( loads )</a></li><li class="h3"><a href="#tools-supports">Supports ( supports )</a></li><li class="h3"><a href="#tools-search">Search ( search )</a></li><li class="h3"><a href="#tools-annotations">Annotations ( annotations )</a></li><li class="h3"><a href="#tools-files">Files ( files )</a></li><li class="h3"><a href="#tools-groundwater">Groundwater ( groundwater , since v0.1.200)</a></li><li class="h3"><a href="#tools-statistics">Statistics, back analysis and optimisation ( statistics , since v0.1.201)</a></li><li class="h3"><a href="#tools-settings">Settings ( settings )</a></li><li class="h3"><a href="#tools-analysis">Analysis ( analysis )</a></li><li class="h3"><a href="#tools-view">View, history and Python ( view , history , python )</a></li><li class="h2"><a href="#resources">5.1.8 Resources</a></li><li class="h2"><a href="#workflow">5.1.9 Modelling workflow</a></li><li class="h3"><a href="#rules">Rules that change the number</a></li><li class="h2"><a href="#errors">5.1.10 Errors</a></li><li class="h2"><a href="#security">5.1.11 Security model</a></li><li class="h3"><a href="#python-exec">python_exec: arbitrary code execution</a></li><li class="h3"><a href="#security-stdio">Over stdio</a></li><li class="h3"><a href="#security-http">Over HTTP</a></li><li class="h3"><a href="#security-bridge">The bridge to the window</a></li><li class="h3"><a href="#security-internet">On the Internet ( --public-url )</a></li><li class="h3"><a href="#security-files">Files, network and telemetry</a></li></ul><button class="print" type="button"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="1.5"/><path d="M6 14h12v7H6z"/></svg> Print this page</button>
 <!-- @end pagetoc -->
     </div>
   </aside>
@@ -650,7 +650,7 @@ ogr-slip2d-mcp --profile compact --workdir "C:\models"     <span class="c"># sma
           <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
           <b>OpenGeoRock</b>
         </a>
-        <p class="tagline">Open-source geotechnical software, built in the open at the Universidad Politécnica de Cartagena.</p>
+        <p class="tagline">Open-source geotechnical software developed at the Universidad Politécnica de Cartagena.</p>
         <span class="lang" role="group" aria-label="Language"><a href="../../docs/reference/mcp.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../../es/docs/reference/mcp.html" hreflang="es" lang="es">ES</a></span>
       </div>
       <div>

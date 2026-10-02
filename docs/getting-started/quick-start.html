@@ -65,7 +65,7 @@
               <a class="mega-item" href="../../docs/reference/cli.html"><b>The command line</b><span>Batch runs with ogr-slip2d-cli</span></a>
             </div>
           </div>
-          <div class="mega-foot"><span>Five programs, one open core.</span><a href="../../products/index.html">All products →</a></div>
+          <div class="mega-foot"><span>OGR Slip2D is available now; the other four programs are planned.</span><a href="../../products/index.html">All products →</a></div>
         </div>
       </div>
       <a href="../../examples/index.html" data-nav="examples">Examples</a>
@@ -168,7 +168,7 @@
     </header>
 
     <article class="doc prose">
-      <p class="lede">This tutorial builds the slope on the home page from an empty project: a 16 m slope with a mid-height bench, three soils and a water table, analysed with three methods. It takes about fifteen minutes and touches every step of a typical analysis. The model is also available ready-made: <a href="../../assets/models/ej01-two-layer-slope.ogr" download>ej01-two-layer-slope.ogr</a>.</p>
+      <p class="lede">This tutorial builds the slope on the home page from an empty project: a 16 m slope with a mid-height bench, three soils and a water table, analysed with three methods. It takes about fifteen minutes and goes through the usual steps of an analysis. The model is also available ready-made: <a href="../../assets/models/ej01-two-layer-slope.ogr" download>ej01-two-layer-slope.ogr</a>.</p>
 
       <figure class="fig" id="fig-target">
         <div class="art"><!-- svg:qs-target --><svg class="slope-svg" id="qstarget" viewBox="0 0 850 652" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="qstarget-t">
@@ -486,7 +486,7 @@
       <p>Boundaries can be drawn with the mouse, but typing the coordinates is exact. With a drawing tool active, type each vertex in the <strong>Enter X,Y</strong> field at the right of the status bar and press <kbd>Enter</kbd>; finish the boundary with <kbd>Enter</kbd> on an empty field, or from the right-click menu.</p>
       <ol>
         <li><span class="ui">Boundaries → Add External Boundary</span> (<kbd>Ctrl</kbd>+<kbd>1</kbd>): <code>0,0</code> · <code>100,0</code> · <code>100,18</code> · <code>66,18</code> · <code>54,26</code> · <code>48,26</code> · <code>36,34</code> · <code>0,34</code>. The external boundary closes itself.</li>
-        <li><span class="ui">Boundaries → Add Material Boundary</span> (<kbd>Ctrl</kbd>+<kbd>2</kbd>): <code>0,24</code> · <code>57,24</code> — the contact between sand and clay, which ends on the lower face.</li>
+        <li><span class="ui">Boundaries → Add Material Boundary</span> (<kbd>Ctrl</kbd>+<kbd>2</kbd>): <code>0,24</code> · <code>57,24</code>, the contact between sand and clay, which ends on the lower face.</li>
         <li>Again for the clay–gravel contact: <code>0,12</code> · <code>100,12</code>.</li>
         <li><span class="ui">Boundaries → Add Water Table</span> (<kbd>Ctrl</kbd>+<kbd>3</kbd>): <code>0,28</code> · <code>45,25</code> · <code>60,19</code> · <code>70,16.5</code> · <code>100,16</code>.</li>
       </ol>
@@ -494,7 +494,7 @@
         <div class="art"><img src="../../assets/img/shots/qs-geometry.webp" alt="The canvas with the external boundary, two material boundaries and the water table" loading="lazy" width="1600" height="1000"></div>
         <figcaption><span class="fignum">Figure 1.2.3</span> External boundary, two material boundaries and the water table. Each closed region between boundaries will receive one material.</figcaption>
       </figure>
-      <div class="note water"><span class="label">Water does nothing until it is assigned</span><p>A water table only produces pore pressure in the materials that use it. When you finish drawing it, the program offers to assign it; if you skip that step, do it later with <span class="ui">Properties → Assign Water Surface…</span>.</p></div>
+      <div class="note water"><span class="label">A water table has to be assigned</span><p>A water table only produces pore pressure in the materials that use it. When you finish drawing it, the program offers to assign it; if you skip that step, do it later with <span class="ui">Properties → Assign Water Surface…</span>.</p></div>
 
       <h2 id="materials"><span class="secnum">1.2.4</span><span class="ht">Define and assign the materials</span><a class="anchor" href="#materials" aria-label="Link to this section">#</a></h2>
       <ol>
@@ -505,7 +505,7 @@
         <div class="art"><img src="../../assets/img/shots/define-materials.webp" alt="The Define Materials dialog with Mohr-Coulomb parameters" loading="lazy" width="900" height="783"></div>
         <figcaption><span class="fignum">Figure 1.2.4</span> Define Materials. The strength parameters shown depend on the strength type chosen.</figcaption>
       </figure>
-      <div class="note warn"><span class="label">An unassigned region is not empty</span><p>A region nobody assigns takes the <strong>first</strong> material of the list. Check the colours on the canvas before computing; with <strong>DATA TIPS</strong> on in the status bar, hovering over a region shows its material.</p></div>
+      <div class="note warn"><span class="label">Regions left unassigned</span><p>A region nobody assigns takes the <strong>first</strong> material of the list. Check the colours on the canvas before computing; with <strong>DATA TIPS</strong> on in the status bar, hovering over a region shows its material.</p></div>
 
       <h2 id="search"><span class="secnum">1.2.5</span><span class="ht">Choose the slip surfaces</span><a class="anchor" href="#search" aria-label="Link to this section">#</a></h2>
       <p>The default search is a grid of circle centres. <span class="ui">Surfaces → Auto Grid</span> places a grid above the slope sized from the geometry; <span class="ui">Surfaces → Surface Options…</span> shows the surface type (circular) and the search method (grid). For each centre, the program tries a set of radii between the shortest circle that reaches the slope and the longest that stays within the slope limits.</p>
@@ -540,17 +540,17 @@
       <p>A few things worth checking on any analysis:</p>
       <ul>
         <li><strong>The minimum is not on the edge of the grid.</strong> If the critical centre sits on the border, enlarge the grid and compute again.</li>
-        <li><strong>The methods agree.</strong> Large differences between Bishop and the rigorous methods point at unusual interslice forces — see <a class="xref" href="../theory/methods.html">Section 3.2</a>.</li>
+        <li><strong>The methods agree.</strong> Large differences between Bishop and the rigorous methods point at unusual interslice forces (see <a class="xref" href="../theory/methods.html">Section 3.2</a>).</li>
         <li><strong>The pore pressures are the ones intended.</strong> Query the slices below the water table and check their pore pressure against the head above them.</li>
       </ul>
 
       <h2 id="save"><span class="secnum">1.2.8</span><span class="ht">Save and go further</span><a class="anchor" href="#save" aria-label="Link to this section">#</a></h2>
-      <p><span class="ui">File → Save</span> writes the model to a <code>.ogr</code> file — plain JSON that the program, the command line, the Python API and the MCP server all open. From here:</p>
+      <p><span class="ui">File → Save</span> writes the model to a <code>.ogr</code> file, plain JSON that the program, the command line, the Python API and the MCP server can all open. From here you can go on to:</p>
       <div class="cards-doc">
-        <a href="../user-guide/surfaces.html"><b>Try another search</b><span>Non-circular surfaces, focus objects and optimisation.</span></a>
-        <a href="../user-guide/groundwater.html"><b>Compute the water instead</b><span>Finite-element seepage feeding the pore pressures.</span></a>
-        <a href="../user-guide/probabilistic.html"><b>Ask how likely</b><span>Random strengths and a probability of failure.</span></a>
-        <a href="../../ai/index.html"><b>Let an agent do it</b><span>The same model, built from one sentence through MCP.</span></a>
+        <a href="../user-guide/surfaces.html"><b>Slip surfaces and search</b><span>Non-circular surfaces, focus objects and optimisation.</span></a>
+        <a href="../user-guide/groundwater.html"><b>Finite-element groundwater</b><span>Seepage computed by finite elements instead of a drawn water table; it supplies the pore pressures.</span></a>
+        <a href="../user-guide/probabilistic.html"><b>Probabilistic and sensitivity analysis</b><span>Random strengths and a probability of failure.</span></a>
+        <a href="../../ai/index.html"><b>AI agents and MCP</b><span>The same model, built from one sentence.</span></a>
       </div>
     </article>
 
@@ -581,7 +581,7 @@
           <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
           <b>OpenGeoRock</b>
         </a>
-        <p class="tagline">Open-source geotechnical software, built in the open at the Universidad Politécnica de Cartagena.</p>
+        <p class="tagline">Open-source geotechnical software developed at the Universidad Politécnica de Cartagena.</p>
         <span class="lang" role="group" aria-label="Language"><a href="../../docs/getting-started/quick-start.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../../es/docs/getting-started/quick-start.html" hreflang="es" lang="es">ES</a></span>
       </div>
       <div>

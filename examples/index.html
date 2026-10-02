@@ -64,7 +64,7 @@
               <a class="mega-item" href="../docs/reference/cli.html"><b>The command line</b><span>Batch runs with ogr-slip2d-cli</span></a>
             </div>
           </div>
-          <div class="mega-foot"><span>Five programs, one open core.</span><a href="../products/index.html">All products →</a></div>
+          <div class="mega-foot"><span>OGR Slip2D is available now; the other four programs are planned.</span><a href="../products/index.html">All products →</a></div>
         </div>
       </div>
       <a href="../examples/index.html" data-nav="examples" aria-current="page">Examples</a>
@@ -104,8 +104,8 @@
 <section class="page-hero">
   <div class="wrap">
     <nav class="crumbs label" aria-label="Breadcrumb"><a href="../index.html">Home</a><span aria-hidden="true">/</span><span>Examples</span></nav>
-    <h1>Worked examples, <em>with the files.</em></h1>
-    <p class="lede">Five models solved with OGR Slip2D <span data-v>0.1.235</span>. Each comes with the figure the program computed, the data you need to check it and the <code>.ogr</code> file to open it yourself. Every number on this page is the program's output.</p>
+    <h1>Five <em>worked examples</em></h1>
+    <p class="lede">Five models solved with OGR Slip2D <span data-v>0.1.235</span>. For each one we give the figure computed by the program, the data needed to check it and the <code>.ogr</code> file, so you can open it yourself. All the numbers on this page come from the program.</p>
     <nav class="chips mt-m" aria-label="Examples on this page">
       <a class="tag" href="#ex1">1 · Two-layer slope</a>
       <a class="tag" href="#ex2">2 · Embankment on a weak seam</a>
@@ -121,8 +121,8 @@
   <div class="wrap grid-2" style="align-items:start">
     <div>
       <div class="sec-num label">Example 1</div>
-      <h2 class="mt-s">A two-layer slope <em>with a water table.</em></h2>
-      <p>A 16 m high cut with a bench, in silty sand over clay, on a base of dense gravel, with a water table through the slope. It is the model of the <a href="../docs/getting-started/quick-start.html">quick start</a>, where it is built step by step. The automatic grid places 169 centres above the slope and tries 11 radii from each, 1 859 circles in all.</p>
+      <h2 class="mt-s">A two-layer slope <em>with a water table</em></h2>
+      <p>A 16 m high cut with a bench, in silty sand over clay on a base of dense gravel, with a water table crossing the slope. It is the same model that the <a href="../docs/getting-started/quick-start.html">quick start</a> builds step by step. The automatic grid places 169 centres above the slope and tries 11 radii at each, 1 859 circles in all.</p>
       <dl class="spec-list one mt-m">
         <div><dt class="label">Silty sand</dt><dd>c′ = 5 kPa · φ′ = 32° · γ = 19 kN/m³</dd></div>
         <div><dt class="label">Clay</dt><dd>c′ = 12 kPa · φ′ = 24° · γ = 19.5 kN/m³</dd></div>
@@ -429,8 +429,8 @@
 <section class="section alt" id="ex2">
   <div class="wrap">
     <div class="sec-head">
-      <div><div class="sec-num label">Example 2</div><h2>An embankment on soft clay <em>with a weak seam.</em></h2></div>
-      <p>A 6 m embankment on soft clay whose undrained strength grows with depth, with a thin weak seam 4.5 m below the ground. The critical surface is not a circle: it runs along the seam. A berm at the toe is the classic remedy, and the two models show how much it gains.</p>
+      <div><div class="sec-num label">Example 2</div><h2>An embankment on soft clay <em>with a weak seam</em></h2></div>
+      <p>A 6 m embankment on soft clay whose undrained strength grows with depth, with a thin weak seam 4.5 m below the ground. The critical surface is non-circular and runs along the seam. A berm at the toe is the usual remedy, and comparing the two models shows how much it raises the factor of safety.</p>
     </div>
     <div class="grid-2" style="align-items:start;gap:36px">
       <figure class="sheet" style="margin:0" data-animate>
@@ -708,7 +708,7 @@
             </tbody>
           </table>
         </div>
-        <p class="mt-s" style="font-size:14.5px;color:var(--ink-2)">The two searches find the same mechanism: <a class="xref" href="../docs/theory/search.html#fig-path-example">Figure 3.4.5</a> shows the path search. Total-stress analysis, no pore pressure.</p>
+        <p class="mt-s" style="font-size:14.5px;color:var(--ink-2)">Both searches find the same mechanism; <a class="xref" href="../docs/theory/search.html#fig-path-example">Figure 3.4.5</a> shows the one found by the path search. The analysis is in total stresses, without pore pressure.</p>
         <div class="cta-row">
           <a class="btn primary" href="../assets/models/ej02a-embankment-no-berm.ogr" download>Model 2a</a><span class="label muted" style="align-self:center">.ogr · 9 KB</span>
           <a class="btn" href="../assets/models/ej02b-embankment-berm.ogr" download>Model 2b</a><span class="label muted" style="align-self:center">.ogr · 9 KB</span>
@@ -722,8 +722,8 @@
 <section class="section" id="ex3">
   <div class="wrap">
     <div class="sec-head">
-      <div><div class="sec-num label">Example 3</div><h2>An earth dam: <em>steady seepage and stability.</em></h2></div>
-      <p>A homogeneous dam 15 m high with the reservoir at 13 m and a toe drain 16 m long. The finite-element seepage gives the free surface and the pore pressure at every slice base; the drain keeps the water off the downstream face.</p>
+      <div><div class="sec-num label">Example 3</div><h2>An earth dam: <em>steady seepage and stability</em></h2></div>
+      <p>A homogeneous dam 15 m high, with the reservoir at 13 m and a toe drain 16 m long. The finite-element seepage analysis gives the free surface and the pore pressure at the base of each slice, and the drain keeps the water away from the downstream face.</p>
     </div>
     <figure class="sheet" style="margin:0" data-animate>
       <div class="fig"><!-- svg:ex3 --><svg class="slope-svg" id="ex3-svg" viewBox="0 0 945 195" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="ex3-svg-t">
@@ -894,7 +894,7 @@
             </tbody>
           </table>
         </div>
-        <p class="mt-s" style="font-size:14.5px;color:var(--ink-2)">The mesh and the head field are in <a class="xref" href="../docs/theory/seepage.html#fig-dam-mesh">Figure 3.7.1</a>, the pore pressure on the slices of the critical surface in <a class="xref" href="../docs/theory/seepage.html#fig-dam-u">Figure 3.7.5</a>.</p>
+        <p class="mt-s" style="font-size:14.5px;color:var(--ink-2)">The mesh and the head field are shown in <a class="xref" href="../docs/theory/seepage.html#fig-dam-mesh">Figure 3.7.1</a>, and the pore pressure on the slices of the critical surface in <a class="xref" href="../docs/theory/seepage.html#fig-dam-u">Figure 3.7.5</a>.</p>
         <div class="cta-row">
           <a class="btn primary" href="../assets/models/ej03-earth-dam-toe-drain.ogr" download>Download the model</a><span class="label muted" style="align-self:center">.ogr · 157 KB, with mesh and field</span>
         </div>
@@ -912,8 +912,8 @@
     </figure>
     <div>
       <div class="sec-num label">Example 4</div>
-      <h2 class="mt-s">The same slope, <em>with uncertain strengths.</em></h2>
-      <p>Example 1 with three strength parameters as random variables, each normal and truncated at three standard deviations. 1 000 Monte Carlo samples are evaluated on the deterministic critical surface of each method (global minimum).</p>
+      <h2 class="mt-s">The slope of example 1 <em>with uncertain strengths</em></h2>
+      <p>Three strength parameters become random variables, each normal and truncated at three standard deviations. We evaluate 1 000 Monte Carlo samples on the deterministic critical surface of each method (global minimum).</p>
       <dl class="spec-list one mt-m">
         <div><dt class="label">Clay c′</dt><dd>mean 12 kPa · σ = 3 kPa · 3 to 21 kPa</dd></div>
         <div><dt class="label">Clay φ′</dt><dd>mean 24° · σ = 2.4° · 16.8° to 31.2°</dd></div>
@@ -929,7 +929,7 @@
           </tbody>
         </table>
       </div>
-      <p class="mt-s" style="font-size:14.5px;color:var(--ink-2)">Five samples in 1 000 fall below 1: too few to pin the probability down, as the <a href="../docs/theory/probabilistic.html#fig-prob-convergence">convergence plot</a> shows.</p>
+      <p class="mt-s" style="font-size:14.5px;color:var(--ink-2)">Only five of the 1 000 samples fall below 1, which is too few to pin the probability down, as the <a href="../docs/theory/probabilistic.html#fig-prob-convergence">convergence plot</a> shows.</p>
       <div class="cta-row">
         <a class="btn primary" href="../assets/models/ej04-two-layer-slope-probabilistic.ogr" download>Download the model</a><span class="label muted" style="align-self:center">.ogr · 9 KB</span>
       </div>
@@ -941,8 +941,8 @@
 <section class="section" id="ex5">
   <div class="wrap">
     <div class="sec-head">
-      <div><div class="sec-num label">Example 5</div><h2>Rapid drawdown, <em>as a transient seepage problem.</em></h2></div>
-      <p>The dam of example 3, now looking at its upstream slope while the reservoir is lowered from 13 m to 1 m in eight days. The finite-element analysis follows the water as it drains out of the fill, and a full search finds the factor of safety at the end of every stage. The lowest value does not come with the lowest level, but two days later.</p>
+      <div><div class="sec-num label">Example 5</div><h2>Rapid drawdown <em>as a transient seepage problem</em></h2></div>
+      <p>This is the dam of example 3, but here we look at its upstream slope while the reservoir is lowered from 13 m to 1 m in eight days. The finite-element analysis follows the water as it drains out of the fill, and a full search finds the factor of safety at the end of each stage. The lowest factor of safety comes two days after the reservoir reaches its lowest level.</p>
     </div>
     <div class="grid-2" style="align-items:start;gap:36px">
       <figure class="sheet" style="margin:0">
@@ -1007,7 +1007,7 @@
             </tbody>
           </table>
         </div>
-        <p class="mt-s" style="font-size:14.5px;color:var(--ink-2)">Seven stages with 20 time steps each. A stage applies its level from the end of the previous stage, so the level drops by 2.4 m on days 0, 2, 4, 6 and 8, and each factor of safety is computed at the end of its stage. The stages at 10 and 20 days report time steps that did not reach the tolerance of 10<sup>−5</sup>; with the automatic number of steps instead, every factor above changed by less than 0.002. The same curve is <a class="xref" href="../docs/theory/rapid-drawdown.html#fig-dd-time">Figure 3.8.4</a> of the theory.</p>
+        <p class="mt-s" style="font-size:14.5px;color:var(--ink-2)">Seven stages with 20 time steps each. A stage applies its level from the end of the previous stage, so the level drops by 2.4 m on days 0, 2, 4, 6 and 8, and each factor of safety is computed at the end of its stage. The stages at 10 and 20 days report time steps that did not reach the tolerance of 10<sup>−5</sup>; with the automatic number of steps instead, each of the factors above changed by less than 0.002. The same curve appears as <a class="xref" href="../docs/theory/rapid-drawdown.html#fig-dd-time">Figure 3.8.4</a> in the theory manual.</p>
         <div class="cta-row">
           <a class="btn primary" href="../assets/models/ej05-earth-dam-drawdown.ogr" download>Download the model</a><span class="label muted" style="align-self:center">.ogr · 392 KB, with the stages</span>
           <a class="btn" href="../docs/theory/rapid-drawdown.html#transient-alternative">The theory <span class="arrow">→</span></a>
@@ -1019,7 +1019,7 @@
 
 <section class="section ink">
   <div class="wrap cta-band">
-    <div><div class="label">Reproduce them</div><h2 class="mt-s">Open a model, press Compute, <em>compare.</em></h2><p class="mt-m">The files open in OGR Slip2D <span data-v>0.1.235</span> with every setting used here. An AI agent connected through the MCP server can open them as well and explain each result.</p></div>
+    <div><div class="label">Reproduce them</div><h2 class="mt-s">How to reproduce the examples</h2><p class="mt-m">Each file opens in OGR Slip2D <span data-v>0.1.235</span> with the settings used on this page: press Compute and compare the result with the tables. An AI agent connected through the MCP server can also open the files and explain the results.</p></div>
     <div class="cta-row"><a class="btn primary lg" href="../download/index.html">Get OGR Slip2D</a><a class="btn lg" href="../ai/index.html">Connect an AI agent</a></div>
   </div>
 </section>
@@ -1035,7 +1035,7 @@
           <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
           <b>OpenGeoRock</b>
         </a>
-        <p class="tagline">Open-source geotechnical software, built in the open at the Universidad Politécnica de Cartagena.</p>
+        <p class="tagline">Open-source geotechnical software developed at the Universidad Politécnica de Cartagena.</p>
         <span class="lang" role="group" aria-label="Language"><a href="../examples/index.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../es/examples/index.html" hreflang="es" lang="es">ES</a></span>
       </div>
       <div>

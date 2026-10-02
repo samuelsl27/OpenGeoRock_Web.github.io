@@ -64,7 +64,7 @@
               <a class="mega-item" href="../../docs/reference/cli.html"><b>The command line</b><span>Batch runs with ogr-slip2d-cli</span></a>
             </div>
           </div>
-          <div class="mega-foot"><span>Five programs, one open core.</span><a href="../../products/index.html">All products →</a></div>
+          <div class="mega-foot"><span>OGR Slip2D is available now; the other four programs are planned.</span><a href="../../products/index.html">All products →</a></div>
         </div>
       </div>
       <a href="../../examples/index.html" data-nav="examples">Examples</a>
@@ -167,7 +167,7 @@
     </header>
 
     <article class="doc prose">
-      <p class="lede">OGR Slip2D is a Python package, <code>ogr-slip2d</code>. Until signed installers are published, it is installed from its public source code into a virtual environment. This page covers the requirements, the installation itself, the optional extras and how to check that everything works.</p>
+      <p class="lede">OGR Slip2D is a Python package, <code>ogr-slip2d</code>. Until signed installers are published, it is installed from its public source code into a virtual environment.</p>
 
       <h2 id="requirements"><span class="secnum">1.1.1</span><span class="ht">Requirements</span><a class="anchor" href="#requirements" aria-label="Link to this section">#</a></h2>
       <ul>
@@ -200,7 +200,7 @@ pip install -e .</code></pre></div>
           </table>
         </div>
       </figure>
-      <p>The program opens with an empty project. <span class="ui">File → Load Demo Slope</span> loads a small sample model — a 10 m high, 1V:1H slope in silty clay with a water table — which is a quick way to check that the analysis runs. <a class="xref" href="quick-start.html">Section 1.2</a> builds a model from scratch.</p>
+      <p>The program opens with an empty project. <span class="ui">File → Load Demo Slope</span> loads a small sample model (a 10 m high, 1V:1H slope in silty clay with a water table), which is a quick way to check that the analysis runs. <a class="xref" href="quick-start.html">Section 1.2</a> builds a model from scratch.</p>
 
       <h2 id="extras"><span class="secnum">1.1.4</span><span class="ht">Optional extras</span><a class="anchor" href="#extras" aria-label="Link to this section">#</a></h2>
       <figure class="tbl" id="tbl-extras">
@@ -219,19 +219,19 @@ pip install -e .</code></pre></div>
       <p>Several extras can be combined: <code>pip install -e ".[mcp,dev]"</code>. Connecting an AI agent is described step by step on the <a href="../../ai/index.html#install">AI &amp; MCP page</a>.</p>
 
       <h2 id="tests"><span class="secnum">1.1.5</span><span class="ht">Running the test suite</span><a class="anchor" href="#tests" aria-label="Link to this section">#</a></h2>
-      <p>The project uses its own test runner, <code>tests/_runner.py</code>; pytest is not required, and the test modules cannot be imported outside the runner. The graphical tests build real Qt widgets, so they need Qt's off-screen platform:</p>
+      <p>The project uses its own test runner, <code>tests/_runner.py</code>; pytest is not required, and the test modules cannot be imported outside the runner. The graphical tests build Qt widgets, so they need Qt's off-screen platform:</p>
       <div class="code"><pre><code># Windows (PowerShell)
 $env:QT_QPA_PLATFORM = "offscreen"; python tests/_runner.py
 # macOS and Linux
 QT_QPA_PLATFORM=offscreen python tests/_runner.py</code></pre></div>
-      <p>The full suite — 5 265 tests in version <span data-v>0.1.235</span> — takes about half an hour; the time varies between identical runs, so treat it as a check that the suite finishes rather than as a measurement. To work on one area, run only part of it:</p>
+      <p>The full suite (5 265 tests in version <span data-v>0.1.235</span>) takes about half an hour; the time varies between identical runs, so take it only as an approximate guide. To work on one area, run only part of it:</p>
       <div class="code"><pre><code>python tests/_runner.py transient          # files whose name contains it
 python tests/_runner.py -k erfc            # tests whose name contains it
 python tests/_runner.py --list transient   # show the selection, run nothing</code></pre></div>
-      <div class="note"><span class="label">Note</span><p>A pattern that matches nothing exits with code 2 instead of announcing an empty success, and a filtered run prints a <code>FILTERED RUN</code> warning around its totals: it is not evidence for a release.</p></div>
+      <div class="note"><span class="label">Note</span><p>A pattern that matches nothing exits with code 2 instead of announcing an empty success. A filtered run prints a <code>FILTERED RUN</code> warning around its totals, because only the full suite can support a release.</p></div>
 
       <h2 id="update"><span class="secnum">1.1.6</span><span class="ht">Updating and uninstalling</span><a class="anchor" href="#update" aria-label="Link to this section">#</a></h2>
-      <p>From the repository folder, with the environment active: <code>git pull</code>, then <code>pip install -e .</code> again to pick up any new dependency. To uninstall, delete the cloned folder — the virtual environment lives inside it.</p>
+      <p>From the repository folder, with the environment active: <code>git pull</code>, then <code>pip install -e .</code> again to pick up any new dependency. To uninstall, delete the cloned folder, since the virtual environment lives inside it.</p>
 
       <h2 id="language"><span class="secnum">1.1.7</span><span class="ht">Interface language</span><a class="anchor" href="#language" aria-label="Link to this section">#</a></h2>
       <p>The interface is available in English and Spanish (<span class="ui">File → Preferences… → Language</span>). The program starts in English; in version <span data-v>0.1.235</span> the choice of language is not stored between sessions. Screenshots in this documentation show the English interface.</p>
@@ -263,7 +263,7 @@ python tests/_runner.py --list transient   # show the selection, run nothing</co
           <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
           <b>OpenGeoRock</b>
         </a>
-        <p class="tagline">Open-source geotechnical software, built in the open at the Universidad Politécnica de Cartagena.</p>
+        <p class="tagline">Open-source geotechnical software developed at the Universidad Politécnica de Cartagena.</p>
         <span class="lang" role="group" aria-label="Language"><a href="../../docs/getting-started/installation.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../../es/docs/getting-started/installation.html" hreflang="es" lang="es">ES</a></span>
       </div>
       <div>

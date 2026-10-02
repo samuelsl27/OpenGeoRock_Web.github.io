@@ -65,7 +65,7 @@
               <a class="mega-item" href="../../../es/docs/reference/cli.html"><b>La línea de comandos</b><span>Cálculos por lotes con ogr-slip2d-cli</span></a>
             </div>
           </div>
-          <div class="mega-foot"><span>Cinco programas sobre un mismo núcleo abierto.</span><a href="../../../es/products/index.html">Todos los productos →</a></div>
+          <div class="mega-foot"><span>OGR Slip2D ya está disponible; los otros cuatro programas están previstos.</span><a href="../../../es/products/index.html">Todos los productos →</a></div>
         </div>
       </div>
       <a href="../../../es/examples/index.html" data-nav="examples">Ejemplos</a>
@@ -168,7 +168,7 @@
     </header>
 
     <article class="doc prose">
-      <p class="lede">Un análisis probabilístico toma como variables aleatorias algunos datos de entrada del modelo, genera muestras de ellas y recalcula el factor de seguridad con cada muestra, de lo que resultan la distribución del factor de seguridad, la probabilidad de rotura y el índice de fiabilidad. El análisis de sensibilidad, en cambio, hace variar un solo dato cada vez dentro de su intervalo. Esta página explica cómo configurar ambos y cómo interpretar sus resultados; la base estadística está en la <a class="xref" href="../theory/probabilistic.html">Sección 3.11</a>.</p>
+      <p class="lede">Un análisis probabilístico toma como variables aleatorias algunos datos de entrada del modelo, genera muestras de ellas y recalcula el factor de seguridad con cada muestra, de lo que resultan la distribución del factor de seguridad, la probabilidad de rotura y el índice de fiabilidad. El análisis de sensibilidad, en cambio, hace variar un solo dato cada vez dentro de su intervalo. Ambos se configuran en Project Settings y en el menú Statistics, y sus resultados se leen en la ventana Statistics; la base estadística está en la <a class="xref" href="../theory/probabilistic.html">Sección 3.11</a>.</p>
       <div class="note warn"><span class="label">Versión 0.1.235</span><p>En esta versión el cálculo no puede completarse desde el menú de la ventana (véase la <a class="xref" href="#compute-statistics">Sección 2.10.4</a>). Aun así, los ajustes que se describen a continuación son los que usa el análisis cuando se ejecuta mediante el servidor MCP o la API de Python.</p></div>
 
       <h2 id="enable"><span class="secnum">2.10.1</span><span class="ht">Activación del análisis</span><a class="anchor" href="#enable" aria-label="Enlace a esta sección">#</a></h2>
@@ -223,7 +223,7 @@
       </figure>
       <div class="impl">
         <span class="label">En OGR Slip2D</span>
-        <p>Toda distribución se <strong>trunca</strong> a su intervalo real. Las muestras se obtienen invirtiendo la distribución entre los dos límites, de modo que ningún valor queda fuera de ellos y los estratos del hipercubo latino se mantienen tras el truncamiento. La correlación indicada se impone reordenando los rangos de la segunda variable, con lo que ambas distribuciones marginales se conservan exactamente <a class="cite" href="../reference/bibliography.html#iman1982">(Iman y Conover, 1982)</a>. Cada muestra se aplica a una copia del modelo, así que el cálculo nunca modifica tu proyecto.</p>
+        <p>Las distribuciones se <strong>truncan</strong> a su intervalo real. Las muestras se obtienen invirtiendo la distribución entre los dos límites, de modo que ningún valor queda fuera de ellos y los estratos del hipercubo latino se mantienen tras el truncamiento. La correlación indicada se impone reordenando los rangos de la segunda variable, con lo que ambas distribuciones marginales no se alteran <a class="cite" href="../reference/bibliography.html#iman1982">(Iman y Conover, 1982)</a>. Cada muestra se aplica a una copia del modelo, así que el cálculo no modifica tu proyecto.</p>
         <span class="src">Código: <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_core/statistics/distributions.py" target="_blank" rel="noopener">ogr_core/statistics/distributions.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_core/statistics/random_variables.py" target="_blank" rel="noopener">ogr_core/statistics/random_variables.py</a></span>
       </div>
 
@@ -295,9 +295,9 @@
 
       <h2 id="reading"><span class="secnum">2.10.8</span><span class="ht">Interpretación de los resultados</span><a class="anchor" href="#reading" aria-label="Enlace a esta sección">#</a></h2>
       <ul>
-        <li>Comprueba el gráfico de convergencia antes de citar una probabilidad de rotura: un valor que todavía varía con el número de muestras no es aún un resultado.</li>
+        <li>Comprueba el gráfico de convergencia antes de citar una probabilidad de rotura: si el valor todavía cambia al añadir muestras, hacen falta más.</li>
         <li>Un cálculo Global Minimum supone que la superficie crítica no cambia de una muestra a otra. Si los datos de entrada pueden cambiar el mecanismo de rotura (por ejemplo, una capa débil de resistencia variable), conviene comparar con un cálculo Overall Slope.</li>
-        <li>El índice de fiabilidad presupone una distribución normal o lognormal del factor de seguridad; la probabilidad de rotura, en cambio, no presupone nada y se limita a contar muestras, así que con pocas muestras una probabilidad pequeña se estima con muy poca precisión.</li>
+        <li>El índice de fiabilidad presupone una distribución normal o lognormal del factor de seguridad. La probabilidad de rotura es la fracción de muestras con <span class="m" data-tex="F &lt; 1"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi><mo>&lt;</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">F &lt; 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.7224em;vertical-align:-0.0391em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">F</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span><!--/k--></span> y no presupone ninguna distribución, así que con pocas muestras una probabilidad pequeña se estima con muy poca precisión.</li>
         <li>Una muestra que no puede evaluarse se descarta, y el cálculo indica cuántas han sido.</li>
       </ul>
     </article>

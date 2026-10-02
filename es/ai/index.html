@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>Agentes de IA y MCP — OpenGeoRock</title>
-<meta name="description" content="OGR Slip2D incorpora un servidor oficial del Model Context Protocol (MCP) con el que Claude, ChatGPT o un modelo local pueden construir modelos de taludes, calcularlos y leer los resultados. Qué hace y cómo se instala en cada cliente.">
+<meta name="description" content="OGR Slip2D incluye un servidor oficial del Model Context Protocol (MCP) con el que Claude, ChatGPT o un modelo local pueden construir y calcular modelos de taludes y leer sus resultados. Cómo funciona y cómo se configura en cada cliente.">
 <!-- @inc head -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>document.documentElement.classList.replace("no-js", "js")</script>
@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="OpenGeoRock">
 <meta property="og:title" content="Agentes de IA y MCP — OpenGeoRock">
-<meta property="og:description" content="OGR Slip2D incorpora un servidor oficial del Model Context Protocol (MCP) con el que Claude, ChatGPT o un modelo local pueden construir modelos de taludes, calcularlos y leer los resultados. Qué hace y cómo se instala en cada cliente.">
+<meta property="og:description" content="OGR Slip2D incluye un servidor oficial del Model Context Protocol (MCP) con el que Claude, ChatGPT o un modelo local pueden construir y calcular modelos de taludes y leer sus resultados. Cómo funciona y cómo se configura en cada cliente.">
 <meta property="og:url" content="https://opengeorock.org/es/ai/">
 <meta property="og:image" content="https://opengeorock.org/assets/img/og-image.png">
 <meta property="og:locale" content="es_ES">
@@ -64,7 +64,7 @@
               <a class="mega-item" href="../../es/docs/reference/cli.html"><b>La línea de comandos</b><span>Cálculos por lotes con ogr-slip2d-cli</span></a>
             </div>
           </div>
-          <div class="mega-foot"><span>Cinco programas sobre un mismo núcleo abierto.</span><a href="../../es/products/index.html">Todos los productos →</a></div>
+          <div class="mega-foot"><span>OGR Slip2D ya está disponible; los otros cuatro programas están previstos.</span><a href="../../es/products/index.html">Todos los productos →</a></div>
         </div>
       </div>
       <a href="../../es/examples/index.html" data-nav="examples">Ejemplos</a>
@@ -105,8 +105,8 @@
   <div class="wrap grid-2" style="align-items:end">
     <div>
       <nav class="crumbs label" aria-label="Ruta de navegación"><a href="../index.html">Inicio</a><span aria-hidden="true">/</span><span>IA y MCP</span></nav>
-      <h1>Análisis de taludes que puede dirigir tu <em>agente de IA</em>.</h1>
-      <p class="lede">OGR Slip2D incorpora un servidor oficial del Model Context Protocol, desarrollado en el mismo repositorio que el motor de cálculo. Un agente puede abrir el programa, construir el modelo, lanzar el cálculo, consultar cada dovela y ver una imagen del resultado, todo en tu equipo y en la misma ventana que tienes delante.</p>
+      <h1>Usar OGR Slip2D con un <em>agente de IA</em></h1>
+      <p class="lede">OGR Slip2D incluye un servidor oficial del Model Context Protocol, desarrollado en el mismo repositorio que el motor de cálculo. Con él, un agente puede abrir el programa, construir un modelo y calcularlo, y después revisar los resultados dovela a dovela o mirar una imagen de ellos. Todo se ejecuta en tu ordenador y, si OGR Slip2D está abierto, puedes seguir cada paso en su ventana.</p>
       <div class="cta-row">
         <a class="btn primary lg" href="#install">Instalar el servidor MCP <span class="arrow">→</span></a>
         <a class="btn lg" href="../docs/reference/mcp.html">Referencia de herramientas</a>
@@ -114,7 +114,7 @@
     </div>
     <div class="note" style="margin:0">
       <span class="label">Situación actual</span>
-      <p>Uno de los primeros programas geotécnicos con servidor MCP oficial y, hasta donde sabemos (octubre de 2026), el primero de estabilidad de taludes de código abierto. Funciona con cualquier cliente MCP, incluidos los modelos locales, con los que nada sale de tu ordenador.</p>
+      <p>OGR Slip2D es uno de los primeros programas geotécnicos con servidor MCP oficial. Hasta donde sabemos (octubre de 2026), es además el primer programa de estabilidad de taludes de código abierto que lo incluye. Lo puede usar cualquier cliente MCP, y con un modelo local no sale nada de tu ordenador.</p>
       <p class="mb-0 label" style="margin-top:10px">Servidor desde OGR Slip2D 0.1.195 · puente con la ventana desde la 0.1.207</p>
     </div>
   </div>
@@ -124,24 +124,24 @@
 <section class="section">
   <div class="wrap">
     <div class="sec-head">
-      <div><div class="sec-num label">§ 01 — La idea</div><h2>Las herramientas de un ingeniero, <em>al alcance de un agente.</em></h2></div>
-      <p>El <a href="https://modelcontextprotocol.io" target="_blank" rel="noopener">Model Context Protocol</a> es un estándar abierto para conectar con otros programas las aplicaciones basadas en modelos de lenguaje. OGR Slip2D ofrece sus operaciones como herramientas MCP que cualquier cliente compatible puede usar, y el criterio de ingeniería sigue siendo tuyo.</p>
+      <div><div class="sec-num label">§ 01 — La idea</div><h2>Las operaciones del programa como <em>herramientas MCP</em></h2></div>
+      <p>El <a href="https://modelcontextprotocol.io" target="_blank" rel="noopener">Model Context Protocol</a> es un estándar abierto para conectar las aplicaciones basadas en modelos de lenguaje con otros programas. OGR Slip2D publica sus operaciones como herramientas MCP que puede usar cualquier cliente compatible, y el criterio de ingeniería sigue siendo tuyo.</p>
     </div>
     <div class="grid-3">
       <div class="card">
-        <span class="label">Construir</span>
+        <span class="label">Modelo</span>
         <h3>Un modelo completo en una sola llamada</h3>
-        <p>Geometría, materiales, la región que ocupa cada uno y el nivel freático, a partir de una descripción o de un plano DXF. Cada cambio es un paso que se puede deshacer.</p>
+        <p>La geometría, los materiales, la región que ocupa cada uno y el nivel freático se pueden definir a partir de una descripción o tomar de un plano DXF. Cualquier cambio se puede deshacer en un solo paso.</p>
       </div>
       <div class="card">
-        <span class="label">Calcular</span>
-        <h3>El mismo motor que usas tú</h3>
-        <p>Equilibrio límite con cualquiera de los nueve métodos y las siete búsquedas, agua subterránea por elementos finitos, análisis probabilísticos, retroanálisis y optimización, en tareas en segundo plano que se pueden cancelar.</p>
+        <span class="label">Cálculo</span>
+        <h3>El mismo motor que el programa de escritorio</h3>
+        <p>Equilibrio límite con cualquiera de los nueve métodos y las siete búsquedas, agua subterránea por elementos finitos, análisis probabilístico, retroanálisis y optimización. Los cálculos se ejecutan como tareas en segundo plano, y cualquiera de ellas se puede cancelar.</p>
       </div>
       <div class="card">
-        <span class="label">Leer</span>
+        <span class="label">Resultados</span>
         <h3>Números e imágenes</h3>
-        <p>Superficies críticas con sus dovelas, las consultas de la ventana de interpretación, códigos de error, campos de agua subterránea y un PNG del modelo, o del área de dibujo tal como se ve, que el agente puede mirar.</p>
+        <p>Superficies críticas con sus dovelas, las consultas de la ventana de interpretación, códigos de error y campos de agua subterránea. El agente también puede pedir un PNG del modelo, o del área de dibujo tal como se ve en pantalla, y mirarlo.</p>
       </div>
     </div>
   </div>
@@ -152,12 +152,12 @@
   <div class="wrap grid-2" style="align-items:start">
     <div>
       <div class="sec-num label">§ 02 — Una sesión real</div>
-      <h2 class="mt-s">De una frase a un <em>factor de seguridad.</em></h2>
-      <p class="lede mt-m">De esta conversación salió el talud de la portada. El agente hizo cinco llamadas, la primera a <code>server_info</code>, y el trabajo de ingeniería lo hizo el programa.</p>
+      <h2 class="mt-s">Un agente modela y calcula <em>un talud de 16 m</em></h2>
+      <p class="lede mt-m">El talud de la portada se construyó en esta conversación. El agente hizo cinco llamadas, la primera a <code>server_info</code>, y las cifras de sus respuestas salen de OGR Slip2D.</p>
       <ul class="ticks">
         <li><code>model_define</code> construyó el talud de 16 m: tres materiales, dos contactos y un nivel freático asignado a los tres.</li>
-        <li><code>analysis_configure</code> eligió los métodos, la búsqueda por rejilla, 30 dovelas y la dirección de rotura.</li>
-        <li><code>analysis_run</code> calculó 1 859 círculos con cada método en una tarea en segundo plano.</li>
+        <li><code>analysis_configure</code> fijó los métodos, la búsqueda por rejilla, 30 dovelas y la dirección de rotura.</li>
+        <li>En una tarea en segundo plano, <code>analysis_run</code> calculó 1 859 círculos con cada método.</li>
         <li><code>results_get</code> devolvió las superficies críticas con sus tablas de dovelas.</li>
       </ul>
     </div>
@@ -182,21 +182,21 @@
 <section class="section" id="install">
   <div class="wrap">
     <div class="sec-head">
-      <div><div class="sec-num label">§ 03 — Instalación</div><h2>Conecta tu agente <em>en tres pasos.</em></h2></div>
-      <p>Necesitas Python 3.11 o posterior y un cliente MCP. El servidor forma parte de OGR Slip2D: no hay que descargar nada más. Sustituye <code>C:\path\to\projects</code> por la carpeta donde guardas tus modelos <code>.ogr</code>.</p>
+      <div><div class="sec-num label">§ 03 — Instalación</div><h2>Instalar el servidor y <em>conectar un cliente</em></h2></div>
+      <p>Necesitas Python 3.11 o posterior y un cliente MCP. El servidor forma parte del paquete de OGR Slip2D, así que no hay que descargarlo aparte. En los ejemplos, sustituye <code>C:\path\to\projects</code> por la carpeta donde guardas tus modelos <code>.ogr</code>.</p>
     </div>
 
     <ol class="steps">
       <li>
         <h4>Instala OGR Slip2D con el extra MCP</h4>
-        <p>El extra <code>[mcp]</code> añade el SDK oficial de MCP para Python (licencia MIT). El programa de escritorio no lo necesita; el servidor, sí.</p>
+        <p>El extra <code>[mcp]</code> añade el SDK oficial de MCP para Python (licencia MIT), que necesita el servidor pero no el programa de escritorio.</p>
         <div class="code"><pre><code>git clone https://github.com/samuelsl27/OGR-Slip2D.git
 cd OGR-Slip2D
 python -m venv .venv
 .venv\Scripts\activate          # macOS / Linux: source .venv/bin/activate
 pip install -e ".[mcp]"
 ogr-slip2d-mcp --version</code></pre></div>
-        <p class="muted">Si <code>ogr-slip2d-mcp</code> no está en el <code>PATH</code> del cliente, usa la ruta completa del ejecutable o ejecuta <code>python -m ogr_mcp</code>, que hace exactamente lo mismo.</p>
+        <p class="muted">Si <code>ogr-slip2d-mcp</code> no está en el <code>PATH</code> del cliente, indica la ruta completa del ejecutable o ejecuta <code>python -m ogr_mcp</code>, que arranca el mismo servidor.</p>
       </li>
       <li>
         <h4>Registra el servidor en tu cliente</h4>
@@ -213,7 +213,7 @@ ogr-slip2d-mcp --version</code></pre></div>
           </div>
 
           <div class="tabpanel" role="tabpanel" id="p-desktop" aria-labelledby="t-desktop">
-            <p>Edita <code>claude_desktop_config.json</code>, que está en <code>%APPDATA%\Claude\</code> en Windows y en <code>~/Library/Application Support/Claude/</code> en macOS. La versión de Microsoft Store lo guarda en <code>%LOCALAPPDATA%\Packages\Claude_&lt;id&gt;\LocalCache\Roaming\Claude\</code>. Después, reinicia Claude.</p>
+            <p>Edita <code>claude_desktop_config.json</code>, que está en <code>%APPDATA%\Claude\</code> en Windows y en <code>~/Library/Application Support/Claude/</code> en macOS; la versión de Microsoft Store lo guarda en <code>%LOCALAPPDATA%\Packages\Claude_&lt;id&gt;\LocalCache\Roaming\Claude\</code>. Después, reinicia Claude.</p>
             <div class="code"><pre><code>{
   "mcpServers": {
     "ogr-slip2d": {
@@ -228,11 +228,11 @@ ogr-slip2d-mcp --version</code></pre></div>
           <div class="tabpanel" role="tabpanel" id="p-code" aria-labelledby="t-code" hidden>
             <p>Un solo comando registra el servidor en Claude Code:</p>
             <div class="code"><pre><code>claude mcp add ogr-slip2d -- ogr-slip2d-mcp --workdir "C:\path\to\projects"</code></pre></div>
-            <p class="muted mb-0">Claude Code pide confirmación antes de usar cada herramienta. No la desactives para <code>python_exec</code> (ver <a href="#security">Seguridad</a>).</p>
+            <p class="muted mb-0">Claude Code pide confirmación antes de cada llamada a una herramienta. Mantenla activada para <code>python_exec</code> (ver <a href="#security">Seguridad</a>).</p>
           </div>
 
           <div class="tabpanel" role="tabpanel" id="p-lmstudio" aria-labelledby="t-lmstudio" hidden>
-            <p>Para los modelos locales de LM Studio, la configuración está en <code>%USERPROFILE%\.lmstudio\mcp.json</code> en Windows o en <code>~/.lmstudio/mcp.json</code> en macOS y Linux:</p>
+            <p>LM Studio lee los servidores MCP de sus modelos locales en <code>%USERPROFILE%\.lmstudio\mcp.json</code> en Windows, o en <code>~/.lmstudio/mcp.json</code> en macOS y Linux:</p>
             <div class="code"><pre><code>{
   "mcpServers": {
     "ogr-slip2d": {
@@ -241,11 +241,11 @@ ogr-slip2d-mcp --version</code></pre></div>
     }
   }
 }</code></pre></div>
-            <p class="muted mb-0"><strong>Usa <code>--profile compact</code> con los modelos pequeños.</strong> Publica 14 herramientas en lugar de 74: <code>model_define</code> construye la geometría en una sola llamada y <code>python_exec</code> cubre el resto. Un modelo pequeño se pierde entre muchas herramientas, y la descripción de cada una ocupa contexto en todas las peticiones.</p>
+            <p class="muted mb-0"><strong>Con modelos pequeños, usa <code>--profile compact</code>.</strong> Este perfil publica 14 herramientas en lugar de 74: <code>model_define</code> construye la geometría en una sola llamada y <code>python_exec</code> cubre el resto. Un modelo pequeño se pierde entre muchas herramientas, y la descripción de cada una ocupa contexto en todas las peticiones.</p>
           </div>
 
           <div class="tabpanel" role="tabpanel" id="p-ollama" aria-labelledby="t-ollama" hidden>
-            <p>Ollama sirve modelos, pero no habla MCP: eso lo hace el cliente que usa el modelo. Con <a href="https://github.com/jonigl/mcp-client-for-ollama" target="_blank" rel="noopener">mcp-client-for-ollama</a>, o con cualquier cliente MCP que acepte el formato <code>mcpServers</code>, la entrada es la misma que en LM Studio:</p>
+            <p>Ollama sirve modelos, pero no habla MCP: de eso se encarga el cliente que usa el modelo. Con <a href="https://github.com/jonigl/mcp-client-for-ollama" target="_blank" rel="noopener">mcp-client-for-ollama</a>, o con cualquier cliente MCP que acepte el formato <code>mcpServers</code>, la entrada es la misma que en LM Studio:</p>
             <div class="code"><pre><code>{
   "mcpServers": {
     "ogr-slip2d": {
@@ -260,16 +260,16 @@ ogr-slip2d-mcp --version</code></pre></div>
             <p>Open WebUI solo se conecta a servidores MCP por HTTP (Streamable HTTP, Open WebUI 0.6.31 o posterior). Arranca el servidor con un token:</p>
             <div class="code"><pre><code>ogr-slip2d-mcp --transport http --port 8765 --token-file token.txt --workdir "C:\path\to\projects"</code></pre></div>
             <p>Después, en Open WebUI, ve a <span class="ui">Settings → Admin → Integrations → External Tool Servers → + Add Connection</span> y elige el tipo <strong>MCP (Streamable HTTP)</strong>, la URL <code>http://127.0.0.1:8765/mcp</code> y la autenticación <strong>Bearer</strong>, con el token como clave.</p>
-            <p class="muted mb-0">Sin <code>--token-file</code> ni <code>OGR_MCP_TOKEN</code>, el servidor genera un token y lo muestra al arrancar. Si Open WebUI se ejecuta en Docker, usa <code>http://host.docker.internal:8765/mcp</code> y arranca el servidor con <code>--host 0.0.0.0</code> y un token explícito, porque sin él el servidor no arranca.</p>
+            <p class="muted mb-0">Sin <code>--token-file</code> ni <code>OGR_MCP_TOKEN</code>, el servidor genera un token y lo muestra al arrancar. Si Open WebUI se ejecuta en Docker, usa <code>http://host.docker.internal:8765/mcp</code> y arranca el servidor con <code>--host 0.0.0.0</code> y un token explícito; con ese host y sin token, el servidor no arranca.</p>
           </div>
 
           <div class="tabpanel" role="tabpanel" id="p-chatgpt" aria-labelledby="t-chatgpt" hidden>
-            <div class="note warn"><span class="label">Lee esto primero</span><p>ChatGPT solo se conecta a servidores HTTPS públicos mediante OAuth. Si publicas el servidor en Internet, publicas también <code>python_exec</code>, es decir, tu equipo. Hazlo solo cuando lo necesites y cierra el túnel al terminar.</p></div>
+            <div class="note warn"><span class="label">Lee esto primero</span><p>ChatGPT solo se conecta a servidores HTTPS públicos, mediante OAuth. Si expones el servidor a Internet, expones también <code>python_exec</code> y, con él, tu equipo, así que hazlo solo cuando lo necesites y cierra el túnel al terminar.</p></div>
             <p>1. Arranca el servidor en la interfaz local (loopback) con un token de al menos 32 caracteres y la dirección pública de tu túnel:</p>
             <div class="code"><pre><code>ogr-slip2d-mcp --transport http --port 8765 --token-file token.txt --public-url https://YOUR-TUNNEL.example --workdir "C:\path\to\projects"</code></pre></div>
             <p>2. Pon delante de <code>http://127.0.0.1:8765</code> un túnel que termine la conexión HTTPS. Por ejemplo, <code>cloudflared tunnel --url http://127.0.0.1:8765</code> te da la dirección para <code>--public-url</code> (reinicia el servidor con ella).</p>
             <p>3. En ChatGPT, activa el <strong>modo desarrollador</strong> y crea un conector con la dirección <code>https://YOUR-TUNNEL.example/mcp</code> y autenticación <strong>OAuth</strong>.</p>
-            <p class="mb-0">4. ChatGPT te lleva a la página <code>/approve</code> del servidor: comprueba que el cliente es el que esperas y escribe el token de <code>token.txt</code>. El servidor hace de su propio servidor de autorización OAuth 2.1 (PKCE, registro dinámico), y los tokens de acceso duran una hora y solo se guardan en memoria.</p>
+            <p class="mb-0">4. ChatGPT te lleva a la página <code>/approve</code> del servidor, donde compruebas que el cliente es el que esperas y escribes el token de <code>token.txt</code>. El servidor hace de su propio servidor de autorización OAuth 2.1 (PKCE, registro dinámico). Los tokens de acceso duran una hora y solo se guardan en memoria.</p>
           </div>
 
           <div class="tabpanel" role="tabpanel" id="p-agents" aria-labelledby="t-agents" hidden>
@@ -285,7 +285,7 @@ async with MCPServerStdio(
     agent = Agent(name="geotechnics", mcp_servers=[ogr],
                   instructions="Analyse slopes with OGR Slip2D.")
     result = await Runner.run(agent, "Build and analyse the slope ...")</code></pre></div>
-            <p class="muted mb-0"><code>client_session_timeout_seconds</code> es importante: el SDK espera por defecto unos pocos segundos, y <code>analysis_run</code> espera hasta 30 s (su valor por defecto) antes de devolver una tarea cuyo estado se consulta con <code>job_get</code>.</p>
+            <p class="muted mb-0">Fija <code>client_session_timeout_seconds</code> de forma explícita. El SDK espera por defecto unos pocos segundos, mientras que <code>analysis_run</code> espera hasta 30 s (su valor por defecto) antes de devolver una tarea cuyo estado se consulta con <code>job_get</code>.</p>
           </div>
 
           <div class="tabpanel" role="tabpanel" id="p-openapi" aria-labelledby="t-openapi" hidden>
@@ -293,13 +293,13 @@ async with MCPServerStdio(
             <div class="code"><pre><code>python -m venv mcpo-env
 mcpo-env\Scripts\pip install mcpo "mcp&lt;2"
 mcpo-env\Scripts\mcpo --port 8000 --api-key "your-key" -- ogr-slip2d-mcp --workdir "C:\path\to\projects"</code></pre></div>
-            <p class="muted mb-0">La especificación queda entonces en <code>http://localhost:8000/openapi.json</code> y la documentación interactiva, en <code>/docs</code>. <code>model_render</code> devuelve la imagen como URI de datos; pasa <code>save_path</code> si quieres además el PNG en disco.</p>
+            <p class="muted mb-0">La especificación queda entonces en <code>http://localhost:8000/openapi.json</code> y la documentación interactiva, en <code>/docs</code>. <code>model_render</code> devuelve la imagen como URI de datos; pasa <code>save_path</code> si además quieres el PNG en disco.</p>
           </div>
         </div>
       </li>
       <li>
         <h4>Comprueba la conexión</h4>
-        <p>Pide al agente que llame a <code>server_info</code>. La respuesta incluye la versión, las unidades (SI) y las herramientas publicadas, y dice si la próxima llamada irá a una ventana abierta de OGR Slip2D o a un modelo propio del servidor.</p>
+        <p>Pide al agente que llame a <code>server_info</code>. La respuesta incluye la versión, las unidades (SI) y las herramientas publicadas, e indica si la próxima llamada irá a una ventana abierta de OGR Slip2D o a un modelo propio del servidor.</p>
         <div class="code"><pre><code>{"server": "ogr-slip2d", "units": "SI: m, kN, kPa, kN/m3, degrees", "profile": "full",
  "attached_to_window": {"window_open": true, "next_call_goes_to": "the open window"},
  "program_coverage": {"mapped": 116, "pending": 0}, "licence": "AGPL-3.0-or-later", …}</code></pre></div>
@@ -313,19 +313,19 @@ mcpo-env\Scripts\mcpo --port 8000 --api-key "your-key" -- ogr-slip2d-mcp --workd
   <div class="wrap grid-2">
     <div>
       <div class="sec-num label">§ 04 — La misma ventana, el mismo modelo</div>
-      <h2 class="mt-s">Tú lo ves. <em>Y puedes deshacerlo.</em></h2>
-      <p class="lede mt-m">Si OGR Slip2D está abierto, lo que pidas al agente ocurre en su ventana, sea cual sea el cliente y abras primero lo que abras. No hay nada que configurar: el programa activa su puente al arrancar.</p>
+      <h2 class="mt-s">El agente trabaja <em>en tu ventana</em></h2>
+      <p class="lede mt-m">Si OGR Slip2D está abierto, lo que pidas al agente se hace en esa ventana, uses el cliente que uses y abras primero el programa o el cliente. El programa activa su puente para agentes al arrancar, así que no hace falta configurar nada más.</p>
       <ul class="ticks">
-        <li>Cada cambio del agente es un paso de <span class="ui">Edit → Undo</span>, y el área de dibujo se actualiza al momento.</li>
-        <li>Un cálculo lanzado por el agente aparece en el panel de resultados y en el área de dibujo, igual que al pulsar <span class="ui">Compute</span>.</li>
-        <li><code>project_new</code> y <code>project_open</code> no se ejecutan si hay cambios sin guardar: el agente no puede hacerte perder el trabajo.</li>
-        <li>El puente solo escucha en 127.0.0.1, con un token aleatorio nuevo cada vez. Puedes desactivarlo en <span class="ui">Tools → Agent bridge (MCP)</span> o arrancar el programa con <code>--no-agent-bridge</code>.</li>
+        <li>Cada cambio del agente es un paso de <span class="ui">Edit → Undo</span>, y el área de dibujo se actualiza después de cada uno.</li>
+        <li>Un cálculo lanzado por el agente aparece en el panel de resultados y en el área de dibujo, igual que cuando pulsas <span class="ui">Compute</span>.</li>
+        <li><code>project_new</code> y <code>project_open</code> no se ejecutan si hay cambios sin guardar, de modo que el agente no puede descartar tu trabajo.</li>
+        <li>El puente solo escucha en 127.0.0.1, con un token aleatorio nuevo cada vez que arranca. Puedes desactivarlo en <span class="ui">Tools → Agent bridge (MCP)</span> o arrancar el programa con <code>--no-agent-bridge</code>.</li>
       </ul>
     </div>
     <figure class="shot">
       <div class="bar label"><i></i><i></i><i></i>&nbsp; OGR Slip2D · controlado por MCP</div>
       <img src="../../assets/img/shots/main-window.webp" alt="El modelador de OGR Slip2D con un modelo que un agente ha construido y calculado mediante MCP: círculos candidatos, el círculo crítico en rojo y la tabla de resultados" width="1600" height="1000" loading="lazy">
-      <figcaption><span class="label">Fig.</span>El modelador mientras un agente trabaja en él: cada cambio llega como una edición que puedes deshacer.</figcaption>
+      <figcaption><span class="label">Fig.</span>La ventana del modelador mientras un agente trabaja en el modelo. Los cambios llegan como ediciones normales, que puedes deshacer.</figcaption>
     </figure>
   </div>
 </section>
@@ -334,8 +334,8 @@ mcpo-env\Scripts\mcpo --port 8000 --api-key "your-key" -- ogr-slip2d-mcp --workd
 <section class="section">
   <div class="wrap">
     <div class="sec-head">
-      <div><div class="sec-num label">§ 05 — Qué puede hacer el agente</div><h2>74 herramientas, <em>116 acciones de menú.</em></h2></div>
-      <p>El servidor da acceso a todas las acciones de modelado y análisis de los menús del programa; solo quedan fuera las de visualización (zoom, desplazamiento, impresión). El perfil compact publica 14 herramientas, pensadas para modelos locales pequeños.</p>
+      <div><div class="sec-num label">§ 05 — Qué puede hacer el agente</div><h2>74 herramientas que cubren <em>116 acciones de menú</em></h2></div>
+      <p>El servidor da acceso a todas las acciones de modelado y análisis de los menús del programa. Solo quedan fuera las que afectan únicamente a la vista (zoom, desplazamiento, impresión). Para modelos locales pequeños, el perfil compact publica 14 de las 74 herramientas.</p>
     </div>
     <div class="table-wrap">
       <table class="data">
@@ -350,7 +350,7 @@ mcpo-env\Scripts\mcpo --port 8000 --api-key "your-key" -- ogr-slip2d-mcp --workd
           <tr><td>Estadística</td><td>Variables aleatorias, análisis probabilísticos y de sensibilidad, retroanálisis, optimización</td><td><code>statistics_run</code> · <code>back_analysis_run</code></td></tr>
           <tr><td>Análisis</td><td>Ajustes, cálculos en segundo plano, tareas, resultados, consultas de la ventana de interpretación, cálculo de una superficie concreta</td><td><code>analysis_run</code> · <code>results_query</code> · <code>surface_evaluate</code></td></tr>
           <tr><td>Archivos</td><td>Importación y exportación de DXF, informe en PDF, importación de propiedades de otro modelo</td><td><code>dxf_import</code> · <code>report_generate</code></td></tr>
-          <tr><td>Vista y Python</td><td>PNG del modelo o del área de dibujo, historial de deshacer, Python para todo lo demás</td><td><code>model_render</code> · <code>project_history</code> · <code>python_exec</code></td></tr>
+          <tr><td>Vista y Python</td><td>PNG del modelo o del área de dibujo tal como se ve, historial de deshacer, Python para todo lo demás</td><td><code>model_render</code> · <code>project_history</code> · <code>python_exec</code></td></tr>
         </tbody>
       </table>
     </div>
@@ -363,14 +363,14 @@ mcpo-env\Scripts\mcpo --port 8000 --api-key "your-key" -- ogr-slip2d-mcp --workd
   <div class="wrap grid-2" style="align-items:start">
     <div>
       <div class="label">§ 06 — Seguridad</div>
-      <h2 class="mt-s" style="color:var(--paper)">Potente a propósito. <em style="color:#9bd8a8">Local por defecto.</em></h2>
-      <p class="lede mt-m">El servidor publica siempre <code style="background:#ffffff14;border-color:#ffffff22;color:var(--paper)">python_exec</code>, que ejecuta Python con los permisos de tu usuario y cubre todo lo que aún no tiene herramienta propia. Quien pueda comunicarse con el servidor puede ejecutar código en tu equipo; por eso, la configuración por defecto solo te deja acceder a ti.</p>
+      <h2 class="mt-s" style="color:var(--paper)">Seguridad y <em style="color:#9bd8a8">acceso por red</em></h2>
+      <p class="lede mt-m">El servidor publica siempre <code style="background:#ffffff14;border-color:#ffffff22;color:var(--paper)">python_exec</code>, que ejecuta Python con los permisos de tu usuario y cubre lo que todavía no tiene herramienta propia. Quien pueda comunicarse con el servidor puede ejecutar código en tu equipo, así que, por defecto, solo tienes acceso tú.</p>
     </div>
     <ul class="ticks">
-      <li><strong>stdio</strong> (Claude, LM Studio, el Agents SDK): el servidor es un proceso hijo del cliente y no abre ningún puerto. El riesgo que queda es la inyección de instrucciones (prompt injection), así que mantén activada la confirmación del cliente antes de cada herramienta.</li>
-      <li><strong>HTTP</strong>: siempre con token, también en 127.0.0.1, y comparado en tiempo constante; las cabeceras Host y Origin se comprueban para evitar el DNS rebinding. Sin token no hay acceso por red.</li>
-      <li><strong>Internet</strong> (<code style="background:#ffffff14;border-color:#ffffff22;color:var(--paper)">--public-url</code>): OAuth 2.1 con PKCE, aprobación con límite de frecuencia y tokens solo en memoria. El servidor nunca abre túneles por su cuenta.</li>
-      <li><strong>Sin telemetría</strong>: el servidor no hace llamadas de red por su cuenta.</li>
+      <li><strong>stdio</strong> (Claude, LM Studio, el Agents SDK): el servidor se ejecuta como proceso hijo del cliente y no abre ningún puerto. El riesgo que queda es la inyección de instrucciones (prompt injection), así que mantén activada la confirmación del cliente antes de cada llamada a una herramienta.</li>
+      <li><strong>HTTP</strong>: siempre hace falta un token, también en 127.0.0.1, y se compara en tiempo constante. Las cabeceras Host y Origin se comprueban para evitar el DNS rebinding. Sin token no hay acceso por red.</li>
+      <li><strong>Internet</strong> (<code style="background:#ffffff14;border-color:#ffffff22;color:var(--paper)">--public-url</code>): OAuth 2.1 con PKCE, aprobación con límite de frecuencia y tokens que solo se guardan en memoria. El servidor nunca abre un túnel por su cuenta.</li>
+      <li><strong>Sin telemetría</strong>: el servidor no hace llamadas de red propias.</li>
     </ul>
   </div>
 </section>
@@ -379,7 +379,7 @@ mcpo-env\Scripts\mcpo --port 8000 --api-key "your-key" -- ogr-slip2d-mcp --workd
 <section class="section">
   <div class="wrap">
     <div class="sec-head">
-      <div><div class="sec-num label">§ 07 — Prueba a pedir</div><h2>Peticiones que <em>funcionan.</em></h2></div>
+      <div><div class="sec-num label">§ 07 — Prueba a pedir</div><h2>Ejemplos de peticiones</h2></div>
       <p>Dale al agente los datos de ingeniería (geometría, resistencias, agua) y pídele las comprobaciones que harías tú. Todas las unidades son del SI.</p>
     </div>
     <div class="grid-3">
@@ -399,17 +399,17 @@ mcpo-env\Scripts\mcpo --port 8000 --api-key "your-key" -- ogr-slip2d-mcp --workd
     <div class="sec-num label">§ 08 — Preguntas</div>
     <h2 class="mt-s">Preguntas frecuentes</h2>
     <div class="mt-m stack">
-      <details class="note"><summary><strong>¿Mi modelo sale de mi ordenador?</strong></summary><p class="mt-s">El servidor no hace ninguna llamada de red. Al proveedor del modelo solo le llega lo que le envía tu cliente, como en cualquier otra conversación. Con un modelo local (LM Studio, Ollama), nada sale de tu equipo.</p></details>
+      <details class="note"><summary><strong>¿Mi modelo sale de mi ordenador?</strong></summary><p class="mt-s">El servidor no hace ninguna llamada de red. Al proveedor del modelo le llega lo que le envía tu cliente, como en cualquier otra conversación. Con un modelo local (LM Studio, Ollama), no sale nada de tu equipo.</p></details>
       <details class="note"><summary><strong>¿Qué modelos pueden usarlo?</strong></summary><p class="mt-s">Cualquier cliente que hable MCP. Los modelos grandes en la nube manejan bien el perfil completo de 74 herramientas; con modelos locales pequeños, arranca el servidor con <code>--profile compact</code>.</p></details>
-      <details class="note"><summary><strong>¿Puede el agente estropear mi modelo?</strong></summary><p class="mt-s">Cada cambio se puede deshacer; un script ejecutado con <code>python_exec</code> cuenta como un solo paso y se revierte si falla, y el agente no puede abrir ni crear un modelo si hay cambios sin guardar. Además, los ajustes que el cálculo no usaría se rechazan explicando el motivo, en lugar de guardarse.</p></details>
-      <details class="note"><summary><strong>¿La respuesta del agente es un resultado de ingeniería?</strong></summary><p class="mt-s">Las cifras salen del mismo motor de cálculo que las del programa de escritorio y merecen las mismas comprobaciones: cálculos independientes, análisis de sensibilidad y criterio de ingeniería. Un proyecto lo firma un ingeniero, no un programa; y tampoco un agente.</p></details>
+      <details class="note"><summary><strong>¿Puede el agente estropear mi modelo?</strong></summary><p class="mt-s">Cada cambio se puede deshacer. Un script ejecutado con <code>python_exec</code> cuenta como un solo paso y se revierte si falla, y el agente no puede abrir ni crear un modelo si hay cambios sin guardar. Los ajustes que el cálculo no usaría se rechazan, con el motivo, en lugar de guardarse.</p></details>
+      <details class="note"><summary><strong>¿La respuesta del agente es un resultado de ingeniería?</strong></summary><p class="mt-s">Las cifras salen del mismo motor que las del programa de escritorio y necesitan las mismas comprobaciones: cálculos independientes, la sensibilidad del resultado a los datos de entrada y el criterio de ingeniería. La responsabilidad de un proyecto es del ingeniero que lo firma, tanto si el modelo lo ha construido él como si lo ha hecho un agente.</p></details>
     </div>
   </div>
 </section>
 
 <section class="section ink">
   <div class="wrap cta-band">
-    <div><div class="label">Siguiente paso</div><h2 class="mt-s">Instálalo y <em>pide un talud.</em></h2></div>
+    <div><div class="label">Siguiente paso</div><h2 class="mt-s">Instalación y <em>documentación</em></h2></div>
     <div class="cta-row"><a class="btn primary lg" href="#install">Instalar</a><a class="btn lg" href="../docs/reference/mcp.html">Referencia</a><a class="btn lg" href="https://github.com/samuelsl27/OGR-Slip2D/tree/main/docs/mcp" target="_blank" rel="noopener">Documentación del servidor en GitHub ↗</a></div>
   </div>
 </section>

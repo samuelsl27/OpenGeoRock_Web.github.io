@@ -64,7 +64,7 @@
               <a class="mega-item" href="../../docs/reference/cli.html"><b>The command line</b><span>Batch runs with ogr-slip2d-cli</span></a>
             </div>
           </div>
-          <div class="mega-foot"><span>Five programs, one open core.</span><a href="../../products/index.html">All products →</a></div>
+          <div class="mega-foot"><span>OGR Slip2D is available now; the other four programs are planned.</span><a href="../../products/index.html">All products →</a></div>
         </div>
       </div>
       <a href="../../examples/index.html" data-nav="examples">Examples</a>
@@ -167,7 +167,7 @@
     </header>
 
     <article class="doc prose">
-      <p class="lede">This page covers what leaves the program — the PDF report, images, prints and DXF drawings — and the ways of running it without the mouse: the Python terminal inside the window, the command line, the Python API and AI agents connected through the MCP server. The last three have their own reference chapters; here they are introduced from the point of view of the desktop program.</p>
+      <p class="lede">Results leave the program as a PDF report, images, prints and DXF drawings. The program can also be run without the mouse, from the Python terminal inside the window, the command line, the Python API or an AI agent connected through the MCP server. The last three have their own reference chapters; here they are introduced from the point of view of the desktop program.</p>
 
       <h2 id="report"><span class="secnum">2.12.1</span><span class="ht">The PDF report</span><a class="anchor" href="#report" aria-label="Link to this section">#</a></h2>
       <p><span class="ui">File → Generate Report…</span> writes an A4 PDF of the last Compute, with every method it ran; without a Compute it refuses, with a message. The file name proposed is the project's name followed by <code>_report.pdf</code>. The report has eight sections:</p>
@@ -193,7 +193,7 @@
 
       <h2 id="images"><span class="secnum">2.12.2</span><span class="ht">Images</span><a class="anchor" href="#images" aria-label="Link to this section">#</a></h2>
       <ul>
-        <li><span class="ui">File → Export Image…</span> writes a PNG of everything drawn in the model view — the whole extent, not only the part on screen — on a white background. It asks for the <em>Width in pixels</em> (1920 by default; 200 to 12 000); the height follows from the proportions of the model.</li>
+        <li><span class="ui">File → Export Image…</span> writes a PNG of everything drawn in the model view (the whole extent, not only the part on screen) on a white background. It asks for the <em>Width in pixels</em> (1920 by default; 200 to 12 000); the height follows from the proportions of the model.</li>
         <li><span class="ui">Edit → Copy Image</span> copies the view as it is on screen to the clipboard, as a bitmap.</li>
         <li>The Interpret window has its own <span class="ui">File → Export Image…</span> (PNG or JPEG of its view) and <span class="ui">Edit → Copy Image</span> (<a class="xref" href="results.html">Section 2.8</a>).</li>
       </ul>
@@ -203,7 +203,7 @@
       <p><span class="ui">File → Page Setup…</span> chooses the paper and margins, and <span class="ui">File → Print Preview…</span> shows the whole model drawn on that page; print from the preview window. In version 0.1.235 <span class="ui">File → Print…</span> (<kbd>Ctrl</kbd>+<kbd>P</kbd>) only displays a message.</p>
 
       <h2 id="dxf"><span class="secnum">2.12.4</span><span class="ht">DXF drawings</span><a class="anchor" href="#dxf" aria-label="Link to this section">#</a></h2>
-      <p><span class="ui">File → Export DXF…</span> writes the model to a DXF drawing for CAD. The dialog sets the unit of the coordinates (m, cm, mm, km, ft or in; the model is in metres and the unit is recorded in the file), what to include — <em>Boundaries (geometry)</em>, <em>Supports</em>, <em>Loads (as arrows)</em>, <em>Finite element mesh</em> (off by default, as it writes one line per element edge), <em>Critical slip surface</em> (after a Compute) and <em>Annotations (title, factor of safety)</em> — and the <em>Load arrow size</em> as a percentage of the model diagonal (2 %). The geometry goes to the layers the DXF importer recognises, so the drawing can be edited and imported back; loads, mesh, slip surface and annotations go to separate layers whose names start with <code>OGR_X_</code>, which the importer ignores, so a load arrow cannot come back as a boundary. Importing a DXF is described in <a class="xref" href="geometry.html">Section 2.2</a>.</p>
+      <p><span class="ui">File → Export DXF…</span> writes the model to a DXF drawing for CAD. The dialog sets the unit of the coordinates (m, cm, mm, km, ft or in; the model is in metres and the unit is recorded in the file), the <em>Load arrow size</em> as a percentage of the model diagonal (2 %), and what to include: <em>Boundaries (geometry)</em>, <em>Supports</em>, <em>Loads (as arrows)</em>, <em>Finite element mesh</em> (off by default, as it writes one line per element edge), <em>Critical slip surface</em> (after a Compute) and <em>Annotations (title, factor of safety)</em>. The geometry goes to the layers the DXF importer recognises, so the drawing can be edited and imported back; loads, mesh, slip surface and annotations go to separate layers whose names start with <code>OGR_X_</code>, which the importer ignores, so a load arrow cannot come back as a boundary. Importing a DXF is described in <a class="xref" href="geometry.html">Section 2.2</a>.</p>
 
       <h2 id="terminal"><span class="secnum">2.12.5</span><span class="ht">The Python terminal</span><a class="anchor" href="#terminal" aria-label="Link to this section">#</a></h2>
       <p><span class="ui">Window → Terminal</span> (<kbd>Ctrl</kbd>+<kbd>`</kbd>) opens a Python console inside the window, connected to the live model. These names are defined in it:</p>
@@ -213,7 +213,7 @@
           <table class="data">
             <thead><tr><th>Name</th><th>What it is</th></tr></thead>
             <tbody>
-              <tr><td><code>project</code></td><td>The project open in the window — the same object you are editing. It follows New Project, Open Project and Load Demo Slope.</td></tr>
+              <tr><td><code>project</code></td><td>The project open in the window, which is the same object you are editing. It follows New Project, Open Project and Load Demo Slope.</td></tr>
               <tr><td><code>canvas</code></td><td>The model view.</td></tr>
               <tr><td><code>mainwindow</code></td><td>The main window.</td></tr>
               <tr><td><code>ogr_core</code>, <code>ogr_slip2d</code></td><td>The model and analysis packages.</td></tr>
@@ -223,7 +223,7 @@
           </table>
         </div>
       </figure>
-      <p><kbd>Enter</kbd> runs the input, <kbd>Shift</kbd>+<kbd>Enter</kbd> starts a new line of the same input, <kbd>Ctrl</kbd>+<kbd>↑</kbd> and <kbd>Ctrl</kbd>+<kbd>↓</kbd> move through the history, and <kbd>Ctrl</kbd>+<kbd>L</kbd> clears the console. To run the analysis exactly as the project is configured, as Compute does, use the analysis runner:</p>
+      <p><kbd>Enter</kbd> runs the input, <kbd>Shift</kbd>+<kbd>Enter</kbd> starts a new line of the same input, <kbd>Ctrl</kbd>+<kbd>↑</kbd> and <kbd>Ctrl</kbd>+<kbd>↓</kbd> move through the history, and <kbd>Ctrl</kbd>+<kbd>L</kbd> clears the console. To run the analysis as the project is configured, as Compute does, use the analysis runner:</p>
       <div class="code"><pre><code>&gt;&gt;&gt; [m.name for m in project.materials]
 &gt;&gt;&gt; from ogr_slip2d.analysis_runner import run_analysis
 &gt;&gt;&gt; out = run_analysis(project)            # the methods enabled in the project
@@ -232,7 +232,7 @@
       <div class="note"><span class="label">Note</span><p>Changes made to <code>project</code> from the terminal do not go through <span class="ui">Edit → Undo</span>, and the view is not redrawn by itself: call <code>canvas.refresh_scene()</code>. A calculation started here runs in the window's own thread, so the window waits until it ends. A search built by hand from its class, as in the example of <code>help_ogr()</code>, uses that class's defaults, not the project's settings; <code>run_analysis</code> uses the project's.</p></div>
 
       <h2 id="cli"><span class="secnum">2.12.6</span><span class="ht">The command line</span><a class="anchor" href="#cli" aria-label="Link to this section">#</a></h2>
-      <p><code>ogr-slip2d-cli</code> runs a saved project without opening the window. It computes the analysis the project describes, through the same runner as the desktop program; each option overrides one setting of the project in memory, and the file is never modified.</p>
+      <p><code>ogr-slip2d-cli</code> runs a saved project without opening the window. It computes the analysis the project describes, through the same runner as the desktop program; each option overrides one setting of the project in memory, and the file is not modified.</p>
       <figure class="tbl" id="tbl-cli">
         <figcaption><span class="fignum">Table 2.12.2</span> Commands of <code>ogr-slip2d-cli</code>. The full reference is <a class="xref" href="../reference/cli.html">Section 5.2</a>.</figcaption>
         <div class="table-wrap">
@@ -251,7 +251,7 @@
       <p>A project the analysis cannot honour is refused with its reasons and exit code 3, as Compute refuses it in the window. Version 0.1.235 has no command-line command for the statistical analyses. <code>--search</code> takes the search ids <code>grid</code>, <code>slope</code>, <code>auto_refine</code>, <code>block</code>, <code>path</code>, <code>simulated_annealing</code> and <code>particle_swarm</code>; an id it does not recognise is not refused, and the run falls back to a Grid Search.</p>
 
       <h2 id="python-api"><span class="secnum">2.12.7</span><span class="ht">Python API</span><a class="anchor" href="#python-api" aria-label="Link to this section">#</a></h2>
-      <p>Every part of the program can be imported from Python. The shortest way to analyse a saved project is the same runner the window and the command line use:</p>
+      <p>The packages of the program can be imported from Python. The shortest way to analyse a saved project is the same runner the window and the command line use:</p>
       <div class="code"><pre><code>from ogr_core.project import Project
 from ogr_slip2d.analysis_runner import run_analysis
 
@@ -265,7 +265,7 @@ for note in out.warnings:
       <p>For building and editing models from code, the operations layer <code>ogr_api</code> offers the same operations as the tools of the MCP server, with validation, undo and long runs as background jobs; the repository's <code>examples/</code> folder has a worked script. The Python API is described in <a class="xref" href="../reference/python-api.html">Section 5.3</a>.</p>
 
       <h2 id="ai-agents"><span class="secnum">2.12.8</span><span class="ht">AI agents</span><a class="anchor" href="#ai-agents" aria-label="Link to this section">#</a></h2>
-      <p>The MCP server, <code>ogr-slip2d-mcp</code>, lets an AI agent build, run and read models through the same operations (it needs the <code>[mcp]</code> extra; see <a class="xref" href="../getting-started/installation.html">Section 1.1</a>). The desktop program opens an <strong>agent bridge</strong> when it starts — <span class="ui">Tools → Agent bridge (MCP)</span>, local connections only and with a token — so that a server started with <code>ogr-slip2d-mcp --attach</code> works on the open window: every edit the agent makes appears on screen and can be undone. Start the program with <code>ogr-slip2d --no-agent-bridge</code>, or untick the menu item, to keep agents out. How to connect an agent is explained on the <a href="../../ai/index.html">AI &amp; MCP page</a>, and every tool is listed in <a class="xref" href="../reference/mcp.html">Section 5.1</a>.</p>
+      <p>The MCP server, <code>ogr-slip2d-mcp</code>, lets an AI agent build, run and read models through the same operations (it needs the <code>[mcp]</code> extra; see <a class="xref" href="../getting-started/installation.html">Section 1.1</a>). When it starts, the desktop program opens an <strong>agent bridge</strong> (<span class="ui">Tools → Agent bridge (MCP)</span>) that accepts local connections only and requires a token, so that a server started with <code>ogr-slip2d-mcp --attach</code> works on the open window: every edit the agent makes appears on screen and can be undone. Start the program with <code>ogr-slip2d --no-agent-bridge</code>, or untick the menu item, to keep agents out. How to connect an agent is explained on the <a href="../../ai/index.html">AI &amp; MCP page</a>, and every tool is listed in <a class="xref" href="../reference/mcp.html">Section 5.1</a>.</p>
     </article>
 
 <!-- @inc docfoot -->
@@ -295,7 +295,7 @@ for note in out.warnings:
           <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
           <b>OpenGeoRock</b>
         </a>
-        <p class="tagline">Open-source geotechnical software, built in the open at the Universidad Politécnica de Cartagena.</p>
+        <p class="tagline">Open-source geotechnical software developed at the Universidad Politécnica de Cartagena.</p>
         <span class="lang" role="group" aria-label="Language"><a href="../../docs/user-guide/automation.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../../es/docs/user-guide/automation.html" hreflang="es" lang="es">ES</a></span>
       </div>
       <div>

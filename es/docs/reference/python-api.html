@@ -64,7 +64,7 @@
               <a class="mega-item" href="../../../es/docs/reference/cli.html"><b>La línea de comandos</b><span>Cálculos por lotes con ogr-slip2d-cli</span></a>
             </div>
           </div>
-          <div class="mega-foot"><span>Cinco programas sobre un mismo núcleo abierto.</span><a href="../../../es/products/index.html">Todos los productos →</a></div>
+          <div class="mega-foot"><span>OGR Slip2D ya está disponible; los otros cuatro programas están previstos.</span><a href="../../../es/products/index.html">Todos los productos →</a></div>
         </div>
       </div>
       <a href="../../../es/examples/index.html" data-nav="examples">Ejemplos</a>
@@ -167,7 +167,7 @@
     </header>
 
     <article class="doc prose">
-      <p class="lede">OGR Slip2D es un programa escrito en Python y todo lo que calcula puede dirigirse desde un script. Hay dos niveles: el <strong>motor</strong>, cuyos objetos (<code>Project</code>, las búsquedas y los métodos) dan control total, pero también total responsabilidad, y la <strong>capa de operaciones</strong> <code>ogr_api</code>, formada por operaciones con nombre, validadas y reversibles que el servidor MCP publica como herramientas. Además, la ventana del programa incluye una consola de Python conectada al proyecto abierto. Esta página muestra un breve ejemplo de cada uno, todos comprobados con la v<span data-v>0.1.235</span>.</p>
+      <p class="lede">OGR Slip2D es un programa escrito en Python y sus cálculos pueden dirigirse desde un script. Hay dos niveles: el <strong>motor</strong>, cuyos objetos (<code>Project</code>, las búsquedas y los métodos) dan control total y dejan las comprobaciones de tu cuenta, y la <strong>capa de operaciones</strong> <code>ogr_api</code>, formada por operaciones con nombre, validadas y reversibles que el servidor MCP publica como herramientas. Además, la ventana del programa incluye una consola de Python conectada al proyecto abierto. A continuación se da un breve ejemplo de cada uno, todos comprobados con la v<span data-v>0.1.235</span>.</p>
 
       <h2 id="levels"><span class="secnum">5.3.1</span><span class="ht">Dos niveles</span><a class="anchor" href="#levels" aria-label="Enlace a esta sección">#</a></h2>
       <figure class="tbl" id="tbl-levels">
@@ -194,7 +194,7 @@
       <p>Un modelo es un <code>Project</code> (<code>ogr_core.project</code>). <code>Project.load(path)</code> lee un archivo <code>.ogr</code> y <code>project.save(path)</code> guarda el proyecto en uno (<a class="xref" href="file-format.html">Sección 5.4</a>); <code>Project(name)</code> crea un proyecto vacío, al que se añaden contornos y materiales con <code>add_boundary</code> y <code>add_material</code>, como hace <code>examples/quick_slope.py</code>. <code>ogr_core.project.demo.<wbr>build_demo_project()</code> devuelve el talud de demostración.</p>
 
       <h3 id="run-analysis"><span class="ht">El análisis que describe el proyecto</span><a class="anchor" href="#run-analysis" aria-label="Enlace a esta sección">#</a></h3>
-      <p><code>run_analysis(project, method_ids=None, progress_cb=None, *, allow_unconfigured=False)</code>, del módulo <code>ogr_slip2d.analysis_runner</code>, es el análisis que ejecutan <span class="ui">Analysis → Compute</span>, la línea de comandos y la capa de operaciones: una búsqueda por método, construida a partir de los ajustes del proyecto. Tiene en cuenta los coeficientes parciales de la norma de diseño (que se aplican a una copia, de modo que el proyecto que se pasa no se modifica nunca), el desembalse rápido, los límites del talud, los filtros de superficies, los objetos de foco, el modo sísmico, los ajustes de convergencia, la semilla y las comprobaciones de admisibilidad.</p>
+      <p><code>run_analysis(project, method_ids=None, progress_cb=None, *, allow_unconfigured=False)</code>, del módulo <code>ogr_slip2d.analysis_runner</code>, es el análisis que ejecutan <span class="ui">Analysis → Compute</span>, la línea de comandos y la capa de operaciones: una búsqueda por método, construida a partir de los ajustes del proyecto. Aplica los coeficientes parciales de la norma de diseño a una copia (el proyecto que se pasa no se modifica) y tiene en cuenta el desembalse rápido, los límites del talud, los filtros de superficies, los objetos de foco, el modo sísmico, los ajustes de convergencia, la semilla y las comprobaciones de admisibilidad.</p>
       <div class="code"><pre><code>from ogr_core.project import Project
 from ogr_slip2d.analysis_runner import run_analysis
 
@@ -233,7 +233,7 @@ search = GridSearch(method=BishopSimplified(), grid_nx=6, grid_ny=6,
 result = search.run(project)               <span class="c"># 7 × 7 centres × 6 radii = 294 circles</span>
 print(result.critical.fos, result.attempts)
 save_results("slope_bishop.h5", result, project_id=project.id)</code></pre></div>
-      <div class="note warn"><span class="label">Una búsqueda construida a mano no equivale a Compute</span><p>Un objeto construido a mano usa sus propios valores por defecto y toma del proyecto únicamente el modelo. Un método parte de una tolerancia de 0.001 y 75 iteraciones, sin aceleración de Steffensen (en el proyecto, los valores por defecto son 0.005, 50 y Steffensen activado); <code>GridSearch</code> parte de 10 × 10 intervalos, un incremento de radio de 10, 30 dovelas y un área mínima de 0.5 m², y coloca la rejilla por su cuenta cuando no se indican <code>grid_x</code> y <code>grid_y</code>. Los límites del talud, los filtros de superficies, los objetos de foco y el modo sísmico Ky del proyecto solo llegan a una búsqueda construida a mano si se le pasan, y el desembalse rápido y la norma de diseño los aplica únicamente el módulo que ejecuta los análisis. Para obtener lo que calcula la ventana, usa <code>run_analysis</code>. <code>build_search(project, method_id)</code> devuelve la búsqueda que el proyecto configura para un método, con el desembalse rápido incluido; la norma de diseño la aplica <code>run_analysis</code> a una copia del proyecto.</p></div>
+      <div class="note warn"><span class="label">Una búsqueda construida a mano difiere de Compute</span><p>Un objeto construido a mano usa sus propios valores por defecto y toma del proyecto únicamente el modelo. Un método parte de una tolerancia de 0.001 y 75 iteraciones, sin aceleración de Steffensen (en el proyecto, los valores por defecto son 0.005, 50 y Steffensen activado); <code>GridSearch</code> parte de 10 × 10 intervalos, un incremento de radio de 10, 30 dovelas y un área mínima de 0.5 m², y coloca la rejilla por su cuenta cuando no se indican <code>grid_x</code> y <code>grid_y</code>. Los límites del talud, los filtros de superficies, los objetos de foco y el modo sísmico Ky del proyecto solo llegan a una búsqueda construida a mano si se le pasan, y el desembalse rápido y la norma de diseño los aplica únicamente el módulo que ejecuta los análisis. Para obtener lo que calcula la ventana, usa <code>run_analysis</code>. <code>build_search(project, method_id)</code> devuelve la búsqueda que el proyecto configura para un método, con el desembalse rápido incluido; la norma de diseño la aplica <code>run_analysis</code> a una copia del proyecto.</p></div>
       <figure class="tbl" id="tbl-search-result">
         <figcaption><span class="fignum">Tabla 5.3.2</span> Qué devuelve una búsqueda (<code>SearchResult</code>) y qué contiene cada superficie evaluada (<code>LEMResult</code>).</figcaption>
         <div class="table-wrap">
@@ -277,7 +277,7 @@ for method_id, res in outcome.results.items():
       <p>Una Grid Search de 400 círculos o más se evalúa en un grupo de procesos de trabajo (como máximo 8, que por defecto usan el 50 % de los procesadores lógicos; <span class="ui">Project Settings → Advanced</span> permite desactivarlo). En Windows cada proceso de trabajo vuelve a importar el script, por lo que un script que ejecute una búsqueda debe mantener su código de nivel superior dentro de <code>if __name__ == "__main__":</code>, como hacen los ejemplos de esta página y los del repositorio. Si el grupo de procesos no puede arrancar, el análisis no se detiene: la búsqueda pasa a ejecutarse en un solo proceso.</p>
 
       <h2 id="operations"><span class="secnum">5.3.3</span><span class="ht">La capa de operaciones</span><a class="anchor" href="#operations" aria-label="Enlace a esta sección">#</a></h2>
-      <p><code>ogr_api</code> reúne todo lo que el programa puede hacer con un modelo, en forma de operaciones con nombre, argumentos tipados y respuestas compatibles con JSON, sin depender de Qt ni del SDK de MCP. Hay 73 operaciones: las herramientas MCP, salvo <code>server_info</code>, con los mismos nombres; cada parámetro de una herramienta es un parámetro de su operación, así que las tablas de herramientas de la <a class="xref" href="mcp.html#tools">Sección 5.1.7</a> también las describen. <code>ogr_api.OPERATIONS</code> es el registro.</p>
+      <p><code>ogr_api</code> reúne lo que el programa puede hacer con un modelo, en forma de operaciones con nombre, argumentos tipados y respuestas compatibles con JSON, sin depender de Qt ni del SDK de MCP. Hay 73 operaciones: las herramientas MCP, salvo <code>server_info</code>, con los mismos nombres; cada parámetro de una herramienta es un parámetro de su operación, así que las tablas de herramientas de la <a class="xref" href="mcp.html#tools">Sección 5.1.7</a> también las describen. <code>ogr_api.OPERATIONS</code> es el registro.</p>
       <div class="code"><pre><code>from pathlib import Path
 
 from ogr_api import OgrApiError, Workspace, call
@@ -322,7 +322,7 @@ if __name__ == "__main__":
       </div>
 
       <h2 id="terminal"><span class="secnum">5.3.4</span><span class="ht">La consola integrada</span><a class="anchor" href="#terminal" aria-label="Enlace a esta sección">#</a></h2>
-      <p><span class="ui">Window → Terminal</span> (<kbd>Ctrl</kbd>+<kbd>`</kbd>) abre una consola de Python dentro del programa, conectada al proyecto abierto. Se ejecuta en el propio proceso del programa, de modo que todo lo que hace lo hace sobre el modelo que se ve en pantalla.</p>
+      <p><span class="ui">Window → Terminal</span> (<kbd>Ctrl</kbd>+<kbd>`</kbd>) abre una consola de Python dentro del programa, conectada al proyecto abierto. Se ejecuta en el propio proceso del programa y actúa directamente sobre el modelo que se ve en pantalla.</p>
       <figure class="tbl" id="tbl-terminal">
         <figcaption><span class="fignum">Tabla 5.3.3</span> Nombres disponibles en la consola integrada.</figcaption>
         <div class="table-wrap">

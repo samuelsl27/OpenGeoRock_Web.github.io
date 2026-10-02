@@ -64,7 +64,7 @@
               <a class="mega-item" href="../../../es/docs/reference/cli.html"><b>La línea de comandos</b><span>Cálculos por lotes con ogr-slip2d-cli</span></a>
             </div>
           </div>
-          <div class="mega-foot"><span>Cinco programas sobre un mismo núcleo abierto.</span><a href="../../../es/products/index.html">Todos los productos →</a></div>
+          <div class="mega-foot"><span>OGR Slip2D ya está disponible; los otros cuatro programas están previstos.</span><a href="../../../es/products/index.html">Todos los productos →</a></div>
         </div>
       </div>
       <a href="../../../es/examples/index.html" data-nav="examples">Ejemplos</a>
@@ -167,7 +167,7 @@
     </header>
 
     <article class="doc prose">
-      <p class="lede">OGR Slip2D es un paquete de Python, <code>ogr-slip2d</code>. Mientras no haya instaladores firmados, se instala desde el código fuente público en un entorno virtual. Esta página explica los requisitos, la instalación, los extras opcionales y cómo comprobar que todo funciona.</p>
+      <p class="lede">OGR Slip2D es un paquete de Python, <code>ogr-slip2d</code>. Mientras no haya instaladores firmados, se instala desde el código fuente público en un entorno virtual.</p>
 
       <h2 id="requirements"><span class="secnum">1.1.1</span><span class="ht">Requisitos</span><a class="anchor" href="#requirements" aria-label="Enlace a esta sección">#</a></h2>
       <ul>
@@ -219,16 +219,16 @@ pip install -e .</code></pre></div>
       <p>Se pueden combinar varios extras, por ejemplo <code>pip install -e ".[mcp,dev]"</code>. Para conectar un agente de IA, la <a href="../../ai/index.html#install">página de IA y MCP</a> explica los pasos uno a uno.</p>
 
       <h2 id="tests"><span class="secnum">1.1.5</span><span class="ht">Ejecución de la batería de tests</span><a class="anchor" href="#tests" aria-label="Enlace a esta sección">#</a></h2>
-      <p>El proyecto trae su propio ejecutor de tests, <code>tests/_runner.py</code>, así que no hace falta pytest; además, los módulos de tests no se pueden importar fuera del ejecutor. Los tests gráficos crean widgets reales de Qt, por lo que necesitan la plataforma «offscreen» de Qt (sin pantalla):</p>
+      <p>El proyecto trae su propio ejecutor de tests, <code>tests/_runner.py</code>, así que no hace falta pytest; además, los módulos de tests no se pueden importar fuera del ejecutor. Los tests gráficos crean widgets de Qt, por lo que necesitan la plataforma «offscreen» de Qt (sin pantalla):</p>
       <div class="code"><pre><code># Windows (PowerShell)
 $env:QT_QPA_PLATFORM = "offscreen"; python tests/_runner.py
 # macOS and Linux
 QT_QPA_PLATFORM=offscreen python tests/_runner.py</code></pre></div>
-      <p>La batería completa (5 265 tests en la versión <span data-v>0.1.235</span>) tarda en torno a media hora. El tiempo varía entre ejecuciones idénticas, así que sirve para comprobar que la batería termina, no como medición. Para trabajar en un área concreta, ejecuta solo una parte:</p>
+      <p>La batería completa (5 265 tests en la versión <span data-v>0.1.235</span>) tarda en torno a media hora; el tiempo varía entre ejecuciones idénticas, así que es solo una referencia aproximada. Para trabajar en un área concreta, ejecuta solo una parte:</p>
       <div class="code"><pre><code>python tests/_runner.py transient          # files whose name contains it
 python tests/_runner.py -k erfc            # tests whose name contains it
 python tests/_runner.py --list transient   # show the selection, run nothing</code></pre></div>
-      <div class="note"><span class="label">Nota</span><p>Si el patrón no coincide con nada, la ejecución termina con el código 2 en lugar de dar por correcta una ejecución vacía. Una ejecución filtrada imprime un aviso <code>FILTERED RUN</code> junto a los totales: no sirve de prueba para publicar una versión.</p></div>
+      <div class="note"><span class="label">Nota</span><p>Si el patrón no coincide con nada, la ejecución termina con el código 2 en lugar de dar por correcta una ejecución vacía. Una ejecución filtrada imprime un aviso <code>FILTERED RUN</code> junto a los totales, porque solo la batería completa puede respaldar la publicación de una versión.</p></div>
 
       <h2 id="update"><span class="secnum">1.1.6</span><span class="ht">Actualización y desinstalación</span><a class="anchor" href="#update" aria-label="Enlace a esta sección">#</a></h2>
       <p>Desde la carpeta del repositorio y con el entorno activado, ejecuta <code>git pull</code> y, a continuación, <code>pip install -e .</code> otra vez para incorporar las dependencias nuevas, si las hay. Para desinstalar, borra la carpeta clonada: el entorno virtual está dentro de ella.</p>

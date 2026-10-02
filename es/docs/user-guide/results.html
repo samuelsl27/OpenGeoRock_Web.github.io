@@ -64,7 +64,7 @@
               <a class="mega-item" href="../../../es/docs/reference/cli.html"><b>La línea de comandos</b><span>Cálculos por lotes con ogr-slip2d-cli</span></a>
             </div>
           </div>
-          <div class="mega-foot"><span>Cinco programas sobre un mismo núcleo abierto.</span><a href="../../../es/products/index.html">Todos los productos →</a></div>
+          <div class="mega-foot"><span>OGR Slip2D ya está disponible; los otros cuatro programas están previstos.</span><a href="../../../es/products/index.html">Todos los productos →</a></div>
         </div>
       </div>
       <a href="../../../es/examples/index.html" data-nav="examples">Ejemplos</a>
@@ -167,10 +167,10 @@
     </header>
 
     <article class="doc prose">
-      <p class="lede"><span class="ui">Analysis → Compute</span> ejecuta una búsqueda por cada método activado en el proyecto. El panel Results y la barra de estado muestran el resultado principal, <span class="ui">Analysis Notes</span> recoge todo lo que el cálculo ha tenido que señalar y la ventana Interpret permite examinar cada superficie y cada dovela. Esta página describe todo ello y explica cómo exportar los resultados.</p>
+      <p class="lede"><span class="ui">Analysis → Compute</span> ejecuta una búsqueda por cada método activado en el proyecto. El valor crítico aparece en el panel Results y en la barra de estado; las notas que ha generado el cálculo están en <span class="ui">Analysis Notes</span>, y la ventana Interpret permite examinar las superficies y sus dovelas. Desde ella se pueden exportar los resultados como imágenes y archivos CSV.</p>
 
       <h2 id="compute"><span class="secnum">2.8.1</span><span class="ht">Ejecución del análisis</span><a class="anchor" href="#compute" aria-label="Enlace a esta sección">#</a></h2>
-      <p>Elige <span class="ui">Analysis → Compute</span> (<kbd>Ctrl</kbd>+<kbd>T</kbd>, también en la barra de herramientas). Antes de calcular se revisa el modelo. Si no tiene contornos, si no tiene materiales o si algún ajuste no puede respetarse, el análisis no se ejecuta y el programa explica por qué. Ocurre, por ejemplo, cuando hay materiales que toman la presión intersticial de un campo de elementos finitos sin calcular, un desembalse rápido cuyas condiciones no se cumplen u objetos de búsqueda por bloques que la búsqueda no puede utilizar. Es una negativa deliberada: la alternativa sería dar un número verosímil calculado con parte del modelo ignorada.</p>
+      <p>Elige <span class="ui">Analysis → Compute</span> (<kbd>Ctrl</kbd>+<kbd>T</kbd>, también en la barra de herramientas). Antes de calcular se revisa el modelo. Si no tiene contornos, si no tiene materiales o si algún ajuste no puede respetarse, el análisis no se ejecuta y el programa explica por qué. Ocurre, por ejemplo, cuando hay materiales que toman la presión intersticial de un campo de elementos finitos sin calcular, un desembalse rápido cuyas condiciones no se cumplen u objetos de búsqueda por bloques que la búsqueda no puede utilizar. Esta comprobación evita dar un número calculado con parte del modelo ignorada.</p>
       <p>Cada método marcado en <span class="ui">Analysis → Project Settings →</span> <span class="ui">Methods</span> se ejecuta con su propia búsqueda, uno tras otro (en un proyecto nuevo, Bishop simplificado y Janbu simplificado), y una ventana de progreso indica cómo avanza el cálculo.</p>
       <div class="note warn"><span class="label">Cancel no detiene la ejecución</span><p>En la versión 0.1.235, el botón <strong>Cancel</strong> de la ventana de progreso solo cierra la ventana: el análisis sigue en segundo plano y sus resultados aparecen cuando termina.</p></div>
       <p>Al terminar la ejecución:</p>
@@ -293,7 +293,7 @@
       <p>El informe del análisis en PDF se genera desde la ventana principal con <span class="ui">File → Generate Report…</span>. Las imágenes, los dibujos DXF y los análisis ejecutados mediante scripts se explican en la <a class="xref" href="automation.html">Sección 2.12</a>. El menú <span class="ui">Data</span> incluye además dos comandos relacionados con los soportes, <em>Support Force Diagram…</em> y <em>Back Analysis…</em>, que se tratan en la <a class="xref" href="supports.html">Sección 2.6</a>.</p>
 
       <h2 id="known-issues"><span class="secnum">2.8.11</span><span class="ht">Comandos sin efecto en la versión 0.1.235</span><a class="anchor" href="#known-issues" aria-label="Enlace a esta sección">#</a></h2>
-      <div class="note warn"><span class="label">Están en los menús, pero no funcionan</span>
+      <div class="note warn"><span class="label">Problemas conocidos</span>
         <p>En la versión 0.1.235, estos comandos de la ventana Interpret no hacen nada o hacen menos de lo que indica su nombre:</p>
         <ul>
           <li><span class="ui">Groundwater → Phreatic Surface</span>, <span class="ui">Piezometric Lines</span>, <span class="ui">Flow Vectors</span> y <span class="ui">Streamlines</span> se pueden marcar, pero no tienen efecto. Los vectores de flujo y la superficie libre se dibujan con <span class="ui">Groundwater → Interpret Groundwater</span>, en la ventana principal.</li>

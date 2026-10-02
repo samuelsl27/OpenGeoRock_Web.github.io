@@ -65,7 +65,7 @@
               <a class="mega-item" href="../../../es/docs/reference/cli.html"><b>La línea de comandos</b><span>Cálculos por lotes con ogr-slip2d-cli</span></a>
             </div>
           </div>
-          <div class="mega-foot"><span>Cinco programas sobre un mismo núcleo abierto.</span><a href="../../../es/products/index.html">Todos los productos →</a></div>
+          <div class="mega-foot"><span>OGR Slip2D ya está disponible; los otros cuatro programas están previstos.</span><a href="../../../es/products/index.html">Todos los productos →</a></div>
         </div>
       </div>
       <a href="../../../es/examples/index.html" data-nav="examples">Ejemplos</a>
@@ -168,7 +168,7 @@
     </header>
 
     <article class="doc prose">
-      <p class="lede">Un proyecto de OGR Slip2D es un único archivo JSON en texto plano, con la extensión <code>.ogr</code>, que contiene la geometría, los materiales, las cargas, los soportes, todos los ajustes y, una vez calculado, el campo de agua subterránea por elementos finitos. Se puede leer, comparar y mantener bajo control de versiones como cualquier archivo de texto. Los resultados de una búsqueda, que pueden alcanzar miles de superficies con sus dovelas, se guardan aparte, en un archivo HDF5. Esta página enumera las claves del primero y describe la estructura del segundo.</p>
+      <p class="lede">Un proyecto de OGR Slip2D es un único archivo JSON en texto plano, con la extensión <code>.ogr</code>, que contiene la geometría, los materiales, las cargas, los soportes, todos los ajustes y, una vez calculado, el campo de agua subterránea por elementos finitos. Se puede leer, comparar y mantener bajo control de versiones como cualquier archivo de texto. Los resultados de una búsqueda, que pueden alcanzar miles de superficies con sus dovelas, se guardan aparte, en un archivo HDF5. A continuación se enumeran las claves del primero y se describe la estructura del segundo.</p>
 
       <h2 id="json"><span class="secnum">5.4.1</span><span class="ht">Un documento JSON en texto plano</span><a class="anchor" href="#json" aria-label="Enlace a esta sección">#</a></h2>
       <ul>
@@ -176,9 +176,9 @@
         <li><strong>Unidades.</strong> Los valores se guardan en unidades del SI (m, kN por metro de talud, kPa, kN/m³, grados), sea cual sea el sistema de unidades que muestre la ventana: la conversión se hace solo allí donde la interfaz muestra o lee los datos.</li>
         <li><strong>Identificadores.</strong> Cada objeto lleva un identificador UUID (una cadena de texto), y las referencias entre objetos usan esos identificadores: un material apunta a su superficie de agua con <code>water_surface_id</code> y una asignación de región apunta a su material con <code>material_id</code>.</li>
         <li><strong>Las regiones no se almacenan como tales.</strong> Las regiones se calculan a partir de los contornos externo y de material; lo que guarda el archivo es cada asignación, como un punto situado dentro de una región (<code>region_assignments</code>), que se vuelve a localizar en las regiones recalculadas después de cada cambio de geometría.</li>
-        <li><strong>El mismo documento en todas partes.</strong> La ventana, <code>ogr-slip2d-cli</code>, la capa de operaciones y el servidor MCP leen y escriben el mismo archivo; <code>project_get</code> entrega a un agente una de sus secciones (<a class="xref" href="mcp.html">Sección 5.1</a>).</li>
+        <li><strong>Compartido por todos los componentes.</strong> La ventana, <code>ogr-slip2d-cli</code>, la capa de operaciones y el servidor MCP leen y escriben el mismo archivo; <code>project_get</code> entrega a un agente una de sus secciones (<a class="xref" href="mcp.html">Sección 5.1</a>).</li>
       </ul>
-      <p>Al guardar se escribe el documento completo, por lo que un archivo guardado con la versión actual contiene todas las claves que se indican a continuación. Un cálculo nunca modifica el archivo.</p>
+      <p>Al guardar se escribe el documento completo, por lo que un archivo guardado con la versión actual contiene todas las claves que se indican a continuación; un cálculo no modifica el archivo.</p>
 
       <h3 id="excerpt"><span class="ht">Un fragmento</span><a class="anchor" href="#excerpt" aria-label="Enlace a esta sección">#</a></h3>
       <p>Comienzo de un talud de dos capas con nivel freático, tal como lo guarda la v<span data-v>0.1.235</span>; <code>…</code> señala las líneas omitidas.</p>
@@ -264,7 +264,7 @@
               <tr><td><code>fem_mesh</code>, <code>seepage_bcs</code></td><td>La malla de elementos finitos y las condiciones de contorno de la filtración, o <code>null</code>.</td></tr>
               <tr><td><code>seepage_result</code>, <code>transient_results</code></td><td>El campo estacionario de agua subterránea calculado (o <code>null</code>) y los campos de las etapas transitorias. Solo se escriben los datos mínimos; los campos derivados se reconstruyen al leer el archivo.</td></tr>
               <tr><td><code>random_variables</code></td><td>Los datos de entrada que se tratan como aleatorios en los análisis probabilístico y de sensibilidad.</td></tr>
-              <tr><td><code>annotations</code></td><td>Dibujos, textos y cotas; el análisis nunca los lee.</td></tr>
+              <tr><td><code>annotations</code></td><td>Dibujos, textos y cotas; el análisis no los lee.</td></tr>
               <tr><td><code>focus_objects</code></td><td>Objetos de foco que restringen la búsqueda.</td></tr>
               <tr><td><code>user_surfaces</code></td><td>Círculos definidos a mano y analizados junto con la búsqueda. Los extremos en que cortan el terreno no significan nada en el archivo: son un resultado del análisis, no un dato de entrada.</td></tr>
             </tbody>
@@ -306,7 +306,7 @@
         <li>un proyecto de desembalse rápido B̄ dibujado con la convención de desembalse anterior a la v0.1.69 se lee con el nivel freático y la línea de desembalse intercambiados, para que el modelo signifique lo que significaba;</li>
         <li>una rejilla de presiones de agua que declara además su propio tipo de valor fija en consecuencia el método de agua subterránea (v0.1.202).</li>
       </ul>
-      <p>La conversión de la v0.1.69 cambia, a propósito, el factor de seguridad de los archivos a los que se aplica, y el registro de cambios de esa versión lo indica. Nada garantiza que una versión anterior del programa abra un archivo escrito por otra más reciente.</p>
+      <p>La conversión de la v0.1.69 cambia, a propósito, el factor de seguridad de los archivos a los que se aplica, y el registro de cambios de esa versión lo indica. No se garantiza que una versión anterior del programa abra un archivo escrito por otra más reciente.</p>
 
       <h2 id="results"><span class="secnum">5.4.5</span><span class="ht">Resultados en HDF5</span><a class="anchor" href="#results" aria-label="Enlace a esta sección">#</a></h2>
       <p>Los resultados de una búsqueda se guardan en un archivo HDF5, normalmente junto al proyecto, con el mismo nombre y la extensión <code>.h5</code>. La ventana guarda el resultado del primer método después de cada Compute, siempre que el proyecto tenga archivo; <code>ogr-slip2d-cli compute</code> guarda un archivo por método (<a class="xref" href="cli.html">Sección 5.2</a>), y un script usa <code>save_results</code> (<a class="xref" href="python-api.html">Sección 5.3</a>). Cada archivo contiene una búsqueda, y un archivo existente se sustituye.</p>

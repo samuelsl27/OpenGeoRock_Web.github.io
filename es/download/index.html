@@ -2,8 +2,8 @@
 <html class="no-js" lang="es" data-root="../../">
 <head>
 <meta charset="utf-8">
-<title>Descargar OGR Slip2D — instalación desde el código fuente — OpenGeoRock</title>
-<meta name="description" content="Cómo instalar OGR Slip2D: requisitos, instalación paso a paso desde el código fuente en Windows, macOS y Linux, el extra opcional para MCP y cómo actualizarlo.">
+<title>Descargar OGR Slip2D: instalación desde el código fuente — OpenGeoRock</title>
+<meta name="description" content="Cómo instalar OGR Slip2D desde el código fuente en Windows, macOS y Linux: requisitos, los pasos en cada sistema, el extra opcional para MCP y cómo actualizarlo.">
 <!-- @inc head -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>document.documentElement.classList.replace("no-js", "js")</script>
@@ -13,8 +13,8 @@
 <link rel="alternate" hreflang="x-default" href="https://opengeorock.org/download/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="OpenGeoRock">
-<meta property="og:title" content="Descargar OGR Slip2D — instalación desde el código fuente — OpenGeoRock">
-<meta property="og:description" content="Cómo instalar OGR Slip2D: requisitos, instalación paso a paso desde el código fuente en Windows, macOS y Linux, el extra opcional para MCP y cómo actualizarlo.">
+<meta property="og:title" content="Descargar OGR Slip2D: instalación desde el código fuente — OpenGeoRock">
+<meta property="og:description" content="Cómo instalar OGR Slip2D desde el código fuente en Windows, macOS y Linux: requisitos, los pasos en cada sistema, el extra opcional para MCP y cómo actualizarlo.">
 <meta property="og:url" content="https://opengeorock.org/es/download/">
 <meta property="og:image" content="https://opengeorock.org/assets/img/og-image.png">
 <meta property="og:locale" content="es_ES">
@@ -64,7 +64,7 @@
               <a class="mega-item" href="../../es/docs/reference/cli.html"><b>La línea de comandos</b><span>Cálculos por lotes con ogr-slip2d-cli</span></a>
             </div>
           </div>
-          <div class="mega-foot"><span>Cinco programas sobre un mismo núcleo abierto.</span><a href="../../es/products/index.html">Todos los productos →</a></div>
+          <div class="mega-foot"><span>OGR Slip2D ya está disponible; los otros cuatro programas están previstos.</span><a href="../../es/products/index.html">Todos los productos →</a></div>
         </div>
       </div>
       <a href="../../es/examples/index.html" data-nav="examples">Ejemplos</a>
@@ -104,12 +104,12 @@
   <div class="wrap grid-2" style="align-items:end">
     <div>
       <nav class="crumbs label" aria-label="Ruta de navegación"><a href="../index.html">Inicio</a><span aria-hidden="true">/</span><span>Descargar OGR Slip2D</span></nav>
-      <h1>Descarga <em>OGR Slip2D.</em></h1>
-      <p class="lede">OGR Slip2D está en desarrollo activo y es una versión preliminar. Todavía no hay instaladores firmados: por ahora se instala desde el código fuente público, y con Python se tarda unos minutos.</p>
+      <h1>Cómo instalar <em>OGR Slip2D</em></h1>
+      <p class="lede">OGR Slip2D es una versión preliminar y sigue en desarrollo activo. Todavía no hay instaladores firmados, así que por ahora se instala desde el código fuente público; con Python se tarda unos minutos.</p>
     </div>
     <div class="grid-2" style="gap:12px">
       <div class="card"><span class="tag live">Disponible ahora</span><h3>Desde el código fuente</h3><p>Versión <span data-v>0.1.235</span>, el mismo código que comprueban los tests.</p></div>
-      <div class="card planned"><span class="tag soon">Previsto</span><h3>Instaladores</h3><p>Instaladores firmados para Windows, macOS y Linux: son lo siguiente en la hoja de ruta.</p></div>
+      <div class="card planned"><span class="tag soon">Previsto</span><h3>Instaladores</h3><p>Instaladores firmados para Windows, macOS y Linux. Son lo siguiente en la hoja de ruta.</p></div>
     </div>
   </div>
 </section>
@@ -161,8 +161,8 @@ ogr-slip2d</code></pre></div>
 <section class="section alt">
   <div class="wrap">
     <div class="sec-head">
-      <div><div class="sec-num label">§ 02 — Qué se instala</div><h2>Tres comandos, <em>un paquete.</em></h2></div>
-      <p>El paquete se llama <code>ogr-slip2d</code>. Instala el programa de escritorio, una interfaz de línea de comandos y, con el extra <code>[mcp]</code>, el servidor para agentes de IA.</p>
+      <div><div class="sec-num label">§ 02 — Qué se instala</div><h2>El paquete y <em>sus tres comandos</em></h2></div>
+      <p>El paquete se llama <code>ogr-slip2d</code>. Instala el programa de escritorio y una interfaz de línea de comandos y, si añades el extra <code>[mcp]</code>, también el servidor para agentes de IA.</p>
     </div>
     <div class="table-wrap">
       <table class="data">
@@ -175,9 +175,9 @@ ogr-slip2d</code></pre></div>
       </table>
     </div>
     <div class="grid-3 mt-l">
-      <div class="card"><span class="label">Actualización</span><h3>Siempre al día</h3><p>Desde la carpeta del repositorio, <code>git pull</code> y luego otra vez <code>pip install -e .</code>, por si hay dependencias nuevas.</p></div>
-      <div class="card"><span class="label">Extras</span><h3>Componentes opcionales</h3><p><code>[mcp]</code> añade el servidor MCP; <code>[dev]</code>, las herramientas de desarrollo. El programa en sí no necesita ninguno de los dos.</p></div>
-      <div class="card"><span class="label">Cambios</span><h3>Cada versión, explicada</h3><p>Cada versión tiene su historial de cambios, que recoge lo que se ha escrito y también lo que se ha encontrado.</p><div class="foot label"><a class="link" href="https://github.com/samuelsl27/OGR-Slip2D/tree/main/docs/changelog" target="_blank" rel="noopener">Historial de cambios en GitHub ↗</a></div></div>
+      <div class="card"><span class="label">Actualización</span><h3>Actualizar una instalación</h3><p>Desde la carpeta del repositorio, ejecuta <code>git pull</code> y después otra vez <code>pip install -e .</code>, por si hay dependencias nuevas.</p></div>
+      <div class="card"><span class="label">Extras</span><h3>Componentes opcionales</h3><p><code>[mcp]</code> añade el servidor MCP, y <code>[dev]</code>, las herramientas de desarrollo. Ninguno de los dos hace falta para usar el programa.</p></div>
+      <div class="card"><span class="label">Cambios</span><h3>Historial de versiones</h3><p>Cada versión tiene su historial de cambios, que recoge lo que se ha escrito y también lo que se ha encontrado durante su desarrollo.</p><div class="foot label"><a class="link" href="https://github.com/samuelsl27/OGR-Slip2D/tree/main/docs/changelog" target="_blank" rel="noopener">Historial de cambios en GitHub ↗</a></div></div>
     </div>
   </div>
 </section>
@@ -186,11 +186,11 @@ ogr-slip2d</code></pre></div>
   <div class="wrap grid-2" style="align-items:start">
     <div>
       <div class="sec-num label">§ 03 — Antes de usarlo</div>
-      <h2 class="mt-s">Versión preliminar <em>quiere decir preliminar.</em></h2>
+      <h2 class="mt-s">Sobre esta <em>versión preliminar</em></h2>
     </div>
     <div>
-      <p>OGR Slip2D es software de investigación en desarrollo activo. Sus métodos están validados con casos publicados y su batería incluye miles de tests, pero se distribuye sin garantía de ningún tipo: antes de basar nada en sus resultados, hay que contrastarlos con cálculos independientes. Un proyecto lo firma una persona, no un programa.</p>
-      <p>¿Has encontrado un error, o conoces el factor de seguridad de algún talud? <a href="https://github.com/samuelsl27/OGR-Slip2D/issues" target="_blank" rel="noopener">Abre una incidencia</a>. Un caso de validación es la contribución más valiosa que puedes hacer.</p>
+      <p>OGR Slip2D es software de investigación y sigue en desarrollo activo. Sus métodos están validados con casos publicados y su batería incluye miles de tests, pero el programa se distribuye sin garantía de ningún tipo. Antes de basar nada en sus resultados hay que contrastarlos con cálculos independientes, y la responsabilidad de un proyecto es del ingeniero que lo firma.</p>
+      <p>Si encuentras un error, o conoces el factor de seguridad de algún talud, <a href="https://github.com/samuelsl27/OGR-Slip2D/issues" target="_blank" rel="noopener">abre una incidencia</a>. Los casos de validación son la contribución que más nos ayuda.</p>
       <div class="cta-row"><a class="btn primary" href="../docs/getting-started/quick-start.html">Inicio rápido <span class="arrow">→</span></a><a class="btn" href="../verification/index.html">Verificación</a></div>
     </div>
   </div>

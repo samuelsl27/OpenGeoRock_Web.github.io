@@ -136,6 +136,15 @@ lo firma una persona, no un programa.
   no aparecen. La web convence enseñando resultados verificables.
 - **Sin garantías.** Nada puede sugerir que los resultados no necesitan
   comprobación independiente.
+- **Que se lea escrito por una persona.** El autor revisó la web en octubre de
+  2026 porque la redacción delataba a una IA. Un título describe su sección
+  (*How we verify the program*, no *Checked against references, not believed.*);
+  nada de eslóganes en dos tiempos, contrastes «X, not Y» en cada párrafo, frases
+  lapidarias de remate, tríadas forzadas ni una raya por frase (en castellano,
+  ninguna en la prosa). Mejor un dato que un adjetivo; frases de longitud
+  variada; en las páginas del proyecto habla el equipo (*we*, «nosotros») con
+  moderación, y la documentación es impersonal. Ejemplos reales, antes y
+  después, en `../desarrollo/traduccion/ESTILO-HUMANO.md`.
 - **El mensaje del MCP lleva fecha y «hasta donde sabemos», nunca «el primero» a
   secas** (no es defendible). Redacción adoptada: *One of the first geotechnical
   programs with an official MCP server — and, to our knowledge (October 2026), the

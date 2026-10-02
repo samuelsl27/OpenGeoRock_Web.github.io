@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>Project settings — OGR Slip2D documentation</title>
-<meta name="description" content="Every page of the OGR Slip2D Project Settings dialog — General, Methods, Groundwater, Transient, Statistics, Random Numbers, Design Standard, Advanced, Seismic and Project Summary — with each field, its default and its range, the six unit systems and the failure direction.">
+<meta name="description" content="The ten pages of the OGR Slip2D Project Settings dialog (General, Methods, Groundwater, Transient, Statistics, Random Numbers, Design Standard, Advanced, Seismic and Project Summary), with the default and the range of each field, the six unit systems and the failure direction.">
 <!-- @inc head -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>document.documentElement.classList.replace("no-js", "js")</script>
@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="OpenGeoRock">
 <meta property="og:title" content="Project settings — OGR Slip2D documentation">
-<meta property="og:description" content="Every page of the OGR Slip2D Project Settings dialog — General, Methods, Groundwater, Transient, Statistics, Random Numbers, Design Standard, Advanced, Seismic and Project Summary — with each field, its default and its range, the six unit systems and the failure direction.">
+<meta property="og:description" content="The ten pages of the OGR Slip2D Project Settings dialog (General, Methods, Groundwater, Transient, Statistics, Random Numbers, Design Standard, Advanced, Seismic and Project Summary), with the default and the range of each field, the six unit systems and the failure direction.">
 <meta property="og:url" content="https://opengeorock.org/docs/user-guide/project-settings.html">
 <meta property="og:image" content="https://opengeorock.org/assets/img/og-image.png">
 <meta property="og:locale" content="en_GB">
@@ -65,7 +65,7 @@
               <a class="mega-item" href="../../docs/reference/cli.html"><b>The command line</b><span>Batch runs with ogr-slip2d-cli</span></a>
             </div>
           </div>
-          <div class="mega-foot"><span>Five programs, one open core.</span><a href="../../products/index.html">All products →</a></div>
+          <div class="mega-foot"><span>OGR Slip2D is available now; the other four programs are planned.</span><a href="../../products/index.html">All products →</a></div>
         </div>
       </div>
       <a href="../../examples/index.html" data-nav="examples">Examples</a>
@@ -168,15 +168,15 @@
     </header>
 
     <article class="doc prose">
-      <p class="lede">The Project Settings dialog holds the choices that apply to the whole analysis: units and failure direction, the methods of slices and their convergence, the groundwater method, the statistical and seismic analyses, partial factors and a few numerical controls. This page goes through its ten pages field by field, with the default value of each. The settings are saved in the project file, so every project carries its own.</p>
+      <p class="lede">The Project Settings dialog holds the choices that apply to the whole analysis: units and failure direction, the methods of slices and their convergence, the groundwater method, the statistical and seismic analyses, partial factors and a few numerical controls. The settings are saved in the project file, so every project carries its own.</p>
 
       <h2 id="dialog"><span class="secnum">2.1.1</span><span class="ht">Opening the dialog</span><a class="anchor" href="#dialog" aria-label="Link to this section">#</a></h2>
-      <p>Choose <span class="ui">Analysis → Project Settings…</span> (<kbd>Ctrl</kbd>+<kbd>J</kbd>) or the toolbar button. The pages are listed on the left — <strong>General</strong>, <strong>Methods</strong>, <strong>Groundwater</strong>, <strong>Transient</strong>, <strong>Statistics</strong>, <strong>Random Numbers</strong>, <strong>Design Standard</strong>, <strong>Advanced</strong>, <strong>Seismic</strong> and <strong>Project Summary</strong> — and the buttons at the bottom act on all of them at once:</p>
+      <p>Choose <span class="ui">Analysis → Project Settings…</span> (<kbd>Ctrl</kbd>+<kbd>J</kbd>) or the toolbar button. The pages are listed on the left (<strong>General</strong>, <strong>Methods</strong>, <strong>Groundwater</strong>, <strong>Transient</strong>, <strong>Statistics</strong>, <strong>Random Numbers</strong>, <strong>Design Standard</strong>, <strong>Advanced</strong>, <strong>Seismic</strong> and <strong>Project Summary</strong>) and the buttons at the bottom act on all of them at once:</p>
       <ul>
         <li><span class="ui">OK</span> applies every page and closes the dialog; <span class="ui">Apply</span> applies them and leaves it open; <span class="ui">Cancel</span> closes it without applying what has not been applied yet.</li>
         <li><span class="ui">Restore Defaults</span> puts back the default value of every project setting.</li>
       </ul>
-      <p>The settings of the slip-surface search — surface type, search method, grid, filters, optimisation — are not in this dialog but in <span class="ui">Surfaces → Surface Options…</span> (<a class="xref" href="surfaces.html">Section 2.7</a>).</p>
+      <p>The settings of the slip-surface search (surface type, search method, grid, filters, optimisation) are not in this dialog but in <span class="ui">Surfaces → Surface Options…</span> (<a class="xref" href="surfaces.html">Section 2.7</a>).</p>
       <div class="note warn"><span class="label">Version 0.1.235</span><p><span class="ui">Restore Defaults</span> takes effect immediately, before <span class="ui">OK</span>, and <span class="ui">Cancel</span> does not undo it. It also resets the settings that live outside this dialog: the whole Surface Options configuration, the slope limits and the moment axis go back to their defaults too.</p></div>
 
       <figure class="fig shot-fig" id="fig-project-settings">
@@ -221,7 +221,7 @@
           </table>
         </div>
       </figure>
-      <div class="note warn"><span class="label">Version 0.1.235</span><p>The unit system reaches only the <span class="ui">Define Materials</span> dialog — unit weights, strength parameters, constant pore pressure and air entry value — and the Newmark displacement shown in the Interpret window. Coordinates, loads, supports, the water pressure grid and the remaining fields of this dialog are always entered and shown in metres, kN and kPa, whatever system is selected. With the default system nothing differs.</p></div>
+      <div class="note warn"><span class="label">Version 0.1.235</span><p>The unit system reaches only the <span class="ui">Define Materials</span> dialog (unit weights, strength parameters, constant pore pressure and air entry value) and the Newmark displacement shown in the Interpret window. Coordinates, loads, supports, the water pressure grid and the remaining fields of this dialog are always entered and shown in metres, kN and kPa, whatever system is selected. With the default system there is no difference.</p></div>
 
       <h3 id="failure-direction"><span class="ht">Failure direction</span><a class="anchor" href="#failure-direction" aria-label="Link to this section">#</a></h3>
       <p>The equations of every method are written for a mass that slides in a known direction (<a class="xref" href="../theory/limit-equilibrium.html#direction">Section 3.1.5</a>). The page shows a small sketch of the slope and an arrow for the option chosen:</p>
@@ -333,7 +333,7 @@
       <p>The seed governs the probabilistic and sensitivity analyses and the searches that draw surfaces at random (Slope, Block, Path and Simulated Annealing). The Grid Search and Auto Refine enumerate their surfaces, so nothing there is random. Keep the pseudo-random generator for results that go into a report: they can be reproduced exactly.</p>
 
       <h2 id="design-standard"><span class="secnum">2.1.8</span><span class="ht">Design Standard</span><a class="anchor" href="#design-standard" aria-label="Link to this section">#</a></h2>
-      <p>Partial factors, off by default: switching them on changes every factor of safety the model has given so far, so it is an explicit choice. When they are applied, the analysis works on a factored copy of the model — the project itself is never changed — and the value it reports is an <em>over-design factor</em>, which must exceed 1, rather than a factor of safety. The status bar, the Results dock and the analysis notes say so. The procedure is explained in <a class="xref" href="design-standards.html">Section 2.11</a> and <a class="xref" href="../theory/partial-factors.html">Section 3.12</a>.</p>
+      <p>Partial factors, off by default: switching them on changes every factor of safety the model has given so far, so it is an explicit choice. When they are applied, the analysis works on a factored copy of the model (the project itself is not changed) and the value it reports is an <em>over-design factor</em>, which must exceed 1, rather than a factor of safety. The status bar, the Results dock and the analysis notes say so. The procedure is explained in <a class="xref" href="design-standards.html">Section 2.11</a> and <a class="xref" href="../theory/partial-factors.html">Section 3.12</a>.</p>
       <figure class="tbl" id="tbl-design">
         <figcaption><span class="fignum">Table 2.1.8</span> Design Standard page.</figcaption>
         <div class="table-wrap">
@@ -462,7 +462,7 @@
           <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
           <b>OpenGeoRock</b>
         </a>
-        <p class="tagline">Open-source geotechnical software, built in the open at the Universidad Politécnica de Cartagena.</p>
+        <p class="tagline">Open-source geotechnical software developed at the Universidad Politécnica de Cartagena.</p>
         <span class="lang" role="group" aria-label="Language"><a href="../../docs/user-guide/project-settings.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../../es/docs/user-guide/project-settings.html" hreflang="es" lang="es">ES</a></span>
       </div>
       <div>

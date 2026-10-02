@@ -65,7 +65,7 @@
               <a class="mega-item" href="../../docs/reference/cli.html"><b>The command line</b><span>Batch runs with ogr-slip2d-cli</span></a>
             </div>
           </div>
-          <div class="mega-foot"><span>Five programs, one open core.</span><a href="../../products/index.html">All products →</a></div>
+          <div class="mega-foot"><span>OGR Slip2D is available now; the other four programs are planned.</span><a href="../../products/index.html">All products →</a></div>
         </div>
       </div>
       <a href="../../examples/index.html" data-nav="examples">Examples</a>
@@ -168,7 +168,7 @@
     </header>
 
     <article class="doc prose">
-      <p class="lede">OGR Slip2D has one window in which the model is drawn, configured and computed — the modeller — and separate windows that present the results. This page walks through the parts of the modeller, the conventions for drawing on the canvas, the result windows, the preferences and the keyboard shortcuts. The rest of the user guide follows the menus from left to right.</p>
+      <p class="lede">OGR Slip2D has a single window, the modeller, in which the model is drawn, configured and computed; the results are shown in separate windows. The rest of the user guide follows the menus from left to right.</p>
 
       <h2 id="main-window"><span class="secnum">1.3.1</span><span class="ht">The main window</span><a class="anchor" href="#main-window" aria-label="Link to this section">#</a></h2>
       <p>The program starts with an empty project called <em>Untitled</em>; the status bar suggests <span class="ui">File → Load Demo Slope</span> to start from a small sample model instead. The title bar shows the version and, once the project has been saved or opened, the name of its file.</p>
@@ -180,7 +180,7 @@
 
       <p>From top to bottom the window holds:</p>
       <ul>
-        <li><strong>The menu bar</strong>, with every command of the program (<a class="xref" href="#menus">Section 1.3.2</a>).</li>
+        <li><strong>The menu bar</strong>, with the commands of the program (<a class="xref" href="#menus">Section 1.3.2</a>).</li>
         <li><strong>The toolbar</strong>, with the most used commands as buttons (<a class="xref" href="#toolbar">Section 1.3.3</a>).</li>
         <li><strong>The canvas</strong>, where the model is drawn and the results of the last analysis are shown (<a class="xref" href="#canvas">Section 1.3.4</a>).</li>
         <li><strong>The Results dock</strong>, which lists the lowest factors of safety of the last analysis, and the <strong>Terminal dock</strong>, an embedded Python console, hidden until <span class="ui">Window → Terminal</span> is chosen (<a class="xref" href="#docks">Section 1.3.6</a>).</li>
@@ -257,12 +257,12 @@
       <p>Each boundary type has its own colour, and the water surfaces carry a letter at their midpoint: <strong>W</strong> on the water table, <strong>P</strong> on a piezometric line and <strong>D</strong> on the drawdown line.</p>
 
       <h3 id="drawing"><span class="ht">Drawing on the canvas</span><a class="anchor" href="#drawing" aria-label="Link to this section">#</a></h3>
-      <p>A drawing command — <span class="ui">Boundaries → Add External Boundary</span>, for instance — puts the canvas in a <em>tool mode</em>, and the status bar says what the tool expects. The conventions are the same for every boundary:</p>
+      <p>A drawing command, such as <span class="ui">Boundaries → Add External Boundary</span>, puts the canvas in a <em>tool mode</em>, and the status bar says what the tool expects. The conventions are the same for every boundary:</p>
       <ul>
         <li><strong>Click</strong> to add a vertex. The point is snapped to vertices, lines and the grid when the drawing aids are on (<a href="#snap">Snapping</a>).</li>
         <li><strong>Type</strong> a vertex instead: write <code>x, y</code> in the <strong>Enter X,Y:</strong> field of the status bar and press <kbd>Enter</kbd>. Commas, spaces and semicolons are accepted as separators (<code>12.5, 3.2</code>, <code>12.5 3.2</code>, <code>12.5;3.2</code>), with a point as the decimal separator.</li>
         <li><strong>Enter</strong> finishes the drawing once it has two vertices. The external boundary and the Block Search window are closed polygons and are closed automatically; every other boundary is an open polyline. Clicking again on the first vertex also closes the external boundary.</li>
-        <li><strong>Right-click</strong> while drawing opens a menu with <span class="ui">Done</span>, <span class="ui">Close Boundary</span> (external boundary and Block Search window only), <span class="ui">Undo last vertex</span>, the <span class="ui">Snap</span>, <span class="ui">Ortho</span> and <span class="ui">OSnap</span> switches, <span class="ui">Coordinate Table…</span> — a table of the vertices drawn so far, to correct or extend by typing — and <span class="ui">Cancel</span>.</li>
+        <li><strong>Right-click</strong> while drawing opens a menu with <span class="ui">Done</span>, <span class="ui">Close Boundary</span> (external boundary and Block Search window only), <span class="ui">Undo last vertex</span>, the <span class="ui">Snap</span>, <span class="ui">Ortho</span> and <span class="ui">OSnap</span> switches, <span class="ui">Coordinate Table…</span> (a table of the vertices drawn so far, to correct or extend by typing) and <span class="ui">Cancel</span>.</li>
         <li><strong>Esc</strong> cancels the drawing in progress and returns to the Select tool.</li>
       </ul>
       <p>Picking tools work the same way with a fixed number of clicks: two for a distributed load, a search-grid rectangle, a support (head, then tail) or a support pattern, one for a line load. Some commands ask for typed coordinates in a small dialog instead, as <code>x,y  x,y …</code>: the annotation tools of the <span class="ui">Tools</span> menu, the focus objects and <span class="ui">Add Surface (centre and radius)…</span>.</p>
@@ -275,11 +275,11 @@
         <li><strong>ORTHO</strong> (<kbd>F8</kbd>, off) locks the segment being drawn to the horizontal or the vertical when it is within a few degrees of either.</li>
         <li><strong>OSNAP</strong> (<kbd>F3</kbd>, off) draws temporary extension lines from the edges and vertices of nearby boundaries; with SNAP on, the cursor can snap to them.</li>
       </ul>
-      <p><span class="ui">View → Snap…</span> sets the capture tolerances — in screen pixels, so that snapping is equally easy at any zoom (vertex 12 px, line 10 px, grid node 8 px, extension 8 px) — the angular window of ORTHO (5°) and the data-tip mode, and has a <span class="ui">Restore Defaults</span> button. The snapping grid follows the zoom: its spacing is a round number (1, 2 or 5 times a power of ten) about 60 pixels wide on screen.</p>
+      <p><span class="ui">View → Snap…</span> sets the capture tolerances (in screen pixels, so that they do not depend on the zoom: vertex 12 px, line 10 px, grid node 8 px, extension 8 px), the angular window of ORTHO (5°) and the data-tip mode, and has a <span class="ui">Restore Defaults</span> button. The snapping grid follows the zoom: its spacing is a round number (1, 2 or 5 times a power of ten) about 60 pixels wide on screen.</p>
       <div class="note warn"><span class="label">Version 0.1.235</span><p>The <strong>Grid spacing</strong> fields of the Snap dialog have no lasting effect: the canvas replaces them with the zoom-dependent spacing as soon as the cursor moves. The shortcut <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>S</kbd> is assigned both to <span class="ui">View → Snap…</span> and to <span class="ui">File → Save As…</span>; use the menus for either.</p></div>
 
       <h3 id="undo"><span class="ht">Undo and redo</span><a class="anchor" href="#undo" aria-label="Link to this section">#</a></h3>
-      <p><span class="ui">Edit → Undo</span> (<kbd>Ctrl</kbd>+<kbd>Z</kbd>) and <span class="ui">Edit → Redo</span> (<kbd>Ctrl</kbd>+<kbd>Y</kbd>) step through the edits of the geometry — adding, deleting, moving, converting and reshaping boundaries and their vertices — and the painting of materials onto regions with <span class="ui">Properties → Assign Materials</span>. Edits made in dialogs (materials, loads, supports, settings) are not on the undo stack: <span class="ui">Cancel</span> is the way back while the dialog is open. The stack is cleared when a project is created, opened or replaced by the demo slope.</p>
+      <p><span class="ui">Edit → Undo</span> (<kbd>Ctrl</kbd>+<kbd>Z</kbd>) and <span class="ui">Edit → Redo</span> (<kbd>Ctrl</kbd>+<kbd>Y</kbd>) step through the edits of the geometry (adding, deleting, moving, converting and reshaping boundaries and their vertices) and the painting of materials onto regions with <span class="ui">Properties → Assign Materials</span>. Edits made in dialogs (materials, loads, supports, settings) are not on the undo stack; while the dialog is open, the only way back is <span class="ui">Cancel</span>. The stack is cleared when a project is created, opened or replaced by the demo slope.</p>
 
       <h2 id="status-bar"><span class="secnum">1.3.5</span><span class="ht">The status bar</span><a class="anchor" href="#status-bar" aria-label="Link to this section">#</a></h2>
       <p>The left part of the status bar shows messages: what the active tool expects, what the last command did, and the factor of safety of the last analysis. A message stays for a few seconds and is replaced by the next one; the complete list of notes of an analysis is in <span class="ui">Analysis → Analysis Notes…</span> (<a class="xref" href="#docks">Section 1.3.6</a>). The right part holds the permanent indicators.</p>
@@ -310,7 +310,7 @@
       <p>The docks can be moved, floated and closed. A closed dock is brought back by right-clicking the toolbar, which lists the toolbar and the docks with a tick each.</p>
       <div class="note"><span class="label">Version 0.1.235</span><p>Selecting a row of the Results dock does not yet highlight its surface on the canvas; use <span class="ui">Analysis → Interpret</span> to inspect individual surfaces.</p></div>
       <p><strong>Terminal dock.</strong> <span class="ui">Window → Terminal</span> (<kbd>Ctrl</kbd>+<kbd>`</kbd>) opens an embedded Python console that runs inside the program, with the live model as <code>project</code>, the canvas as <code>canvas</code>, the window as <code>mainwindow</code>, NumPy as <code>np</code> and the packages <code>ogr_core</code> and <code>ogr_slip2d</code>; <code>help_ogr()</code> prints a few examples. <kbd>Enter</kbd> runs the input, <kbd>Shift</kbd>+<kbd>Enter</kbd> starts a new line, <kbd>Ctrl</kbd>+<kbd>↑</kbd> and <kbd>Ctrl</kbd>+<kbd>↓</kbd> move through the history and <kbd>Ctrl</kbd>+<kbd>L</kbd> clears the console. Code typed there can change anything in the model; scripting is described in <a class="xref" href="../user-guide/automation.html">Section 2.12</a>.</p>
-      <p><strong>Analysis notes.</strong> An analysis can produce several notes — a method that could not run, a setting the chosen search does not read, a design standard that turns the result into an over-design factor. The status bar shows the first one followed by <em>[+n more — Analysis &gt; Analysis Notes]</em>; <span class="ui">Analysis → Analysis Notes…</span> opens a panel with all of them, the notes of the last statistical run included.</p>
+      <p><strong>Analysis notes.</strong> An analysis can produce several notes: a method that could not run, a setting the chosen search does not read, a design standard that turns the result into an over-design factor. The status bar shows the first one followed by <em>[+n more — Analysis &gt; Analysis Notes]</em>; <span class="ui">Analysis → Analysis Notes…</span> opens a panel with all of them, the notes of the last statistical run included.</p>
       <p><strong>Info Viewer.</strong> <span class="ui">Analysis → Info Viewer</span> (<kbd>Ctrl</kbd>+<kbd>I</kbd>) summarises the model: number of boundaries, materials, supports and loads, the bounding box, the search method and the author.</p>
       <p><strong>Assign Materials panel.</strong> <span class="ui">Properties → Assign Materials</span> opens a floating panel with the list of materials; see <a class="xref" href="../user-guide/materials.html#assign">Section 2.3.3</a>.</p>
 
@@ -327,7 +327,7 @@
         <li><strong>Method selector</strong>: when several methods were computed, a drop-down list at the top switches the whole window between them.</li>
         <li><strong>Hover preview</strong>: with a grid search, hovering over a centre of the grid draws the lowest surface of that centre and gives its factor of safety in the status bar.</li>
       </ul>
-      <p>Its menus are <span class="ui">File</span> (export the image or the surface data as CSV), <span class="ui">Edit</span>, <span class="ui">View</span> (zoom, legend, contour and legend options), <span class="ui">Data</span> (which surfaces are drawn — global minimum, minimum per centre or all — filters, the factor of safety along the slope, data exports, invalid surfaces, support forces and back analysis), <span class="ui">Query</span> (queries, slices, line of thrust, values along the surface, free-body diagram of a slice, surfaces through a point, result table), <span class="ui">Groundwater</span>, <span class="ui">Statistics</span> (histogram, cumulative, scatter, sensitivity and convergence plots), <span class="ui">Tools</span>, <span class="ui">Window</span> and <span class="ui">Help</span>. Commands that need something the project does not have — a transient analysis, supports, statistical results — are greyed out with a tooltip saying what is missing. Everything in this window is described in <a class="xref" href="../user-guide/results.html">Section 2.8</a>.</p>
+      <p>Its menus are <span class="ui">File</span> (export the image or the surface data as CSV), <span class="ui">Edit</span>, <span class="ui">View</span> (zoom, legend, contour and legend options), <span class="ui">Data</span> (which surfaces are drawn: global minimum, minimum per centre or all; filters; the factor of safety along the slope; data exports; invalid surfaces; support forces and back analysis), <span class="ui">Query</span> (queries, slices, line of thrust, values along the surface, free-body diagram of a slice, surfaces through a point, result table), <span class="ui">Groundwater</span>, <span class="ui">Statistics</span> (histogram, cumulative, scatter, sensitivity and convergence plots), <span class="ui">Tools</span>, <span class="ui">Window</span> and <span class="ui">Help</span>. Commands that need something the project does not have (a transient analysis, supports, statistical results) are greyed out, with a tooltip saying what is missing. The window is described in <a class="xref" href="../user-guide/results.html">Section 2.8</a>.</p>
       <div class="note warn"><span class="label">Version 0.1.235</span><p>A few commands of the Interpret window do nothing yet: <span class="ui">View → Data Tips</span>, the four display switches at the top of the <span class="ui">Groundwater</span> menu (<span class="ui">Phreatic Surface</span>, <span class="ui">Piezometric Lines</span>, <span class="ui">Flow Vectors</span>, <span class="ui">Streamlines</span>) and <span class="ui">Tools → Measure</span> and <span class="ui">Tools → Dimension Length</span>.</p></div>
 
       <h2 id="other-windows"><span class="secnum">1.3.8</span><span class="ht">Other result windows</span><a class="anchor" href="#other-windows" aria-label="Link to this section">#</a></h2>
@@ -361,7 +361,7 @@
         <li>Neither choice is stored: the program always starts in English with the light theme.</li>
       </ul>
       <p>Menu names in this documentation are those of the English interface.</p>
-      <div class="note warn"><span class="label">Version 0.1.235</span><p>The three check boxes in the lower group of the Preferences dialog — <em>Show Tabs for Multiple Windows</em>, <em>Mark file as modified after importing</em> and <em>Default to compressed format when saving</em> — are not connected to anything yet.</p></div>
+      <div class="note warn"><span class="label">Version 0.1.235</span><p>The three check boxes in the lower group of the Preferences dialog (<em>Show Tabs for Multiple Windows</em>, <em>Mark file as modified after importing</em> and <em>Default to compressed format when saving</em>) are not connected to anything yet.</p></div>
 
       <h2 id="agent-bridge"><span class="secnum">1.3.10</span><span class="ht">The agent bridge</span><a class="anchor" href="#agent-bridge" aria-label="Link to this section">#</a></h2>
       <p>An AI agent connected through the MCP server can work on the model open in the window, where every edit is seen as it happens. <span class="ui">Tools → Agent bridge (MCP)</span> controls this connection. It is switched on when the program starts, unless the program is started with <code>ogr-slip2d --no-agent-bridge</code>, and the status bar then gives the process number and port: <em>Agent bridge on (pid …, port …)</em>.</p>
@@ -435,7 +435,7 @@
           <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
           <b>OpenGeoRock</b>
         </a>
-        <p class="tagline">Open-source geotechnical software, built in the open at the Universidad Politécnica de Cartagena.</p>
+        <p class="tagline">Open-source geotechnical software developed at the Universidad Politécnica de Cartagena.</p>
         <span class="lang" role="group" aria-label="Language"><a href="../../docs/getting-started/interface.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../../es/docs/getting-started/interface.html" hreflang="es" lang="es">ES</a></span>
       </div>
       <div>
