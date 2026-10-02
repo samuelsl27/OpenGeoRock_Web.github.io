@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>Cálculo e interpretación de resultados — documentación de OGR Slip2D</title>
-<meta name="description" content="Ejecutar un análisis en OGR Slip2D y leer sus resultados: Compute, el panel Results, Analysis Notes, el Info Viewer y la ventana Interpret, con sus contornos, consultas, gráficos, resumen de superficies no válidas y exportaciones.">
+<meta name="description" content="Cómo ejecutar un análisis en OGR Slip2D e interpretar sus resultados: Compute, el panel Results, Analysis Notes, el Info Viewer y la ventana Interpret, con sus contornos, consultas, gráficos, resumen de superficies no válidas y exportaciones.">
 <!-- @inc head -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>document.documentElement.classList.replace("no-js", "js")</script>
@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="OpenGeoRock">
 <meta property="og:title" content="Cálculo e interpretación de resultados — documentación de OGR Slip2D">
-<meta property="og:description" content="Ejecutar un análisis en OGR Slip2D y leer sus resultados: Compute, el panel Results, Analysis Notes, el Info Viewer y la ventana Interpret, con sus contornos, consultas, gráficos, resumen de superficies no válidas y exportaciones.">
+<meta property="og:description" content="Cómo ejecutar un análisis en OGR Slip2D e interpretar sus resultados: Compute, el panel Results, Analysis Notes, el Info Viewer y la ventana Interpret, con sus contornos, consultas, gráficos, resumen de superficies no válidas y exportaciones.">
 <meta property="og:url" content="https://opengeorock.org/es/docs/user-guide/results.html">
 <meta property="og:image" content="https://opengeorock.org/assets/img/og-image.png">
 <meta property="og:locale" content="es_ES">
@@ -48,23 +48,23 @@
             <div class="mega-col">
               <span class="label">Disponible hoy</span>
               <a class="mega-item feature" href="../../../es/products/slip2d.html"><b>OGR Slip2D</b><span>Estabilidad de taludes 2D: equilibrio límite, agua subterránea por elementos finitos y análisis probabilístico.</span></a>
-              <a class="mega-item" href="../../../es/ai/index.html"><b>Servidor MCP para agentes de IA <span class="tag live">nuevo</span></b><span>Claude, ChatGPT o un modelo local construyen y calculan modelos de OGR Slip2D.</span></a>
+              <a class="mega-item" href="../../../es/ai/index.html"><b>Servidor MCP para agentes de IA <span class="tag live">nuevo</span></b><span>Claude, ChatGPT o un modelo local crean y calculan modelos de OGR Slip2D.</span></a>
             </div>
             <div class="mega-col">
-              <span class="label">En la hoja de ruta</span>
+              <span class="label">Previstos</span>
               <a class="mega-item" href="../../../es/products/index.html#ogr-data"><b>OGR Data</b><span>Base de datos de propiedades de suelos y macizos rocosos</span></a>
               <a class="mega-item" href="../../../es/products/index.html#ogr-fem2d"><b>OGR FEM2D</b><span>Elementos finitos elastoplásticos 2D</span></a>
               <a class="mega-item" href="../../../es/products/index.html#ogr-slip3d"><b>OGR Slip3D</b><span>Equilibrio límite en 3D</span></a>
               <a class="mega-item" href="../../../es/products/index.html#ogr-fem3d"><b>OGR FEM3D</b><span>Elementos finitos 3D con flujo acoplado</span></a>
             </div>
             <div class="mega-col">
-              <span class="label">Úsalo desde</span>
+              <span class="label">Cómo se usa</span>
               <a class="mega-item" href="../../../es/docs/getting-started/interface.html"><b>El programa de escritorio</b><span>Modelador, intérprete y terminal de Python</span></a>
               <a class="mega-item" href="../../../es/docs/reference/python-api.html"><b>Python</b><span>Automatiza análisis desde tu propio código</span></a>
               <a class="mega-item" href="../../../es/docs/reference/cli.html"><b>La línea de comandos</b><span>Cálculos por lotes con ogr-slip2d-cli</span></a>
             </div>
           </div>
-          <div class="mega-foot"><span>Cinco programas, un núcleo abierto.</span><a href="../../../es/products/index.html">Todos los productos →</a></div>
+          <div class="mega-foot"><span>Cinco programas sobre un mismo núcleo abierto.</span><a href="../../../es/products/index.html">Todos los productos →</a></div>
         </div>
       </div>
       <a href="../../../es/examples/index.html" data-nav="examples">Ejemplos</a>
@@ -114,14 +114,14 @@
 <li><a href="../../../es/docs/user-guide/geometry.html"><span class="n">2.2</span><span>Geometría y contornos</span></a></li>
 <li><a href="../../../es/docs/user-guide/materials.html"><span class="n">2.3</span><span>Materiales</span></a></li>
 <li><a href="../../../es/docs/user-guide/water.html"><span class="n">2.4</span><span>Agua y presión intersticial</span></a></li>
-<li><a href="../../../es/docs/user-guide/loads.html"><span class="n">2.5</span><span>Cargas y carga sísmica</span></a></li>
+<li><a href="../../../es/docs/user-guide/loads.html"><span class="n">2.5</span><span>Cargas y acción sísmica</span></a></li>
 <li><a href="../../../es/docs/user-guide/supports.html"><span class="n">2.6</span><span>Soportes</span></a></li>
 <li><a href="../../../es/docs/user-guide/surfaces.html"><span class="n">2.7</span><span>Superficies de rotura y búsqueda</span></a></li>
 <li><a href="../../../es/docs/user-guide/results.html" aria-current="page"><span class="n">2.8</span><span>Cálculo e interpretación de resultados</span></a></li>
 <li><a href="../../../es/docs/user-guide/groundwater.html"><span class="n">2.9</span><span>Agua subterránea por elementos finitos</span></a></li>
 <li><a href="../../../es/docs/user-guide/probabilistic.html"><span class="n">2.10</span><span>Análisis probabilístico y de sensibilidad</span></a></li>
 <li><a href="../../../es/docs/user-guide/design-standards.html"><span class="n">2.11</span><span>Normas de diseño</span></a></li>
-<li><a href="../../../es/docs/user-guide/automation.html"><span class="n">2.12</span><span>Informes, scripting y línea de comandos</span></a></li>
+<li><a href="../../../es/docs/user-guide/automation.html"><span class="n">2.12</span><span>Informes, scripts y línea de comandos</span></a></li>
 </ul></details>
 <details open><summary>3 · Manual de teoría</summary><ul>
 <li><a href="../../../es/docs/theory/limit-equilibrium.html"><span class="n">3.1</span><span>Equilibrio límite y factor de seguridad</span></a></li>
@@ -129,11 +129,11 @@
 <li><a href="../../../es/docs/theory/interslice.html"><span class="n">3.3</span><span>Fuerzas entre dovelas, convergencia y admisibilidad</span></a></li>
 <li><a href="../../../es/docs/theory/search.html"><span class="n">3.4</span><span>Búsqueda de la superficie de rotura</span></a></li>
 <li><a href="../../../es/docs/theory/strength.html"><span class="n">3.5</span><span>Modelos de resistencia al corte</span></a></li>
-<li><a href="../../../es/docs/theory/pore-pressure.html"><span class="n">3.6</span><span>Presión intersticial y resistencia no saturada</span></a></li>
+<li><a href="../../../es/docs/theory/pore-pressure.html"><span class="n">3.6</span><span>Presión intersticial y resistencia de los suelos no saturados</span></a></li>
 <li><a href="../../../es/docs/theory/seepage.html"><span class="n">3.7</span><span>Filtración por elementos finitos</span></a></li>
 <li><a href="../../../es/docs/theory/rapid-drawdown.html"><span class="n">3.8</span><span>Desembalse rápido</span></a></li>
 <li><a href="../../../es/docs/theory/seismic.html"><span class="n">3.9</span><span>Análisis sísmico</span></a></li>
-<li><a href="../../../es/docs/theory/supports.html"><span class="n">3.10</span><span>Fuerzas de los soportes</span></a></li>
+<li><a href="../../../es/docs/theory/supports.html"><span class="n">3.10</span><span>Fuerzas de soporte</span></a></li>
 <li><a href="../../../es/docs/theory/probabilistic.html"><span class="n">3.11</span><span>Análisis probabilístico</span></a></li>
 <li><a href="../../../es/docs/theory/partial-factors.html"><span class="n">3.12</span><span>Coeficientes parciales (Eurocódigo 7)</span></a></li>
 </ul></details>
@@ -146,7 +146,7 @@
 <li><a href="../../../es/docs/reference/mcp.html"><span class="n">5.1</span><span>Servidor MCP</span></a></li>
 <li><a href="../../../es/docs/reference/cli.html"><span class="n">5.2</span><span>Interfaz de línea de comandos</span></a></li>
 <li><a href="../../../es/docs/reference/python-api.html"><span class="n">5.3</span><span>API de Python</span></a></li>
-<li><a href="../../../es/docs/reference/file-format.html"><span class="n">5.4</span><span>El formato .ogr</span></a></li>
+<li><a href="../../../es/docs/reference/file-format.html"><span class="n">5.4</span><span>El formato de archivo .ogr</span></a></li>
 <li><a href="../../../es/docs/reference/error-codes.html"><span class="n">5.5</span><span>Códigos de error</span></a></li>
 <li><a href="../../../es/docs/reference/notation.html"><span class="n">5.6</span><span>Notación y glosario</span></a></li>
 <li><a href="../../../es/docs/reference/bibliography.html"><span class="n">5.7</span><span>Bibliografía</span></a></li>
@@ -162,145 +162,145 @@
 <nav class="crumbs label" aria-label="Ruta de navegación"><a href="../../../es/docs/index.html">Documentación</a><span aria-hidden="true">/</span><span>2 · Guía de usuario</span></nav>
 <div class="chapter label">2.8</div>
 <h1>Cálculo e interpretación de resultados</h1>
-<div class="meta label"><span>Describe OGR Slip2D <span data-v>0.1.235</span></span></div>
+<div class="meta label"><span>Válido para OGR Slip2D <span data-v>0.1.235</span></span></div>
 <!-- @end dochead -->
     </header>
 
     <article class="doc prose">
-      <p class="lede"><span class="ui">Analysis → Compute</span> ejecuta una búsqueda para cada método activado en el proyecto. El panel Results y la barra de estado dan el resultado principal, <span class="ui">Analysis Notes</span> reúne todo lo que el cálculo ha tenido que indicar, y la ventana Interpret permite examinar cada superficie y cada dovela. Esta página trata de las cuatro y de cómo extraer los resultados del programa.</p>
+      <p class="lede"><span class="ui">Analysis → Compute</span> ejecuta una búsqueda por cada método activado en el proyecto. El panel Results y la barra de estado muestran el resultado principal, <span class="ui">Analysis Notes</span> recoge todo lo que el cálculo ha tenido que señalar y la ventana Interpret permite examinar cada superficie y cada dovela. Esta página describe todo ello y explica cómo exportar los resultados.</p>
 
       <h2 id="compute"><span class="secnum">2.8.1</span><span class="ht">Ejecución del análisis</span><a class="anchor" href="#compute" aria-label="Enlace a esta sección">#</a></h2>
-      <p>Elige <span class="ui">Analysis → Compute</span> (<kbd>Ctrl</kbd>+<kbd>T</kbd>, también en la barra de herramientas). Antes de calcular nada se comprueba el modelo, y la ejecución se rechaza, indicando los motivos, cuando el modelo no tiene contornos, cuando no tiene materiales o cuando un ajuste no puede respetarse; por ejemplo, materiales que toman su presión intersticial de un campo de elementos finitos que no se ha calculado, un desembalse rápido cuyas condiciones no se cumplen, u objetos de Block Search que la búsqueda no puede usar. El rechazo es deliberado: la alternativa sería un número verosímil calculado ignorando parte del modelo.</p>
-      <p>Cada método marcado en <span class="ui">Analysis → Project Settings →</span> <span class="ui">Methods</span> se ejecuta con su propia búsqueda (Bishop simplificado y Janbu simplificado en un proyecto nuevo), uno tras otro, mientras una ventana de progreso muestra cuánto lleva avanzado el cálculo.</p>
-      <div class="note warn"><span class="label">Cancel no detiene la ejecución</span><p>En la versión 0.1.235, el botón <strong>Cancel</strong> de la ventana de progreso solo cierra la ventana: el análisis continúa en segundo plano y sus resultados aparecen cuando termina.</p></div>
-      <p>Cuando termina la ejecución:</p>
+      <p>Elige <span class="ui">Analysis → Compute</span> (<kbd>Ctrl</kbd>+<kbd>T</kbd>, también en la barra de herramientas). Antes de calcular se revisa el modelo. Si no tiene contornos, si no tiene materiales o si algún ajuste no puede respetarse, el análisis no se ejecuta y el programa explica por qué. Ocurre, por ejemplo, cuando hay materiales que toman la presión intersticial de un campo de elementos finitos sin calcular, un desembalse rápido cuyas condiciones no se cumplen u objetos de búsqueda por bloques que la búsqueda no puede utilizar. Es una negativa deliberada: la alternativa sería dar un número verosímil calculado con parte del modelo ignorada.</p>
+      <p>Cada método marcado en <span class="ui">Analysis → Project Settings →</span> <span class="ui">Methods</span> se ejecuta con su propia búsqueda, uno tras otro (en un proyecto nuevo, Bishop simplificado y Janbu simplificado), y una ventana de progreso indica cómo avanza el cálculo.</p>
+      <div class="note warn"><span class="label">Cancel no detiene la ejecución</span><p>En la versión 0.1.235, el botón <strong>Cancel</strong> de la ventana de progreso solo cierra la ventana: el análisis sigue en segundo plano y sus resultados aparecen cuando termina.</p></div>
+      <p>Al terminar la ejecución:</p>
       <ul>
         <li>la vista del modelo y el panel Results muestran el resultado del <strong>primer</strong> método activado;</li>
-        <li>la barra de estado da su valor crítico, por ejemplo <code>Critical FoS (bishop_simplified): 1.234</code>, y cuántos métodos se han calculado. Con una norma de diseño activada, la etiqueta es <em>Over-design factor</em> (factor de sobredimensionamiento; <a class="xref" href="design-standards.html">Sección 2.11</a>);</li>
-        <li>todo lo demás que la ejecución decidió o no pudo hacer va a <span class="ui">Analysis → Analysis Notes…</span>;</li>
-        <li>si el proyecto se ha guardado o se ha abierto desde un archivo, el resultado del primer método se escribe también junto a él, con el nombre del proyecto y la extensión <code>.h5</code>.</li>
+        <li>la barra de estado indica su valor crítico, por ejemplo <code>Critical FoS (bishop_simplified): 1.234</code>, y el número de métodos calculados. Si hay una norma de diseño activa, la etiqueta pasa a ser <em>Over-design factor</em> (factor de sobredimensionamiento; <a class="xref" href="design-standards.html">Sección 2.11</a>);</li>
+        <li>el resto de decisiones y limitaciones del cálculo se anotan en <span class="ui">Analysis → Analysis Notes…</span>;</li>
+        <li>si el proyecto se ha guardado o se ha abierto desde un archivo, el resultado del primer método se guarda además junto a ese archivo, con el nombre del proyecto y la extensión <code>.h5</code>.</li>
       </ul>
-      <p>Los resultados describen el modelo tal como estaba cuando se calculó. Tras editar el modelo, vuelve a calcular; una ventana Interpret sigue mostrando la ejecución con la que se abrió.</p>
+      <p>Los resultados corresponden al modelo tal como estaba en el momento de calcular. Si lo editas, vuelve a calcular; una ventana Interpret que ya esté abierta sigue mostrando el cálculo con el que se abrió.</p>
 
       <h2 id="results-dock"><span class="secnum">2.8.2</span><span class="ht">El panel Results</span><a class="anchor" href="#results-dock" aria-label="Enlace a esta sección">#</a></h2>
-      <p>El panel <strong>Results</strong>, bajo el modelo, muestra el método, el número de superficies válidas y el valor crítico, seguidos de las 50 superficies con menor factor de seguridad: <em>#</em>, <em>FoS</em>, <em>Method</em>, <em>Centre X</em>, <em>Centre Y</em> y <em>Radius</em>, con la primera fila resaltada. Abarca solo el primer método activado; la ventana Interpret tiene todos los métodos. El recuento de superficies válidas excluye las que convergieron pero fueron descartadas por una comprobación posterior al análisis (la comprobación de m-alpha o la de tensiones de tracción), porque esas nunca pueden ser la superficie crítica.</p>
-      <div class="note"><span class="label">La lista y el valor crítico</span><p>La lista ordena todas las superficies que convergieron, incluidas las descartadas por la comprobación de m-alpha o la de tensiones de tracción. Cuando una de ellas tiene un factor de seguridad menor que el de la superficie crítica, aparece por encima de esta, y la primera fila resaltada deja de ser la superficie crítica. El valor de la cabecera del panel, y el de la barra de estado, es siempre el de la superficie crítica.</p></div>
+      <p>El panel <strong>Results</strong>, situado bajo el modelo, indica el método, el número de superficies válidas y el valor crítico, y a continuación lista las 50 superficies con menor factor de seguridad (columnas <em>#</em>, <em>FoS</em>, <em>Method</em>, <em>Centre X</em>, <em>Centre Y</em> y <em>Radius</em>), con la primera fila resaltada. Solo recoge el primer método activado; la ventana Interpret los incluye todos. En el recuento de superficies válidas no entran las que convergieron pero se descartaron en una comprobación posterior al análisis (la de m-alfa o la de tensiones de tracción), porque esas nunca pueden ser la superficie crítica.</p>
+      <div class="note"><span class="label">La lista y el valor crítico</span><p>La lista ordena todas las superficies que convergieron, también las descartadas por la comprobación de m-alfa o la de tensiones de tracción. Si alguna de ellas tiene un factor de seguridad menor que el de la superficie crítica, aparece por encima de esta, y entonces la primera fila resaltada no es la superficie crítica. El valor de la cabecera del panel y el de la barra de estado son siempre los de la superficie crítica.</p></div>
 
       <h2 id="analysis-notes"><span class="secnum">2.8.3</span><span class="ht">Analysis Notes</span><a class="anchor" href="#analysis-notes" aria-label="Enlace a esta sección">#</a></h2>
-      <p><span class="ui">Analysis → Analysis Notes…</span> abre una ventana que puede permanecer abierta mientras se trabaja. Enumera todas las notas de la última ejecución —primero las generales del modelo, bajo <em>Model</em>, y después las relativas a la superficie indicada de cada método, bajo el identificador del método— y <strong>Copy all</strong> las copia al portapapeles, una por línea. Las notas típicas indican que el centro crítico está en el borde de la rejilla, que la búsqueda elegida no ha respetado un ajuste, que un conjunto de casos de capa débil ha tenido que truncarse o que se ha aplicado una norma de diseño. Ninguna de ellas modifica un factor de seguridad; léelas antes de citar uno. La ventana se actualiza tras cada ejecución.</p>
+      <p><span class="ui">Analysis → Analysis Notes…</span> abre una ventana que puedes dejar abierta mientras trabajas. Contiene todas las notas del último cálculo (primero las generales del modelo, bajo <em>Model</em>, y luego las relativas a la superficie que da cada método, bajo el identificador del método), y <strong>Copy all</strong> las copia al portapapeles, una por línea. Las notas más habituales avisan de que el centro crítico se encuentra en el borde de la rejilla, de que la búsqueda elegida no ha respetado algún ajuste, de que ha habido que truncar un conjunto de casos de capa débil o de que se ha aplicado una norma de diseño. Ninguna modifica el factor de seguridad, pero conviene leerlas antes de citar un valor. La ventana se actualiza tras cada ejecución.</p>
 
       <h2 id="info-viewer"><span class="secnum">2.8.4</span><span class="ht">Info Viewer</span><a class="anchor" href="#info-viewer" aria-label="Enlace a esta sección">#</a></h2>
-      <p><span class="ui">Analysis → Info Viewer</span> (<kbd>Ctrl</kbd>+<kbd>I</kbd>) resume el modelo, no los resultados: el nombre del proyecto, el número de contornos, materiales, soportes, cargas distribuidas y cargas lineales, el rectángulo envolvente, el método de búsqueda y el autor.</p>
+      <p><span class="ui">Analysis → Info Viewer</span> (<kbd>Ctrl</kbd>+<kbd>I</kbd>) resume el modelo, no los resultados: nombre del proyecto, número de contornos, de materiales, de soportes, de cargas distribuidas y de cargas lineales, rectángulo envolvente, método de búsqueda y autor.</p>
 
       <h2 id="interpret"><span class="secnum">2.8.5</span><span class="ht">La ventana Interpret</span><a class="anchor" href="#interpret" aria-label="Enlace a esta sección">#</a></h2>
-      <p>Tras ejecutar Compute, <span class="ui">Analysis → Interpret</span> abre una ventana independiente, de solo lectura, <em>OGR Slip2D — Interpret — nombre</em>, sobre los resultados de esa ejecución. Cada llamada abre una ventana nueva, de modo que se pueden comparar dos lado a lado. Tiene sus propios menús y estos paneles:</p>
+      <p>Después de calcular, <span class="ui">Analysis → Interpret</span> abre una ventana independiente y de solo lectura, <em>OGR Slip2D — Interpret — nombre</em>, con los resultados de ese cálculo. Cada vez que se elige se abre una ventana nueva, así que se pueden comparar dos cálculos uno junto a otro. La ventana tiene sus propios menús y estos paneles:</p>
       <ul>
-        <li><strong>Legend</strong> (izquierda): la escala de colores del campo representado, con el valor crítico marcado. <span class="ui">View → Show Legend</span> la oculta.</li>
-        <li><strong>Summary</strong> (derecha): el método, las superficies válidas sobre el total, los intentos de generación (y cuántos rechazó un objeto de foco), el valor crítico, sus iteraciones y, para un círculo, su centro y su radio.</li>
-        <li><strong>Surfaces</strong> (derecha): las 100 superficies con menor factor de seguridad, ordenadas como en el panel Results. Al seleccionar una fila se resalta la superficie y se muestra su primera dovela en Slice Data.</li>
-        <li><strong>Slice Data</strong> (abajo): todas las magnitudes de una dovela (véase <a href="#slice-data">Datos de dovela</a> más abajo).</li>
+        <li><strong>Legend</strong> (izquierda): escala de colores del campo representado, con el valor crítico señalado. <span class="ui">View → Show Legend</span> la oculta.</li>
+        <li><strong>Summary</strong> (derecha): el método, las superficies válidas respecto del total, los intentos de generación (y cuántos de ellos rechazó un objeto de foco), el valor crítico, sus iteraciones y, si es un círculo, su centro y su radio.</li>
+        <li><strong>Surfaces</strong> (derecha): las 100 superficies con menor factor de seguridad, ordenadas como en el panel Results. Al seleccionar una fila se resalta la superficie y su primera dovela aparece en Slice Data.</li>
+        <li><strong>Slice Data</strong> (abajo): todas las magnitudes de una dovela (véase <a href="#slice-data">Datos de dovela</a> más adelante).</li>
       </ul>
-      <p>El menú <span class="ui">Window</span> muestra u oculta Summary, Surfaces y Slice Data; <span class="ui">File → Close</span> (<kbd>Ctrl</kbd>+<kbd>W</kbd>) cierra la ventana. Cuando se han calculado varios métodos, la barra superior tiene una lista <strong>Method</strong> en la que cada método aparece con su valor crítico; al elegir uno, todos los paneles, el gráfico y la leyenda pasan a ese método. Con un solo método, la barra se limita a nombrarlo y a dar su valor crítico.</p>
+      <p>El menú <span class="ui">Window</span> muestra u oculta Summary, Surfaces y Slice Data, y <span class="ui">File → Close</span> (<kbd>Ctrl</kbd>+<kbd>W</kbd>) cierra la ventana. Si se han calculado varios métodos, la barra superior incluye una lista <strong>Method</strong> en la que cada método aparece con su valor crítico; al elegir uno, todos los paneles, el gráfico y la leyenda pasan a mostrar ese método. Con un solo método, la barra se limita a nombrarlo y a dar su valor crítico.</p>
 
       <figure class="fig shot-fig" id="fig-interpret">
-        <div class="art"><img src="../../../assets/img/shots/interpret.webp" alt="La ventana Interpret tras una Grid Search con Spencer: los centros de giro coloreados según el factor de seguridad sobre el talud, la superficie crítica con sus dovelas y una dovela resaltada, la leyenda de colores a la izquierda, los paneles Summary y Surfaces a la derecha y el panel Slice Data debajo" loading="lazy" width="1600" height="877"></div>
-        <figcaption><span class="fignum">Figura 2.8.1</span> La ventana Interpret tras una Grid Search. Cada centro de giro se colorea según el menor factor de seguridad hallado en él, y Summary da las superficies válidas sobre las generadas.</figcaption>
+        <div class="art"><img src="../../../assets/img/shots/interpret.webp" alt="Ventana Interpret tras una Grid Search con el método de Spencer: los centros de giro sobre el talud, coloreados según el factor de seguridad; la superficie crítica con sus dovelas y una de ellas resaltada; la leyenda de colores a la izquierda, los paneles Summary y Surfaces a la derecha y el panel Slice Data debajo" loading="lazy" width="1600" height="877"></div>
+        <figcaption><span class="fignum">Figura 2.8.1</span> Ventana Interpret tras una Grid Search. Cada centro de giro se colorea según el menor factor de seguridad encontrado en él, y Summary indica cuántas de las superficies generadas son válidas.</figcaption>
       </figure>
 
-      <h3 id="colour-grid"><span class="ht">La rejilla coloreada de centros</span><a class="anchor" href="#colour-grid" aria-label="Enlace a esta sección">#</a></h3>
-      <p>Con una Grid Search, cada centro de la rejilla se colorea según el menor factor de seguridad hallado en él. Mueve el puntero sobre la rejilla para previsualizar la superficie mínima del centro más próximo —la barra de estado da su factor de seguridad— y haz clic para seleccionarla. En las búsquedas no circulares no hay rejilla: selecciona las superficies desde el panel Surfaces o con <span class="ui">Query → Add Query</span>.</p>
-      <p><span class="ui">View → Contour Options…</span> controla el gráfico: el campo mostrado (<em>Factor of safety</em> y, cuando existe un resultado de agua subterránea por elementos finitos, <em>Pore pressure</em>, <em>Total head</em> y <em>Pressure head</em>), un rango automático o un <em>Minimum</em> y un <em>Maximum</em> fijos, el <em>Number of intervals</em>, el <em>Mode</em>, la <em>Palette</em>, los colores invertidos y el formato numérico. Para el factor de seguridad, la escala por defecto es fija, de 0 a 6 en 24 bandas, de modo que una sola superficie profunda con un factor alto no comprima el rango que importa. <span class="ui">View → Legend Options…</span> fija los decimales, el número de intervalos y la notación científica de la leyenda, y <span class="ui">Data → Supplemental Contours</span> dibuja isolíneas sobre las bandas rellenas.</p>
+      <h3 id="colour-grid"><span class="ht">La rejilla de centros coloreada</span><a class="anchor" href="#colour-grid" aria-label="Enlace a esta sección">#</a></h3>
+      <p>En una Grid Search, cada centro de la rejilla se colorea según el menor factor de seguridad encontrado en él. Pasa el puntero por la rejilla para ver la superficie de menor factor de seguridad del centro más próximo (la barra de estado muestra su factor de seguridad) y haz clic para seleccionarla. Las búsquedas no circulares no tienen rejilla; en ellas las superficies se seleccionan desde el panel Surfaces o con <span class="ui">Query → Add Query</span>.</p>
+      <p><span class="ui">View → Contour Options…</span> controla la representación: el campo mostrado (<em>Factor of safety</em> y, si existe un resultado de agua subterránea por elementos finitos, <em>Pore pressure</em>, <em>Total head</em> y <em>Pressure head</em>), el intervalo de valores, automático o fijado con <em>Minimum</em> y <em>Maximum</em>, el <em>Number of intervals</em>, el <em>Mode</em>, la <em>Palette</em>, la inversión de colores y el formato numérico. Para el factor de seguridad, la escala por defecto es fija, de 0 a 6 en 24 bandas, de modo que una sola superficie profunda con un factor alto no aplaste el intervalo que interesa. <span class="ui">View → Legend Options…</span> define los decimales, el número de intervalos y la notación científica de la leyenda, y <span class="ui">Data → Supplemental Contours</span> traza isolíneas sobre las bandas rellenas.</p>
 
-      <h2 id="which-surfaces"><span class="secnum">2.8.6</span><span class="ht">Elección de las superficies que se dibujan</span><a class="anchor" href="#which-surfaces" aria-label="Enlace a esta sección">#</a></h2>
-      <p>Tres opciones en la parte superior del menú <span class="ui">Data</span> deciden lo que se dibuja sobre el modelo:</p>
+      <h2 id="which-surfaces"><span class="secnum">2.8.6</span><span class="ht">Qué superficies se dibujan</span><a class="anchor" href="#which-surfaces" aria-label="Enlace a esta sección">#</a></h2>
+      <p>Tres opciones de la parte superior del menú <span class="ui">Data</span> determinan qué se dibuja sobre el modelo:</p>
       <ul>
         <li><strong>Global Minimum</strong> (por defecto): solo la superficie crítica;</li>
-        <li><strong>Minimum Surfaces</strong>: la superficie de menor factor de seguridad en cada centro de giro de la rejilla;</li>
+        <li><strong>Minimum Surfaces</strong>: la superficie de menor factor de seguridad en cada centro de la rejilla;</li>
         <li><strong>All Surfaces</strong>: todas las superficies válidas analizadas.</li>
       </ul>
-      <p><span class="ui">Data → Filter Surfaces…</span> restringe las dos últimas: <em>By factor of safety</em> (un mínimo y un máximo), <em>Only the N lowest</em> o <em>Surfaces with error code</em>, que muestra solo las superficies no válidas rechazadas por un motivo determinado. <strong>Apply</strong> vuelve a dibujar sin cerrar el diálogo, <strong>Reset</strong> borra el filtro y <strong>Cancel</strong> deshace además lo que hizo Apply. El mínimo global se dibuja siempre.</p>
+      <p><span class="ui">Data → Filter Surfaces…</span> filtra las dos últimas opciones por <em>By factor of safety</em> (un mínimo y un máximo), por <em>Only the N lowest</em> o por <em>Surfaces with error code</em>, que muestra solo las superficies no válidas rechazadas por un motivo concreto. <strong>Apply</strong> redibuja sin cerrar el diálogo, <strong>Reset</strong> elimina el filtro y <strong>Cancel</strong> deshace además lo que hizo Apply. El mínimo global se dibuja siempre.</p>
 
       <h2 id="queries"><span class="secnum">2.8.7</span><span class="ht">Consultas</span><a class="anchor" href="#queries" aria-label="Enlace a esta sección">#</a></h2>
-      <p>Una <em>consulta</em> es una superficie que se elige para inspeccionarla en detalle. <span class="ui">Query → Add Query</span> activa un modo de selección: la superficie bajo el puntero se previsualiza con su factor de seguridad (y, para un círculo, su radio y su centro), un clic la conserva y <kbd>Esc</kbd> cancela. Se pueden conservar varias consultas; cada una lleva su factor de seguridad escrito en su centro, o en el extremo de coronación de una superficie no circular. Las opciones siguientes actúan sobre la última superficie seleccionada, después sobre la última consulta y, en su defecto, sobre el mínimo global, para el que crean una consulta.</p>
+      <p>Una <em>consulta</em> es una superficie que se elige para examinarla en detalle. <span class="ui">Query → Add Query</span> activa el modo de selección: al pasar el puntero se previsualiza la superficie que queda bajo él, con su factor de seguridad (y, si es un círculo, su radio y su centro); un clic la conserva y <kbd>Esc</kbd> cancela. Se pueden conservar varias consultas, y cada una lleva escrito su factor de seguridad en el centro o, si la superficie no es circular, en el extremo de coronación. Las opciones siguientes actúan sobre la última superficie seleccionada; si no hay ninguna, sobre la última consulta y, si tampoco hay consultas, sobre el mínimo global, para el que crean una consulta.</p>
       <figure class="tbl" id="tbl-query-menu">
-        <figcaption><span class="fignum">Tabla 2.8.1</span> El menú Query de la ventana Interpret.</figcaption>
+        <figcaption><span class="fignum">Tabla 2.8.1</span> Menú Query de la ventana Interpret.</figcaption>
         <div class="table-wrap">
           <table class="data">
             <thead><tr><th>Comando</th><th>Qué muestra</th></tr></thead>
             <tbody>
-              <tr><td>Graph Query…</td><td>Una magnitud de la dovela a lo largo de cada consulta —<em>Factor of safety</em>, <em>Slice weight</em>, <em>Base normal stress</em>, <em>Shear strength</em>, <em>Mobilised shear stress</em>, <em>Pore pressure</em> o <em>Base inclination</em>— en función de la distancia a lo largo de la superficie, del número de dovela o de x.</td></tr>
-              <tr><td>Delete Query…</td><td>Elimina una consulta, o todas.</td></tr>
+              <tr><td>Graph Query…</td><td>Una magnitud de las dovelas a lo largo de cada consulta (<em>Factor of safety</em>, <em>Slice weight</em>, <em>Base normal stress</em>, <em>Shear strength</em>, <em>Mobilised shear stress</em>, <em>Pore pressure</em> o <em>Base inclination</em>), representada en función de la distancia a lo largo de la superficie, del número de dovela o de x.</td></tr>
+              <tr><td>Delete Query…</td><td>Elimina una consulta o todas.</td></tr>
               <tr><td>Show Slices</td><td>Los límites de las dovelas de cada consulta.</td></tr>
-              <tr><td>Query Slice Data…</td><td>Haz clic en una dovela para mostrar sus datos en Slice Data y resaltarla en el modelo, con flechas para sus fuerzas.</td></tr>
-              <tr><td>Show Line of Thrust</td><td>La línea que pasa por los puntos de aplicación de las fuerzas entre dovelas (línea de empujes). Disponible solo para los métodos que resuelven esas fuerzas: Spencer, GLE / Morgenstern–Price, Lowe–Karafiath y Corps of Engineers #1 y #2.</td></tr>
+              <tr><td>Query Slice Data…</td><td>Haz clic en una dovela para ver sus datos en Slice Data y resaltarla en el modelo, con flechas que indican sus fuerzas.</td></tr>
+              <tr><td>Show Line of Thrust</td><td>La línea que pasa por los puntos de aplicación de las fuerzas entre dovelas (línea de empujes). Solo está disponible con los métodos que calculan esas fuerzas: Spencer, GLE / Morgenstern-Price, Lowe-Karafiath y Corps of Engineers #1 y #2.</td></tr>
               <tr><td>Show Values Along Surface…</td><td>Un gráfico de la tensión normal efectiva, la resistencia al corte disponible, la presión intersticial y la inclinación de la base a lo largo de la superficie, tal como las calculó el método.</td></tr>
-              <tr><td>Free Body Diagram of Slice…</td><td>Pide un número de dovela (contado desde 0) y dibuja su peso, las fuerzas normal y cortante en la base, la fuerza del agua intersticial, la fuerza de cualquier soporte y las resultantes entre dovelas, a una misma escala y rotuladas con sus valores.</td></tr>
-              <tr><td>Surfaces Crossing Point…</td><td>Cuenta las superficies que pasan a menos de una tolerancia (0.5 m por defecto) de un punto que se introduce y da el menor factor de seguridad entre ellas.</td></tr>
+              <tr><td>Free Body Diagram of Slice…</td><td>Pide el número de la dovela (se cuenta desde 0) y dibuja su peso, la fuerza normal y la cortante en la base, la fuerza del agua intersticial, la de los soportes que haya y las resultantes entre dovelas, todas a la misma escala y rotuladas con su valor.</td></tr>
+              <tr><td>Surfaces Crossing Point…</td><td>Cuenta las superficies que pasan cerca de un punto que se introduce (a una distancia máxima, o tolerancia, de 0.5 m por defecto) y da el menor factor de seguridad de todas ellas.</td></tr>
               <tr><td>Add Result Table (sortable)…</td><td>Todas las superficies válidas con su factor de seguridad, tipo, área de la masa deslizante y número de dovelas; haz clic en una cabecera para ordenar.</td></tr>
-              <tr><td>Query Invalid Surfaces</td><td>Activado por defecto: durante la selección, un centro sin ninguna superficie válida muestra el motivo.</td></tr>
-              <tr><td>Text during Query</td><td>Activado por defecto: la lectura flotante durante la selección.</td></tr>
+              <tr><td>Query Invalid Surfaces</td><td>Activado por defecto: al seleccionar, un centro sin ninguna superficie válida muestra el motivo.</td></tr>
+              <tr><td>Text during Query</td><td>Activado por defecto: el texto flotante durante la selección.</td></tr>
             </tbody>
           </table>
         </div>
       </figure>
 
       <h3 id="slice-data"><span class="ht">Datos de dovela</span><a class="anchor" href="#slice-data" aria-label="Enlace a esta sección">#</a></h3>
-      <p>El panel Slice Data agrupa las magnitudes de una dovela en <em>Geometry</em> (posición, anchura, longitud y ángulo de la base, altura), <em>Forces</em> (peso, presión intersticial, carga en superficie, fuerza normal en la base y la fuerza cortante motora W·sin α), <em>Stresses</em> (tensión normal y tensión normal efectiva, resistencia al corte, el factor de seguridad con el que se resolvió el equilibrio y la tensión cortante movilizada τ<sub>f</sub>/F), <em>Material</em> (nombre, modelo de resistencia, peso específico y cohesión y ángulo de rozamiento en la base) e <em>Interslice forces</em>, que solo se rellenan para los métodos que las resuelven. <strong>Copy</strong> copia la tabla al portapapeles como texto separado por tabuladores, <strong>Zoom Slice</strong> centra la vista en la dovela y <strong>Hide Geometry</strong> deja en pantalla solo la dovela, para una captura limpia. La teoría en que se basan los números está en la <a class="xref" href="../theory/methods.html">Sección 3.2</a>.</p>
+      <p>El panel Slice Data agrupa las magnitudes de una dovela en <em>Geometry</em> (posición, anchura, longitud y ángulo de la base, altura), <em>Forces</em> (peso, presión intersticial, carga en superficie, fuerza normal en la base y fuerza tangencial motora W·sin α), <em>Stresses</em> (tensión normal y tensión normal efectiva, resistencia al corte, factor de seguridad con el que se resolvió el equilibrio y tensión tangencial movilizada τ<sub>f</sub>/F), <em>Material</em> (nombre, modelo de resistencia, peso específico, y cohesión y ángulo de rozamiento en la base) e <em>Interslice forces</em>, que solo se rellenan con los métodos que las calculan. <strong>Copy</strong> copia la tabla al portapapeles como texto separado por tabuladores, <strong>Zoom Slice</strong> centra la vista en la dovela y <strong>Hide Geometry</strong> deja en pantalla solo la dovela, para obtener una captura limpia. La teoría de la que proceden estos números está en la <a class="xref" href="../theory/methods.html">Sección 3.2</a>.</p>
 
       <h2 id="charts"><span class="secnum">2.8.8</span><span class="ht">Gráficos</span><a class="anchor" href="#charts" aria-label="Enlace a esta sección">#</a></h2>
       <ul>
-        <li><span class="ui">Data → Graph SF Along Slope…</span> representa el factor de seguridad de cada superficie válida en sus intersecciones izquierda y derecha con el terreno, en función de x, ya sea el mínimo de cada uno de un número de intervalos (50 por defecto) o todos los puntos. Muestra en qué puntos del talud afloran los factores bajos, que es hacia donde hay que dirigir la búsqueda.</li>
-        <li><span class="ui">Data → Graph SF with Time…</span> representa, para un análisis de agua subterránea en régimen transitorio, el factor de seguridad de las etapas marcadas con <em>Calculate SF</em> en función del tiempo (<a class="xref" href="groundwater.html">Sección 2.9</a>). Aparece en gris cuando no hay un análisis de este tipo.</li>
-        <li>El menú <span class="ui">Statistics</span> contiene los gráficos probabilísticos y de sensibilidad (<a class="xref" href="probabilistic.html">Sección 2.10</a>), y el menú <span class="ui">Groundwater</span> el historial de iteraciones y el gráfico de convergencia de un análisis de agua subterránea.</li>
+        <li><span class="ui">Data → Graph SF Along Slope…</span> representa el factor de seguridad de cada superficie válida frente a la coordenada x de sus puntos de corte con el terreno, el izquierdo y el derecho, bien con el mínimo de cada intervalo de x (50 por defecto), bien con todos los puntos. Así se ve en qué puntos del talud afloran los factores de seguridad bajos, que es donde conviene concentrar la búsqueda.</li>
+        <li><span class="ui">Data → Graph SF with Time…</span> representa, en un análisis de agua subterránea en régimen transitorio, el factor de seguridad de las etapas marcadas con <em>Calculate SF</em> frente al tiempo (<a class="xref" href="groundwater.html">Sección 2.9</a>). Aparece desactivado si no hay un análisis de ese tipo.</li>
+        <li>Los gráficos probabilísticos y de sensibilidad están en el menú <span class="ui">Statistics</span> (<a class="xref" href="probabilistic.html">Sección 2.10</a>), y el historial de iteraciones y el gráfico de convergencia de un análisis de agua subterránea, en el menú <span class="ui">Groundwater</span>.</li>
       </ul>
 
       <h2 id="invalid-surfaces"><span class="secnum">2.8.9</span><span class="ht">Superficies no válidas y códigos de error</span><a class="anchor" href="#invalid-surfaces" aria-label="Enlace a esta sección">#</a></h2>
-      <p><span class="ui">Data → Summary of Invalid Surfaces…</span> indica cuántas superficies se rechazaron de las generadas, agrupadas por motivo, cuántas se descartaron antes del dovelado (por ejemplo, un círculo que no corta el terreno dos veces) y cuántas retiró un objeto de foco. A una superficie que falla no se le asigna factor de seguridad; allí donde se espera un número, lleva uno de los códigos de la <a class="xref" href="#tbl-error-codes">Tabla 2.8.2</a>, descritos con detalle en la <a class="xref" href="../reference/error-codes.html">Sección 5.5</a>.</p>
+      <p><span class="ui">Data → Summary of Invalid Surfaces…</span> indica cuántas de las superficies generadas se rechazaron, agrupadas por motivo, cuántas se descartaron antes de dividirlas en dovelas (por ejemplo, un círculo que no corta dos veces el terreno) y cuántas eliminó un objeto de foco. Una superficie que falla no recibe factor de seguridad; en el lugar donde se espera un número figura uno de los códigos de la <a class="xref" href="#tbl-error-codes">Tabla 2.8.2</a>, descritos en detalle en la <a class="xref" href="../reference/error-codes.html">Sección 5.5</a>.</p>
       <figure class="tbl" id="tbl-error-codes">
-        <figcaption><span class="fignum">Tabla 2.8.2</span> Códigos escritos en lugar del factor de seguridad de una superficie rechazada.</figcaption>
+        <figcaption><span class="fignum">Tabla 2.8.2</span> Códigos que se escriben en lugar del factor de seguridad de una superficie rechazada.</figcaption>
         <div class="table-wrap">
           <table class="data">
             <thead><tr><th class="n">Código</th><th>Motivo</th></tr></thead>
             <tbody>
               <tr><td class="n">−120</td><td>Tensión de tracción en la base de una dovela (Tensile stress check)</td></tr>
-              <tr><td class="n">−112</td><td>m-alpha por debajo de su límite (m-alpha check)</td></tr>
-              <tr><td class="n">−111</td><td>Sin factor de seguridad convergido</td></tr>
-              <tr><td class="n">−101</td><td>Cualquier otro rechazo</td></tr>
+              <tr><td class="n">−112</td><td>m-alfa por debajo de su límite (m-alpha check)</td></tr>
+              <tr><td class="n">−111</td><td>El factor de seguridad no converge</td></tr>
+              <tr><td class="n">−101</td><td>Cualquier otro motivo de rechazo</td></tr>
             </tbody>
           </table>
         </div>
       </figure>
-      <p>Para ver dónde están las superficies rechazadas, usa <em>Surfaces with error code</em> en <span class="ui">Data → Filter Surfaces…</span>. Una zona en blanco en la rejilla coloreada suele explicarse allí.</p>
+      <p>Para localizar las superficies rechazadas, usa <em>Surfaces with error code</em> en <span class="ui">Data → Filter Surfaces…</span>. Un hueco en blanco en la rejilla coloreada suele explicarse ahí.</p>
 
       <h2 id="exports"><span class="secnum">2.8.10</span><span class="ht">Exportación de resultados</span><a class="anchor" href="#exports" aria-label="Enlace a esta sección">#</a></h2>
       <figure class="tbl" id="tbl-exports">
         <figcaption><span class="fignum">Tabla 2.8.3</span> Exportaciones de la ventana Interpret.</figcaption>
         <div class="table-wrap">
           <table class="data">
-            <thead><tr><th>Comando</th><th>Qué escribe</th></tr></thead>
+            <thead><tr><th>Comando</th><th>Qué exporta</th></tr></thead>
             <tbody>
-              <tr><td>File → Export Image…</td><td>La vista tal como está en pantalla, como PNG o JPEG.</td></tr>
-              <tr><td>Edit → Copy Image</td><td>La misma vista en el portapapeles, como mapa de bits (también en la barra de herramientas).</td></tr>
-              <tr><td>File → Export Data (CSV)…</td><td>Una fila por superficie válida, ordenadas por factor de seguridad: posición, factor de seguridad, método, centro, radio, x de los dos extremos, iteraciones y convergencia.</td></tr>
-              <tr><td>Data → Export Raw Data…</td><td>Una fila por superficie analizada, válida o no: centro, radio, x de los dos extremos y el factor de seguridad o, en su lugar, el código de error. <strong>Copy</strong> lo copia al portapapeles como texto separado por tabuladores; <strong>Save…</strong> escribe un archivo <code>.txt</code> (tabuladores) o <code>.csv</code> (comas).</td></tr>
-              <tr><td>Data → Export Slice Data (CSV)…</td><td>Las dovelas de la superficie seleccionada, o de la crítica, con los resultados por dovela propios del método.</td></tr>
+              <tr><td>File → Export Image…</td><td>La vista tal como aparece en pantalla, en PNG o JPEG.</td></tr>
+              <tr><td>Edit → Copy Image</td><td>La misma vista, copiada al portapapeles como mapa de bits (también en la barra de herramientas).</td></tr>
+              <tr><td>File → Export Data (CSV)…</td><td>Las superficies válidas, una por fila y ordenadas por factor de seguridad, con su número de orden, factor de seguridad, método, centro, radio, x de los dos extremos, iteraciones y convergencia.</td></tr>
+              <tr><td>Data → Export Raw Data…</td><td>Todas las superficies analizadas, válidas o no, una por fila, con el centro, el radio, la x de los dos extremos y el factor de seguridad o, en su lugar, el código de error. <strong>Copy</strong> lo copia al portapapeles como texto separado por tabuladores y <strong>Save…</strong> guarda un archivo <code>.txt</code> (tabuladores) o <code>.csv</code> (comas).</td></tr>
+              <tr><td>Data → Export Slice Data (CSV)…</td><td>Las dovelas de la superficie seleccionada o de la crítica, con los resultados por dovela propios del método utilizado.</td></tr>
               <tr><td>Statistics → Export Statistics Data…</td><td>Las muestras probabilísticas (<a class="xref" href="probabilistic.html">Sección 2.10</a>).</td></tr>
               <tr><td>Groundwater → Export All Nodal Values…</td><td>Altura total, altura de presión y presión intersticial en cada nodo de la malla (<a class="xref" href="groundwater.html">Sección 2.9</a>).</td></tr>
             </tbody>
           </table>
         </div>
       </figure>
-      <p>Un informe en PDF del análisis se genera desde la ventana principal con <span class="ui">File → Generate Report…</span>; las imágenes, los dibujos DXF y las ejecuciones mediante scripts se tratan en la <a class="xref" href="automation.html">Sección 2.12</a>. El menú <span class="ui">Data</span> contiene además dos comandos relativos a los soportes, <em>Support Force Diagram…</em> y <em>Back Analysis…</em>; los soportes se tratan en la <a class="xref" href="supports.html">Sección 2.6</a>.</p>
+      <p>El informe del análisis en PDF se genera desde la ventana principal con <span class="ui">File → Generate Report…</span>. Las imágenes, los dibujos DXF y los análisis ejecutados mediante scripts se explican en la <a class="xref" href="automation.html">Sección 2.12</a>. El menú <span class="ui">Data</span> incluye además dos comandos relacionados con los soportes, <em>Support Force Diagram…</em> y <em>Back Analysis…</em>, que se tratan en la <a class="xref" href="supports.html">Sección 2.6</a>.</p>
 
       <h2 id="known-issues"><span class="secnum">2.8.11</span><span class="ht">Comandos sin efecto en la versión 0.1.235</span><a class="anchor" href="#known-issues" aria-label="Enlace a esta sección">#</a></h2>
-      <div class="note warn"><span class="label">En los menús, pero sin funcionar</span>
-        <p>Estos comandos de la ventana Interpret no hacen nada, o hacen menos de lo que dice su nombre, en la versión 0.1.235:</p>
+      <div class="note warn"><span class="label">Están en los menús, pero no funcionan</span>
+        <p>En la versión 0.1.235, estos comandos de la ventana Interpret no hacen nada o hacen menos de lo que indica su nombre:</p>
         <ul>
-          <li><span class="ui">Groundwater → Phreatic Surface</span>, <span class="ui">Piezometric Lines</span>, <span class="ui">Flow Vectors</span> y <span class="ui">Streamlines</span> se pueden marcar, pero no tienen efecto. Los vectores de flujo y la superficie libre los dibuja <span class="ui">Groundwater → Interpret Groundwater</span> en la ventana principal.</li>
-          <li><span class="ui">Groundwater → Contour Options…</span> guarda sus ajustes, pero no se dibuja nada con ellos; para trazar los contornos de los campos de agua subterránea, usa en su lugar <span class="ui">View → Contour Options…</span>. <span class="ui">Groundwater → Define User Data…</span> evalúa la expresión en cada nodo y da su intervalo, pero no la representa.</li>
+          <li><span class="ui">Groundwater → Phreatic Surface</span>, <span class="ui">Piezometric Lines</span>, <span class="ui">Flow Vectors</span> y <span class="ui">Streamlines</span> se pueden marcar, pero no tienen efecto. Los vectores de flujo y la superficie libre se dibujan con <span class="ui">Groundwater → Interpret Groundwater</span>, en la ventana principal.</li>
+          <li><span class="ui">Groundwater → Contour Options…</span> guarda los ajustes, pero no se dibuja nada con ellos; para los contornos de los campos de agua subterránea, usa <span class="ui">View → Contour Options…</span>. <span class="ui">Groundwater → Define User Data…</span> evalúa la expresión en cada nodo y da su intervalo de valores, pero no la representa.</li>
           <li><span class="ui">Tools → Measure</span> y <span class="ui">Tools → Dimension Length</span> no tienen efecto.</li>
-          <li><span class="ui">View → Data Tips</span> y el indicador <em>DATA TIPS</em> de la barra de estado no tienen efecto; la previsualización de la superficie bajo el puntero está siempre activada.</li>
-          <li><span class="ui">Data → Support Force Analysis…</span> enumera todos los soportes del modelo con su capacidad; no calcula la fuerza que toma cada uno en la superficie crítica.</li>
+          <li><span class="ui">View → Data Tips</span> y el indicador <em>DATA TIPS</em> de la barra de estado no tienen efecto; la vista previa de la superficie bajo el puntero está siempre activa.</li>
+          <li><span class="ui">Data → Support Force Analysis…</span> enumera todos los soportes del modelo con su capacidad, pero no calcula la fuerza que toma cada uno en la superficie crítica.</li>
         </ul>
       </div>
     </article>
@@ -317,7 +317,7 @@
   <aside class="doc-toc" aria-label="En esta página">
     <div class="toc-inner">
 <!-- @inc pagetoc -->
-<span class="label">En esta página</span><ul><li class="h2"><a href="#compute">2.8.1 Ejecución del análisis</a></li><li class="h2"><a href="#results-dock">2.8.2 El panel Results</a></li><li class="h2"><a href="#analysis-notes">2.8.3 Analysis Notes</a></li><li class="h2"><a href="#info-viewer">2.8.4 Info Viewer</a></li><li class="h2"><a href="#interpret">2.8.5 La ventana Interpret</a></li><li class="h3"><a href="#colour-grid">La rejilla coloreada de centros</a></li><li class="h2"><a href="#which-surfaces">2.8.6 Elección de las superficies que se dibujan</a></li><li class="h2"><a href="#queries">2.8.7 Consultas</a></li><li class="h3"><a href="#slice-data">Datos de dovela</a></li><li class="h2"><a href="#charts">2.8.8 Gráficos</a></li><li class="h2"><a href="#invalid-surfaces">2.8.9 Superficies no válidas y códigos de error</a></li><li class="h2"><a href="#exports">2.8.10 Exportación de resultados</a></li><li class="h2"><a href="#known-issues">2.8.11 Comandos sin efecto en la versión 0.1.235</a></li></ul><button class="print" type="button"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="1.5"/><path d="M6 14h12v7H6z"/></svg> Imprimir esta página</button>
+<span class="label">En esta página</span><ul><li class="h2"><a href="#compute">2.8.1 Ejecución del análisis</a></li><li class="h2"><a href="#results-dock">2.8.2 El panel Results</a></li><li class="h2"><a href="#analysis-notes">2.8.3 Analysis Notes</a></li><li class="h2"><a href="#info-viewer">2.8.4 Info Viewer</a></li><li class="h2"><a href="#interpret">2.8.5 La ventana Interpret</a></li><li class="h3"><a href="#colour-grid">La rejilla de centros coloreada</a></li><li class="h2"><a href="#which-surfaces">2.8.6 Qué superficies se dibujan</a></li><li class="h2"><a href="#queries">2.8.7 Consultas</a></li><li class="h3"><a href="#slice-data">Datos de dovela</a></li><li class="h2"><a href="#charts">2.8.8 Gráficos</a></li><li class="h2"><a href="#invalid-surfaces">2.8.9 Superficies no válidas y códigos de error</a></li><li class="h2"><a href="#exports">2.8.10 Exportación de resultados</a></li><li class="h2"><a href="#known-issues">2.8.11 Comandos sin efecto en la versión 0.1.235</a></li></ul><button class="print" type="button"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="1.5"/><path d="M6 14h12v7H6z"/></svg> Imprimir esta página</button>
 <!-- @end pagetoc -->
     </div>
   </aside>
@@ -332,7 +332,7 @@
           <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
           <b>OpenGeoRock</b>
         </a>
-        <p class="tagline">Software geotécnico de código abierto, desarrollado a la vista de todos en la Universidad Politécnica de Cartagena.</p>
+        <p class="tagline">Software geotécnico de código abierto desarrollado en la Universidad Politécnica de Cartagena.</p>
         <span class="lang" role="group" aria-label="Idioma"><a href="../../../docs/user-guide/results.html" hreflang="en" lang="en">EN</a><a href="../../../es/docs/user-guide/results.html" hreflang="es" lang="es" aria-current="true">ES</a></span>
       </div>
       <div>
@@ -345,7 +345,7 @@
         </ul>
       </div>
       <div>
-        <h5>Aprende</h5>
+        <h5>Recursos</h5>
         <ul>
           <li><a href="../../../es/docs/index.html">Documentación</a></li>
           <li><a href="../../../es/docs/getting-started/quick-start.html">Inicio rápido</a></li>
@@ -375,7 +375,7 @@
       </div>
     </div>
     <div class="legal">
-      <span>© 2026 Samuel Sáez López · OGR Slip2D es software libre bajo AGPL-3.0-or-later, sin garantía de ningún tipo.</span>
+      <span>© 2026 Samuel Sáez López · OGR Slip2D es software libre (licencia AGPL-3.0 o posterior) y se distribuye sin ninguna garantía.</span>
       <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
     </div>
   </div>

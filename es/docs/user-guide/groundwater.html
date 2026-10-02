@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>Agua subterránea por elementos finitos — documentación de OGR Slip2D</title>
-<meta name="description" content="Cálculo de las presiones intersticiales de un talud por filtración con elementos finitos en OGR Slip2D: método, propiedades hidráulicas, malla, condiciones de contorno y embalses, análisis estacionario y transitorio, interpretación, acoplamiento con el análisis de estabilidad y el barrido de niveles de desembalse.">
+<meta name="description" content="Cálculo de las presiones intersticiales de un talud por filtración con elementos finitos en OGR Slip2D: método, propiedades hidráulicas, malla, condiciones de contorno y embalses, análisis estacionario y transitorio, interpretación, acoplamiento con el análisis de estabilidad y barrido de niveles de desembalse.">
 <!-- @inc head -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>document.documentElement.classList.replace("no-js", "js")</script>
@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="OpenGeoRock">
 <meta property="og:title" content="Agua subterránea por elementos finitos — documentación de OGR Slip2D">
-<meta property="og:description" content="Cálculo de las presiones intersticiales de un talud por filtración con elementos finitos en OGR Slip2D: método, propiedades hidráulicas, malla, condiciones de contorno y embalses, análisis estacionario y transitorio, interpretación, acoplamiento con el análisis de estabilidad y el barrido de niveles de desembalse.">
+<meta property="og:description" content="Cálculo de las presiones intersticiales de un talud por filtración con elementos finitos en OGR Slip2D: método, propiedades hidráulicas, malla, condiciones de contorno y embalses, análisis estacionario y transitorio, interpretación, acoplamiento con el análisis de estabilidad y barrido de niveles de desembalse.">
 <meta property="og:url" content="https://opengeorock.org/es/docs/user-guide/groundwater.html">
 <meta property="og:image" content="https://opengeorock.org/assets/img/og-image.png">
 <meta property="og:locale" content="es_ES">
@@ -48,23 +48,23 @@
             <div class="mega-col">
               <span class="label">Disponible hoy</span>
               <a class="mega-item feature" href="../../../es/products/slip2d.html"><b>OGR Slip2D</b><span>Estabilidad de taludes 2D: equilibrio límite, agua subterránea por elementos finitos y análisis probabilístico.</span></a>
-              <a class="mega-item" href="../../../es/ai/index.html"><b>Servidor MCP para agentes de IA <span class="tag live">nuevo</span></b><span>Claude, ChatGPT o un modelo local construyen y calculan modelos de OGR Slip2D.</span></a>
+              <a class="mega-item" href="../../../es/ai/index.html"><b>Servidor MCP para agentes de IA <span class="tag live">nuevo</span></b><span>Claude, ChatGPT o un modelo local crean y calculan modelos de OGR Slip2D.</span></a>
             </div>
             <div class="mega-col">
-              <span class="label">En la hoja de ruta</span>
+              <span class="label">Previstos</span>
               <a class="mega-item" href="../../../es/products/index.html#ogr-data"><b>OGR Data</b><span>Base de datos de propiedades de suelos y macizos rocosos</span></a>
               <a class="mega-item" href="../../../es/products/index.html#ogr-fem2d"><b>OGR FEM2D</b><span>Elementos finitos elastoplásticos 2D</span></a>
               <a class="mega-item" href="../../../es/products/index.html#ogr-slip3d"><b>OGR Slip3D</b><span>Equilibrio límite en 3D</span></a>
               <a class="mega-item" href="../../../es/products/index.html#ogr-fem3d"><b>OGR FEM3D</b><span>Elementos finitos 3D con flujo acoplado</span></a>
             </div>
             <div class="mega-col">
-              <span class="label">Úsalo desde</span>
+              <span class="label">Cómo se usa</span>
               <a class="mega-item" href="../../../es/docs/getting-started/interface.html"><b>El programa de escritorio</b><span>Modelador, intérprete y terminal de Python</span></a>
               <a class="mega-item" href="../../../es/docs/reference/python-api.html"><b>Python</b><span>Automatiza análisis desde tu propio código</span></a>
               <a class="mega-item" href="../../../es/docs/reference/cli.html"><b>La línea de comandos</b><span>Cálculos por lotes con ogr-slip2d-cli</span></a>
             </div>
           </div>
-          <div class="mega-foot"><span>Cinco programas, un núcleo abierto.</span><a href="../../../es/products/index.html">Todos los productos →</a></div>
+          <div class="mega-foot"><span>Cinco programas sobre un mismo núcleo abierto.</span><a href="../../../es/products/index.html">Todos los productos →</a></div>
         </div>
       </div>
       <a href="../../../es/examples/index.html" data-nav="examples">Ejemplos</a>
@@ -114,14 +114,14 @@
 <li><a href="../../../es/docs/user-guide/geometry.html"><span class="n">2.2</span><span>Geometría y contornos</span></a></li>
 <li><a href="../../../es/docs/user-guide/materials.html"><span class="n">2.3</span><span>Materiales</span></a></li>
 <li><a href="../../../es/docs/user-guide/water.html"><span class="n">2.4</span><span>Agua y presión intersticial</span></a></li>
-<li><a href="../../../es/docs/user-guide/loads.html"><span class="n">2.5</span><span>Cargas y carga sísmica</span></a></li>
+<li><a href="../../../es/docs/user-guide/loads.html"><span class="n">2.5</span><span>Cargas y acción sísmica</span></a></li>
 <li><a href="../../../es/docs/user-guide/supports.html"><span class="n">2.6</span><span>Soportes</span></a></li>
 <li><a href="../../../es/docs/user-guide/surfaces.html"><span class="n">2.7</span><span>Superficies de rotura y búsqueda</span></a></li>
 <li><a href="../../../es/docs/user-guide/results.html"><span class="n">2.8</span><span>Cálculo e interpretación de resultados</span></a></li>
 <li><a href="../../../es/docs/user-guide/groundwater.html" aria-current="page"><span class="n">2.9</span><span>Agua subterránea por elementos finitos</span></a></li>
 <li><a href="../../../es/docs/user-guide/probabilistic.html"><span class="n">2.10</span><span>Análisis probabilístico y de sensibilidad</span></a></li>
 <li><a href="../../../es/docs/user-guide/design-standards.html"><span class="n">2.11</span><span>Normas de diseño</span></a></li>
-<li><a href="../../../es/docs/user-guide/automation.html"><span class="n">2.12</span><span>Informes, scripting y línea de comandos</span></a></li>
+<li><a href="../../../es/docs/user-guide/automation.html"><span class="n">2.12</span><span>Informes, scripts y línea de comandos</span></a></li>
 </ul></details>
 <details open><summary>3 · Manual de teoría</summary><ul>
 <li><a href="../../../es/docs/theory/limit-equilibrium.html"><span class="n">3.1</span><span>Equilibrio límite y factor de seguridad</span></a></li>
@@ -129,11 +129,11 @@
 <li><a href="../../../es/docs/theory/interslice.html"><span class="n">3.3</span><span>Fuerzas entre dovelas, convergencia y admisibilidad</span></a></li>
 <li><a href="../../../es/docs/theory/search.html"><span class="n">3.4</span><span>Búsqueda de la superficie de rotura</span></a></li>
 <li><a href="../../../es/docs/theory/strength.html"><span class="n">3.5</span><span>Modelos de resistencia al corte</span></a></li>
-<li><a href="../../../es/docs/theory/pore-pressure.html"><span class="n">3.6</span><span>Presión intersticial y resistencia no saturada</span></a></li>
+<li><a href="../../../es/docs/theory/pore-pressure.html"><span class="n">3.6</span><span>Presión intersticial y resistencia de los suelos no saturados</span></a></li>
 <li><a href="../../../es/docs/theory/seepage.html"><span class="n">3.7</span><span>Filtración por elementos finitos</span></a></li>
 <li><a href="../../../es/docs/theory/rapid-drawdown.html"><span class="n">3.8</span><span>Desembalse rápido</span></a></li>
 <li><a href="../../../es/docs/theory/seismic.html"><span class="n">3.9</span><span>Análisis sísmico</span></a></li>
-<li><a href="../../../es/docs/theory/supports.html"><span class="n">3.10</span><span>Fuerzas de los soportes</span></a></li>
+<li><a href="../../../es/docs/theory/supports.html"><span class="n">3.10</span><span>Fuerzas de soporte</span></a></li>
 <li><a href="../../../es/docs/theory/probabilistic.html"><span class="n">3.11</span><span>Análisis probabilístico</span></a></li>
 <li><a href="../../../es/docs/theory/partial-factors.html"><span class="n">3.12</span><span>Coeficientes parciales (Eurocódigo 7)</span></a></li>
 </ul></details>
@@ -146,7 +146,7 @@
 <li><a href="../../../es/docs/reference/mcp.html"><span class="n">5.1</span><span>Servidor MCP</span></a></li>
 <li><a href="../../../es/docs/reference/cli.html"><span class="n">5.2</span><span>Interfaz de línea de comandos</span></a></li>
 <li><a href="../../../es/docs/reference/python-api.html"><span class="n">5.3</span><span>API de Python</span></a></li>
-<li><a href="../../../es/docs/reference/file-format.html"><span class="n">5.4</span><span>El formato .ogr</span></a></li>
+<li><a href="../../../es/docs/reference/file-format.html"><span class="n">5.4</span><span>El formato de archivo .ogr</span></a></li>
 <li><a href="../../../es/docs/reference/error-codes.html"><span class="n">5.5</span><span>Códigos de error</span></a></li>
 <li><a href="../../../es/docs/reference/notation.html"><span class="n">5.6</span><span>Notación y glosario</span></a></li>
 <li><a href="../../../es/docs/reference/bibliography.html"><span class="n">5.7</span><span>Bibliografía</span></a></li>
@@ -162,12 +162,12 @@
 <nav class="crumbs label" aria-label="Ruta de navegación"><a href="../../../es/docs/index.html">Documentación</a><span aria-hidden="true">/</span><span>2 · Guía de usuario</span></nav>
 <div class="chapter label">2.9</div>
 <h1>Agua subterránea por elementos finitos</h1>
-<div class="meta label"><span>Describe OGR Slip2D <span data-v>0.1.235</span></span></div>
+<div class="meta label"><span>Válido para OGR Slip2D <span data-v>0.1.235</span></span></div>
 <!-- @end dochead -->
     </header>
 
     <article class="doc prose">
-      <p class="lede">En lugar de dibujar un nivel freático, OGR Slip2D puede calcular las presiones intersticiales del talud mediante un análisis de filtración por elementos finitos, estacionario o por etapas a lo largo del tiempo, y pasárselas al análisis de equilibrio límite. El menú <span class="ui">Groundwater</span> está ordenado como el flujo de trabajo, y cada comando queda disponible solo cuando se ha hecho el paso anterior. Las ecuaciones están en la <a class="xref" href="../theory/seepage.html">Sección 3.7</a>.</p>
+      <p class="lede">En lugar de dibujar un nivel freático, OGR Slip2D puede calcular las presiones intersticiales del talud con un análisis de filtración por elementos finitos, estacionario o por etapas en el tiempo, y pasárselas al análisis de equilibrio límite. El menú <span class="ui">Groundwater</span> sigue el orden del flujo de trabajo, y cada comando solo está disponible cuando se ha completado el paso anterior. Las ecuaciones están en la <a class="xref" href="../theory/seepage.html">Sección 3.7</a>.</p>
 
       <h2 id="workflow"><span class="secnum">2.9.1</span><span class="ht">El flujo de trabajo</span><a class="anchor" href="#workflow" aria-label="Enlace a esta sección">#</a></h2>
       <figure class="tbl" id="tbl-workflow">
@@ -177,13 +177,13 @@
             <thead><tr><th class="n">Paso</th><th>Comando</th><th>Disponible cuando</th></tr></thead>
             <tbody>
               <tr><td class="n">1</td><td><span class="ui">Analysis → Project Settings →</span> <span class="ui">Groundwater</span>: Method <code>fea_steady</code> o <code>fea_transient</code></td><td>siempre</td></tr>
-              <tr><td class="n">2</td><td><span class="ui">Properties → Define Materials…</span>: Water Parameters, Type <code>fem</code>, para cada material que toma el campo (<a class="xref" href="#coupling">Sección 2.9.8</a>)</td><td>siempre, pero véase la nota de esa sección</td></tr>
-              <tr><td class="n">3</td><td><span class="ui">Groundwater →</span> <span class="ui">Define Hydraulic Properties…</span></td><td>el método es de elementos finitos y existen materiales</td></tr>
+              <tr><td class="n">2</td><td><span class="ui">Properties → Define Materials…</span>: Water Parameters, Type <code>fem</code>, para cada material que toma el campo (<a class="xref" href="#coupling">Sección 2.9.8</a>)</td><td>siempre; véase la nota de esa sección</td></tr>
+              <tr><td class="n">3</td><td><span class="ui">Groundwater →</span> <span class="ui">Define Hydraulic Properties…</span></td><td>el método es de elementos finitos y hay materiales</td></tr>
               <tr><td class="n">4</td><td><span class="ui">Groundwater → Mesh →</span> <span class="ui">Generate FE Mesh…</span></td><td>siempre (necesita un contorno externo)</td></tr>
-              <tr><td class="n">5</td><td><span class="ui">Groundwater →</span> <span class="ui">Set Boundary Conditions…</span></td><td>existe una malla</td></tr>
+              <tr><td class="n">5</td><td><span class="ui">Groundwater →</span> <span class="ui">Set Boundary Conditions…</span></td><td>hay una malla</td></tr>
               <tr><td class="n">6</td><td><span class="ui">Groundwater → Transient Groundwater…</span> (solo para un análisis por etapas)</td><td>el método es de elementos finitos</td></tr>
-              <tr><td class="n">7</td><td><span class="ui">Groundwater → Compute Groundwater</span></td><td>existe una malla</td></tr>
-              <tr><td class="n">8</td><td><span class="ui">Groundwater → Interpret Groundwater</span></td><td>existe un resultado de agua subterránea</td></tr>
+              <tr><td class="n">7</td><td><span class="ui">Groundwater → Compute Groundwater</span></td><td>hay una malla</td></tr>
+              <tr><td class="n">8</td><td><span class="ui">Groundwater → Interpret Groundwater</span></td><td>hay un resultado de agua subterránea</td></tr>
               <tr><td class="n">9</td><td><span class="ui">Analysis → Compute</span></td><td>—</td></tr>
             </tbody>
           </table>
@@ -191,45 +191,45 @@
       </figure>
 
       <h2 id="method"><span class="secnum">2.9.2</span><span class="ht">Elección de un método de elementos finitos</span><a class="anchor" href="#method" aria-label="Enlace a esta sección">#</a></h2>
-      <p>En <span class="ui">Analysis → Project Settings →</span> <span class="ui">Groundwater</span>, fija <strong>Method</strong> en <code>fea_steady</code> o <code>fea_transient</code>. El programa trata ambos de la misma manera: que el análisis se ejecute por etapas lo decide el grupo <strong>Advanced</strong> de la misma página, donde <strong>Transient groundwater</strong> es una de cuatro opciones mutuamente excluyentes (junto con <em>None</em>, <em>Calculate Excess Pore Pressure (B-bar method)</em> y <em>Rapid Drawdown analysis</em>). Con un método de elementos finitos:</p>
+      <p>En <span class="ui">Analysis → Project Settings →</span> <span class="ui">Groundwater</span>, pon <strong>Method</strong> en <code>fea_steady</code> o <code>fea_transient</code>. El programa trata los dos igual: que el análisis se haga por etapas lo decide el grupo <strong>Advanced</strong> de la misma página, donde <strong>Transient groundwater</strong> es una de cuatro opciones mutuamente excluyentes (junto con <em>None</em>, <em>Calculate Excess Pore Pressure (B-bar method)</em> y <em>Rapid Drawdown analysis</em>). Con un método de elementos finitos:</p>
       <ul>
-        <li>los comandos hidráulicos del menú Groundwater quedan disponibles;</li>
-        <li><span class="ui">Properties → Define Materials…</span> muestra dos campos de resistencia no saturada para cada material, <strong>Unsaturated Shear Strength Angle</strong> (φ<sup>b</sup>) y <strong>Air Entry Value</strong>, ambos 0 por defecto, de modo que la succión no añade resistencia salvo que se pida (<a class="xref" href="../theory/pore-pressure.html">Sección 3.6</a>). <strong>Negative pore pressure cutoff</strong>, en la página Groundwater, limita la succión que pueden usar;</li>
-        <li>un embalse no se dibuja: es la altura total que se prescribe en el contorno, y el análisis de estabilidad aplica el peso del agua en reposo allí donde esa altura queda por encima del terreno. No dibujes un nivel freático sobre él.</li>
+        <li>se habilitan los comandos hidráulicos del menú Groundwater;</li>
+        <li><span class="ui">Properties → Define Materials…</span> muestra dos campos de resistencia no saturada por material, <strong>Unsaturated Shear Strength Angle</strong> (φ<sup>b</sup>) y <strong>Air Entry Value</strong>, ambos con valor 0 por defecto, por lo que la succión no añade resistencia salvo que se pida (<a class="xref" href="../theory/pore-pressure.html">Sección 3.6</a>). <strong>Negative pore pressure cutoff</strong>, en la página Groundwater, limita la succión que se puede usar;</li>
+        <li>un embalse no se dibuja: es la altura total que se prescribe en el contorno, y el análisis de estabilidad aplica el peso del agua en reposo allí donde esa altura queda por encima del terreno. No dibujes encima un nivel freático.</li>
       </ul>
 
       <h2 id="hydraulic-properties"><span class="secnum">2.9.3</span><span class="ht">Propiedades hidráulicas</span><a class="anchor" href="#hydraulic-properties" aria-label="Enlace a esta sección">#</a></h2>
-      <p><span class="ui">Groundwater →</span> <span class="ui">Define Hydraulic Properties…</span> muestra los materiales a la izquierda (los nombres y los colores se editan en Define Materials) y la permeabilidad del seleccionado a la derecha. Un material que nunca se edita aquí conserva los valores por defecto: permeabilidad constante con K<sub>s</sub> = 1 × 10⁻⁶.</p>
+      <p><span class="ui">Groundwater →</span> <span class="ui">Define Hydraulic Properties…</span> muestra a la izquierda la lista de materiales (los nombres y los colores se editan en Define Materials) y a la derecha la permeabilidad del material seleccionado. Los materiales que no se editen aquí conservan los valores por defecto: permeabilidad constante con K<sub>s</sub> = 1 × 10⁻⁶.</p>
       <figure class="tbl" id="tbl-hydraulic">
         <figcaption><span class="fignum">Tabla 2.9.2</span> Campos de Define Hydraulic Properties.</figcaption>
         <div class="table-wrap">
           <table class="data">
             <thead><tr><th>Campo</th><th>Significado</th><th>Por defecto</th></tr></thead>
             <tbody>
-              <tr><td>Saturated permeability Ks</td><td>Permeabilidad K1 del suelo saturado. El campo queda deshabilitado para <em>User Defined</em>, que la toma del primer punto de su curva.</td><td class="n">1 × 10⁻⁶</td></tr>
-              <tr><td>K2 / K1</td><td>Anisotropía: relación entre la segunda permeabilidad principal y la primera.</td><td class="n">1</td></tr>
+              <tr><td>Saturated permeability Ks</td><td>Permeabilidad K1 del suelo saturado. Se deshabilita con <em>User Defined</em>, que la toma del primer punto de su curva.</td><td class="n">1 × 10⁻⁶</td></tr>
+              <tr><td>K2 / K1</td><td>Anisotropía: cociente entre la segunda permeabilidad principal y la primera.</td><td class="n">1</td></tr>
               <tr><td>K1 angle (deg from +X)</td><td>Dirección de K1.</td><td class="n">0°</td></tr>
               <tr><td>Model</td><td>Cómo disminuye la permeabilidad en la zona no saturada: <em>Constant</em>, <em>Simple</em> (con un tipo de suelo: General, Sand, Silt, Clay o Loam), <em>Brooks-Corey</em>, <em>Fredlund-Xing</em>, <em>Gardner</em>, <em>van Genuchten</em> o <em>User Defined</em>. Los parámetros del modelo elegido aparecen debajo.</td><td>Constant</td></tr>
             </tbody>
           </table>
         </div>
       </figure>
-      <p><strong>Pick…</strong> carga parámetros representativos de la literatura para Brooks-Corey, Fredlund-Xing, Gardner y van Genuchten; <strong>Plot…</strong> dibuja la permeabilidad en función de la succión para el material mostrado.</p>
+      <p><strong>Pick…</strong> carga parámetros representativos de la literatura para Brooks-Corey, Fredlund-Xing, Gardner y van Genuchten; <strong>Plot…</strong> dibuja la permeabilidad frente a la succión del material que se muestra.</p>
 
       <figure class="fig shot-fig" id="fig-hydraulic-properties">
-        <div class="art"><img src="../../../assets/img/shots/hydraulic-properties.webp" alt="El diálogo Define Hydraulic Properties: la lista de materiales a la izquierda; la permeabilidad saturada, la anisotropía y el modelo de permeabilidad no saturada con sus parámetros a la derecha" loading="lazy" width="905" height="650"></div>
+        <div class="art"><img src="../../../assets/img/shots/hydraulic-properties.webp" alt="El diálogo Define Hydraulic Properties: a la izquierda, la lista de materiales; a la derecha, la permeabilidad saturada, la anisotropía y el modelo de permeabilidad no saturada con sus parámetros" loading="lazy" width="905" height="650"></div>
         <figcaption><span class="fignum">Figura 2.9.1</span> Define Hydraulic Properties.</figcaption>
       </figure>
 
-      <div class="note warn"><span class="label">Las unidades no se convierten</span><p>El programa no convierte ni K<sub>s</sub> ni los tiempos de las etapas: <em>Permeability Units</em> y <em>Time Units</em>, en la página General de Project Settings, solo los etiquetan, y el diálogo no muestra ninguna unidad. Un análisis estacionario no depende de la unidad siempre que todos los materiales usen la misma, pero uno transitorio sí: da los tiempos de las etapas en la unidad de tiempo de K<sub>s</sub> —segundos si K<sub>s</sub> está en m/s—. Ten en cuenta que las dos etiquetas valen por defecto m/s y días.</p></div>
+      <div class="note warn"><span class="label">Las unidades no se convierten</span><p>El programa no convierte ni K<sub>s</sub> ni los tiempos de las etapas: <em>Permeability Units</em> y <em>Time Units</em>, en la página General de Project Settings, solo los rotulan, y el diálogo no muestra ninguna unidad. Un análisis estacionario no depende de la unidad siempre que todos los materiales usen la misma, pero uno transitorio sí: da los tiempos de las etapas en la unidad de tiempo de K<sub>s</sub> (segundos si K<sub>s</sub> está en m/s). Ten en cuenta que, por defecto, las dos etiquetas son m/s y días.</p></div>
 
       <h2 id="mesh"><span class="secnum">2.9.4</span><span class="ht">La malla de elementos finitos</span><a class="anchor" href="#mesh" aria-label="Enlace a esta sección">#</a></h2>
-      <p><span class="ui">Groundwater → Mesh →</span> <span class="ui">Generate FE Mesh…</span> pide el <strong>número aproximado de elementos</strong> (1000 por defecto; de 20 a 200 000) y genera la malla de cada región de material del modelo con triángulos de tres nodos, con los nodos compartidos a lo largo de los contactos, de modo que cada elemento toma el material que el análisis de equilibrio límite lee para esa región. La barra de estado indica el número de elementos y de nodos y el menor ángulo de la malla.</p>
-      <p>Las condiciones de contorno están ligadas a números de nodo, de modo que una malla nueva —o <span class="ui">Groundwater → Mesh → Reset FE Mesh</span>— elimina las condiciones de contorno, el campo calculado, los resultados transitorios y las condiciones almacenadas con las etapas transitorias, y lo indica en la barra de estado. Las etapas en sí conservan sus tiempos, sus etiquetas y sus indicadores.</p>
+      <p><span class="ui">Groundwater → Mesh →</span> <span class="ui">Generate FE Mesh…</span> pide el <strong>número aproximado de elementos</strong> (1000 por defecto; de 20 a 200 000) y construye en cada región de material una malla de triángulos de tres nodos, con nodos comunes en los contactos, de modo que cada elemento toma el material que el análisis de equilibrio límite lee para esa región. La barra de estado indica el número de elementos y de nodos y el menor ángulo de la malla.</p>
+      <p>Las condiciones de contorno van ligadas a los números de los nodos, así que una malla nueva (o <span class="ui">Groundwater → Mesh → Reset FE Mesh</span>) elimina las condiciones de contorno, el campo calculado, los resultados transitorios y las condiciones guardadas con las etapas transitorias, y lo indica en la barra de estado. Las etapas en sí conservan sus tiempos, sus etiquetas y sus indicadores.</p>
 
       <h2 id="boundary-conditions"><span class="secnum">2.9.5</span><span class="ht">Condiciones de contorno</span><a class="anchor" href="#boundary-conditions" aria-label="Enlace a esta sección">#</a></h2>
-      <p>Una malla empieza con condiciones por defecto: <em>Unknown (P=0 or Q=0)</em> en la superficie del terreno, incluida la cara del talud, y caudal nodal nulo en los bordes izquierdo, derecho e inferior. Estas condiciones no prescriben ninguna altura en ningún sitio, y un problema estacionario sin una altura prescrita no tiene solución, de modo que hay que fijar al menos una altura antes de calcular.</p>
-      <p><span class="ui">Groundwater →</span> <span class="ui">Set Boundary Conditions…</span> asigna una condición a todo un lado del modelo cada vez. Elige el <strong>Type</strong>, introduce el <strong>Value</strong> cuando el tipo lo admita, selecciona el destino en <strong>Apply to</strong> —<em>Left edge</em>, <em>Right edge</em>, <em>Bottom edge</em> o <em>Ground surface</em>, cada uno con su número de nodos— y pulsa <strong>Assign</strong>. <strong>Restore defaults</strong> vuelve a las condiciones por defecto. La línea de resumen cuenta los nodos de cada tipo.</p>
+      <p>Una malla nueva parte de unas condiciones por defecto: <em>Unknown (P=0 or Q=0)</em> en la superficie del terreno, incluida la cara del talud, y caudal nodal nulo en los bordes izquierdo, derecho e inferior. Estas condiciones no prescriben ninguna altura en ningún punto, y un problema estacionario sin altura prescrita no tiene solución, así que hay que fijar al menos una altura antes de calcular.</p>
+      <p><span class="ui">Groundwater →</span> <span class="ui">Set Boundary Conditions…</span> asigna una condición a todo un lado del modelo cada vez. Elige el <strong>Type</strong>, introduce el <strong>Value</strong> si el tipo lo requiere, selecciona el destino en <strong>Apply to</strong> (<em>Left edge</em>, <em>Right edge</em>, <em>Bottom edge</em> o <em>Ground surface</em>, cada uno con su número de nodos) y pulsa <strong>Assign</strong>. <strong>Restore defaults</strong> vuelve a las condiciones por defecto. La línea de resumen cuenta los nodos de cada tipo.</p>
       <figure class="tbl" id="tbl-bc-types">
         <figcaption><span class="fignum">Tabla 2.9.3</span> Tipos de condición de contorno.</figcaption>
         <div class="table-wrap">
@@ -241,65 +241,65 @@
               <tr><td>Zero Pressure</td><td>—</td><td>—</td></tr>
               <tr><td>Nodal Flow Rate</td><td>caudal en cada nodo</td><td>permitida</td></tr>
               <tr><td>Infiltration</td><td>flujo en los segmentos del contorno; se aplica solo a segmentos</td><td>permitida</td></tr>
-              <tr><td>Unknown (P=0 or Q=0)</td><td>—</td><td>la decide el algoritmo de resolución, nodo a nodo: P = 0 donde el agua rezuma, Q = 0 en el resto</td></tr>
+              <tr><td>Unknown (P=0 or Q=0)</td><td>—</td><td>la decide el motor de cálculo nodo a nodo: P = 0 donde el agua rezuma y Q = 0 en el resto</td></tr>
             </tbody>
           </table>
         </div>
       </figure>
-      <p>Otros dos destinos al final de la lista prescriben un <strong>embalse</strong>: <em>Reservoir on the left, at Value</em> y <em>Reservoir on the right, at Value</em>. Introduce el nivel del agua como Value y pulsa Assign: todo nodo del contorno al que llega el agua —el borde vertical de ese lado y la superficie del terreno hacia el interior mientras se mantenga a la cota del nivel o por debajo de ella— recibe una altura total igual al nivel, y el diálogo indica cuántos nodos quedaron sumergidos. Un embalse que alcanza solo uno o dos nodos suele ser un nivel tecleado por debajo del pie.</p>
+      <p>Otros dos destinos al final de la lista prescriben un <strong>embalse</strong>: <em>Reservoir on the left, at Value</em> y <em>Reservoir on the right, at Value</em>. Introduce el nivel del agua como Value y pulsa Assign: todo nodo del contorno al que llega el agua (el borde vertical de ese lado y la superficie del terreno hacia el interior, mientras se mantenga a la cota del nivel o por debajo) recibe una altura total igual al nivel, y el diálogo indica cuántos nodos han quedado sumergidos. Si el embalse alcanza solo uno o dos nodos, suele deberse a un nivel introducido por debajo del pie.</p>
 
       <figure class="fig shot-fig" id="fig-boundary-conditions">
         <div class="art"><img src="../../../assets/img/shots/boundary-conditions.webp" alt="El diálogo Set Boundary Conditions: tipo de condición, valor y opción de superficie de rezume, la lista de lados y de destinos de embalse, y el resumen de condiciones por tipo" loading="lazy" width="700" height="650"></div>
         <figcaption><span class="fignum">Figura 2.9.2</span> Set Boundary Conditions, con los destinos de embalse al final de la lista.</figcaption>
       </figure>
 
-      <div class="note"><span class="label">Nota</span><p>En la versión 0.1.235 el selector <strong>Pick by</strong> del diálogo (<em>Line segments</em> o <em>Nodes</em>) no tiene efecto: una condición va siempre a todos los nodos del lado elegido, y la infiltración, a sus segmentos. OK conserva las condiciones; Cancel descarta todo lo asignado desde que se abrió el diálogo.</p></div>
+      <div class="note"><span class="label">Nota</span><p>En la versión 0.1.235, el selector <strong>Pick by</strong> del diálogo (<em>Line segments</em> o <em>Nodes</em>) no tiene efecto: una condición va siempre a todos los nodos del lado elegido, y la infiltración, a sus segmentos. OK conserva las condiciones; Cancel descarta todo lo asignado desde que se abrió el diálogo.</p></div>
 
       <h2 id="compute-groundwater"><span class="secnum">2.9.6</span><span class="ht">Cálculo del campo</span><a class="anchor" href="#compute-groundwater" aria-label="Enlace a esta sección">#</a></h2>
-      <p><span class="ui">Groundwater → Compute Groundwater</span> resuelve el campo estacionario, o las etapas de un análisis transitorio cuando hay uno configurado. Una resolución estacionaria indica en la barra de estado el número de iteraciones y el intervalo de presión intersticial, y nombra cualquier material que haya usado las propiedades hidráulicas por defecto; cuando no converge, la barra de estado dice por qué. El campo se guarda en el archivo <code>.ogr</code>, de modo que al reabrir un proyecto no hace falta calcularlo de nuevo.</p>
+      <p><span class="ui">Groundwater → Compute Groundwater</span> resuelve el campo estacionario o, si hay un análisis transitorio configurado, las etapas de este. En un cálculo estacionario, la barra de estado indica el número de iteraciones y el intervalo de presión intersticial, y nombra los materiales que han usado las propiedades hidráulicas por defecto; si no converge, la barra de estado explica por qué. El campo se guarda en el archivo <code>.ogr</code>, así que al reabrir un proyecto no hace falta volver a calcularlo.</p>
       <div class="impl">
         <span class="label">En OGR Slip2D</span>
-        <p>El análisis estacionario resuelve la altura total sobre triángulos lineales, con la permeabilidad reducida en la zona no saturada según el modelo de cada material, mediante iteración de Picard con subrelajación (relajación 0.4, como máximo 200 iteraciones, tolerancia 10⁻⁵ m). Los nodos de tipo <em>Unknown</em> alternan entre superficie de rezume y flujo nulo hasta que se estabilizan <a class="cite" href="../reference/bibliography.html#neuman1973">(Neuman, 1973)</a>. El análisis transitorio resuelve la ecuación de Richards en forma mixta con pasos de tiempo implícitos <a class="cite" href="../reference/bibliography.html#celia1990">(Celia, Bouloutas y Zarba, 1990)</a>.</p>
+        <p>El análisis estacionario calcula la altura total sobre triángulos lineales, con la permeabilidad reducida en la zona no saturada según el modelo de cada material, mediante iteración de Picard con subrelajación (relajación 0.4, 200 iteraciones como máximo, tolerancia 10⁻⁵ m). Los nodos de tipo <em>Unknown</em> alternan entre superficie de rezume y flujo nulo hasta que se estabilizan <a class="cite" href="../reference/bibliography.html#neuman1973">(Neuman, 1973)</a>. El análisis transitorio resuelve la ecuación de Richards en forma mixta, con pasos de tiempo implícitos <a class="cite" href="../reference/bibliography.html#celia1990">(Celia, Bouloutas y Zarba, 1990)</a>.</p>
         <span class="src">Código: <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_slip2d/transient_stability.py" target="_blank" rel="noopener">ogr_slip2d/transient_stability.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/tree/main/ogr_fem2d/solvers" target="_blank" rel="noopener">ogr_fem2d/solvers/</a></span>
       </div>
 
       <h2 id="interpret-groundwater"><span class="secnum">2.9.7</span><span class="ht">Interpretación del campo</span><a class="anchor" href="#interpret-groundwater" aria-label="Enlace a esta sección">#</a></h2>
-      <p><span class="ui">Groundwater → Interpret Groundwater</span> abre la ventana <em>Interpret Groundwater</em>. Su barra ofrece:</p>
+      <p><span class="ui">Groundwater → Interpret Groundwater</span> abre la ventana <em>Interpret Groundwater</em>, cuya barra ofrece:</p>
       <ul>
         <li><strong>Field</strong>: isolíneas rellenas de <em>Total Head H</em>, <em>Pressure Head P</em> o <em>Pore Pressure u</em>, con la succión como valores negativos;</li>
-        <li><strong>Flow vectors</strong> (activado): la velocidad de Darcy de los elementos;</li>
+        <li><strong>Flow vectors</strong> (activado): la velocidad de Darcy en los elementos;</li>
         <li><strong>Free surface (P=0)</strong> (activado): la línea de presión nula;</li>
         <li><strong>Mesh</strong> (desactivado): los lados de los elementos;</li>
-        <li><strong>Discharge section…</strong>: pide una sección como <code>x0,y0,x1,y1</code> e indica el caudal que la atraviesa por unidad de ancho, positivo hacia la normal de la sección (la dirección del primer punto al segundo girada 90° en sentido antihorario);</li>
-        <li>en una ejecución transitoria, una lista <strong>Stage</strong>, con <em>[SF]</em> en las etapas que calcularon un factor de seguridad, y <strong>FoS vs time…</strong>.</li>
+        <li><strong>Discharge section…</strong>: pide una sección en la forma <code>x0,y0,x1,y1</code> y da el caudal que la atraviesa por unidad de ancho, positivo hacia la normal de la sección (la dirección del primer punto al segundo girada 90° en sentido antihorario);</li>
+        <li>en una ejecución transitoria, una lista <strong>Stage</strong>, con <em>[SF]</em> en las etapas en las que se calculó un factor de seguridad, y <strong>FoS vs time…</strong>.</li>
       </ul>
-      <p>La línea bajo el gráfico da el número de nodos, los intervalos de altura y de presión intersticial, las iteraciones, los nodos de la superficie de rezume y, para una etapa, su tiempo y sus factores de seguridad; aparece <em>NOT CONVERGED</em> cuando la resolución no ha convergido.</p>
+      <p>La línea situada bajo el gráfico indica el número de nodos, los intervalos de altura y de presión intersticial, las iteraciones, los nodos de la superficie de rezume y, en una etapa, su tiempo y sus factores de seguridad; si la resolución no ha convergido, aparece <em>NOT CONVERGED</em>.</p>
       <figure class="fig shot-fig" id="fig-groundwater-interpret">
-        <div class="art"><img src="../../../assets/img/shots/groundwater-interpret.webp" alt="La ventana Interpret Groundwater: isolíneas del campo de agua subterránea sobre la malla de elementos finitos, vectores de flujo y la superficie libre, con el selector de campo y las opciones encima" loading="lazy" width="1600" height="635"></div>
+        <div class="art"><img src="../../../assets/img/shots/groundwater-interpret.webp" alt="La ventana Interpret Groundwater: isolíneas del campo de agua subterránea sobre la malla de elementos finitos, vectores de flujo y superficie libre, con el selector de campo y las opciones en la parte superior" loading="lazy" width="1600" height="635"></div>
         <figcaption><span class="fignum">Figura 2.9.3</span> La ventana Interpret Groundwater.</figcaption>
       </figure>
-      <p>Los campos de agua subterránea también se pueden representar con isolíneas sobre los resultados de estabilidad, en la ventana Interpret de <span class="ui">Analysis → Interpret</span>, con <span class="ui">View → Contour Options…</span>; su menú <span class="ui">Groundwater</span> añade el historial de iteraciones, un gráfico de convergencia, una consulta de la altura en un punto y <em>Export All Nodal Values…</em> a CSV (<a class="xref" href="results.html">Sección 2.8</a>).</p>
+      <p>Los campos de agua subterránea también se pueden representar con isolíneas sobre los resultados de estabilidad, en la ventana Interpret de <span class="ui">Analysis → Interpret</span>, con <span class="ui">View → Contour Options…</span>; su menú <span class="ui">Groundwater</span> añade el historial de iteraciones, un gráfico de convergencia, la consulta de la altura en un punto y la exportación a CSV con <em>Export All Nodal Values…</em> (<a class="xref" href="results.html">Sección 2.8</a>).</p>
 
       <h2 id="coupling"><span class="secnum">2.9.8</span><span class="ht">Uso del campo en el análisis de estabilidad</span><a class="anchor" href="#coupling" aria-label="Enlace a esta sección">#</a></h2>
-      <p>El campo calculado llega al análisis de equilibrio límite solo a través de los materiales cuyo <strong>Water Parameters → Type</strong> es <code>fem</code>: en la base de cada dovela de un material así, la presión intersticial se interpola a partir de los valores nodales del elemento que la contiene. Una base de dovela fuera de la malla no recibe presión intersticial. Un material que se deja con cualquier otro tipo ignora el campo por completo.</p>
-      <div class="note warn"><span class="label">Fija el tipo antes de elegir el método</span><p>En la versión 0.1.235 Define Materials oculta todo el grupo <em>Water Parameters</em> mientras el método de agua subterránea es <code>fea_steady</code> o <code>fea_transient</code>, de modo que entonces no se puede cambiar el Type. Fija Type en <code>fem</code> para los materiales afectados <em>antes</em> de elegir el método de elementos finitos —o vuelve a poner un momento el método anterior para cambiarlo—. El mismo acoplamiento se puede establecer mediante el servidor MCP o la API de Python (<a class="xref" href="../reference/mcp.html">Sección 5.1</a>).</p></div>
-      <p>Compute se niega a ejecutarse mientras un material de tipo <code>fem</code> no tiene un campo calculado que leer, en lugar de indicar la presión intersticial como cero, lo que parecería un talud seco. Al generar una malla nueva se borra el campo, así que hay que calcular de nuevo el agua subterránea tras regenerar la malla. Tras un análisis transitorio, el campo almacenado en el proyecto es el de la última etapa.</p>
+      <p>El campo calculado solo llega al análisis de equilibrio límite en los materiales cuyo <strong>Water Parameters → Type</strong> es <code>fem</code>: en la base de cada dovela de uno de esos materiales, la presión intersticial se interpola a partir de los valores nodales del elemento que la contiene. Una base de dovela fuera de la malla no recibe presión intersticial. Un material con cualquier otro tipo ignora por completo el campo.</p>
+      <div class="note warn"><span class="label">Fija el tipo antes de elegir el método</span><p>En la versión 0.1.235, Define Materials oculta todo el grupo <em>Water Parameters</em> mientras el método de agua subterránea es <code>fea_steady</code> o <code>fea_transient</code>, por lo que entonces no se puede cambiar el Type. Fija Type en <code>fem</code> en los materiales afectados <em>antes</em> de elegir el método de elementos finitos, o vuelve a poner un momento el método anterior para cambiarlo. El mismo acoplamiento puede establecerse con el servidor MCP o con la API de Python (<a class="xref" href="../reference/mcp.html">Sección 5.1</a>).</p></div>
+      <p>Compute no se ejecuta mientras un material de tipo <code>fem</code> no tenga un campo calculado que leer; así se evita dar la presión intersticial como cero, lo que parecería un talud seco. Al generar una malla nueva se borra el campo, por lo que hay que volver a calcular el agua subterránea tras rehacer la malla. Después de un análisis transitorio, el campo guardado en el proyecto es el de la última etapa.</p>
 
       <h2 id="transient"><span class="secnum">2.9.9</span><span class="ht">Análisis transitorio</span><a class="anchor" href="#transient" aria-label="Enlace a esta sección">#</a></h2>
-      <p>Un análisis por etapas se configura en <span class="ui">Groundwater → Transient Groundwater…</span>. Su primera casilla hace lo mismo que elegir <strong>Transient groundwater</strong> en el grupo Advanced de <span class="ui">Analysis → Project Settings →</span> <span class="ui">Groundwater</span>.</p>
+      <p>Un análisis por etapas se configura en <span class="ui">Groundwater → Transient Groundwater…</span>. Su primera casilla equivale a elegir <strong>Transient groundwater</strong> en el grupo Advanced de <span class="ui">Analysis → Project Settings →</span> <span class="ui">Groundwater</span>.</p>
       <ul>
-        <li><strong>Transient groundwater analysis</strong> activa o desactiva el análisis por etapas; al activarlo se desactiva la otra opción avanzada, si se había elegido alguna.</li>
-        <li><strong>Stages</strong>: una tabla con <em>Time</em>, <em>Calculate SF</em> y <em>Label</em>. <strong>Add stage</strong> añade una fila al doble del último tiempo (1 para la primera), <strong>Delete stage</strong> elimina las filas seleccionadas. Los tiempos deben ser positivos y distintos; las etapas se ordenan por tiempo.</li>
-        <li><strong>Capture current BCs</strong> guarda en la etapa seleccionada las condiciones fijadas en ese momento en Set Boundary Conditions, y la etapa se marca con <em>[BC]</em>. Una etapa sin condiciones propias usa las actuales, y el campo solo evoluciona donde las condiciones de una etapa difieren de las iniciales.</li>
-        <li><strong>Capture as initial state</strong> guarda las condiciones actuales como estado inicial: el campo estacionario del que parte la ejecución. Sin ello, se usan las condiciones actuales, de modo que el modelo parte en equilibrio con ellas.</li>
-        <li><strong>Transient FEA options</strong>: <em>Tolerance</em> (1 × 10⁻⁵), <em>Maximum iterations</em> (30) y <em>Number of time steps</em> por etapa (<em>Auto</em> por defecto: se deduce del tamaño de los elementos y del almacenamiento, de modo que el frente de agua cruce aproximadamente un elemento por paso). Los mismos tres están en la página Transient de Project Settings, que aparece en gris salvo que la opción transitoria esté activada.</li>
+        <li><strong>Transient groundwater analysis</strong> activa o desactiva el análisis por etapas; al activarlo se desactiva la otra opción avanzada, si había alguna elegida.</li>
+        <li><strong>Stages</strong>: una tabla con <em>Time</em>, <em>Calculate SF</em> y <em>Label</em>. <strong>Add stage</strong> añade una fila con el doble del último tiempo (1 para la primera) y <strong>Delete stage</strong> elimina las filas seleccionadas. Los tiempos deben ser positivos y distintos; las etapas se ordenan por tiempo.</li>
+        <li><strong>Capture current BCs</strong> guarda en la etapa seleccionada las condiciones vigentes en Set Boundary Conditions, y la etapa queda marcada con <em>[BC]</em>. Una etapa sin condiciones propias usa las actuales, y el campo solo evoluciona donde las condiciones de una etapa difieren de las iniciales.</li>
+        <li><strong>Capture as initial state</strong> guarda las condiciones actuales como estado inicial, es decir, el campo estacionario del que parte la ejecución. Si no se captura un estado inicial, se toman las condiciones actuales, de modo que el modelo parte en equilibrio con ellas.</li>
+        <li><strong>Transient FEA options</strong>: <em>Tolerance</em> (1 × 10⁻⁵), <em>Maximum iterations</em> (30) y <em>Number of time steps</em> por etapa (por defecto <em>Auto</em>, que se deduce del tamaño de los elementos y del almacenamiento para que el frente de agua recorra aproximadamente un elemento por paso). Los mismos tres están en la página Transient de Project Settings, que aparece en gris salvo que la opción transitoria esté activada.</li>
       </ul>
-      <p>Para un desembalse, por ejemplo, asigna un embalse al nivel inicial y captura esas condiciones como estado inicial. Después pulsa <strong>Restore defaults</strong> en Set Boundary Conditions —asignar un embalse más bajo no borra las alturas de los nodos a los que ya no llega—, asigna el embalse al nivel más bajo y, de nuevo, cualquier otra condición, selecciona una etapa y captura las condiciones. Compute Groundwater resuelve las etapas en orden y calcula el factor de seguridad, con todos los métodos activados, en las etapas marcadas como <em>Calculate SF</em>. Se representan en función del tiempo con <strong>FoS vs time…</strong> en Interpret Groundwater y con <span class="ui">Data → Graph SF with Time…</span> en la ventana Interpret. Si ningún material es de tipo <code>fem</code>, la ejecución avisa de que los factores de las etapas ignorarían las presiones calculadas.</p>
-      <div class="note"><span class="label">Nota</span><p>El análisis transitorio usa además los contenidos de agua saturado y residual (0.4 y 0.05) y el almacenamiento específico (1 × 10⁻⁵ 1/m) de cada material. Define Hydraulic Properties no los muestra en la versión 0.1.235; conservan estos valores por defecto salvo que se fijen mediante el servidor MCP o la API de Python.</p></div>
+      <p>Para un desembalse, por ejemplo, asigna un embalse al nivel inicial y captúralo como estado inicial. Después pulsa <strong>Restore defaults</strong> en Set Boundary Conditions (asignar un embalse más bajo no borra las alturas de los nodos a los que ya no llega), asigna el embalse al nivel más bajo y, de nuevo, cualquier otra condición, selecciona una etapa y captura las condiciones. Compute Groundwater resuelve las etapas en orden y calcula el factor de seguridad, con todos los métodos activados, en las etapas marcadas como <em>Calculate SF</em>. Los factores se representan en función del tiempo con <strong>FoS vs time…</strong> en Interpret Groundwater y con <span class="ui">Data → Graph SF with Time…</span> en la ventana Interpret. Si ningún material es de tipo <code>fem</code>, la ejecución avisa de que los factores de las etapas ignorarían las presiones calculadas.</p>
+      <div class="note"><span class="label">Nota</span><p>El análisis transitorio usa además los contenidos de agua saturado y residual (0.4 y 0.05) y el almacenamiento específico (1 × 10⁻⁵ 1/m) de cada material. Define Hydraulic Properties no los muestra en la versión 0.1.235; conservan estos valores por defecto salvo que se fijen con el servidor MCP o con la API de Python.</p></div>
 
       <h2 id="drawdown-sweep"><span class="secnum">2.9.10</span><span class="ht">Drawdown Level Sweep</span><a class="anchor" href="#drawdown-sweep" aria-label="Enlace a esta sección">#</a></h2>
-      <p><span class="ui">Groundwater → Drawdown Level Sweep…</span> pertenece al análisis de desembalse rápido por equilibrio límite, no al de elementos finitos: necesita que esté seleccionado <em>Rapid Drawdown analysis</em> en el grupo Advanced, un método de agua subterránea basado en superficies de agua y al menos un material con comportamiento sin drenaje (<a class="xref" href="water.html">Sección 2.4</a>, <a class="xref" href="../theory/rapid-drawdown.html">Sección 3.8</a>). Responde a una pregunta que el desembalse total por sí solo no responde: el nivel crítico del embalse no es siempre el más bajo.</p>
-      <p>El diálogo pide el <strong>Number of levels</strong> (11 por defecto; de 2 a 101), espaciados uniformemente desde el nivel freático inicial hasta el punto más bajo del terreno del modelo, y si se debe <strong>Include total drawdown</strong> (marcado). Cada nivel es una búsqueda completa con todos los métodos activados, de modo que el número de niveles es el coste de la ejecución. La barra de estado indica entonces el nivel crítico y su factor de seguridad —y, cuando el desembalse total lo sobrestimaría, en cuánto— y un gráfico representa el factor de seguridad en función del nivel de desembalse.</p>
+      <p><span class="ui">Groundwater → Drawdown Level Sweep…</span> pertenece al análisis de desembalse rápido por equilibrio límite, no al de elementos finitos: necesita tener seleccionado <em>Rapid Drawdown analysis</em> en el grupo Advanced, un método de agua subterránea basado en superficies de agua y al menos un material con comportamiento sin drenaje (<a class="xref" href="water.html">Sección 2.4</a>, <a class="xref" href="../theory/rapid-drawdown.html">Sección 3.8</a>). Responde a una pregunta que el desembalse total por sí solo no resuelve: el nivel crítico del embalse no es siempre el más bajo.</p>
+      <p>El diálogo pide el <strong>Number of levels</strong> (11 por defecto; de 2 a 101), repartidos uniformemente desde el nivel freático inicial hasta el punto más bajo del terreno del modelo, y si se incluye el desembalse total (<strong>Include total drawdown</strong>, marcado por defecto). Cada nivel es una búsqueda completa con todos los métodos activados, por lo que el coste de la ejecución depende del número de niveles. Después, la barra de estado indica el nivel crítico y su factor de seguridad (y, si el desembalse total lo sobrestimara, en cuánto), y un gráfico representa el factor de seguridad en función del nivel de desembalse.</p>
     </article>
 
 <!-- @inc docfoot -->
@@ -329,7 +329,7 @@
           <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
           <b>OpenGeoRock</b>
         </a>
-        <p class="tagline">Software geotécnico de código abierto, desarrollado a la vista de todos en la Universidad Politécnica de Cartagena.</p>
+        <p class="tagline">Software geotécnico de código abierto desarrollado en la Universidad Politécnica de Cartagena.</p>
         <span class="lang" role="group" aria-label="Idioma"><a href="../../../docs/user-guide/groundwater.html" hreflang="en" lang="en">EN</a><a href="../../../es/docs/user-guide/groundwater.html" hreflang="es" lang="es" aria-current="true">ES</a></span>
       </div>
       <div>
@@ -342,7 +342,7 @@
         </ul>
       </div>
       <div>
-        <h5>Aprende</h5>
+        <h5>Recursos</h5>
         <ul>
           <li><a href="../../../es/docs/index.html">Documentación</a></li>
           <li><a href="../../../es/docs/getting-started/quick-start.html">Inicio rápido</a></li>
@@ -372,7 +372,7 @@
       </div>
     </div>
     <div class="legal">
-      <span>© 2026 Samuel Sáez López · OGR Slip2D es software libre bajo AGPL-3.0-or-later, sin garantía de ningún tipo.</span>
+      <span>© 2026 Samuel Sáez López · OGR Slip2D es software libre (licencia AGPL-3.0 o posterior) y se distribuye sin ninguna garantía.</span>
       <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
     </div>
   </div>

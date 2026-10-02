@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>Normas de diseño — documentación de OGR Slip2D</title>
-<meta name="description" content="Aplicación de coeficientes parciales en OGR Slip2D: la página Design Standard, los ajustes predefinidos del Eurocódigo 7 DA1-C1, DA1-C2, DA2 y DA3 y los coeficientes personalizados, a qué se aplican los coeficientes, cómo interpretar el factor de sobredimensionamiento y las limitaciones de la versión 0.1.235.">
+<meta name="description" content="Cómo aplicar coeficientes parciales en OGR Slip2D: la página Design Standard, los ajustes predefinidos del Eurocódigo 7 (DA1-C1, DA1-C2, DA2 y DA3) y los coeficientes personalizados, a qué se aplican, cómo interpretar el factor de sobredimensionamiento y las limitaciones de la versión 0.1.235.">
 <!-- @inc head -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>document.documentElement.classList.replace("no-js", "js")</script>
@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="OpenGeoRock">
 <meta property="og:title" content="Normas de diseño — documentación de OGR Slip2D">
-<meta property="og:description" content="Aplicación de coeficientes parciales en OGR Slip2D: la página Design Standard, los ajustes predefinidos del Eurocódigo 7 DA1-C1, DA1-C2, DA2 y DA3 y los coeficientes personalizados, a qué se aplican los coeficientes, cómo interpretar el factor de sobredimensionamiento y las limitaciones de la versión 0.1.235.">
+<meta property="og:description" content="Cómo aplicar coeficientes parciales en OGR Slip2D: la página Design Standard, los ajustes predefinidos del Eurocódigo 7 (DA1-C1, DA1-C2, DA2 y DA3) y los coeficientes personalizados, a qué se aplican, cómo interpretar el factor de sobredimensionamiento y las limitaciones de la versión 0.1.235.">
 <meta property="og:url" content="https://opengeorock.org/es/docs/user-guide/design-standards.html">
 <meta property="og:image" content="https://opengeorock.org/assets/img/og-image.png">
 <meta property="og:locale" content="es_ES">
@@ -49,23 +49,23 @@
             <div class="mega-col">
               <span class="label">Disponible hoy</span>
               <a class="mega-item feature" href="../../../es/products/slip2d.html"><b>OGR Slip2D</b><span>Estabilidad de taludes 2D: equilibrio límite, agua subterránea por elementos finitos y análisis probabilístico.</span></a>
-              <a class="mega-item" href="../../../es/ai/index.html"><b>Servidor MCP para agentes de IA <span class="tag live">nuevo</span></b><span>Claude, ChatGPT o un modelo local construyen y calculan modelos de OGR Slip2D.</span></a>
+              <a class="mega-item" href="../../../es/ai/index.html"><b>Servidor MCP para agentes de IA <span class="tag live">nuevo</span></b><span>Claude, ChatGPT o un modelo local crean y calculan modelos de OGR Slip2D.</span></a>
             </div>
             <div class="mega-col">
-              <span class="label">En la hoja de ruta</span>
+              <span class="label">Previstos</span>
               <a class="mega-item" href="../../../es/products/index.html#ogr-data"><b>OGR Data</b><span>Base de datos de propiedades de suelos y macizos rocosos</span></a>
               <a class="mega-item" href="../../../es/products/index.html#ogr-fem2d"><b>OGR FEM2D</b><span>Elementos finitos elastoplásticos 2D</span></a>
               <a class="mega-item" href="../../../es/products/index.html#ogr-slip3d"><b>OGR Slip3D</b><span>Equilibrio límite en 3D</span></a>
               <a class="mega-item" href="../../../es/products/index.html#ogr-fem3d"><b>OGR FEM3D</b><span>Elementos finitos 3D con flujo acoplado</span></a>
             </div>
             <div class="mega-col">
-              <span class="label">Úsalo desde</span>
+              <span class="label">Cómo se usa</span>
               <a class="mega-item" href="../../../es/docs/getting-started/interface.html"><b>El programa de escritorio</b><span>Modelador, intérprete y terminal de Python</span></a>
               <a class="mega-item" href="../../../es/docs/reference/python-api.html"><b>Python</b><span>Automatiza análisis desde tu propio código</span></a>
               <a class="mega-item" href="../../../es/docs/reference/cli.html"><b>La línea de comandos</b><span>Cálculos por lotes con ogr-slip2d-cli</span></a>
             </div>
           </div>
-          <div class="mega-foot"><span>Cinco programas, un núcleo abierto.</span><a href="../../../es/products/index.html">Todos los productos →</a></div>
+          <div class="mega-foot"><span>Cinco programas sobre un mismo núcleo abierto.</span><a href="../../../es/products/index.html">Todos los productos →</a></div>
         </div>
       </div>
       <a href="../../../es/examples/index.html" data-nav="examples">Ejemplos</a>
@@ -115,14 +115,14 @@
 <li><a href="../../../es/docs/user-guide/geometry.html"><span class="n">2.2</span><span>Geometría y contornos</span></a></li>
 <li><a href="../../../es/docs/user-guide/materials.html"><span class="n">2.3</span><span>Materiales</span></a></li>
 <li><a href="../../../es/docs/user-guide/water.html"><span class="n">2.4</span><span>Agua y presión intersticial</span></a></li>
-<li><a href="../../../es/docs/user-guide/loads.html"><span class="n">2.5</span><span>Cargas y carga sísmica</span></a></li>
+<li><a href="../../../es/docs/user-guide/loads.html"><span class="n">2.5</span><span>Cargas y acción sísmica</span></a></li>
 <li><a href="../../../es/docs/user-guide/supports.html"><span class="n">2.6</span><span>Soportes</span></a></li>
 <li><a href="../../../es/docs/user-guide/surfaces.html"><span class="n">2.7</span><span>Superficies de rotura y búsqueda</span></a></li>
 <li><a href="../../../es/docs/user-guide/results.html"><span class="n">2.8</span><span>Cálculo e interpretación de resultados</span></a></li>
 <li><a href="../../../es/docs/user-guide/groundwater.html"><span class="n">2.9</span><span>Agua subterránea por elementos finitos</span></a></li>
 <li><a href="../../../es/docs/user-guide/probabilistic.html"><span class="n">2.10</span><span>Análisis probabilístico y de sensibilidad</span></a></li>
 <li><a href="../../../es/docs/user-guide/design-standards.html" aria-current="page"><span class="n">2.11</span><span>Normas de diseño</span></a></li>
-<li><a href="../../../es/docs/user-guide/automation.html"><span class="n">2.12</span><span>Informes, scripting y línea de comandos</span></a></li>
+<li><a href="../../../es/docs/user-guide/automation.html"><span class="n">2.12</span><span>Informes, scripts y línea de comandos</span></a></li>
 </ul></details>
 <details open><summary>3 · Manual de teoría</summary><ul>
 <li><a href="../../../es/docs/theory/limit-equilibrium.html"><span class="n">3.1</span><span>Equilibrio límite y factor de seguridad</span></a></li>
@@ -130,11 +130,11 @@
 <li><a href="../../../es/docs/theory/interslice.html"><span class="n">3.3</span><span>Fuerzas entre dovelas, convergencia y admisibilidad</span></a></li>
 <li><a href="../../../es/docs/theory/search.html"><span class="n">3.4</span><span>Búsqueda de la superficie de rotura</span></a></li>
 <li><a href="../../../es/docs/theory/strength.html"><span class="n">3.5</span><span>Modelos de resistencia al corte</span></a></li>
-<li><a href="../../../es/docs/theory/pore-pressure.html"><span class="n">3.6</span><span>Presión intersticial y resistencia no saturada</span></a></li>
+<li><a href="../../../es/docs/theory/pore-pressure.html"><span class="n">3.6</span><span>Presión intersticial y resistencia de los suelos no saturados</span></a></li>
 <li><a href="../../../es/docs/theory/seepage.html"><span class="n">3.7</span><span>Filtración por elementos finitos</span></a></li>
 <li><a href="../../../es/docs/theory/rapid-drawdown.html"><span class="n">3.8</span><span>Desembalse rápido</span></a></li>
 <li><a href="../../../es/docs/theory/seismic.html"><span class="n">3.9</span><span>Análisis sísmico</span></a></li>
-<li><a href="../../../es/docs/theory/supports.html"><span class="n">3.10</span><span>Fuerzas de los soportes</span></a></li>
+<li><a href="../../../es/docs/theory/supports.html"><span class="n">3.10</span><span>Fuerzas de soporte</span></a></li>
 <li><a href="../../../es/docs/theory/probabilistic.html"><span class="n">3.11</span><span>Análisis probabilístico</span></a></li>
 <li><a href="../../../es/docs/theory/partial-factors.html"><span class="n">3.12</span><span>Coeficientes parciales (Eurocódigo 7)</span></a></li>
 </ul></details>
@@ -147,7 +147,7 @@
 <li><a href="../../../es/docs/reference/mcp.html"><span class="n">5.1</span><span>Servidor MCP</span></a></li>
 <li><a href="../../../es/docs/reference/cli.html"><span class="n">5.2</span><span>Interfaz de línea de comandos</span></a></li>
 <li><a href="../../../es/docs/reference/python-api.html"><span class="n">5.3</span><span>API de Python</span></a></li>
-<li><a href="../../../es/docs/reference/file-format.html"><span class="n">5.4</span><span>El formato .ogr</span></a></li>
+<li><a href="../../../es/docs/reference/file-format.html"><span class="n">5.4</span><span>El formato de archivo .ogr</span></a></li>
 <li><a href="../../../es/docs/reference/error-codes.html"><span class="n">5.5</span><span>Códigos de error</span></a></li>
 <li><a href="../../../es/docs/reference/notation.html"><span class="n">5.6</span><span>Notación y glosario</span></a></li>
 <li><a href="../../../es/docs/reference/bibliography.html"><span class="n">5.7</span><span>Bibliografía</span></a></li>
@@ -163,31 +163,31 @@
 <nav class="crumbs label" aria-label="Ruta de navegación"><a href="../../../es/docs/index.html">Documentación</a><span aria-hidden="true">/</span><span>2 · Guía de usuario</span></nav>
 <div class="chapter label">2.11</div>
 <h1>Normas de diseño</h1>
-<div class="meta label"><span>Describe OGR Slip2D <span data-v>0.1.235</span></span></div>
+<div class="meta label"><span>Válido para OGR Slip2D <span data-v>0.1.235</span></span></div>
 <!-- @end dochead -->
     </header>
 
     <article class="doc prose">
-      <p class="lede">Una norma de diseño aplica coeficientes parciales a los datos de entrada del análisis: las resistencias se dividen; las cargas y los pesos específicos se multiplican. Lo que se obtiene entonces no es un factor de seguridad, sino un <em>factor de sobredimensionamiento</em>, que debe superar 1. OGR Slip2D ofrece los tres enfoques de proyecto del Eurocódigo 7 como cuatro ajustes predefinidos (DA1 combinación 1, DA1 combinación 2, DA2 y DA3) y permite introducir coeficientes propios. El fundamento de los coeficientes está en la <a class="xref" href="../theory/partial-factors.html">Sección 3.12</a>.</p>
+      <p class="lede">Una norma de diseño aplica coeficientes parciales a los datos de entrada del análisis: las resistencias se dividen y las cargas y los pesos específicos se multiplican. Lo que resulta ya no es un factor de seguridad, sino un <em>factor de sobredimensionamiento</em>, que debe superar 1. OGR Slip2D ofrece cuatro ajustes predefinidos, que corresponden a los enfoques de proyecto del Eurocódigo 7 (DA1 con sus dos combinaciones, DA2 y DA3), y permite introducir coeficientes propios. El fundamento de los coeficientes está en la <a class="xref" href="../theory/partial-factors.html">Sección 3.12</a>.</p>
 
       <h2 id="design-standard-page"><span class="secnum">2.11.1</span><span class="ht">La página Design Standard</span><a class="anchor" href="#design-standard-page" aria-label="Enlace a esta sección">#</a></h2>
-      <p>Los coeficientes se fijan en <span class="ui">Analysis → Project Settings →</span> <span class="ui">Design Standard</span>. <strong>Apply partial factors</strong> está desactivado en un proyecto nuevo: aplicar coeficientes en silencio cambiaría todos los factores de seguridad calculados antes, por lo que debe ser una decisión deliberada. Con la casilla marcada, <strong>Design standard</strong> ofrece <em>None</em>, <em>Eurocode 7 — DA1 Combination 1</em>, <em>Eurocode 7 — DA1 Combination 2</em>, <em>Eurocode 7 — DA2</em>, <em>Eurocode 7 — DA3</em> y <em>Custom</em>. Al elegir una norma se cargan sus coeficientes en las ocho casillas inferiores; las casillas solo se pueden editar con <em>Custom</em> (de 0.1 a 10).</p>
+      <p>Los coeficientes se definen en <span class="ui">Analysis → Project Settings →</span> <span class="ui">Design Standard</span>. En un proyecto nuevo, <strong>Apply partial factors</strong> está desactivado: aplicar coeficientes sin avisar cambiaría todos los factores de seguridad calculados hasta entonces, así que debe ser una decisión deliberada. Con la casilla marcada, <strong>Design standard</strong> ofrece <em>None</em>, <em>Eurocode 7 — DA1 Combination 1</em>, <em>Eurocode 7 — DA1 Combination 2</em>, <em>Eurocode 7 — DA2</em>, <em>Eurocode 7 — DA3</em> y <em>Custom</em>. Al elegir una norma, sus coeficientes se cargan en las ocho casillas inferiores, que solo se pueden editar con <em>Custom</em> (de 0.1 a 10).</p>
       <figure class="fig shot-fig" id="fig-design-standard">
-        <div class="art"><img src="../../../assets/img/shots/project-settings-design.webp" alt="La página Design Standard de Project Settings: Apply partial factors sin marcar, la lista Design standard en None y los ocho coeficientes parciales en gris, con valor 1.000" loading="lazy" width="1025" height="800"></div>
-        <figcaption><span class="fignum">Figura 2.11.1</span> La página Design Standard de Project Settings en un proyecto nuevo: desactivada, con todos los coeficientes en 1.000.</figcaption>
+        <div class="art"><img src="../../../assets/img/shots/project-settings-design.webp" alt="Página Design Standard de Project Settings: Apply partial factors sin marcar, la lista Design standard en None y los ocho coeficientes parciales en gris, todos con valor 1.000" loading="lazy" width="1025" height="800"></div>
+        <figcaption><span class="fignum">Figura 2.11.1</span> Página Design Standard de Project Settings en un proyecto nuevo: desactivada y con todos los coeficientes en 1.000.</figcaption>
       </figure>
       <figure class="tbl" id="tbl-factor-fields">
-        <figcaption><span class="fignum">Tabla 2.11.1</span> Los coeficientes parciales y aquello a lo que se aplica cada uno.</figcaption>
+        <figcaption><span class="fignum">Tabla 2.11.1</span> Coeficientes parciales y datos a los que se aplica cada uno.</figcaption>
         <div class="table-wrap">
           <table class="data">
             <thead><tr><th>Campo</th><th>Coeficiente</th><th>Aplicación</th></tr></thead>
             <tbody>
-              <tr><td>Permanent actions</td><td>γ<sub>G</sub></td><td>Nada en la versión 0.1.235 (<a class="xref" href="#limitations">Sección 2.11.5</a>).</td></tr>
-              <tr><td>Variable actions</td><td>γ<sub>Q</sub></td><td>Multiplica la magnitud de cada carga distribuida y de cada carga lineal.</td></tr>
+              <tr><td>Permanent actions</td><td>γ<sub>G</sub></td><td>No se aplica en la versión 0.1.235 (<a class="xref" href="#limitations">Sección 2.11.5</a>).</td></tr>
+              <tr><td>Variable actions</td><td>γ<sub>Q</sub></td><td>Multiplica la magnitud de todas las cargas distribuidas y lineales.</td></tr>
               <tr><td>Cohesion</td><td>γ<sub>c′</sub></td><td>Divide la cohesión efectiva y la ordenada en el origen de las envolventes de resistencia del desembalse rápido.</td></tr>
-              <tr><td>tan(friction angle)</td><td>γ<sub>φ′</sub></td><td>Divide tan φ′, tan φ<sup>b</sup> de la resistencia no saturada y la pendiente de las envolventes del desembalse rápido.</td></tr>
+              <tr><td>tan(friction angle)</td><td>γ<sub>φ′</sub></td><td>Divide tan φ′, la tan φ<sup>b</sup> de la resistencia no saturada y la pendiente de las envolventes del desembalse rápido.</td></tr>
               <tr><td>Undrained strength cu</td><td>γ<sub>cu</sub></td><td>Divide la resistencia al corte sin drenaje.</td></tr>
-              <tr><td>Shear strength (other models)</td><td>γ<sub>τ</sub></td><td>Divide toda la resistencia al corte de los modelos que no son ni c′–φ′ ni sin drenaje.</td></tr>
+              <tr><td>Shear strength (other models)</td><td>γ<sub>τ</sub></td><td>Divide la resistencia al corte completa de los modelos que no son ni c′–φ′ ni sin drenaje.</td></tr>
               <tr><td>Unit weight</td><td>γ<sub>γ</sub></td><td>Multiplica el peso específico y el peso específico saturado de cada material.</td></tr>
               <tr><td>Resistance</td><td>γ<sub>R;e</sub></td><td>Divide las cuatro categorías de resistencia anteriores, es decir, todo el lado resistente.</td></tr>
             </tbody>
@@ -198,7 +198,7 @@
       <h2 id="presets"><span class="secnum">2.11.2</span><span class="ht">Los ajustes predefinidos</span><a class="anchor" href="#presets" aria-label="Enlace a esta sección">#</a></h2>
       <p>Los ajustes predefinidos siguen los enfoques de proyecto de la norma UNE-EN 1997-1, anexo A <a class="cite" href="../reference/bibliography.html#en1997">(CEN, 2004)</a>.</p>
       <figure class="tbl" id="tbl-presets">
-        <figcaption><span class="fignum">Tabla 2.11.2</span> Coeficientes parciales que carga cada ajuste predefinido. γ<sub>G</sub> se muestra tal como se guarda, pero no se aplica en la versión 0.1.235.</figcaption>
+        <figcaption><span class="fignum">Tabla 2.11.2</span> Coeficientes parciales de cada ajuste predefinido. γ<sub>G</sub> aparece tal como se almacena, pero no se aplica en la versión 0.1.235.</figcaption>
         <div class="table-wrap">
           <table class="data">
             <thead><tr><th>Ajuste predefinido</th><th class="n">γ<sub>G</sub></th><th class="n">γ<sub>Q</sub></th><th class="n">γ<sub>c′</sub></th><th class="n">γ<sub>φ′</sub></th><th class="n">γ<sub>cu</sub></th><th class="n">γ<sub>τ</sub></th><th class="n">γ<sub>γ</sub></th><th class="n">γ<sub>R;e</sub></th></tr></thead>
@@ -211,30 +211,30 @@
           </table>
         </div>
       </figure>
-      <p>El coeficiente de <em>Shear strength (other models)</em> no es un coeficiente de la norma UNE-EN 1997-1: los ajustes predefinidos lo igualan al γ<sub>φ′</sub> del mismo conjunto, de modo que una envolvente de resistencia que no puede descomponerse en c′ y tan φ′ se reduce como la reduciría el propio factor de seguridad. Es una decisión del programa, y puede cambiarse con <em>Custom</em>.</p>
+      <p>El coeficiente de <em>Shear strength (other models)</em> no procede de la norma UNE-EN 1997-1: los ajustes predefinidos lo igualan al γ<sub>φ′</sub> del mismo conjunto, de modo que una envolvente de resistencia que no se puede descomponer en c′ y tan φ′ se reduce igual que lo haría el propio factor de seguridad. Es una decisión del programa, y se puede cambiar con <em>Custom</em>.</p>
 
       <h2 id="what-is-factored"><span class="secnum">2.11.3</span><span class="ht">A qué se aplican los coeficientes y cómo</span><a class="anchor" href="#what-is-factored" aria-label="Enlace a esta sección">#</a></h2>
-      <p>Los coeficientes se aplican a una <strong>copia</strong> del proyecto cuando se inicia un análisis; el modelo nunca se modifica, y al desactivar la norma se recuperan exactamente los resultados sin coeficientes. Todos los análisis calculan sobre esa copia: Compute, cada muestra de Compute Statistics, el Drawdown Level Sweep, Optimize Surfaces, el retroanálisis de la fuerza de los soportes y los factores de seguridad de las etapas del análisis transitorio.</p>
-      <p>Los coeficientes de los materiales dividen y los de las acciones multiplican, de modo que cada uno actúa en el sentido desfavorable. El coeficiente del ángulo de rozamiento se aplica a su tangente, como especifica el Eurocódigo 7: con γ<sub>φ′</sub> = 1.25, un ángulo de rozamiento de 30° pasa a ser 24.79°, no 24°. Cada modelo de resistencia declara a cuál de las cuatro categorías pertenecen sus parámetros; un modelo que no declara ninguna se deja sin coeficientes, y las notas del análisis lo nombran. Las fuerzas de los soportes, los coeficientes sísmicos y las presiones intersticiales se usan tal como se introducen.</p>
+      <p>Los coeficientes se aplican a una <strong>copia</strong> del proyecto al iniciar un análisis. El modelo no se modifica nunca, y al desactivar la norma se recuperan exactamente los resultados sin coeficientes. Todos los análisis se calculan sobre esa copia: Compute, cada muestra de Compute Statistics, el Drawdown Level Sweep, Optimize Surfaces, el retroanálisis de la fuerza de los soportes y los factores de seguridad de las etapas del análisis transitorio.</p>
+      <p>Los coeficientes de los materiales dividen y los de las acciones multiplican, de modo que cada uno actúa en el sentido desfavorable. El coeficiente del ángulo de rozamiento se aplica a su tangente, como establece el Eurocódigo 7: con γ<sub>φ′</sub> = 1.25, un ángulo de rozamiento de 30° pasa a ser 24.79° y no 24°. Cada modelo de resistencia declara a cuál de las cuatro categorías pertenecen sus parámetros; si un modelo no declara ninguna, no se le aplican coeficientes y las notas del análisis lo mencionan. Las fuerzas de los soportes, los coeficientes sísmicos y las presiones intersticiales se usan tal como se introducen.</p>
       <div class="impl">
         <span class="label">En OGR Slip2D</span>
-        <p>Como la copia con coeficientes es un proyecto ordinario, los métodos de dovelas y las búsquedas no saben nada de normas de cálculo: una norma es una tabla de números, no un cambio en la mecánica. Las notas del análisis de una ejecución con coeficientes empiezan con la línea <em>Design standard applied: … — the reported value is an over-design factor, not a factor of safety, and must exceed 1</em> (norma de diseño aplicada: el valor indicado es un factor de sobredimensionamiento, no un factor de seguridad, y debe superar 1), seguida de lo que la norma pedía y no se aplicó.</p>
+        <p>Como la copia con coeficientes es un proyecto como cualquier otro, los métodos de dovelas y las búsquedas no saben nada de normas de cálculo: una norma es una tabla de números, no una modificación de la mecánica. Las notas del análisis de un cálculo con coeficientes empiezan con la línea <em>Design standard applied: … — the reported value is an over-design factor, not a factor of safety, and must exceed 1</em> (norma de diseño aplicada: el valor indicado es un factor de sobredimensionamiento, no un factor de seguridad, y debe superar 1), y a continuación indican lo que la norma pedía y no se aplicó.</p>
         <span class="src">Código: <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_core/project/design_factors.py" target="_blank" rel="noopener">ogr_core/project/design_factors.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_core/project/settings.py" target="_blank" rel="noopener">ogr_core/project/settings.py</a></span>
       </div>
 
       <h2 id="over-design-factor"><span class="secnum">2.11.4</span><span class="ht">Interpretación del factor de sobredimensionamiento</span><a class="anchor" href="#over-design-factor" aria-label="Enlace a esta sección">#</a></h2>
-      <p>Con una norma aplicada, la barra de estado, el panel Results y la ventana Interpret rotulan el valor crítico como <strong>Over-design factor</strong> en lugar de factor de seguridad. Se calcula exactamente como un factor de seguridad, pero sobre el modelo con los coeficientes aplicados, de modo que la pregunta a la que responde cambia: un valor superior a 1 significa que el talud cumple el estado límite con los coeficientes parciales elegidos <a class="cite" href="../reference/bibliography.html#frank2004">(Frank et al., 2004)</a>.</p>
-      <p>Cuando los cuatro coeficientes de resistencia son iguales a un mismo valor γ, el coeficiente de resistencia es 1 y no se aplica coeficiente alguno a las cargas ni a los pesos específicos, toda resistencia se divide por γ para cualquier tensión normal, y el factor de sobredimensionamiento es el factor de seguridad dividido por γ, en todos los métodos:</p>
+      <p>Cuando se aplica una norma, la barra de estado, el panel Results y la ventana Interpret rotulan el valor crítico como <strong>Over-design factor</strong> en lugar de factor de seguridad. Se calcula exactamente igual que un factor de seguridad, pero sobre el modelo con los coeficientes aplicados, así que la pregunta a la que responde es otra: un valor superior a 1 significa que el talud cumple el estado límite con los coeficientes parciales elegidos <a class="cite" href="../reference/bibliography.html#frank2004">(Frank et al., 2004)</a>.</p>
+      <p>Si los cuatro coeficientes de resistencia son iguales a un mismo valor γ, el coeficiente de resistencia es 1 y no se aplica ningún coeficiente a las cargas ni a los pesos específicos, la resistencia se divide por γ para cualquier tensión normal y el factor de sobredimensionamiento es el factor de seguridad dividido por γ, con todos los métodos:</p>
       <div class="eq" id="eq-overdesign" data-tex="F_d = \dfrac{F}{\gamma}" data-n="2.11.1"><!--k--><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>F</mi><mi>d</mi></msub><mo>=</mo><mstyle scriptlevel="0" displaystyle="true"><mfrac><mi>F</mi><mi>γ</mi></mfrac></mstyle></mrow><annotation encoding="application/x-tex">F_d = \dfrac{F}{\gamma}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.1389em;">F</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">d</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:2.2408em;vertical-align:-0.8804em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3603em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0556em;">γ</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.1389em;">F</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.8804em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span><!--/k--></div>
-      <p>DA1 Combination 2 en un talud de materiales c′–φ′ sin cargas exteriores es ese caso, con γ = 1.25: un talud con un factor de seguridad de 1.30 tiene un factor de sobredimensionamiento de 1.04.</p>
-      <p>Dos casos merecen atención. Con <strong>Apply partial factors</strong> marcada y todos los coeficientes en 1.0 (la norma <em>None</em>, por ejemplo), nada cambia, pero el valor sigue rotulándose como factor de sobredimensionamiento; las notas del análisis indican que no se ha aplicado ningún coeficiente. Y en la versión 0.1.235 el informe en PDF de <span class="ui">File → Generate Report…</span> no registra la norma: su tabla de mínimos globales rotula el valor como <em>Factor of Safety (FS)</em> incluso cuando es un factor de sobredimensionamiento. Indica tú mismo la norma en el informe.</p>
+      <p>DA1 Combination 2, en un talud de materiales c′–φ′ sin cargas exteriores, es ese caso, con γ = 1.25: un talud con factor de seguridad 1.30 tiene un factor de sobredimensionamiento de 1.04.</p>
+      <p>Hay dos casos que requieren cuidado. En el primero, con <strong>Apply partial factors</strong> marcada y todos los coeficientes en 1.0 (la norma <em>None</em>, por ejemplo), no cambia nada, pero el valor se sigue rotulando como factor de sobredimensionamiento; las notas del análisis indican que no se ha aplicado ningún coeficiente. En el segundo, el informe en PDF de <span class="ui">File → Generate Report…</span> no registra la norma en la versión 0.1.235: su tabla de mínimos globales rotula el valor como <em>Factor of Safety (FS)</em> incluso cuando es un factor de sobredimensionamiento. Indica tú mismo la norma en el informe.</p>
 
       <h2 id="limitations"><span class="secnum">2.11.5</span><span class="ht">Limitaciones de la versión 0.1.235</span><a class="anchor" href="#limitations" aria-label="Enlace a esta sección">#</a></h2>
-      <div class="note warn"><span class="label">Dos desviaciones conocidas respecto al Eurocódigo 7 (D226)</span>
-        <p>El programa declara ambas y no las ha corregido en esta versión:</p>
+      <div class="note warn"><span class="label">Dos desviaciones conocidas respecto del Eurocódigo 7 (D226)</span>
+        <p>El programa las declara y no las ha corregido en esta versión:</p>
         <ul>
-          <li><strong>El coeficiente de las acciones permanentes γ<sub>G</sub> no se aplica.</strong> El peso del suelo y las cargas permanentes no llevan coeficiente de acciones, y toda carga distribuida o lineal recibe el coeficiente de las acciones variables γ<sub>Q</sub>. Las notas del análisis lo indican siempre que γ<sub>G</sub> es distinto de 1. En consecuencia, en un modelo sin cargas exteriores DA1 Combination 1 no cambia nada —el factor de sobredimensionamiento es igual al factor de seguridad— y DA2 solo divide las resistencias por γ<sub>R;e</sub> = 1.1.</li>
-          <li><strong>DA3 usa los coeficientes de acciones del conjunto A1</strong> (1.35 y 1.5), cuando la norma UNE-EN 1997-1 aplica a las acciones sobre un talud los del conjunto A2 (1.0 y 1.3). Sumado a la primera desviación, DA3 multiplica por tanto toda carga por 1.5 en lugar de 1.3. Con <em>Custom</em> se puede introducir el valor A2 para las acciones variables.</li>
+          <li><strong>No se aplica el coeficiente de las acciones permanentes γ<sub>G</sub>.</strong> El peso del suelo y las cargas permanentes no llevan coeficiente de acciones, y toda carga distribuida o lineal recibe el de las acciones variables, γ<sub>Q</sub>. Las notas del análisis lo señalan siempre que γ<sub>G</sub> es distinto de 1. Por eso, en un modelo sin cargas exteriores, DA1 Combination 1 no cambia nada (el factor de sobredimensionamiento es igual al factor de seguridad) y DA2 solo divide las resistencias por γ<sub>R;e</sub> = 1.1.</li>
+          <li><strong>DA3 usa los coeficientes de acciones del conjunto A1</strong> (1.35 y 1.5), mientras que la norma UNE-EN 1997-1 aplica a las acciones sobre un talud los del conjunto A2 (1.0 y 1.3). Unido a lo anterior, DA3 multiplica toda carga por 1.5 en lugar de por 1.3. Con <em>Custom</em> se puede introducir el valor A2 para las acciones variables.</li>
         </ul>
       </div>
     </article>
@@ -242,7 +242,7 @@
 <!-- @inc docfoot -->
 <nav class="doc-pager" aria-label="Páginas">
 <a class="prev" href="../../../es/docs/user-guide/probabilistic.html"><span class="label">← Anterior · 2.10</span><b>Análisis probabilístico y de sensibilidad</b></a>
-<a class="next" href="../../../es/docs/user-guide/automation.html"><span class="label">2.12 · Siguiente →</span><b>Informes, scripting y línea de comandos</b></a>
+<a class="next" href="../../../es/docs/user-guide/automation.html"><span class="label">2.12 · Siguiente →</span><b>Informes, scripts y línea de comandos</b></a>
 </nav>
 <div class="doc-edit label"><a href="https://github.com/samuelsl27/OpenGeoRock_Web.github.io/blob/main/es/docs/user-guide/design-standards.html" target="_blank" rel="noopener">Editar esta página ↗</a><a href="https://github.com/samuelsl27/OGR-Slip2D/issues" target="_blank" rel="noopener">Informar de un problema ↗</a></div>
 <!-- @end docfoot -->
@@ -266,7 +266,7 @@
           <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
           <b>OpenGeoRock</b>
         </a>
-        <p class="tagline">Software geotécnico de código abierto, desarrollado a la vista de todos en la Universidad Politécnica de Cartagena.</p>
+        <p class="tagline">Software geotécnico de código abierto desarrollado en la Universidad Politécnica de Cartagena.</p>
         <span class="lang" role="group" aria-label="Idioma"><a href="../../../docs/user-guide/design-standards.html" hreflang="en" lang="en">EN</a><a href="../../../es/docs/user-guide/design-standards.html" hreflang="es" lang="es" aria-current="true">ES</a></span>
       </div>
       <div>
@@ -279,7 +279,7 @@
         </ul>
       </div>
       <div>
-        <h5>Aprende</h5>
+        <h5>Recursos</h5>
         <ul>
           <li><a href="../../../es/docs/index.html">Documentación</a></li>
           <li><a href="../../../es/docs/getting-started/quick-start.html">Inicio rápido</a></li>
@@ -309,7 +309,7 @@
       </div>
     </div>
     <div class="legal">
-      <span>© 2026 Samuel Sáez López · OGR Slip2D es software libre bajo AGPL-3.0-or-later, sin garantía de ningún tipo.</span>
+      <span>© 2026 Samuel Sáez López · OGR Slip2D es software libre (licencia AGPL-3.0 o posterior) y se distribuye sin ninguna garantía.</span>
       <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
     </div>
   </div>

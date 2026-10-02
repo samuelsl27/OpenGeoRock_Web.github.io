@@ -33,31 +33,31 @@
         { "n": "2.2", "slug": "geometry", "en": "Geometry and boundaries", "es": "Geometría y contornos" },
         { "n": "2.3", "slug": "materials", "en": "Materials", "es": "Materiales" },
         { "n": "2.4", "slug": "water", "en": "Water and pore pressure", "es": "Agua y presión intersticial" },
-        { "n": "2.5", "slug": "loads", "en": "Loads and seismic loading", "es": "Cargas y carga sísmica" },
+        { "n": "2.5", "slug": "loads", "en": "Loads and seismic loading", "es": "Cargas y acción sísmica" },
         { "n": "2.6", "slug": "supports", "en": "Supports", "es": "Soportes" },
         { "n": "2.7", "slug": "surfaces", "en": "Slip surfaces and search", "es": "Superficies de rotura y búsqueda" },
         { "n": "2.8", "slug": "results", "en": "Computing and interpreting results", "es": "Cálculo e interpretación de resultados" },
         { "n": "2.9", "slug": "groundwater", "en": "Finite-element groundwater", "es": "Agua subterránea por elementos finitos" },
         { "n": "2.10", "slug": "probabilistic", "en": "Probabilistic and sensitivity analysis", "es": "Análisis probabilístico y de sensibilidad" },
         { "n": "2.11", "slug": "design-standards", "en": "Design standards", "es": "Normas de diseño" },
-        { "n": "2.12", "slug": "automation", "en": "Reports, scripting and the command line", "es": "Informes, scripting y línea de comandos" }
+        { "n": "2.12", "slug": "automation", "en": "Reports, scripting and the command line", "es": "Informes, scripts y línea de comandos" }
       ]
     },
     {
       "n": "3", "dir": "theory", "en": "Theory manual", "es": "Manual de teoría",
       "d_en": "The equations OGR Slip2D solves, with their assumptions, their original sources and how they are implemented.",
-      "d_es": "Las ecuaciones que resuelve OGR Slip2D, con sus hipótesis, sus fuentes originales y cómo están implementadas.",
+      "d_es": "Las ecuaciones que resuelve OGR Slip2D, con sus hipótesis, sus fuentes originales y cómo se aplican en el programa.",
       "pages": [
         { "n": "3.1", "slug": "limit-equilibrium", "en": "Limit equilibrium and the factor of safety", "es": "Equilibrio límite y factor de seguridad" },
         { "n": "3.2", "slug": "methods", "en": "Methods of slices", "es": "Métodos de dovelas" },
         { "n": "3.3", "slug": "interslice", "en": "Interslice forces, convergence and admissibility", "es": "Fuerzas entre dovelas, convergencia y admisibilidad" },
         { "n": "3.4", "slug": "search", "en": "Slip-surface search", "es": "Búsqueda de la superficie de rotura" },
         { "n": "3.5", "slug": "strength", "en": "Shear strength models", "es": "Modelos de resistencia al corte" },
-        { "n": "3.6", "slug": "pore-pressure", "en": "Pore pressure and unsaturated strength", "es": "Presión intersticial y resistencia no saturada" },
+        { "n": "3.6", "slug": "pore-pressure", "en": "Pore pressure and unsaturated strength", "es": "Presión intersticial y resistencia de los suelos no saturados" },
         { "n": "3.7", "slug": "seepage", "en": "Finite-element seepage", "es": "Filtración por elementos finitos" },
         { "n": "3.8", "slug": "rapid-drawdown", "en": "Rapid drawdown", "es": "Desembalse rápido" },
         { "n": "3.9", "slug": "seismic", "en": "Seismic analysis", "es": "Análisis sísmico" },
-        { "n": "3.10", "slug": "supports", "en": "Support forces", "es": "Fuerzas de los soportes" },
+        { "n": "3.10", "slug": "supports", "en": "Support forces", "es": "Fuerzas de soporte" },
         { "n": "3.11", "slug": "probabilistic", "en": "Probabilistic analysis", "es": "Análisis probabilístico" },
         { "n": "3.12", "slug": "partial-factors", "en": "Partial factors (Eurocode 7)", "es": "Coeficientes parciales (Eurocódigo 7)" }
       ]
@@ -65,7 +65,7 @@
     {
       "n": "4", "dir": "verification", "en": "Verification", "es": "Verificación",
       "d_en": "How results are checked against published cases and closed-form solutions, case by case.",
-      "d_es": "Cómo se contrastan los resultados con casos publicados y soluciones cerradas, caso a caso.",
+      "d_es": "Cómo se contrastan los resultados con casos publicados y con soluciones analíticas, caso por caso.",
       "pages": [
         { "n": "4.1", "slug": "methodology", "en": "Verification methodology", "es": "Metodología de verificación" },
         { "n": "4.2", "slug": "slope-benchmarks", "en": "Limit-equilibrium benchmarks", "es": "Casos de referencia de equilibrio límite" },
@@ -80,7 +80,7 @@
         { "n": "5.1", "slug": "mcp", "en": "MCP server", "es": "Servidor MCP" },
         { "n": "5.2", "slug": "cli", "en": "Command-line interface", "es": "Interfaz de línea de comandos" },
         { "n": "5.3", "slug": "python-api", "en": "Python API", "es": "API de Python" },
-        { "n": "5.4", "slug": "file-format", "en": "The .ogr file format", "es": "El formato .ogr" },
+        { "n": "5.4", "slug": "file-format", "en": "The .ogr file format", "es": "El formato de archivo .ogr" },
         { "n": "5.5", "slug": "error-codes", "en": "Error codes", "es": "Códigos de error" },
         { "n": "5.6", "slug": "notation", "en": "Notation and glossary", "es": "Notación y glosario" },
         { "n": "5.7", "slug": "bibliography", "en": "Bibliography", "es": "Bibliografía" }

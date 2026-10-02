@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>Instalación — documentación de OGR Slip2D</title>
-<meta name="description" content="Instalación de OGR Slip2D desde el código fuente en Windows, macOS o Linux: requisitos, entorno virtual, extras opcionales, los tres comandos que instala, actualización y ejecución de la batería de tests.">
+<meta name="description" content="Cómo instalar OGR Slip2D desde el código fuente en Windows, macOS o Linux: requisitos, entorno virtual, extras opcionales, los tres comandos que se instalan, actualización y batería de tests.">
 <!-- @inc head -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>document.documentElement.classList.replace("no-js", "js")</script>
@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="OpenGeoRock">
 <meta property="og:title" content="Instalación — documentación de OGR Slip2D">
-<meta property="og:description" content="Instalación de OGR Slip2D desde el código fuente en Windows, macOS o Linux: requisitos, entorno virtual, extras opcionales, los tres comandos que instala, actualización y ejecución de la batería de tests.">
+<meta property="og:description" content="Cómo instalar OGR Slip2D desde el código fuente en Windows, macOS o Linux: requisitos, entorno virtual, extras opcionales, los tres comandos que se instalan, actualización y batería de tests.">
 <meta property="og:url" content="https://opengeorock.org/es/docs/getting-started/installation.html">
 <meta property="og:image" content="https://opengeorock.org/assets/img/og-image.png">
 <meta property="og:locale" content="es_ES">
@@ -48,23 +48,23 @@
             <div class="mega-col">
               <span class="label">Disponible hoy</span>
               <a class="mega-item feature" href="../../../es/products/slip2d.html"><b>OGR Slip2D</b><span>Estabilidad de taludes 2D: equilibrio límite, agua subterránea por elementos finitos y análisis probabilístico.</span></a>
-              <a class="mega-item" href="../../../es/ai/index.html"><b>Servidor MCP para agentes de IA <span class="tag live">nuevo</span></b><span>Claude, ChatGPT o un modelo local construyen y calculan modelos de OGR Slip2D.</span></a>
+              <a class="mega-item" href="../../../es/ai/index.html"><b>Servidor MCP para agentes de IA <span class="tag live">nuevo</span></b><span>Claude, ChatGPT o un modelo local crean y calculan modelos de OGR Slip2D.</span></a>
             </div>
             <div class="mega-col">
-              <span class="label">En la hoja de ruta</span>
+              <span class="label">Previstos</span>
               <a class="mega-item" href="../../../es/products/index.html#ogr-data"><b>OGR Data</b><span>Base de datos de propiedades de suelos y macizos rocosos</span></a>
               <a class="mega-item" href="../../../es/products/index.html#ogr-fem2d"><b>OGR FEM2D</b><span>Elementos finitos elastoplásticos 2D</span></a>
               <a class="mega-item" href="../../../es/products/index.html#ogr-slip3d"><b>OGR Slip3D</b><span>Equilibrio límite en 3D</span></a>
               <a class="mega-item" href="../../../es/products/index.html#ogr-fem3d"><b>OGR FEM3D</b><span>Elementos finitos 3D con flujo acoplado</span></a>
             </div>
             <div class="mega-col">
-              <span class="label">Úsalo desde</span>
+              <span class="label">Cómo se usa</span>
               <a class="mega-item" href="../../../es/docs/getting-started/interface.html"><b>El programa de escritorio</b><span>Modelador, intérprete y terminal de Python</span></a>
               <a class="mega-item" href="../../../es/docs/reference/python-api.html"><b>Python</b><span>Automatiza análisis desde tu propio código</span></a>
               <a class="mega-item" href="../../../es/docs/reference/cli.html"><b>La línea de comandos</b><span>Cálculos por lotes con ogr-slip2d-cli</span></a>
             </div>
           </div>
-          <div class="mega-foot"><span>Cinco programas, un núcleo abierto.</span><a href="../../../es/products/index.html">Todos los productos →</a></div>
+          <div class="mega-foot"><span>Cinco programas sobre un mismo núcleo abierto.</span><a href="../../../es/products/index.html">Todos los productos →</a></div>
         </div>
       </div>
       <a href="../../../es/examples/index.html" data-nav="examples">Ejemplos</a>
@@ -114,14 +114,14 @@
 <li><a href="../../../es/docs/user-guide/geometry.html"><span class="n">2.2</span><span>Geometría y contornos</span></a></li>
 <li><a href="../../../es/docs/user-guide/materials.html"><span class="n">2.3</span><span>Materiales</span></a></li>
 <li><a href="../../../es/docs/user-guide/water.html"><span class="n">2.4</span><span>Agua y presión intersticial</span></a></li>
-<li><a href="../../../es/docs/user-guide/loads.html"><span class="n">2.5</span><span>Cargas y carga sísmica</span></a></li>
+<li><a href="../../../es/docs/user-guide/loads.html"><span class="n">2.5</span><span>Cargas y acción sísmica</span></a></li>
 <li><a href="../../../es/docs/user-guide/supports.html"><span class="n">2.6</span><span>Soportes</span></a></li>
 <li><a href="../../../es/docs/user-guide/surfaces.html"><span class="n">2.7</span><span>Superficies de rotura y búsqueda</span></a></li>
 <li><a href="../../../es/docs/user-guide/results.html"><span class="n">2.8</span><span>Cálculo e interpretación de resultados</span></a></li>
 <li><a href="../../../es/docs/user-guide/groundwater.html"><span class="n">2.9</span><span>Agua subterránea por elementos finitos</span></a></li>
 <li><a href="../../../es/docs/user-guide/probabilistic.html"><span class="n">2.10</span><span>Análisis probabilístico y de sensibilidad</span></a></li>
 <li><a href="../../../es/docs/user-guide/design-standards.html"><span class="n">2.11</span><span>Normas de diseño</span></a></li>
-<li><a href="../../../es/docs/user-guide/automation.html"><span class="n">2.12</span><span>Informes, scripting y línea de comandos</span></a></li>
+<li><a href="../../../es/docs/user-guide/automation.html"><span class="n">2.12</span><span>Informes, scripts y línea de comandos</span></a></li>
 </ul></details>
 <details open><summary>3 · Manual de teoría</summary><ul>
 <li><a href="../../../es/docs/theory/limit-equilibrium.html"><span class="n">3.1</span><span>Equilibrio límite y factor de seguridad</span></a></li>
@@ -129,11 +129,11 @@
 <li><a href="../../../es/docs/theory/interslice.html"><span class="n">3.3</span><span>Fuerzas entre dovelas, convergencia y admisibilidad</span></a></li>
 <li><a href="../../../es/docs/theory/search.html"><span class="n">3.4</span><span>Búsqueda de la superficie de rotura</span></a></li>
 <li><a href="../../../es/docs/theory/strength.html"><span class="n">3.5</span><span>Modelos de resistencia al corte</span></a></li>
-<li><a href="../../../es/docs/theory/pore-pressure.html"><span class="n">3.6</span><span>Presión intersticial y resistencia no saturada</span></a></li>
+<li><a href="../../../es/docs/theory/pore-pressure.html"><span class="n">3.6</span><span>Presión intersticial y resistencia de los suelos no saturados</span></a></li>
 <li><a href="../../../es/docs/theory/seepage.html"><span class="n">3.7</span><span>Filtración por elementos finitos</span></a></li>
 <li><a href="../../../es/docs/theory/rapid-drawdown.html"><span class="n">3.8</span><span>Desembalse rápido</span></a></li>
 <li><a href="../../../es/docs/theory/seismic.html"><span class="n">3.9</span><span>Análisis sísmico</span></a></li>
-<li><a href="../../../es/docs/theory/supports.html"><span class="n">3.10</span><span>Fuerzas de los soportes</span></a></li>
+<li><a href="../../../es/docs/theory/supports.html"><span class="n">3.10</span><span>Fuerzas de soporte</span></a></li>
 <li><a href="../../../es/docs/theory/probabilistic.html"><span class="n">3.11</span><span>Análisis probabilístico</span></a></li>
 <li><a href="../../../es/docs/theory/partial-factors.html"><span class="n">3.12</span><span>Coeficientes parciales (Eurocódigo 7)</span></a></li>
 </ul></details>
@@ -146,7 +146,7 @@
 <li><a href="../../../es/docs/reference/mcp.html"><span class="n">5.1</span><span>Servidor MCP</span></a></li>
 <li><a href="../../../es/docs/reference/cli.html"><span class="n">5.2</span><span>Interfaz de línea de comandos</span></a></li>
 <li><a href="../../../es/docs/reference/python-api.html"><span class="n">5.3</span><span>API de Python</span></a></li>
-<li><a href="../../../es/docs/reference/file-format.html"><span class="n">5.4</span><span>El formato .ogr</span></a></li>
+<li><a href="../../../es/docs/reference/file-format.html"><span class="n">5.4</span><span>El formato de archivo .ogr</span></a></li>
 <li><a href="../../../es/docs/reference/error-codes.html"><span class="n">5.5</span><span>Códigos de error</span></a></li>
 <li><a href="../../../es/docs/reference/notation.html"><span class="n">5.6</span><span>Notación y glosario</span></a></li>
 <li><a href="../../../es/docs/reference/bibliography.html"><span class="n">5.7</span><span>Bibliografía</span></a></li>
@@ -162,29 +162,29 @@
 <nav class="crumbs label" aria-label="Ruta de navegación"><a href="../../../es/docs/index.html">Documentación</a><span aria-hidden="true">/</span><span>1 · Primeros pasos</span></nav>
 <div class="chapter label">1.1</div>
 <h1>Instalación</h1>
-<div class="meta label"><span>Describe OGR Slip2D <span data-v>0.1.235</span></span></div>
+<div class="meta label"><span>Válido para OGR Slip2D <span data-v>0.1.235</span></span></div>
 <!-- @end dochead -->
     </header>
 
     <article class="doc prose">
-      <p class="lede">OGR Slip2D es un paquete de Python, <code>ogr-slip2d</code>. Hasta que se publiquen instaladores firmados, se instala desde su código fuente público en un entorno virtual. Esta página trata los requisitos, la instalación en sí, los extras opcionales y cómo comprobar que todo funciona.</p>
+      <p class="lede">OGR Slip2D es un paquete de Python, <code>ogr-slip2d</code>. Mientras no haya instaladores firmados, se instala desde el código fuente público en un entorno virtual. Esta página explica los requisitos, la instalación, los extras opcionales y cómo comprobar que todo funciona.</p>
 
       <h2 id="requirements"><span class="secnum">1.1.1</span><span class="ht">Requisitos</span><a class="anchor" href="#requirements" aria-label="Enlace a esta sección">#</a></h2>
       <ul>
-        <li><strong>Python 3.11 o posterior.</strong> Las ejecuciones de integración continua prueban la batería de tests con 3.11, 3.12 y 3.13.</li>
+        <li><strong>Python 3.11 o posterior.</strong> La integración continua ejecuta la batería de tests con las versiones 3.11, 3.12 y 3.13.</li>
         <li><strong>Git</strong>, para clonar el repositorio (o descargarlo como ZIP desde GitHub).</li>
       </ul>
       <p>Todo lo demás lo instala pip a partir de los metadatos del paquete: NumPy, SciPy, Shapely, pyclipper, ezdxf, h5py, Matplotlib, PySide6, QtAwesome, Typer, Rich, Pydantic y ReportLab.</p>
 
       <h2 id="install"><span class="secnum">1.1.2</span><span class="ht">Instalación desde el código fuente</span><a class="anchor" href="#install" aria-label="Enlace a esta sección">#</a></h2>
-      <p>Clona el repositorio, crea dentro de él un entorno virtual, actívalo e instala el paquete en modo editable:</p>
+      <p>Clona el repositorio, crea dentro un entorno virtual, actívalo e instala el paquete en modo editable:</p>
       <div class="code"><pre><code>git clone https://github.com/samuelsl27/OGR-Slip2D.git
 cd OGR-Slip2D
 python -m venv .venv
 .venv\Scripts\activate            # Windows
 source .venv/bin/activate         # macOS and Linux
 pip install -e .</code></pre></div>
-      <p>La instalación editable (<code>-e</code>) enlaza el paquete con la carpeta que clonaste, de modo que basta con <code>git pull</code> para actualizar el código. En macOS y en algunas distribuciones de Linux el intérprete se llama <code>python3</code>.</p>
+      <p>La instalación editable (<code>-e</code>) enlaza el paquete con la carpeta clonada, de modo que basta con <code>git pull</code> para actualizar el código. En macOS y en algunas distribuciones de Linux el intérprete se llama <code>python3</code>.</p>
 
       <h2 id="commands"><span class="secnum">1.1.3</span><span class="ht">Los tres comandos</span><a class="anchor" href="#commands" aria-label="Enlace a esta sección">#</a></h2>
       <figure class="tbl" id="tbl-commands">
@@ -200,7 +200,7 @@ pip install -e .</code></pre></div>
           </table>
         </div>
       </figure>
-      <p>El programa se abre con un proyecto vacío. <span class="ui">File → Load Demo Slope</span> carga un pequeño modelo de ejemplo —un talud de 10 m de altura, 1V:1H, en arcilla limosa con un nivel freático—, que es una forma rápida de comprobar que el análisis funciona. La <a class="xref" href="quick-start.html">Sección 1.2</a> construye un modelo desde cero.</p>
+      <p>Al arrancar, el programa abre un proyecto vacío. La opción <span class="ui">File → Load Demo Slope</span> carga un modelo de ejemplo pequeño (un talud 1V:1H de 10 m de altura, en arcilla limosa y con nivel freático), útil para comprobar rápidamente que el análisis funciona. En la <a class="xref" href="quick-start.html">Sección 1.2</a> se construye un modelo desde cero.</p>
 
       <h2 id="extras"><span class="secnum">1.1.4</span><span class="ht">Extras opcionales</span><a class="anchor" href="#extras" aria-label="Enlace a esta sección">#</a></h2>
       <figure class="tbl" id="tbl-extras">
@@ -211,30 +211,30 @@ pip install -e .</code></pre></div>
             <tbody>
               <tr><td><code>mcp</code></td><td>El SDK oficial de MCP para Python (<code>mcp&gt;=2.1,&lt;3</code>, licencia MIT)</td><td>El servidor MCP</td></tr>
               <tr><td><code>dev</code></td><td>pytest, pytest-qt, black, ruff, mypy</td><td>Herramientas de desarrollo</td></tr>
-              <tr><td><code>docs</code></td><td>Sphinx y su tema</td><td>Compilar la documentación en local</td></tr>
+              <tr><td><code>docs</code></td><td>Sphinx y su tema</td><td>Generar la documentación en local</td></tr>
             </tbody>
           </table>
         </div>
       </figure>
-      <p>Se pueden combinar varios extras: <code>pip install -e ".[mcp,dev]"</code>. Conectar un agente de IA se describe paso a paso en la <a href="../../ai/index.html#install">página de IA y MCP</a>.</p>
+      <p>Se pueden combinar varios extras, por ejemplo <code>pip install -e ".[mcp,dev]"</code>. Para conectar un agente de IA, la <a href="../../ai/index.html#install">página de IA y MCP</a> explica los pasos uno a uno.</p>
 
       <h2 id="tests"><span class="secnum">1.1.5</span><span class="ht">Ejecución de la batería de tests</span><a class="anchor" href="#tests" aria-label="Enlace a esta sección">#</a></h2>
-      <p>El proyecto usa su propio ejecutor de tests, <code>tests/_runner.py</code>; pytest no es necesario, y los módulos de tests no se pueden importar fuera del ejecutor. Los tests gráficos construyen widgets de Qt reales, así que necesitan la plataforma sin pantalla («offscreen») de Qt:</p>
+      <p>El proyecto trae su propio ejecutor de tests, <code>tests/_runner.py</code>, así que no hace falta pytest; además, los módulos de tests no se pueden importar fuera del ejecutor. Los tests gráficos crean widgets reales de Qt, por lo que necesitan la plataforma «offscreen» de Qt (sin pantalla):</p>
       <div class="code"><pre><code># Windows (PowerShell)
 $env:QT_QPA_PLATFORM = "offscreen"; python tests/_runner.py
 # macOS and Linux
 QT_QPA_PLATFORM=offscreen python tests/_runner.py</code></pre></div>
-      <p>La batería completa —5 265 tests en la versión <span data-v>0.1.235</span>— tarda aproximadamente media hora; el tiempo varía entre ejecuciones idénticas, así que tómalo como una comprobación de que la batería termina y no como una medición. Para trabajar en un área, ejecuta solo una parte:</p>
+      <p>La batería completa (5 265 tests en la versión <span data-v>0.1.235</span>) tarda en torno a media hora. El tiempo varía entre ejecuciones idénticas, así que sirve para comprobar que la batería termina, no como medición. Para trabajar en un área concreta, ejecuta solo una parte:</p>
       <div class="code"><pre><code>python tests/_runner.py transient          # files whose name contains it
 python tests/_runner.py -k erfc            # tests whose name contains it
 python tests/_runner.py --list transient   # show the selection, run nothing</code></pre></div>
-      <div class="note"><span class="label">Nota</span><p>Un patrón que no coincide con nada termina con el código 2 en lugar de anunciar un éxito vacío, y una ejecución filtrada imprime una advertencia <code>FILTERED RUN</code> alrededor de sus totales: no es evidencia para una versión.</p></div>
+      <div class="note"><span class="label">Nota</span><p>Si el patrón no coincide con nada, la ejecución termina con el código 2 en lugar de dar por correcta una ejecución vacía. Una ejecución filtrada imprime un aviso <code>FILTERED RUN</code> junto a los totales: no sirve de prueba para publicar una versión.</p></div>
 
       <h2 id="update"><span class="secnum">1.1.6</span><span class="ht">Actualización y desinstalación</span><a class="anchor" href="#update" aria-label="Enlace a esta sección">#</a></h2>
-      <p>Desde la carpeta del repositorio, con el entorno activo: <code>git pull</code> y, después, <code>pip install -e .</code> de nuevo para incorporar cualquier dependencia nueva. Para desinstalar, borra la carpeta clonada: el entorno virtual está dentro de ella.</p>
+      <p>Desde la carpeta del repositorio y con el entorno activado, ejecuta <code>git pull</code> y, a continuación, <code>pip install -e .</code> otra vez para incorporar las dependencias nuevas, si las hay. Para desinstalar, borra la carpeta clonada: el entorno virtual está dentro de ella.</p>
 
       <h2 id="language"><span class="secnum">1.1.7</span><span class="ht">Idioma de la interfaz</span><a class="anchor" href="#language" aria-label="Enlace a esta sección">#</a></h2>
-      <p>La interfaz está disponible en inglés y en español (<span class="ui">File → Preferences… → Language</span>). El programa arranca en inglés; en la versión <span data-v>0.1.235</span> la elección de idioma no se conserva entre sesiones. Las capturas de pantalla de esta documentación muestran la interfaz en inglés.</p>
+      <p>La interfaz está disponible en inglés y en español (<span class="ui">File → Preferences… → Language</span>). El programa arranca en inglés y, en la versión <span data-v>0.1.235</span>, no guarda el idioma elegido de una sesión a otra. Las capturas de esta documentación muestran la interfaz en inglés.</p>
     </article>
 
 <!-- @inc docfoot -->
@@ -263,7 +263,7 @@ python tests/_runner.py --list transient   # show the selection, run nothing</co
           <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
           <b>OpenGeoRock</b>
         </a>
-        <p class="tagline">Software geotécnico de código abierto, desarrollado a la vista de todos en la Universidad Politécnica de Cartagena.</p>
+        <p class="tagline">Software geotécnico de código abierto desarrollado en la Universidad Politécnica de Cartagena.</p>
         <span class="lang" role="group" aria-label="Idioma"><a href="../../../docs/getting-started/installation.html" hreflang="en" lang="en">EN</a><a href="../../../es/docs/getting-started/installation.html" hreflang="es" lang="es" aria-current="true">ES</a></span>
       </div>
       <div>
@@ -276,7 +276,7 @@ python tests/_runner.py --list transient   # show the selection, run nothing</co
         </ul>
       </div>
       <div>
-        <h5>Aprende</h5>
+        <h5>Recursos</h5>
         <ul>
           <li><a href="../../../es/docs/index.html">Documentación</a></li>
           <li><a href="../../../es/docs/getting-started/quick-start.html">Inicio rápido</a></li>
@@ -306,7 +306,7 @@ python tests/_runner.py --list transient   # show the selection, run nothing</co
       </div>
     </div>
     <div class="legal">
-      <span>© 2026 Samuel Sáez López · OGR Slip2D es software libre bajo AGPL-3.0-or-later, sin garantía de ningún tipo.</span>
+      <span>© 2026 Samuel Sáez López · OGR Slip2D es software libre (licencia AGPL-3.0 o posterior) y se distribuye sin ninguna garantía.</span>
       <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
     </div>
   </div>

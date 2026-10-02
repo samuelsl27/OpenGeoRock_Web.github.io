@@ -62,7 +62,7 @@ L = {
     "es": {
         "docs": "Documentación", "fig": "Figura", "tbl": "Tabla", "eq": "Ec.", "sec": "Sección",
         "prev": "Anterior", "next": "Siguiente", "on_page": "En esta página", "print": "Imprimir esta página",
-        "edit": "Editar esta página", "issue": "Informar de un problema", "describes": "Describe OGR Slip2D",
+        "edit": "Editar esta página", "issue": "Informar de un problema", "describes": "Válido para OGR Slip2D",
         "docs_home": "Portada de la documentación", "contents": "Contenido", "search": "Buscar en la documentación",
         "anchor": "Enlace a esta sección", "lang": "Idioma", "chapter": "Capítulo",
         "crumbs": "Ruta de navegación", "pager": "Páginas",

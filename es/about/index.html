@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>El proyecto — OpenGeoRock</title>
-<meta name="description" content="Por qué existe OpenGeoRock, quién lo desarrolla, la licencia AGPL en la práctica, cómo aportar un caso de validación y cómo citar OGR Slip2D.">
+<meta name="description" content="Por qué existe OpenGeoRock, quién lo desarrolla, qué supone en la práctica la licencia AGPL, cómo aportar un caso de validación y cómo citar OGR Slip2D.">
 <!-- @inc head -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>document.documentElement.classList.replace("no-js", "js")</script>
@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="OpenGeoRock">
 <meta property="og:title" content="El proyecto — OpenGeoRock">
-<meta property="og:description" content="Por qué existe OpenGeoRock, quién lo desarrolla, la licencia AGPL en la práctica, cómo aportar un caso de validación y cómo citar OGR Slip2D.">
+<meta property="og:description" content="Por qué existe OpenGeoRock, quién lo desarrolla, qué supone en la práctica la licencia AGPL, cómo aportar un caso de validación y cómo citar OGR Slip2D.">
 <meta property="og:url" content="https://opengeorock.org/es/about/">
 <meta property="og:image" content="https://opengeorock.org/assets/img/og-image.png">
 <meta property="og:locale" content="es_ES">
@@ -48,23 +48,23 @@
             <div class="mega-col">
               <span class="label">Disponible hoy</span>
               <a class="mega-item feature" href="../../es/products/slip2d.html"><b>OGR Slip2D</b><span>Estabilidad de taludes 2D: equilibrio límite, agua subterránea por elementos finitos y análisis probabilístico.</span></a>
-              <a class="mega-item" href="../../es/ai/index.html"><b>Servidor MCP para agentes de IA <span class="tag live">nuevo</span></b><span>Claude, ChatGPT o un modelo local construyen y calculan modelos de OGR Slip2D.</span></a>
+              <a class="mega-item" href="../../es/ai/index.html"><b>Servidor MCP para agentes de IA <span class="tag live">nuevo</span></b><span>Claude, ChatGPT o un modelo local crean y calculan modelos de OGR Slip2D.</span></a>
             </div>
             <div class="mega-col">
-              <span class="label">En la hoja de ruta</span>
+              <span class="label">Previstos</span>
               <a class="mega-item" href="../../es/products/index.html#ogr-data"><b>OGR Data</b><span>Base de datos de propiedades de suelos y macizos rocosos</span></a>
               <a class="mega-item" href="../../es/products/index.html#ogr-fem2d"><b>OGR FEM2D</b><span>Elementos finitos elastoplásticos 2D</span></a>
               <a class="mega-item" href="../../es/products/index.html#ogr-slip3d"><b>OGR Slip3D</b><span>Equilibrio límite en 3D</span></a>
               <a class="mega-item" href="../../es/products/index.html#ogr-fem3d"><b>OGR FEM3D</b><span>Elementos finitos 3D con flujo acoplado</span></a>
             </div>
             <div class="mega-col">
-              <span class="label">Úsalo desde</span>
+              <span class="label">Cómo se usa</span>
               <a class="mega-item" href="../../es/docs/getting-started/interface.html"><b>El programa de escritorio</b><span>Modelador, intérprete y terminal de Python</span></a>
               <a class="mega-item" href="../../es/docs/reference/python-api.html"><b>Python</b><span>Automatiza análisis desde tu propio código</span></a>
               <a class="mega-item" href="../../es/docs/reference/cli.html"><b>La línea de comandos</b><span>Cálculos por lotes con ogr-slip2d-cli</span></a>
             </div>
           </div>
-          <div class="mega-foot"><span>Cinco programas, un núcleo abierto.</span><a href="../../es/products/index.html">Todos los productos →</a></div>
+          <div class="mega-foot"><span>Cinco programas sobre un mismo núcleo abierto.</span><a href="../../es/products/index.html">Todos los productos →</a></div>
         </div>
       </div>
       <a href="../../es/examples/index.html" data-nav="examples">Ejemplos</a>
@@ -104,7 +104,7 @@
   <div class="wrap">
     <nav class="crumbs label" aria-label="Ruta de navegación"><a href="../index.html">Inicio</a><span aria-hidden="true">/</span><span>El proyecto</span></nav>
     <h1>Software geotécnico de código abierto, <em>desarrollado a la vista de todos.</em></h1>
-    <p class="lede">Casi todos los programas de los que depende un ingeniero geotécnico son cerrados, caros y opacos: una caja negra en el centro de las decisiones sobre presas, taludes, túneles y cimentaciones. OpenGeoRock reconstruye esas herramientas a la vista de todos: un núcleo de cálculo en Python puro, una interfaz de escritorio moderna y una batería de tests que cualquiera puede inspeccionar.</p>
+    <p class="lede">Casi todos los programas en los que se apoya un ingeniero geotécnico son cerrados, caros y opacos: una caja negra en el centro de decisiones sobre presas, taludes, túneles y cimentaciones. OpenGeoRock rehace esas herramientas en abierto, con un núcleo de cálculo en Python puro, una interfaz de escritorio moderna y una batería de tests que cualquiera puede revisar.</p>
   </div>
 </section>
 
@@ -113,15 +113,15 @@
   <div class="wrap">
     <div class="sec-head">
       <div><div class="sec-num label">§ 01 — Principios</div><h2>Resultados para <em>comprobar</em>, no para creer.</h2></div>
-      <p>Cada método incluye el caso de referencia con el que se validó, de modo que los resultados se pueden comprobar en lugar de creerlos. El resto se deduce de ahí.</p>
+      <p>Cada método va acompañado del caso de referencia con el que se validó, para que sus resultados puedan comprobarse en vez de tener que creerlos. Todo lo demás se deriva de ahí.</p>
     </div>
     <div class="feature-grid">
-      <div class="feature"><span class="n label">01</span><h4>Motores legibles</h4><p>Núcleos de cálculo en Python puro, documentados y desacoplados de la interfaz, de modo que se pueden leer, usar desde scripts o integrar en otros programas.</p></div>
-      <div class="feature"><span class="n label">02</span><h4>Resultados verificables</h4><p>El trabajo numérico se valida con algo externo —un caso publicado, una solución en forma cerrada, una identidad analítica— y nunca con una instantánea de su propia salida.</p></div>
-      <div class="feature"><span class="n label">03</span><h4>Ningún ajuste sin efecto</h4><p>Un control que no modifica el resultado es peor que ninguno, porque el usuario cree que el análisis lo respeta. Cada opción va acompañada del test que demuestra que cambia el número.</p></div>
-      <div class="feature"><span class="n label">04</span><h4>Una aplicación de escritorio moderna</h4><p>Una interfaz en PySide6 con un modelador completo, una ventana de interpretación y un terminal de Python integrado.</p></div>
-      <div class="feature"><span class="n label">05</span><h4>Abierto a los agentes</h4><p>Las mismas operaciones que usa la interfaz se publican a través de un servidor MCP, de modo que los agentes de IA trabajan con el ingeniero, sobre el mismo modelo.</p></div>
-      <div class="feature"><span class="n label">06</span><h4>Pensado para contribuir</h4><p>Módulos pequeños y bien delimitados y un contrato explícito para los colaboradores —humanos o asistidos por IA—, con la razón de cada regla.</p></div>
+      <div class="feature"><span class="n label">01</span><h4>Motores de cálculo legibles</h4><p>Núcleos de cálculo en Python puro, documentados e independientes de la interfaz, que se pueden leer, usar desde scripts o integrar en otros programas.</p></div>
+      <div class="feature"><span class="n label">02</span><h4>Resultados verificables</h4><p>Cada cálculo numérico se valida con algo externo (un caso publicado, una solución analítica, una identidad exacta), nunca con resultados guardados del propio programa.</p></div>
+      <div class="feature"><span class="n label">03</span><h4>Ningún ajuste sin efecto</h4><p>Un control que no cambia el resultado es peor que no tenerlo, porque el usuario cree que el análisis lo tiene en cuenta. Cada opción tiene un test que demuestra que modifica el resultado.</p></div>
+      <div class="feature"><span class="n label">04</span><h4>Un programa de escritorio moderno</h4><p>Interfaz en PySide6 con un modelador completo, una ventana de interpretación y un terminal de Python integrado.</p></div>
+      <div class="feature"><span class="n label">05</span><h4>Abierto a agentes de IA</h4><p>Las operaciones que usa la interfaz se ofrecen también mediante un servidor MCP, para que los agentes de IA trabajen junto al ingeniero, sobre el mismo modelo.</p></div>
+      <div class="feature"><span class="n label">06</span><h4>Pensado para colaborar</h4><p>Módulos pequeños y bien delimitados, y un contrato explícito para los colaboradores, trabajen con o sin ayuda de IA, que explica el porqué de cada regla.</p></div>
     </div>
   </div>
 </section>
@@ -131,16 +131,16 @@
   <div class="wrap">
     <div class="sec-head">
       <div><div class="sec-num label">§ 02 — Equipo</div><h2>Un equipo pequeño, <em>en la Universidad Politécnica de Cartagena.</em></h2></div>
-      <p>OpenGeoRock lo escribe Samuel Sáez López como parte de su investigación doctoral en la UPCT, bajo la supervisión académica del Prof. Emilio Trigueros Tornero.</p>
+      <p>OpenGeoRock lo programa Samuel Sáez López dentro de su investigación doctoral en la UPCT, bajo la supervisión académica del profesor Emilio Trigueros Tornero.</p>
     </div>
     <div class="people">
       <article class="person">
-        <div class="photo"><img src="../../assets/img/people/samuel.webp" alt="Samuel Sáez López sobre el terreno, en una cantera" width="1200" height="900" loading="lazy"></div>
+        <div class="photo"><img src="../../assets/img/people/samuel.webp" alt="Samuel Sáez López en una cantera, en trabajo de campo" width="1200" height="900" loading="lazy"></div>
         <div class="body">
           <div class="role label">Autor · mantenedor · titular de los derechos de autor</div>
           <h3>Samuel Sáez López</h3>
           <div class="aff">Ingeniero de minas · doctorando, Universidad Politécnica de Cartagena (UPCT)</div>
-          <p class="bio">Doctorando del programa <em>Tecnología y Modelización en Ingeniería Civil, Minera y Ambiental</em> de la UPCT. Escribe y mantiene el código de OpenGeoRock y dirige el diseño tanto de su motor de cálculo como de su interfaz; su investigación doctoral sobre estabilidad de taludes y mecánica de rocas alimenta directamente los métodos numéricos que se publican aquí.</p>
+          <p class="bio">Doctorando del programa <em>Tecnología y Modelización en Ingeniería Civil, Minera y Ambiental</em> de la UPCT. Escribe y mantiene el código de OpenGeoRock y dirige el diseño del motor de cálculo y de la interfaz. Su investigación doctoral sobre estabilidad de taludes y mecánica de rocas se traslada directamente a los métodos numéricos que se publican aquí.</p>
           <div class="links">
             <a class="btn sm" href="https://www.linkedin.com/in/samuel-saez-lopez-7603091a2/" target="_blank" rel="noopener">LinkedIn</a>
             <a class="btn sm" href="mailto:samuel.saez@edu.upct.es">samuel.saez@edu.upct.es</a>
@@ -163,7 +163,7 @@
         </article>
         <div class="note" style="margin:0">
           <span class="label">Autoría</span>
-          <p>Para que el reparto de contribuciones no deje lugar a dudas: Samuel Sáez López es el <strong>autor y titular de los derechos de autor</strong> del código fuente; Emilio Trigueros Tornero aporta <strong>supervisión académica y colaboración científica</strong>. Las contribuciones se aceptan bajo el <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/CLA.md" target="_blank" rel="noopener">CLA</a> del proyecto.</p>
+          <p>Para que no haya dudas sobre el reparto: Samuel Sáez López es el <strong>autor y titular de los derechos de autor</strong> del código fuente, y Emilio Trigueros Tornero aporta la <strong>supervisión académica y la colaboración científica</strong>. Las contribuciones se aceptan conforme al <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/CLA.md" target="_blank" rel="noopener">CLA</a> del proyecto.</p>
         </div>
       </div>
     </div>
@@ -174,7 +174,7 @@
       </a>
       <div class="affil">
         <div class="logo"><img src="../../assets/img/logos/imga.png" alt="IMGA S.L.P." width="480" height="274" loading="lazy"></div>
-        <div><span class="label">Colaboradora profesional</span><b>IMGA S.L.P.</b><span>Ingeniería Minera, Geológica y Ambiental</span></div>
+        <div><span class="label">Colaboración profesional</span><b>IMGA S.L.P.</b><span>Ingeniería Minera, Geológica y Ambiental</span></div>
       </div>
     </div>
   </div>
@@ -186,16 +186,16 @@
     <div>
       <div class="sec-num label">§ 03 — Licencia</div>
       <h2 class="mt-s">AGPL-3.0-or-later, <em>en la práctica.</em></h2>
-      <p class="lede mt-m">La GNU Affero General Public License v3.0 o posterior. Cada archivo fuente lleva su identificador SPDX, y un test falla si falta alguno.</p>
+      <p class="lede mt-m">Es la GNU Affero General Public License, versión 3.0 o posterior. Cada archivo fuente lleva su identificador SPDX, y hay un test que falla si falta en alguno.</p>
       <div class="cta-row"><a class="btn" href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/LICENSE" target="_blank" rel="noopener">Texto completo de la licencia ↗</a></div>
     </div>
     <div>
       <ul class="ticks">
-        <li>Puedes usar OpenGeoRock libremente, <strong>también para trabajos profesionales de ingeniería</strong>, y facturar ese trabajo sin pagar ni publicar nada. Ejecutar un programa no es una actividad restringida.</li>
-        <li>Si lo <strong>modificas</strong> y dejas que otros usen tu versión <strong>a distancia, a través de una red</strong> —un servicio web o SaaS—, debes ofrecerles el código fuente de tu versión. Cobrar por ese servicio está permitido; mantenerlo cerrado, no.</li>
-        <li><strong>No hay garantía de ningún tipo.</strong> Los resultados deben contrastarse con cálculos independientes antes de basar nada en ellos. Un proyecto lo firma una persona, no un programa.</li>
+        <li>Puedes usar OpenGeoRock libremente, <strong>también en trabajos profesionales de ingeniería</strong>, y facturar esos trabajos sin pagar ni publicar nada: ejecutar un programa no está sujeto a ninguna restricción.</li>
+        <li>Si lo <strong>modificas</strong> y dejas que otros usen tu versión <strong>a distancia, a través de una red</strong> (como servicio web o SaaS), tienes que ofrecerles el código fuente de esa versión. Puedes cobrar por el servicio, pero no mantenerlo cerrado.</li>
+        <li><strong>No hay garantía de ningún tipo.</strong> Antes de basar nada en los resultados, hay que contrastarlos con cálculos independientes. Un proyecto lo firma una persona, no un programa.</li>
       </ul>
-      <div class="note mt-m"><span class="label">Un cambio de licencia</span><p>Hasta la v0.1.42 el proyecto estuvo bajo la licencia GPL-3.0. Pasó a la AGPL en la v0.1.43 para que una versión modificada que se ofrezca como servicio en red tenga que publicar su código fuente, algo que la GPL no exige, porque servir un programa no es distribuirlo.</p></div>
+      <div class="note mt-m"><span class="label">Un cambio de licencia</span><p>Hasta la v0.1.42, el proyecto tenía licencia GPL-3.0. En la v0.1.43 pasó a la AGPL, para que una versión modificada que se ofrezca como servicio en red tenga que publicar su código fuente. La GPL no lo exige, porque servir un programa no es distribuirlo.</p></div>
     </div>
   </div>
 </section>
@@ -205,12 +205,12 @@
   <div class="wrap">
     <div class="sec-head">
       <div><div class="label">§ 04 — Contribuir</div><h2 class="mt-s" style="color:var(--paper)">El buen software geotécnico <em style="color:#9bd8a8">se construye entre todos.</em></h2></div>
-      <p>Código, validación con casos reales, informes de errores o, simplemente, ejecutar el programa en un proyecto real e informar de lo que falló.</p>
+      <p>Código, validación con casos reales, avisos de errores o, simplemente, usar el programa en un proyecto real y contar qué ha fallado.</p>
     </div>
     <div class="grid-3">
       <a class="card ink" style="border-color:#ffffff22" href="https://github.com/samuelsl27/OGR-Slip2D/issues/new/choose" target="_blank" rel="noopener"><span class="label">Lo más valioso</span><h3 style="color:var(--paper)">Un caso de validación</h3><p>Un talud cuyo factor de seguridad conoces por una publicación, por otro programa o por un cálculo a mano. Abre una incidencia con la plantilla <em>Validation case</em>.</p><div class="foot label"><span>Abrir una incidencia</span><span>↗</span></div></a>
-      <a class="card ink" style="border-color:#ffffff22" href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener"><span class="label">Código</span><h3 style="color:var(--paper)">Lee primero CONTRIBUTING</h3><p>Las condiciones que debe cumplir un cambio y por qué existe cada una: todas se remontan a un problema real de la historia del proyecto.</p><div class="foot label"><span>CONTRIBUTING.md</span><span>↗</span></div></a>
-      <a class="card ink" style="border-color:#ffffff22" href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/AGENTS.md" target="_blank" rel="noopener"><span class="label">Con agentes de IA</span><h3 style="color:var(--paper)">El mismo criterio para todos</h3><p>El código asistido por IA se acepta con el mismo criterio que todo lo demás: si no puedes explicar por qué hay una línea, no la envíes.</p><div class="foot label"><span>Reglas para agentes</span><span>↗</span></div></a>
+      <a class="card ink" style="border-color:#ffffff22" href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener"><span class="label">Código</span><h3 style="color:var(--paper)">Empieza por CONTRIBUTING</h3><p>Las condiciones que tiene que cumplir un cambio y el porqué de cada una: todas nacen de un problema real de la historia del proyecto.</p><div class="foot label"><span>CONTRIBUTING.md</span><span>↗</span></div></a>
+      <a class="card ink" style="border-color:#ffffff22" href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/AGENTS.md" target="_blank" rel="noopener"><span class="label">Con agentes de IA</span><h3 style="color:var(--paper)">El mismo criterio para todos</h3><p>El código escrito con ayuda de IA se acepta con el mismo criterio que el resto: si no sabes explicar por qué está una línea, no la envíes.</p><div class="foot label"><span>Reglas para agentes</span><span>↗</span></div></a>
     </div>
   </div>
 </section>
@@ -219,10 +219,10 @@
 <section class="section" id="cite">
   <div class="wrap grid-2" style="align-items:start">
     <div>
-      <div class="sec-num label">§ 05 — Citar</div>
+      <div class="sec-num label">§ 05 — Cómo citar</div>
       <h2 class="mt-s">Si te ha sido útil <em>en tu trabajo.</em></h2>
-      <p class="lede mt-m">Si OGR Slip2D contribuye a un trabajo publicado, por favor, cítalo. Indicar la versión utilizada hace reproducible el resultado.</p>
-      <p>Preguntas sobre el proyecto: <a href="mailto:samuel.saez@edu.upct.es">samuel.saez@edu.upct.es</a>.</p>
+      <p class="lede mt-m">Si OGR Slip2D ha contribuido a un trabajo publicado, te agradeceremos que lo cites. Indicar la versión que usaste permite reproducir el resultado.</p>
+      <p>Para cualquier pregunta sobre el proyecto: <a href="mailto:samuel.saez@edu.upct.es">samuel.saez@edu.upct.es</a>.</p>
     </div>
     <div class="code"><pre><code>@software{ogr_suite,
   author  = {Sáez López, Samuel},
@@ -246,7 +246,7 @@
           <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
           <b>OpenGeoRock</b>
         </a>
-        <p class="tagline">Software geotécnico de código abierto, desarrollado a la vista de todos en la Universidad Politécnica de Cartagena.</p>
+        <p class="tagline">Software geotécnico de código abierto desarrollado en la Universidad Politécnica de Cartagena.</p>
         <span class="lang" role="group" aria-label="Idioma"><a href="../../about/index.html" hreflang="en" lang="en">EN</a><a href="../../es/about/index.html" hreflang="es" lang="es" aria-current="true">ES</a></span>
       </div>
       <div>
@@ -259,7 +259,7 @@
         </ul>
       </div>
       <div>
-        <h5>Aprende</h5>
+        <h5>Recursos</h5>
         <ul>
           <li><a href="../../es/docs/index.html">Documentación</a></li>
           <li><a href="../../es/docs/getting-started/quick-start.html">Inicio rápido</a></li>
@@ -289,7 +289,7 @@
       </div>
     </div>
     <div class="legal">
-      <span>© 2026 Samuel Sáez López · OGR Slip2D es software libre bajo AGPL-3.0-or-later, sin garantía de ningún tipo.</span>
+      <span>© 2026 Samuel Sáez López · OGR Slip2D es software libre (licencia AGPL-3.0 o posterior) y se distribuye sin ninguna garantía.</span>
       <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
     </div>
   </div>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>API de Python — documentación de OGR Slip2D</title>
-<meta name="description" content="Automatización de OGR Slip2D desde Python en dos niveles: el motor (Project, run_analysis, GridSearch y los métodos) y la capa de operaciones ogr_api que usa el servidor MCP, además de las variables de la consola integrada, con un ejemplo probado para cada uno.">
+<meta name="description" content="Cómo controlar OGR Slip2D desde Python en dos niveles: el motor (Project, run_analysis, GridSearch y los métodos) y la capa de operaciones ogr_api que usa el servidor MCP, además de las variables de la consola integrada, con un ejemplo comprobado de cada uno.">
 <!-- @inc head -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>document.documentElement.classList.replace("no-js", "js")</script>
@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="OpenGeoRock">
 <meta property="og:title" content="API de Python — documentación de OGR Slip2D">
-<meta property="og:description" content="Automatización de OGR Slip2D desde Python en dos niveles: el motor (Project, run_analysis, GridSearch y los métodos) y la capa de operaciones ogr_api que usa el servidor MCP, además de las variables de la consola integrada, con un ejemplo probado para cada uno.">
+<meta property="og:description" content="Cómo controlar OGR Slip2D desde Python en dos niveles: el motor (Project, run_analysis, GridSearch y los métodos) y la capa de operaciones ogr_api que usa el servidor MCP, además de las variables de la consola integrada, con un ejemplo comprobado de cada uno.">
 <meta property="og:url" content="https://opengeorock.org/es/docs/reference/python-api.html">
 <meta property="og:image" content="https://opengeorock.org/assets/img/og-image.png">
 <meta property="og:locale" content="es_ES">
@@ -48,23 +48,23 @@
             <div class="mega-col">
               <span class="label">Disponible hoy</span>
               <a class="mega-item feature" href="../../../es/products/slip2d.html"><b>OGR Slip2D</b><span>Estabilidad de taludes 2D: equilibrio límite, agua subterránea por elementos finitos y análisis probabilístico.</span></a>
-              <a class="mega-item" href="../../../es/ai/index.html"><b>Servidor MCP para agentes de IA <span class="tag live">nuevo</span></b><span>Claude, ChatGPT o un modelo local construyen y calculan modelos de OGR Slip2D.</span></a>
+              <a class="mega-item" href="../../../es/ai/index.html"><b>Servidor MCP para agentes de IA <span class="tag live">nuevo</span></b><span>Claude, ChatGPT o un modelo local crean y calculan modelos de OGR Slip2D.</span></a>
             </div>
             <div class="mega-col">
-              <span class="label">En la hoja de ruta</span>
+              <span class="label">Previstos</span>
               <a class="mega-item" href="../../../es/products/index.html#ogr-data"><b>OGR Data</b><span>Base de datos de propiedades de suelos y macizos rocosos</span></a>
               <a class="mega-item" href="../../../es/products/index.html#ogr-fem2d"><b>OGR FEM2D</b><span>Elementos finitos elastoplásticos 2D</span></a>
               <a class="mega-item" href="../../../es/products/index.html#ogr-slip3d"><b>OGR Slip3D</b><span>Equilibrio límite en 3D</span></a>
               <a class="mega-item" href="../../../es/products/index.html#ogr-fem3d"><b>OGR FEM3D</b><span>Elementos finitos 3D con flujo acoplado</span></a>
             </div>
             <div class="mega-col">
-              <span class="label">Úsalo desde</span>
+              <span class="label">Cómo se usa</span>
               <a class="mega-item" href="../../../es/docs/getting-started/interface.html"><b>El programa de escritorio</b><span>Modelador, intérprete y terminal de Python</span></a>
               <a class="mega-item" href="../../../es/docs/reference/python-api.html"><b>Python</b><span>Automatiza análisis desde tu propio código</span></a>
               <a class="mega-item" href="../../../es/docs/reference/cli.html"><b>La línea de comandos</b><span>Cálculos por lotes con ogr-slip2d-cli</span></a>
             </div>
           </div>
-          <div class="mega-foot"><span>Cinco programas, un núcleo abierto.</span><a href="../../../es/products/index.html">Todos los productos →</a></div>
+          <div class="mega-foot"><span>Cinco programas sobre un mismo núcleo abierto.</span><a href="../../../es/products/index.html">Todos los productos →</a></div>
         </div>
       </div>
       <a href="../../../es/examples/index.html" data-nav="examples">Ejemplos</a>
@@ -114,14 +114,14 @@
 <li><a href="../../../es/docs/user-guide/geometry.html"><span class="n">2.2</span><span>Geometría y contornos</span></a></li>
 <li><a href="../../../es/docs/user-guide/materials.html"><span class="n">2.3</span><span>Materiales</span></a></li>
 <li><a href="../../../es/docs/user-guide/water.html"><span class="n">2.4</span><span>Agua y presión intersticial</span></a></li>
-<li><a href="../../../es/docs/user-guide/loads.html"><span class="n">2.5</span><span>Cargas y carga sísmica</span></a></li>
+<li><a href="../../../es/docs/user-guide/loads.html"><span class="n">2.5</span><span>Cargas y acción sísmica</span></a></li>
 <li><a href="../../../es/docs/user-guide/supports.html"><span class="n">2.6</span><span>Soportes</span></a></li>
 <li><a href="../../../es/docs/user-guide/surfaces.html"><span class="n">2.7</span><span>Superficies de rotura y búsqueda</span></a></li>
 <li><a href="../../../es/docs/user-guide/results.html"><span class="n">2.8</span><span>Cálculo e interpretación de resultados</span></a></li>
 <li><a href="../../../es/docs/user-guide/groundwater.html"><span class="n">2.9</span><span>Agua subterránea por elementos finitos</span></a></li>
 <li><a href="../../../es/docs/user-guide/probabilistic.html"><span class="n">2.10</span><span>Análisis probabilístico y de sensibilidad</span></a></li>
 <li><a href="../../../es/docs/user-guide/design-standards.html"><span class="n">2.11</span><span>Normas de diseño</span></a></li>
-<li><a href="../../../es/docs/user-guide/automation.html"><span class="n">2.12</span><span>Informes, scripting y línea de comandos</span></a></li>
+<li><a href="../../../es/docs/user-guide/automation.html"><span class="n">2.12</span><span>Informes, scripts y línea de comandos</span></a></li>
 </ul></details>
 <details open><summary>3 · Manual de teoría</summary><ul>
 <li><a href="../../../es/docs/theory/limit-equilibrium.html"><span class="n">3.1</span><span>Equilibrio límite y factor de seguridad</span></a></li>
@@ -129,11 +129,11 @@
 <li><a href="../../../es/docs/theory/interslice.html"><span class="n">3.3</span><span>Fuerzas entre dovelas, convergencia y admisibilidad</span></a></li>
 <li><a href="../../../es/docs/theory/search.html"><span class="n">3.4</span><span>Búsqueda de la superficie de rotura</span></a></li>
 <li><a href="../../../es/docs/theory/strength.html"><span class="n">3.5</span><span>Modelos de resistencia al corte</span></a></li>
-<li><a href="../../../es/docs/theory/pore-pressure.html"><span class="n">3.6</span><span>Presión intersticial y resistencia no saturada</span></a></li>
+<li><a href="../../../es/docs/theory/pore-pressure.html"><span class="n">3.6</span><span>Presión intersticial y resistencia de los suelos no saturados</span></a></li>
 <li><a href="../../../es/docs/theory/seepage.html"><span class="n">3.7</span><span>Filtración por elementos finitos</span></a></li>
 <li><a href="../../../es/docs/theory/rapid-drawdown.html"><span class="n">3.8</span><span>Desembalse rápido</span></a></li>
 <li><a href="../../../es/docs/theory/seismic.html"><span class="n">3.9</span><span>Análisis sísmico</span></a></li>
-<li><a href="../../../es/docs/theory/supports.html"><span class="n">3.10</span><span>Fuerzas de los soportes</span></a></li>
+<li><a href="../../../es/docs/theory/supports.html"><span class="n">3.10</span><span>Fuerzas de soporte</span></a></li>
 <li><a href="../../../es/docs/theory/probabilistic.html"><span class="n">3.11</span><span>Análisis probabilístico</span></a></li>
 <li><a href="../../../es/docs/theory/partial-factors.html"><span class="n">3.12</span><span>Coeficientes parciales (Eurocódigo 7)</span></a></li>
 </ul></details>
@@ -146,7 +146,7 @@
 <li><a href="../../../es/docs/reference/mcp.html"><span class="n">5.1</span><span>Servidor MCP</span></a></li>
 <li><a href="../../../es/docs/reference/cli.html"><span class="n">5.2</span><span>Interfaz de línea de comandos</span></a></li>
 <li><a href="../../../es/docs/reference/python-api.html" aria-current="page"><span class="n">5.3</span><span>API de Python</span></a></li>
-<li><a href="../../../es/docs/reference/file-format.html"><span class="n">5.4</span><span>El formato .ogr</span></a></li>
+<li><a href="../../../es/docs/reference/file-format.html"><span class="n">5.4</span><span>El formato de archivo .ogr</span></a></li>
 <li><a href="../../../es/docs/reference/error-codes.html"><span class="n">5.5</span><span>Códigos de error</span></a></li>
 <li><a href="../../../es/docs/reference/notation.html"><span class="n">5.6</span><span>Notación y glosario</span></a></li>
 <li><a href="../../../es/docs/reference/bibliography.html"><span class="n">5.7</span><span>Bibliografía</span></a></li>
@@ -162,12 +162,12 @@
 <nav class="crumbs label" aria-label="Ruta de navegación"><a href="../../../es/docs/index.html">Documentación</a><span aria-hidden="true">/</span><span>5 · Referencia</span></nav>
 <div class="chapter label">5.3</div>
 <h1>API de Python</h1>
-<div class="meta label"><span>Describe OGR Slip2D <span data-v>0.1.235</span></span></div>
+<div class="meta label"><span>Válido para OGR Slip2D <span data-v>0.1.235</span></span></div>
 <!-- @end dochead -->
     </header>
 
     <article class="doc prose">
-      <p class="lede">OGR Slip2D es un programa en Python, y todo lo que calcula puede controlarse desde un script. Hay dos niveles: el <strong>motor</strong>, cuyos objetos (<code>Project</code>, las búsquedas y los métodos) dan control total y responsabilidad total, y la <strong>capa de operaciones</strong> <code>ogr_api</code>, las operaciones con nombre, validadas y reversibles que el servidor MCP publica como herramientas. La ventana del programa tiene además una consola de Python conectada al proyecto activo. Esta página muestra un breve ejemplo de cada uno, todos comprobados con la v<span data-v>0.1.235</span>.</p>
+      <p class="lede">OGR Slip2D es un programa escrito en Python y todo lo que calcula puede dirigirse desde un script. Hay dos niveles: el <strong>motor</strong>, cuyos objetos (<code>Project</code>, las búsquedas y los métodos) dan control total, pero también total responsabilidad, y la <strong>capa de operaciones</strong> <code>ogr_api</code>, formada por operaciones con nombre, validadas y reversibles que el servidor MCP publica como herramientas. Además, la ventana del programa incluye una consola de Python conectada al proyecto abierto. Esta página muestra un breve ejemplo de cada uno, todos comprobados con la v<span data-v>0.1.235</span>.</p>
 
       <h2 id="levels"><span class="secnum">5.3.1</span><span class="ht">Dos niveles</span><a class="anchor" href="#levels" aria-label="Enlace a esta sección">#</a></h2>
       <figure class="tbl" id="tbl-levels">
@@ -177,31 +177,31 @@
             <thead><tr><th></th><th>Motor</th><th>Capa de operaciones</th></tr></thead>
             <tbody>
               <tr><td>Paquetes</td><td><code>ogr_core</code> (modelo, ajustes, archivos), <code>ogr_slip2d</code> (métodos, búsquedas), <code>ogr_fem2d</code> (filtración)</td><td><code>ogr_api</code></td></tr>
-              <tr><td>Tú manejas</td><td>objetos de Python: un <code>Project</code>, una búsqueda, su resultado</td><td>referencias: <code>project_id</code>, <code>job_id</code>, <code>result_id</code></td></tr>
-              <tr><td>Validación</td><td>lo que comprueba cada objeto; un ajuste mal escrito se acepta en silencio</td><td>se comprueban todos los argumentos y ajustes, con los nombres válidos más próximos</td></tr>
+              <tr><td>Trabajas con</td><td>objetos de Python: un <code>Project</code>, una búsqueda, su resultado</td><td>identificadores: <code>project_id</code>, <code>job_id</code>, <code>result_id</code></td></tr>
+              <tr><td>Validación</td><td>la que hace cada objeto; un ajuste mal escrito se acepta sin dar aviso</td><td>se comprueban todos los argumentos y ajustes, y se sugieren los nombres válidos más parecidos</td></tr>
               <tr><td>Deshacer</td><td>no</td><td>cada edición es un paso de deshacer</td></tr>
-              <tr><td>Análisis</td><td>se ejecutan en tu proceso</td><td>tareas en segundo plano en un proceso hijo que se puede cancelar</td></tr>
-              <tr><td>Respuestas</td><td>objetos de resultado completos (cada superficie, cada dovela)</td><td>resúmenes serializables en JSON; resultados completos si se solicitan</td></tr>
-              <tr><td>Úsalo para</td><td>investigación, estudios paramétricos, nuevos posprocesados</td><td>scripts que deben comportarse como lo hace el programa; lo que hace un agente</td></tr>
+              <tr><td>Análisis</td><td>se ejecutan en tu proceso</td><td>tareas en segundo plano, en un proceso hijo que se puede cancelar</td></tr>
+              <tr><td>Respuestas</td><td>objetos de resultado completos (cada superficie, cada dovela)</td><td>resúmenes compatibles con JSON; resultados completos si se piden</td></tr>
+              <tr><td>Cuándo usarlo</td><td>investigación, estudios paramétricos, posprocesados nuevos</td><td>scripts que deban comportarse igual que el programa; lo que hace un agente</td></tr>
             </tbody>
           </table>
         </div>
       </figure>
-      <p>Ambos necesitan el paquete instalado (<a class="xref" href="../getting-started/installation.html">Sección 1.1</a>); ninguno necesita la ventana. En el repositorio, <code>examples/quick_slope.py</code> usa el motor y <code>examples/api_acads.py</code> la capa de operaciones; desde la raíz del repositorio se ejecutan como <code>python -m examples.quick_slope</code> y <code>python -m examples.api_acads</code>.</p>
+      <p>Ambos niveles requieren tener instalado el paquete (<a class="xref" href="../getting-started/installation.html">Sección 1.1</a>), pero ninguno necesita la ventana. En el repositorio, <code>examples/quick_slope.py</code> usa el motor y <code>examples/api_acads.py</code> la capa de operaciones; desde la raíz del repositorio se ejecutan como <code>python -m examples.quick_slope</code> y <code>python -m examples.api_acads</code>.</p>
 
       <h2 id="engine"><span class="secnum">5.3.2</span><span class="ht">El motor</span><a class="anchor" href="#engine" aria-label="Enlace a esta sección">#</a></h2>
       <h3 id="projects"><span class="ht">Proyectos</span><a class="anchor" href="#projects" aria-label="Enlace a esta sección">#</a></h3>
-      <p>Un modelo es un <code>Project</code> (<code>ogr_core.project</code>). <code>Project.load(path)</code> lee un archivo <code>.ogr</code> y <code>project.save(path)</code> escribe uno (<a class="xref" href="file-format.html">Sección 5.4</a>); <code>Project(name)</code> crea uno vacío, al que se añaden contornos y materiales con <code>add_boundary</code> y <code>add_material</code>, como hace <code>examples/quick_slope.py</code>. <code>ogr_core.project.demo.<wbr>build_demo_project()</code> devuelve el talud de demostración.</p>
+      <p>Un modelo es un <code>Project</code> (<code>ogr_core.project</code>). <code>Project.load(path)</code> lee un archivo <code>.ogr</code> y <code>project.save(path)</code> guarda el proyecto en uno (<a class="xref" href="file-format.html">Sección 5.4</a>); <code>Project(name)</code> crea un proyecto vacío, al que se añaden contornos y materiales con <code>add_boundary</code> y <code>add_material</code>, como hace <code>examples/quick_slope.py</code>. <code>ogr_core.project.demo.<wbr>build_demo_project()</code> devuelve el talud de demostración.</p>
 
       <h3 id="run-analysis"><span class="ht">El análisis que describe el proyecto</span><a class="anchor" href="#run-analysis" aria-label="Enlace a esta sección">#</a></h3>
-      <p><code>run_analysis(project, method_ids=None, progress_cb=None, *, allow_unconfigured=False)</code>, en <code>ogr_slip2d.analysis_runner</code>, es el análisis que ejecutan <span class="ui">Analysis → Compute</span>, la línea de comandos y la capa de operaciones: una búsqueda por método, construida a partir de los ajustes del proyecto, con los coeficientes parciales de la norma de diseño aplicados a una copia (el proyecto que se pasa nunca se modifica), el desembalse rápido, los límites del talud, los filtros de superficies, los objetos de foco, el modo sísmico, los ajustes de convergencia, la semilla y las comprobaciones de admisibilidad.</p>
+      <p><code>run_analysis(project, method_ids=None, progress_cb=None, *, allow_unconfigured=False)</code>, del módulo <code>ogr_slip2d.analysis_runner</code>, es el análisis que ejecutan <span class="ui">Analysis → Compute</span>, la línea de comandos y la capa de operaciones: una búsqueda por método, construida a partir de los ajustes del proyecto. Tiene en cuenta los coeficientes parciales de la norma de diseño (que se aplican a una copia, de modo que el proyecto que se pasa no se modifica nunca), el desembalse rápido, los límites del talud, los filtros de superficies, los objetos de foco, el modo sísmico, los ajustes de convergencia, la semilla y las comprobaciones de admisibilidad.</p>
       <div class="code"><pre><code>from ogr_core.project import Project
 from ogr_slip2d.analysis_runner import run_analysis
 
 
 def main():
     project = Project.load("slope.ogr")
-    outcome = run_analysis(project)        <span class="c"># los métodos activados en el proyecto</span>
+    outcome = run_analysis(project)        <span class="c"># the methods enabled in the project</span>
     for note in outcome.warnings:
         print("Note:", note)
     for method_id, result in outcome.results.items():
@@ -216,42 +216,42 @@ def main():
 if __name__ == "__main__":
     main()</code></pre></div>
       <ul>
-        <li>Devuelve un <code>AnalysisOutcome</code> con <code>results</code> (id del método → resultado de la búsqueda), <code>factor_report</code> (el informe de la norma de diseño), <code>warnings</code> (las notas que muestra la ventana) y <code>project</code> (la copia con coeficientes que se analizó). <code>results, report = run_analysis(project)</code> también funciona.</li>
-        <li>Si el proyecto no se puede analizar tal como está configurado, lanza <code>AnalysisNotConfigured</code>, un <code>ValueError</code> cuyo atributo <code>problems</code> enumera todos los motivos; <code>allow_unconfigured=True</code> ejecuta de todos modos, para quien ya los haya leído.</li>
-        <li>Con una norma de diseño activa, <code>critical.fos</code> es un factor de sobredimensionamiento, que debe superar 1, no un factor de seguridad.</li>
-        <li><code>progress_cb(done, total)</code> se llama a lo largo de toda la ejecución, con todos los métodos incluidos.</li>
+        <li>Devuelve un <code>AnalysisOutcome</code> con <code>results</code> (id del método → resultado de la búsqueda), <code>factor_report</code> (el informe de la norma de diseño), <code>warnings</code> (las notas que muestra la ventana) y <code>project</code> (la copia con los coeficientes parciales aplicados, que es la que se analizó). <code>results, report = run_analysis(project)</code> también funciona.</li>
+        <li>Si el proyecto no se puede analizar tal como está configurado, lanza <code>AnalysisNotConfigured</code>, un <code>ValueError</code> cuyo atributo <code>problems</code> enumera todos los motivos; <code>allow_unconfigured=True</code> ejecuta el análisis de todos modos, para quien ya los haya leído.</li>
+        <li>Con una norma de diseño activa, <code>critical.fos</code> es un factor de sobredimensionamiento, que ha de superar 1, y no un factor de seguridad.</li>
+        <li><code>progress_cb(done, total)</code> se invoca a lo largo de toda la ejecución, con el avance de todos los métodos en conjunto.</li>
       </ul>
 
       <h3 id="hand-built"><span class="ht">Una búsqueda construida a mano</span><a class="anchor" href="#hand-built" aria-label="Enlace a esta sección">#</a></h3>
-      <p>Las búsquedas (<code>GridSearch</code>, <code>SlopeSearch</code>, <code>AutoRefineSearch</code>, <code>BlockSearch</code>, <code>PathSearch</code>, <code>SimulatedAnnealingSearch</code>; el enjambre de partículas está en <code>ogr_slip2d.particle_swarm</code>) y los nueve métodos (<code>BishopSimplified</code>, <code>JanbuSimplified</code>, <code>JanbuCorrected</code>, <code>OrdinaryFellenius</code>, <code>Spencer</code>, <code>GLEMorgensternPrice</code>, <code>LoweKarafiath</code>, <code>CorpsOfEngineers1</code>, <code>CorpsOfEngineers2</code>) se pueden construir directamente; <code>method_registry()</code> asigna a cada id de método su clase.</p>
+      <p>Las búsquedas (<code>GridSearch</code>, <code>SlopeSearch</code>, <code>AutoRefineSearch</code>, <code>BlockSearch</code>, <code>PathSearch</code>, <code>SimulatedAnnealingSearch</code>; la de enjambre de partículas está en <code>ogr_slip2d.particle_swarm</code>) y los nueve métodos (<code>BishopSimplified</code>, <code>JanbuSimplified</code>, <code>JanbuCorrected</code>, <code>OrdinaryFellenius</code>, <code>Spencer</code>, <code>GLEMorgensternPrice</code>, <code>LoweKarafiath</code>, <code>CorpsOfEngineers1</code>, <code>CorpsOfEngineers2</code>) se pueden crear directamente; <code>method_registry()</code> asocia cada id de método con su clase.</p>
       <div class="code"><pre><code>from ogr_core.project import Project, save_results
 from ogr_slip2d import BishopSimplified, GridSearch
 
 project = Project.load("slope.ogr")
 search = GridSearch(method=BishopSimplified(), grid_nx=6, grid_ny=6,
                     radius_increment=5, num_slices=25)
-result = search.run(project)               <span class="c"># 7 × 7 centros × 6 radios = 294 círculos</span>
+result = search.run(project)               <span class="c"># 7 × 7 centres × 6 radii = 294 circles</span>
 print(result.critical.fos, result.attempts)
 save_results("slope_bishop.h5", result, project_id=project.id)</code></pre></div>
-      <div class="note warn"><span class="label">Una búsqueda construida a mano no es Compute</span><p>Un objeto construido a mano usa sus propios valores por defecto y lee del proyecto solo el modelo en sí. Un método toma una tolerancia de 0.001, 75 iteraciones y ninguna aceleración de Steffensen (los valores por defecto del proyecto son 0.005, 50 y Steffensen activado); <code>GridSearch</code> toma 10 × 10 intervalos, un incremento de radio de 10, 30 dovelas y un área mínima de 0.5 m², y sitúa la rejilla por sí misma cuando no se dan <code>grid_x</code> y <code>grid_y</code>. Los límites del talud, los filtros de superficies, los objetos de foco y el modo sísmico Ky del proyecto solo llegan a una búsqueda construida a mano si se le pasan, y el desembalse rápido y la norma de diseño los aplica únicamente el ejecutor de análisis. Para obtener lo que calcula la ventana, usa <code>run_analysis</code>. <code>build_search(project, method_id)</code> devuelve la búsqueda que el proyecto configura para un método, desembalse rápido incluido; la norma de diseño la aplica <code>run_analysis</code>, a una copia del proyecto.</p></div>
+      <div class="note warn"><span class="label">Una búsqueda construida a mano no equivale a Compute</span><p>Un objeto construido a mano usa sus propios valores por defecto y toma del proyecto únicamente el modelo. Un método parte de una tolerancia de 0.001 y 75 iteraciones, sin aceleración de Steffensen (en el proyecto, los valores por defecto son 0.005, 50 y Steffensen activado); <code>GridSearch</code> parte de 10 × 10 intervalos, un incremento de radio de 10, 30 dovelas y un área mínima de 0.5 m², y coloca la rejilla por su cuenta cuando no se indican <code>grid_x</code> y <code>grid_y</code>. Los límites del talud, los filtros de superficies, los objetos de foco y el modo sísmico Ky del proyecto solo llegan a una búsqueda construida a mano si se le pasan, y el desembalse rápido y la norma de diseño los aplica únicamente el módulo que ejecuta los análisis. Para obtener lo que calcula la ventana, usa <code>run_analysis</code>. <code>build_search(project, method_id)</code> devuelve la búsqueda que el proyecto configura para un método, con el desembalse rápido incluido; la norma de diseño la aplica <code>run_analysis</code> a una copia del proyecto.</p></div>
       <figure class="tbl" id="tbl-search-result">
-        <figcaption><span class="fignum">Tabla 5.3.2</span> Lo que devuelve una búsqueda (<code>SearchResult</code>) y lo que lleva cada superficie evaluada (<code>LEMResult</code>).</figcaption>
+        <figcaption><span class="fignum">Tabla 5.3.2</span> Qué devuelve una búsqueda (<code>SearchResult</code>) y qué contiene cada superficie evaluada (<code>LEMResult</code>).</figcaption>
         <div class="table-wrap">
           <table class="data">
             <thead><tr><th>Atributo</th><th>Significado</th></tr></thead>
             <tbody>
-              <tr><td><code>result.critical</code></td><td>La superficie admisible con el menor factor de seguridad (el menor coeficiente sísmico crítico en una ejecución Ky), o <code>None</code> cuando ninguna superficie es válida. Si todas las superficies válidas incumplieron las comprobaciones de admisibilidad, estas se ignoran en lugar de no devolver nada, y <code>inadmissible_count</code> lo indica.</td></tr>
-              <tr><td><code>result.evaluations</code></td><td>Todas las superficies que se dovelaron y calcularon, válidas o no, en el orden en que se generaron.</td></tr>
+              <tr><td><code>result.critical</code></td><td>Superficie admisible con el menor factor de seguridad (el menor coeficiente sísmico crítico en un análisis Ky), o <code>None</code> si ninguna superficie es válida. Si todas las superficies válidas incumplen las comprobaciones de admisibilidad, estas se ignoran en lugar de no devolver nada, y <code>inadmissible_count</code> lo indica.</td></tr>
+              <tr><td><code>result.evaluations</code></td><td>Todas las superficies que se dividieron en dovelas y se calcularon, sean válidas o no, en el orden en que se generaron.</td></tr>
               <tr><td><code>valid_count</code>, <code>invalid_count</code></td><td>Superficies con y sin factor de seguridad; su suma es <code>total_count</code>.</td></tr>
-              <tr><td><code>attempts</code>, <code>focus_rejected</code></td><td>Superficies candidatas formadas (una Grid Search intenta (<em>nx</em> + 1)(<em>ny</em> + 1)(<em>radius increment</em> + 1)) y candidatas retiradas por los objetos de foco.</td></tr>
-              <tr><td><code>top_n(n)</code>, <code>min_fos</code></td><td>Las <em>n</em> mejores superficies válidas; el factor de la superficie crítica.</td></tr>
-              <tr><td><code>minima</code>, <code>optimized</code>, <code>objective</code></td><td>Mínimos locales distintos (enjambre de partículas multimodal); la superficie producida por <em>Optimize Surfaces</em> cuando mejoró el resultado de la búsqueda; <code>"fos"</code> o <code>"ky"</code>.</td></tr>
-              <tr><td><code>fos</code></td><td>Factor de seguridad de una superficie, o <code>None</code> cuando no existe (nunca NaN).</td></tr>
+              <tr><td><code>attempts</code>, <code>focus_rejected</code></td><td>Superficies candidatas generadas (una Grid Search intenta (<em>nx</em> + 1)(<em>ny</em> + 1)(<em>radius increment</em> + 1)) y candidatas descartadas por los objetos de foco.</td></tr>
+              <tr><td><code>top_n(n)</code>, <code>min_fos</code></td><td>Las <em>n</em> mejores superficies válidas; factor de seguridad de la superficie crítica.</td></tr>
+              <tr><td><code>minima</code>, <code>optimized</code>, <code>objective</code></td><td>Mínimos locales distintos (enjambre de partículas multimodal); superficie generada por <em>Optimize Surfaces</em> cuando mejoró el resultado de la búsqueda; <code>"fos"</code> o <code>"ky"</code>.</td></tr>
+              <tr><td><code>fos</code></td><td>Factor de seguridad de una superficie, o <code>None</code> si no existe (nunca NaN).</td></tr>
               <tr><td><code>converged</code>, <code>iterations</code>, <code>method_id</code></td><td>Convergencia de la iteración, iteraciones empleadas y método.</td></tr>
-              <tr><td><code>surface</code>, <code>slices</code></td><td>La superficie de rotura (<code>surface.to_dict()</code> da su geometría) y sus dovelas.</td></tr>
+              <tr><td><code>surface</code>, <code>slices</code></td><td>Superficie de rotura (<code>surface.to_dict()</code> da su geometría) y sus dovelas.</td></tr>
               <tr><td><code>is_valid</code></td><td>Ha convergido, con un factor positivo y sin error.</td></tr>
-              <tr><td><code>admissible</code>, <code>admissibility_note</code>, <code>admissibility_reason</code></td><td>Veredicto de las comprobaciones posteriores al análisis (tensión de tracción, m-alpha).</td></tr>
-              <tr><td><code>error_message</code>, <code>reason</code></td><td>Por qué no hay factor, en palabras y como código (<a class="xref" href="error-codes.html#reasons">Sección 5.5.2</a>).</td></tr>
+              <tr><td><code>admissible</code>, <code>admissibility_note</code>, <code>admissibility_reason</code></td><td>Veredicto de las comprobaciones posteriores al análisis (tracción, m-alfa).</td></tr>
+              <tr><td><code>error_message</code>, <code>reason</code></td><td>Motivo por el que no hay factor de seguridad, en texto y como código (<a class="xref" href="error-codes.html#reasons">Sección 5.5.2</a>).</td></tr>
               <tr><td><code>details</code></td><td>Datos adicionales, como <code>lambda</code>, <code>ky</code> o <code>newmark_displacement</code>.</td></tr>
             </tbody>
           </table>
@@ -259,7 +259,7 @@ save_results("slope_bishop.h5", result, project_id=project.id)</code></pre></div
       </figure>
 
       <h3 id="one-surface"><span class="ht">Una superficie</span><a class="anchor" href="#one-surface" aria-label="Enlace a esta sección">#</a></h3>
-      <p><code>evaluate_surfaces(project, surface, method_ids=None)</code> calcula el factor de seguridad de una superficie dada con cada método, con las mismas comprobaciones, la misma copia con coeficientes y la misma búsqueda configurada que <code>run_analysis</code>. Su atributo <code>results</code> asigna a cada id de método un resultado, o <code>None</code> cuando la superficie no corta el modelo.</p>
+      <p><code>evaluate_surfaces(project, surface, method_ids=None)</code> calcula el factor de seguridad de una superficie dada con cada método, y lo hace con las mismas comprobaciones, la misma copia con coeficientes y la misma búsqueda configurada que <code>run_analysis</code>. Su atributo <code>results</code> asocia a cada id de método un resultado, o <code>None</code> si la superficie no corta el modelo.</p>
       <div class="code"><pre><code>from ogr_core.project import Project
 from ogr_slip2d import SlipCircle
 from ogr_slip2d.analysis_runner import evaluate_surfaces
@@ -271,13 +271,13 @@ for method_id, res in outcome.results.items():
     print(method_id, None if res is None else res.fos)</code></pre></div>
 
       <h3 id="results-files"><span class="ht">Archivos de resultados</span><a class="anchor" href="#results-files" aria-label="Enlace a esta sección">#</a></h3>
-      <p><code>save_results(path, search_result, project_id="")</code> escribe un resultado de búsqueda en HDF5 y <code>load_summary(path)</code> vuelve a leer sus metadatos y sus matrices de resumen, sin las dovelas; ambas están en <code>ogr_core.project</code>. La estructura del archivo está en la <a class="xref" href="file-format.html#results">Sección 5.4.5</a>.</p>
+      <p><code>save_results(path, search_result, project_id="")</code> escribe un resultado de búsqueda en HDF5 y <code>load_summary(path)</code> vuelve a leer sus metadatos y sus matrices de resumen, sin las dovelas; ambas funciones están en <code>ogr_core.project</code>. La estructura del archivo se describe en la <a class="xref" href="file-format.html#results">Sección 5.4.5</a>.</p>
 
       <h3 id="processes"><span class="ht">Scripts y procesos de trabajo</span><a class="anchor" href="#processes" aria-label="Enlace a esta sección">#</a></h3>
-      <p>Una Grid Search de 400 círculos o más se evalúa en un grupo de procesos de trabajo (como máximo 8, que por defecto usan el 50 % de los procesadores lógicos; <span class="ui">Project Settings → Advanced</span> puede desactivarlo). En Windows cada proceso de trabajo vuelve a importar el script, de modo que un script que ejecuta una búsqueda debe mantener su código de nivel superior bajo <code>if __name__ == "__main__":</code>, como hacen los ejemplos de esta página y los del repositorio. Un grupo de procesos que no puede arrancar no detiene el análisis: la búsqueda vuelve a un solo proceso.</p>
+      <p>Una Grid Search de 400 círculos o más se evalúa en un grupo de procesos de trabajo (como máximo 8, que por defecto usan el 50 % de los procesadores lógicos; <span class="ui">Project Settings → Advanced</span> permite desactivarlo). En Windows cada proceso de trabajo vuelve a importar el script, por lo que un script que ejecute una búsqueda debe mantener su código de nivel superior dentro de <code>if __name__ == "__main__":</code>, como hacen los ejemplos de esta página y los del repositorio. Si el grupo de procesos no puede arrancar, el análisis no se detiene: la búsqueda pasa a ejecutarse en un solo proceso.</p>
 
       <h2 id="operations"><span class="secnum">5.3.3</span><span class="ht">La capa de operaciones</span><a class="anchor" href="#operations" aria-label="Enlace a esta sección">#</a></h2>
-      <p><code>ogr_api</code> reúne todo lo que el programa puede hacer con un modelo en forma de operaciones con nombre, con argumentos tipados y respuestas serializables en JSON, sin Qt y sin el SDK de MCP. Hay 73 operaciones: las herramientas MCP salvo <code>server_info</code>, con los mismos nombres, y cada parámetro de una herramienta es un parámetro de su operación, de modo que las tablas de herramientas de la <a class="xref" href="mcp.html#tools">Sección 5.1.7</a> también las describen. <code>ogr_api.OPERATIONS</code> es el registro.</p>
+      <p><code>ogr_api</code> reúne todo lo que el programa puede hacer con un modelo, en forma de operaciones con nombre, argumentos tipados y respuestas compatibles con JSON, sin depender de Qt ni del SDK de MCP. Hay 73 operaciones: las herramientas MCP, salvo <code>server_info</code>, con los mismos nombres; cada parámetro de una herramienta es un parámetro de su operación, así que las tablas de herramientas de la <a class="xref" href="mcp.html#tools">Sección 5.1.7</a> también las describen. <code>ogr_api.OPERATIONS</code> es el registro.</p>
       <div class="code"><pre><code>from pathlib import Path
 
 from ogr_api import OgrApiError, Workspace, call
@@ -308,33 +308,33 @@ def main():
 if __name__ == "__main__":
     main()</code></pre></div>
       <ul>
-        <li><strong><code>Workspace(workdir=None, jobs_root=None, max_concurrent_jobs=1, max_results_per_project=5)</code></strong> contiene los modelos abiertos, su historial de deshacer, sus resultados y el gestor de tareas. <code>workdir</code> ancla las rutas relativas; sin él, una ruta relativa es un error. Conserva los cinco últimos resultados de cada modelo.</li>
+        <li><strong><code>Workspace(workdir=None, jobs_root=None, max_concurrent_jobs=1, max_results_per_project=5)</code></strong> guarda los modelos abiertos, su historial de deshacer, sus resultados y el gestor de tareas. <code>workdir</code> sirve de base para las rutas relativas; sin él, una ruta relativa produce un error. Conserva los cinco últimos resultados de cada modelo.</li>
         <li><strong><code>call(ws, "operation", **kwargs)</code></strong> ejecuta una operación. El modelo se indica con <code>project_id</code>, que puede omitirse mientras haya un solo modelo abierto.</li>
         <li>Las <strong>ediciones</strong> son atómicas y cada una es un paso de deshacer (<code>call(ws, "project_history", action="undo")</code>).</li>
-        <li>Los <strong>análisis</strong> (<code>analysis_run</code>, <code>groundwater_run</code>, <code>statistics_run</code>, <code>back_analysis_run</code>, <code>optimize_run</code>, <code>drawdown_sweep_run</code>) se ejecutan como tareas en un proceso hijo, sobre una copia desligada del modelo. Una llamada espera hasta <code>wait_seconds</code> y, si no, responde <code>state: "running"</code> con un <code>job_id</code> para <code>job_get</code>; <code>job_cancel</code> finaliza el árbol de procesos de la tarea. La respuesta de una ejecución terminada incluye <code>result_id</code>, <code>summary</code> y <code>stale</code> (si el modelo ha cambiado desde entonces). <code>ws.shutdown()</code> finaliza las tareas que aún se están ejecutando y elimina sus archivos.</li>
+        <li>Los <strong>análisis</strong> (<code>analysis_run</code>, <code>groundwater_run</code>, <code>statistics_run</code>, <code>back_analysis_run</code>, <code>optimize_run</code>, <code>drawdown_sweep_run</code>) se ejecutan como tareas en un proceso hijo, sobre una copia independiente del modelo. La llamada espera hasta <code>wait_seconds</code> y, si el análisis no ha terminado, responde <code>state: "running"</code> con un <code>job_id</code> que se pasa a <code>job_get</code>; <code>job_cancel</code> finaliza el árbol de procesos de la tarea. La respuesta de una ejecución terminada incluye <code>result_id</code>, <code>summary</code> y <code>stale</code> (si el modelo ha cambiado desde entonces). <code>ws.shutdown()</code> finaliza las tareas que sigan en ejecución y elimina sus archivos.</li>
         <li>Los <strong>errores</strong> son subclases de <code>OgrApiError</code> con un <code>code</code> estable, un <code>message</code>, un <code>hint</code> y <code>details</code> (<a class="xref" href="error-codes.html#api-errors">Sección 5.5.4</a>). Un nombre de argumento que la operación no admite no es un <code>OgrApiError</code>: Python lanza <code>TypeError</code>.</li>
-        <li><strong><code>python_exec</code></strong> ejecuta un script con <code>project</code>, <code>api</code> (cada operación como <code>api.&lt;name&gt;(...)</code>, con <code>project_id</code> ya rellenado), <code>np</code>, <code>ogr_core</code>, <code>ogr_slip2d</code> y <code>result(result_id)</code> (un resultado almacenado, completo) como un único paso de deshacer; devuelve <code>ok</code>, <code>stdout</code>, <code>stderr</code>, <code>value</code> (la representación de la última expresión), <code>error</code> y <code>rolled_back</code>.</li>
+        <li><strong><code>python_exec</code></strong> ejecuta un script que dispone de <code>project</code>, <code>api</code> (cada operación como <code>api.&lt;name&gt;(...)</code>, con <code>project_id</code> ya rellenado), <code>np</code>, <code>ogr_core</code>, <code>ogr_slip2d</code> y <code>result(result_id)</code> (un resultado almacenado, completo), todo ello como un único paso de deshacer; devuelve <code>ok</code>, <code>stdout</code>, <code>stderr</code>, <code>value</code> (la representación de la última expresión), <code>error</code> y <code>rolled_back</code>.</li>
       </ul>
       <div class="impl">
         <span class="label">En OGR Slip2D</span>
-        <p>La capa de operaciones existe porque los objetos de ajustes del motor aceptan en silencio un ajuste mal escrito y un id de búsqueda desconocido se convierte en una Grid Search; aquí se rechazan ambos, con una sugerencia. Nunca importa Qt ni el SDK de MCP, lo que comprueba un test, de modo que el mismo registro sirve al servidor MCP, al puente para agentes de la ventana y a un script sencillo.</p>
+        <p>La capa de operaciones existe porque los objetos de ajustes del motor aceptan sin dar aviso un ajuste mal escrito y un id de búsqueda desconocido se convierte en una Grid Search; aquí se rechazan ambos, con una sugerencia. Nunca importa Qt ni el SDK de MCP, lo que comprueba un test, de modo que el mismo registro sirve al servidor MCP, al puente para agentes de la ventana y a un script cualquiera.</p>
         <span class="src">Código: <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_api/__init__.py" target="_blank" rel="noopener">ogr_api/__init__.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_api/workspace.py" target="_blank" rel="noopener">ogr_api/workspace.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/examples/api_acads.py" target="_blank" rel="noopener">examples/api_acads.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/examples/quick_slope.py" target="_blank" rel="noopener">examples/quick_slope.py</a></span>
       </div>
 
       <h2 id="terminal"><span class="secnum">5.3.4</span><span class="ht">La consola integrada</span><a class="anchor" href="#terminal" aria-label="Enlace a esta sección">#</a></h2>
-      <p><span class="ui">Window → Terminal</span> (<kbd>Ctrl</kbd>+<kbd>`</kbd>) abre una consola de Python dentro del programa, conectada al proyecto activo. Se ejecuta en el propio proceso del programa: todo lo que hace lo hace sobre el modelo que se ve en pantalla.</p>
+      <p><span class="ui">Window → Terminal</span> (<kbd>Ctrl</kbd>+<kbd>`</kbd>) abre una consola de Python dentro del programa, conectada al proyecto abierto. Se ejecuta en el propio proceso del programa, de modo que todo lo que hace lo hace sobre el modelo que se ve en pantalla.</p>
       <figure class="tbl" id="tbl-terminal">
         <figcaption><span class="fignum">Tabla 5.3.3</span> Nombres disponibles en la consola integrada.</figcaption>
         <div class="table-wrap">
           <table class="data">
             <thead><tr><th>Nombre</th><th>Qué es</th></tr></thead>
             <tbody>
-              <tr><td><code>project</code></td><td>El <code>Project</code> actual; se vuelve a enlazar cuando se crea o se abre un proyecto.</td></tr>
-              <tr><td><code>canvas</code></td><td>El lienzo de dibujo de la ventana principal.</td></tr>
-              <tr><td><code>mainwindow</code></td><td>La ventana principal.</td></tr>
+              <tr><td><code>project</code></td><td><code>Project</code> actual; se vuelve a enlazar al crear o abrir un proyecto.</td></tr>
+              <tr><td><code>canvas</code></td><td>Lienzo de dibujo de la ventana principal.</td></tr>
+              <tr><td><code>mainwindow</code></td><td>Ventana principal.</td></tr>
               <tr><td><code>np</code></td><td>NumPy.</td></tr>
-              <tr><td><code>ogr_core</code>, <code>ogr_slip2d</code></td><td>Los paquetes del modelo y del solucionador.</td></tr>
-              <tr><td><code>help_ogr()</code></td><td>Imprime una breve lista de consejos.</td></tr>
+              <tr><td><code>ogr_core</code>, <code>ogr_slip2d</code></td><td>Paquetes del modelo y del motor de cálculo.</td></tr>
+              <tr><td><code>help_ogr()</code></td><td>Muestra una breve lista de consejos.</td></tr>
             </tbody>
           </table>
         </div>
@@ -345,9 +345,9 @@ if __name__ == "__main__":
 &gt;&gt;&gt; print(outcome.results["spencer"].critical.fos)</code></pre></div>
       <ul>
         <li><kbd>Enter</kbd> ejecuta la entrada, <kbd>Shift</kbd>+<kbd>Enter</kbd> empieza una nueva línea, <kbd>Ctrl</kbd>+<kbd>↑</kbd> y <kbd>Ctrl</kbd>+<kbd>↓</kbd> recorren el historial y <kbd>Ctrl</kbd>+<kbd>L</kbd> borra la consola.</li>
-        <li>El valor de una expresión suelta no se muestra: usa <code>print()</code>, como arriba.</li>
+        <li>El valor de una expresión suelta no se muestra: usa <code>print()</code>, como en el ejemplo anterior.</li>
         <li>La consola se ejecuta en el propio hilo de la ventana, de modo que un cálculo largo iniciado en ella bloquea la ventana hasta que termina.</li>
-        <li>Los cambios hechos en <code>project</code> desde la consola actúan directamente sobre el modelo y no son pasos de <span class="ui">Edit → Undo</span>. Para ediciones que se puedan deshacer desde un script, usa la capa de operaciones o el <code>python_exec</code> de un agente.</li>
+        <li>Los cambios que se hacen en <code>project</code> desde la consola actúan directamente sobre el modelo y no son pasos de <span class="ui">Edit → Undo</span>. Para hacer ediciones que se puedan deshacer desde un script, usa la capa de operaciones o el <code>python_exec</code> de un agente.</li>
       </ul>
       <div class="impl">
         <span class="label">En OGR Slip2D</span>
@@ -359,7 +359,7 @@ if __name__ == "__main__":
 <!-- @inc docfoot -->
 <nav class="doc-pager" aria-label="Páginas">
 <a class="prev" href="../../../es/docs/reference/cli.html"><span class="label">← Anterior · 5.2</span><b>Interfaz de línea de comandos</b></a>
-<a class="next" href="../../../es/docs/reference/file-format.html"><span class="label">5.4 · Siguiente →</span><b>El formato .ogr</b></a>
+<a class="next" href="../../../es/docs/reference/file-format.html"><span class="label">5.4 · Siguiente →</span><b>El formato de archivo .ogr</b></a>
 </nav>
 <div class="doc-edit label"><a href="https://github.com/samuelsl27/OpenGeoRock_Web.github.io/blob/main/es/docs/reference/python-api.html" target="_blank" rel="noopener">Editar esta página ↗</a><a href="https://github.com/samuelsl27/OGR-Slip2D/issues" target="_blank" rel="noopener">Informar de un problema ↗</a></div>
 <!-- @end docfoot -->
@@ -383,7 +383,7 @@ if __name__ == "__main__":
           <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
           <b>OpenGeoRock</b>
         </a>
-        <p class="tagline">Software geotécnico de código abierto, desarrollado a la vista de todos en la Universidad Politécnica de Cartagena.</p>
+        <p class="tagline">Software geotécnico de código abierto desarrollado en la Universidad Politécnica de Cartagena.</p>
         <span class="lang" role="group" aria-label="Idioma"><a href="../../../docs/reference/python-api.html" hreflang="en" lang="en">EN</a><a href="../../../es/docs/reference/python-api.html" hreflang="es" lang="es" aria-current="true">ES</a></span>
       </div>
       <div>
@@ -396,7 +396,7 @@ if __name__ == "__main__":
         </ul>
       </div>
       <div>
-        <h5>Aprende</h5>
+        <h5>Recursos</h5>
         <ul>
           <li><a href="../../../es/docs/index.html">Documentación</a></li>
           <li><a href="../../../es/docs/getting-started/quick-start.html">Inicio rápido</a></li>
@@ -426,7 +426,7 @@ if __name__ == "__main__":
       </div>
     </div>
     <div class="legal">
-      <span>© 2026 Samuel Sáez López · OGR Slip2D es software libre bajo AGPL-3.0-or-later, sin garantía de ningún tipo.</span>
+      <span>© 2026 Samuel Sáez López · OGR Slip2D es software libre (licencia AGPL-3.0 o posterior) y se distribuye sin ninguna garantía.</span>
       <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
     </div>
   </div>

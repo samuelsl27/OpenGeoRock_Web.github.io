@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>Soportes — documentación de OGR Slip2D</title>
-<meta name="description" content="Soportes en OGR Slip2D: definición de tipos de soporte (las nueve clases y sus propiedades), colocación de soportes aislados y en patrón, su edición, fuerzas activas y pasivas y orientación de la fuerza, y el retroanálisis de la fuerza de soporte.">
+<meta name="description" content="Soportes en OGR Slip2D: definición de los tipos de soporte (las nueve clases y sus propiedades), colocación de soportes individuales y en patrón, edición, fuerzas activas y pasivas, orientación de la fuerza y retroanálisis de la fuerza de soporte.">
 <!-- @inc head -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>document.documentElement.classList.replace("no-js", "js")</script>
@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="OpenGeoRock">
 <meta property="og:title" content="Soportes — documentación de OGR Slip2D">
-<meta property="og:description" content="Soportes en OGR Slip2D: definición de tipos de soporte (las nueve clases y sus propiedades), colocación de soportes aislados y en patrón, su edición, fuerzas activas y pasivas y orientación de la fuerza, y el retroanálisis de la fuerza de soporte.">
+<meta property="og:description" content="Soportes en OGR Slip2D: definición de los tipos de soporte (las nueve clases y sus propiedades), colocación de soportes individuales y en patrón, edición, fuerzas activas y pasivas, orientación de la fuerza y retroanálisis de la fuerza de soporte.">
 <meta property="og:url" content="https://opengeorock.org/es/docs/user-guide/supports.html">
 <meta property="og:image" content="https://opengeorock.org/assets/img/og-image.png">
 <meta property="og:locale" content="es_ES">
@@ -49,23 +49,23 @@
             <div class="mega-col">
               <span class="label">Disponible hoy</span>
               <a class="mega-item feature" href="../../../es/products/slip2d.html"><b>OGR Slip2D</b><span>Estabilidad de taludes 2D: equilibrio límite, agua subterránea por elementos finitos y análisis probabilístico.</span></a>
-              <a class="mega-item" href="../../../es/ai/index.html"><b>Servidor MCP para agentes de IA <span class="tag live">nuevo</span></b><span>Claude, ChatGPT o un modelo local construyen y calculan modelos de OGR Slip2D.</span></a>
+              <a class="mega-item" href="../../../es/ai/index.html"><b>Servidor MCP para agentes de IA <span class="tag live">nuevo</span></b><span>Claude, ChatGPT o un modelo local crean y calculan modelos de OGR Slip2D.</span></a>
             </div>
             <div class="mega-col">
-              <span class="label">En la hoja de ruta</span>
+              <span class="label">Previstos</span>
               <a class="mega-item" href="../../../es/products/index.html#ogr-data"><b>OGR Data</b><span>Base de datos de propiedades de suelos y macizos rocosos</span></a>
               <a class="mega-item" href="../../../es/products/index.html#ogr-fem2d"><b>OGR FEM2D</b><span>Elementos finitos elastoplásticos 2D</span></a>
               <a class="mega-item" href="../../../es/products/index.html#ogr-slip3d"><b>OGR Slip3D</b><span>Equilibrio límite en 3D</span></a>
               <a class="mega-item" href="../../../es/products/index.html#ogr-fem3d"><b>OGR FEM3D</b><span>Elementos finitos 3D con flujo acoplado</span></a>
             </div>
             <div class="mega-col">
-              <span class="label">Úsalo desde</span>
+              <span class="label">Cómo se usa</span>
               <a class="mega-item" href="../../../es/docs/getting-started/interface.html"><b>El programa de escritorio</b><span>Modelador, intérprete y terminal de Python</span></a>
               <a class="mega-item" href="../../../es/docs/reference/python-api.html"><b>Python</b><span>Automatiza análisis desde tu propio código</span></a>
               <a class="mega-item" href="../../../es/docs/reference/cli.html"><b>La línea de comandos</b><span>Cálculos por lotes con ogr-slip2d-cli</span></a>
             </div>
           </div>
-          <div class="mega-foot"><span>Cinco programas, un núcleo abierto.</span><a href="../../../es/products/index.html">Todos los productos →</a></div>
+          <div class="mega-foot"><span>Cinco programas sobre un mismo núcleo abierto.</span><a href="../../../es/products/index.html">Todos los productos →</a></div>
         </div>
       </div>
       <a href="../../../es/examples/index.html" data-nav="examples">Ejemplos</a>
@@ -115,14 +115,14 @@
 <li><a href="../../../es/docs/user-guide/geometry.html"><span class="n">2.2</span><span>Geometría y contornos</span></a></li>
 <li><a href="../../../es/docs/user-guide/materials.html"><span class="n">2.3</span><span>Materiales</span></a></li>
 <li><a href="../../../es/docs/user-guide/water.html"><span class="n">2.4</span><span>Agua y presión intersticial</span></a></li>
-<li><a href="../../../es/docs/user-guide/loads.html"><span class="n">2.5</span><span>Cargas y carga sísmica</span></a></li>
+<li><a href="../../../es/docs/user-guide/loads.html"><span class="n">2.5</span><span>Cargas y acción sísmica</span></a></li>
 <li><a href="../../../es/docs/user-guide/supports.html" aria-current="page"><span class="n">2.6</span><span>Soportes</span></a></li>
 <li><a href="../../../es/docs/user-guide/surfaces.html"><span class="n">2.7</span><span>Superficies de rotura y búsqueda</span></a></li>
 <li><a href="../../../es/docs/user-guide/results.html"><span class="n">2.8</span><span>Cálculo e interpretación de resultados</span></a></li>
 <li><a href="../../../es/docs/user-guide/groundwater.html"><span class="n">2.9</span><span>Agua subterránea por elementos finitos</span></a></li>
 <li><a href="../../../es/docs/user-guide/probabilistic.html"><span class="n">2.10</span><span>Análisis probabilístico y de sensibilidad</span></a></li>
 <li><a href="../../../es/docs/user-guide/design-standards.html"><span class="n">2.11</span><span>Normas de diseño</span></a></li>
-<li><a href="../../../es/docs/user-guide/automation.html"><span class="n">2.12</span><span>Informes, scripting y línea de comandos</span></a></li>
+<li><a href="../../../es/docs/user-guide/automation.html"><span class="n">2.12</span><span>Informes, scripts y línea de comandos</span></a></li>
 </ul></details>
 <details open><summary>3 · Manual de teoría</summary><ul>
 <li><a href="../../../es/docs/theory/limit-equilibrium.html"><span class="n">3.1</span><span>Equilibrio límite y factor de seguridad</span></a></li>
@@ -130,11 +130,11 @@
 <li><a href="../../../es/docs/theory/interslice.html"><span class="n">3.3</span><span>Fuerzas entre dovelas, convergencia y admisibilidad</span></a></li>
 <li><a href="../../../es/docs/theory/search.html"><span class="n">3.4</span><span>Búsqueda de la superficie de rotura</span></a></li>
 <li><a href="../../../es/docs/theory/strength.html"><span class="n">3.5</span><span>Modelos de resistencia al corte</span></a></li>
-<li><a href="../../../es/docs/theory/pore-pressure.html"><span class="n">3.6</span><span>Presión intersticial y resistencia no saturada</span></a></li>
+<li><a href="../../../es/docs/theory/pore-pressure.html"><span class="n">3.6</span><span>Presión intersticial y resistencia de los suelos no saturados</span></a></li>
 <li><a href="../../../es/docs/theory/seepage.html"><span class="n">3.7</span><span>Filtración por elementos finitos</span></a></li>
 <li><a href="../../../es/docs/theory/rapid-drawdown.html"><span class="n">3.8</span><span>Desembalse rápido</span></a></li>
 <li><a href="../../../es/docs/theory/seismic.html"><span class="n">3.9</span><span>Análisis sísmico</span></a></li>
-<li><a href="../../../es/docs/theory/supports.html"><span class="n">3.10</span><span>Fuerzas de los soportes</span></a></li>
+<li><a href="../../../es/docs/theory/supports.html"><span class="n">3.10</span><span>Fuerzas de soporte</span></a></li>
 <li><a href="../../../es/docs/theory/probabilistic.html"><span class="n">3.11</span><span>Análisis probabilístico</span></a></li>
 <li><a href="../../../es/docs/theory/partial-factors.html"><span class="n">3.12</span><span>Coeficientes parciales (Eurocódigo 7)</span></a></li>
 </ul></details>
@@ -147,7 +147,7 @@
 <li><a href="../../../es/docs/reference/mcp.html"><span class="n">5.1</span><span>Servidor MCP</span></a></li>
 <li><a href="../../../es/docs/reference/cli.html"><span class="n">5.2</span><span>Interfaz de línea de comandos</span></a></li>
 <li><a href="../../../es/docs/reference/python-api.html"><span class="n">5.3</span><span>API de Python</span></a></li>
-<li><a href="../../../es/docs/reference/file-format.html"><span class="n">5.4</span><span>El formato .ogr</span></a></li>
+<li><a href="../../../es/docs/reference/file-format.html"><span class="n">5.4</span><span>El formato de archivo .ogr</span></a></li>
 <li><a href="../../../es/docs/reference/error-codes.html"><span class="n">5.5</span><span>Códigos de error</span></a></li>
 <li><a href="../../../es/docs/reference/notation.html"><span class="n">5.6</span><span>Notación y glosario</span></a></li>
 <li><a href="../../../es/docs/reference/bibliography.html"><span class="n">5.7</span><span>Bibliografía</span></a></li>
@@ -163,15 +163,15 @@
 <nav class="crumbs label" aria-label="Ruta de navegación"><a href="../../../es/docs/index.html">Documentación</a><span aria-hidden="true">/</span><span>2 · Guía de usuario</span></nav>
 <div class="chapter label">2.6</div>
 <h1>Soportes</h1>
-<div class="meta label"><span>Describe OGR Slip2D <span data-v>0.1.235</span></span></div>
+<div class="meta label"><span>Válido para OGR Slip2D <span data-v>0.1.235</span></span></div>
 <!-- @end dochead -->
     </header>
 
     <article class="doc prose">
-      <p class="lede">Los anclajes, bulones, pilotes, geosintéticos y muros aportan una fuerza allí donde los corta una superficie de rotura. En OGR Slip2D, un soporte es una línea que va desde su <em>cabeza</em>, en el paramento del talud, hasta su <em>cola</em>, dentro del terreno, y toma sus propiedades de un tipo de soporte con nombre, definido una sola vez para el proyecto. Esta página explica cómo definir tipos de soporte, colocar soportes uno a uno o en patrón, editarlos, elegir entre fuerzas activas y pasivas y obtener con el retroanálisis la fuerza de soporte que requiere un diseño. Cómo desarrolla cada tipo su fuerza es el objeto de la <a class="xref" href="../theory/supports.html">Sección 3.10</a>.</p>
+      <p class="lede">Los anclajes, los bulones, los pilotes, los geosintéticos y los muros aportan una fuerza allí donde los corta una superficie de rotura. En OGR Slip2D, un soporte es una línea que va desde su <em>cabeza</em>, en la cara del talud, hasta su <em>cola</em>, dentro del terreno, y toma sus propiedades de un tipo de soporte con nombre, definido una sola vez para todo el proyecto. Esta página explica cómo definir los tipos de soporte, colocar soportes uno a uno o en patrón, editarlos, elegir entre fuerzas activas y pasivas y obtener con el retroanálisis la fuerza de soporte que exige un diseño. En la <a class="xref" href="../theory/supports.html">Sección 3.10</a> se explica cómo desarrolla su fuerza cada tipo.</p>
 
       <h2 id="define"><span class="secnum">2.6.1</span><span class="ht">Definición de tipos de soporte</span><a class="anchor" href="#define" aria-label="Enlace a esta sección">#</a></h2>
-      <p>No se pueden colocar soportes hasta que el proyecto tenga al menos un tipo de soporte. Elige <span class="ui">Properties → Define Support…</span> para abrir <strong>Define Support Properties</strong>. La lista de la izquierda, <strong>Support Types</strong>, contiene los conjuntos de propiedades con nombre del proyecto, cada uno con su clase entre paréntesis; <span class="ui">+ Add</span> crea uno, <span class="ui">Duplicate</span> copia el seleccionado y <span class="ui">− Remove</span> lo elimina (el último no se puede eliminar). Si se abre en un proyecto sin tipos, el diálogo empieza con <em>Type 1</em>, un soporte End Anchored.</p>
+      <p>No se pueden colocar soportes mientras el proyecto no tenga al menos un tipo de soporte. Elige <span class="ui">Properties → Define Support…</span> para abrir <strong>Define Support Properties</strong>. La lista de la izquierda, <strong>Support Types</strong>, contiene los conjuntos de propiedades con nombre del proyecto, cada uno con su clase entre corchetes; <span class="ui">+ Add</span> crea uno, <span class="ui">Duplicate</span> copia el seleccionado y <span class="ui">− Remove</span> lo elimina (el último no se puede eliminar). Si el proyecto no tiene tipos, el diálogo se abre con <em>Type 1</em>, un soporte End Anchored.</p>
       <figure class="tbl" id="tbl-define">
         <figcaption><span class="fignum">Tabla 2.6.1</span> Campos de un tipo de soporte.</figcaption>
         <div class="table-wrap">
@@ -180,74 +180,74 @@
             <tbody>
               <tr><td><strong>Name</strong></td><td>Nombre del conjunto de propiedades, que se usa en todas las listas de soportes</td></tr>
               <tr><td><strong>Support Type</strong></td><td>Una de las nueve clases (<a class="xref" href="#tbl-types">Tabla 2.6.2</a>). Al cambiarla, los parámetros vuelven a los valores por defecto de la nueva clase.</td></tr>
-              <tr><td><strong>Force Application</strong></td><td>Active o Passive (<a class="xref" href="#force">Sección 2.6.2</a>); toma el valor por defecto de la clase al elegir la clase</td></tr>
+              <tr><td><strong>Force Application</strong></td><td>Active o Passive (<a class="xref" href="#force">Sección 2.6.2</a>); toma el valor por defecto de la clase al elegir esta</td></tr>
               <tr><td><strong>Force Orientation</strong></td><td>Dirección de la fuerza del soporte (<a class="xref" href="#tbl-orientation">Tabla 2.6.3</a>); toma el valor por defecto de la clase</td></tr>
               <tr><td><strong>User Angle (from horizontal)</strong></td><td>Ángulo de la fuerza; solo se habilita con <em>User-defined angle</em></td></tr>
-              <tr><td>Parámetros</td><td>Las propiedades de la clase, agrupadas en pestañas en algunas de ellas; encima se muestra una breve descripción de la clase</td></tr>
+              <tr><td>Parámetros</td><td>Las propiedades de la clase (en algunas, agrupadas en pestañas); encima aparece una breve descripción de la clase</td></tr>
             </tbody>
           </table>
         </div>
       </figure>
-      <p>Los parámetros se rotulan con su nombre interno escrito en palabras (<em>Out Of Plane Spacing</em>, <em>Bond Length Percent</em>…) y llevan sus unidades: kN, kN/m, kPa, m, grados o tanto por ciento. Estas unidades son fijas: no se convierten al sistema de unidades del proyecto. Las capacidades de los anclajes, los anclajes inyectados (tiebacks), los bulones y los pilotes son por soporte, y el programa las divide por la separación fuera del plano para obtener una fuerza por metro de talud; un geosintético se describe por metro de ancho de lámina, con su cobertura de bandas.</p>
+      <p>Los parámetros se rotulan con el nombre con que se guardan, escrito en palabras (<em>Out Of Plane Spacing</em>, <em>Bond Length Percent</em>…), y llevan sus unidades: kN, kN/m, kPa, m, grados o tanto por ciento. Estas unidades son fijas y no se convierten al sistema de unidades del proyecto. Las capacidades de anclajes, anclajes inyectados (tiebacks), bulones y pilotes se expresan por soporte, y el programa las divide por la separación fuera del plano para obtener una fuerza por metro de talud; un geosintético se describe por metro de ancho de lámina, con su cobertura de bandas.</p>
 
       <figure class="tbl" id="tbl-types">
-        <figcaption><span class="fignum">Tabla 2.6.2</span> Las nueve clases de soporte, con su aplicación y orientación de la fuerza por defecto y sus parámetros (valores por defecto).</figcaption>
+        <figcaption><span class="fignum">Tabla 2.6.2</span> Las nueve clases de soporte, con la aplicación y la orientación de la fuerza por defecto y sus parámetros (valores por defecto).</figcaption>
         <div class="table-wrap">
           <table class="data">
             <thead><tr><th>Clase</th><th>Valores por defecto</th><th>Parámetros</th></tr></thead>
             <tbody>
-              <tr><td>End Anchored</td><td>Activa, paralela al soporte</td><td>Capacidad del anclaje 200 kN; separación fuera del plano 1.5 m. Una fuerza constante, la capacidad dividida por la separación, dondequiera que la superficie corte el perno.</td></tr>
+              <tr><td>End Anchored</td><td>Activa, paralela al soporte</td><td>Capacidad del anclaje 200 kN; separación fuera del plano 1.5 m. Fuerza constante, igual a la capacidad dividida por la separación, allí donde la superficie corta el bulón.</td></tr>
               <tr><td>Grouted Tieback</td><td>Activa, paralela al soporte</td><td><em>Tensile / Plate</em>: capacidad a tracción 600 kN, capacidad de la placa 300 kN, capacidad a cortante 0 kN (0 = sin cortante). <em>Pullout</em>: resistencia de adherencia 150 kN/m, longitud de adherencia del 30 % de la longitud, en la cola. <em>Geometry</em>: separación fuera del plano 2.0 m.</td></tr>
-              <tr><td>Grouted Tieback with Friction</td><td>Activa, paralela al soporte</td><td>Como el Grouted Tieback, pero con <em>Pullout (Friction)</em> en su lugar: modelo de interfaz Linear (Mohr-Coulomb) o Hyperbolic, adhesión 60 kPa, ángulo de rozamiento 25°, diámetro de la lechada 0.15 m, longitud de adherencia 30 %.</td></tr>
+              <tr><td>Grouted Tieback with Friction</td><td>Activa, paralela al soporte</td><td>Como Grouted Tieback, pero con <em>Pullout (Friction)</em> en lugar de Pullout: modelo de interfaz Linear (Mohr-Coulomb) o Hyperbolic, adhesión 60 kPa, ángulo de rozamiento 25°, diámetro de la lechada 0.15 m, longitud de adherencia 30 %.</td></tr>
               <tr><td>Soil Nail</td><td>Pasiva, paralela al soporte</td><td><em>Tensile / Plate</em>: capacidad a tracción 100 kN, capacidad de la placa 50 kN, capacidad a cortante 0 kN. <em>Pullout</em>: resistencia de adherencia 30 kN/m, en toda la longitud. <em>Geometry</em>: separación fuera del plano 1.5 m.</td></tr>
-              <tr><td>Pile / Micropile</td><td>Pasiva, tangente a la superficie de rotura</td><td>Modo de rotura Shear o Ito &amp; Matsui; resistencia a cortante del pilote 100 kN; separación fuera del plano 2.0 m; diámetro del pilote 0.6 m (solo Ito &amp; Matsui); posición de la fuerza en la superficie de rotura o en el centroide del diagrama de presiones.</td></tr>
+              <tr><td>Pile / Micropile</td><td>Pasiva, tangente a la superficie de rotura</td><td>Modo de rotura Shear o Ito &amp; Matsui; resistencia a cortante del pilote 100 kN; separación fuera del plano 2.0 m; diámetro del pilote 0.6 m (solo en Ito &amp; Matsui); posición de la fuerza en la superficie de rotura o en el centroide del diagrama de presiones.</td></tr>
               <tr><td>Geosynthetic</td><td>Pasiva, paralela al soporte</td><td><em>Tensile</em>: capacidad a tracción 50 kN/m, cobertura de bandas 100 %, resistencia de la conexión 0 kN/m, anclaje None, Slope face, Embedded end o Both ends. <em>Pullout &amp; Stripping</em>: adhesión y ángulo de rozamiento (0 kPa, 25°), coeficiente de interacción Ci (0.8) o factor de rozamiento F* (0.6). <em>F* vs Depth</em>: F* constante o función de la profundidad.</td></tr>
-              <tr><td>User Defined</td><td>Activa, paralela al soporte</td><td>Separación fuera del plano 1.0 m y una tabla de fuerza por soporte frente a la distancia desde la cabeza, interpolada linealmente y constante más allá de sus extremos (por defecto, 100, 200 y 100 kN a 0, 5 y 10 m).</td></tr>
-              <tr><td>Retaining Wall (EFP)</td><td>Activa, horizontal</td><td>Perfil Uniform, Triangular (por defecto), Trapezoidal o Custom; presión 20 kPa (uniforme); presión fluida equivalente 25 kN/m³ (triangular y trapezoidal); tramo constante del 60 % de la altura (trapezoidal); posición de la fuerza. No se puede colocar en patrón.</td></tr>
+              <tr><td>User Defined</td><td>Activa, paralela al soporte</td><td>Separación fuera del plano 1.0 m y una tabla de fuerza por soporte en función de la distancia a la cabeza, interpolada linealmente y constante más allá de sus extremos (por defecto, 100, 200 y 100 kN a 0, 5 y 10 m).</td></tr>
+              <tr><td>Retaining Wall (EFP)</td><td>Activa, horizontal</td><td>Perfil Uniform, Triangular (por defecto), Trapezoidal o Custom; presión 20 kPa (uniforme); presión del fluido equivalente 25 kN/m³ (triangular y trapezoidal); tramo constante del 60 % de la altura (trapezoidal); posición de la fuerza. No se puede colocar en patrón.</td></tr>
               <tr><td>Helical Anchor</td><td>Activa, tangente a la superficie de rotura</td><td><em>Capacities</em>: capacidad a tracción 150 kN, capacidad del conjunto de cabeza 100 kN, capacidad a cortante 0 kN. <em>Anchor</em>: fuste Round o Square, ancho del fuste 0.09 m, 3 hélices de diámetro medio 0.25 m separadas 1.5 m. <em>Geometry</em>: separación fuera del plano 2.0 m. Su capacidad se calcula a partir del suelo.</td></tr>
             </tbody>
           </table>
         </div>
       </figure>
-      <p>Las capacidades de los anclajes inyectados, los bulones, los geosintéticos y los anclajes helicoidales combinan varios modos de rotura (rotura a tracción, arrancamiento por detrás de la superficie de rotura, descabezamiento en la cabeza o en la placa), y la fuerza en un cruce es la menor de las que se aplican allí. El modo Ito &amp; Matsui del pilote obtiene su fuerza del suelo que fluye entre los pilotes de una fila <a class="cite" href="../reference/bibliography.html#ito1975">(Ito y Matsui, 1975)</a>. Las ecuaciones están en la <a class="xref" href="../theory/supports.html">Sección 3.10</a>.</p>
-      <p><span class="ui">OK</span> guarda la lista. Los soportes ya colocados siguen a su conjunto de propiedades: un cambio de clase o de parámetros se les aplica de inmediato. Un soporte cuyo conjunto se ha eliminado pasa a usar el primer conjunto de la misma clase (o, si no hay ninguno, las propiedades por defecto de esa clase), y las notas del análisis lo indican.</p>
+      <p>Las capacidades de anclajes inyectados, bulones, geosintéticos y anclajes helicoidales combinan varios modos de rotura (rotura a tracción, arrancamiento por detrás de la superficie de rotura, descabezamiento de la cabeza o de la placa), y la fuerza en una intersección es la menor de las aplicables en ese punto. En el modo Ito &amp; Matsui del pilote, la fuerza procede del suelo que fluye entre los pilotes de una fila <a class="cite" href="../reference/bibliography.html#ito1975">(Ito y Matsui, 1975)</a>. Las ecuaciones están en la <a class="xref" href="../theory/supports.html">Sección 3.10</a>.</p>
+      <p><span class="ui">OK</span> guarda la lista. Los soportes ya colocados siguen su conjunto de propiedades: un cambio de clase o de parámetros se les aplica de inmediato. Un soporte cuyo conjunto se ha eliminado pasa a usar el primer conjunto de la misma clase o, si no hay ninguno, las propiedades por defecto de esa clase, y las notas del análisis lo indican.</p>
 
       <h2 id="force"><span class="secnum">2.6.2</span><span class="ht">Aplicación y orientación de la fuerza</span><a class="anchor" href="#force" aria-label="Enlace a esta sección">#</a></h2>
-      <p>La fuerza de un soporte puede entrar de dos maneras en el equilibrio de la masa deslizante <a class="cite" href="../reference/bibliography.html#duncan2005">(Duncan y Wright, 2005)</a>:</p>
+      <p>La fuerza de un soporte puede intervenir de dos maneras en el equilibrio de la masa deslizante <a class="cite" href="../reference/bibliography.html#duncan2005">(Duncan y Wright, 2005)</a>:</p>
       <ul>
-        <li><strong>Active</strong> (activa): la fuerza reduce la acción desestabilizadora, como hace un anclaje pretensado antes de cualquier movimiento: <span class="m" data-tex="F = R / (D - T)"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi><mo>=</mo><mi>R</mi><mi mathvariant="normal">/</mi><mo stretchy="false">(</mo><mi>D</mi><mo>−</mo><mi>T</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">F = R / (D - T)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">F</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0077em;">R</span><span class="mord">/</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.0278em;">D</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">T</span><span class="mclose">)</span></span></span></span><!--/k--></span>.</li>
-        <li><strong>Passive</strong> (pasiva): la fuerza se suma a la resistencia y solo se moviliza a medida que la masa se mueve, como en un bulón sin tesar: <span class="m" data-tex="F = (R + T) / D"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi><mo>=</mo><mo stretchy="false">(</mo><mi>R</mi><mo>+</mo><mi>T</mi><mo stretchy="false">)</mo><mi mathvariant="normal">/</mi><mi>D</mi></mrow><annotation encoding="application/x-tex">F = (R + T) / D</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">F</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.0077em;">R</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">T</span><span class="mclose">)</span><span class="mord">/</span><span class="mord mathnormal" style="margin-right:0.0278em;">D</span></span></span></span><!--/k--></span>, de modo que la fuerza del soporte queda dividida por el factor de seguridad, igual que la resistencia del suelo.</li>
+        <li><strong>Active</strong> (activa): la fuerza reduce la acción desestabilizadora, como hace un anclaje pretensado antes de que se produzca cualquier movimiento: <span class="m" data-tex="F = R / (D - T)"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi><mo>=</mo><mi>R</mi><mi mathvariant="normal">/</mi><mo stretchy="false">(</mo><mi>D</mi><mo>−</mo><mi>T</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">F = R / (D - T)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">F</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0077em;">R</span><span class="mord">/</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.0278em;">D</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">T</span><span class="mclose">)</span></span></span></span><!--/k--></span>.</li>
+        <li><strong>Passive</strong> (pasiva): la fuerza se suma a la resistencia y solo se moviliza a medida que se mueve la masa, como en un bulón sin tesar: <span class="m" data-tex="F = (R + T) / D"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi><mo>=</mo><mo stretchy="false">(</mo><mi>R</mi><mo>+</mo><mi>T</mi><mo stretchy="false">)</mo><mi mathvariant="normal">/</mi><mi>D</mi></mrow><annotation encoding="application/x-tex">F = (R + T) / D</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">F</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.0077em;">R</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">T</span><span class="mclose">)</span><span class="mord">/</span><span class="mord mathnormal" style="margin-right:0.0278em;">D</span></span></span></span><!--/k--></span>, de modo que la fuerza del soporte se divide por el factor de seguridad igual que la resistencia del suelo.</li>
       </ul>
-      <p>Aquí, <span class="m" data-tex="R"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.0077em;">R</span></span></span></span><!--/k--></span> y <span class="m" data-tex="D"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi></mrow><annotation encoding="application/x-tex">D</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.0278em;">D</span></span></span></span><!--/k--></span> son las sumas resistente y desestabilizadora, y <span class="m" data-tex="T"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">T</span></span></span></span><!--/k--></span>, la fuerza del soporte. Para una misma fuerza, las dos dan factores de seguridad distintos; los valores por defecto de cada clase figuran en la <a class="xref" href="#tbl-types">Tabla 2.6.2</a>.</p>
+      <p>Aquí, <span class="m" data-tex="R"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.0077em;">R</span></span></span></span><!--/k--></span> y <span class="m" data-tex="D"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi></mrow><annotation encoding="application/x-tex">D</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.0278em;">D</span></span></span></span><!--/k--></span> son las sumas resistente y desestabilizadora, y <span class="m" data-tex="T"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">T</span></span></span></span><!--/k--></span>, la fuerza del soporte. Para una misma fuerza, las dos hipótesis dan factores de seguridad distintos; los valores por defecto de cada clase figuran en la <a class="xref" href="#tbl-types">Tabla 2.6.2</a>.</p>
       <figure class="tbl" id="tbl-orientation">
         <figcaption><span class="fignum">Tabla 2.6.3</span> Orientaciones de la fuerza.</figcaption>
         <div class="table-wrap">
           <table class="data">
-            <thead><tr><th>Orientación de la fuerza</th><th>Dirección de la fuerza en el cruce</th></tr></thead>
+            <thead><tr><th>Orientación de la fuerza</th><th>Dirección de la fuerza en la intersección</th></tr></thead>
             <tbody>
-              <tr><td>Tangent to slip surface</td><td>A lo largo de la superficie de rotura, oponiéndose al movimiento</td></tr>
-              <tr><td>Parallel to support</td><td>A lo largo del soporte, de la cabeza a la cola: un perno traccionado tira de la masa deslizante hacia su anclaje</td></tr>
+              <tr><td>Tangent to slip surface</td><td>A lo largo de la superficie de rotura, en sentido contrario al movimiento</td></tr>
+              <tr><td>Parallel to support</td><td>A lo largo del soporte, de la cabeza a la cola: un bulón en tracción tira de la masa deslizante hacia su anclaje</td></tr>
               <tr><td>Bisector (tangent + parallel)</td><td>A medio camino entre las dos anteriores</td></tr>
               <tr><td>Horizontal</td><td>Horizontal, en sentido contrario al de la rotura</td></tr>
-              <tr><td>Perpendicular to pile</td><td>Transversal al soporte, del lado que se opone al movimiento</td></tr>
-              <tr><td>User-defined angle</td><td>Según <strong>User Angle (from horizontal)</strong></td></tr>
+              <tr><td>Perpendicular to pile</td><td>Transversal al soporte, en el sentido que se opone al movimiento</td></tr>
+              <tr><td>User-defined angle</td><td>Según el valor de <strong>User Angle (from horizontal)</strong></td></tr>
             </tbody>
           </table>
         </div>
       </figure>
-      <div class="note warn"><span class="label">Dónde se guardan la aplicación y la orientación</span><p>Cada soporte colocado conserva su propia aplicación y orientación de la fuerza. <span class="ui">Add Support</span> las copia del tipo de soporte al colocarlo; <span class="ui">Add Support Pattern…</span> las toma de su propio diálogo, donde empiezan en <em>Active</em> y <em>Tangent To Slip</em> diga lo que diga el tipo. Cambiarlas después en Define Support no cambia los soportes ya colocados: edítalos con <span class="ui">Properties…</span> en su menú contextual (clic derecho), o con <span class="ui">Modify Pattern…</span> si se trata de una fila.</p></div>
+      <div class="note warn"><span class="label">Dónde se guardan la aplicación y la orientación</span><p>Cada soporte colocado conserva su propia aplicación y orientación de la fuerza. <span class="ui">Add Support</span> las copia del tipo de soporte al colocarlo; <span class="ui">Add Support Pattern…</span> las toma de su propio diálogo, donde empiezan en <em>Active</em> y <em>Tangent To Slip</em> diga lo que diga el tipo. Si se cambian después en Define Support, los soportes ya colocados no se modifican: edítalos con <span class="ui">Properties…</span> en su menú contextual o, si forman una fila, con <span class="ui">Modify Pattern…</span>.</p></div>
 
       <h2 id="place"><span class="secnum">2.6.3</span><span class="ht">Colocación de soportes</span><a class="anchor" href="#place" aria-label="Enlace a esta sección">#</a></h2>
       <h3 id="add-support"><span class="ht">Un soporte cada vez</span><a class="anchor" href="#add-support" aria-label="Enlace a esta sección">#</a></h3>
       <ol>
         <li>Elige <span class="ui">Support → Add Support</span>.</li>
-        <li>Haz clic en la <strong>cabeza</strong>, en el paramento del talud, y después en la <strong>cola</strong>, el extremo situado dentro del terreno. Los clics se ajustan igual que en cualquier otro dibujo.</li>
-        <li>Repite con el soporte siguiente; pulsa <kbd>Esc</kbd> para terminar.</li>
+        <li>Haz clic en la <strong>cabeza</strong>, en la cara del talud, y después en la <strong>cola</strong>, el extremo que queda dentro del terreno. Los clics se ajustan igual que en cualquier otro dibujo.</li>
+        <li>Repite con el siguiente soporte; pulsa <kbd>Esc</kbd> para terminar.</li>
       </ol>
-      <p>El orden de los clics importa: la longitud de descabezamiento se mide desde la cabeza y la de arrancamiento desde la cola, y una fuerza paralela al soporte tira de la cabeza hacia la cola. <span class="ui">Add Support</span> usa siempre el <strong>primer</strong> tipo de soporte de la lista de Define Support; para asignar otro tipo a un soporte, usa <span class="ui">Support → Modify Support…</span> o <span class="ui">Properties…</span> en su menú contextual.</p>
+      <p>El orden de los clics importa: la longitud de descabezamiento se mide desde la cabeza y la de arrancamiento desde la cola, y una fuerza paralela al soporte actúa de la cabeza hacia la cola. <span class="ui">Add Support</span> usa siempre el <strong>primer</strong> tipo de soporte de la lista de Define Support; para dar otro tipo a un soporte, usa <span class="ui">Support → Modify Support…</span> o <span class="ui">Properties…</span> en su menú contextual.</p>
 
       <h3 id="pattern"><span class="ht">Un patrón de soportes</span><a class="anchor" href="#pattern" aria-label="Enlace a esta sección">#</a></h3>
-      <p><span class="ui">Support → Add Support Pattern…</span> coloca una fila de soportes idénticos a lo largo del talud. Rellena el diálogo, pulsa <span class="ui">OK</span> y haz clic después en dos puntos del paramento del talud: el primer soporte tiene la cabeza en el primer punto y los demás le siguen a lo largo del segmento con la separación en el plano, tantos como quepan.</p>
+      <p><span class="ui">Support → Add Support Pattern…</span> coloca una fila de soportes idénticos a lo largo del talud. Rellena el diálogo, pulsa <span class="ui">OK</span> y haz clic en dos puntos de la cara del talud: el primer soporte tiene la cabeza en el primer punto y los demás se suceden a lo largo del segmento con la separación en el plano, tantos como quepan.</p>
       <figure class="tbl" id="tbl-pattern">
         <figcaption><span class="fignum">Tabla 2.6.4</span> Diálogo Add Support Pattern.</figcaption>
         <div class="table-wrap">
@@ -256,11 +256,11 @@
             <tbody>
               <tr><td><strong>Type</strong></td><td>Tipo de soporte de la fila; no se ofrecen los tipos Retaining Wall (EFP)</td><td>Primer tipo</td></tr>
               <tr><td><strong>Length</strong></td><td>Longitud de cada soporte</td><td class="n">6.0 m</td></tr>
-              <tr><td><strong>In-plane spacing</strong></td><td>Distancia entre cabezas a lo largo del segmento marcado</td><td class="n">1.5 m</td></tr>
-              <tr><td><strong>Mode</strong></td><td><em>Angle from horizontal</em>: todos los soportes con el ángulo <strong>Angle</strong>. <em>Perpendicular to boundary</em>: normales al segmento marcado. <em>Vertical (depth)</em>: verticales hacia abajo.</td><td>Angle from horizontal</td></tr>
+              <tr><td><strong>In-plane spacing</strong></td><td>Distancia entre cabezas a lo largo del segmento definido por los dos clics</td><td class="n">1.5 m</td></tr>
+              <tr><td><strong>Mode</strong></td><td><em>Angle from horizontal</em>: todos los soportes con el ángulo <strong>Angle</strong>. <em>Perpendicular to boundary</em>: perpendiculares al segmento. <em>Vertical (depth)</em>: verticales hacia abajo.</td><td>Angle from horizontal</td></tr>
               <tr><td><strong>Angle</strong></td><td>Ángulo de los soportes respecto al semieje <span class="m" data-tex="x"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span></span></span></span><!--/k--></span> positivo, en sentido antihorario; los valores negativos apuntan hacia abajo. Solo para <em>Angle from horizontal</em>.</td><td>−15°</td></tr>
               <tr><td><strong>Flip angle 180°</strong></td><td>Invierte el sentido de la cabeza a la cola</td><td>desactivado</td></tr>
-              <tr><td><strong>Application</strong>, <strong>Force direction</strong></td><td>Aplicación y orientación de la fuerza que se asignan a todos los soportes de la fila</td><td>Active, Tangent To Slip</td></tr>
+              <tr><td><strong>Application</strong>, <strong>Force direction</strong></td><td>Aplicación y orientación de la fuerza que se dan a todos los soportes de la fila</td><td>Active, Tangent To Slip</td></tr>
             </tbody>
           </table>
         </div>
@@ -274,21 +274,21 @@
           <table class="data">
             <thead><tr><th>Comando</th><th>Qué hace</th></tr></thead>
             <tbody>
-              <tr><td>Clic derecho → <span class="ui">Properties…</span></td><td>Abre <strong>Support Properties</strong> para ese soporte: nombre, tipo de soporte, aplicación de la fuerza, orientación de la fuerza, ángulo de usuario, coordenadas de la cabeza y de la cola y color, junto con su longitud y el ángulo de su eje.</td></tr>
-              <tr><td>Clic derecho → <span class="ui">Modify Pattern…</span></td><td>Localiza los soportes de la misma clase y de longitud similar dispuestos con una separación regular, y los edita juntos: tipo, longitud, separación en el plano, ángulo respecto a la horizontal, aplicación y orientación.</td></tr>
-              <tr><td><span class="ui">Support → Modify Support…</span></td><td>Elige un soporte de una lista y después su tipo de soporte.</td></tr>
-              <tr><td><span class="ui">Support → Move Support…</span></td><td>Elige un soporte y después un desplazamiento en <span class="m" data-tex="x"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span></span></span></span><!--/k--></span> y en <span class="m" data-tex="y"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi></mrow><annotation encoding="application/x-tex">y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">y</span></span></span></span><!--/k--></span>; se mueven ambos extremos, así que la longitud y el ángulo se conservan.</td></tr>
-              <tr><td><span class="ui">Support → Stretch Support</span> o clic derecho → <span class="ui">Stretch</span></td><td>Haz clic cerca de un extremo de un soporte y después en la nueva posición de ese extremo. Se mueve el extremo más cercano al primer clic.</td></tr>
+              <tr><td>Botón derecho → <span class="ui">Properties…</span></td><td>Abre <strong>Support Properties</strong> para ese soporte: nombre, tipo de soporte, aplicación de la fuerza, orientación de la fuerza, ángulo de usuario, coordenadas de la cabeza y de la cola y color, junto con su longitud y el ángulo de su eje.</td></tr>
+              <tr><td>Botón derecho → <span class="ui">Modify Pattern…</span></td><td>Localiza los soportes de la misma clase y de longitud similar colocados con una separación regular y los edita juntos: tipo, longitud, separación en el plano, ángulo respecto a la horizontal, aplicación y orientación.</td></tr>
+              <tr><td><span class="ui">Support → Modify Support…</span></td><td>Elige un soporte en una lista y después su tipo de soporte.</td></tr>
+              <tr><td><span class="ui">Support → Move Support…</span></td><td>Elige un soporte y después un desplazamiento en <span class="m" data-tex="x"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span></span></span></span><!--/k--></span> y en <span class="m" data-tex="y"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi></mrow><annotation encoding="application/x-tex">y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">y</span></span></span></span><!--/k--></span>; se mueven los dos extremos, así que la longitud y el ángulo se conservan.</td></tr>
+              <tr><td><span class="ui">Support → Stretch Support</span> o botón derecho → <span class="ui">Stretch</span></td><td>Haz clic cerca de un extremo de un soporte y después en la nueva posición de ese extremo. Se mueve el extremo más cercano al primer clic.</td></tr>
               <tr><td><span class="ui">Support → Ungroup Support Pattern</span></td><td>Deshace a la vez todos los patrones del modelo, para que cada soporte pueda editarse por separado.</td></tr>
-              <tr><td><span class="ui">Support → Delete Support</span> o clic derecho → <span class="ui">Delete</span></td><td>Haz clic en los soportes para eliminarlos; <kbd>Esc</kbd> termina.</td></tr>
+              <tr><td><span class="ui">Support → Delete Support</span> o botón derecho → <span class="ui">Delete</span></td><td>Haz clic en los soportes para eliminarlos; <kbd>Esc</kbd> termina.</td></tr>
             </tbody>
           </table>
         </div>
       </figure>
-      <p>Los cambios en los soportes no quedan en el historial de deshacer. Los soportes no se desplazan al editar la geometría, así que compruébalos después de modificar la forma del talud. <span class="ui">Tools → Property Tables → Support Properties Table</span> muestra la lista de soportes del modelo; en la ventana Interpret, <span class="ui">Data → Support Force Analysis…</span> y <span class="ui">Data → Support Force Diagram…</span> muestran la fuerza que desarrolla cada soporte a lo largo de su longitud y qué modo de rotura es determinante (<a class="xref" href="results.html">Sección 2.8</a>).</p>
+      <p>Los cambios en los soportes no quedan en el historial de deshacer. Los soportes no se desplazan al editar la geometría, así que comprueba su posición después de modificar la forma del talud. <span class="ui">Tools → Property Tables → Support Properties Table</span> muestra la lista de soportes del modelo; en la ventana Interpret, <span class="ui">Data → Support Force Analysis…</span> y <span class="ui">Data → Support Force Diagram…</span> muestran la fuerza que desarrolla cada soporte a lo largo de su longitud y qué modo de rotura es el determinante (<a class="xref" href="results.html">Sección 2.8</a>).</p>
 
       <h2 id="back-analysis"><span class="secnum">2.6.5</span><span class="ht">Retroanálisis de la fuerza de soporte</span><a class="anchor" href="#back-analysis" aria-label="Enlace a esta sección">#</a></h2>
-      <p><span class="ui">Support → Back Analysis of Support Force…</span> responde a la pregunta de diseño a la inversa: ¿qué fuerza horizontal hace falta para que todas las superficies de rotura alcancen un factor de seguridad objetivo? El factor se fija en el objetivo, de modo que la fuerza se obtiene de las sumas resistente y desestabilizadora sin iterar, tanto con la hipótesis activa como con la pasiva; se informa de la superficie que necesita la mayor fuerza <a class="cite" href="../reference/bibliography.html#duncan2005">(Duncan y Wright, 2005)</a>.</p>
+      <p><span class="ui">Support → Back Analysis of Support Force…</span> responde a la pregunta de diseño al revés: ¿qué fuerza horizontal hace falta para que todas las superficies de rotura alcancen un factor de seguridad objetivo? El factor se fija en el valor objetivo, de modo que la fuerza sale de las sumas resistente y desestabilizadora sin iterar, tanto con la hipótesis activa como con la pasiva; el programa da la superficie que necesita la mayor fuerza <a class="cite" href="../reference/bibliography.html#duncan2005">(Duncan y Wright, 2005)</a>.</p>
       <figure class="tbl" id="tbl-back">
         <figcaption><span class="fignum">Tabla 2.6.6</span> Diálogo Back Analysis of Support Force.</figcaption>
         <div class="table-wrap">
@@ -296,24 +296,24 @@
             <thead><tr><th>Campo</th><th>Significado</th><th>Por defecto</th></tr></thead>
             <tbody>
               <tr><td><strong>Target factor of safety</strong></td><td>Factor de seguridad que debe alcanzar cada superficie (0.001 a 100)</td><td class="n">1.3</td></tr>
-              <tr><td><strong>Elevation (y)</strong></td><td>Cota de la fuerza horizontal. Solo influye en Bishop, que toma momentos; para Janbu, la posición de una fuerza horizontal no importa.</td><td class="n">0.0</td></tr>
-              <tr><td><strong>Analysis method</strong></td><td><code>bishop_simplified</code>, <code>janbu_simplified</code> o <code>janbu_corrected</code>; el método no está definido para los demás</td><td><code>bishop_simplified</code></td></tr>
+              <tr><td><strong>Elevation (y)</strong></td><td>Cota de la fuerza horizontal. Solo influye en Bishop, que toma momentos; en Janbu, la posición de una fuerza horizontal no importa.</td><td class="n">0.0</td></tr>
+              <tr><td><strong>Analysis method</strong></td><td><code>bishop_simplified</code>, <code>janbu_simplified</code> o <code>janbu_corrected</code>; no está definido para los demás métodos</td><td><code>bishop_simplified</code></td></tr>
             </tbody>
           </table>
         </div>
       </figure>
-      <p>Sobre el modelo se ejecuta la búsqueda configurada en Surface Options, con la norma de diseño si hay una activada. La barra de estado indica la fuerza necesaria para el factor de seguridad objetivo, las fuerzas activa y pasiva de la superficie determinante, su factor de seguridad sin soporte y el número de superficies analizadas. El valor pasivo es el mayor de los dos, así que es el conservador. En la ventana Interpret, <span class="ui">Data → Back Analysis…</span> calcula las mismas magnitudes para la superficie crítica que se muestra allí. El retroanálisis no usa ni modifica los resultados de <span class="ui">Analysis → Compute</span>.</p>
+      <p>La búsqueda configurada en Surface Options se ejecuta sobre el modelo, con la norma de diseño si hay una activada. La barra de estado indica la fuerza necesaria para el factor de seguridad objetivo, las fuerzas activa y pasiva de la superficie determinante, su factor de seguridad sin soporte y el número de superficies analizadas. El valor pasivo es el mayor de los dos y, por tanto, el conservador. En la ventana Interpret, <span class="ui">Data → Back Analysis…</span> calcula las mismas magnitudes para la superficie crítica que se muestra en ella. El retroanálisis no usa ni modifica los resultados de <span class="ui">Analysis → Compute</span>.</p>
 
       <div class="impl">
         <span class="label">En OGR Slip2D</span>
-        <p>Cada clase de soporte es un complemento (plug-in) que declara sus parámetros, su aplicación y orientación por defecto y la fuerza que puede desarrollar a una distancia dada de su cabeza; el diálogo se construye a partir de esas declaraciones. Cada soporte colocado hace referencia por su nombre a su conjunto de propiedades, así que dos conjuntos de la misma clase con capacidades distintas se mantienen diferenciados en el análisis.</p>
+        <p>Cada clase de soporte es un complemento (plug-in) que declara sus parámetros, su aplicación y orientación por defecto y la fuerza que puede desarrollar a una distancia dada de su cabeza; el diálogo se construye a partir de esas declaraciones. Cada soporte colocado indica el nombre de su conjunto de propiedades, de modo que dos conjuntos de la misma clase con capacidades distintas no se confunden en el análisis.</p>
         <span class="src">Código: <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_core/support/support.py" target="_blank" rel="noopener">ogr_core/support/support.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_slip2d/support_integration.py" target="_blank" rel="noopener">ogr_slip2d/support_integration.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_slip2d/back_analysis.py" target="_blank" rel="noopener">ogr_slip2d/back_analysis.py</a></span>
       </div>
     </article>
 
 <!-- @inc docfoot -->
 <nav class="doc-pager" aria-label="Páginas">
-<a class="prev" href="../../../es/docs/user-guide/loads.html"><span class="label">← Anterior · 2.5</span><b>Cargas y carga sísmica</b></a>
+<a class="prev" href="../../../es/docs/user-guide/loads.html"><span class="label">← Anterior · 2.5</span><b>Cargas y acción sísmica</b></a>
 <a class="next" href="../../../es/docs/user-guide/surfaces.html"><span class="label">2.7 · Siguiente →</span><b>Superficies de rotura y búsqueda</b></a>
 </nav>
 <div class="doc-edit label"><a href="https://github.com/samuelsl27/OpenGeoRock_Web.github.io/blob/main/es/docs/user-guide/supports.html" target="_blank" rel="noopener">Editar esta página ↗</a><a href="https://github.com/samuelsl27/OGR-Slip2D/issues" target="_blank" rel="noopener">Informar de un problema ↗</a></div>
@@ -338,7 +338,7 @@
           <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
           <b>OpenGeoRock</b>
         </a>
-        <p class="tagline">Software geotécnico de código abierto, desarrollado a la vista de todos en la Universidad Politécnica de Cartagena.</p>
+        <p class="tagline">Software geotécnico de código abierto desarrollado en la Universidad Politécnica de Cartagena.</p>
         <span class="lang" role="group" aria-label="Idioma"><a href="../../../docs/user-guide/supports.html" hreflang="en" lang="en">EN</a><a href="../../../es/docs/user-guide/supports.html" hreflang="es" lang="es" aria-current="true">ES</a></span>
       </div>
       <div>
@@ -351,7 +351,7 @@
         </ul>
       </div>
       <div>
-        <h5>Aprende</h5>
+        <h5>Recursos</h5>
         <ul>
           <li><a href="../../../es/docs/index.html">Documentación</a></li>
           <li><a href="../../../es/docs/getting-started/quick-start.html">Inicio rápido</a></li>
@@ -381,7 +381,7 @@
       </div>
     </div>
     <div class="legal">
-      <span>© 2026 Samuel Sáez López · OGR Slip2D es software libre bajo AGPL-3.0-or-later, sin garantía de ningún tipo.</span>
+      <span>© 2026 Samuel Sáez López · OGR Slip2D es software libre (licencia AGPL-3.0 o posterior) y se distribuye sin ninguna garantía.</span>
       <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
     </div>
   </div>

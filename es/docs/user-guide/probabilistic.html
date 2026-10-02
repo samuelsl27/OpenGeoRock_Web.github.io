@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>Análisis probabilístico y de sensibilidad — documentación de OGR Slip2D</title>
-<meta name="description" content="Configuración de un análisis probabilístico o de sensibilidad en OGR Slip2D: variables aleatorias y sus distribuciones, correlación, muestreo y semilla, Compute Statistics, la ventana Statistics y el menú Statistics de la ventana Interpret, con las limitaciones de la versión 0.1.235.">
+<meta name="description" content="Cómo configurar un análisis probabilístico o de sensibilidad en OGR Slip2D: variables aleatorias y sus distribuciones, correlación, muestreo y semilla, Compute Statistics, la ventana Statistics y el menú Statistics de la ventana Interpret, con las limitaciones de la versión 0.1.235.">
 <!-- @inc head -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>document.documentElement.classList.replace("no-js", "js")</script>
@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="OpenGeoRock">
 <meta property="og:title" content="Análisis probabilístico y de sensibilidad — documentación de OGR Slip2D">
-<meta property="og:description" content="Configuración de un análisis probabilístico o de sensibilidad en OGR Slip2D: variables aleatorias y sus distribuciones, correlación, muestreo y semilla, Compute Statistics, la ventana Statistics y el menú Statistics de la ventana Interpret, con las limitaciones de la versión 0.1.235.">
+<meta property="og:description" content="Cómo configurar un análisis probabilístico o de sensibilidad en OGR Slip2D: variables aleatorias y sus distribuciones, correlación, muestreo y semilla, Compute Statistics, la ventana Statistics y el menú Statistics de la ventana Interpret, con las limitaciones de la versión 0.1.235.">
 <meta property="og:url" content="https://opengeorock.org/es/docs/user-guide/probabilistic.html">
 <meta property="og:image" content="https://opengeorock.org/assets/img/og-image.png">
 <meta property="og:locale" content="es_ES">
@@ -49,23 +49,23 @@
             <div class="mega-col">
               <span class="label">Disponible hoy</span>
               <a class="mega-item feature" href="../../../es/products/slip2d.html"><b>OGR Slip2D</b><span>Estabilidad de taludes 2D: equilibrio límite, agua subterránea por elementos finitos y análisis probabilístico.</span></a>
-              <a class="mega-item" href="../../../es/ai/index.html"><b>Servidor MCP para agentes de IA <span class="tag live">nuevo</span></b><span>Claude, ChatGPT o un modelo local construyen y calculan modelos de OGR Slip2D.</span></a>
+              <a class="mega-item" href="../../../es/ai/index.html"><b>Servidor MCP para agentes de IA <span class="tag live">nuevo</span></b><span>Claude, ChatGPT o un modelo local crean y calculan modelos de OGR Slip2D.</span></a>
             </div>
             <div class="mega-col">
-              <span class="label">En la hoja de ruta</span>
+              <span class="label">Previstos</span>
               <a class="mega-item" href="../../../es/products/index.html#ogr-data"><b>OGR Data</b><span>Base de datos de propiedades de suelos y macizos rocosos</span></a>
               <a class="mega-item" href="../../../es/products/index.html#ogr-fem2d"><b>OGR FEM2D</b><span>Elementos finitos elastoplásticos 2D</span></a>
               <a class="mega-item" href="../../../es/products/index.html#ogr-slip3d"><b>OGR Slip3D</b><span>Equilibrio límite en 3D</span></a>
               <a class="mega-item" href="../../../es/products/index.html#ogr-fem3d"><b>OGR FEM3D</b><span>Elementos finitos 3D con flujo acoplado</span></a>
             </div>
             <div class="mega-col">
-              <span class="label">Úsalo desde</span>
+              <span class="label">Cómo se usa</span>
               <a class="mega-item" href="../../../es/docs/getting-started/interface.html"><b>El programa de escritorio</b><span>Modelador, intérprete y terminal de Python</span></a>
               <a class="mega-item" href="../../../es/docs/reference/python-api.html"><b>Python</b><span>Automatiza análisis desde tu propio código</span></a>
               <a class="mega-item" href="../../../es/docs/reference/cli.html"><b>La línea de comandos</b><span>Cálculos por lotes con ogr-slip2d-cli</span></a>
             </div>
           </div>
-          <div class="mega-foot"><span>Cinco programas, un núcleo abierto.</span><a href="../../../es/products/index.html">Todos los productos →</a></div>
+          <div class="mega-foot"><span>Cinco programas sobre un mismo núcleo abierto.</span><a href="../../../es/products/index.html">Todos los productos →</a></div>
         </div>
       </div>
       <a href="../../../es/examples/index.html" data-nav="examples">Ejemplos</a>
@@ -115,14 +115,14 @@
 <li><a href="../../../es/docs/user-guide/geometry.html"><span class="n">2.2</span><span>Geometría y contornos</span></a></li>
 <li><a href="../../../es/docs/user-guide/materials.html"><span class="n">2.3</span><span>Materiales</span></a></li>
 <li><a href="../../../es/docs/user-guide/water.html"><span class="n">2.4</span><span>Agua y presión intersticial</span></a></li>
-<li><a href="../../../es/docs/user-guide/loads.html"><span class="n">2.5</span><span>Cargas y carga sísmica</span></a></li>
+<li><a href="../../../es/docs/user-guide/loads.html"><span class="n">2.5</span><span>Cargas y acción sísmica</span></a></li>
 <li><a href="../../../es/docs/user-guide/supports.html"><span class="n">2.6</span><span>Soportes</span></a></li>
 <li><a href="../../../es/docs/user-guide/surfaces.html"><span class="n">2.7</span><span>Superficies de rotura y búsqueda</span></a></li>
 <li><a href="../../../es/docs/user-guide/results.html"><span class="n">2.8</span><span>Cálculo e interpretación de resultados</span></a></li>
 <li><a href="../../../es/docs/user-guide/groundwater.html"><span class="n">2.9</span><span>Agua subterránea por elementos finitos</span></a></li>
 <li><a href="../../../es/docs/user-guide/probabilistic.html" aria-current="page"><span class="n">2.10</span><span>Análisis probabilístico y de sensibilidad</span></a></li>
 <li><a href="../../../es/docs/user-guide/design-standards.html"><span class="n">2.11</span><span>Normas de diseño</span></a></li>
-<li><a href="../../../es/docs/user-guide/automation.html"><span class="n">2.12</span><span>Informes, scripting y línea de comandos</span></a></li>
+<li><a href="../../../es/docs/user-guide/automation.html"><span class="n">2.12</span><span>Informes, scripts y línea de comandos</span></a></li>
 </ul></details>
 <details open><summary>3 · Manual de teoría</summary><ul>
 <li><a href="../../../es/docs/theory/limit-equilibrium.html"><span class="n">3.1</span><span>Equilibrio límite y factor de seguridad</span></a></li>
@@ -130,11 +130,11 @@
 <li><a href="../../../es/docs/theory/interslice.html"><span class="n">3.3</span><span>Fuerzas entre dovelas, convergencia y admisibilidad</span></a></li>
 <li><a href="../../../es/docs/theory/search.html"><span class="n">3.4</span><span>Búsqueda de la superficie de rotura</span></a></li>
 <li><a href="../../../es/docs/theory/strength.html"><span class="n">3.5</span><span>Modelos de resistencia al corte</span></a></li>
-<li><a href="../../../es/docs/theory/pore-pressure.html"><span class="n">3.6</span><span>Presión intersticial y resistencia no saturada</span></a></li>
+<li><a href="../../../es/docs/theory/pore-pressure.html"><span class="n">3.6</span><span>Presión intersticial y resistencia de los suelos no saturados</span></a></li>
 <li><a href="../../../es/docs/theory/seepage.html"><span class="n">3.7</span><span>Filtración por elementos finitos</span></a></li>
 <li><a href="../../../es/docs/theory/rapid-drawdown.html"><span class="n">3.8</span><span>Desembalse rápido</span></a></li>
 <li><a href="../../../es/docs/theory/seismic.html"><span class="n">3.9</span><span>Análisis sísmico</span></a></li>
-<li><a href="../../../es/docs/theory/supports.html"><span class="n">3.10</span><span>Fuerzas de los soportes</span></a></li>
+<li><a href="../../../es/docs/theory/supports.html"><span class="n">3.10</span><span>Fuerzas de soporte</span></a></li>
 <li><a href="../../../es/docs/theory/probabilistic.html"><span class="n">3.11</span><span>Análisis probabilístico</span></a></li>
 <li><a href="../../../es/docs/theory/partial-factors.html"><span class="n">3.12</span><span>Coeficientes parciales (Eurocódigo 7)</span></a></li>
 </ul></details>
@@ -147,7 +147,7 @@
 <li><a href="../../../es/docs/reference/mcp.html"><span class="n">5.1</span><span>Servidor MCP</span></a></li>
 <li><a href="../../../es/docs/reference/cli.html"><span class="n">5.2</span><span>Interfaz de línea de comandos</span></a></li>
 <li><a href="../../../es/docs/reference/python-api.html"><span class="n">5.3</span><span>API de Python</span></a></li>
-<li><a href="../../../es/docs/reference/file-format.html"><span class="n">5.4</span><span>El formato .ogr</span></a></li>
+<li><a href="../../../es/docs/reference/file-format.html"><span class="n">5.4</span><span>El formato de archivo .ogr</span></a></li>
 <li><a href="../../../es/docs/reference/error-codes.html"><span class="n">5.5</span><span>Códigos de error</span></a></li>
 <li><a href="../../../es/docs/reference/notation.html"><span class="n">5.6</span><span>Notación y glosario</span></a></li>
 <li><a href="../../../es/docs/reference/bibliography.html"><span class="n">5.7</span><span>Bibliografía</span></a></li>
@@ -163,43 +163,43 @@
 <nav class="crumbs label" aria-label="Ruta de navegación"><a href="../../../es/docs/index.html">Documentación</a><span aria-hidden="true">/</span><span>2 · Guía de usuario</span></nav>
 <div class="chapter label">2.10</div>
 <h1>Análisis probabilístico y de sensibilidad</h1>
-<div class="meta label"><span>Describe OGR Slip2D <span data-v>0.1.235</span></span></div>
+<div class="meta label"><span>Válido para OGR Slip2D <span data-v>0.1.235</span></span></div>
 <!-- @end dochead -->
     </header>
 
     <article class="doc prose">
-      <p class="lede">Un análisis probabilístico trata algunos datos de entrada del modelo como variables aleatorias, extrae muestras de ellas y recalcula el factor de seguridad para cada muestra, lo que da su distribución, la probabilidad de rotura y el índice de fiabilidad. Un análisis de sensibilidad, en cambio, barre un dato de entrada cada vez a lo largo de su rango. Esta página explica cómo configurar ambos y cómo leer sus resultados; la estadística en que se basan está en la <a class="xref" href="../theory/probabilistic.html">Sección 3.11</a>.</p>
-      <div class="note warn"><span class="label">Versión 0.1.235</span><p>En esta versión la ejecución no puede completarse desde el menú de la ventana: véase la <a class="xref" href="#compute-statistics">Sección 2.10.4</a>. Los ajustes que siguen son, aun así, los que usa el análisis cuando se ejecuta a través del servidor MCP o de la API de Python.</p></div>
+      <p class="lede">Un análisis probabilístico toma como variables aleatorias algunos datos de entrada del modelo, genera muestras de ellas y recalcula el factor de seguridad con cada muestra, de lo que resultan la distribución del factor de seguridad, la probabilidad de rotura y el índice de fiabilidad. El análisis de sensibilidad, en cambio, hace variar un solo dato cada vez dentro de su intervalo. Esta página explica cómo configurar ambos y cómo interpretar sus resultados; la base estadística está en la <a class="xref" href="../theory/probabilistic.html">Sección 3.11</a>.</p>
+      <div class="note warn"><span class="label">Versión 0.1.235</span><p>En esta versión el cálculo no puede completarse desde el menú de la ventana (véase la <a class="xref" href="#compute-statistics">Sección 2.10.4</a>). Aun así, los ajustes que se describen a continuación son los que usa el análisis cuando se ejecuta mediante el servidor MCP o la API de Python.</p></div>
 
       <h2 id="enable"><span class="secnum">2.10.1</span><span class="ht">Activación del análisis</span><a class="anchor" href="#enable" aria-label="Enlace a esta sección">#</a></h2>
-      <p>Ambos análisis se activan en <span class="ui">Analysis → Project Settings →</span> <span class="ui">Statistics</span>. Hasta que se marca uno de ellos, los comandos del menú <span class="ui">Statistics</span> permanecen en gris: <span class="ui">Random Variables…</span> se habilita primero, <span class="ui">Compute Statistics</span> cuando hay definida al menos una variable aleatoria y <span class="ui">Show Statistics</span> cuando hay resultados que mostrar.</p>
+      <p>Los dos análisis se activan en <span class="ui">Analysis → Project Settings →</span> <span class="ui">Statistics</span>. Mientras no se marque uno de ellos, los comandos del menú <span class="ui">Statistics</span> aparecen en gris. <span class="ui">Random Variables…</span> se habilita en primer lugar, <span class="ui">Compute Statistics</span> cuando hay al menos una variable aleatoria definida y <span class="ui">Show Statistics</span> cuando hay resultados que mostrar.</p>
       <figure class="tbl" id="tbl-statistics-page">
-        <figcaption><span class="fignum">Tabla 2.10.1</span> La página Statistics de Project Settings.</figcaption>
+        <figcaption><span class="fignum">Tabla 2.10.1</span> Página Statistics de Project Settings.</figcaption>
         <div class="table-wrap">
           <table class="data">
             <thead><tr><th>Campo</th><th>Qué hace</th><th>Por defecto</th></tr></thead>
             <tbody>
-              <tr><td>Probabilistic analysis</td><td>Muestrea las variables aleatorias y recalcula el factor de seguridad para cada muestra.</td><td>desactivado</td></tr>
-              <tr><td>Sensitivity analysis</td><td>Barre cada variable aleatoria a lo largo de su rango, una cada vez.</td><td>desactivado</td></tr>
-              <tr><td>Analysis type</td><td><em>Global Minimum</em> evalúa cada muestra sobre la superficie crítica del análisis determinista. <em>Overall Slope</em> repite toda la búsqueda para cada muestra, de modo que no se supone fija la posición de la superficie crítica; es mucho más lento.</td><td>Global Minimum</td></tr>
+              <tr><td>Probabilistic analysis</td><td>Muestrea las variables aleatorias y recalcula el factor de seguridad con cada muestra.</td><td>desactivado</td></tr>
+              <tr><td>Sensitivity analysis</td><td>Hace un barrido de cada variable aleatoria dentro de su intervalo, de una en una.</td><td>desactivado</td></tr>
+              <tr><td>Analysis type</td><td><em>Global Minimum</em> evalúa cada muestra sobre la superficie crítica del análisis determinista. <em>Overall Slope</em> repite toda la búsqueda con cada muestra, de modo que la posición de la superficie crítica no se da por fija; es mucho más lento.</td><td>Global Minimum</td></tr>
               <tr><td>Sampling method</td><td><em>Monte Carlo</em> o <em>Latin Hypercube</em>.</td><td>Monte Carlo</td></tr>
               <tr><td>Number of samples</td><td>N (de 1 a 1 000 000).</td><td class="n">1000</td></tr>
-              <tr><td>Sensitivity intervals</td><td>Intervalos iguales en que se divide el rango de cada variable para el barrido de sensibilidad (de 2 a 500); se evalúan intervalos + 1 valores.</td><td class="n">50</td></tr>
+              <tr><td>Sensitivity intervals</td><td>Intervalos iguales en que se divide el margen de variación de cada variable en el barrido de sensibilidad (de 2 a 500); se evalúan intervalos + 1 valores.</td><td class="n">50</td></tr>
             </tbody>
           </table>
         </div>
       </figure>
 
       <h2 id="random-variables"><span class="secnum">2.10.2</span><span class="ht">Variables aleatorias</span><a class="anchor" href="#random-variables" aria-label="Enlace a esta sección">#</a></h2>
-      <p><span class="ui">Statistics → Random Variables…</span> abre un diálogo de tres columnas. <strong>Available parameters</strong> enumera todos los datos de entrada del modelo que pueden pasar a ser aleatorios; selecciona uno y pulsa <strong>Add →</strong> para pasarlo a <strong>Random variables</strong> (<strong>Remove</strong> lo devuelve). La distribución de la variable seleccionada se edita a la derecha. Los parámetros disponibles son:</p>
+      <p><span class="ui">Statistics → Random Variables…</span> abre un diálogo de tres columnas. En <strong>Available parameters</strong> figuran todos los datos de entrada del modelo que pueden hacerse aleatorios; selecciona uno y pulsa <strong>Add →</strong> para pasarlo a <strong>Random variables</strong> (con <strong>Remove</strong> vuelve a la lista). La distribución de la variable seleccionada se edita a la derecha. Los parámetros disponibles son:</p>
       <ul>
         <li>los parámetros del modelo de resistencia de cada material (cohesión, ángulo de rozamiento y los parámetros de los demás modelos);</li>
         <li>el peso específico y el peso específico saturado de cada material, r<sub>u</sub>, la presión intersticial constante, el ángulo φ<sup>b</sup> de resistencia al corte no saturado y el valor de entrada de aire;</li>
-        <li>los parámetros hidráulicos de cada material que los tiene;</li>
+        <li>los parámetros hidráulicos de los materiales que los tienen;</li>
         <li>los parámetros de cada soporte;</li>
         <li>las magnitudes de las cargas distribuidas y lineales;</li>
         <li>los coeficientes sísmicos k<sub>h</sub> y k<sub>v</sub>;</li>
-        <li>un desplazamiento vertical del nivel freático, cuando el modelo tiene uno.</li>
+        <li>un desplazamiento vertical del nivel freático, si el modelo tiene alguno.</li>
       </ul>
       <figure class="tbl" id="tbl-random-variable">
         <figcaption><span class="fignum">Tabla 2.10.2</span> Parámetros estadísticos de una variable aleatoria.</figcaption>
@@ -208,55 +208,55 @@
             <thead><tr><th>Campo</th><th>Qué hace</th></tr></thead>
             <tbody>
               <tr><td>Distribution</td><td><em>Normal</em>, <em>Uniform</em>, <em>Triangular</em>, <em>Beta</em>, <em>Exponential</em>, <em>Lognormal</em> o <em>Gamma</em>.</td></tr>
-              <tr><td>Mean (deterministic)</td><td>El valor del modelo; solo lectura. Para cambiar la media, cambia el modelo.</td></tr>
-              <tr><td>Standard deviation</td><td>La usan Normal, Lognormal, Beta y Gamma; aparece en gris para las demás.</td></tr>
-              <tr><td>Relative minimum, Relative maximum</td><td>Hasta dónde puede bajar y subir la variable respecto a la media. <em>Actual range</em> muestra el resultado, desde la media − mínimo relativo hasta la media + máximo relativo.</td></tr>
+              <tr><td>Mean (deterministic)</td><td>El valor del modelo; es de solo lectura. Para cambiar la media hay que cambiar el modelo.</td></tr>
+              <tr><td>Standard deviation</td><td>La emplean las distribuciones Normal, Lognormal, Beta y Gamma; en las demás aparece en gris.</td></tr>
+              <tr><td>Relative minimum, Relative maximum</td><td>Cuánto puede bajar y subir la variable respecto de la media. <em>Actual range</em> muestra el resultado, de la media − mínimo relativo a la media + máximo relativo.</td></tr>
               <tr><td>Correlated with, Correlation coefficient</td><td>Otra variable aleatoria del modelo y un coeficiente entre −1 y 1. Lo habitual es un coeficiente negativo entre la cohesión y el ángulo de rozamiento.</td></tr>
             </tbody>
           </table>
         </div>
       </figure>
-      <p>Una variable recién añadida es Normal, con una desviación típica del 10 % de su media y límites relativos del 30 % de la media a cada lado (0.1 y 0.3 cuando la media es cero, como en un coeficiente sísmico o en el desplazamiento del nivel freático). <strong>Plot distribution…</strong> dibuja la densidad de probabilidad que se muestreará, con la media marcada.</p>
+      <p>Una variable recién añadida es de tipo Normal, con una desviación típica del 10 % de su media y límites relativos del 30 % de la media a cada lado (0.1 y 0.3 si la media es cero, como ocurre con un coeficiente sísmico o con el desplazamiento del nivel freático). <strong>Plot distribution…</strong> dibuja la densidad de probabilidad que se va a muestrear, con la media marcada.</p>
       <figure class="fig shot-fig" id="fig-random-variables">
-        <div class="art"><img src="../../../assets/img/shots/random-variables.webp" alt="El diálogo Random Variables: los parámetros disponibles a la izquierda, las variables aleatorias en el centro y la distribución, la desviación típica, los límites relativos y la correlación de la variable seleccionada a la derecha" loading="lazy" width="1075" height="700"></div>
+        <div class="art"><img src="../../../assets/img/shots/random-variables.webp" alt="Diálogo Random Variables: los parámetros disponibles a la izquierda, las variables aleatorias en el centro y, a la derecha, la distribución, la desviación típica, los límites relativos y la correlación de la variable seleccionada" loading="lazy" width="1075" height="700"></div>
         <figcaption><span class="fignum">Figura 2.10.1</span> Statistics → Random Variables.</figcaption>
       </figure>
       <div class="impl">
         <span class="label">En OGR Slip2D</span>
-        <p>Toda distribución se <strong>trunca</strong> a su rango real: las muestras se obtienen invirtiendo la distribución entre los dos límites, de modo que ningún valor queda fuera de ellos y los estratos del hipercubo latino se conservan tras la truncación. Una correlación declarada se impone reordenando los rangos de la segunda variable, lo que conserva exactamente las dos distribuciones marginales <a class="cite" href="../reference/bibliography.html#iman1982">(Iman y Conover, 1982)</a>. Cada muestra se aplica a una copia del modelo; la ejecución nunca modifica tu proyecto.</p>
+        <p>Toda distribución se <strong>trunca</strong> a su intervalo real. Las muestras se obtienen invirtiendo la distribución entre los dos límites, de modo que ningún valor queda fuera de ellos y los estratos del hipercubo latino se mantienen tras el truncamiento. La correlación indicada se impone reordenando los rangos de la segunda variable, con lo que ambas distribuciones marginales se conservan exactamente <a class="cite" href="../reference/bibliography.html#iman1982">(Iman y Conover, 1982)</a>. Cada muestra se aplica a una copia del modelo, así que el cálculo nunca modifica tu proyecto.</p>
         <span class="src">Código: <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_core/statistics/distributions.py" target="_blank" rel="noopener">ogr_core/statistics/distributions.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_core/statistics/random_variables.py" target="_blank" rel="noopener">ogr_core/statistics/random_variables.py</a></span>
       </div>
 
       <h2 id="sampling"><span class="secnum">2.10.3</span><span class="ht">Muestreo y semilla</span><a class="anchor" href="#sampling" aria-label="Enlace a esta sección">#</a></h2>
-      <p><em>Monte Carlo</em> extrae cada muestra de forma independiente. <em>Latin Hypercube</em> divide el rango de probabilidad de cada variable en N estratos y extrae una muestra de cada uno, lo que suele necesitar menos muestras para la misma precisión <a class="cite" href="../reference/bibliography.html#mckay1979">(McKay, Beckman y Conover, 1979)</a>.</p>
-      <p>Los números aleatorios se configuran en <span class="ui">Analysis → Project Settings →</span> <span class="ui">Random Numbers</span>:</p>
+      <p><em>Monte Carlo</em> genera cada muestra de forma independiente. <em>Latin Hypercube</em> divide el intervalo de probabilidad de cada variable en N estratos y toma una muestra de cada uno, de modo que suele bastar con menos muestras para obtener la misma precisión <a class="cite" href="../reference/bibliography.html#mckay1979">(McKay, Beckman y Conover, 1979)</a>.</p>
+      <p>Los números aleatorios se ajustan en <span class="ui">Analysis → Project Settings →</span> <span class="ui">Random Numbers</span>:</p>
       <ul>
-        <li><strong>Generation</strong>: <em>Pseudo-random</em> (por defecto) es reproducible: la misma <strong>Seed</strong> (10116 por defecto) da siempre las mismas muestras y, por tanto, la misma respuesta; <em>Random</em> toma la semilla del reloj, de modo que las ejecuciones sucesivas difieren, lo que permite comprobar que una conclusión no es un artefacto de una semilla concreta. El cuadro Seed aparece en gris con Random.</li>
-        <li><strong>Share one Latin Hypercube stratification across variables</strong> (desactivado): la muestra <em>i</em> queda entonces en el mismo estrato de todas las variables, de modo que todas resultan desfavorables a la vez. Responde a una pregunta distinta de la del caso independiente y suele ampliar la dispersión. No hace nada con Monte Carlo.</li>
+        <li><strong>Generation</strong>: <em>Pseudo-random</em> (por defecto) es reproducible, pues la misma <strong>Seed</strong> (10116 por defecto) da siempre las mismas muestras y, por tanto, el mismo resultado. <em>Random</em> toma la semilla del reloj, de modo que cada ejecución difiere de la anterior, lo que sirve para comprobar que una conclusión no es un artefacto de una semilla concreta. Con Random, el cuadro Seed aparece en gris.</li>
+        <li><strong>Share one Latin Hypercube stratification across variables</strong> (desactivado): la muestra <em>i</em> cae entonces en el mismo estrato de todas las variables, de modo que todas resultan desfavorables a la vez. Responde a una pregunta distinta de la del caso independiente y suele aumentar la dispersión. Con Monte Carlo no tiene ningún efecto.</li>
       </ul>
-      <p>La misma página fija también la semilla de las búsquedas aleatorias de superficies de rotura (<a class="xref" href="surfaces.html">Sección 2.7</a>).</p>
+      <p>Esa misma página fija también la semilla de las búsquedas aleatorias de superficies de rotura (<a class="xref" href="surfaces.html">Sección 2.7</a>).</p>
 
       <h2 id="compute-statistics"><span class="secnum">2.10.4</span><span class="ht">Cálculo de las estadísticas</span><a class="anchor" href="#compute-statistics" aria-label="Enlace a esta sección">#</a></h2>
       <p><span class="ui">Statistics → Compute Statistics</span> ejecuta primero el análisis determinista, con cada método activado y su búsqueda, para hallar la superficie crítica de cada método. Después:</p>
       <ul>
-        <li>un análisis <strong>Global Minimum</strong> evalúa las N muestras sobre la superficie crítica de cada método —cada método conserva la suya—;</li>
-        <li>un análisis <strong>Overall Slope</strong> repite toda la búsqueda N veces. Además de la distribución del factor de seguridad mínimo, registra la superficie crítica de cada muestra y la <em>superficie probabilística crítica</em>: la superficie individual con mayor probabilidad de rotura entre las evaluadas al menos cinco veces, que no tiene por qué ser la superficie crítica determinista;</li>
-        <li>un análisis de <strong>sensibilidad</strong> se calcula como se describe más adelante.</li>
+        <li>un análisis <strong>Global Minimum</strong> evalúa las N muestras sobre la superficie crítica de cada método (cada uno conserva la suya);</li>
+        <li>un análisis <strong>Overall Slope</strong> repite toda la búsqueda N veces. Además de la distribución del factor de seguridad mínimo, registra la superficie crítica de cada muestra y la <em>superficie probabilística crítica</em>, que es la que tiene mayor probabilidad de rotura entre las evaluadas al menos cinco veces y no tiene por qué coincidir con la superficie crítica determinista;</li>
+        <li>el análisis de <strong>sensibilidad</strong> se calcula como se describe más adelante.</li>
       </ul>
-      <p>Con una norma de diseño activada, a cada muestra se le aplican los coeficientes parciales igual que al modelo determinista, de modo que las estadísticas describen el factor de sobredimensionamiento (<a class="xref" href="design-standards.html">Sección 2.11</a>). Con un modo de análisis sísmico activado (coeficiente sísmico crítico o desplazamiento de Newmark), las estadísticas se toman sobre el factor de seguridad de la superficie con el menor coeficiente sísmico crítico, que no es necesariamente el menor factor de seguridad de la muestra; las notas del análisis lo indican.</p>
-      <div class="note warn"><span class="label">Compute Statistics falla desde el menú en la versión 0.1.235</span><p>Iniciada desde la ventana, la ejecución se detiene con un error interno (<code>TypeError: cannot pickle 'MainWindow' object</code>) cuando intenta copiar el modelo para la primera muestra, después del análisis determinista. La ventana no muestra ningún mensaje, no se produce ninguna estadística y Show Statistics sigue en gris. El mismo análisis se ejecuta a través del servidor MCP (su herramienta <code>statistics_run</code>) y de las operaciones de la API de Python, que copian el modelo de una forma que funciona (<a class="xref" href="../reference/mcp.html">Sección 5.1</a>, <a class="xref" href="../reference/python-api.html">Sección 5.3</a>).</p></div>
+      <p>Si hay una norma de diseño activa, a cada muestra se le aplican los coeficientes parciales igual que al modelo determinista, de modo que las estadísticas describen el factor de sobredimensionamiento (<a class="xref" href="design-standards.html">Sección 2.11</a>). Si está activo un modo de análisis sísmico (coeficiente sísmico crítico o desplazamiento de Newmark), las estadísticas se calculan con el factor de seguridad de la superficie de menor coeficiente sísmico crítico, que no es necesariamente el menor factor de seguridad de la muestra; las notas del análisis lo señalan.</p>
+      <div class="note warn"><span class="label">Compute Statistics falla desde el menú en la versión 0.1.235</span><p>Cuando se inicia desde la ventana, el cálculo se interrumpe con un error interno (<code>TypeError: cannot pickle 'MainWindow' object</code>) al intentar copiar el modelo para la primera muestra, una vez terminado el análisis determinista. La ventana no muestra ningún mensaje, no se genera ninguna estadística y Show Statistics sigue en gris. El mismo análisis sí funciona con el servidor MCP (su herramienta <code>statistics_run</code>) y con las operaciones de la API de Python, que copian el modelo de un modo que no da ese problema (<a class="xref" href="../reference/mcp.html">Sección 5.1</a>, <a class="xref" href="../reference/python-api.html">Sección 5.3</a>).</p></div>
 
       <h2 id="statistics-window"><span class="secnum">2.10.5</span><span class="ht">La ventana Statistics</span><a class="anchor" href="#statistics-window" aria-label="Enlace a esta sección">#</a></h2>
-      <p>Tras una ejecución correcta, la ventana <strong>Statistics</strong> se abre por sí sola; <span class="ui">Statistics → Show Statistics</span> la vuelve a abrir. Elige el <strong>Method</strong> y el <strong>Plot</strong>:</p>
+      <p>Cuando el cálculo termina correctamente, la ventana <strong>Statistics</strong> se abre sola, y <span class="ui">Statistics → Show Statistics</span> permite abrirla de nuevo. Elige el <strong>Method</strong> y el <strong>Plot</strong>:</p>
       <ul>
-        <li><strong>Histogram of FoS</strong>: los factores de seguridad de las muestras, con el umbral de rotura (F = 1) y la media marcados. La línea inferior da el número de muestras, la media, la desviación típica, el mínimo y el máximo, la probabilidad de rotura, el índice de fiabilidad (normal y lognormal) y el factor de seguridad determinista.</li>
-        <li><strong>Convergence</strong>: el factor de seguridad medio y la probabilidad de rotura en función del número de muestras. Una cola plana indica que el número de muestras es suficiente; una curva que aún deriva indica que hacen falta más muestras.</li>
-        <li><strong>Sensitivity</strong>: el factor de seguridad frente a cada variable, como porcentaje de su rango, con las variables ordenadas según cuánto lo modifican.</li>
+        <li><strong>Histogram of FoS</strong>: los factores de seguridad de las muestras, con el umbral de rotura (F = 1) y la media señalados. Debajo se indican el número de muestras, la media, la desviación típica, el mínimo y el máximo, la probabilidad de rotura, el índice de fiabilidad (normal y lognormal) y el factor de seguridad determinista.</li>
+        <li><strong>Convergence</strong>: el factor de seguridad medio y la probabilidad de rotura en función del número de muestras. Si la cola de la curva es plana, el número de muestras es suficiente; si todavía deriva, hacen falta más.</li>
+        <li><strong>Sensitivity</strong>: el factor de seguridad en función de cada variable, expresada como porcentaje de su intervalo, con las variables ordenadas según la influencia que tienen sobre él.</li>
       </ul>
-      <p>Cuando una ejecución no ha podido muestrear todas las variables —por ejemplo, porque una variable se refiere a un material que se ha eliminado después—, la ventana lo indica en rojo encima del gráfico.</p>
+      <p>Si en un cálculo no se han podido muestrear todas las variables (por ejemplo, porque una variable se refiere a un material que se ha eliminado después), la ventana lo indica en rojo sobre el gráfico.</p>
       <figure class="fig shot-fig" id="fig-statistics-window">
-        <div class="art"><img src="../../../assets/img/shots/statistics-window.webp" alt="La ventana Statistics con el histograma de los factores de seguridad muestreados, con el umbral de rotura y la media marcados, y el resumen estadístico debajo" loading="lazy" width="1500" height="900"></div>
-        <figcaption><span class="fignum">Figura 2.10.2</span> La ventana Statistics con el histograma del factor de seguridad.</figcaption>
+        <div class="art"><img src="../../../assets/img/shots/statistics-window.webp" alt="Ventana Statistics con el histograma de los factores de seguridad muestreados, el umbral de rotura y la media señalados, y el resumen estadístico debajo" loading="lazy" width="1500" height="900"></div>
+        <figcaption><span class="fignum">Figura 2.10.2</span> Ventana Statistics con el histograma del factor de seguridad.</figcaption>
       </figure>
       <p>La probabilidad de rotura y los índices de fiabilidad se calculan a partir de las N muestras válidas:</p>
       <div class="eq" id="eq-pf" data-tex="P_f = \dfrac{n(F &lt; 1)}{N}" data-n="2.10.1"><!--k--><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>P</mi><mi>f</mi></msub><mo>=</mo><mstyle scriptlevel="0" displaystyle="true"><mfrac><mrow><mi>n</mi><mo stretchy="false">(</mo><mi>F</mi><mo>&lt;</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><mi>N</mi></mfrac></mstyle></mrow><annotation encoding="application/x-tex">P_f = \dfrac{n(F &lt; 1)}{N}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.9694em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.1389em;">P</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.1076em;">f</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:2.113em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.109em;">N</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">n</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.1389em;">F</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span><!--/k--></div>
@@ -269,36 +269,36 @@
       </dl>
 
       <h2 id="interpret-statistics"><span class="secnum">2.10.6</span><span class="ht">El menú Statistics de la ventana Interpret</span><a class="anchor" href="#interpret-statistics" aria-label="Enlace a esta sección">#</a></h2>
-      <p>La ventana Interpret (<a class="xref" href="results.html">Sección 2.8</a>) tiene su propio menú <span class="ui">Statistics</span>. Sus tres primeros gráficos <strong>no</strong> usan las muestras probabilísticas: se dibujan a partir de los factores de seguridad de las superficies analizadas por la búsqueda y están disponibles tras cualquier Compute.</p>
+      <p>La ventana Interpret (<a class="xref" href="results.html">Sección 2.8</a>) tiene su propio menú <span class="ui">Statistics</span>. Sus tres primeros gráficos <strong>no</strong> usan las muestras probabilísticas: se trazan con los factores de seguridad de las superficies que ha analizado la búsqueda y están disponibles después de cualquier cálculo.</p>
       <figure class="tbl" id="tbl-interpret-statistics">
-        <figcaption><span class="fignum">Tabla 2.10.3</span> El menú Statistics de la ventana Interpret.</figcaption>
+        <figcaption><span class="fignum">Tabla 2.10.3</span> Menú Statistics de la ventana Interpret.</figcaption>
         <div class="table-wrap">
           <table class="data">
-            <thead><tr><th>Comando</th><th>Qué muestra</th><th>Requiere</th></tr></thead>
+            <thead><tr><th>Comando</th><th>Qué muestra</th><th>Necesita</th></tr></thead>
             <tbody>
-              <tr><td>Histogram Plot…</td><td>Histograma de los factores de seguridad de las superficies válidas de la búsqueda (25 intervalos, ajustable).</td><td>un Compute</td></tr>
-              <tr><td>Cumulative Plot…</td><td>Distribución acumulada de los mismos factores de seguridad.</td><td>un Compute</td></tr>
-              <tr><td>Scatter Plot…</td><td>Factor de seguridad en función del radio, para las superficies válidas de la búsqueda.</td><td>un Compute</td></tr>
+              <tr><td>Histogram Plot…</td><td>Histograma de los factores de seguridad de las superficies válidas de la búsqueda (25 intervalos, ajustable).</td><td>un cálculo</td></tr>
+              <tr><td>Cumulative Plot…</td><td>Distribución acumulada de los mismos factores de seguridad.</td><td>un cálculo</td></tr>
+              <tr><td>Scatter Plot…</td><td>Factor de seguridad en función del radio, para las superficies válidas de la búsqueda.</td><td>un cálculo</td></tr>
               <tr><td>Sensitivity Plot…</td><td>Las curvas de sensibilidad del primer método.</td><td>resultados estadísticos</td></tr>
               <tr><td>Convergence Plot…</td><td>Factor de seguridad medio y probabilidad de rotura en función del número de muestras.</td><td>resultados estadísticos</td></tr>
-              <tr><td>Export Statistics Data…</td><td>Un archivo CSV con una fila por muestra: su número, el valor de cada variable aleatoria y el factor de seguridad.</td><td>resultados estadísticos</td></tr>
-              <tr><td>Show GM Surfaces, Pick GM Surfaces</td><td>Dibuja, o enumera para su selección, cada mínimo que indica el resultado: la superficie crítica de cada muestra de una ejecución Overall Slope, o las regiones que distinguió una Particle Swarm Search con varios mínimos.</td><td>cualquiera de los dos casos</td></tr>
-              <tr><td>Critical Probabilistic Surface</td><td>Da en la barra de estado la probabilidad de rotura y el índice de fiabilidad de la superficie probabilística crítica.</td><td>una ejecución Overall Slope</td></tr>
+              <tr><td>Export Statistics Data…</td><td>Un archivo CSV con una fila por muestra: número, valor de cada variable aleatoria y factor de seguridad.</td><td>resultados estadísticos</td></tr>
+              <tr><td>Show GM Surfaces, Pick GM Surfaces</td><td>Dibuja, o lista para elegir, todos los mínimos que contiene el resultado: la superficie crítica de cada muestra de un cálculo Overall Slope o las regiones que ha distinguido una Particle Swarm Search con varios mínimos.</td><td>cualquiera de los dos casos</td></tr>
+              <tr><td>Critical Probabilistic Surface</td><td>Muestra en la barra de estado la probabilidad de rotura y el índice de fiabilidad de la superficie probabilística crítica.</td><td>un cálculo Overall Slope</td></tr>
             </tbody>
           </table>
         </div>
       </figure>
-      <p>Los comandos que necesitan resultados estadísticos aparecen en gris hasta que los hay, con un texto emergente que lo indica. Show GM Surfaces y Pick GM Surfaces no los necesitan: también funcionan tras una Particle Swarm Search con <em>Report several minima</em> marcada, que en la versión 0.1.235 es la única forma de usarlos desde la ventana.</p>
+      <p>Los comandos que necesitan resultados estadísticos aparecen en gris mientras no los haya, y un texto emergente lo indica. Show GM Surfaces y Pick GM Surfaces no los necesitan: también funcionan después de una Particle Swarm Search con <em>Report several minima</em> marcada, que en la versión 0.1.235 es la única manera de usarlos desde la ventana.</p>
 
       <h2 id="sensitivity"><span class="secnum">2.10.7</span><span class="ht">Análisis de sensibilidad</span><a class="anchor" href="#sensitivity" aria-label="Enlace a esta sección">#</a></h2>
-      <p>Para cada variable aleatoria, una tras otra, el análisis de sensibilidad divide su rango real en el número de <strong>Sensitivity intervals</strong> (50 por defecto, es decir, 51 valores) y recalcula el factor de seguridad sobre la superficie crítica de cada método en cada valor, manteniendo todas las demás variables en sus medias. Solo se usan el mínimo y el máximo de cada variable: la distribución, la desviación típica y las correlaciones no intervienen, y de él no resulta ninguna probabilidad de rotura. Su resultado muestra qué datos de entrada importan más y hasta dónde puede variar uno de ellos antes de que el factor de seguridad llegue a 1.</p>
+      <p>El análisis de sensibilidad toma las variables aleatorias de una en una, divide el intervalo real de cada una en tantos intervalos como indique <strong>Sensitivity intervals</strong> (50 por defecto, es decir, 51 valores) y recalcula el factor de seguridad sobre la superficie crítica de cada método para cada valor, con todas las demás variables fijas en su media. Solo se emplean el mínimo y el máximo de cada variable: la distribución, la desviación típica y las correlaciones no intervienen, y de este análisis no resulta ninguna probabilidad de rotura. El resultado indica qué datos de entrada influyen más y cuánto puede variar uno de ellos antes de que el factor de seguridad llegue a 1.</p>
 
-      <h2 id="reading"><span class="secnum">2.10.8</span><span class="ht">Lectura de los resultados</span><a class="anchor" href="#reading" aria-label="Enlace a esta sección">#</a></h2>
+      <h2 id="reading"><span class="secnum">2.10.8</span><span class="ht">Interpretación de los resultados</span><a class="anchor" href="#reading" aria-label="Enlace a esta sección">#</a></h2>
       <ul>
         <li>Comprueba el gráfico de convergencia antes de citar una probabilidad de rotura: un valor que todavía varía con el número de muestras no es aún un resultado.</li>
-        <li>Una ejecución Global Minimum supone que la superficie crítica no cambia con las muestras. Cuando los datos de entrada pueden cambiar el mecanismo —una capa débil cuya resistencia varía, por ejemplo—, compara con una ejecución Overall Slope.</li>
-        <li>El índice de fiabilidad supone una distribución normal o lognormal del factor de seguridad; la probabilidad de rotura no supone nada, sino que cuenta muestras, de modo que con pocas muestras una probabilidad pequeña queda mal resuelta.</li>
-        <li>Una muestra que no puede evaluarse se deja fuera, y la ejecución indica cuántas fueron.</li>
+        <li>Un cálculo Global Minimum supone que la superficie crítica no cambia de una muestra a otra. Si los datos de entrada pueden cambiar el mecanismo de rotura (por ejemplo, una capa débil de resistencia variable), conviene comparar con un cálculo Overall Slope.</li>
+        <li>El índice de fiabilidad presupone una distribución normal o lognormal del factor de seguridad; la probabilidad de rotura, en cambio, no presupone nada y se limita a contar muestras, así que con pocas muestras una probabilidad pequeña se estima con muy poca precisión.</li>
+        <li>Una muestra que no puede evaluarse se descarta, y el cálculo indica cuántas han sido.</li>
       </ul>
     </article>
 
@@ -314,7 +314,7 @@
   <aside class="doc-toc" aria-label="En esta página">
     <div class="toc-inner">
 <!-- @inc pagetoc -->
-<span class="label">En esta página</span><ul><li class="h2"><a href="#enable">2.10.1 Activación del análisis</a></li><li class="h2"><a href="#random-variables">2.10.2 Variables aleatorias</a></li><li class="h2"><a href="#sampling">2.10.3 Muestreo y semilla</a></li><li class="h2"><a href="#compute-statistics">2.10.4 Cálculo de las estadísticas</a></li><li class="h2"><a href="#statistics-window">2.10.5 La ventana Statistics</a></li><li class="h2"><a href="#interpret-statistics">2.10.6 El menú Statistics de la ventana Interpret</a></li><li class="h2"><a href="#sensitivity">2.10.7 Análisis de sensibilidad</a></li><li class="h2"><a href="#reading">2.10.8 Lectura de los resultados</a></li></ul><button class="print" type="button"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="1.5"/><path d="M6 14h12v7H6z"/></svg> Imprimir esta página</button>
+<span class="label">En esta página</span><ul><li class="h2"><a href="#enable">2.10.1 Activación del análisis</a></li><li class="h2"><a href="#random-variables">2.10.2 Variables aleatorias</a></li><li class="h2"><a href="#sampling">2.10.3 Muestreo y semilla</a></li><li class="h2"><a href="#compute-statistics">2.10.4 Cálculo de las estadísticas</a></li><li class="h2"><a href="#statistics-window">2.10.5 La ventana Statistics</a></li><li class="h2"><a href="#interpret-statistics">2.10.6 El menú Statistics de la ventana Interpret</a></li><li class="h2"><a href="#sensitivity">2.10.7 Análisis de sensibilidad</a></li><li class="h2"><a href="#reading">2.10.8 Interpretación de los resultados</a></li></ul><button class="print" type="button"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="1.5"/><path d="M6 14h12v7H6z"/></svg> Imprimir esta página</button>
 <!-- @end pagetoc -->
     </div>
   </aside>
@@ -329,7 +329,7 @@
           <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
           <b>OpenGeoRock</b>
         </a>
-        <p class="tagline">Software geotécnico de código abierto, desarrollado a la vista de todos en la Universidad Politécnica de Cartagena.</p>
+        <p class="tagline">Software geotécnico de código abierto desarrollado en la Universidad Politécnica de Cartagena.</p>
         <span class="lang" role="group" aria-label="Idioma"><a href="../../../docs/user-guide/probabilistic.html" hreflang="en" lang="en">EN</a><a href="../../../es/docs/user-guide/probabilistic.html" hreflang="es" lang="es" aria-current="true">ES</a></span>
       </div>
       <div>
@@ -342,7 +342,7 @@
         </ul>
       </div>
       <div>
-        <h5>Aprende</h5>
+        <h5>Recursos</h5>
         <ul>
           <li><a href="../../../es/docs/index.html">Documentación</a></li>
           <li><a href="../../../es/docs/getting-started/quick-start.html">Inicio rápido</a></li>
@@ -372,7 +372,7 @@
       </div>
     </div>
     <div class="legal">
-      <span>© 2026 Samuel Sáez López · OGR Slip2D es software libre bajo AGPL-3.0-or-later, sin garantía de ningún tipo.</span>
+      <span>© 2026 Samuel Sáez López · OGR Slip2D es software libre (licencia AGPL-3.0 o posterior) y se distribuye sin ninguna garantía.</span>
       <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
     </div>
   </div>
