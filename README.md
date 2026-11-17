@@ -68,7 +68,7 @@ GitHub Pages redespliega solo. **No hay entorno de pruebas**: lo que se sube a
 | `AGENTS.md` | Contrato de trabajo para agentes de IA |
 
 Notas, borradores, capturas en bruto y herramientas de producción viven fuera
-del repo, en `web-OGR/desarrollo/`.
+del repo, en `../desarrollo/` (la carpeta `Web/desarrollo/` de la suite).
 
 ## Si desarrollas con IA
 

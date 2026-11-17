@@ -12,7 +12,7 @@ para decidir sobre un talud real. Quien la lea puede basar un proyecto en ella.
 ## La fuente de cada dato
 
 Todo sale del repositorio [`OGR-Slip2D`](https://github.com/samuelsl27/OGR-Slip2D)
-(copia local del autor: `C:\Samuel\OpenGeoRock_Slip2d\OGR-Slip2D`):
+(copia local del autor: `C:\Samuel\OGR_Suite\Slip2D\OGR-Slip2D`):
 
 | Dato en la web | Fuente exacta |
 |---|---|

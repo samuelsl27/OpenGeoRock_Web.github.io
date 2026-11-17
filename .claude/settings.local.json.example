@@ -2,12 +2,34 @@
   "$comment": [
     "Copia este archivo a .claude/settings.local.json y ajústalo a tu gusto.",
     "settings.local.json está en .gitignore: no se versiona.",
-    "Lo de aquí se fusiona sobre .claude/settings.json."
+    "Lo de aquí se fusiona sobre .claude/settings.json.",
+    "additionalDirectories da al agente carpetas de fuera del repositorio",
+    "(montarlas en el workspace de VS Code NO se las da): el material de",
+    "trabajo de ../desarrollo y los repositorios de los programas, que son",
+    "la fuente de todo dato técnico. Da lectura Y escritura: por eso los",
+    "repositorios de los programas llevan una regla deny de Edit (que cubre",
+    "también Write). La regla Read deja leer suite.toml, el registro de",
+    "programas de la suite.",
+    "Usa rutas ABSOLUTAS y ajústalas a tu máquina. En las reglas de",
+    "permisos, //c/... es C:\\... en Windows."
   ],
   "permissions": {
     "allow": [
       "Bash(start:*)",
-      "Bash(explorer:*)"
+      "Bash(explorer:*)",
+      "Read(//c/Samuel/OGR_Suite/suite.toml)",
+      "Read(//c/Samuel/OGR_Suite/README.md)"
+    ],
+    "additionalDirectories": [
+      "C:/Samuel/OGR_Suite/Web/desarrollo",
+      "C:/Samuel/OGR_Suite/Slip2D/OGR-Slip2D",
+      "C:/Samuel/OGR_Suite/FEM2D/OGR-FEM2D",
+      "C:/Samuel/OGR_Suite/Core/OGR-Core"
+    ],
+    "deny": [
+      "Edit(//c/Samuel/OGR_Suite/Slip2D/OGR-Slip2D/**)",
+      "Edit(//c/Samuel/OGR_Suite/FEM2D/OGR-FEM2D/**)",
+      "Edit(//c/Samuel/OGR_Suite/Core/OGR-Core/**)"
     ]
   },
   "env": {

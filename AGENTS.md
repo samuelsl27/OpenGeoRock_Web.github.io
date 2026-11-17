@@ -109,7 +109,7 @@ intermedio. Revisa en local antes (`/revisar`, `/publicar`).
 ### Fuera del repositorio
 
 Notas, borradores, capturas en bruto y herramientas de producción **no viven
-aquí** sino en `C:\Samuel\OpenGeoRock_Slip2d\web-OGR\desarrollo\` (desde la raíz
+aquí** sino en `C:\Samuel\OGR_Suite\Web\desarrollo\` (desde la raíz
 de este repo, `../desarrollo/`). No se versiona: en un clon nuevo no existe, y
 los flujos de traducción y de figuras dependen de ella. Sus carpetas:
 

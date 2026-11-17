@@ -37,7 +37,7 @@ assets/css/site.css · assets/css/docs.css · assets/js/site.js   (los comparten
 ## 2. Árbol de carpetas
 
 ```
-WEB_OGR_v2/
+OGR-Web/
 ├── index.html · 404.html · sitemap.xml · CNAME · .nojekyll
 ├── products/   index.html · slip2d.html
 ├── ai/ · examples/ · verification/ · download/ · about/      (un index.html cada una)
@@ -57,7 +57,7 @@ WEB_OGR_v2/
 └── AGENTS.md · CLAUDE.md · README.md · .mcp.json · .gitignore · .vscode/
 ```
 
-Fuera del repositorio, en `C:\Samuel\OpenGeoRock_Slip2d\web-OGR\desarrollo\` (desde la
+Fuera del repositorio, en `C:\Samuel\OGR_Suite\Web\desarrollo\` (desde la
 raíz de este repo, `../desarrollo/`): notas, modelos `.ogr` de los que salen las
 figuras, capturas en bruto, herramientas de producción y el trabajo de traducción.
 Ver `AGENTS.md`.

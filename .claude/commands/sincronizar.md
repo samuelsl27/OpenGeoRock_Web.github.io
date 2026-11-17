@@ -8,7 +8,7 @@ paso 4.**
    documenta una versión concreta (`tools/site.json`). Lee el **commit publicado**
    de esa versión, no el árbol de trabajo, que puede ir por delante (a 2026-10-02:
    web en la 0.1.235, árbol de trabajo en la 0.1.236). Con la copia local
-   `C:\Samuel\OpenGeoRock_Slip2d\OGR-Slip2D`, `git show <commit>:ruta`; si no sabes
+   `C:\Samuel\OGR_Suite\Slip2D\OGR-Slip2D`, `git show <commit>:ruta`; si no sabes
    qué commit es, pregúntamelo. Si no hay copia local, usa la API de GitHub o
    pídeme la ruta.
    - versión → `pyproject.toml`
