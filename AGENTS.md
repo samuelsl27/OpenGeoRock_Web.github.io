@@ -256,8 +256,10 @@ por qué. Los originales sin optimizar no entran al repo.
 - **Trabajo en paralelo:** cada cual edita solo sus páginas y sincroniza con
   `--only`. Detalle en `dev/guia-documentacion.md` (§ «Trabajo en paralelo»).
 - Los cambios con contenido nuevo dejan una nota en `dev/changelog/`.
-- Los cambios grandes se hacen en una rama distinta de `main` (el rediseño vive
-  en `rediseno-v3`). **Nada se fusiona en `main`, se commitea ni se publica sin
+- Solo vive `main`. Un cambio grande va en una rama corta; al fusionarla en
+  `main` se borra, en GitHub y en local. Una rama sin fusionar no se borra sin
+  mi OK, y si lleva algo que `main` no tiene, antes se archiva con una etiqueta
+  `archivo/<nombre>`. **Nada se fusiona en `main`, se commitea ni se publica sin
   mi OK explícito**; el procedimiento está en `/publicar`.
 - Comandos del proyecto: `/sincronizar` (datos al día con el programa),
   `/revisar` (revisión de los cambios), `/publicar` (revisar + resumen + OK +
