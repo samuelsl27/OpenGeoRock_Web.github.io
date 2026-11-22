@@ -61,7 +61,7 @@ Los datos técnicos **no viven aquí**. Viven en
 - `README.md` → la hoja de ruta de la suite
 
 Esta web es una **vista** de ese repositorio **en una versión concreta**: la de
-`tools/site.json` (hoy, la 0.1.235), que se cotejó con el commit publicado y no con
+`tools/site.json` (hoy, la 0.1.481), que se cotejó con el commit publicado y no con
 el árbol de trabajo. El comando `/sincronizar` existe para mantener la vista al día.
 
 ## Convenciones de código

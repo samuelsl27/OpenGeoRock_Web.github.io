@@ -162,7 +162,7 @@
 <nav class="crumbs label" aria-label="Ruta de navegación"><a href="../../../es/docs/index.html">Documentación</a><span aria-hidden="true">/</span><span>2 · Guía de usuario</span></nav>
 <div class="chapter label">2.9</div>
 <h1>Agua subterránea por elementos finitos</h1>
-<div class="meta label"><span>Válido para OGR Slip2D <span data-v>0.1.235</span></span></div>
+<div class="meta label"><span>Válido para OGR Slip2D <span data-v>0.1.481</span></span></div>
 <!-- @end dochead -->
     </header>
 
@@ -209,15 +209,16 @@
               <tr><td>Saturated permeability Ks</td><td>Permeabilidad K1 del suelo saturado. Se deshabilita con <em>User Defined</em>, que la toma del primer punto de su curva.</td><td class="n">1 × 10⁻⁶</td></tr>
               <tr><td>K2 / K1</td><td>Anisotropía: cociente entre la segunda permeabilidad principal y la primera.</td><td class="n">1</td></tr>
               <tr><td>K1 angle (deg from +X)</td><td>Dirección de K1.</td><td class="n">0°</td></tr>
+              <tr><td>Minimum relative permeability kr_min</td><td>Límite inferior de la permeabilidad relativa: kr nunca baja de él, así que la zona seca conserva algo de conductividad (en el diálogo desde la versión 0.1.275).</td><td class="n">1 × 10⁻⁶</td></tr>
               <tr><td>Model</td><td>Cómo disminuye la permeabilidad en la zona no saturada: <em>Constant</em>, <em>Simple</em> (con un tipo de suelo: General, Sand, Silt, Clay o Loam), <em>Brooks-Corey</em>, <em>Fredlund-Xing</em>, <em>Gardner</em>, <em>van Genuchten</em> o <em>User Defined</em>. Los parámetros del modelo elegido aparecen debajo.</td><td>Constant</td></tr>
             </tbody>
           </table>
         </div>
       </figure>
-      <p><strong>Pick…</strong> carga parámetros representativos de la literatura para Brooks-Corey, Fredlund-Xing, Gardner y van Genuchten; <strong>Plot…</strong> dibuja la permeabilidad frente a la succión del material que se muestra.</p>
+      <p><strong>Pick…</strong> carga parámetros representativos para Brooks-Corey, Fredlund-Xing, Gardner y van Genuchten, y su lista dice de dónde salen: de una tabla publicada para van Genuchten y Brooks-Corey, y valores ilustrativos sin fuente publicada para Gardner y Fredlund-Xing. <strong>Plot…</strong> dibuja la permeabilidad frente a la succión del material que se muestra.</p>
 
       <figure class="fig shot-fig" id="fig-hydraulic-properties">
-        <div class="art"><img src="../../../assets/img/shots/hydraulic-properties.webp" alt="El diálogo Define Hydraulic Properties: a la izquierda, la lista de materiales; a la derecha, la permeabilidad saturada, la anisotropía y el modelo de permeabilidad no saturada con sus parámetros" loading="lazy" width="905" height="650"></div>
+        <div class="art"><img src="../../../assets/img/shots/hydraulic-properties.webp" alt="El diálogo Define Hydraulic Properties: a la izquierda, la lista de materiales; a la derecha, la permeabilidad saturada, la anisotropía, el límite inferior de la permeabilidad relativa y el modelo de permeabilidad no saturada con sus parámetros, en una columna que se desplaza hacia abajo hasta la función de contenido de agua" loading="lazy" width="900" height="650"></div>
         <figcaption><span class="fignum">Figura 2.9.1</span> Define Hydraulic Properties.</figcaption>
       </figure>
 
@@ -253,14 +254,14 @@
         <figcaption><span class="fignum">Figura 2.9.2</span> Set Boundary Conditions, con los destinos de embalse al final de la lista.</figcaption>
       </figure>
 
-      <div class="note"><span class="label">Nota</span><p>En la versión 0.1.235, el selector <strong>Pick by</strong> del diálogo (<em>Line segments</em> o <em>Nodes</em>) no tiene efecto: una condición va siempre a todos los nodos del lado elegido, y la infiltración, a sus segmentos. OK conserva las condiciones; Cancel descarta todo lo asignado desde que se abrió el diálogo.</p></div>
+      <div class="note"><span class="label">Nota</span><p>En la versión 0.1.481, el selector <strong>Pick by</strong> del diálogo (<em>Line segments</em> o <em>Nodes</em>) no tiene efecto: una condición va siempre a todos los nodos del lado elegido, y la infiltración, a sus segmentos. OK conserva las condiciones; Cancel descarta todo lo asignado desde que se abrió el diálogo.</p></div>
 
       <h2 id="compute-groundwater"><span class="secnum">2.9.6</span><span class="ht">Cálculo del campo</span><a class="anchor" href="#compute-groundwater" aria-label="Enlace a esta sección">#</a></h2>
       <p><span class="ui">Groundwater → Compute Groundwater</span> resuelve el campo estacionario o, si hay un análisis transitorio configurado, las etapas de este. En un cálculo estacionario, la barra de estado indica el número de iteraciones y el intervalo de presión intersticial, y nombra los materiales que han usado las propiedades hidráulicas por defecto; si no converge, la barra de estado explica por qué. El campo se guarda en el archivo <code>.ogr</code>, así que al reabrir un proyecto no hace falta volver a calcularlo.</p>
       <div class="impl">
         <span class="label">En OGR Slip2D</span>
         <p>El análisis estacionario calcula la altura total sobre triángulos lineales, con la permeabilidad reducida en la zona no saturada según el modelo de cada material, mediante iteración de Picard con subrelajación (relajación 0.4, 200 iteraciones como máximo, tolerancia 10⁻⁵ m). Los nodos de tipo <em>Unknown</em> alternan entre superficie de rezume y flujo nulo hasta que se estabilizan <a class="cite" href="../reference/bibliography.html#neuman1973">(Neuman, 1973)</a>. El análisis transitorio resuelve la ecuación de Richards en forma mixta, con pasos de tiempo implícitos <a class="cite" href="../reference/bibliography.html#celia1990">(Celia, Bouloutas y Zarba, 1990)</a>.</p>
-        <span class="src">Código: <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_slip2d/transient_stability.py" target="_blank" rel="noopener">ogr_slip2d/transient_stability.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/tree/main/ogr_fem2d/solvers" target="_blank" rel="noopener">ogr_fem2d/solvers/</a></span>
+        <span class="src">Código: <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_slip2d/transient_stability.py" target="_blank" rel="noopener">ogr_slip2d/transient_stability.py</a> · OGR-Core: <a href="https://github.com/samuelsl27/OGR-Core/tree/v0.2.2/ogr_core/fem" target="_blank" rel="noopener">ogr_core/fem/</a></span>
       </div>
 
       <h2 id="interpret-groundwater"><span class="secnum">2.9.7</span><span class="ht">Interpretación del campo</span><a class="anchor" href="#interpret-groundwater" aria-label="Enlace a esta sección">#</a></h2>
@@ -282,7 +283,7 @@
 
       <h2 id="coupling"><span class="secnum">2.9.8</span><span class="ht">Uso del campo en el análisis de estabilidad</span><a class="anchor" href="#coupling" aria-label="Enlace a esta sección">#</a></h2>
       <p>El campo calculado solo llega al análisis de equilibrio límite en los materiales cuyo <strong>Water Parameters → Type</strong> es <code>fem</code>: en la base de cada dovela de uno de esos materiales, la presión intersticial se interpola a partir de los valores nodales del elemento que la contiene. Una base de dovela fuera de la malla no recibe presión intersticial. Un material con cualquier otro tipo ignora por completo el campo.</p>
-      <div class="note warn"><span class="label">Fija el tipo antes de elegir el método</span><p>En la versión 0.1.235, Define Materials oculta todo el grupo <em>Water Parameters</em> mientras el método de agua subterránea es <code>fea_steady</code> o <code>fea_transient</code>, por lo que entonces no se puede cambiar el Type. Fija Type en <code>fem</code> en los materiales afectados <em>antes</em> de elegir el método de elementos finitos, o vuelve a poner un momento el método anterior para cambiarlo. El mismo acoplamiento puede establecerse con el servidor MCP o con la API de Python (<a class="xref" href="../reference/mcp.html">Sección 5.1</a>).</p></div>
+      <div class="note warn"><span class="label">Fija el tipo antes de elegir el método</span><p>En la versión 0.1.481, Define Materials oculta todo el grupo <em>Water Parameters</em> mientras el método de agua subterránea es <code>fea_steady</code> o <code>fea_transient</code>, por lo que entonces no se puede cambiar el Type. Fija Type en <code>fem</code> en los materiales afectados <em>antes</em> de elegir el método de elementos finitos, o vuelve a poner un momento el método anterior para cambiarlo. El mismo acoplamiento puede establecerse con el servidor MCP o con la API de Python (<a class="xref" href="../reference/mcp.html">Sección 5.1</a>).</p></div>
       <p>Compute no se ejecuta mientras un material de tipo <code>fem</code> no tenga un campo calculado que leer; así se evita dar la presión intersticial como cero, lo que parecería un talud seco. Al generar una malla nueva se borra el campo, por lo que hay que volver a calcular el agua subterránea tras rehacer la malla. Después de un análisis transitorio, el campo guardado en el proyecto es el de la última etapa.</p>
 
       <h2 id="transient"><span class="secnum">2.9.9</span><span class="ht">Análisis transitorio</span><a class="anchor" href="#transient" aria-label="Enlace a esta sección">#</a></h2>
@@ -295,7 +296,7 @@
         <li><strong>Transient FEA options</strong>: <em>Tolerance</em> (1 × 10⁻⁵), <em>Maximum iterations</em> (30) y <em>Number of time steps</em> por etapa (por defecto <em>Auto</em>, que se deduce del tamaño de los elementos y del almacenamiento para que el frente de agua recorra aproximadamente un elemento por paso). Los mismos tres están en la página Transient de Project Settings, que aparece en gris salvo que la opción transitoria esté activada.</li>
       </ul>
       <p>Para un desembalse, por ejemplo, asigna un embalse al nivel inicial y captúralo como estado inicial. Después pulsa <strong>Restore defaults</strong> en Set Boundary Conditions (asignar un embalse más bajo no borra las alturas de los nodos a los que ya no llega), asigna el embalse al nivel más bajo y, de nuevo, cualquier otra condición, selecciona una etapa y captura las condiciones. Compute Groundwater resuelve las etapas en orden y calcula el factor de seguridad, con todos los métodos activados, en las etapas marcadas como <em>Calculate SF</em>. Los factores se representan en función del tiempo con <strong>FoS vs time…</strong> en Interpret Groundwater y con <span class="ui">Data → Graph SF with Time…</span> en la ventana Interpret. Si ningún material es de tipo <code>fem</code>, la ejecución avisa de que los factores de las etapas ignorarían las presiones calculadas.</p>
-      <div class="note"><span class="label">Nota</span><p>El análisis transitorio usa además los contenidos de agua saturado y residual (0.4 y 0.05) y el almacenamiento específico (1 × 10⁻⁵ 1/m) de cada material. Define Hydraulic Properties no los muestra en la versión 0.1.235; conservan estos valores por defecto salvo que se fijen con el servidor MCP o con la API de Python.</p></div>
+      <div class="note"><span class="label">Nota</span><p>El análisis transitorio usa además una función de contenido de agua de van Genuchten de cada material, con cualquier modelo de permeabilidad: los contenidos de agua saturado y residual (0.4 y 0.05 por defecto), α, n y m, y el almacenamiento específico (1 × 10⁻⁵ 1/m). Desde la versión 0.1.268 aparecen en el grupo <em>Water content function (transient analysis)</em> de Define Hydraulic Properties. Desde la versión 0.1.278 su α es un parámetro propio (<code>wc_alpha</code>, 0.036 1/m por defecto), que leen todos los modelos salvo van Genuchten, que usa el α de su propia página.</p></div>
 
       <h2 id="drawdown-sweep"><span class="secnum">2.9.10</span><span class="ht">Drawdown Level Sweep</span><a class="anchor" href="#drawdown-sweep" aria-label="Enlace a esta sección">#</a></h2>
       <p><span class="ui">Groundwater → Drawdown Level Sweep…</span> pertenece al análisis de desembalse rápido por equilibrio límite, no al de elementos finitos: necesita tener seleccionado <em>Rapid Drawdown analysis</em> en el grupo Advanced, un método de agua subterránea basado en superficies de agua y al menos un material con comportamiento sin drenaje (<a class="xref" href="water.html">Sección 2.4</a>, <a class="xref" href="../theory/rapid-drawdown.html">Sección 3.8</a>). El barrido es necesario porque el nivel crítico del embalse no siempre es el más bajo.</p>
@@ -373,7 +374,7 @@
     </div>
     <div class="legal">
       <span>© 2026 Samuel Sáez López · OGR Slip2D es software libre (licencia AGPL-3.0 o posterior) y se distribuye sin ninguna garantía.</span>
-      <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
+      <span>OGR Slip2D <span data-v>0.1.481</span> · 2026-11-22</span>
     </div>
   </div>
 </footer>

@@ -110,7 +110,7 @@
     <div class="metrics" style="margin-top:0;grid-template-columns:repeat(3,1fr)">
       <div class="metric"><div class="v">7</div><div class="k label">Published cases</div></div>
       <div class="metric"><div class="v">12</div><div class="k label">Method checks</div></div>
-      <div class="metric"><div class="v">5 265</div><div class="k label">Tests · v<span data-v>0.1.235</span></div></div>
+      <div class="metric"><div class="v">7 551</div><div class="k label">Tests · v<span data-v>0.1.481</span></div></div>
     </div>
   </div>
 </section>
@@ -137,7 +137,7 @@
   <div class="wrap">
     <div class="sec-head">
       <div><div class="sec-num label">§ 02 — Published benchmarks</div><h2>Results of the seven <em>published cases</em></h2></div>
-      <p>The repository holds each case with its model, its expected values and their source, and the test suite runs all of them. The values below were recomputed with OGR Slip2D <span data-v>0.1.235</span>, running each case the same way the suite does.</p>
+      <p>The repository holds each case with its model, its expected values and their source, and the test suite runs all of them. The values below were recomputed with OGR Slip2D <span data-v>0.1.481</span>, running each case the same way the suite does.</p>
     </div>
     <div class="table-wrap">
       <table class="data">
@@ -201,14 +201,15 @@
   <div class="wrap grid-2" style="align-items:start">
     <div>
       <div class="sec-num label">§ 04 — The test suite</div>
-      <h2 class="mt-s">How the <em>5 265 tests</em> are organised</h2>
+      <h2 class="mt-s">How the <em>7 551 tests</em> are organised</h2>
     </div>
     <div>
       <ul class="ticks">
         <li>There is one test file per feature area, and its header states which invariant it protects and why.</li>
         <li>Each configurable setting has a test that checks it changes the result.</li>
         <li>Tests restore any state they change, such as the language, the units or the caches. Otherwise unrelated tests could fail, and only when the whole suite is run.</li>
-        <li>The full suite runs before each release. A filtered run says so in its output and does not count as evidence for a release.</li>
+        <li>The full suite runs before each release. A filtered run says so in its output and does not count as evidence for a release. In version 0.1.481, 7 550 tests pass and one is skipped because it only runs on POSIX systems.</li>
+        <li>Since version 0.1.473, the code that OGR Slip2D shares with the rest of the suite (materials, finite elements, hydraulics, supports) lives in OGR-Core, and its tests run there.</li>
         <li>Continuous integration runs on Python 3.11, 3.12 and 3.13 and also checks the licence header of every file.</li>
       </ul>
       <div class="cta-row"><a class="btn" href="../docs/getting-started/installation.html#tests">Run the suite yourself</a></div>
@@ -278,7 +279,7 @@
     </div>
     <div class="legal">
       <span>© 2026 Samuel Sáez López · OGR Slip2D is free software under AGPL-3.0-or-later, with no warranty of any kind.</span>
-      <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
+      <span>OGR Slip2D <span data-v>0.1.481</span> · 2026-11-22</span>
     </div>
   </div>
   <div class="lang-hint" role="dialog" aria-label="Idioma" lang="es">

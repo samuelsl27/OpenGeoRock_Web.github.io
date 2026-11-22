@@ -163,7 +163,7 @@
 <nav class="crumbs label" aria-label="Ruta de navegación"><a href="../../../es/docs/index.html">Documentación</a><span aria-hidden="true">/</span><span>2 · Guía de usuario</span></nav>
 <div class="chapter label">2.2</div>
 <h1>Geometría y contornos</h1>
-<div class="meta label"><span>Válido para OGR Slip2D <span data-v>0.1.235</span></span></div>
+<div class="meta label"><span>Válido para OGR Slip2D <span data-v>0.1.481</span></span></div>
 <!-- @end dochead -->
     </header>
 
@@ -226,7 +226,7 @@
         <li>Termina con <kbd>Enter</kbd> o con <span class="ui">Done</span> en el menú del clic derecho. El contorno externo se cierra solo; <kbd>Esc</kbd> cancela el dibujo.</li>
       </ol>
       <p>Mientras se dibuja, la opción <span class="ui">Coordinate Table…</span> del menú del clic derecho muestra los vértices colocados hasta ese momento, para corregirlos o para teclear el resto del contorno como una tabla. Dibuja el nivel freático, las líneas piezométricas y la línea de desembalse de izquierda a derecha y a todo el ancho de los materiales a los que se aplican: fuera de la extensión horizontal de una línea de agua, la presión intersticial que esta da es nula.</p>
-      <p>Un contorno también se puede dibujar en la capa de anotaciones y convertir después en geometría: <span class="ui">Tools → Draw</span> admite coordenadas tecleadas para una línea, una polilínea, un polígono, un rectángulo o un círculo, y <span class="ui">Tools → Convert Tool to Boundary…</span> lo copia como contorno externo, contorno de material, nivel freático, línea piezométrica o grieta de tracción.</p>
+      <p>Un contorno también se puede dibujar en la capa de anotaciones y convertir después en geometría: <span class="ui">Tools → Draw</span> dibuja una línea, una polilínea, un polígono, un rectángulo o un círculo con los mismos clics y puntos tecleados que un contorno, y <span class="ui">Tools → Convert Tool to Boundary…</span> lo copia como contorno externo, contorno de material, nivel freático, línea piezométrica o grieta de tracción.</p>
 
       <h3 id="material-boundaries"><span class="ht">Contornos de material y regiones</span><a class="anchor" href="#material-boundaries" aria-label="Enlace a esta sección">#</a></h3>
       <p>Las regiones del modelo son las partes en que los contornos de material dividen el contorno externo. Cada región recibe un material (<a class="xref" href="materials.html#assign">Sección 2.3.3</a>). Para que las regiones resulten como se espera:</p>
@@ -235,7 +235,7 @@
         <li><strong>Un extremo que se detiene dentro del modelo se prolonga</strong> en línea recta, en la dirección de su último segmento, hasta salir del modelo, y corta todas las regiones que encuentra a su paso. Es mejor prolongar la línea a propósito que depender de este comportamiento.</li>
         <li><strong>Una lente</strong> (una bolsa de un material dentro de otro) es un contorno de material <em>cerrado</em>, que forma una región propia y deja un hueco en la región que la rodea.</li>
       </ul>
-      <div class="note warn"><span class="label">Dibujar una lente en 0.1.235</span><p><span class="ui">Add Material Boundary</span> siempre produce una polilínea abierta, aunque el último clic caiga sobre el primer vértice, y los dos extremos de ese lazo se prolongan entonces de lado a lado del modelo, como cualquier otro extremo suelto. Para crear una lente, usa en su lugar un polígono cerrado: tecléalo con <span class="ui">Tools → Draw → Polygon</span> y conviértelo en un Material Boundary con <span class="ui">Tools → Convert Tool to Boundary…</span>, o impórtalo desde un dibujo DXF.</p></div>
+      <div class="note warn"><span class="label">Dibujar una lente en 0.1.481</span><p><span class="ui">Add Material Boundary</span> siempre produce una polilínea abierta, aunque el último clic caiga sobre el primer vértice, y los dos extremos de ese lazo se prolongan entonces de lado a lado del modelo, como cualquier otro extremo suelto. Para crear una lente, usa en su lugar un polígono cerrado: dibújalo con <span class="ui">Tools → Draw → Polygon</span> y conviértelo en un Material Boundary con <span class="ui">Tools → Convert Tool to Boundary…</span>, o impórtalo desde un dibujo DXF.</p></div>
       <p>Una región a la que no se ha asignado ningún material toma el <strong>primer</strong> material del proyecto (<a href="materials.html#first-material">Regiones sin material</a>).</p>
 
       <h3 id="water-lines"><span class="ht">Líneas de agua</span><a class="anchor" href="#water-lines" aria-label="Enlace a esta sección">#</a></h3>
@@ -264,7 +264,7 @@
 
       <h3 id="weak-layers"><span class="ht">Capas débiles y superficies anisótropas</span><a class="anchor" href="#weak-layers" aria-label="Enlace a esta sección">#</a></h3>
       <p>Una <strong>capa débil</strong> es una junta, una banda de corte o una capa delgada a lo largo de la cual puede discurrir una superficie de rotura. No divide el terreno en regiones, y su resistencia es la de un material. Al terminar la línea, si el proyecto tiene materiales, el diálogo <strong>Assign Material</strong> pregunta cuál se le asigna: una capa débil sin material no tiene resistencia propia. Una superficie de prueba que toca una capa débil se recorta para seguirla. Cómo se trata una superficie que toca varias capas se elige en <span class="ui">Surfaces → Surface Options…</span> (<a class="xref" href="surfaces.html">Sección 2.7</a>), y la inclinación máxima de la base de dovela que se admite en una superficie así, en la <a class="xref" href="project-settings.html#advanced">Sección 2.1.9</a>.</p>
-      <div class="note warn"><span class="label">Versión 0.1.235</span><p>El material de una capa débil solo se puede elegir al dibujar la línea: <span class="ui">Properties → Assign Material</span> no actúa sobre las capas débiles. Para dar otro material a una capa débil, bórrala y vuelve a dibujarla. Al convertir un contorno de material en capa débil con <span class="ui">Convert Boundary…</span>, se conserva el material que tenía.</p></div>
+      <div class="note warn"><span class="label">Versión 0.1.481</span><p>El material de una capa débil solo se puede elegir al dibujar la línea: <span class="ui">Properties → Assign Material by Clicking</span> no actúa sobre las capas débiles. Para dar otro material a una capa débil, bórrala y vuelve a dibujarla. Al convertir un contorno de material en capa débil con <span class="ui">Convert Boundary…</span>, se conserva el material que tenía.</p></div>
       <p>Una <strong>superficie anisótropa</strong> no aporta resistencia ni divide nada: indica en cada punto la dirección de la estratificación, para un material cuyo modelo de resistencia sea Anisotropic Linear o Snowden Modified Anisotropic Linear y que la seleccione en Define Materials (<a href="materials.html#strength">Tipo de resistencia</a>). La orientación se toma en el punto más próximo de la polilínea, no en el que queda en la misma vertical, y el orden en que se marcan los vértices determina el ángulo en un quiebro; por eso hay que marcarlos uno tras otro a lo largo de la estratificación.</p>
 
       <h3 id="block-objects"><span class="ht">Objetos de búsqueda por bloques</span><a class="anchor" href="#block-objects" aria-label="Enlace a esta sección">#</a></h3>
@@ -286,7 +286,7 @@
               <tr><td><span class="ui">Edit → Insert Vertex</span></td><td>Un clic sobre un lado añade allí un vértice.</td></tr>
               <tr><td><span class="ui">Edit → Move Vertex</span></td><td>Arrastra un vértice; el arrastre cuenta como un solo paso de deshacer.</td></tr>
               <tr><td><span class="ui">Edit → Delete Vertex</span></td><td>Un clic sobre un vértice lo borra; un contorno conserva al menos dos.</td></tr>
-              <tr><td><span class="ui">Convert Boundary…</span></td><td>Haz clic en un contorno y elige después su nuevo tipo. Un contorno convertido en línea de agua, grieta, capa débil o superficie anisótropa pasa a ser una polilínea abierta; un contorno cerrado convertido en contorno de material sigue cerrado.</td></tr>
+              <tr><td><span class="ui">Convert Boundary…</span></td><td>Haz clic en un contorno y elige después su nuevo tipo. Un contorno convertido en línea de agua, grieta, capa débil o superficie anisótropa pasa a ser una polilínea abierta; un contorno cerrado convertido en contorno de material sigue cerrado. Una conversión que rompería una regla de «uno como máximo por modelo» se rechaza, con el motivo en la barra de estado, y la opción del menú del clic derecho hace lo mismo que este comando (desde la versión 0.1.455).</td></tr>
               <tr><td><span class="ui">Simplify Boundary…</span></td><td>Elige un contorno y una tolerancia <strong>ε</strong> (0.5 m por defecto): se eliminan los vértices que se apartan de la línea simplificada menos de ε (Ramer–Douglas–Peucker).</td></tr>
               <tr><td><span class="ui">Geometry Cleanup…</span></td><td>Para cada contorno, informa de las autointersecciones, de si el contorno externo no está cerrado y de los vértices duplicados, y enumera los cruces entre contornos; a continuación elimina los vértices duplicados, con una tolerancia relativa al tamaño del modelo, en un solo paso de deshacer.</td></tr>
               <tr><td><span class="ui">Edit Coordinates…</span></td><td>Elige un contorno y edita sus vértices como una tabla de <strong>X</strong> e <strong>Y</strong>, con <span class="ui">Add Row</span>, <span class="ui">Delete Row</span>, <span class="ui">Move Up</span> y <span class="ui">Move Down</span>.</td></tr>
@@ -296,7 +296,6 @@
         </div>
       </figure>
       <p>El escalado y el giro se hacen respecto al pivote tecleado en el diálogo, (0, 0) por defecto, y no respecto al centro del contorno.</p>
-      <div class="note warn"><span class="label">Versión 0.1.235</span><p><span class="ui">Convert Boundary…</span> no comprueba las reglas de «uno como máximo por modelo»: permite convertir un contorno en un segundo contorno externo, nivel freático, grieta de tracción o línea de desembalse. Comprueba tú el tipo al que conviertes. La opción <span class="ui">Convert Boundary…</span> del menú del clic derecho solo cambia el tipo y deja la polilínea abierta o cerrada como estaba; para convertir un contorno cerrado en una línea abierta, usa el comando del menú Boundaries.</p></div>
 
       <h2 id="external-tools"><span class="secnum">2.2.4</span><span class="ht">Modificar la forma del contorno externo</span><a class="anchor" href="#external-tools" aria-label="Enlace a esta sección">#</a></h2>
 
@@ -337,7 +336,7 @@
             <tbody>
               <tr><td><strong>Drawing units</strong></td><td>Unidad del dibujo: m, cm, mm, km, ft o in. Se propone la unidad registrada en el archivo, pero es solo orientativa y con frecuencia falta o es errónea.</td><td>La del archivo</td></tr>
               <tr><td><strong>Curve discretisation</strong></td><td>Segmentos por circunferencia completa con que se representan los arcos, los círculos, las splines y los tramos curvos (bulges) de las polilíneas (de 4 a 720)</td><td class="n">64</td></tr>
-              <tr><td><strong>Import as</strong> (uno por capa)</td><td>Función de la capa, propuesta a partir de su nombre: (ignore), External Boundary, Material Boundary, Water Table, Piezometric Line, Drawdown Line, Tension Crack, Support</td><td>Propuesta</td></tr>
+              <tr><td><strong>Import as</strong> (uno por capa)</td><td>Función de la capa, propuesta a partir de su nombre: (ignore), External Boundary, Material Boundary, Water Table, Piezometric Line, Drawdown Line, Tension Crack, Weak Layer, Anisotropic Surface, Support</td><td>Propuesta</td></tr>
               <tr><td><strong>Welding tolerance</strong></td><td>Los extremos separados por menos de esta distancia se sueldan, y se inserta un nodo donde un extremo cae sobre un segmento; se expresa como porcentaje de la diagonal del modelo (se recomienda de 0.005 % a 0.5 %)</td><td class="n">0.05 %</td></tr>
               <tr><td><strong>Simplify polylines</strong> / <strong>Simplification tolerance</strong></td><td>Simplificación de Douglas–Peucker, también en porcentaje de la diagonal; nunca se eliminan los vértices compartidos con otro contorno</td><td>activado / 0.02 %</td></tr>
               <tr><td><strong>Replace existing boundaries of the imported types</strong></td><td>Borra los contornos que el modelo ya tiene de cada tipo que se importa</td><td>activado</td></tr>
@@ -347,7 +346,7 @@
       </figure>
       <p>La tabla de capas indica las entidades y el número de vértices de cada capa; las capas sin función propuesta aparecen resaltadas para que decidas qué son. La función de cada capa se propone a partir de su nombre, sin tener en cuenta mayúsculas ni separadores: <code>OGR_EXTERNAL</code>, <code>EXTERNAL</code>, <code>EXTERIOR</code> o <code>CONTORNO</code> como contorno externo; <code>OGR_MATERIAL</code>, <code>MATERIAL</code>, <code>SUELO</code> o <code>ESTRATO</code> como contornos de material; <code>OGR_WATER_TABLE</code>, <code>WATER_TABLE</code>, <code>WT</code> o <code>FREATICO</code> como nivel freático; <code>OGR_PIEZO</code> o <code>PIEZOMETRIC</code> como líneas piezométricas; <code>OGR_DRAWDOWN</code> o <code>DRAWDOWN</code> como línea de desembalse; <code>OGR_CRACK</code> o <code>TENSION_CRACK</code> como grieta de tracción; y algunos alias más en inglés y en español.</p>
       <p><span class="ui">Preview</span> simula la importación sin aplicarla e informa del número de vértices antes y después de la simplificación, del número de regiones encontradas y de si las áreas de las regiones suman el área del contorno externo, que es la comprobación decisiva. Si no es así, alguna región no se ha cerrado: aumenta un poco la tolerancia de soldadura y vuelve a previsualizar. Con <span class="ui">Import</span>, la importación nunca se rechaza: lo que no se ha podido resolver queda enumerado y, si hay problemas, al terminar se abre el panel no modal <strong>DXF Import — Problems</strong>. Este panel agrupa los problemas por tipo, con su gravedad y una solución propuesta; al seleccionar uno, el lienzo se centra en él, con un doble clic se acerca la vista, y los botones <span class="ui">Go to problem</span> y <span class="ui">Zoom all</span> hacen lo mismo.</p>
-      <div class="note warn"><span class="label">Versión 0.1.235</span><p>La función <strong>Support</strong> todavía no importa nada, y el diálogo no ofrece ninguna función para capas débiles ni para superficies anisótropas: una capa llamada <code>OGR_WEAK_LAYER</code> u <code>OGR_ANISO_SURFACE</code>, como las que escribe Export DXF, aparece como <em>(ignore)</em>. Dibuja esas líneas en el programa después de importar el resto.</p></div>
+      <div class="note warn"><span class="label">Versión 0.1.481</span><p>La función <strong>Support</strong> todavía no importa nada: coloca los soportes en el programa después de importar el resto.</p></div>
 
       <h3 id="dxf-export"><span class="ht">Exportar un dibujo</span><a class="anchor" href="#dxf-export" aria-label="Enlace a esta sección">#</a></h3>
       <p><span class="ui">File → Export DXF…</span> escribe el modelo en un dibujo DXF. La geometría va a capas que el importador reconoce, de modo que un modelo se puede exportar, editar en un programa de dibujo y volver a importar; todo lo que es un dibujo de resultados va a capas cuyo nombre empieza por <code>OGR_X_</code>, que el importador ignora por defecto.</p>
@@ -363,7 +362,8 @@
               <tr><td><strong>Loads (as arrows)</strong></td><td>activado</td><td><code>OGR_X_LOADS</code></td></tr>
               <tr><td><strong>Finite element mesh</strong></td><td>desactivado (una línea por lado de elemento)</td><td><code>OGR_X_MESH</code></td></tr>
               <tr><td><strong>Critical slip surface</strong></td><td>activado, cuando hay resultados</td><td><code>OGR_X_SLIP_SURFACE</code></td></tr>
-              <tr><td><strong>Annotations (title, factor of safety)</strong></td><td>activado</td><td><code>OGR_X_ANNOTATION</code></td></tr>
+              <tr><td><strong>Labels (title, factor of safety)</strong></td><td>activado</td><td><code>OGR_X_ANNOTATION</code></td></tr>
+              <tr><td><strong>Annotation layer</strong> (lo dibujado con el menú <span class="ui">Tools</span>)</td><td>activado</td><td><code>OGR_X_DRAWING</code></td></tr>
               <tr><td><strong>Load arrow size</strong>, en porcentaje de la diagonal del modelo (de 0.1 a 20 %)</td><td class="n">2.0 %</td><td>—</td></tr>
             </tbody>
           </table>
@@ -374,7 +374,7 @@
       <div class="impl">
         <span class="label">En OGR Slip2D</span>
         <p>Las reglas que limitan a uno por modelo el contorno externo, el nivel freático, la grieta de tracción y la línea de desembalse, junto con las condiciones de la línea de desembalse y de los objetos de búsqueda por bloques, se comprueban en un único punto al que recurren la interfaz gráfica, la interfaz de scripts y las herramientas para agentes. Así, un modelo construido con un script cumple las mismas reglas que uno dibujado a mano. Las regiones se obtienen mediante una subdivisión plana del contorno externo y de los contornos de material.</p>
-        <span class="src">Código: <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_core/project/rules.py" target="_blank" rel="noopener">ogr_core/project/rules.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_core/geometry/regions.py" target="_blank" rel="noopener">ogr_core/geometry/regions.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/tree/main/ogr_core/dxf" target="_blank" rel="noopener">ogr_core/dxf/</a></span>
+        <span class="src">Código (OGR-Core v0.2.2): <a href="https://github.com/samuelsl27/OGR-Core/blob/v0.2.2/ogr_core/project/rules.py" target="_blank" rel="noopener">ogr_core/project/rules.py</a> · <a href="https://github.com/samuelsl27/OGR-Core/blob/v0.2.2/ogr_core/geometry/regions.py" target="_blank" rel="noopener">ogr_core/geometry/regions.py</a> · <a href="https://github.com/samuelsl27/OGR-Core/tree/v0.2.2/ogr_core/dxf" target="_blank" rel="noopener">ogr_core/dxf/</a></span>
       </div>
     </article>
 
@@ -449,7 +449,7 @@
     </div>
     <div class="legal">
       <span>© 2026 Samuel Sáez López · OGR Slip2D es software libre (licencia AGPL-3.0 o posterior) y se distribuye sin ninguna garantía.</span>
-      <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
+      <span>OGR Slip2D <span data-v>0.1.481</span> · 2026-11-22</span>
     </div>
   </div>
 </footer>

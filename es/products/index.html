@@ -119,8 +119,8 @@
       <a class="card ink" id="ogr-slip2d" href="slip2d.html" style="min-height:300px">
         <div class="split"><span class="tag live">Disponible · versión preliminar</span><span class="label">OGR-01</span></div>
         <h3 style="font-size:34px;margin-top:auto">OGR Slip2D</h3>
-        <p>Equilibrio límite en 2D con nueve métodos y siete algoritmos de búsqueda, agua subterránea por elementos finitos, análisis probabilístico y de sensibilidad, soportes, carga sísmica, Eurocódigo 7 y un servidor MCP para agentes de IA.</p>
-        <div class="foot label"><span>Código fuente disponible · v<span data-v>0.1.235</span></span><span>Ver la ficha →</span></div>
+        <p>Equilibrio límite en 2D con diez métodos y siete algoritmos de búsqueda, agua subterránea por elementos finitos, análisis probabilístico y de sensibilidad, soportes, carga sísmica, Eurocódigo 7 y un servidor MCP para agentes de IA.</p>
+        <div class="foot label"><span>Código fuente disponible · v<span data-v>0.1.481</span></span><span>Ver la ficha →</span></div>
       </a>
       <div class="card planned" id="ogr-slip3d" style="min-height:300px">
         <div class="split"><span class="tag soon">Previsto</span><span class="label">OGR-04</span></div>
@@ -137,7 +137,7 @@
   <div class="wrap">
     <div class="sec-head">
       <div><div class="sec-num label">Categoría 02</div><h2>Elementos finitos</h2></div>
-      <p>Tensiones, deformaciones y flujo acoplado. El núcleo de elementos finitos ya forma parte de OGR Slip2D, donde calcula el flujo de agua subterránea.</p>
+      <p>Tensiones, deformaciones y flujo acoplado. El núcleo de elementos finitos vive en <a href="https://github.com/samuelsl27/OGR-Core" target="_blank" rel="noopener">OGR-Core</a>, la biblioteca común de la suite, que es pública y tiene licencia AGPL-3.0-or-later. OGR Slip2D lo usa para calcular el flujo de agua subterránea, y OGR FEM2D se construirá sobre él.</p>
     </div>
     <div class="grid-2" style="align-items:stretch;gap:16px">
       <div class="card planned" id="ogr-fem2d" style="min-height:260px">
@@ -180,7 +180,7 @@
       <a class="card" href="../docs/getting-started/interface.html"><span class="label">Escritorio</span><h3>El programa</h3><p>Modelador, ventanas de interpretación, diálogos y un terminal de Python integrado con acceso al modelo abierto.</p><div class="foot label"><span>Recorrido por la interfaz</span><span>→</span></div></a>
       <a class="card" href="../docs/reference/python-api.html"><span class="label">Python</span><h3>La API</h3><p>Abre un proyecto, lanza una búsqueda con el método que quieras y lee la superficie crítica desde tus propios scripts.</p><div class="foot label"><span>API de Python</span><span>→</span></div></a>
       <a class="card" href="../docs/reference/cli.html"><span class="label">Terminal</span><h3>La CLI</h3><p>Revisa y calcula proyectos <code>.ogr</code> por lotes y guarda los resultados en HDF5.</p><div class="foot label"><span>Referencia de la CLI</span><span>→</span></div></a>
-      <a class="card" href="../ai/index.html"><span class="label">Agentes</span><h3>El servidor MCP</h3><p>74 herramientas para Claude, ChatGPT o un modelo local, que actúan sobre la ventana abierta.</p><div class="foot label"><span>IA y MCP</span><span>→</span></div></a>
+      <a class="card" href="../ai/index.html"><span class="label">Agentes</span><h3>El servidor MCP</h3><p>75 herramientas para Claude, ChatGPT o un modelo local, que actúan sobre la ventana abierta.</p><div class="foot label"><span>IA y MCP</span><span>→</span></div></a>
     </div>
   </div>
 </section>
@@ -247,7 +247,7 @@
     </div>
     <div class="legal">
       <span>© 2026 Samuel Sáez López · OGR Slip2D es software libre (licencia AGPL-3.0 o posterior) y se distribuye sin ninguna garantía.</span>
-      <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
+      <span>OGR Slip2D <span data-v>0.1.481</span> · 2026-11-22</span>
     </div>
   </div>
 </footer>

@@ -183,7 +183,7 @@ Es idempotente: se puede lanzar cuantas veces se quiera.
 | `header` | `tools/partials/header.en.html` · `header.es.html` | todas, tras `<body>` | enlace «Skip to content», barra con mega-menú, selector EN/ES, menú móvil; marca la entrada activa (5,1 KB · 5,3 KB) |
 | `footer` | `tools/partials/footer.en.html` · `footer.es.html` | todas, antes de `</body>` | columnas de enlaces, línea legal con la versión y su fecha, selector de idioma; en EN, el aviso «¿Prefieres leer esta web en español?» (3,1 KB · 2,9 KB) |
 | `docnav` | `sitio.py` | páginas de `docs/` (no `docs/index.html`), en `aside.doc-side` | buscador y árbol de capítulos con la página actual |
-| `dochead` | `sitio.py` | páginas de `docs/`, en `header.doc-head` | botón «Contents», migas, nº de capítulo, `h1` y «Describes OGR Slip2D 0.1.235» |
+| `dochead` | `sitio.py` | páginas de `docs/`, en `header.doc-head` | botón «Contents», migas, nº de capítulo, `h1` y «Describes OGR Slip2D 0.1.481» |
 | `docfoot` | `sitio.py` | páginas de `docs/`, tras `</article>` | anterior/siguiente, «Edit this page», «Report a problem» |
 | `pagetoc` | `sitio.py` | páginas de `docs/`, en `aside.doc-toc` | «En esta página» (h2 y h3) y botón de imprimir |
 | `docgroups` | `sitio.py` | `docs/index.html` | las tarjetas de los cinco capítulos |
@@ -316,13 +316,13 @@ Esto es lo que hay que revisar en cada sincronización con el programa
 
 | Dato | Fuente en la web | Aparece en |
 |---|---|---|
-| **Versión** del programa (`0.1.235`) | `tools/site.json` (`version`, `version_date`) | Escrita sola, con `<span data-v>`: portada, `products/`, `download/`, `examples/`, `verification/`, `docs/` («Describes OGR Slip2D…») y el pie, con su fecha. **Escrita a mano** en las notas ligadas a una versión (`grep -rn "0.1.235"` descartando `data-v`): sobre todo `docs/getting-started/interface.html` y `docs/user-guide/` |
+| **Versión** del programa (`0.1.481`) | `tools/site.json` (`version`, `version_date`) | Escrita sola, con `<span data-v>`: portada, `products/`, `download/`, `examples/`, `verification/`, `docs/` («Describes OGR Slip2D…») y el pie, con su fecha. **Escrita a mano** en las notas ligadas a una versión (`grep -rn "0.1.235"` descartando `data-v`): sobre todo `docs/getting-started/interface.html` y `docs/user-guide/` |
 | Versiones históricas («desde v0.1.xxx») | — | `about/` (cambio de licencia), `ai/` (servidor y puente de ventana), `docs/reference/`: son hechos pasados |
 | **Licencia** (`AGPL-3.0-or-later`) | — | portada, `products/slip2d.html`, `products/` y `about/` (en palabras), `ai/`, `docs/user-guide/automation.html`, pie |
 | Métodos, búsquedas, modelos de resistencia, tipos de soporte, distribuciones | — | portada, `products/`, `products/slip2d.html` (cifras, pestañas y ficha técnica), `ai/`, `docs/theory/`, `docs/user-guide/`, `docs/reference/cli.html` y `python-api.html` |
 | Herramientas MCP, acciones de menú y perfil compacto | — | `ai/index.html`, `docs/reference/mcp.html`, portada, `products/`, `products/slip2d.html` |
 | Número de tests | — | portada, `products/slip2d.html`, `verification/`, `examples/`, `docs/getting-started/installation.html`, `docs/theory/search.html` |
-| Casos de validación y comprobaciones | `../desarrollo/notas/validacion-v0.1.235.json` | `verification/`, portada, `products/slip2d.html`, `examples/`, `docs/theory/probabilistic.html`; el capítulo 4 de la documentación los repetirá |
+| Casos de validación y comprobaciones | `../desarrollo/notas/validacion-v0.1.481.json` (la de cada versión documentada; la 0.1.235 se conserva) | `verification/`, portada, `products/slip2d.html`, `examples/`, `docs/theory/probabilistic.html`; el capítulo 4 de la documentación los repetirá |
 | Estado de los cinco programas | — | `products/index.html`, portada (suite), menú (`tools/partials/header.*`), `download/` (instaladores *planned*) |
 | Resultados de los ejemplos (p. ej. el factor de seguridad del ejemplo 1) | `../desarrollo/modelos-ogr/` | `examples/`, héroe de la portada, `products/slip2d.html`, `ai/`, `docs/getting-started/quick-start.html` y páginas de teoría |
 | Requisito de Python | — | `download/`, `ai/`, portada, `products/slip2d.html`, `verification/`, `docs/getting-started/installation.html`, `docs/reference/mcp.html` |

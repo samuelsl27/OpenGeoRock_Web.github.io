@@ -163,7 +163,7 @@
 <nav class="crumbs label" aria-label="Ruta de navegación"><a href="../../../es/docs/index.html">Documentación</a><span aria-hidden="true">/</span><span>2 · Guía de usuario</span></nav>
 <div class="chapter label">2.4</div>
 <h1>Agua y presión intersticial</h1>
-<div class="meta label"><span>Válido para OGR Slip2D <span data-v>0.1.235</span></span></div>
+<div class="meta label"><span>Válido para OGR Slip2D <span data-v>0.1.481</span></span></div>
 <!-- @end dochead -->
     </header>
 
@@ -187,7 +187,7 @@
           </table>
         </div>
       </figure>
-      <div class="note warn"><span class="label">Efecto del método</span><p>En la versión <span data-v>0.1.235</span>, los cuatro métodos <code>none</code>, <code>water_table</code>, <code>piezo_line</code> y <code>ru</code> no cambian la forma de calcular la presión intersticial: un material de tipo <code>water_table</code> lee el nivel freático con cualquiera de los cuatro, y un material que se deja en <code>none</code> está seco con los cuatro. El método sí importa para los métodos de rejilla, para los de elementos finitos y para un análisis de desembalse rápido, que solo se ejecuta con <code>water_table</code> o <code>piezo_line</code>. Elige el método que corresponda a lo que usan los materiales, para que los ajustes del proyecto describan el modelo.</p></div>
+      <div class="note warn"><span class="label">Efecto del método</span><p>En la versión <span data-v>0.1.481</span>, los cuatro métodos <code>none</code>, <code>water_table</code>, <code>piezo_line</code> y <code>ru</code> no cambian la forma de calcular la presión intersticial: un material de tipo <code>water_table</code> lee el nivel freático con cualquiera de los cuatro, y un material que se deja en <code>none</code> está seco con los cuatro. El método sí importa para los métodos de rejilla, para los de elementos finitos y para un análisis de desembalse rápido, que solo se ejecuta con <code>water_table</code> o <code>piezo_line</code>. Elige el método que corresponda a lo que usan los materiales, para que los ajustes del proyecto describan el modelo.</p></div>
 
       <h2 id="material-water"><span class="secnum">2.4.2</span><span class="ht">Cómo toma un material su presión intersticial</span><a class="anchor" href="#material-water" aria-label="Enlace a esta sección">#</a></h2>
       <p>El <strong>Type</strong> de los Water Parameters de un material determina la presión intersticial <span class="m" data-tex="u"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>u</mi></mrow><annotation encoding="application/x-tex">u</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">u</span></span></span></span><!--/k--></span> en cada punto del material y, por tanto, en la base de las dovelas que quedan dentro de él. La teoría de cada tipo está en la <a class="xref" href="../theory/pore-pressure.html">Sección 3.6</a>.</p>
@@ -208,7 +208,7 @@
         </div>
       </figure>
       <p>Con un método de rejilla, esta sustituye a los tipos anteriores, salvo <code>constant</code> y <code>ru</code>, en todos los materiales que tengan marcada la casilla <strong>Use the water pressure grid</strong> (<a class="xref" href="#grid">Sección 2.4.5</a>).</p>
-      <div class="note warn"><span class="label">Métodos de elementos finitos en 0.1.235</span><p>El campo de filtración solo llega a los materiales de tipo <code>fem</code>, pero Define Materials oculta todo el grupo Water Parameters mientras el método del proyecto es <code>fea_steady</code> o <code>fea_transient</code>. Pon el tipo de los materiales en <code>fem</code> antes de cambiar el método en Project Settings. Una ejecución transitoria en la que ningún material usa el campo lo indica en sus notas.</p></div>
+      <div class="note warn"><span class="label">Métodos de elementos finitos en 0.1.481</span><p>El campo de filtración solo llega a los materiales de tipo <code>fem</code>, pero Define Materials oculta todo el grupo Water Parameters mientras el método del proyecto es <code>fea_steady</code> o <code>fea_transient</code>. Pon el tipo de los materiales en <code>fem</code> antes de cambiar el método en Project Settings. Una ejecución transitoria en la que ningún material usa el campo lo indica en sus notas.</p></div>
 
       <h3 id="hu"><span class="ht">Superficies de agua y Hu</span><a class="anchor" href="#hu" aria-label="Enlace a esta sección">#</a></h3>
       <p>Por debajo de un nivel freático o de una línea piezométrica, la presión intersticial es la hidrostática multiplicada por el coeficiente <span class="m" data-tex="H_u"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mi>u</mi></msub></mrow><annotation encoding="application/x-tex">H_u</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0813em;">H</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0813em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">u</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><!--/k--></span>:</p>
@@ -332,7 +332,7 @@
       <div class="impl">
         <span class="label">En OGR Slip2D</span>
         <p>La presión intersticial en un punto se calcula en una sola función para todos los métodos de dovelas, a partir del material que contiene el punto y de los ajustes de agua subterránea del proyecto. El módulo de dovelado aplica el agua embalsada como una carga sobre la superficie del terreno, no como presión intersticial.</p>
-        <span class="src">Código: <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_core/hydraulic/pore_pressure.py" target="_blank" rel="noopener">ogr_core/hydraulic/pore_pressure.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_core/hydraulic/ponded_water.py" target="_blank" rel="noopener">ogr_core/hydraulic/ponded_water.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_core/hydraulic/water_pressure_grid.py" target="_blank" rel="noopener">ogr_core/hydraulic/water_pressure_grid.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_core/hydraulic/excess_pore_pressure.py" target="_blank" rel="noopener">ogr_core/hydraulic/excess_pore_pressure.py</a></span>
+        <span class="src">Código: OGR-Core: <a href="https://github.com/samuelsl27/OGR-Core/blob/v0.2.2/ogr_core/hydraulic/pore_pressure.py" target="_blank" rel="noopener">ogr_core/hydraulic/pore_pressure.py</a> · <a href="https://github.com/samuelsl27/OGR-Core/blob/v0.2.2/ogr_core/hydraulic/ponded_water.py" target="_blank" rel="noopener">ogr_core/hydraulic/ponded_water.py</a> · <a href="https://github.com/samuelsl27/OGR-Core/blob/v0.2.2/ogr_core/hydraulic/water_pressure_grid.py" target="_blank" rel="noopener">ogr_core/hydraulic/water_pressure_grid.py</a> · <a href="https://github.com/samuelsl27/OGR-Core/blob/v0.2.2/ogr_core/hydraulic/excess_pore_pressure.py" target="_blank" rel="noopener">ogr_core/hydraulic/excess_pore_pressure.py</a></span>
       </div>
     </article>
 
@@ -407,7 +407,7 @@
     </div>
     <div class="legal">
       <span>© 2026 Samuel Sáez López · OGR Slip2D es software libre (licencia AGPL-3.0 o posterior) y se distribuye sin ninguna garantía.</span>
-      <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
+      <span>OGR Slip2D <span data-v>0.1.481</span> · 2026-11-22</span>
     </div>
   </div>
 </footer>

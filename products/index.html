@@ -119,8 +119,8 @@
       <a class="card ink" id="ogr-slip2d" href="slip2d.html" style="min-height:300px">
         <div class="split"><span class="tag live">Available · pre-release</span><span class="label">OGR-01</span></div>
         <h3 style="font-size:34px;margin-top:auto">OGR Slip2D</h3>
-        <p>2D limit equilibrium with nine methods and seven searches, finite-element groundwater, probabilistic and sensitivity analysis, supports, seismic loading, Eurocode 7 and an MCP server for AI agents.</p>
-        <div class="foot label"><span>Source available · v<span data-v>0.1.235</span></span><span>Product page →</span></div>
+        <p>2D limit equilibrium with ten methods and seven searches, finite-element groundwater, probabilistic and sensitivity analysis, supports, seismic loading, Eurocode 7 and an MCP server for AI agents.</p>
+        <div class="foot label"><span>Source available · v<span data-v>0.1.481</span></span><span>Product page →</span></div>
       </a>
       <div class="card planned" id="ogr-slip3d" style="min-height:300px">
         <div class="split"><span class="tag soon">Planned</span><span class="label">OGR-04</span></div>
@@ -137,7 +137,7 @@
   <div class="wrap">
     <div class="sec-head">
       <div><div class="sec-num label">Category 02</div><h2>Finite elements</h2></div>
-      <p>Stresses, deformations and coupled flow. The finite-element kernel is already part of OGR Slip2D, where it solves the groundwater flow.</p>
+      <p>Stresses, deformations and coupled flow. The finite-element kernel lives in <a href="https://github.com/samuelsl27/OGR-Core" target="_blank" rel="noopener">OGR-Core</a>, the suite's shared library, which is public and licensed under AGPL-3.0-or-later. OGR Slip2D uses it to solve the groundwater flow, and OGR FEM2D will be built on it.</p>
     </div>
     <div class="grid-2" style="align-items:stretch;gap:16px">
       <div class="card planned" id="ogr-fem2d" style="min-height:260px">
@@ -180,7 +180,7 @@
       <a class="card" href="../docs/getting-started/interface.html"><span class="label">Desktop</span><h3>The program</h3><p>Modeller, interpretation windows, dialogs and an embedded Python terminal with access to the open model.</p><div class="foot label"><span>Interface tour</span><span>→</span></div></a>
       <a class="card" href="../docs/reference/python-api.html"><span class="label">Python</span><h3>The API</h3><p>Load a project, run a search with a method and read the critical surface from your own scripts.</p><div class="foot label"><span>Python API</span><span>→</span></div></a>
       <a class="card" href="../docs/reference/cli.html"><span class="label">Terminal</span><h3>The CLI</h3><p>Inspect and compute <code>.ogr</code> projects in batch, writing results to HDF5.</p><div class="foot label"><span>CLI reference</span><span>→</span></div></a>
-      <a class="card" href="../ai/index.html"><span class="label">Agents</span><h3>The MCP server</h3><p>74 tools for Claude, ChatGPT or a local model, which work on the open window.</p><div class="foot label"><span>AI &amp; MCP</span><span>→</span></div></a>
+      <a class="card" href="../ai/index.html"><span class="label">Agents</span><h3>The MCP server</h3><p>75 tools for Claude, ChatGPT or a local model, which work on the open window.</p><div class="foot label"><span>AI &amp; MCP</span><span>→</span></div></a>
     </div>
   </div>
 </section>
@@ -247,7 +247,7 @@
     </div>
     <div class="legal">
       <span>© 2026 Samuel Sáez López · OGR Slip2D is free software under AGPL-3.0-or-later, with no warranty of any kind.</span>
-      <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
+      <span>OGR Slip2D <span data-v>0.1.481</span> · 2026-11-22</span>
     </div>
   </div>
   <div class="lang-hint" role="dialog" aria-label="Idioma" lang="es">

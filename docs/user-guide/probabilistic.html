@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>Probabilistic and sensitivity analysis — OGR Slip2D documentation</title>
-<meta name="description" content="Set up a probabilistic or sensitivity analysis in OGR Slip2D: random variables and their distributions, correlation, sampling and seed, Compute Statistics, the Statistics window and the Statistics menu of the Interpret window, with the limitations of version 0.1.235.">
+<meta name="description" content="Set up a probabilistic or sensitivity analysis in OGR Slip2D: random variables and their distributions, correlation, sampling and seed, Compute Statistics, the Statistics window and the Statistics menu of the Interpret window.">
 <!-- @inc head -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>document.documentElement.classList.replace("no-js", "js")</script>
@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="OpenGeoRock">
 <meta property="og:title" content="Probabilistic and sensitivity analysis — OGR Slip2D documentation">
-<meta property="og:description" content="Set up a probabilistic or sensitivity analysis in OGR Slip2D: random variables and their distributions, correlation, sampling and seed, Compute Statistics, the Statistics window and the Statistics menu of the Interpret window, with the limitations of version 0.1.235.">
+<meta property="og:description" content="Set up a probabilistic or sensitivity analysis in OGR Slip2D: random variables and their distributions, correlation, sampling and seed, Compute Statistics, the Statistics window and the Statistics menu of the Interpret window.">
 <meta property="og:url" content="https://opengeorock.org/docs/user-guide/probabilistic.html">
 <meta property="og:image" content="https://opengeorock.org/assets/img/og-image.png">
 <meta property="og:locale" content="en_GB">
@@ -163,13 +163,12 @@
 <nav class="crumbs label" aria-label="Breadcrumb"><a href="../../docs/index.html">Documentation</a><span aria-hidden="true">/</span><span>2 · User guide</span></nav>
 <div class="chapter label">2.10</div>
 <h1>Probabilistic and sensitivity analysis</h1>
-<div class="meta label"><span>Describes OGR Slip2D <span data-v>0.1.235</span></span></div>
+<div class="meta label"><span>Describes OGR Slip2D <span data-v>0.1.481</span></span></div>
 <!-- @end dochead -->
     </header>
 
     <article class="doc prose">
       <p class="lede">A probabilistic analysis treats some inputs of the model as random variables, draws samples of them and recomputes the factor of safety for each sample, which gives its distribution, the probability of failure and the reliability index. A sensitivity analysis instead sweeps one input at a time across its range. Both are set up in Project Settings and in the Statistics menu, and their output is read in the Statistics window; the statistics behind them are in <a class="xref" href="../theory/probabilistic.html">Section 3.11</a>.</p>
-      <div class="note warn"><span class="label">Version 0.1.235</span><p>In this version the run cannot be completed from the window's menu: see <a class="xref" href="#compute-statistics">Section 2.10.4</a>. The settings below are still the ones the analysis uses when it is run through the MCP server or the Python API.</p></div>
 
       <h2 id="enable"><span class="secnum">2.10.1</span><span class="ht">Enabling the analysis</span><a class="anchor" href="#enable" aria-label="Link to this section">#</a></h2>
       <p>Both analyses are switched on in <span class="ui">Analysis → Project Settings →</span> <span class="ui">Statistics</span>. Until one of them is ticked, the commands of the <span class="ui">Statistics</span> menu stay greyed out: <span class="ui">Random Variables…</span> becomes available first, <span class="ui">Compute Statistics</span> once at least one random variable is defined, and <span class="ui">Show Statistics</span> once there are results to show.</p>
@@ -224,7 +223,7 @@
       <div class="impl">
         <span class="label">In OGR Slip2D</span>
         <p>Distributions are <strong>truncated</strong> to their actual range: samples are drawn by inverting the distribution between the two limits, so no value falls outside them and Latin Hypercube strata survive the truncation. A declared correlation is imposed by reordering the ranks of the second variable, which leaves both marginal distributions unchanged <a class="cite" href="../reference/bibliography.html#iman1982">(Iman &amp; Conover, 1982)</a>. Each sample is applied to a copy of the model, so the run does not modify your project.</p>
-        <span class="src">Source: <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_core/statistics/distributions.py" target="_blank" rel="noopener">ogr_core/statistics/distributions.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_core/statistics/random_variables.py" target="_blank" rel="noopener">ogr_core/statistics/random_variables.py</a></span>
+        <span class="src">Source: OGR-Core: <a href="https://github.com/samuelsl27/OGR-Core/blob/v0.2.2/ogr_core/statistics/distributions.py" target="_blank" rel="noopener">ogr_core/statistics/distributions.py</a> · <a href="https://github.com/samuelsl27/OGR-Core/blob/v0.2.2/ogr_core/statistics/random_variables.py" target="_blank" rel="noopener">ogr_core/statistics/random_variables.py</a></span>
       </div>
 
       <h2 id="sampling"><span class="secnum">2.10.3</span><span class="ht">Sampling and the seed</span><a class="anchor" href="#sampling" aria-label="Link to this section">#</a></h2>
@@ -240,11 +239,10 @@
       <p><span class="ui">Statistics → Compute Statistics</span> first runs the deterministic analysis, with every enabled method and its search, to find the critical surface of each method. Then:</p>
       <ul>
         <li>a <strong>Global Minimum</strong> analysis evaluates the N samples on the critical surface of each method (each method keeps its own);</li>
-        <li>an <strong>Overall Slope</strong> analysis repeats the whole search N times. Besides the distribution of the minimum factor of safety, it records the critical surface of every sample and the <em>critical probabilistic surface</em>: the individual surface with the highest probability of failure among those evaluated at least five times, which need not be the deterministic critical surface;</li>
+        <li>an <strong>Overall Slope</strong> analysis repeats the whole search N times. Besides the distribution of the minimum factor of safety, it records the critical surface of every sample and the <em>critical probabilistic surface</em>: among the surfaces that have a factor of safety in every sample of the run, the one with the highest probability of failure, which need not be the deterministic critical surface. It needs at least five samples, and some runs have none (for example with the critical seismic coefficient as the objective); the run then says why;</li>
         <li>a <strong>sensitivity</strong> analysis is computed as described below.</li>
       </ul>
-      <p>With a design standard active, every sample is factored like the deterministic model, so the statistics describe the over-design factor (<a class="xref" href="design-standards.html">Section 2.11</a>). With a seismic analysis mode on (critical seismic coefficient or Newmark displacement), the statistics are taken on the factor of safety of the surface with the lowest critical seismic coefficient, which is not necessarily the lowest factor of safety of the sample; the analysis notes say so.</p>
-      <div class="note warn"><span class="label">Compute Statistics fails from the menu in version 0.1.235</span><p>Started from the window, the run stops with an internal error (<code>TypeError: cannot pickle 'MainWindow' object</code>) when it tries to copy the model for the first sample, after the deterministic analysis. The window shows no message, no statistics are produced and Show Statistics stays greyed out. The same analysis runs through the MCP server (its <code>statistics_run</code> tool) and through the operations of the Python API, which copy the model in a way that works (<a class="xref" href="../reference/mcp.html">Section 5.1</a>, <a class="xref" href="../reference/python-api.html">Section 5.3</a>).</p></div>
+      <p>The run goes on in the background with a progress dialog; <span class="ui">Cancel</span> stops it and leaves the results of the previous run as they were. With a design standard active, every sample is factored like the deterministic model, so the statistics describe the over-design factor (<a class="xref" href="design-standards.html">Section 2.11</a>). With a seismic analysis mode on (critical seismic coefficient or Newmark displacement), the statistics are taken on the factor of safety of the surface with the lowest critical seismic coefficient, which is not necessarily the lowest factor of safety of the sample; the analysis notes say so.</p>
 
       <h2 id="statistics-window"><span class="secnum">2.10.5</span><span class="ht">The Statistics window</span><a class="anchor" href="#statistics-window" aria-label="Link to this section">#</a></h2>
       <p>After a successful run the <strong>Statistics</strong> window opens by itself; <span class="ui">Statistics → Show Statistics</span> opens it again. Choose the <strong>Method</strong> and the <strong>Plot</strong>:</p>
@@ -279,7 +277,8 @@
               <tr><td>Histogram Plot…</td><td>Histogram of the factors of safety of the valid surfaces of the search (25 bins, adjustable).</td><td>a Compute</td></tr>
               <tr><td>Cumulative Plot…</td><td>Cumulative distribution of the same factors of safety.</td><td>a Compute</td></tr>
               <tr><td>Scatter Plot…</td><td>Factor of safety against radius, for the valid surfaces of the search.</td><td>a Compute</td></tr>
-              <tr><td>Sensitivity Plot…</td><td>The sensitivity curves of the first method.</td><td>statistics results</td></tr>
+              <tr><td>Sensitivity Plot…</td><td>The sensitivity curves of the method shown in the Interpret window, or of the run's first method when that one was not swept.</td><td>statistics results</td></tr>
+              <tr><td>Sensitivity Tornado…</td><td>The change of the factor of safety over the range of each variable, with its sign, for the same method.</td><td>statistics results</td></tr>
               <tr><td>Convergence Plot…</td><td>Mean factor of safety and probability of failure against the number of samples.</td><td>statistics results</td></tr>
               <tr><td>Export Statistics Data…</td><td>A CSV file with one row per sample: its number, the value of every random variable and the factor of safety.</td><td>statistics results</td></tr>
               <tr><td>Show GM Surfaces, Pick GM Surfaces</td><td>Draws, or lists for selection, every minimum the result reports: the critical surface of each sample of an Overall Slope run, or the regions a Particle Swarm Search with several minima told apart.</td><td>either of those</td></tr>
@@ -288,7 +287,7 @@
           </table>
         </div>
       </figure>
-      <p>Commands that need statistics results are greyed out until there are some, with a tooltip saying so. Show GM Surfaces and Pick GM Surfaces do not need them: they also work after a Particle Swarm Search with <em>Report several minima</em> ticked, which in version 0.1.235 is the only way to use them from the window.</p>
+      <p>Commands that need statistics results are greyed out until there are some, with a tooltip saying so. Show GM Surfaces and Pick GM Surfaces do not need them: they also work after a Particle Swarm Search with <em>Report several minima</em> ticked.</p>
 
       <h2 id="sensitivity"><span class="secnum">2.10.7</span><span class="ht">Sensitivity analysis</span><a class="anchor" href="#sensitivity" aria-label="Link to this section">#</a></h2>
       <p>For each random variable in turn, the sensitivity analysis divides its actual range into the number of <strong>Sensitivity intervals</strong> (50 by default, so 51 values) and recomputes the factor of safety on the critical surface of each method at every value, with all the other variables held at their means. Only the minimum and maximum of each variable are used: the distribution, the standard deviation and the correlations play no part, and no probability of failure comes out of it. Its result shows which inputs matter most, and how far one of them can move before the factor of safety reaches 1.</p>
@@ -373,7 +372,7 @@
     </div>
     <div class="legal">
       <span>© 2026 Samuel Sáez López · OGR Slip2D is free software under AGPL-3.0-or-later, with no warranty of any kind.</span>
-      <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
+      <span>OGR Slip2D <span data-v>0.1.481</span> · 2026-11-22</span>
     </div>
   </div>
   <div class="lang-hint" role="dialog" aria-label="Idioma" lang="es">

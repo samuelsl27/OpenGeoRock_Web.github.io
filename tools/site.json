@@ -2,8 +2,8 @@
   "base_url": "https://opengeorock.org/",
   "repo_web": "https://github.com/samuelsl27/OpenGeoRock_Web.github.io",
   "repo_program": "https://github.com/samuelsl27/OGR-Slip2D",
-  "version": "0.1.235",
-  "version_date": "2026-10-01",
+  "version": "0.1.481",
+  "version_date": "2026-11-22",
   "nav_sections": {
     "products/": "products",
     "examples/": "examples",

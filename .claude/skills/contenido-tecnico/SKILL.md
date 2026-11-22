@@ -18,10 +18,10 @@ Todo sale del repositorio [`OGR-Slip2D`](https://github.com/samuelsl27/OGR-Slip2
 |---|---|
 | Versión que documenta la web | `tools/site.json` (`version`, `version_date`); debe coincidir con `pyproject.toml` → `[project] version` **del commit publicado** |
 | Licencia | `pyproject.toml` → `license`, y `LICENSE` |
-| Métodos de equilibrio límite (ids, valores por defecto) | `ogr_slip2d/methods/`, `ogr_slip2d/interslice.py`, `ogr_core/project/settings.py` |
+| Métodos de equilibrio límite (ids, valores por defecto) | `ogr_slip2d/methods/`, `ogr_slip2d/interslice.py`; ajustes del proyecto en OGR-Core, `ogr_core/project/` |
 | Algoritmos de búsqueda | `ogr_slip2d/search.py` |
-| Modelos de resistencia | `ogr_core/materials/builtin_models.py` |
-| Filtración y agua subterránea | `ogr_fem2d/solvers/seepage.py`, `ogr_core/hydraulic/` |
+| Modelos de resistencia | OGR-Core, `ogr_core/materials/builtin_models.py` (la etiqueta que fija `pyproject.toml` del programa) |
+| Filtración y agua subterránea | OGR-Core, `ogr_core/fem/seepage.py` y `ogr_core/hydraulic/` (desde OGR Slip2D 0.1.473 el código común vive en OGR-Core) |
 | Menús, diálogos y comportamiento de la interfaz | `ogr_gui/main_window.py` y los diálogos de `ogr_gui/dialogs/` |
 | Servidor MCP: herramientas, perfiles, cobertura | `ogr_api/inventory.py`, `ogr_mcp/`, `docs/mcp/*.md` (el código manda sobre la prosa) |
 | Número de tests | `docs/changelog/CHANGELOG_v<versión>.md`, línea «Suite entera». **No** el README del programa, que puede ir por detrás (hoy dice 4836; el changelog de la 0.1.235 dice 5265) |

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>Limit-equilibrium benchmarks — OGR Slip2D documentation</title>
-<meta name="description" content="The seven published slope-stability cases that OGR Slip2D reproduces, one by one: source, model, search or stated surface, reference value, value obtained, difference and tolerance, recomputed with version 0.1.235; and the checks of the methods on stated surfaces.">
+<meta name="description" content="The seven published slope-stability cases that OGR Slip2D reproduces, one by one: source, model, search or stated surface, reference value, value obtained, difference and tolerance, recomputed with version 0.1.481; and the checks of the methods on stated surfaces.">
 <!-- @inc head -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>document.documentElement.classList.replace("no-js", "js")</script>
@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="OpenGeoRock">
 <meta property="og:title" content="Limit-equilibrium benchmarks — OGR Slip2D documentation">
-<meta property="og:description" content="The seven published slope-stability cases that OGR Slip2D reproduces, one by one: source, model, search or stated surface, reference value, value obtained, difference and tolerance, recomputed with version 0.1.235; and the checks of the methods on stated surfaces.">
+<meta property="og:description" content="The seven published slope-stability cases that OGR Slip2D reproduces, one by one: source, model, search or stated surface, reference value, value obtained, difference and tolerance, recomputed with version 0.1.481; and the checks of the methods on stated surfaces.">
 <meta property="og:url" content="https://opengeorock.org/docs/verification/slope-benchmarks.html">
 <meta property="og:image" content="https://opengeorock.org/assets/img/og-image.png">
 <meta property="og:locale" content="en_GB">
@@ -163,12 +163,12 @@
 <nav class="crumbs label" aria-label="Breadcrumb"><a href="../../docs/index.html">Documentation</a><span aria-hidden="true">/</span><span>4 · Verification</span></nav>
 <div class="chapter label">4.2</div>
 <h1>Limit-equilibrium benchmarks</h1>
-<div class="meta label"><span>Describes OGR Slip2D <span data-v>0.1.235</span></span></div>
+<div class="meta label"><span>Describes OGR Slip2D <span data-v>0.1.481</span></span></div>
 <!-- @end dochead -->
     </header>
 
     <article class="doc prose">
-      <p class="lede">Seven published cases are run against OGR Slip2D <span data-v>0.1.235</span> as the test suite runs them. The reference of each case is a published value, and its tolerance follows from how precise that source is (<a class="xref" href="methodology.html#tolerance">Section 4.1.4</a>).</p>
+      <p class="lede">Seven published cases are run against OGR Slip2D <span data-v>0.1.481</span> as the test suite runs them. The reference of each case is a published value, and its tolerance follows from how precise that source is (<a class="xref" href="methodology.html#tolerance">Section 4.1.4</a>).</p>
       <p>The cases are in the <a href="https://github.com/samuelsl27/OGR-Slip2D/tree/main/validacion/casos" target="_blank" rel="noopener">validacion/casos/</a> folder of the repository. Each holds the model (<code>modelo.ogr</code>), the expected values with their source and tolerance (<code>esperado.json</code>) and a description (<code>caso.md</code>). The numbering is the order in which the cases were added.</p>
 
       <h2 id="summary"><span class="secnum">4.2.1</span><span class="ht">The seven cases at a glance</span><a class="anchor" href="#summary" aria-label="Link to this section">#</a></h2>
@@ -263,9 +263,9 @@
           <text class="mute" x="362.0" y="340" text-anchor="middle">difference from the reference value (%)</text>
           </svg>
         </div>
-        <figcaption><span class="fignum">Figure 4.2.1</span> Difference between the factor of safety of OGR Slip2D <span data-v>0.1.235</span> and the reference value, as a percentage of the reference, for the twelve method and case pairs. The shaded band is the tolerance of each case.</figcaption>
+        <figcaption><span class="fignum">Figure 4.2.1</span> Difference between the factor of safety of OGR Slip2D <span data-v>0.1.481</span> and the reference value, as a percentage of the reference, for the twelve method and case pairs. The shaded band is the tolerance of each case.</figcaption>
       </figure>
-      <div class="note"><span class="label">How the differences are computed</span><p>The values obtained are shown to four decimals, but the difference of each row and its comparison with the tolerance use the unrounded values, as in <a class="xref" href="methodology.html#eq-difference">Eq. (4.1.1)</a>: the difference is relative to the reference value, and positive when OGR Slip2D gives the higher factor of safety. The values were recomputed with version <span data-v>0.1.235</span> on the models of the repository, with the function that the test suite uses.</p></div>
+      <div class="note"><span class="label">How the differences are computed</span><p>The values obtained are shown to four decimals, but the difference of each row and its comparison with the tolerance use the unrounded values, as in <a class="xref" href="methodology.html#eq-difference">Eq. (4.1.1)</a>: the difference is relative to the reference value, and positive when OGR Slip2D gives the higher factor of safety. The values were recomputed with version <span data-v>0.1.481</span> on the models of the repository, with the function that the test suite uses.</p></div>
       <div class="note warn"><span class="label">Scope</span><p>All seven cases use circular surfaces and Mohr–Coulomb materials. Pore pressure enters one of them, as a water table, and a load another; none has supports, seismic loading, a finite-element pore-pressure field or a non-circular surface. Spencer and GLE / Morgenstern–Price are compared with a published value only in case 007 (<a class="xref" href="methodology.html#tolerance">Section 4.1.4</a>); other checks of those methods are in <a class="xref" href="#method-checks">Section 4.2.9</a>.</p></div>
 
       <h2 id="acads-1a"><span class="secnum">4.2.2</span><span class="ht">Case 001 · ACADS 1(a): homogeneous slope, total stress</span><a class="anchor" href="#acads-1a" aria-label="Link to this section">#</a></h2>
@@ -649,7 +649,7 @@
 
       <h2 id="reinforcement-1999"><span class="secnum">4.2.7</span><span class="ht">Case 006 · Reinforcement example (1999): the minimum-depth filter</span><a class="anchor" href="#reinforcement-1999" aria-label="Link to this section">#</a></h2>
       <p>The reinforcement back-analysis example of the reference manual of a slope-stability program, published in 1999; the case is called Reinforcement example (1999), as on the <a href="../../verification/index.html">Verification page</a>. The example is a cohesionless slope with a distributed load on the crest, and it asks for the reinforcement force that brings the slope to a factor of safety of 1.5, starting from the unreinforced factor, 0.764, found on the circle with centre (−11.41, 35.264) and radius 34.426 m. The statement adds two conditions: only failure surfaces with a minimum depth of 2 m are considered, and a focus point is placed at the toe, so that only circles through it are considered. The source has no entry in the <a href="../reference/bibliography.html">bibliography</a>.</p>
-      <p><strong>What it checks.</strong> That the minimum-depth filter reaches the engine. It is the only case that exercises a surface filter: the others check methods and searches, and none checked that a surface-filter setting arrived at the analysis, which for many versions it did not. The condition is part of the statement and not a detail of the solution: without it the problem does not have the published answer. The case file records that, with the same model and the filter off, the minimum falls on a sliver 0.669 m thick on the face of the slope, with its centre on the edge of the grid. If the filter stopped reaching the engine this case would fail: in version <span data-v>0.1.235</span> the grid search of the model with the filter off gives 0.7277, centred at (−20.0, 45.6), which is 4.7 % below the published value and outside the tolerance.</p>
+      <p><strong>What it checks.</strong> That the minimum-depth filter reaches the engine. It is the only case that exercises a surface filter: the others check methods and searches, and none checked that a surface-filter setting arrived at the analysis, which for many versions it did not. The condition is part of the statement and not a detail of the solution: without it the problem does not have the published answer. The case file records that, with the same model and the filter off, the minimum falls on a sliver 0.669 m thick on the face of the slope, with its centre on the edge of the grid. If the filter stopped reaching the engine this case would fail: in version <span data-v>0.1.481</span> the grid search of the model with the filter off gives 0.7277, centred at (−20.0, 45.6), which is 4.7 % below the published value and outside the tolerance.</p>
       <figure class="fig" id="fig-geom-006">
         <div class="art">
           <svg class="dg" viewBox="0 0 640 403" role="img" aria-labelledby="fig-geom-006-t"><title id="fig-geom-006-t">Cross-section of case 006, the reinforcement example: a 12 m slope at 45 degrees with a distributed load of 40 kPa on the crest and a focus point at the toe</title>
@@ -967,7 +967,7 @@
     </div>
     <div class="legal">
       <span>© 2026 Samuel Sáez López · OGR Slip2D is free software under AGPL-3.0-or-later, with no warranty of any kind.</span>
-      <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
+      <span>OGR Slip2D <span data-v>0.1.481</span> · 2026-11-22</span>
     </div>
   </div>
   <div class="lang-hint" role="dialog" aria-label="Idioma" lang="es">

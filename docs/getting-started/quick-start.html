@@ -163,7 +163,7 @@
 <nav class="crumbs label" aria-label="Breadcrumb"><a href="../../docs/index.html">Documentation</a><span aria-hidden="true">/</span><span>1 · Getting started</span></nav>
 <div class="chapter label">1.2</div>
 <h1>Quick start: your first model</h1>
-<div class="meta label"><span>Describes OGR Slip2D <span data-v>0.1.235</span></span></div>
+<div class="meta label"><span>Describes OGR Slip2D <span data-v>0.1.481</span></span></div>
 <!-- @end dochead -->
     </header>
 
@@ -499,7 +499,7 @@
       <h2 id="materials"><span class="secnum">1.2.4</span><span class="ht">Define and assign the materials</span><a class="anchor" href="#materials" aria-label="Link to this section">#</a></h2>
       <ol>
         <li><span class="ui">Properties → Define Materials…</span>: create the three materials of <a class="xref" href="#tbl-materials">Table 1.2.1</a>, with strength type <strong>Mohr-Coulomb</strong> and pore pressure from the <strong>water table</strong>.</li>
-        <li><span class="ui">Properties → Assign Materials</span>: pick a material and click inside its region; repeat for the three layers.</li>
+        <li><span class="ui">Properties → Assign Materials Panel…</span>: pick a material and click inside its region; repeat for the three layers.</li>
       </ol>
       <figure class="fig shot-fig" id="fig-qs-materials">
         <div class="art"><img src="../../assets/img/shots/define-materials.webp" alt="The Define Materials dialog with Mohr-Coulomb parameters" loading="lazy" width="900" height="783"></div>
@@ -517,7 +517,7 @@
         <figcaption><span class="fignum">Figure 1.2.5</span> The modeller after the analysis.</figcaption>
       </figure>
       <figure class="tbl" id="tbl-results">
-        <figcaption><span class="fignum">Table 1.2.2</span> Critical factors of safety of the tutorial, computed with OGR Slip2D <span data-v>0.1.235</span>. The three methods find the same circle: centre (60.0, 47.6), radius 31.17 m.</figcaption>
+        <figcaption><span class="fignum">Table 1.2.2</span> Critical factors of safety of the tutorial, computed with OGR Slip2D <span data-v>0.1.481</span>. The three methods find the same circle: centre (60.0, 47.6), radius 31.17 m.</figcaption>
         <div class="table-wrap">
           <table class="data">
             <thead><tr><th>Method</th><th class="n">Critical FoS</th><th class="n">Valid surfaces</th><th>Detail</th></tr></thead>
@@ -529,7 +529,7 @@
           </table>
         </div>
       </figure>
-      <p>Not every circle the grid generates gives a valid result. For Bishop, of 1 859 circles, 185 could not be divided into slices, 181 had no converged factor of safety (error code −111) and 4 failed the m-α check of <a class="xref" href="../theory/interslice.html">Section 3.3</a> (code −112), which leaves the 1 489 valid surfaces of the table. <span class="ui">Analysis → Analysis Notes…</span> says why, and the Interpret window counts them by error code.</p>
+      <p>Not every circle the grid generates gives a valid result. For Bishop, of 1 859 circles, 79 run outside the external boundary between their two crossings with the ground (error code −103), 106 could not be divided into slices, 181 gave no factor of safety (error code −111) and 4 failed the m-α check of <a class="xref" href="../theory/interslice.html">Section 3.3</a> (code −112), which leaves the 1 489 valid surfaces of the table. <span class="ui">Analysis → Analysis Notes…</span> says why, and the Interpret window counts them by error code.</p>
 
       <h2 id="interpret"><span class="secnum">1.2.7</span><span class="ht">Interpret</span><a class="anchor" href="#interpret" aria-label="Link to this section">#</a></h2>
       <p><span class="ui">Analysis → Interpret</span> opens the result in its own window: the grid of centres coloured by factor of safety, the critical surface, the ranked surfaces and, for any slice, its forces, stresses and pore pressure. Choose the method in the toolbar to compare Bishop, Spencer and GLE.</p>
@@ -625,7 +625,7 @@
     </div>
     <div class="legal">
       <span>© 2026 Samuel Sáez López · OGR Slip2D is free software under AGPL-3.0-or-later, with no warranty of any kind.</span>
-      <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
+      <span>OGR Slip2D <span data-v>0.1.481</span> · 2026-11-22</span>
     </div>
   </div>
   <div class="lang-hint" role="dialog" aria-label="Idioma" lang="es">

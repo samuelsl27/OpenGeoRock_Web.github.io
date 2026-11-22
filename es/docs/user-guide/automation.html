@@ -162,7 +162,7 @@
 <nav class="crumbs label" aria-label="Ruta de navegación"><a href="../../../es/docs/index.html">Documentación</a><span aria-hidden="true">/</span><span>2 · Guía de usuario</span></nav>
 <div class="chapter label">2.12</div>
 <h1>Informes, scripts y línea de comandos</h1>
-<div class="meta label"><span>Válido para OGR Slip2D <span data-v>0.1.235</span></span></div>
+<div class="meta label"><span>Válido para OGR Slip2D <span data-v>0.1.481</span></span></div>
 <!-- @end dochead -->
     </header>
 
@@ -170,24 +170,23 @@
       <p class="lede">Los resultados salen del programa en forma de informe en PDF, imágenes, impresiones y dibujos DXF. Además, el programa se puede manejar sin ratón desde la consola de Python de la ventana, la línea de comandos, la API de Python o un agente de IA conectado mediante el servidor MCP. Los tres últimos tienen su propio capítulo de referencia; aquí solo se presentan desde el programa de escritorio.</p>
 
       <h2 id="report"><span class="secnum">2.12.1</span><span class="ht">El informe en PDF</span><a class="anchor" href="#report" aria-label="Enlace a esta sección">#</a></h2>
-      <p><span class="ui">File → Generate Report…</span> genera un PDF en formato A4 con el último cálculo y todos los métodos que se ejecutaron en él; si todavía no se ha calculado, el programa lo rechaza con un mensaje. El nombre de archivo propuesto es el del proyecto seguido de <code>_report.pdf</code>. El informe consta de ocho secciones:</p>
+      <p><span class="ui">File → Generate Report…</span> genera un PDF en formato A4 con el último cálculo y todos los métodos que se ejecutaron en él; si todavía no se ha calculado, el programa lo rechaza con un mensaje. Antes pregunta si se incluye un dibujo de la superficie crítica de cada método y cómo se encuadra. El nombre de archivo propuesto es el del proyecto seguido de <code>_report.pdf</code>, y el informe sale en el idioma de la interfaz. Tiene estas secciones:</p>
       <ol>
         <li><strong>Project Summary</strong>: título, archivo, autor, empresa, fechas y comentarios;</li>
         <li><strong>General Settings</strong>: unidades, unidades de tiempo y de permeabilidad y dirección de rotura;</li>
-        <li><strong>Analysis Options</strong>: los métodos, el número de dovelas, la tolerancia, el máximo de iteraciones y las opciones de las superficies;</li>
+        <li><strong>Analysis Options</strong>: los métodos, el número de dovelas, la tolerancia, el máximo de iteraciones y las opciones de las superficies; con una norma de diseño aplicada, también la norma y lo que ha factorizado;</li>
         <li><strong>Material Properties</strong>;</li>
-        <li><strong>Global Minimums</strong>: para cada método, el factor de seguridad y la superficie crítica (centro y radio si es un círculo, los dos puntos extremos y el área total de las dovelas);</li>
+        <li><strong>Global Minimums</strong>: para cada método, el factor de seguridad y la superficie crítica (centro y radio si es un círculo, los dos puntos extremos y el área total de las dovelas), seguidos de los vértices de una superficie crítica no circular;</li>
+        <li><strong>Critical Surface by Method</strong>, los dibujos, si se han pedido;</li>
         <li><strong>Valid / Invalid Surfaces</strong>: los recuentos por método, con los intentos de generación;</li>
         <li><strong>Slice Data</strong> de la superficie crítica de cada método;</li>
         <li><strong>List of Coordinates</strong> de los contornos.</li>
       </ol>
       <p>El título, el autor y la empresa proceden de <span class="ui">Analysis → Project Settings →</span> <span class="ui">Project Summary</span>.</p>
-      <div class="note warn"><span class="label">Antes de enviar un informe (versión 0.1.235)</span>
+      <div class="note warn"><span class="label">Antes de enviar un informe (versión 0.1.481)</span>
         <ul>
           <li>Un proyecto nuevo trae como valores por defecto de <em>Author</em> y <em>Company</em>, en Project Summary, el nombre y la institución del autor del programa. Cámbialos; de lo contrario, el informe citará a otra persona.</li>
-          <li>El informe solo contiene tablas, sin dibujo del modelo; añade uno con <span class="ui">File → Export Image…</span>.</li>
-          <li>No incluye las notas del análisis ni registra la norma de diseño: si hay una aplicada, el valor que rotula como <em>Factor of Safety (FS)</em> es un factor de sobredimensionamiento (<a class="xref" href="design-standards.html">Sección 2.11</a>).</li>
-          <li>El pie de página indica la licencia GPL-3.0, pero el programa tiene licencia AGPL-3.0-or-later.</li>
+          <li>No incluye las notas del análisis, salvo las de la norma de diseño (<span class="ui">Analysis → Analysis Notes…</span>).</li>
         </ul>
       </div>
 
@@ -197,13 +196,13 @@
         <li><span class="ui">Edit → Copy Image</span> copia al portapapeles la vista tal como está en pantalla, como mapa de bits.</li>
         <li>La ventana Interpret tiene sus propios <span class="ui">File → Export Image…</span> (PNG o JPEG de su vista) y <span class="ui">Edit → Copy Image</span> (<a class="xref" href="results.html">Sección 2.8</a>).</li>
       </ul>
-      <div class="note"><span class="label">Nota</span><p><span class="ui">Edit → Picture Format</span> ofrece <em>Bitmap</em> y <em>Vector (SVG)</em>, pero en la versión 0.1.235 da igual lo que se elija: Copy Image siempre copia un mapa de bits al portapapeles.</p></div>
+      <div class="note"><span class="label">Nota</span><p><span class="ui">Edit → Picture Format</span> ofrece <em>Bitmap</em> y <em>Vector (SVG)</em>, pero en la versión 0.1.481 da igual lo que se elija: Copy Image siempre copia un mapa de bits al portapapeles.</p></div>
 
       <h2 id="printing"><span class="secnum">2.12.3</span><span class="ht">Impresión</span><a class="anchor" href="#printing" aria-label="Enlace a esta sección">#</a></h2>
-      <p><span class="ui">File → Page Setup…</span> permite elegir el papel y los márgenes, y <span class="ui">File → Print Preview…</span> muestra el modelo completo dibujado en esa página; la impresión se lanza desde la ventana de vista previa. En la versión 0.1.235, <span class="ui">File → Print…</span> (<kbd>Ctrl</kbd>+<kbd>P</kbd>) solo muestra un mensaje.</p>
+      <p><span class="ui">File → Page Setup…</span> permite elegir el papel y los márgenes, y <span class="ui">File → Print Preview…</span> muestra el modelo completo dibujado en esa página; la impresión se lanza desde la ventana de vista previa. En la versión 0.1.481, <span class="ui">File → Print…</span> (<kbd>Ctrl</kbd>+<kbd>P</kbd>) solo muestra un mensaje.</p>
 
       <h2 id="dxf"><span class="secnum">2.12.4</span><span class="ht">Dibujos DXF</span><a class="anchor" href="#dxf" aria-label="Enlace a esta sección">#</a></h2>
-      <p><span class="ui">File → Export DXF…</span> exporta el modelo a un dibujo DXF para CAD. En el diálogo se elige la unidad de las coordenadas (m, cm, mm, km, ft o in; el modelo está en metros y la unidad se anota en el archivo), el <em>Load arrow size</em>, como porcentaje de la diagonal del modelo (2 %), y lo que se incluye en el dibujo: <em>Boundaries (geometry)</em>, <em>Supports</em>, <em>Loads (as arrows)</em>, <em>Finite element mesh</em> (desactivada por defecto, porque escribe una línea por cada lado de elemento), <em>Critical slip surface</em> (tras un cálculo) y <em>Annotations (title, factor of safety)</em>. La geometría va a las capas que reconoce el importador de DXF, de modo que el dibujo se puede editar y volver a importar. Las cargas, la malla, la superficie de rotura y las anotaciones van a capas distintas, cuyos nombres empiezan por <code>OGR_X_</code> y que el importador ignora, así que una flecha de carga no puede volver como contorno. La importación de un DXF se describe en la <a class="xref" href="geometry.html">Sección 2.2</a>.</p>
+      <p><span class="ui">File → Export DXF…</span> exporta el modelo a un dibujo DXF para CAD. En el diálogo se elige la unidad de las coordenadas (m, cm, mm, km, ft o in; el modelo está en metros y la unidad se anota en el archivo), el <em>Load arrow size</em>, como porcentaje de la diagonal del modelo (2 %), y lo que se incluye en el dibujo: <em>Boundaries (geometry)</em>, <em>Supports</em>, <em>Loads (as arrows)</em>, <em>Finite element mesh</em> (desactivada por defecto, porque escribe una línea por cada lado de elemento), <em>Critical slip surface</em> (tras un cálculo), <em>Labels (title, factor of safety)</em> y <em>Annotation layer</em> (lo dibujado con el menú <span class="ui">Tools</span>). La geometría va a las capas que reconoce el importador de DXF, de modo que el dibujo se puede editar y volver a importar. Las cargas, la malla, la superficie de rotura, los rótulos y la capa de anotaciones van a capas distintas, cuyos nombres empiezan por <code>OGR_X_</code> y que el importador ignora, así que una flecha de carga no puede volver como contorno. La importación de un DXF se describe en la <a class="xref" href="geometry.html">Sección 2.2</a>.</p>
 
       <h2 id="terminal"><span class="secnum">2.12.5</span><span class="ht">La consola de Python</span><a class="anchor" href="#terminal" aria-label="Enlace a esta sección">#</a></h2>
       <p><span class="ui">Window → Terminal</span> (<kbd>Ctrl</kbd>+<kbd>`</kbd>) abre una consola de Python dentro de la ventana, conectada al modelo abierto. En ella se definen estos nombres:</p>
@@ -229,7 +228,7 @@
 &gt;&gt;&gt; out = run_analysis(project)            # los métodos activados en el proyecto
 &gt;&gt;&gt; {mid: r.critical.fos for mid, r in out.results.items() if r.critical}
 &gt;&gt;&gt; out.warnings                           # las notas del análisis</code></pre></div>
-      <div class="note"><span class="label">Nota</span><p>Los cambios que se hacen en <code>project</code> desde la consola no pasan por <span class="ui">Edit → Undo</span>, y la vista no se redibuja sola: hay que llamar a <code>canvas.refresh_scene()</code>. Un cálculo lanzado desde aquí se ejecuta en el propio hilo de la ventana, por lo que esta no responde hasta que termina. Una búsqueda construida a mano a partir de su clase, como en el ejemplo de <code>help_ogr()</code>, usa los valores por defecto de esa clase y no los ajustes del proyecto; <code>run_analysis</code> sí usa los del proyecto.</p></div>
+      <div class="note"><span class="label">Nota</span><p>Desde la versión 0.1.305, una orden que cambia <code>project</code> es un paso de <span class="ui">Edit → Undo</span>, llamado <em>Python script</em>, y la vista se redibuja después. Un cambio en la malla de elementos finitos o en sus resultados no entra en ese paso; tras uno así, llama a <code>canvas.refresh_scene()</code>. Un cálculo lanzado desde aquí se ejecuta en el propio hilo de la ventana, por lo que esta no responde hasta que termina. Una búsqueda construida a mano a partir de su clase, como en el ejemplo de <code>help_ogr()</code>, usa los valores por defecto de esa clase y no los ajustes del proyecto; <code>run_analysis</code> sí usa los del proyecto.</p></div>
 
       <h2 id="cli"><span class="secnum">2.12.6</span><span class="ht">La línea de comandos</span><a class="anchor" href="#cli" aria-label="Enlace a esta sección">#</a></h2>
       <p><code>ogr-slip2d-cli</code> ejecuta un proyecto guardado sin abrir la ventana. Calcula el análisis que describe el proyecto con el mismo ejecutor que el programa de escritorio; cada opción sustituye en memoria un ajuste del proyecto, y el archivo no se modifica.</p>
@@ -240,15 +239,15 @@
             <thead><tr><th>Comando</th><th>Qué hace</th></tr></thead>
             <tbody>
               <tr><td><code>info project.ogr</code></td><td>Muestra un resumen del proyecto y de sus materiales.</td></tr>
-              <tr><td><code>compute project.ogr</code></td><td>Ejecuta el análisis, muestra todas las notas y una tabla con el valor crítico de cada método, y guarda el resultado de cada método en formato HDF5 (<code>project.h5</code>, o un archivo por método). Opciones: <code>--method</code>, <code>--slices</code>, <code>--nx</code>, <code>--ny</code> (intervalos de la rejilla), <code>--dr</code> (Radius Increment), <code>--search</code>, <code>--samples</code> (Number of Surfaces de las búsquedas Slope, Block y Path) y <code>--output</code>.</td></tr>
-              <tr><td><code>methods</code></td><td>Lista los nueve métodos y el equilibrio que satisface cada uno.</td></tr>
+              <tr><td><code>compute project.ogr</code></td><td>Ejecuta el análisis, muestra todas las notas y una tabla con el valor crítico de cada método, y guarda el resultado de cada método en formato HDF5 (<code>project.h5</code>, o un archivo por método). Opciones: <code>--method</code>, <code>--slices</code>, <code>--sarma-slices</code> (el número mínimo de cuñas del método de Sarma), <code>--nx</code>, <code>--ny</code> (intervalos de la rejilla), <code>--dr</code> (Radius Increment), <code>--search</code>, <code>--samples</code> (Number of Surfaces de las búsquedas Slope, Block y Path) y <code>--output</code>.</td></tr>
+              <tr><td><code>methods</code></td><td>Lista los diez métodos y el equilibrio que satisface cada uno.</td></tr>
               <tr><td><code>strength-models</code></td><td>Lista los modelos de resistencia y sus parámetros.</td></tr>
               <tr><td><code>new-demo out.ogr</code></td><td>Guarda el talud de demostración como proyecto.</td></tr>
             </tbody>
           </table>
         </div>
       </figure>
-      <p>Si el proyecto contiene algo que el análisis no puede respetar, se rechaza con los motivos y el código de salida 3, como hace Compute en la ventana. La versión 0.1.235 no incluye ningún comando para los análisis estadísticos. <code>--search</code> acepta los identificadores de búsqueda <code>grid</code>, <code>slope</code>, <code>auto_refine</code>, <code>block</code>, <code>path</code>, <code>simulated_annealing</code> y <code>particle_swarm</code>; un identificador que no reconoce no provoca ningún rechazo, y el cálculo se hace con una Grid Search.</p>
+      <p>Si el proyecto contiene algo que el análisis no puede respetar, se rechaza con los motivos y el código de salida 3, como hace Compute en la ventana. La versión 0.1.481 no incluye ningún comando para los análisis estadísticos. <code>--search</code> acepta los identificadores de búsqueda <code>grid</code>, <code>slope</code>, <code>auto_refine</code>, <code>block</code>, <code>path</code>, <code>simulated_annealing</code> y <code>particle_swarm</code>; un identificador que no reconoce no provoca ningún rechazo, y el cálculo se hace con una Grid Search.</p>
 
       <h2 id="python-api"><span class="secnum">2.12.7</span><span class="ht">API de Python</span><a class="anchor" href="#python-api" aria-label="Enlace a esta sección">#</a></h2>
       <p>Los paquetes del programa se pueden importar desde Python. La manera más breve de analizar un proyecto guardado es recurrir al mismo ejecutor que usan la ventana y la línea de comandos:</p>
@@ -339,7 +338,7 @@ for note in out.warnings:
     </div>
     <div class="legal">
       <span>© 2026 Samuel Sáez López · OGR Slip2D es software libre (licencia AGPL-3.0 o posterior) y se distribuye sin ninguna garantía.</span>
-      <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
+      <span>OGR Slip2D <span data-v>0.1.481</span> · 2026-11-22</span>
     </div>
   </div>
 </footer>

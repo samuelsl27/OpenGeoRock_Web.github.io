@@ -163,7 +163,7 @@
 <nav class="crumbs label" aria-label="Ruta de navegación"><a href="../../../es/docs/index.html">Documentación</a><span aria-hidden="true">/</span><span>4 · Verificación</span></nav>
 <div class="chapter label">4.1</div>
 <h1>Metodología de verificación</h1>
-<div class="meta label"><span>Válido para OGR Slip2D <span data-v>0.1.235</span></span></div>
+<div class="meta label"><span>Válido para OGR Slip2D <span data-v>0.1.481</span></span></div>
 <!-- @end dochead -->
     </header>
 
@@ -277,7 +277,7 @@
       </div>
 
       <h2 id="running"><span class="secnum">4.1.7</span><span class="ht">Ejecución de los casos</span><a class="anchor" href="#running" aria-label="Enlace a esta sección">#</a></h2>
-      <p>Un único test, <code>tests/test_validation_cases.py</code>, recorre todas las carpetas de casos que tienen un modelo y un <code>esperado.json</code>, así que para añadir un caso no hace falta escribir código. El proyecto usa su propio ejecutor de tests y no necesita pytest; los módulos de test no pueden importarse fuera del ejecutor. Desde un clon del repositorio (<a class="xref" href="../getting-started/installation.html#tests">Sección 1.1.5</a>):</p>
+      <p>Un único test, <code>tests/test_validation_cases.py</code>, recorre todas las carpetas de casos que tienen un modelo y un <code>esperado.json</code>, así que para añadir un caso no hace falta escribir código. El proyecto usa su propio ejecutor de tests (desde la v0.1.473, el que comparte la suite, <code>ogr_core.testing.runner</code> de OGR-Core) y no necesita pytest; los módulos de test no pueden importarse fuera del ejecutor. Desde un clon del repositorio (<a class="xref" href="../getting-started/installation.html#tests">Sección 1.1.5</a>):</p>
       <div class="code"><pre><code>python tests/_runner.py validation_cases     # los siete casos y las comprobaciones de sus archivos
 python tests/_runner.py published_cases      # las comprobaciones que los acompañan</code></pre></div>
       <p>Si se selecciona por nombre de archivo, se imprime una advertencia <code>FILTERED RUN</code> junto a los totales y el resultado no vale como prueba para publicar una versión; la batería completa, que es lo que necesita una versión, se ejecuta sin argumentos. Además de reproducir los valores esperados, el test comprueba que cada carpeta tiene sus tres archivos, que <code>esperado.json</code> es válido, que cada caso cita una fuente y declara una tolerancia razonable, que los identificadores de método y los tipos de búsqueda existen, y que al menos un caso se ejecuta de verdad, de modo que una carpeta vacía no pueda pasar sin avisar.</p>
@@ -292,7 +292,7 @@ python tests/_runner.py published_cases      # las comprobaciones que los acompa
       </ul>
 
       <h2 id="scope"><span class="secnum">4.1.9</span><span class="ht">Lo que la verificación no demuestra</span><a class="anchor" href="#scope" aria-label="Enlace a esta sección">#</a></h2>
-      <div class="note warn"><span class="label">Alcance</span><p>Los siete casos publicados usan superficies circulares y materiales de Mohr-Coulomb. En uno de ellos interviene la presión intersticial, mediante un nivel freático, y en otro una carga; ninguno incluye soportes, acción sísmica, un campo de presiones intersticiales por elementos finitos ni una superficie no circular. Esas funciones se comprueban en otros tests de la batería, mediante soluciones analíticas e identidades exactas cuando existen, pero no mediante un factor de seguridad publicado. Un valor reproducido es una prueba a favor de su caso, no una garantía para cualquier talud, y los valores publicados tienen una dispersión propia, que reflejan las tolerancias de la <a class="xref" href="#tbl-tolerances">Tabla 4.1.2</a>. Antes de basar nada en los resultados hay que contrastarlos con cálculos independientes; el ingeniero que firma un proyecto sigue siendo responsable de él.</p></div>
+      <div class="note warn"><span class="label">Alcance</span><p>Los siete casos publicados usan superficies circulares y materiales de Mohr-Coulomb. En uno de ellos interviene la presión intersticial, mediante un nivel freático, y en otro una carga; ninguno incluye soportes, acción sísmica, un campo de presiones intersticiales por elementos finitos ni una superficie no circular, y ninguno se analiza con el método de Sarma. Esas funciones se comprueban en otros tests de la batería, mediante soluciones analíticas e identidades exactas cuando existen, pero no mediante un factor de seguridad publicado. Un valor reproducido es una prueba a favor de su caso, no una garantía para cualquier talud, y los valores publicados tienen una dispersión propia, que reflejan las tolerancias de la <a class="xref" href="#tbl-tolerances">Tabla 4.1.2</a>. Antes de basar nada en los resultados hay que contrastarlos con cálculos independientes; el ingeniero que firma un proyecto sigue siendo responsable de él.</p></div>
 
       <h2 id="references"><span class="secnum">4.1.10</span><span class="ht">Referencias</span><a class="anchor" href="#references" aria-label="Enlace a esta sección">#</a></h2>
       <ul class="refs">
@@ -373,7 +373,7 @@ python tests/_runner.py published_cases      # las comprobaciones que los acompa
     </div>
     <div class="legal">
       <span>© 2026 Samuel Sáez López · OGR Slip2D es software libre (licencia AGPL-3.0 o posterior) y se distribuye sin ninguna garantía.</span>
-      <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
+      <span>OGR Slip2D <span data-v>0.1.481</span> · 2026-11-22</span>
     </div>
   </div>
 </footer>

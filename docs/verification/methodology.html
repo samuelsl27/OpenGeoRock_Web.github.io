@@ -163,7 +163,7 @@
 <nav class="crumbs label" aria-label="Breadcrumb"><a href="../../docs/index.html">Documentation</a><span aria-hidden="true">/</span><span>4 · Verification</span></nav>
 <div class="chapter label">4.1</div>
 <h1>Verification methodology</h1>
-<div class="meta label"><span>Describes OGR Slip2D <span data-v>0.1.235</span></span></div>
+<div class="meta label"><span>Describes OGR Slip2D <span data-v>0.1.481</span></span></div>
 <!-- @end dochead -->
     </header>
 
@@ -277,7 +277,7 @@
       </div>
 
       <h2 id="running"><span class="secnum">4.1.7</span><span class="ht">Running the cases</span><a class="anchor" href="#running" aria-label="Link to this section">#</a></h2>
-      <p>One test, <code>tests/test_validation_cases.py</code>, walks every case folder that has a model and an <code>esperado.json</code>, so adding a case needs no code. The project uses its own test runner and pytest is not required; the test modules cannot be imported outside the runner. From a clone of the repository (<a class="xref" href="../getting-started/installation.html#tests">Section 1.1.5</a>):</p>
+      <p>One test, <code>tests/test_validation_cases.py</code>, walks every case folder that has a model and an <code>esperado.json</code>, so adding a case needs no code. The project uses its own test runner (since v0.1.473 the one the suite shares, <code>ogr_core.testing.runner</code> from OGR-Core) and pytest is not required; the test modules cannot be imported outside the runner. From a clone of the repository (<a class="xref" href="../getting-started/installation.html#tests">Section 1.1.5</a>):</p>
       <div class="code"><pre><code>python tests/_runner.py validation_cases     # the seven cases and the checks of their files
 python tests/_runner.py published_cases      # the checks that accompany them</code></pre></div>
       <p>A selection by file name prints a <code>FILTERED RUN</code> warning around its totals and is not evidence for a release; the whole suite, which is what a release needs, is run with no arguments. Besides reproducing the expected values, the test checks that every folder has its three files, that <code>esperado.json</code> is valid, that every case cites a source and declares a sane tolerance, that the method identifiers and the search types exist, and that at least one case actually runs, so that an empty folder cannot pass unnoticed.</p>
@@ -292,7 +292,7 @@ python tests/_runner.py published_cases      # the checks that accompany them</c
       </ul>
 
       <h2 id="scope"><span class="secnum">4.1.9</span><span class="ht">What the verification does not show</span><a class="anchor" href="#scope" aria-label="Link to this section">#</a></h2>
-      <div class="note warn"><span class="label">Scope</span><p>The seven published cases use circular surfaces and Mohr–Coulomb materials. Pore pressure enters one of them, as a water table, and a load another; none has supports, seismic loading, a finite-element pore-pressure field or a non-circular surface. Those features are exercised by other tests of the suite, by closed forms and identities where they exist, but not by a published factor of safety. A reproduced value is evidence for its case and not a guarantee for every slope, and the published values carry a scatter of their own, which the tolerances of <a class="xref" href="#tbl-tolerances">Table 4.1.2</a> reflect. Results must be checked against independent calculations before anything is based on them; the engineer who signs a project remains responsible for it.</p></div>
+      <div class="note warn"><span class="label">Scope</span><p>The seven published cases use circular surfaces and Mohr–Coulomb materials. Pore pressure enters one of them, as a water table, and a load another; none has supports, seismic loading, a finite-element pore-pressure field or a non-circular surface, and none is analysed with Sarma's method. Those features are exercised by other tests of the suite, by closed forms and identities where they exist, but not by a published factor of safety. A reproduced value is evidence for its case and not a guarantee for every slope, and the published values carry a scatter of their own, which the tolerances of <a class="xref" href="#tbl-tolerances">Table 4.1.2</a> reflect. Results must be checked against independent calculations before anything is based on them; the engineer who signs a project remains responsible for it.</p></div>
 
       <h2 id="references"><span class="secnum">4.1.10</span><span class="ht">References</span><a class="anchor" href="#references" aria-label="Link to this section">#</a></h2>
       <ul class="refs">
@@ -373,7 +373,7 @@ python tests/_runner.py published_cases      # the checks that accompany them</c
     </div>
     <div class="legal">
       <span>© 2026 Samuel Sáez López · OGR Slip2D is free software under AGPL-3.0-or-later, with no warranty of any kind.</span>
-      <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
+      <span>OGR Slip2D <span data-v>0.1.481</span> · 2026-11-22</span>
     </div>
   </div>
   <div class="lang-hint" role="dialog" aria-label="Idioma" lang="es">

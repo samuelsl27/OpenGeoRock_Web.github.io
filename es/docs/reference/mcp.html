@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>Servidor MCP — documentación de OGR Slip2D</title>
-<meta name="description" content="Referencia de ogr-slip2d-mcp, el servidor oficial de Model Context Protocol de OGR Slip2D: instalación, opciones de la línea de comandos, transportes, perfiles, las 74 herramientas, recursos, trabajo con la ventana abierta del programa y modelo de seguridad.">
+<meta name="description" content="Referencia de ogr-slip2d-mcp, el servidor oficial de Model Context Protocol de OGR Slip2D: instalación, opciones de la línea de comandos, transportes, perfiles, las 75 herramientas, recursos, trabajo con la ventana abierta del programa y modelo de seguridad.">
 <!-- @inc head -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>document.documentElement.classList.replace("no-js", "js")</script>
@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="OpenGeoRock">
 <meta property="og:title" content="Servidor MCP — documentación de OGR Slip2D">
-<meta property="og:description" content="Referencia de ogr-slip2d-mcp, el servidor oficial de Model Context Protocol de OGR Slip2D: instalación, opciones de la línea de comandos, transportes, perfiles, las 74 herramientas, recursos, trabajo con la ventana abierta del programa y modelo de seguridad.">
+<meta property="og:description" content="Referencia de ogr-slip2d-mcp, el servidor oficial de Model Context Protocol de OGR Slip2D: instalación, opciones de la línea de comandos, transportes, perfiles, las 75 herramientas, recursos, trabajo con la ventana abierta del programa y modelo de seguridad.">
 <meta property="og:url" content="https://opengeorock.org/es/docs/reference/mcp.html">
 <meta property="og:image" content="https://opengeorock.org/assets/img/og-image.png">
 <meta property="og:locale" content="es_ES">
@@ -163,12 +163,12 @@
 <nav class="crumbs label" aria-label="Ruta de navegación"><a href="../../../es/docs/index.html">Documentación</a><span aria-hidden="true">/</span><span>5 · Referencia</span></nav>
 <div class="chapter label">5.1</div>
 <h1>Servidor MCP</h1>
-<div class="meta label"><span>Válido para OGR Slip2D <span data-v>0.1.235</span></span></div>
+<div class="meta label"><span>Válido para OGR Slip2D <span data-v>0.1.481</span></span></div>
 <!-- @end dochead -->
     </header>
 
     <article class="doc prose">
-      <p class="lede"><code>ogr-slip2d-mcp</code> es el servidor oficial de Model Context Protocol (MCP) de OGR Slip2D. Con él, un agente de IA puede construir el modelo de un talud, ejecutar el análisis y leer y dibujar los resultados, ya sea en modelos propios del servidor o en el modelo abierto en la ventana del programa, donde el usuario ve cada edición y puede deshacerla. Esta página es la referencia técnica (opciones, transportes, las 74 herramientas, recursos y modelo de seguridad); cómo conectar un cliente concreto se explica en la <a href="../../ai/index.html#install">página de IA</a>.</p>
+      <p class="lede"><code>ogr-slip2d-mcp</code> es el servidor oficial de Model Context Protocol (MCP) de OGR Slip2D. Con él, un agente de IA puede construir el modelo de un talud, ejecutar el análisis y leer y dibujar los resultados, ya sea en modelos propios del servidor o en el modelo abierto en la ventana del programa, donde el usuario ve cada edición y puede deshacerla. Esta página es la referencia técnica (opciones, transportes, las 75 herramientas, recursos y modelo de seguridad); cómo conectar un cliente concreto se explica en la <a href="../../ai/index.html#install">página de IA</a>.</p>
 
       <h2 id="overview"><span class="secnum">5.1.1</span><span class="ht">Qué es</span><a class="anchor" href="#overview" aria-label="Enlace a esta sección">#</a></h2>
       <ul>
@@ -183,7 +183,7 @@
       <h2 id="installation"><span class="secnum">5.1.2</span><span class="ht">Instalación</span><a class="anchor" href="#installation" aria-label="Enlace a esta sección">#</a></h2>
       <p>Desde un clon del repositorio, con Python 3.11 o posterior:</p>
       <div class="code"><pre><code>pip install -e ".[mcp]"
-ogr-slip2d-mcp --version        <span class="c"># ogr-slip2d-mcp <span data-v>0.1.235</span>, on standard error</span>
+ogr-slip2d-mcp --version        <span class="c"># ogr-slip2d-mcp <span data-v>0.1.481</span>, on standard error</span>
 python -m ogr_mcp --version     <span class="c"># the same program, if the command is not on PATH</span></code></pre></div>
       <p>Sin el SDK, el servidor se detiene con el código de salida 3 y pide que se instale el extra (<code>pip install "ogr-slip2d[mcp]"</code>). <code>ogr-slip2d-mcp --help</code> enumera todas las opciones. Los archivos de configuración de los clientes (aplicaciones de chat de escritorio, modelos locales y clientes HTTP) están en la <a href="../../ai/index.html#install">página de IA</a>.</p>
 
@@ -273,10 +273,10 @@ ogr-slip2d-mcp --profile compact --workdir "C:\models"     <span class="c"># sma
       <h2 id="profiles"><span class="secnum">5.1.5</span><span class="ht">Perfiles y conjuntos de herramientas</span><a class="anchor" href="#profiles" aria-label="Enlace a esta sección">#</a></h2>
       <p>Un modelo local pequeño se pierde entre muchas herramientas, y la descripción de cada herramienta consume contexto en cada petición. Por eso el servidor ofrece dos perfiles:</p>
       <ul>
-        <li><strong><code>full</code></strong> (por defecto): las 74 herramientas.</li>
+        <li><strong><code>full</code></strong> (por defecto): las 75 herramientas.</li>
         <li><strong><code>compact</code></strong>: las 14 herramientas que bastan para un ciclo completo de construcción, cálculo y lectura: <code>server_info</code>, <code>catalog</code>, <code>project_new</code>, <code>project_open</code>, <code>project_save</code>, <code>project_summary</code>, <code>model_define</code>, <code>analysis_configure</code>, <code>analysis_run</code>, <code>job_get</code>, <code>job_cancel</code>, <code>results_get</code>, <code>model_render</code> y <code>python_exec</code>. <code>model_define</code> construye toda la geometría en una sola llamada y <code>python_exec</code> cubre el resto. Están marcadas con C en las tablas de la <a class="xref" href="#tools">Sección 5.1.7</a>.</li>
       </ul>
-      <p><code>--toolsets</code> sustituye el perfil por una lista de conjuntos de herramientas: <code>core</code> (10 herramientas), <code>model</code> (9), <code>settings</code> (3), <code>analysis</code> (7), <code>loads</code> (5), <code>supports</code> (6), <code>search</code> (5), <code>annotations</code> (4), <code>files</code> (5), <code>groundwater</code> (11), <code>statistics</code> (6), <code>view</code> (1), <code>history</code> (1) y <code>python</code> (1). <code>server_info</code> se incluye siempre. Las herramientas se publican en un orden fijo, de modo que el cliente puede guardar la lista en caché.</p>
+      <p><code>--toolsets</code> sustituye el perfil por una lista de conjuntos de herramientas: <code>core</code> (10 herramientas), <code>model</code> (9), <code>settings</code> (3), <code>analysis</code> (7), <code>loads</code> (5), <code>supports</code> (6), <code>search</code> (6), <code>annotations</code> (4), <code>files</code> (5), <code>groundwater</code> (11), <code>statistics</code> (6), <code>view</code> (1), <code>history</code> (1) y <code>python</code> (1). <code>server_info</code> se incluye siempre. Las herramientas se publican en un orden fijo, de modo que el cliente puede guardar la lista en caché.</p>
       <div class="code"><pre><code>ogr-slip2d-mcp --toolsets core,model,settings,analysis,view --workdir "C:\models"</code></pre></div>
 
       <h2 id="window"><span class="secnum">5.1.6</span><span class="ht">Trabajo sobre la ventana abierta del programa</span><a class="anchor" href="#window" aria-label="Enlace a esta sección">#</a></h2>
@@ -311,7 +311,7 @@ ogr-slip2d-mcp --profile compact --workdir "C:\models"     <span class="c"># sma
       </div>
 
       <h2 id="tools"><span class="secnum">5.1.7</span><span class="ht">Herramientas</span><a class="anchor" href="#tools" aria-label="Enlace a esta sección">#</a></h2>
-      <p>Las 74 herramientas del perfil <code>full</code>, agrupadas como en la lista de herramientas del propio programa. <strong>C</strong> marca las 14 herramientas del perfil <code>compact</code>. <strong>Indicación</strong> es la anotación MCP que el servidor declara para cada herramienta (solo lectura, edición o destructiva) y que pueden usar los clientes que piden confirmación. Los parámetros exactos y sus descripciones los publica el propio servidor (<code>tools/list</code>).</p>
+      <p>Las 75 herramientas del perfil <code>full</code>, agrupadas como en la lista de herramientas del propio programa. <strong>C</strong> marca las 14 herramientas del perfil <code>compact</code>. <strong>Indicación</strong> es la anotación MCP que el servidor declara para cada herramienta (solo lectura, edición o destructiva) y que pueden usar los clientes que piden confirmación. Los parámetros exactos y sus descripciones los publica el propio servidor (<code>tools/list</code>).</p>
 
       <h3 id="tools-core"><span class="ht">Proyecto (<code>core</code>)</span><a class="anchor" href="#tools-core" aria-label="Enlace a esta sección">#</a></h3>
       <figure class="tbl" id="tbl-tools-core">
@@ -403,8 +403,9 @@ ogr-slip2d-mcp --profile compact --workdir "C:\models"     <span class="c"># sma
               <tr><td><code>tension_crack_set</code></td><td></td><td>edición</td><td>Agua en la grieta de tracción.</td></tr>
               <tr><td><code>focus_set</code></td><td></td><td>edición</td><td>Objetos de foco (ventana, línea, punto, tangente) que restringen la búsqueda.</td></tr>
               <tr><td><code>focus_delete</code></td><td></td><td>destructiva</td><td>Borra objetos de foco.</td></tr>
-              <tr><td><code>user_surface_add</code></td><td></td><td>edición</td><td>Un círculo definido por el usuario, que se analiza junto con la búsqueda.</td></tr>
-              <tr><td><code>user_surface_delete</code></td><td></td><td>destructiva</td><td>Borra esos círculos.</td></tr>
+              <tr><td><code>user_surface_add</code></td><td></td><td>edición</td><td>Una superficie de rotura definida por el usuario, que se analiza junto con cada búsqueda: un círculo con el tipo de superficie circular o una polilínea con el no circular. Una polilínea puede llevar los datos del método de Sarma (ángulo de la cara, c y φ) en sus vértices interiores.</td></tr>
+              <tr><td><code>user_surface_edit</code></td><td></td><td>edición</td><td>Sustituye los datos de Sarma en los vértices de una polilínea del usuario ya guardada, como un solo paso de deshacer (desde la v0.1.465).</td></tr>
+              <tr><td><code>user_surface_delete</code></td><td></td><td>destructiva</td><td>Borra esas superficies (círculos o polilíneas).</td></tr>
             </tbody>
           </table>
         </div>
@@ -536,7 +537,7 @@ ogr-slip2d-mcp --profile compact --workdir "C:\models"     <span class="c"># sma
       </figure>
       <div class="impl">
         <span class="label">En OGR Slip2D</span>
-        <p><code>server_info</code> informa además de qué parte del programa está al alcance de un agente (<code>program_coverage</code>): en la v<span data-v>0.1.235</span>, 116 de las 140 acciones de la ventana principal corresponden a una operación, ninguna está pendiente y las otras 24 solo tienen sentido en la interfaz (zoom, encuadre, impresión, preferencias y similares), cada una con su motivo por escrito.</p>
+        <p><code>server_info</code> informa además de qué parte del programa está al alcance de un agente (<code>program_coverage</code>): en la v<span data-v>0.1.481</span>, 121 de las 145 acciones de la ventana principal corresponden a una operación, ninguna está pendiente y las otras 24 solo tienen sentido en la interfaz (zoom, encuadre, impresión, preferencias y similares), cada una con su motivo por escrito.</p>
         <span class="src">Código: <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_mcp/server.py" target="_blank" rel="noopener">ogr_mcp/server.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_mcp/profiles.py" target="_blank" rel="noopener">ogr_mcp/profiles.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_api/inventory.py" target="_blank" rel="noopener">ogr_api/inventory.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/docs/mcp/herramientas.md" target="_blank" rel="noopener">docs/mcp/herramientas.md</a></span>
       </div>
 
@@ -694,7 +695,7 @@ ogr-slip2d-mcp --profile compact --workdir "C:\models"     <span class="c"># sma
     </div>
     <div class="legal">
       <span>© 2026 Samuel Sáez López · OGR Slip2D es software libre (licencia AGPL-3.0 o posterior) y se distribuye sin ninguna garantía.</span>
-      <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
+      <span>OGR Slip2D <span data-v>0.1.481</span> · 2026-11-22</span>
     </div>
   </div>
 </footer>

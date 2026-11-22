@@ -163,7 +163,7 @@
 <nav class="crumbs label" aria-label="Ruta de navegación"><a href="../../../es/docs/index.html">Documentación</a><span aria-hidden="true">/</span><span>1 · Primeros pasos</span></nav>
 <div class="chapter label">1.2</div>
 <h1>Inicio rápido: tu primer modelo</h1>
-<div class="meta label"><span>Válido para OGR Slip2D <span data-v>0.1.235</span></span></div>
+<div class="meta label"><span>Válido para OGR Slip2D <span data-v>0.1.481</span></span></div>
 <!-- @end dochead -->
     </header>
 
@@ -499,7 +499,7 @@
       <h2 id="materials"><span class="secnum">1.2.4</span><span class="ht">Define y asigna los materiales</span><a class="anchor" href="#materials" aria-label="Enlace a esta sección">#</a></h2>
       <ol>
         <li><span class="ui">Properties → Define Materials…</span>: crea los tres materiales de la <a class="xref" href="#tbl-materials">Tabla 1.2.1</a>, con el tipo de resistencia <strong>Mohr-Coulomb</strong> y la presión intersticial tomada del <strong>water table</strong> (nivel freático).</li>
-        <li><span class="ui">Properties → Assign Materials</span>: elige un material y haz clic dentro de su región; repite con las tres capas.</li>
+        <li><span class="ui">Properties → Assign Materials Panel…</span>: elige un material y haz clic dentro de su región; repite con las tres capas.</li>
       </ol>
       <figure class="fig shot-fig" id="fig-qs-materials">
         <div class="art"><img src="../../../assets/img/shots/define-materials.webp" alt="Diálogo Define Materials con los parámetros de Mohr-Coulomb" loading="lazy" width="900" height="783"></div>
@@ -517,7 +517,7 @@
         <figcaption><span class="fignum">Figura 1.2.5</span> El modelador tras el análisis.</figcaption>
       </figure>
       <figure class="tbl" id="tbl-results">
-        <figcaption><span class="fignum">Tabla 1.2.2</span> Factores de seguridad críticos del tutorial, calculados con OGR Slip2D <span data-v>0.1.235</span>. Los tres métodos dan el mismo círculo crítico: centro (60.0, 47.6), radio 31.17 m.</figcaption>
+        <figcaption><span class="fignum">Tabla 1.2.2</span> Factores de seguridad críticos del tutorial, calculados con OGR Slip2D <span data-v>0.1.481</span>. Los tres métodos dan el mismo círculo crítico: centro (60.0, 47.6), radio 31.17 m.</figcaption>
         <div class="table-wrap">
           <table class="data">
             <thead><tr><th>Método</th><th class="n">FS crítico</th><th class="n">Superficies válidas</th><th>Detalle</th></tr></thead>
@@ -529,7 +529,7 @@
           </table>
         </div>
       </figure>
-      <p>No todos los círculos que genera la rejilla dan un resultado válido. Con Bishop, de 1 859 círculos, 185 no se pudieron dividir en dovelas, en 181 no convergió el cálculo del factor de seguridad (código de error −111) y 4 no superaron la comprobación de m-α de la <a class="xref" href="../theory/interslice.html">Sección 3.3</a> (código −112); quedan así las 1 489 superficies válidas de la tabla. <span class="ui">Analysis → Analysis Notes…</span> indica el motivo de cada fallo, y la ventana Interpret los cuenta por código de error.</p>
+      <p>No todos los círculos que genera la rejilla dan un resultado válido. Con Bishop, de 1 859 círculos, 79 salen del contorno externo entre sus dos cortes con el terreno (código de error −103), 106 no se pudieron dividir en dovelas, 181 no dieron factor de seguridad (código de error −111) y 4 no superaron la comprobación de m-α de la <a class="xref" href="../theory/interslice.html">Sección 3.3</a> (código −112); quedan así las 1 489 superficies válidas de la tabla. <span class="ui">Analysis → Analysis Notes…</span> indica el motivo de cada fallo, y la ventana Interpret los cuenta por código de error.</p>
 
       <h2 id="interpret"><span class="secnum">1.2.7</span><span class="ht">Interpreta</span><a class="anchor" href="#interpret" aria-label="Enlace a esta sección">#</a></h2>
       <p><span class="ui">Analysis → Interpret</span> abre el resultado en una ventana propia, con la rejilla de centros coloreada según el factor de seguridad, la superficie crítica, las superficies ordenadas y, para cualquier dovela, sus fuerzas, tensiones y presión intersticial. Para comparar Bishop, Spencer y GLE, elige el método en la barra de herramientas.</p>
@@ -625,7 +625,7 @@
     </div>
     <div class="legal">
       <span>© 2026 Samuel Sáez López · OGR Slip2D es software libre (licencia AGPL-3.0 o posterior) y se distribuye sin ninguna garantía.</span>
-      <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
+      <span>OGR Slip2D <span data-v>0.1.481</span> · 2026-11-22</span>
     </div>
   </div>
 </footer>

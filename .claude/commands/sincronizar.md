@@ -15,7 +15,8 @@ paso 4.**
    - licencia → `pyproject.toml` y `LICENSE`
    - métodos, búsquedas, modelos de resistencia y capacidades → el **código**
      (`ogr_slip2d/methods/`, `ogr_slip2d/search.py`,
-     `ogr_core/materials/builtin_models.py`, `ogr_fem2d/solvers/seepage.py`) y el
+     y, en OGR-Core, en la etiqueta que fija el `pyproject.toml` del programa,
+     `ogr_core/materials/builtin_models.py` y `ogr_core/fem/seepage.py`) y el
      `README.md`; si discrepan, gana el código
    - herramientas MCP y cobertura → `ogr_api/inventory.py`, `ogr_mcp/`
    - número de tests → `docs/changelog/CHANGELOG_v<versión>.md`, línea «Suite

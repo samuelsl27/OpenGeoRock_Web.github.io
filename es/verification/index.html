@@ -110,7 +110,7 @@
     <div class="metrics" style="margin-top:0;grid-template-columns:repeat(3,1fr)">
       <div class="metric"><div class="v">7</div><div class="k label">Casos publicados</div></div>
       <div class="metric"><div class="v">12</div><div class="k label">Comprobaciones de método</div></div>
-      <div class="metric"><div class="v">5 265</div><div class="k label">Tests · v<span data-v>0.1.235</span></div></div>
+      <div class="metric"><div class="v">7 551</div><div class="k label">Tests · v<span data-v>0.1.481</span></div></div>
     </div>
   </div>
 </section>
@@ -137,7 +137,7 @@
   <div class="wrap">
     <div class="sec-head">
       <div><div class="sec-num label">§ 02 — Casos de referencia publicados</div><h2>Resultados de los siete <em>casos publicados</em></h2></div>
-      <p>El repositorio guarda cada caso con su modelo, sus valores esperados y su fuente, y la batería de tests los ejecuta todos. Los valores de la tabla se han recalculado con OGR Slip2D <span data-v>0.1.235</span>, ejecutando cada caso igual que lo hace la batería.</p>
+      <p>El repositorio guarda cada caso con su modelo, sus valores esperados y su fuente, y la batería de tests los ejecuta todos. Los valores de la tabla se han recalculado con OGR Slip2D <span data-v>0.1.481</span>, ejecutando cada caso igual que lo hace la batería.</p>
     </div>
     <div class="table-wrap">
       <table class="data">
@@ -201,14 +201,15 @@
   <div class="wrap grid-2" style="align-items:start">
     <div>
       <div class="sec-num label">§ 04 — La batería de tests</div>
-      <h2 class="mt-s">Cómo se organizan <em>los 5 265 tests</em></h2>
+      <h2 class="mt-s">Cómo se organizan <em>los 7 551 tests</em></h2>
     </div>
     <div>
       <ul class="ticks">
         <li>Hay un archivo de tests por área funcional, con una cabecera que indica qué invariante protege y por qué.</li>
         <li>Cada opción configurable tiene un test que comprueba que cambia el resultado.</li>
         <li>Los tests restauran el estado que modifican, como el idioma, las unidades o las cachés. Si no lo hicieran, podrían fallar tests sin relación, y solo al ejecutar la batería completa.</li>
-        <li>La batería completa se ejecuta antes de publicar cada versión. Una ejecución parcial lo indica en su salida y no vale como prueba para publicar.</li>
+        <li>La batería completa se ejecuta antes de publicar cada versión. Una ejecución parcial lo indica en su salida y no vale como prueba para publicar. En la versión 0.1.481 pasan 7 550 tests y uno se salta porque solo corre en sistemas POSIX.</li>
+        <li>Desde la versión 0.1.473, el código que OGR Slip2D comparte con el resto de la suite (materiales, elementos finitos, hidráulica, soportes) vive en OGR-Core, y sus tests corren allí.</li>
         <li>La integración continua se ejecuta con Python 3.11, 3.12 y 3.13 y comprueba además la cabecera de licencia de cada archivo.</li>
       </ul>
       <div class="cta-row"><a class="btn" href="../docs/getting-started/installation.html#tests">Ejecuta la batería tú mismo</a></div>
@@ -278,7 +279,7 @@
     </div>
     <div class="legal">
       <span>© 2026 Samuel Sáez López · OGR Slip2D es software libre (licencia AGPL-3.0 o posterior) y se distribuye sin ninguna garantía.</span>
-      <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
+      <span>OGR Slip2D <span data-v>0.1.481</span> · 2026-11-22</span>
     </div>
   </div>
 </footer>

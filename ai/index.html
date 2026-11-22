@@ -136,7 +136,7 @@
       <div class="card">
         <span class="label">Analysis</span>
         <h3>The same engine as the desktop program</h3>
-        <p>Limit equilibrium with any of the nine methods and seven searches, finite-element groundwater, probabilistic analysis, back analysis and optimisation. Calculations run as background jobs, and any of them can be cancelled.</p>
+        <p>Limit equilibrium with any of the ten methods and seven searches, finite-element groundwater, probabilistic analysis, back analysis and optimisation. Calculations run as background jobs, and any of them can be cancelled.</p>
       </div>
       <div class="card">
         <span class="label">Results</span>
@@ -241,7 +241,7 @@ ogr-slip2d-mcp --version</code></pre></div>
     }
   }
 }</code></pre></div>
-            <p class="muted mb-0"><strong>With small models, use <code>--profile compact</code>.</strong> It publishes 14 tools instead of 74: <code>model_define</code> builds the geometry in one call and <code>python_exec</code> covers the rest. A small model gets lost among many tools, and each tool description takes up context in every request.</p>
+            <p class="muted mb-0"><strong>With small models, use <code>--profile compact</code>.</strong> It publishes 14 tools instead of 75: <code>model_define</code> builds the geometry in one call and <code>python_exec</code> covers the rest. A small model gets lost among many tools, and each tool description takes up context in every request.</p>
           </div>
 
           <div class="tabpanel" role="tabpanel" id="p-ollama" aria-labelledby="t-ollama" hidden>
@@ -302,7 +302,7 @@ mcpo-env\Scripts\mcpo --port 8000 --api-key "your-key" -- ogr-slip2d-mcp --workd
         <p>Ask the agent to call <code>server_info</code>. The reply gives the version, the units (SI) and the published tools, and says whether the next call will go to an open OGR Slip2D window or to a model held by the server.</p>
         <div class="code"><pre><code>{"server": "ogr-slip2d", "units": "SI: m, kN, kPa, kN/m3, degrees", "profile": "full",
  "attached_to_window": {"window_open": true, "next_call_goes_to": "the open window"},
- "program_coverage": {"mapped": 116, "pending": 0}, "licence": "AGPL-3.0-or-later", …}</code></pre></div>
+ "program_coverage": {"mapped": 121, "ui_only": 24, "pending": 0, "pending_by_phase": {}}, "licence": "AGPL-3.0-or-later", …}</code></pre></div>
       </li>
     </ol>
   </div>
@@ -334,8 +334,8 @@ mcpo-env\Scripts\mcpo --port 8000 --api-key "your-key" -- ogr-slip2d-mcp --workd
 <section class="section">
   <div class="wrap">
     <div class="sec-head">
-      <div><div class="sec-num label">§ 05 — What the agent can do</div><h2>74 tools covering <em>116 menu actions</em></h2></div>
-      <p>The server gives access to all the modelling and analysis actions in the program's menus. The ones it leaves out only concern the view (zoom, pan, print). For small local models, the compact profile publishes 14 of the 74 tools.</p>
+      <div><div class="sec-num label">§ 05 — What the agent can do</div><h2>75 tools covering <em>121 menu actions</em></h2></div>
+      <p>The server gives access to all the modelling and analysis actions in the program's menus. The ones it leaves out only concern the view (zoom, pan, print). For small local models, the compact profile publishes 14 of the 75 tools.</p>
     </div>
     <div class="table-wrap">
       <table class="data">
@@ -400,7 +400,7 @@ mcpo-env\Scripts\mcpo --port 8000 --api-key "your-key" -- ogr-slip2d-mcp --workd
     <h2 class="mt-s">Frequently asked</h2>
     <div class="mt-m stack">
       <details class="note"><summary><strong>Does my model leave my computer?</strong></summary><p class="mt-s">The server makes no network calls. A model provider receives whatever your client sends it, as in any other conversation. With a local model (LM Studio, Ollama), nothing leaves your machine.</p></details>
-      <details class="note"><summary><strong>Which models can use it?</strong></summary><p class="mt-s">Any client that speaks MCP. Large hosted models handle the full 74-tool profile well; for small local models, start the server with <code>--profile compact</code>.</p></details>
+      <details class="note"><summary><strong>Which models can use it?</strong></summary><p class="mt-s">Any client that speaks MCP. Large hosted models handle the full 75-tool profile well; for small local models, start the server with <code>--profile compact</code>.</p></details>
       <details class="note"><summary><strong>Can the agent break my model?</strong></summary><p class="mt-s">Each edit is an undo step. A script run with <code>python_exec</code> counts as one step and is rolled back if it fails, and the agent cannot open or create a model while there are unsaved changes. Settings that the calculation would not read are rejected with the reason, instead of being stored.</p></details>
       <details class="note"><summary><strong>Is the agent's answer an engineering result?</strong></summary><p class="mt-s">The numbers come from the same engine as the desktop program and need the same checks: independent calculations, the sensitivity of the result to the inputs, and engineering judgement. Responsibility for a design lies with the engineer who signs it, whether the model was built by hand or by an agent.</p></details>
     </div>
@@ -469,7 +469,7 @@ mcpo-env\Scripts\mcpo --port 8000 --api-key "your-key" -- ogr-slip2d-mcp --workd
     </div>
     <div class="legal">
       <span>© 2026 Samuel Sáez López · OGR Slip2D is free software under AGPL-3.0-or-later, with no warranty of any kind.</span>
-      <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
+      <span>OGR Slip2D <span data-v>0.1.481</span> · 2026-11-22</span>
     </div>
   </div>
   <div class="lang-hint" role="dialog" aria-label="Idioma" lang="es">

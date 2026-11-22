@@ -163,7 +163,7 @@
 <nav class="crumbs label" aria-label="Breadcrumb"><a href="../../docs/index.html">Documentation</a><span aria-hidden="true">/</span><span>2 · User guide</span></nav>
 <div class="chapter label">2.2</div>
 <h1>Geometry and boundaries</h1>
-<div class="meta label"><span>Describes OGR Slip2D <span data-v>0.1.235</span></span></div>
+<div class="meta label"><span>Describes OGR Slip2D <span data-v>0.1.481</span></span></div>
 <!-- @end dochead -->
     </header>
 
@@ -226,7 +226,7 @@
         <li>Finish with <kbd>Enter</kbd> or with <span class="ui">Done</span> in the right-click menu. The external boundary is closed automatically; <kbd>Esc</kbd> cancels.</li>
       </ol>
       <p>While drawing, <span class="ui">Coordinate Table…</span> in the right-click menu lists the vertices placed so far, to correct them or to type the rest of the boundary as a table. Draw the water table, the piezometric lines and the drawdown line from left to right across the whole width of the materials they serve: outside the horizontal extent of a water line the pore pressure it gives is zero.</p>
-      <p>A boundary can also be drawn on the annotation layer and turned into geometry afterwards: <span class="ui">Tools → Draw</span> takes typed coordinates for a line, polyline, polygon, rectangle or circle, and <span class="ui">Tools → Convert Tool to Boundary…</span> copies it into an external boundary, a material boundary, a water table, a piezometric line or a tension crack.</p>
+      <p>A boundary can also be drawn on the annotation layer and turned into geometry afterwards: <span class="ui">Tools → Draw</span> draws a line, polyline, polygon, rectangle or circle with the same clicks and typed points as a boundary, and <span class="ui">Tools → Convert Tool to Boundary…</span> copies it into an external boundary, a material boundary, a water table, a piezometric line or a tension crack.</p>
 
       <h3 id="material-boundaries"><span class="ht">Material boundaries and regions</span><a class="anchor" href="#material-boundaries" aria-label="Link to this section">#</a></h3>
       <p>The regions of the model are the pieces into which the material boundaries cut the external boundary. Each region takes one material (<a class="xref" href="materials.html#assign">Section 2.3.3</a>). For the regions to come out as intended:</p>
@@ -235,7 +235,7 @@
         <li><strong>An end that stops inside the model is extended</strong> straight along its last segment until it leaves the model, cutting every region in its way. Extend the line on purpose instead of relying on this.</li>
         <li><strong>A lens</strong> (a pocket of one material inside another) is a <em>closed</em> material boundary. It becomes a region of its own, and a hole in the region around it.</li>
       </ul>
-      <div class="note warn"><span class="label">Drawing a lens in 0.1.235</span><p><span class="ui">Add Material Boundary</span> always produces an open polyline, even when the last click lands on the first vertex, and the two ends of such a loop are then extended across the model like any other loose end. Create a lens as a closed polygon instead: type it with <span class="ui">Tools → Draw → Polygon</span> and convert it with <span class="ui">Tools → Convert Tool to Boundary…</span> into a Material Boundary, or import it from a DXF drawing.</p></div>
+      <div class="note warn"><span class="label">Drawing a lens in 0.1.481</span><p><span class="ui">Add Material Boundary</span> always produces an open polyline, even when the last click lands on the first vertex, and the two ends of such a loop are then extended across the model like any other loose end. Create a lens as a closed polygon instead: draw it with <span class="ui">Tools → Draw → Polygon</span> and convert it with <span class="ui">Tools → Convert Tool to Boundary…</span> into a Material Boundary, or import it from a DXF drawing.</p></div>
       <p>A region to which no material has been assigned takes the <strong>first</strong> material of the project (<a href="materials.html#first-material">Regions without a material</a>).</p>
 
       <h3 id="water-lines"><span class="ht">Water lines</span><a class="anchor" href="#water-lines" aria-label="Link to this section">#</a></h3>
@@ -264,7 +264,7 @@
 
       <h3 id="weak-layers"><span class="ht">Weak layers and anisotropic surfaces</span><a class="anchor" href="#weak-layers" aria-label="Link to this section">#</a></h3>
       <p>A <strong>weak layer</strong> is a joint, a shear band or a thin layer along which a slip surface can travel. It does not divide the ground into regions; its strength is that of a material. When the line is finished and the project has materials, the <strong>Assign Material</strong> dialog asks which one: a weak layer without a material has no strength of its own. A trial surface that touches a weak layer is clipped to follow it; how a surface that touches several is treated is chosen in <span class="ui">Surfaces → Surface Options…</span> (<a class="xref" href="surfaces.html">Section 2.7</a>), and the steepest slice base allowed on such a surface in <a class="xref" href="project-settings.html#advanced">Section 2.1.9</a>.</p>
-      <div class="note warn"><span class="label">Version 0.1.235</span><p>The material of a weak layer can only be chosen when the line is drawn: <span class="ui">Properties → Assign Material</span> does not reach weak layers. To give a weak layer another material, delete it and draw it again. Converting a material boundary into a weak layer with <span class="ui">Convert Boundary…</span> keeps the material it had.</p></div>
+      <div class="note warn"><span class="label">Version 0.1.481</span><p>The material of a weak layer can only be chosen when the line is drawn: <span class="ui">Properties → Assign Material by Clicking</span> does not reach weak layers. To give a weak layer another material, delete it and draw it again. Converting a material boundary into a weak layer with <span class="ui">Convert Boundary…</span> keeps the material it had.</p></div>
       <p>An <strong>anisotropic surface</strong> carries no strength and divides nothing: it says which way the bedding runs at each point, for a material whose strength model is Anisotropic Linear or Snowden Modified Anisotropic Linear and that selects it in Define Materials (<a href="materials.html#strength">Strength type</a>). The orientation is read at the closest point of the polyline, not at the point vertically above, and the order in which the vertices are clicked decides the angle at a kink, so click them in order along the bedding.</p>
 
       <h3 id="block-objects"><span class="ht">Block Search objects</span><a class="anchor" href="#block-objects" aria-label="Link to this section">#</a></h3>
@@ -286,7 +286,7 @@
               <tr><td><span class="ui">Edit → Insert Vertex</span></td><td>Click on an edge to add a vertex there.</td></tr>
               <tr><td><span class="ui">Edit → Move Vertex</span></td><td>Drag a vertex; the drag is one undo step.</td></tr>
               <tr><td><span class="ui">Edit → Delete Vertex</span></td><td>Click a vertex to delete it; a boundary keeps at least two.</td></tr>
-              <tr><td><span class="ui">Convert Boundary…</span></td><td>Click a boundary, then choose its new type. A boundary converted into a water line, a crack, a weak layer or an anisotropic surface becomes an open polyline; a closed boundary converted into a material boundary stays closed.</td></tr>
+              <tr><td><span class="ui">Convert Boundary…</span></td><td>Click a boundary, then choose its new type. A boundary converted into a water line, a crack, a weak layer or an anisotropic surface becomes an open polyline; a closed boundary converted into a material boundary stays closed. A conversion that would break a one-per-model rule is refused, with the reason on the status bar, and the entry of the right-click menu does the same as this command (since version 0.1.455).</td></tr>
               <tr><td><span class="ui">Simplify Boundary…</span></td><td>Choose a boundary and a tolerance <strong>ε</strong> (0.5 m by default): vertices that deviate less than ε from the simplified line are removed (Ramer–Douglas–Peucker).</td></tr>
               <tr><td><span class="ui">Geometry Cleanup…</span></td><td>Reports, for every boundary, self-intersections, an external boundary that is not closed and duplicate vertices, and lists the crossings between boundaries; then removes the duplicate vertices, with a tolerance relative to the size of the model, as one undo step.</td></tr>
               <tr><td><span class="ui">Edit Coordinates…</span></td><td>Choose a boundary and edit its vertices as a table of <strong>X</strong> and <strong>Y</strong>, with <span class="ui">Add Row</span>, <span class="ui">Delete Row</span>, <span class="ui">Move Up</span> and <span class="ui">Move Down</span>.</td></tr>
@@ -296,7 +296,6 @@
         </div>
       </figure>
       <p>Scaling and rotation are about the pivot typed in the dialog, (0, 0) by default, and not about the centre of the boundary.</p>
-      <div class="note warn"><span class="label">Version 0.1.235</span><p><span class="ui">Convert Boundary…</span> does not check the one-per-model rules: it accepts converting a boundary into a second external boundary, water table, tension crack or drawdown line. Check the type you convert to. The <span class="ui">Convert Boundary…</span> entry of the right-click menu changes only the type, and keeps whether the polyline is closed; use the command of the Boundaries menu to convert a closed boundary into an open line.</p></div>
 
       <h2 id="external-tools"><span class="secnum">2.2.4</span><span class="ht">Reshaping the external boundary</span><a class="anchor" href="#external-tools" aria-label="Link to this section">#</a></h2>
 
@@ -337,7 +336,7 @@
             <tbody>
               <tr><td><strong>Drawing units</strong></td><td>Unit of the drawing: m, cm, mm, km, ft or in. The unit recorded in the file is proposed, but it is only a hint and is often missing or wrong.</td><td>From the file</td></tr>
               <tr><td><strong>Curve discretisation</strong></td><td>Segments per full circle used for arcs, circles, splines and polyline bulges (4 to 720)</td><td class="n">64</td></tr>
-              <tr><td><strong>Import as</strong> (one per layer)</td><td>Role of the layer, proposed from its name: (ignore), External Boundary, Material Boundary, Water Table, Piezometric Line, Drawdown Line, Tension Crack, Support</td><td>Proposed</td></tr>
+              <tr><td><strong>Import as</strong> (one per layer)</td><td>Role of the layer, proposed from its name: (ignore), External Boundary, Material Boundary, Water Table, Piezometric Line, Drawdown Line, Tension Crack, Weak Layer, Anisotropic Surface, Support</td><td>Proposed</td></tr>
               <tr><td><strong>Welding tolerance</strong></td><td>Ends closer than this are welded, and a node is inserted where an end lands on a segment; as a percentage of the model diagonal (recommended 0.005 % to 0.5 %)</td><td class="n">0.05 %</td></tr>
               <tr><td><strong>Simplify polylines</strong> / <strong>Simplification tolerance</strong></td><td>Douglas–Peucker simplification, also as a percentage of the diagonal; vertices shared with another boundary are never removed</td><td>on / 0.02 %</td></tr>
               <tr><td><strong>Replace existing boundaries of the imported types</strong></td><td>Deletes the boundaries of the model of each type being imported</td><td>on</td></tr>
@@ -347,7 +346,7 @@
       </figure>
       <p>The layer table gives each layer's entities and vertex count; layers without a proposed role are highlighted for you to decide. A layer is proposed from its name, ignoring case and separators: <code>OGR_EXTERNAL</code>, <code>EXTERNAL</code>, <code>EXTERIOR</code> or <code>CONTORNO</code> as the external boundary; <code>OGR_MATERIAL</code>, <code>MATERIAL</code>, <code>SUELO</code> or <code>ESTRATO</code> as material boundaries; <code>OGR_WATER_TABLE</code>, <code>WATER_TABLE</code>, <code>WT</code> or <code>FREATICO</code> as the water table; <code>OGR_PIEZO</code> or <code>PIEZOMETRIC</code> as piezometric lines; <code>OGR_DRAWDOWN</code> or <code>DRAWDOWN</code> as the drawdown line; <code>OGR_CRACK</code> or <code>TENSION_CRACK</code> as the tension crack; and a few more aliases in English and Spanish.</p>
       <p><span class="ui">Preview</span> runs the import without committing it and reports the vertex count before and after simplification, the number of regions found and whether the areas of the regions add up to the area of the external boundary, which is the decisive check. If they do not, a region did not close: raise the welding tolerance a little and preview again. <span class="ui">Import</span> is never refused: what could not be resolved is listed, and when there are problems the non-modal <strong>DXF Import — Problems</strong> panel opens after the import. It groups the problems by kind, with their severity and a suggested remedy; selecting one centres the canvas on it, double-clicking zooms in, and <span class="ui">Go to problem</span> and <span class="ui">Zoom all</span> do the same from buttons.</p>
-      <div class="note warn"><span class="label">Version 0.1.235</span><p>The <strong>Support</strong> role imports nothing yet, and the dialog offers no role for weak layers or anisotropic surfaces: a layer named <code>OGR_WEAK_LAYER</code> or <code>OGR_ANISO_SURFACE</code>, as written by Export DXF, appears as <em>(ignore)</em>. Draw those lines in the program after importing the rest.</p></div>
+      <div class="note warn"><span class="label">Version 0.1.481</span><p>The <strong>Support</strong> role imports nothing yet: place the supports in the program after importing the rest.</p></div>
 
       <h3 id="dxf-export"><span class="ht">Exporting a drawing</span><a class="anchor" href="#dxf-export" aria-label="Link to this section">#</a></h3>
       <p><span class="ui">File → Export DXF…</span> writes the model to a DXF drawing. The geometry goes to layers the importer recognises, so that a model can be exported, edited in a drawing program and brought back; everything that is a drawing of results goes to layers whose name starts with <code>OGR_X_</code>, which the importer ignores by default.</p>
@@ -363,7 +362,8 @@
               <tr><td><strong>Loads (as arrows)</strong></td><td>on</td><td><code>OGR_X_LOADS</code></td></tr>
               <tr><td><strong>Finite element mesh</strong></td><td>off (one line per element edge)</td><td><code>OGR_X_MESH</code></td></tr>
               <tr><td><strong>Critical slip surface</strong></td><td>on, when there are results</td><td><code>OGR_X_SLIP_SURFACE</code></td></tr>
-              <tr><td><strong>Annotations (title, factor of safety)</strong></td><td>on</td><td><code>OGR_X_ANNOTATION</code></td></tr>
+              <tr><td><strong>Labels (title, factor of safety)</strong></td><td>on</td><td><code>OGR_X_ANNOTATION</code></td></tr>
+              <tr><td><strong>Annotation layer</strong> (what was drawn with the <span class="ui">Tools</span> menu)</td><td>on</td><td><code>OGR_X_DRAWING</code></td></tr>
               <tr><td><strong>Load arrow size</strong>, as a percentage of the model diagonal (0.1 to 20 %)</td><td class="n">2.0 %</td><td>—</td></tr>
             </tbody>
           </table>
@@ -374,7 +374,7 @@
       <div class="impl">
         <span class="label">In OGR Slip2D</span>
         <p>The one-per-model rules (one external boundary, one water table, one tension crack, one drawdown line) and the conditions on the drawdown line and the Block Search objects are checked in one place that the interface, the scripting interface and the agent tools all ask, so a model built by a script obeys the same rules as one drawn by hand. The regions are built by a planar subdivision of the external boundary and the material boundaries.</p>
-        <span class="src">Source: <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_core/project/rules.py" target="_blank" rel="noopener">ogr_core/project/rules.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_core/geometry/regions.py" target="_blank" rel="noopener">ogr_core/geometry/regions.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/tree/main/ogr_core/dxf" target="_blank" rel="noopener">ogr_core/dxf/</a></span>
+        <span class="src">Source (OGR-Core v0.2.2): <a href="https://github.com/samuelsl27/OGR-Core/blob/v0.2.2/ogr_core/project/rules.py" target="_blank" rel="noopener">ogr_core/project/rules.py</a> · <a href="https://github.com/samuelsl27/OGR-Core/blob/v0.2.2/ogr_core/geometry/regions.py" target="_blank" rel="noopener">ogr_core/geometry/regions.py</a> · <a href="https://github.com/samuelsl27/OGR-Core/tree/v0.2.2/ogr_core/dxf" target="_blank" rel="noopener">ogr_core/dxf/</a></span>
       </div>
     </article>
 
@@ -449,7 +449,7 @@
     </div>
     <div class="legal">
       <span>© 2026 Samuel Sáez López · OGR Slip2D is free software under AGPL-3.0-or-later, with no warranty of any kind.</span>
-      <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
+      <span>OGR Slip2D <span data-v>0.1.481</span> · 2026-11-22</span>
     </div>
   </div>
   <div class="lang-hint" role="dialog" aria-label="Idioma" lang="es">

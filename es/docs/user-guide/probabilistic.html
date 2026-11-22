@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>Análisis probabilístico y de sensibilidad — documentación de OGR Slip2D</title>
-<meta name="description" content="Cómo configurar un análisis probabilístico o de sensibilidad en OGR Slip2D: variables aleatorias y sus distribuciones, correlación, muestreo y semilla, Compute Statistics, la ventana Statistics y el menú Statistics de la ventana Interpret, con las limitaciones de la versión 0.1.235.">
+<meta name="description" content="Cómo configurar un análisis probabilístico o de sensibilidad en OGR Slip2D: variables aleatorias y sus distribuciones, correlación, muestreo y semilla, Compute Statistics, la ventana Statistics y el menú Statistics de la ventana Interpret.">
 <!-- @inc head -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>document.documentElement.classList.replace("no-js", "js")</script>
@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="OpenGeoRock">
 <meta property="og:title" content="Análisis probabilístico y de sensibilidad — documentación de OGR Slip2D">
-<meta property="og:description" content="Cómo configurar un análisis probabilístico o de sensibilidad en OGR Slip2D: variables aleatorias y sus distribuciones, correlación, muestreo y semilla, Compute Statistics, la ventana Statistics y el menú Statistics de la ventana Interpret, con las limitaciones de la versión 0.1.235.">
+<meta property="og:description" content="Cómo configurar un análisis probabilístico o de sensibilidad en OGR Slip2D: variables aleatorias y sus distribuciones, correlación, muestreo y semilla, Compute Statistics, la ventana Statistics y el menú Statistics de la ventana Interpret.">
 <meta property="og:url" content="https://opengeorock.org/es/docs/user-guide/probabilistic.html">
 <meta property="og:image" content="https://opengeorock.org/assets/img/og-image.png">
 <meta property="og:locale" content="es_ES">
@@ -163,13 +163,12 @@
 <nav class="crumbs label" aria-label="Ruta de navegación"><a href="../../../es/docs/index.html">Documentación</a><span aria-hidden="true">/</span><span>2 · Guía de usuario</span></nav>
 <div class="chapter label">2.10</div>
 <h1>Análisis probabilístico y de sensibilidad</h1>
-<div class="meta label"><span>Válido para OGR Slip2D <span data-v>0.1.235</span></span></div>
+<div class="meta label"><span>Válido para OGR Slip2D <span data-v>0.1.481</span></span></div>
 <!-- @end dochead -->
     </header>
 
     <article class="doc prose">
       <p class="lede">Un análisis probabilístico toma como variables aleatorias algunos datos de entrada del modelo, genera muestras de ellas y recalcula el factor de seguridad con cada muestra, de lo que resultan la distribución del factor de seguridad, la probabilidad de rotura y el índice de fiabilidad. El análisis de sensibilidad, en cambio, hace variar un solo dato cada vez dentro de su intervalo. Ambos se configuran en Project Settings y en el menú Statistics, y sus resultados se leen en la ventana Statistics; la base estadística está en la <a class="xref" href="../theory/probabilistic.html">Sección 3.11</a>.</p>
-      <div class="note warn"><span class="label">Versión 0.1.235</span><p>En esta versión el cálculo no puede completarse desde el menú de la ventana (véase la <a class="xref" href="#compute-statistics">Sección 2.10.4</a>). Aun así, los ajustes que se describen a continuación son los que usa el análisis cuando se ejecuta mediante el servidor MCP o la API de Python.</p></div>
 
       <h2 id="enable"><span class="secnum">2.10.1</span><span class="ht">Activación del análisis</span><a class="anchor" href="#enable" aria-label="Enlace a esta sección">#</a></h2>
       <p>Los dos análisis se activan en <span class="ui">Analysis → Project Settings →</span> <span class="ui">Statistics</span>. Mientras no se marque uno de ellos, los comandos del menú <span class="ui">Statistics</span> aparecen en gris. <span class="ui">Random Variables…</span> se habilita en primer lugar, <span class="ui">Compute Statistics</span> cuando hay al menos una variable aleatoria definida y <span class="ui">Show Statistics</span> cuando hay resultados que mostrar.</p>
@@ -224,7 +223,7 @@
       <div class="impl">
         <span class="label">En OGR Slip2D</span>
         <p>Las distribuciones se <strong>truncan</strong> a su intervalo real. Las muestras se obtienen invirtiendo la distribución entre los dos límites, de modo que ningún valor queda fuera de ellos y los estratos del hipercubo latino se mantienen tras el truncamiento. La correlación indicada se impone reordenando los rangos de la segunda variable, con lo que ambas distribuciones marginales no se alteran <a class="cite" href="../reference/bibliography.html#iman1982">(Iman y Conover, 1982)</a>. Cada muestra se aplica a una copia del modelo, así que el cálculo no modifica tu proyecto.</p>
-        <span class="src">Código: <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_core/statistics/distributions.py" target="_blank" rel="noopener">ogr_core/statistics/distributions.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_core/statistics/random_variables.py" target="_blank" rel="noopener">ogr_core/statistics/random_variables.py</a></span>
+        <span class="src">Código: OGR-Core: <a href="https://github.com/samuelsl27/OGR-Core/blob/v0.2.2/ogr_core/statistics/distributions.py" target="_blank" rel="noopener">ogr_core/statistics/distributions.py</a> · <a href="https://github.com/samuelsl27/OGR-Core/blob/v0.2.2/ogr_core/statistics/random_variables.py" target="_blank" rel="noopener">ogr_core/statistics/random_variables.py</a></span>
       </div>
 
       <h2 id="sampling"><span class="secnum">2.10.3</span><span class="ht">Muestreo y semilla</span><a class="anchor" href="#sampling" aria-label="Enlace a esta sección">#</a></h2>
@@ -240,11 +239,10 @@
       <p><span class="ui">Statistics → Compute Statistics</span> ejecuta primero el análisis determinista, con cada método activado y su búsqueda, para hallar la superficie crítica de cada método. Después:</p>
       <ul>
         <li>un análisis <strong>Global Minimum</strong> evalúa las N muestras sobre la superficie crítica de cada método (cada uno conserva la suya);</li>
-        <li>un análisis <strong>Overall Slope</strong> repite toda la búsqueda N veces. Además de la distribución del factor de seguridad mínimo, registra la superficie crítica de cada muestra y la <em>superficie probabilística crítica</em>, que es la que tiene mayor probabilidad de rotura entre las evaluadas al menos cinco veces y no tiene por qué coincidir con la superficie crítica determinista;</li>
+        <li>un análisis <strong>Overall Slope</strong> repite toda la búsqueda N veces. Además de la distribución del factor de seguridad mínimo, registra la superficie crítica de cada muestra y la <em>superficie probabilística crítica</em>: entre las superficies que tienen factor de seguridad en todas las muestras de la corrida, la de mayor probabilidad de rotura, que no tiene por qué coincidir con la superficie crítica determinista. Hacen falta al menos cinco muestras, y algunas corridas no la tienen (por ejemplo, con el coeficiente sísmico crítico como objetivo); en ese caso el cálculo explica por qué;</li>
         <li>el análisis de <strong>sensibilidad</strong> se calcula como se describe más adelante.</li>
       </ul>
-      <p>Si hay una norma de diseño activa, a cada muestra se le aplican los coeficientes parciales igual que al modelo determinista, de modo que las estadísticas describen el factor de sobredimensionamiento (<a class="xref" href="design-standards.html">Sección 2.11</a>). Si está activo un modo de análisis sísmico (coeficiente sísmico crítico o desplazamiento de Newmark), las estadísticas se calculan con el factor de seguridad de la superficie de menor coeficiente sísmico crítico, que no es necesariamente el menor factor de seguridad de la muestra; las notas del análisis lo señalan.</p>
-      <div class="note warn"><span class="label">Compute Statistics falla desde el menú en la versión 0.1.235</span><p>Cuando se inicia desde la ventana, el cálculo se interrumpe con un error interno (<code>TypeError: cannot pickle 'MainWindow' object</code>) al intentar copiar el modelo para la primera muestra, una vez terminado el análisis determinista. La ventana no muestra ningún mensaje, no se genera ninguna estadística y Show Statistics sigue en gris. El mismo análisis sí funciona con el servidor MCP (su herramienta <code>statistics_run</code>) y con las operaciones de la API de Python, que copian el modelo de un modo que no da ese problema (<a class="xref" href="../reference/mcp.html">Sección 5.1</a>, <a class="xref" href="../reference/python-api.html">Sección 5.3</a>).</p></div>
+      <p>El cálculo se ejecuta en segundo plano, con una ventana de progreso; <span class="ui">Cancel</span> lo detiene y deja como estaban los resultados del cálculo anterior. Si hay una norma de diseño activa, a cada muestra se le aplican los coeficientes parciales igual que al modelo determinista, de modo que las estadísticas describen el factor de sobredimensionamiento (<a class="xref" href="design-standards.html">Sección 2.11</a>). Si está activo un modo de análisis sísmico (coeficiente sísmico crítico o desplazamiento de Newmark), las estadísticas se calculan con el factor de seguridad de la superficie de menor coeficiente sísmico crítico, que no es necesariamente el menor factor de seguridad de la muestra; las notas del análisis lo señalan.</p>
 
       <h2 id="statistics-window"><span class="secnum">2.10.5</span><span class="ht">La ventana Statistics</span><a class="anchor" href="#statistics-window" aria-label="Enlace a esta sección">#</a></h2>
       <p>Cuando el cálculo termina correctamente, la ventana <strong>Statistics</strong> se abre sola, y <span class="ui">Statistics → Show Statistics</span> permite abrirla de nuevo. Elige el <strong>Method</strong> y el <strong>Plot</strong>:</p>
@@ -279,7 +277,8 @@
               <tr><td>Histogram Plot…</td><td>Histograma de los factores de seguridad de las superficies válidas de la búsqueda (25 intervalos, ajustable).</td><td>un cálculo</td></tr>
               <tr><td>Cumulative Plot…</td><td>Distribución acumulada de los mismos factores de seguridad.</td><td>un cálculo</td></tr>
               <tr><td>Scatter Plot…</td><td>Factor de seguridad en función del radio, para las superficies válidas de la búsqueda.</td><td>un cálculo</td></tr>
-              <tr><td>Sensitivity Plot…</td><td>Las curvas de sensibilidad del primer método.</td><td>resultados estadísticos</td></tr>
+              <tr><td>Sensitivity Plot…</td><td>Las curvas de sensibilidad del método que muestra la ventana Interpret o, si ese método no se barrió, del primer método del cálculo.</td><td>resultados estadísticos</td></tr>
+              <tr><td>Sensitivity Tornado…</td><td>La variación del factor de seguridad en el rango de cada variable, con su signo, para el mismo método.</td><td>resultados estadísticos</td></tr>
               <tr><td>Convergence Plot…</td><td>Factor de seguridad medio y probabilidad de rotura en función del número de muestras.</td><td>resultados estadísticos</td></tr>
               <tr><td>Export Statistics Data…</td><td>Un archivo CSV con una fila por muestra: número, valor de cada variable aleatoria y factor de seguridad.</td><td>resultados estadísticos</td></tr>
               <tr><td>Show GM Surfaces, Pick GM Surfaces</td><td>Dibuja, o lista para elegir, todos los mínimos que contiene el resultado: la superficie crítica de cada muestra de un cálculo Overall Slope o las regiones que ha distinguido una Particle Swarm Search con varios mínimos.</td><td>cualquiera de los dos casos</td></tr>
@@ -288,7 +287,7 @@
           </table>
         </div>
       </figure>
-      <p>Los comandos que necesitan resultados estadísticos aparecen en gris mientras no los haya, y un texto emergente lo indica. Show GM Surfaces y Pick GM Surfaces no los necesitan: también funcionan después de una Particle Swarm Search con <em>Report several minima</em> marcada, que en la versión 0.1.235 es la única manera de usarlos desde la ventana.</p>
+      <p>Los comandos que necesitan resultados estadísticos aparecen en gris mientras no los haya, y un texto emergente lo indica. Show GM Surfaces y Pick GM Surfaces no los necesitan: también funcionan después de una Particle Swarm Search con <em>Report several minima</em> marcada.</p>
 
       <h2 id="sensitivity"><span class="secnum">2.10.7</span><span class="ht">Análisis de sensibilidad</span><a class="anchor" href="#sensitivity" aria-label="Enlace a esta sección">#</a></h2>
       <p>El análisis de sensibilidad toma las variables aleatorias de una en una, divide el intervalo real de cada una en tantos intervalos como indique <strong>Sensitivity intervals</strong> (50 por defecto, es decir, 51 valores) y recalcula el factor de seguridad sobre la superficie crítica de cada método para cada valor, con todas las demás variables fijas en su media. Solo se emplean el mínimo y el máximo de cada variable: la distribución, la desviación típica y las correlaciones no intervienen, y de este análisis no resulta ninguna probabilidad de rotura. El resultado indica qué datos de entrada influyen más y cuánto puede variar uno de ellos antes de que el factor de seguridad llegue a 1.</p>
@@ -373,7 +372,7 @@
     </div>
     <div class="legal">
       <span>© 2026 Samuel Sáez López · OGR Slip2D es software libre (licencia AGPL-3.0 o posterior) y se distribuye sin ninguna garantía.</span>
-      <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
+      <span>OGR Slip2D <span data-v>0.1.481</span> · 2026-11-22</span>
     </div>
   </div>
 </footer>

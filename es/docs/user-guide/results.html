@@ -162,7 +162,7 @@
 <nav class="crumbs label" aria-label="Ruta de navegación"><a href="../../../es/docs/index.html">Documentación</a><span aria-hidden="true">/</span><span>2 · Guía de usuario</span></nav>
 <div class="chapter label">2.8</div>
 <h1>Cálculo e interpretación de resultados</h1>
-<div class="meta label"><span>Válido para OGR Slip2D <span data-v>0.1.235</span></span></div>
+<div class="meta label"><span>Válido para OGR Slip2D <span data-v>0.1.481</span></span></div>
 <!-- @end dochead -->
     </header>
 
@@ -172,7 +172,7 @@
       <h2 id="compute"><span class="secnum">2.8.1</span><span class="ht">Ejecución del análisis</span><a class="anchor" href="#compute" aria-label="Enlace a esta sección">#</a></h2>
       <p>Elige <span class="ui">Analysis → Compute</span> (<kbd>Ctrl</kbd>+<kbd>T</kbd>, también en la barra de herramientas). Antes de calcular se revisa el modelo. Si no tiene contornos, si no tiene materiales o si algún ajuste no puede respetarse, el análisis no se ejecuta y el programa explica por qué. Ocurre, por ejemplo, cuando hay materiales que toman la presión intersticial de un campo de elementos finitos sin calcular, un desembalse rápido cuyas condiciones no se cumplen u objetos de búsqueda por bloques que la búsqueda no puede utilizar. Esta comprobación evita dar un número calculado con parte del modelo ignorada.</p>
       <p>Cada método marcado en <span class="ui">Analysis → Project Settings →</span> <span class="ui">Methods</span> se ejecuta con su propia búsqueda, uno tras otro (en un proyecto nuevo, Bishop simplificado y Janbu simplificado), y una ventana de progreso indica cómo avanza el cálculo.</p>
-      <div class="note warn"><span class="label">Cancel no detiene la ejecución</span><p>En la versión 0.1.235, el botón <strong>Cancel</strong> de la ventana de progreso solo cierra la ventana: el análisis sigue en segundo plano y sus resultados aparecen cuando termina.</p></div>
+      <p>El botón <strong>Cancel</strong> de la ventana de progreso detiene el análisis. La ventana indica <em>Cancelling…</em> y sigue abierta hasta que el cálculo se ha detenido, y no se publica nada de la ejecución cancelada (desde la versión 0.1.366).</p>
       <p>Al terminar la ejecución:</p>
       <ul>
         <li>la vista del modelo y el panel Results muestran el resultado del <strong>primer</strong> método activado;</li>
@@ -292,13 +292,11 @@
       </figure>
       <p>El informe del análisis en PDF se genera desde la ventana principal con <span class="ui">File → Generate Report…</span>. Las imágenes, los dibujos DXF y los análisis ejecutados mediante scripts se explican en la <a class="xref" href="automation.html">Sección 2.12</a>. El menú <span class="ui">Data</span> incluye además dos comandos relacionados con los soportes, <em>Support Force Diagram…</em> y <em>Back Analysis…</em>, que se tratan en la <a class="xref" href="supports.html">Sección 2.6</a>.</p>
 
-      <h2 id="known-issues"><span class="secnum">2.8.11</span><span class="ht">Comandos sin efecto en la versión 0.1.235</span><a class="anchor" href="#known-issues" aria-label="Enlace a esta sección">#</a></h2>
+      <h2 id="known-issues"><span class="secnum">2.8.11</span><span class="ht">Comandos sin efecto en la versión 0.1.481</span><a class="anchor" href="#known-issues" aria-label="Enlace a esta sección">#</a></h2>
       <div class="note warn"><span class="label">Problemas conocidos</span>
-        <p>En la versión 0.1.235, estos comandos de la ventana Interpret no hacen nada o hacen menos de lo que indica su nombre:</p>
+        <p>En la versión 0.1.481, estos comandos de la ventana Interpret no hacen nada o hacen menos de lo que indica su nombre:</p>
         <ul>
-          <li><span class="ui">Groundwater → Phreatic Surface</span>, <span class="ui">Piezometric Lines</span>, <span class="ui">Flow Vectors</span> y <span class="ui">Streamlines</span> se pueden marcar, pero no tienen efecto. Los vectores de flujo y la superficie libre se dibujan con <span class="ui">Groundwater → Interpret Groundwater</span>, en la ventana principal.</li>
           <li><span class="ui">Groundwater → Contour Options…</span> guarda los ajustes, pero no se dibuja nada con ellos; para los contornos de los campos de agua subterránea, usa <span class="ui">View → Contour Options…</span>. <span class="ui">Groundwater → Define User Data…</span> evalúa la expresión en cada nodo y da su intervalo de valores, pero no la representa.</li>
-          <li><span class="ui">Tools → Measure</span> y <span class="ui">Tools → Dimension Length</span> no tienen efecto.</li>
           <li><span class="ui">View → Data Tips</span> y el indicador <em>DATA TIPS</em> de la barra de estado no tienen efecto; la vista previa de la superficie bajo el puntero está siempre activa.</li>
           <li><span class="ui">Data → Support Force Analysis…</span> enumera todos los soportes del modelo con su capacidad, pero no calcula la fuerza que toma cada uno en la superficie crítica.</li>
         </ul>
@@ -317,7 +315,7 @@
   <aside class="doc-toc" aria-label="En esta página">
     <div class="toc-inner">
 <!-- @inc pagetoc -->
-<span class="label">En esta página</span><ul><li class="h2"><a href="#compute">2.8.1 Ejecución del análisis</a></li><li class="h2"><a href="#results-dock">2.8.2 El panel Results</a></li><li class="h2"><a href="#analysis-notes">2.8.3 Analysis Notes</a></li><li class="h2"><a href="#info-viewer">2.8.4 Info Viewer</a></li><li class="h2"><a href="#interpret">2.8.5 La ventana Interpret</a></li><li class="h3"><a href="#colour-grid">La rejilla de centros coloreada</a></li><li class="h2"><a href="#which-surfaces">2.8.6 Qué superficies se dibujan</a></li><li class="h2"><a href="#queries">2.8.7 Consultas</a></li><li class="h3"><a href="#slice-data">Datos de dovela</a></li><li class="h2"><a href="#charts">2.8.8 Gráficos</a></li><li class="h2"><a href="#invalid-surfaces">2.8.9 Superficies no válidas y códigos de error</a></li><li class="h2"><a href="#exports">2.8.10 Exportación de resultados</a></li><li class="h2"><a href="#known-issues">2.8.11 Comandos sin efecto en la versión 0.1.235</a></li></ul><button class="print" type="button"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="1.5"/><path d="M6 14h12v7H6z"/></svg> Imprimir esta página</button>
+<span class="label">En esta página</span><ul><li class="h2"><a href="#compute">2.8.1 Ejecución del análisis</a></li><li class="h2"><a href="#results-dock">2.8.2 El panel Results</a></li><li class="h2"><a href="#analysis-notes">2.8.3 Analysis Notes</a></li><li class="h2"><a href="#info-viewer">2.8.4 Info Viewer</a></li><li class="h2"><a href="#interpret">2.8.5 La ventana Interpret</a></li><li class="h3"><a href="#colour-grid">La rejilla de centros coloreada</a></li><li class="h2"><a href="#which-surfaces">2.8.6 Qué superficies se dibujan</a></li><li class="h2"><a href="#queries">2.8.7 Consultas</a></li><li class="h3"><a href="#slice-data">Datos de dovela</a></li><li class="h2"><a href="#charts">2.8.8 Gráficos</a></li><li class="h2"><a href="#invalid-surfaces">2.8.9 Superficies no válidas y códigos de error</a></li><li class="h2"><a href="#exports">2.8.10 Exportación de resultados</a></li><li class="h2"><a href="#known-issues">2.8.11 Comandos sin efecto en la versión 0.1.481</a></li></ul><button class="print" type="button"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="1.5"/><path d="M6 14h12v7H6z"/></svg> Imprimir esta página</button>
 <!-- @end pagetoc -->
     </div>
   </aside>
@@ -376,7 +374,7 @@
     </div>
     <div class="legal">
       <span>© 2026 Samuel Sáez López · OGR Slip2D es software libre (licencia AGPL-3.0 o posterior) y se distribuye sin ninguna garantía.</span>
-      <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
+      <span>OGR Slip2D <span data-v>0.1.481</span> · 2026-11-22</span>
     </div>
   </div>
 </footer>

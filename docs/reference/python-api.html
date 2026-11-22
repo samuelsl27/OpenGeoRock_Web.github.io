@@ -162,12 +162,12 @@
 <nav class="crumbs label" aria-label="Breadcrumb"><a href="../../docs/index.html">Documentation</a><span aria-hidden="true">/</span><span>5 · Reference</span></nav>
 <div class="chapter label">5.3</div>
 <h1>Python API</h1>
-<div class="meta label"><span>Describes OGR Slip2D <span data-v>0.1.235</span></span></div>
+<div class="meta label"><span>Describes OGR Slip2D <span data-v>0.1.481</span></span></div>
 <!-- @end dochead -->
     </header>
 
     <article class="doc prose">
-      <p class="lede">OGR Slip2D is a Python program, and its calculations can be driven from a script. There are two levels: the <strong>engine</strong>, whose objects (<code>Project</code>, the searches and the methods) give full control and leave the checking to you, and the <strong>operations layer</strong> <code>ogr_api</code>, the named, validated and undoable operations that the MCP server publishes as tools. The program's window also has a Python terminal connected to the live project. A short example of each follows, all checked against v<span data-v>0.1.235</span>.</p>
+      <p class="lede">OGR Slip2D is a Python program, and its calculations can be driven from a script. There are two levels: the <strong>engine</strong>, whose objects (<code>Project</code>, the searches and the methods) give full control and leave the checking to you, and the <strong>operations layer</strong> <code>ogr_api</code>, the named, validated and undoable operations that the MCP server publishes as tools. The program's window also has a Python terminal connected to the live project. A short example of each follows, all checked against v<span data-v>0.1.481</span>.</p>
 
       <h2 id="levels"><span class="secnum">5.3.1</span><span class="ht">Two levels</span><a class="anchor" href="#levels" aria-label="Link to this section">#</a></h2>
       <figure class="tbl" id="tbl-levels">
@@ -176,7 +176,7 @@
           <table class="data">
             <thead><tr><th></th><th>Engine</th><th>Operations layer</th></tr></thead>
             <tbody>
-              <tr><td>Packages</td><td><code>ogr_core</code> (model, settings, files), <code>ogr_slip2d</code> (methods, searches), <code>ogr_fem2d</code> (seepage)</td><td><code>ogr_api</code></td></tr>
+              <tr><td>Packages</td><td><code>ogr_slip2d</code> (methods, searches) and <code>ogr_core</code> (model, settings, files, and the finite-element seepage in <code>ogr_core.fem</code>), which comes from <a href="https://github.com/samuelsl27/OGR-Core" target="_blank" rel="noopener">OGR-Core</a>, the library shared by the suite</td><td><code>ogr_api</code></td></tr>
               <tr><td>You hold</td><td>Python objects: a <code>Project</code>, a search, its result</td><td>handles: <code>project_id</code>, <code>job_id</code>, <code>result_id</code></td></tr>
               <tr><td>Validation</td><td>what each object checks; a misspelt setting is accepted in silence</td><td>every argument and setting checked, with the closest valid names</td></tr>
               <tr><td>Undo</td><td>no</td><td>every edit is one undo step</td></tr>
@@ -194,7 +194,7 @@
       <p>A model is a <code>Project</code> (<code>ogr_core.project</code>). <code>Project.load(path)</code> reads a <code>.ogr</code> file and <code>project.save(path)</code> writes one (<a class="xref" href="file-format.html">Section 5.4</a>); <code>Project(name)</code> starts an empty one, to which boundaries and materials are added with <code>add_boundary</code> and <code>add_material</code>, as <code>examples/quick_slope.py</code> does. <code>ogr_core.project.demo.<wbr>build_demo_project()</code> returns the demo slope.</p>
 
       <h3 id="run-analysis"><span class="ht">The analysis the project describes</span><a class="anchor" href="#run-analysis" aria-label="Link to this section">#</a></h3>
-      <p><code>run_analysis(project, method_ids=None, progress_cb=None, *, allow_unconfigured=False)</code>, in <code>ogr_slip2d.analysis_runner</code>, is the analysis that <span class="ui">Analysis → Compute</span>, the command line and the operations layer run: one search per method, built from the project's settings. It applies the design-standard partial factors to a copy (the project passed in is not modified) and takes into account rapid drawdown, slope limits, surface filters, focus objects, the seismic mode, the convergence settings, the seed and the admissibility checks.</p>
+      <p><code>run_analysis(project, method_ids=None, progress_cb=None, *, allow_unconfigured=False, spill_slices=True)</code>, in <code>ogr_slip2d.analysis_runner</code>, is the analysis that <span class="ui">Analysis → Compute</span>, the command line and the operations layer run: one search per method, built from the project's settings. It applies the design-standard partial factors to a copy (the project passed in is not modified) and takes into account rapid drawdown, slope limits, surface filters, focus objects, the seismic mode, the convergence settings, the seed and the admissibility checks.</p>
       <div class="code"><pre><code>from ogr_core.project import Project
 from ogr_slip2d.analysis_runner import run_analysis
 
@@ -220,10 +220,11 @@ if __name__ == "__main__":
         <li>If the project cannot be analysed as configured, it raises <code>AnalysisNotConfigured</code>, a <code>ValueError</code> whose <code>problems</code> lists every reason; <code>allow_unconfigured=True</code> runs anyway, for a caller that has read them.</li>
         <li>With a design standard active, <code>critical.fos</code> is an over-design factor, which must exceed 1, not a factor of safety.</li>
         <li><code>progress_cb(done, total)</code> is called across the whole run, all methods included.</li>
+        <li>Since v0.1.408 a search that plans 2 000 surfaces or more keeps the slices of its surfaces in a file on disk and reads them back when they are asked for; <code>spill_slices=False</code> is for a caller that keeps only the critical surfaces.</li>
       </ul>
 
       <h3 id="hand-built"><span class="ht">A search built by hand</span><a class="anchor" href="#hand-built" aria-label="Link to this section">#</a></h3>
-      <p>The searches (<code>GridSearch</code>, <code>SlopeSearch</code>, <code>AutoRefineSearch</code>, <code>BlockSearch</code>, <code>PathSearch</code>, <code>SimulatedAnnealingSearch</code>; the particle swarm is in <code>ogr_slip2d.particle_swarm</code>) and the nine methods (<code>BishopSimplified</code>, <code>JanbuSimplified</code>, <code>JanbuCorrected</code>, <code>OrdinaryFellenius</code>, <code>Spencer</code>, <code>GLEMorgensternPrice</code>, <code>LoweKarafiath</code>, <code>CorpsOfEngineers1</code>, <code>CorpsOfEngineers2</code>) can be built directly; <code>method_registry()</code> maps each method id to its class.</p>
+      <p>The searches (<code>GridSearch</code>, <code>SlopeSearch</code>, <code>AutoRefineSearch</code>, <code>BlockSearch</code>, <code>PathSearch</code>, <code>SimulatedAnnealingSearch</code>; the particle swarm is in <code>ogr_slip2d.particle_swarm</code>) and the ten methods (<code>BishopSimplified</code>, <code>JanbuSimplified</code>, <code>JanbuCorrected</code>, <code>OrdinaryFellenius</code>, <code>Spencer</code>, <code>GLEMorgensternPrice</code>, <code>LoweKarafiath</code>, <code>CorpsOfEngineers1</code>, <code>CorpsOfEngineers2</code>, and <code>SarmaNonVertical</code> in <code>ogr_slip2d.methods</code>) can be built directly; <code>method_registry()</code> maps each method id to its class.</p>
       <div class="code"><pre><code>from ogr_core.project import Project, save_results
 from ogr_slip2d import BishopSimplified, GridSearch
 
@@ -259,7 +260,7 @@ save_results("slope_bishop.h5", result, project_id=project.id)</code></pre></div
       </figure>
 
       <h3 id="one-surface"><span class="ht">One surface</span><a class="anchor" href="#one-surface" aria-label="Link to this section">#</a></h3>
-      <p><code>evaluate_surfaces(project, surface, method_ids=None)</code> computes the factor of safety of one given surface with each method, through the same checks, factored copy and configured search as <code>run_analysis</code>. Its <code>results</code> map each method id to a result, or to <code>None</code> when the surface does not cut the model.</p>
+      <p><code>evaluate_surfaces(project, surface, method_ids=None, *, allow_unconfigured=False)</code> computes the factor of safety of one given surface with each method, through the same checks, factored copy and configured search as <code>run_analysis</code>. Its <code>results</code> map each method id to a result, or to <code>None</code> when the surface does not cut the model.</p>
       <div class="code"><pre><code>from ogr_core.project import Project
 from ogr_slip2d import SlipCircle
 from ogr_slip2d.analysis_runner import evaluate_surfaces
@@ -277,7 +278,7 @@ for method_id, res in outcome.results.items():
       <p>A Grid Search of 400 circles or more is evaluated in a pool of worker processes (at most 8, using by default 50 % of the logical processors; <span class="ui">Project Settings → Advanced</span> can switch it off). On Windows each worker imports the script again, so a script that runs a search should keep its top-level code under <code>if __name__ == "__main__":</code>, as the examples on this page and in the repository do. A pool that cannot start does not stop the analysis: the search falls back to one process.</p>
 
       <h2 id="operations"><span class="secnum">5.3.3</span><span class="ht">The operations layer</span><a class="anchor" href="#operations" aria-label="Link to this section">#</a></h2>
-      <p><code>ogr_api</code> holds what the program can do to a model as named operations with typed arguments and JSON-safe answers, without Qt and without the MCP SDK. There are 73 operations: the MCP tools except <code>server_info</code>, under the same names, and every parameter of a tool is a parameter of its operation, so the tool tables of <a class="xref" href="mcp.html#tools">Section 5.1.7</a> describe them too. <code>ogr_api.OPERATIONS</code> is the registry.</p>
+      <p><code>ogr_api</code> holds what the program can do to a model as named operations with typed arguments and JSON-safe answers, without Qt and without the MCP SDK. There are 74 operations: the MCP tools except <code>server_info</code>, under the same names, and every parameter of a tool is a parameter of its operation, so the tool tables of <a class="xref" href="mcp.html#tools">Section 5.1.7</a> describe them too. <code>ogr_api.OPERATIONS</code> is the registry.</p>
       <div class="code"><pre><code>from pathlib import Path
 
 from ogr_api import OgrApiError, Workspace, call
@@ -347,7 +348,7 @@ if __name__ == "__main__":
         <li><kbd>Enter</kbd> runs the input, <kbd>Shift</kbd>+<kbd>Enter</kbd> starts a new line, <kbd>Ctrl</kbd>+<kbd>↑</kbd> and <kbd>Ctrl</kbd>+<kbd>↓</kbd> walk the history and <kbd>Ctrl</kbd>+<kbd>L</kbd> clears the console.</li>
         <li>The value of a bare expression is not echoed: use <code>print()</code>, as above.</li>
         <li>The console runs on the window's own thread, so a long calculation started there holds the window until it ends.</li>
-        <li>Changes made to <code>project</code> from the console act on the model directly and are not steps of <span class="ui">Edit → Undo</span>. For undoable edits from a script, use the operations layer or an agent's <code>python_exec</code>.</li>
+        <li>Since v0.1.305, a console input that changes the model is one step of <span class="ui">Edit → Undo</span>, named <em>Python script</em>, as an agent's <code>python_exec</code> is; an input that changes nothing leaves no step. The step captures the model, not the finite-element mesh or the computed groundwater fields.</li>
       </ul>
       <div class="impl">
         <span class="label">In OGR Slip2D</span>
@@ -427,7 +428,7 @@ if __name__ == "__main__":
     </div>
     <div class="legal">
       <span>© 2026 Samuel Sáez López · OGR Slip2D is free software under AGPL-3.0-or-later, with no warranty of any kind.</span>
-      <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
+      <span>OGR Slip2D <span data-v>0.1.481</span> · 2026-11-22</span>
     </div>
   </div>
   <div class="lang-hint" role="dialog" aria-label="Idioma" lang="es">

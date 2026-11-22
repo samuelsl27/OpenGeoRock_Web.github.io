@@ -162,7 +162,7 @@
 <nav class="crumbs label" aria-label="Breadcrumb"><a href="../../docs/index.html">Documentation</a><span aria-hidden="true">/</span><span>2 · User guide</span></nav>
 <div class="chapter label">2.9</div>
 <h1>Finite-element groundwater</h1>
-<div class="meta label"><span>Describes OGR Slip2D <span data-v>0.1.235</span></span></div>
+<div class="meta label"><span>Describes OGR Slip2D <span data-v>0.1.481</span></span></div>
 <!-- @end dochead -->
     </header>
 
@@ -209,15 +209,16 @@
               <tr><td>Saturated permeability Ks</td><td>Permeability K1 of the saturated soil. Disabled for <em>User Defined</em>, which takes it from the first point of its curve.</td><td class="n">1 × 10⁻⁶</td></tr>
               <tr><td>K2 / K1</td><td>Anisotropy: ratio of the second principal permeability to the first.</td><td class="n">1</td></tr>
               <tr><td>K1 angle (deg from +X)</td><td>Direction of K1.</td><td class="n">0°</td></tr>
+              <tr><td>Minimum relative permeability kr_min</td><td>Floor of the relative permeability: kr is never taken below it, so the dry zone keeps some conductivity (in the dialog since version 0.1.275).</td><td class="n">1 × 10⁻⁶</td></tr>
               <tr><td>Model</td><td>How the permeability falls in the unsaturated zone: <em>Constant</em>, <em>Simple</em> (with a soil type: General, Sand, Silt, Clay or Loam), <em>Brooks-Corey</em>, <em>Fredlund-Xing</em>, <em>Gardner</em>, <em>van Genuchten</em> or <em>User Defined</em>. The parameters of the chosen model appear below it.</td><td>Constant</td></tr>
             </tbody>
           </table>
         </div>
       </figure>
-      <p><strong>Pick…</strong> loads representative literature parameters for Brooks-Corey, Fredlund-Xing, Gardner and van Genuchten; <strong>Plot…</strong> draws the permeability against suction for the material shown.</p>
+      <p><strong>Pick…</strong> loads representative parameters for Brooks-Corey, Fredlund-Xing, Gardner and van Genuchten, and its list says where they come from: a published table for van Genuchten and Brooks-Corey, illustrative values with no published source for Gardner and Fredlund-Xing. <strong>Plot…</strong> draws the permeability against suction for the material shown.</p>
 
       <figure class="fig shot-fig" id="fig-hydraulic-properties">
-        <div class="art"><img src="../../assets/img/shots/hydraulic-properties.webp" alt="The Define Hydraulic Properties dialog: the list of materials on the left; the saturated permeability, anisotropy and the unsaturated permeability model with its parameters on the right" loading="lazy" width="905" height="650"></div>
+        <div class="art"><img src="../../assets/img/shots/hydraulic-properties.webp" alt="The Define Hydraulic Properties dialog: the list of materials on the left; the saturated permeability, anisotropy, the floor of the relative permeability and the unsaturated permeability model with its parameters on the right, in a column that scrolls down to the water content function" loading="lazy" width="900" height="650"></div>
         <figcaption><span class="fignum">Figure 2.9.1</span> Define Hydraulic Properties.</figcaption>
       </figure>
 
@@ -253,14 +254,14 @@
         <figcaption><span class="fignum">Figure 2.9.2</span> Set Boundary Conditions, with the reservoir targets at the end of the list.</figcaption>
       </figure>
 
-      <div class="note"><span class="label">Note</span><p>In version 0.1.235 the <strong>Pick by</strong> selector of the dialog (<em>Line segments</em> or <em>Nodes</em>) has no effect: a condition always goes to every node of the chosen side, and infiltration to its segments. OK keeps the conditions; Cancel discards everything assigned since the dialog opened.</p></div>
+      <div class="note"><span class="label">Note</span><p>In version 0.1.481 the <strong>Pick by</strong> selector of the dialog (<em>Line segments</em> or <em>Nodes</em>) has no effect: a condition always goes to every node of the chosen side, and infiltration to its segments. OK keeps the conditions; Cancel discards everything assigned since the dialog opened.</p></div>
 
       <h2 id="compute-groundwater"><span class="secnum">2.9.6</span><span class="ht">Computing the field</span><a class="anchor" href="#compute-groundwater" aria-label="Link to this section">#</a></h2>
       <p><span class="ui">Groundwater → Compute Groundwater</span> solves the steady field, or the stages of a transient analysis when one is configured. A steady solve reports the number of iterations and the range of pore pressure in the status bar, and names any material that used the default hydraulic properties; when it does not converge, the status bar says why. The field is saved in the <code>.ogr</code> file, so reopening a project does not require computing it again.</p>
       <div class="impl">
         <span class="label">In OGR Slip2D</span>
         <p>The steady analysis solves for the total head on linear triangles, with the permeability reduced in the unsaturated zone by the model of each material, by under-relaxed Picard iteration (relaxation 0.4, at most 200 iterations, tolerance 10⁻⁵ m). Nodes of type <em>Unknown</em> switch between seepage face and no-flow until they settle <a class="cite" href="../reference/bibliography.html#neuman1973">(Neuman, 1973)</a>. The transient analysis solves Richards' equation in mixed form with implicit time steps <a class="cite" href="../reference/bibliography.html#celia1990">(Celia, Bouloutas &amp; Zarba, 1990)</a>.</p>
-        <span class="src">Source: <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_slip2d/transient_stability.py" target="_blank" rel="noopener">ogr_slip2d/transient_stability.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/tree/main/ogr_fem2d/solvers" target="_blank" rel="noopener">ogr_fem2d/solvers/</a></span>
+        <span class="src">Source: <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_slip2d/transient_stability.py" target="_blank" rel="noopener">ogr_slip2d/transient_stability.py</a> · OGR-Core: <a href="https://github.com/samuelsl27/OGR-Core/tree/v0.2.2/ogr_core/fem" target="_blank" rel="noopener">ogr_core/fem/</a></span>
       </div>
 
       <h2 id="interpret-groundwater"><span class="secnum">2.9.7</span><span class="ht">Interpreting the field</span><a class="anchor" href="#interpret-groundwater" aria-label="Link to this section">#</a></h2>
@@ -282,7 +283,7 @@
 
       <h2 id="coupling"><span class="secnum">2.9.8</span><span class="ht">Using the field in the stability analysis</span><a class="anchor" href="#coupling" aria-label="Link to this section">#</a></h2>
       <p>The computed field reaches the limit-equilibrium analysis only through the materials whose <strong>Water Parameters → Type</strong> is <code>fem</code>: at the base of every slice of such a material, the pore pressure is interpolated from the nodal values of the element that contains it. A slice base outside the mesh gets no pore pressure. A material left on any other type ignores the field entirely.</p>
-      <div class="note warn"><span class="label">Set the type before choosing the method</span><p>In version 0.1.235 Define Materials hides the whole <em>Water Parameters</em> group while the groundwater method is <code>fea_steady</code> or <code>fea_transient</code>, so the Type cannot be changed then. Set Type to <code>fem</code> for the materials concerned <em>before</em> choosing the finite-element method, or switch the method back for a moment to change it. The same coupling can be set through the MCP server or the Python API (<a class="xref" href="../reference/mcp.html">Section 5.1</a>).</p></div>
+      <div class="note warn"><span class="label">Set the type before choosing the method</span><p>In version 0.1.481 Define Materials hides the whole <em>Water Parameters</em> group while the groundwater method is <code>fea_steady</code> or <code>fea_transient</code>, so the Type cannot be changed then. Set Type to <code>fem</code> for the materials concerned <em>before</em> choosing the finite-element method, or switch the method back for a moment to change it. The same coupling can be set through the MCP server or the Python API (<a class="xref" href="../reference/mcp.html">Section 5.1</a>).</p></div>
       <p>Compute refuses to run while a material of type <code>fem</code> has no computed field to read, rather than report the pore pressure as zero, which would look like a dry slope. Generating a new mesh clears the field, so compute the groundwater again after remeshing. After a transient analysis the field stored in the project is that of the last stage.</p>
 
       <h2 id="transient"><span class="secnum">2.9.9</span><span class="ht">Transient analysis</span><a class="anchor" href="#transient" aria-label="Link to this section">#</a></h2>
@@ -295,7 +296,7 @@
         <li><strong>Transient FEA options</strong>: <em>Tolerance</em> (1 × 10⁻⁵), <em>Maximum iterations</em> (30) and <em>Number of time steps</em> per stage (<em>Auto</em> by default: derived from the element size and the storage, so that the water front crosses about one element per step). The same three are on the Transient page of Project Settings, which is greyed out unless the transient option is on.</li>
       </ul>
       <p>For a drawdown, for example, assign a reservoir at the initial level and capture it as the initial state. Then press <strong>Restore defaults</strong> in Set Boundary Conditions (assigning a lower reservoir does not clear the heads of the nodes it no longer reaches), assign the reservoir at the lower level, and any other condition again, select a stage and capture it. Compute Groundwater solves the stages in order and computes the factor of safety, with every enabled method, at the stages marked <em>Calculate SF</em>. They are plotted against time by <strong>FoS vs time…</strong> in Interpret Groundwater and by <span class="ui">Data → Graph SF with Time…</span> in the Interpret window. If no material is of type <code>fem</code>, the run warns that the stage factors would ignore the computed pressures.</p>
-      <div class="note"><span class="label">Note</span><p>The transient analysis also uses the saturated and residual water contents (0.4 and 0.05) and the specific storage (1 × 10⁻⁵ 1/m) of each material. Define Hydraulic Properties does not show them in version 0.1.235; they keep these defaults unless they are set through the MCP server or the Python API.</p></div>
+      <div class="note"><span class="label">Note</span><p>The transient analysis also uses a van Genuchten water content function of each material, with any permeability model: the saturated and residual water contents (0.4 and 0.05 by default), α, n and m, and the specific storage (1 × 10⁻⁵ 1/m). Since version 0.1.268 they are shown in the <em>Water content function (transient analysis)</em> group of Define Hydraulic Properties. Since version 0.1.278 its α is a parameter of its own (<code>wc_alpha</code>, 0.036 1/m by default), read by every model except van Genuchten, which uses the α of its own page.</p></div>
 
       <h2 id="drawdown-sweep"><span class="secnum">2.9.10</span><span class="ht">Drawdown Level Sweep</span><a class="anchor" href="#drawdown-sweep" aria-label="Link to this section">#</a></h2>
       <p><span class="ui">Groundwater → Drawdown Level Sweep…</span> belongs to the limit-equilibrium rapid-drawdown analysis, not to the finite-element one: it needs <em>Rapid Drawdown analysis</em> selected in the Advanced group, a groundwater method based on water surfaces, and at least one material with undrained behaviour (<a class="xref" href="water.html">Section 2.4</a>, <a class="xref" href="../theory/rapid-drawdown.html">Section 3.8</a>). The sweep is needed because the critical reservoir level is not always the lowest one.</p>
@@ -373,7 +374,7 @@
     </div>
     <div class="legal">
       <span>© 2026 Samuel Sáez López · OGR Slip2D is free software under AGPL-3.0-or-later, with no warranty of any kind.</span>
-      <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
+      <span>OGR Slip2D <span data-v>0.1.481</span> · 2026-11-22</span>
     </div>
   </div>
   <div class="lang-hint" role="dialog" aria-label="Idioma" lang="es">

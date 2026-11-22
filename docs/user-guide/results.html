@@ -162,7 +162,7 @@
 <nav class="crumbs label" aria-label="Breadcrumb"><a href="../../docs/index.html">Documentation</a><span aria-hidden="true">/</span><span>2 · User guide</span></nav>
 <div class="chapter label">2.8</div>
 <h1>Computing and interpreting results</h1>
-<div class="meta label"><span>Describes OGR Slip2D <span data-v>0.1.235</span></span></div>
+<div class="meta label"><span>Describes OGR Slip2D <span data-v>0.1.481</span></span></div>
 <!-- @end dochead -->
     </header>
 
@@ -172,7 +172,7 @@
       <h2 id="compute"><span class="secnum">2.8.1</span><span class="ht">Running the analysis</span><a class="anchor" href="#compute" aria-label="Link to this section">#</a></h2>
       <p>Choose <span class="ui">Analysis → Compute</span> (<kbd>Ctrl</kbd>+<kbd>T</kbd>, also on the toolbar). Before anything is computed the model is checked, and the run is refused, with the reasons, when the model has no boundaries, when it has no materials, or when a setting cannot be honoured. Examples are materials that take their pore pressure from a finite-element field that has not been computed, a rapid drawdown whose conditions are not met, and Block Search objects the search cannot use. The check avoids reporting a number computed with part of the model ignored.</p>
       <p>Every method ticked in <span class="ui">Analysis → Project Settings →</span> <span class="ui">Methods</span> is run with its own search (Bishop simplified and Janbu simplified in a new project), one after another, while a progress window shows how far the run has got.</p>
-      <div class="note warn"><span class="label">Cancel does not stop the run</span><p>In version 0.1.235 the <strong>Cancel</strong> button of the progress window only closes the window: the analysis continues in the background, and its results appear when it finishes.</p></div>
+      <p>The <strong>Cancel</strong> button of the progress window stops the analysis. The window says <em>Cancelling…</em> and stays open until the calculation has stopped, and nothing from the cancelled run is published (since version 0.1.366).</p>
       <p>When the run ends:</p>
       <ul>
         <li>the model view and the Results dock show the result of the <strong>first</strong> enabled method;</li>
@@ -292,13 +292,11 @@
       </figure>
       <p>A PDF report of the analysis is produced from the main window with <span class="ui">File → Generate Report…</span>; images, DXF drawings and scripted runs are covered in <a class="xref" href="automation.html">Section 2.12</a>. The <span class="ui">Data</span> menu also holds two support commands, <em>Support Force Diagram…</em> and <em>Back Analysis…</em>; supports are covered in <a class="xref" href="supports.html">Section 2.6</a>.</p>
 
-      <h2 id="known-issues"><span class="secnum">2.8.11</span><span class="ht">Commands without effect in version 0.1.235</span><a class="anchor" href="#known-issues" aria-label="Link to this section">#</a></h2>
+      <h2 id="known-issues"><span class="secnum">2.8.11</span><span class="ht">Commands without effect in version 0.1.481</span><a class="anchor" href="#known-issues" aria-label="Link to this section">#</a></h2>
       <div class="note warn"><span class="label">Known issues</span>
-        <p>These Interpret-window commands do nothing, or less than their name says, in version 0.1.235:</p>
+        <p>These Interpret-window commands do nothing, or less than their name says, in version 0.1.481:</p>
         <ul>
-          <li><span class="ui">Groundwater → Phreatic Surface</span>, <span class="ui">Piezometric Lines</span>, <span class="ui">Flow Vectors</span> and <span class="ui">Streamlines</span> can be ticked but have no effect. Flow vectors and the free surface are drawn by <span class="ui">Groundwater → Interpret Groundwater</span> in the main window.</li>
           <li><span class="ui">Groundwater → Contour Options…</span> stores its settings but nothing is drawn with them; contour the groundwater fields with <span class="ui">View → Contour Options…</span> instead. <span class="ui">Groundwater → Define User Data…</span> evaluates the expression at every node and reports its range, but does not plot it.</li>
-          <li><span class="ui">Tools → Measure</span> and <span class="ui">Tools → Dimension Length</span> have no effect.</li>
           <li><span class="ui">View → Data Tips</span> and the <em>DATA TIPS</em> indicator of the status bar have no effect; the preview of the surface under the pointer is always on.</li>
           <li><span class="ui">Data → Support Force Analysis…</span> lists every support of the model with its capacity; it does not compute the force each one takes on the critical surface.</li>
         </ul>
@@ -317,7 +315,7 @@
   <aside class="doc-toc" aria-label="On this page">
     <div class="toc-inner">
 <!-- @inc pagetoc -->
-<span class="label">On this page</span><ul><li class="h2"><a href="#compute">2.8.1 Running the analysis</a></li><li class="h2"><a href="#results-dock">2.8.2 The Results dock</a></li><li class="h2"><a href="#analysis-notes">2.8.3 Analysis Notes</a></li><li class="h2"><a href="#info-viewer">2.8.4 Info Viewer</a></li><li class="h2"><a href="#interpret">2.8.5 The Interpret window</a></li><li class="h3"><a href="#colour-grid">The coloured grid of centres</a></li><li class="h2"><a href="#which-surfaces">2.8.6 Choosing which surfaces are drawn</a></li><li class="h2"><a href="#queries">2.8.7 Queries</a></li><li class="h3"><a href="#slice-data">Slice data</a></li><li class="h2"><a href="#charts">2.8.8 Charts</a></li><li class="h2"><a href="#invalid-surfaces">2.8.9 Invalid surfaces and error codes</a></li><li class="h2"><a href="#exports">2.8.10 Exporting results</a></li><li class="h2"><a href="#known-issues">2.8.11 Commands without effect in version 0.1.235</a></li></ul><button class="print" type="button"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="1.5"/><path d="M6 14h12v7H6z"/></svg> Print this page</button>
+<span class="label">On this page</span><ul><li class="h2"><a href="#compute">2.8.1 Running the analysis</a></li><li class="h2"><a href="#results-dock">2.8.2 The Results dock</a></li><li class="h2"><a href="#analysis-notes">2.8.3 Analysis Notes</a></li><li class="h2"><a href="#info-viewer">2.8.4 Info Viewer</a></li><li class="h2"><a href="#interpret">2.8.5 The Interpret window</a></li><li class="h3"><a href="#colour-grid">The coloured grid of centres</a></li><li class="h2"><a href="#which-surfaces">2.8.6 Choosing which surfaces are drawn</a></li><li class="h2"><a href="#queries">2.8.7 Queries</a></li><li class="h3"><a href="#slice-data">Slice data</a></li><li class="h2"><a href="#charts">2.8.8 Charts</a></li><li class="h2"><a href="#invalid-surfaces">2.8.9 Invalid surfaces and error codes</a></li><li class="h2"><a href="#exports">2.8.10 Exporting results</a></li><li class="h2"><a href="#known-issues">2.8.11 Commands without effect in version 0.1.481</a></li></ul><button class="print" type="button"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="1.5"/><path d="M6 14h12v7H6z"/></svg> Print this page</button>
 <!-- @end pagetoc -->
     </div>
   </aside>
@@ -376,7 +374,7 @@
     </div>
     <div class="legal">
       <span>© 2026 Samuel Sáez López · OGR Slip2D is free software under AGPL-3.0-or-later, with no warranty of any kind.</span>
-      <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
+      <span>OGR Slip2D <span data-v>0.1.481</span> · 2026-11-22</span>
     </div>
   </div>
   <div class="lang-hint" role="dialog" aria-label="Idioma" lang="es">

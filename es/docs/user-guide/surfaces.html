@@ -163,7 +163,7 @@
 <nav class="crumbs label" aria-label="Ruta de navegación"><a href="../../../es/docs/index.html">Documentación</a><span aria-hidden="true">/</span><span>2 · Guía de usuario</span></nav>
 <div class="chapter label">2.7</div>
 <h1>Superficies de rotura y búsqueda</h1>
-<div class="meta label"><span>Válido para OGR Slip2D <span data-v>0.1.235</span></span></div>
+<div class="meta label"><span>Válido para OGR Slip2D <span data-v>0.1.481</span></span></div>
 <!-- @end dochead -->
     </header>
 
@@ -241,7 +241,7 @@
           </table>
         </div>
       </figure>
-      <div class="note warn"><span class="label">Dos limitaciones de Slope Search</span><p>El intervalo de ángulos en el pie se amplía siempre hasta −70°, así que, en la versión 0.1.235, un <strong>Lower Angle</strong> marcado por encima de −70° no tiene efecto. Además, Slope Search toma los intervalos de entrada y de salida del perfil del terreno, no de los límites del talud: los límites que se fijen filtran sus superficies, como en cualquier búsqueda, pero no orientan dónde busca. Las notas del análisis lo indican cuando ocurre.</p></div>
+      <div class="note warn"><span class="label">Dos limitaciones de Slope Search</span><p>El intervalo de ángulos en el pie se amplía siempre hasta −70°, así que, en la versión 0.1.481, un <strong>Lower Angle</strong> marcado por encima de −70° no tiene efecto. Además, Slope Search toma los intervalos de entrada y de salida del perfil del terreno, no de los límites del talud: los límites que se fijen filtran sus superficies, como en cualquier búsqueda, pero no orientan dónde busca. Las notas del análisis lo indican cuando ocurre.</p></div>
 
       <h3 id="auto-refine-options"><span class="ht">Auto Refine Search</span><a class="anchor" href="#auto-refine-options" aria-label="Enlace a esta sección">#</a></h3>
       <figure class="tbl" id="tbl-auto-refine-options">
@@ -437,7 +437,7 @@
       <h2 id="user-surfaces"><span class="secnum">2.7.5</span><span class="ht">Superficies definidas a mano</span><a class="anchor" href="#user-surfaces" aria-label="Enlace a esta sección">#</a></h2>
       <p>Con Surface Type en Circular se pueden añadir círculos propios; se analizan además de los de la búsqueda y compiten con ellos por el mínimo global.</p>
       <ul>
-        <li><span class="ui">Surfaces →</span> <span class="ui">Add Surface (centre and radius)…</span> pide el centro como <code>x,y</code> y después el radio (20 por defecto).</li>
+        <li><span class="ui">Surfaces →</span> <span class="ui">Add Surface (centre and radius)</span> entra en un modo de dibujo: haz clic en el centro y después en un punto de la circunferencia (desde la versión 0.1.335).</li>
         <li><span class="ui">Surfaces →</span> <span class="ui">Add Surface (three points)</span> activa un modo de dibujo: haz clic en tres puntos del círculo sobre el modelo. Si los tres puntos están casi alineados, se rechazan con un mensaje.</li>
         <li><span class="ui">Surfaces → Manage Surfaces…</span> muestra la lista de círculos por centro y radio; elige uno para eliminarlo, o <em>(delete all)</em>. Para cambiar un círculo, elimínalo y vuelve a añadirlo.</li>
       </ul>
@@ -607,7 +607,7 @@
     </div>
     <div class="legal">
       <span>© 2026 Samuel Sáez López · OGR Slip2D es software libre (licencia AGPL-3.0 o posterior) y se distribuye sin ninguna garantía.</span>
-      <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
+      <span>OGR Slip2D <span data-v>0.1.481</span> · 2026-11-22</span>
     </div>
   </div>
 </footer>

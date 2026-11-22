@@ -163,7 +163,7 @@
 <nav class="crumbs label" aria-label="Breadcrumb"><a href="../../docs/index.html">Documentation</a><span aria-hidden="true">/</span><span>2 · User guide</span></nav>
 <div class="chapter label">2.6</div>
 <h1>Supports</h1>
-<div class="meta label"><span>Describes OGR Slip2D <span data-v>0.1.235</span></span></div>
+<div class="meta label"><span>Describes OGR Slip2D <span data-v>0.1.481</span></span></div>
 <!-- @end dochead -->
     </header>
 
@@ -235,7 +235,7 @@
           </table>
         </div>
       </figure>
-      <div class="note warn"><span class="label">Where application and orientation are stored</span><p>Each placed support keeps its own force application and orientation. <span class="ui">Add Support</span> copies them from the support type when the support is placed; <span class="ui">Add Support Pattern…</span> takes them from its own dialog, where they start at <em>Active</em> and <em>Tangent To Slip</em> whatever the type says. Changing them later in Define Support does not change the supports already placed: edit those with <span class="ui">Properties…</span> in their right-click menu, or with <span class="ui">Modify Pattern…</span> for a row.</p></div>
+      <div class="note warn"><span class="label">Where application and orientation are stored</span><p>Each placed support keeps its own force application and orientation. <span class="ui">Add Support</span> copies them from the support type when the support is placed; <span class="ui">Add Support Pattern…</span> takes them from its own dialog, where they start at <em>Active</em> and <em>Tangent to slip surface</em> whatever the type says. Changing them later in Define Support does not change the supports already placed: edit those with <span class="ui">Properties…</span> in their right-click menu, or with <span class="ui">Modify Pattern…</span> for a row.</p></div>
 
       <h2 id="place"><span class="secnum">2.6.3</span><span class="ht">Placing supports</span><a class="anchor" href="#place" aria-label="Link to this section">#</a></h2>
       <h3 id="add-support"><span class="ht">One support at a time</span><a class="anchor" href="#add-support" aria-label="Link to this section">#</a></h3>
@@ -260,7 +260,7 @@
               <tr><td><strong>Mode</strong></td><td><em>Angle from horizontal</em>: every support at <strong>Angle</strong>. <em>Perpendicular to boundary</em>: normal to the picked segment. <em>Vertical (depth)</em>: straight down.</td><td>Angle from horizontal</td></tr>
               <tr><td><strong>Angle</strong></td><td>Angle of the supports from the positive <span class="m" data-tex="x"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span></span></span></span><!--/k--></span> axis, counter-clockwise; negative values point downwards. Only for <em>Angle from horizontal</em>.</td><td>−15°</td></tr>
               <tr><td><strong>Flip angle 180°</strong></td><td>Reverses the direction from head to tail</td><td>off</td></tr>
-              <tr><td><strong>Application</strong>, <strong>Force direction</strong></td><td>Force application and orientation given to every support of the row</td><td>Active, Tangent To Slip</td></tr>
+              <tr><td><strong>Application</strong>, <strong>Force direction</strong></td><td>Force application and orientation given to every support of the row</td><td>Active, Tangent to slip surface</td></tr>
             </tbody>
           </table>
         </div>
@@ -285,7 +285,7 @@
           </table>
         </div>
       </figure>
-      <p>Changes to supports are not on the undo stack. Supports are not moved when the geometry is edited, so check them after reshaping the slope. <span class="ui">Tools → Property Tables → Support Properties Table</span> lists the supports of the model; in the Interpret window, <span class="ui">Data → Support Force Analysis…</span> and <span class="ui">Data → Support Force Diagram…</span> show the force each support develops along its length and which failure mode governs (<a class="xref" href="results.html">Section 2.8</a>).</p>
+      <p>Changes to supports are undo steps, which <span class="ui">Edit → Undo</span> reverses (since version 0.1.304). Supports are not moved when the geometry is edited, so check them after reshaping the slope. <span class="ui">Tools → Property Tables → Support Properties Table</span> lists the supports of the model; in the Interpret window, <span class="ui">Data → Support Force Analysis…</span> and <span class="ui">Data → Support Force Diagram…</span> show the force each support develops along its length and which failure mode governs (<a class="xref" href="results.html">Section 2.8</a>).</p>
 
       <h2 id="back-analysis"><span class="secnum">2.6.5</span><span class="ht">Back analysis of the support force</span><a class="anchor" href="#back-analysis" aria-label="Link to this section">#</a></h2>
       <p><span class="ui">Support → Back Analysis of Support Force…</span> answers the design question the other way round: what horizontal force is needed for every slip surface to reach a target factor of safety? The factor is fixed at the target, so the force comes out of the resisting and driving sums without iteration, under both the active and the passive assumptions; the surface that needs the largest force is reported <a class="cite" href="../reference/bibliography.html#duncan2005">(Duncan &amp; Wright, 2005)</a>.</p>
@@ -307,7 +307,7 @@
       <div class="impl">
         <span class="label">In OGR Slip2D</span>
         <p>Each kind of support is a plug-in that declares its parameters, its default application and orientation and the force it can develop at a distance from its head; the dialog is built from those declarations. Every placed support names its property set, so two sets of the same kind with different capacities stay distinct in the analysis.</p>
-        <span class="src">Source: <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_core/support/support.py" target="_blank" rel="noopener">ogr_core/support/support.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_slip2d/support_integration.py" target="_blank" rel="noopener">ogr_slip2d/support_integration.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_slip2d/back_analysis.py" target="_blank" rel="noopener">ogr_slip2d/back_analysis.py</a></span>
+        <span class="src">Source: <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_slip2d/support_integration.py" target="_blank" rel="noopener">ogr_slip2d/support_integration.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_slip2d/back_analysis.py" target="_blank" rel="noopener">ogr_slip2d/back_analysis.py</a> · OGR-Core: <a href="https://github.com/samuelsl27/OGR-Core/blob/v0.2.2/ogr_core/support/support.py" target="_blank" rel="noopener">ogr_core/support/support.py</a></span>
       </div>
     </article>
 
@@ -382,7 +382,7 @@
     </div>
     <div class="legal">
       <span>© 2026 Samuel Sáez López · OGR Slip2D is free software under AGPL-3.0-or-later, with no warranty of any kind.</span>
-      <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
+      <span>OGR Slip2D <span data-v>0.1.481</span> · 2026-11-22</span>
     </div>
   </div>
   <div class="lang-hint" role="dialog" aria-label="Idioma" lang="es">

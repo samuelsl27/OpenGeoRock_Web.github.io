@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>MCP server — OGR Slip2D documentation</title>
-<meta name="description" content="Reference of ogr-slip2d-mcp, the official Model Context Protocol server of OGR Slip2D: installation, command-line options, transports, profiles, the 74 tools, resources, work on the open program window and the security model.">
+<meta name="description" content="Reference of ogr-slip2d-mcp, the official Model Context Protocol server of OGR Slip2D: installation, command-line options, transports, profiles, the 75 tools, resources, work on the open program window and the security model.">
 <!-- @inc head -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>document.documentElement.classList.replace("no-js", "js")</script>
@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="OpenGeoRock">
 <meta property="og:title" content="MCP server — OGR Slip2D documentation">
-<meta property="og:description" content="Reference of ogr-slip2d-mcp, the official Model Context Protocol server of OGR Slip2D: installation, command-line options, transports, profiles, the 74 tools, resources, work on the open program window and the security model.">
+<meta property="og:description" content="Reference of ogr-slip2d-mcp, the official Model Context Protocol server of OGR Slip2D: installation, command-line options, transports, profiles, the 75 tools, resources, work on the open program window and the security model.">
 <meta property="og:url" content="https://opengeorock.org/docs/reference/mcp.html">
 <meta property="og:image" content="https://opengeorock.org/assets/img/og-image.png">
 <meta property="og:locale" content="en_GB">
@@ -163,12 +163,12 @@
 <nav class="crumbs label" aria-label="Breadcrumb"><a href="../../docs/index.html">Documentation</a><span aria-hidden="true">/</span><span>5 · Reference</span></nav>
 <div class="chapter label">5.1</div>
 <h1>MCP server</h1>
-<div class="meta label"><span>Describes OGR Slip2D <span data-v>0.1.235</span></span></div>
+<div class="meta label"><span>Describes OGR Slip2D <span data-v>0.1.481</span></span></div>
 <!-- @end dochead -->
     </header>
 
     <article class="doc prose">
-      <p class="lede"><code>ogr-slip2d-mcp</code> is the official Model Context Protocol (MCP) server of OGR Slip2D. With it, an AI agent can build a slope model, run the analysis and read and draw the results, either on models of the server's own or on the model open in the program window, where the user sees each edit and can undo it. This page is the technical reference (options, transports, the 74 tools, resources and the security model); how to connect a particular client is explained on the <a href="../../ai/index.html#install">AI page</a>.</p>
+      <p class="lede"><code>ogr-slip2d-mcp</code> is the official Model Context Protocol (MCP) server of OGR Slip2D. With it, an AI agent can build a slope model, run the analysis and read and draw the results, either on models of the server's own or on the model open in the program window, where the user sees each edit and can undo it. This page is the technical reference (options, transports, the 75 tools, resources and the security model); how to connect a particular client is explained on the <a href="../../ai/index.html#install">AI page</a>.</p>
 
       <h2 id="overview"><span class="secnum">5.1.1</span><span class="ht">What it is</span><a class="anchor" href="#overview" aria-label="Link to this section">#</a></h2>
       <ul>
@@ -183,7 +183,7 @@
       <h2 id="installation"><span class="secnum">5.1.2</span><span class="ht">Installation</span><a class="anchor" href="#installation" aria-label="Link to this section">#</a></h2>
       <p>From a clone of the repository, with Python 3.11 or later:</p>
       <div class="code"><pre><code>pip install -e ".[mcp]"
-ogr-slip2d-mcp --version        <span class="c"># ogr-slip2d-mcp <span data-v>0.1.235</span>, on standard error</span>
+ogr-slip2d-mcp --version        <span class="c"># ogr-slip2d-mcp <span data-v>0.1.481</span>, on standard error</span>
 python -m ogr_mcp --version     <span class="c"># the same program, if the command is not on PATH</span></code></pre></div>
       <p>Without the SDK the server stops with exit code 3 and asks for the extra (<code>pip install "ogr-slip2d[mcp]"</code>). <code>ogr-slip2d-mcp --help</code> lists every option. Client configuration files, for desktop chat applications, local models and HTTP clients, are on the <a href="../../ai/index.html#install">AI page</a>.</p>
 
@@ -273,10 +273,10 @@ ogr-slip2d-mcp --profile compact --workdir "C:\models"     <span class="c"># sma
       <h2 id="profiles"><span class="secnum">5.1.5</span><span class="ht">Profiles and toolsets</span><a class="anchor" href="#profiles" aria-label="Link to this section">#</a></h2>
       <p>A small local model loses its way among many tools, and every tool's description costs context on every request. The server therefore offers two profiles:</p>
       <ul>
-        <li><strong><code>full</code></strong> (default): all 74 tools.</li>
+        <li><strong><code>full</code></strong> (default): all 75 tools.</li>
         <li><strong><code>compact</code></strong>: the 14 tools a complete build–run–read cycle needs: <code>server_info</code>, <code>catalog</code>, <code>project_new</code>, <code>project_open</code>, <code>project_save</code>, <code>project_summary</code>, <code>model_define</code>, <code>analysis_configure</code>, <code>analysis_run</code>, <code>job_get</code>, <code>job_cancel</code>, <code>results_get</code>, <code>model_render</code> and <code>python_exec</code>. <code>model_define</code> builds the whole geometry in one call and <code>python_exec</code> covers the rest. They are marked C in the tables of <a class="xref" href="#tools">Section 5.1.7</a>.</li>
       </ul>
-      <p><code>--toolsets</code> replaces the profile by a list of toolsets: <code>core</code> (10 tools), <code>model</code> (9), <code>settings</code> (3), <code>analysis</code> (7), <code>loads</code> (5), <code>supports</code> (6), <code>search</code> (5), <code>annotations</code> (4), <code>files</code> (5), <code>groundwater</code> (11), <code>statistics</code> (6), <code>view</code> (1), <code>history</code> (1) and <code>python</code> (1). <code>server_info</code> is always included. Tools are published in a fixed order, so a client can cache the list.</p>
+      <p><code>--toolsets</code> replaces the profile by a list of toolsets: <code>core</code> (10 tools), <code>model</code> (9), <code>settings</code> (3), <code>analysis</code> (7), <code>loads</code> (5), <code>supports</code> (6), <code>search</code> (6), <code>annotations</code> (4), <code>files</code> (5), <code>groundwater</code> (11), <code>statistics</code> (6), <code>view</code> (1), <code>history</code> (1) and <code>python</code> (1). <code>server_info</code> is always included. Tools are published in a fixed order, so a client can cache the list.</p>
       <div class="code"><pre><code>ogr-slip2d-mcp --toolsets core,model,settings,analysis,view --workdir "C:\models"</code></pre></div>
 
       <h2 id="window"><span class="secnum">5.1.6</span><span class="ht">Working on the open program window</span><a class="anchor" href="#window" aria-label="Link to this section">#</a></h2>
@@ -311,7 +311,7 @@ ogr-slip2d-mcp --profile compact --workdir "C:\models"     <span class="c"># sma
       </div>
 
       <h2 id="tools"><span class="secnum">5.1.7</span><span class="ht">Tools</span><a class="anchor" href="#tools" aria-label="Link to this section">#</a></h2>
-      <p>The 74 tools of the <code>full</code> profile, grouped as in the program's own tool list. <strong>C</strong> marks the 14 tools of the <code>compact</code> profile. <strong>Hint</strong> is the MCP annotation the server declares for the tool (read-only, edit or destructive), which clients that ask for confirmation can use. The exact parameters and their descriptions are published by the server itself (<code>tools/list</code>).</p>
+      <p>The 75 tools of the <code>full</code> profile, grouped as in the program's own tool list. <strong>C</strong> marks the 14 tools of the <code>compact</code> profile. <strong>Hint</strong> is the MCP annotation the server declares for the tool (read-only, edit or destructive), which clients that ask for confirmation can use. The exact parameters and their descriptions are published by the server itself (<code>tools/list</code>).</p>
 
       <h3 id="tools-core"><span class="ht">Project (<code>core</code>)</span><a class="anchor" href="#tools-core" aria-label="Link to this section">#</a></h3>
       <figure class="tbl" id="tbl-tools-core">
@@ -403,8 +403,9 @@ ogr-slip2d-mcp --profile compact --workdir "C:\models"     <span class="c"># sma
               <tr><td><code>tension_crack_set</code></td><td></td><td>edit</td><td>Water in the tension crack.</td></tr>
               <tr><td><code>focus_set</code></td><td></td><td>edit</td><td>Focus objects (window, line, point, tangent) that restrict the search.</td></tr>
               <tr><td><code>focus_delete</code></td><td></td><td>destructive</td><td>Deletes focus objects.</td></tr>
-              <tr><td><code>user_surface_add</code></td><td></td><td>edit</td><td>A circle of the user's own, analysed together with the search.</td></tr>
-              <tr><td><code>user_surface_delete</code></td><td></td><td>destructive</td><td>Deletes such circles.</td></tr>
+              <tr><td><code>user_surface_add</code></td><td></td><td>edit</td><td>A slip surface of the user's own, analysed together with every search: a circle with the circular surface type, or a polyline with the non-circular one. A polyline can carry the data of Sarma's method (face angle, c and φ) at its interior vertices.</td></tr>
+              <tr><td><code>user_surface_edit</code></td><td></td><td>edit</td><td>Replaces the Sarma data at the vertices of a stored user polyline, as one undo step (since v0.1.465).</td></tr>
+              <tr><td><code>user_surface_delete</code></td><td></td><td>destructive</td><td>Deletes such surfaces (circles or polylines).</td></tr>
             </tbody>
           </table>
         </div>
@@ -536,7 +537,7 @@ ogr-slip2d-mcp --profile compact --workdir "C:\models"     <span class="c"># sma
       </figure>
       <div class="impl">
         <span class="label">In OGR Slip2D</span>
-        <p><code>server_info</code> also reports how much of the program an agent can reach (<code>program_coverage</code>): in v<span data-v>0.1.235</span>, 116 of the 140 actions of the main window are mapped to an operation, none is pending, and the other 24 only make sense in the interface (zoom, pan, printing, preferences and the like), each with its reason written down.</p>
+        <p><code>server_info</code> also reports how much of the program an agent can reach (<code>program_coverage</code>): in v<span data-v>0.1.481</span>, 121 of the 145 actions of the main window are mapped to an operation, none is pending, and the other 24 only make sense in the interface (zoom, pan, printing, preferences and the like), each with its reason written down.</p>
         <span class="src">Source: <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_mcp/server.py" target="_blank" rel="noopener">ogr_mcp/server.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_mcp/profiles.py" target="_blank" rel="noopener">ogr_mcp/profiles.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_api/inventory.py" target="_blank" rel="noopener">ogr_api/inventory.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/docs/mcp/herramientas.md" target="_blank" rel="noopener">docs/mcp/herramientas.md</a></span>
       </div>
 
@@ -694,7 +695,7 @@ ogr-slip2d-mcp --profile compact --workdir "C:\models"     <span class="c"># sma
     </div>
     <div class="legal">
       <span>© 2026 Samuel Sáez López · OGR Slip2D is free software under AGPL-3.0-or-later, with no warranty of any kind.</span>
-      <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
+      <span>OGR Slip2D <span data-v>0.1.481</span> · 2026-11-22</span>
     </div>
   </div>
   <div class="lang-hint" role="dialog" aria-label="Idioma" lang="es">

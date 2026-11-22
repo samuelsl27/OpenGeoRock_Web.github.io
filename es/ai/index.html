@@ -136,7 +136,7 @@
       <div class="card">
         <span class="label">Cálculo</span>
         <h3>El mismo motor que el programa de escritorio</h3>
-        <p>Equilibrio límite con cualquiera de los nueve métodos y las siete búsquedas, agua subterránea por elementos finitos, análisis probabilístico, retroanálisis y optimización. Los cálculos se ejecutan como tareas en segundo plano, y cualquiera de ellas se puede cancelar.</p>
+        <p>Equilibrio límite con cualquiera de los diez métodos y las siete búsquedas, agua subterránea por elementos finitos, análisis probabilístico, retroanálisis y optimización. Los cálculos se ejecutan como tareas en segundo plano, y cualquiera de ellas se puede cancelar.</p>
       </div>
       <div class="card">
         <span class="label">Resultados</span>
@@ -241,7 +241,7 @@ ogr-slip2d-mcp --version</code></pre></div>
     }
   }
 }</code></pre></div>
-            <p class="muted mb-0"><strong>Con modelos pequeños, usa <code>--profile compact</code>.</strong> Este perfil publica 14 herramientas en lugar de 74: <code>model_define</code> construye la geometría en una sola llamada y <code>python_exec</code> cubre el resto. Un modelo pequeño se pierde entre muchas herramientas, y la descripción de cada una ocupa contexto en todas las peticiones.</p>
+            <p class="muted mb-0"><strong>Con modelos pequeños, usa <code>--profile compact</code>.</strong> Este perfil publica 14 herramientas en lugar de 75: <code>model_define</code> construye la geometría en una sola llamada y <code>python_exec</code> cubre el resto. Un modelo pequeño se pierde entre muchas herramientas, y la descripción de cada una ocupa contexto en todas las peticiones.</p>
           </div>
 
           <div class="tabpanel" role="tabpanel" id="p-ollama" aria-labelledby="t-ollama" hidden>
@@ -302,7 +302,7 @@ mcpo-env\Scripts\mcpo --port 8000 --api-key "your-key" -- ogr-slip2d-mcp --workd
         <p>Pide al agente que llame a <code>server_info</code>. La respuesta incluye la versión, las unidades (SI) y las herramientas publicadas, e indica si la próxima llamada irá a una ventana abierta de OGR Slip2D o a un modelo propio del servidor.</p>
         <div class="code"><pre><code>{"server": "ogr-slip2d", "units": "SI: m, kN, kPa, kN/m3, degrees", "profile": "full",
  "attached_to_window": {"window_open": true, "next_call_goes_to": "the open window"},
- "program_coverage": {"mapped": 116, "pending": 0}, "licence": "AGPL-3.0-or-later", …}</code></pre></div>
+ "program_coverage": {"mapped": 121, "ui_only": 24, "pending": 0, "pending_by_phase": {}}, "licence": "AGPL-3.0-or-later", …}</code></pre></div>
       </li>
     </ol>
   </div>
@@ -334,8 +334,8 @@ mcpo-env\Scripts\mcpo --port 8000 --api-key "your-key" -- ogr-slip2d-mcp --workd
 <section class="section">
   <div class="wrap">
     <div class="sec-head">
-      <div><div class="sec-num label">§ 05 — Qué puede hacer el agente</div><h2>74 herramientas que cubren <em>116 acciones de menú</em></h2></div>
-      <p>El servidor da acceso a todas las acciones de modelado y análisis de los menús del programa. Solo quedan fuera las que afectan únicamente a la vista (zoom, desplazamiento, impresión). Para modelos locales pequeños, el perfil compact publica 14 de las 74 herramientas.</p>
+      <div><div class="sec-num label">§ 05 — Qué puede hacer el agente</div><h2>75 herramientas que cubren <em>121 acciones de menú</em></h2></div>
+      <p>El servidor da acceso a todas las acciones de modelado y análisis de los menús del programa. Solo quedan fuera las que afectan únicamente a la vista (zoom, desplazamiento, impresión). Para modelos locales pequeños, el perfil compact publica 14 de las 75 herramientas.</p>
     </div>
     <div class="table-wrap">
       <table class="data">
@@ -400,7 +400,7 @@ mcpo-env\Scripts\mcpo --port 8000 --api-key "your-key" -- ogr-slip2d-mcp --workd
     <h2 class="mt-s">Preguntas frecuentes</h2>
     <div class="mt-m stack">
       <details class="note"><summary><strong>¿Mi modelo sale de mi ordenador?</strong></summary><p class="mt-s">El servidor no hace ninguna llamada de red. Al proveedor del modelo le llega lo que le envía tu cliente, como en cualquier otra conversación. Con un modelo local (LM Studio, Ollama), no sale nada de tu equipo.</p></details>
-      <details class="note"><summary><strong>¿Qué modelos pueden usarlo?</strong></summary><p class="mt-s">Cualquier cliente que hable MCP. Los modelos grandes en la nube manejan bien el perfil completo de 74 herramientas; con modelos locales pequeños, arranca el servidor con <code>--profile compact</code>.</p></details>
+      <details class="note"><summary><strong>¿Qué modelos pueden usarlo?</strong></summary><p class="mt-s">Cualquier cliente que hable MCP. Los modelos grandes en la nube manejan bien el perfil completo de 75 herramientas; con modelos locales pequeños, arranca el servidor con <code>--profile compact</code>.</p></details>
       <details class="note"><summary><strong>¿Puede el agente estropear mi modelo?</strong></summary><p class="mt-s">Cada cambio se puede deshacer. Un script ejecutado con <code>python_exec</code> cuenta como un solo paso y se revierte si falla, y el agente no puede abrir ni crear un modelo si hay cambios sin guardar. Los ajustes que el cálculo no usaría se rechazan, con el motivo, en lugar de guardarse.</p></details>
       <details class="note"><summary><strong>¿La respuesta del agente es un resultado de ingeniería?</strong></summary><p class="mt-s">Las cifras salen del mismo motor que las del programa de escritorio y necesitan las mismas comprobaciones: cálculos independientes, la sensibilidad del resultado a los datos de entrada y el criterio de ingeniería. La responsabilidad de un proyecto es del ingeniero que lo firma, tanto si el modelo lo ha construido él como si lo ha hecho un agente.</p></details>
     </div>
@@ -469,7 +469,7 @@ mcpo-env\Scripts\mcpo --port 8000 --api-key "your-key" -- ogr-slip2d-mcp --workd
     </div>
     <div class="legal">
       <span>© 2026 Samuel Sáez López · OGR Slip2D es software libre (licencia AGPL-3.0 o posterior) y se distribuye sin ninguna garantía.</span>
-      <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
+      <span>OGR Slip2D <span data-v>0.1.481</span> · 2026-11-22</span>
     </div>
   </div>
 </footer>

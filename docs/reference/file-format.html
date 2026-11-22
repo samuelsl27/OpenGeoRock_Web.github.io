@@ -163,7 +163,7 @@
 <nav class="crumbs label" aria-label="Breadcrumb"><a href="../../docs/index.html">Documentation</a><span aria-hidden="true">/</span><span>5 · Reference</span></nav>
 <div class="chapter label">5.4</div>
 <h1>The .ogr file format</h1>
-<div class="meta label"><span>Describes OGR Slip2D <span data-v>0.1.235</span></span></div>
+<div class="meta label"><span>Describes OGR Slip2D <span data-v>0.1.481</span></span></div>
 <!-- @end dochead -->
     </header>
 
@@ -181,7 +181,7 @@
       <p>Saving writes the whole document, so a file saved by the current version carries every key below; a calculation does not modify the file.</p>
 
       <h3 id="excerpt"><span class="ht">An excerpt</span><a class="anchor" href="#excerpt" aria-label="Link to this section">#</a></h3>
-      <p>The beginning of a two-layer slope with a water table, as saved by v<span data-v>0.1.235</span>; <code>…</code> marks lines left out.</p>
+      <p>The beginning of a two-layer slope with a water table, as saved by v<span data-v>0.1.481</span>; <code>…</code> marks lines left out.</p>
       <div class="code"><pre><code>{
   "format_version": "0.1",
   "id": "ed1d8a87-0f66-45c7-9027-1d689a44c66f",
@@ -267,6 +267,8 @@
               <tr><td><code>annotations</code></td><td>Drawings, texts and dimensions; the analysis does not read them.</td></tr>
               <tr><td><code>focus_objects</code></td><td>Focus objects that restrict the search.</td></tr>
               <tr><td><code>user_surfaces</code></td><td>Circles defined by hand and analysed together with the search. Their ends where they meet the ground are not meaningful in the file: they are a result of the analysis, not an input.</td></tr>
+              <tr><td><code>transient_initial_result</code></td><td>The initial state of a transient analysis. Written only when there is one (since v0.1.307).</td></tr>
+              <tr><td><code>user_polylines</code></td><td>Non-circular surfaces drawn by hand, with the data of Sarma's method at their vertices when it is given. Written only when there are any (since v0.1.427).</td></tr>
             </tbody>
           </table>
         </div>
@@ -275,7 +277,7 @@
 
       <h2 id="settings"><span class="secnum">5.4.3</span><span class="ht">Settings keys</span><a class="anchor" href="#settings" aria-label="Link to this section">#</a></h2>
       <figure class="tbl" id="tbl-settings">
-        <figcaption><span class="fignum">Table 5.4.2</span> Keys of <code>settings</code>. Each section is written whole, so every field of every section is present in a saved file.</figcaption>
+        <figcaption><span class="fignum">Table 5.4.2</span> Keys of <code>settings</code>. Each section is written whole, so every field of a section is present in a saved file. All sections are always written except <code>sarma</code>.</figcaption>
         <div class="table-wrap">
           <table class="data">
             <thead><tr><th>Key</th><th>Content</th><th>Some of its fields</th></tr></thead>
@@ -283,7 +285,7 @@
               <tr><td><code>units</code></td><td>Display units and failure direction</td><td><code>system</code>, <code>time</code>, <code>permeability</code>, <code>failure_direction</code> (<code>"L2R"</code> or <code>"R2L"</code>), <code>system_id</code></td></tr>
               <tr><td><code>methods</code></td><td>Methods and convergence</td><td><code>enabled_methods</code>, <code>num_slices</code>, <code>tolerance</code>, <code>max_iterations</code>, <code>interslice_function</code>, <code>interslice_forces</code></td></tr>
               <tr><td><code>groundwater</code></td><td>How pore pressure is obtained</td><td><code>method</code>, <code>pore_fluid_unit_weight</code>, <code>rapid_drawdown</code>, <code>rapid_drawdown_method</code>, <code>transient</code>, <code>transient_stages</code>, <code>default_hu</code>, <code>auto_hu</code></td></tr>
-              <tr><td><code>search</code></td><td>Surface type, search method and its options, slope limits, filters</td><td><code>surface_type</code>, <code>search_method</code>, <code>grid_nx</code>, <code>grid_ny</code>, <code>radius_increment</code>, <code>num_surfaces</code>, <code>slope_limit_left</code>, <code>slope_limit_right</code> (71 fields in all)</td></tr>
+              <tr><td><code>search</code></td><td>Surface type, search method and its options, slope limits, filters</td><td><code>surface_type</code>, <code>search_method</code>, <code>grid_nx</code>, <code>grid_ny</code>, <code>radius_increment</code>, <code>num_surfaces</code>, <code>slope_limit_left</code>, <code>slope_limit_right</code> (72 fields in all)</td></tr>
               <tr><td><code>statistics</code></td><td>Probabilistic and sensitivity analyses</td><td><code>probabilistic_analysis</code>, <code>sensitivity_analysis</code>, <code>sampling_method</code>, <code>num_samples</code>, <code>analysis_type</code>, <code>seed</code></td></tr>
               <tr><td><code>back_analysis</code></td><td>Back analysis of the support force</td><td><code>enabled</code>, <code>target_fos</code>, <code>elevation</code>, <code>method_id</code></td></tr>
               <tr><td><code>random_numbers</code></td><td>Seed of the random searches and of the sampling</td><td><code>method</code>, <code>seed</code>, <code>lhs_correlate</code></td></tr>
@@ -292,6 +294,7 @@
               <tr><td><code>seismic</code></td><td>Seismic analysis beyond the factor of safety</td><td><code>compute_ky</code>, <code>ky_target_fos</code>, <code>newmark</code>, <code>record_id</code>, <code>polarity</code>, <code>allow_upslope</code>, <code>scale</code></td></tr>
               <tr><td><code>summary</code></td><td>Project summary</td><td><code>title</code>, <code>analysis</code>, <code>author</code>, <code>company</code>, <code>date_created</code>, <code>comments</code></td></tr>
               <tr><td><code>max_materials</code>, <code>max_supports</code></td><td>Limits of the model</td><td>20 each by default</td></tr>
+              <tr><td><code>sarma</code></td><td>Sarma's method (since v0.1.464); written only when the method is enabled or a field differs from its default</td><td><code>num_slices</code> (least number of wedges), <code>tolerance</code>, <code>max_iterations</code>, <code>slice_angles</code>, <code>interslice_strength</code>, <code>interslice_cohesion</code>, <code>interslice_phi</code>, <code>boundaries_at_materials</code>, <code>shear_sense</code></td></tr>
             </tbody>
           </table>
         </div>
@@ -319,6 +322,7 @@
               <tr><td><code>/</code></td><td>attributes</td><td><code>format_version</code> (<code>"0.1"</code>), <code>project_id</code>, <code>method</code>, <code>n_surfaces</code> (surfaces stored under <code>/surfaces</code>), <code>n_valid</code>, <code>n_invalid</code>, <code>n_attempts</code>, <code>objective</code> (<code>"fos"</code> or <code>"ky"</code>); <code>n_focus_rejected</code> only when a focus object removed candidates, <code>n_user_surfaces</code> only when there are user surfaces.</td></tr>
               <tr><td><code>/surfaces/surface_00000</code>…</td><td>group per surface</td><td>Attributes <code>fos</code> (absent when there is no factor of safety), <code>converged</code>, <code>iterations</code>, <code>method</code>, <code>is_valid</code>, <code>error</code>, <code>reason</code> (<a class="xref" href="error-codes.html#reasons">Section 5.5.2</a>), <code>surface_type</code>; for circular and composite surfaces <code>centre_x</code>, <code>centre_y</code>, <code>radius</code> and, when known, <code>x_left</code>, <code>x_right</code>; in seismic runs <code>ky</code>, <code>ky_fos</code>, <code>newmark_displacement</code>.</td></tr>
               <tr><td><code>…/slices</code></td><td>dataset</td><td>One row per slice: <code>index</code>, <code>x_centre</code>, <code>width</code>, <code>base_y_left</code>, <code>base_y_right</code> (m), <code>base_angle_deg</code> (°), <code>base_length</code>, <code>height</code> (m), <code>weight</code> (kN/m), <code>pore_pressure</code> at the base and <code>surface_pressure</code> of the distributed load on top (kPa). Compressed with gzip.</td></tr>
+              <tr><td><code>…/faces</code></td><td>dataset</td><td>Sarma's method only: one row per interslice face, with the columns named in its <code>columns</code> attribute (<code>x_base</code>, <code>y_base</code>, <code>x_top</code>, <code>y_top</code>, <code>length</code>, <code>water_force</code>, <code>angle_deg</code>, <code>cohesion</code>, <code>friction_angle</code>, <code>E</code>, <code>E_effective</code>, <code>X</code>). The surface group then also carries <code>sarma_kc</code>.</td></tr>
               <tr><td><code>/user_surfaces/…</code></td><td>groups</td><td>The surfaces defined by hand, laid out as <code>/surfaces</code>; present only when there are any.</td></tr>
               <tr><td><code>/summary/fos_array</code></td><td>dataset</td><td>Factor of safety of each surface of <code>/surfaces</code>, in the same order; NaN where there is no valid factor.</td></tr>
               <tr><td><code>/summary/centres</code>, <code>/summary/radii</code></td><td>datasets</td><td>Centre (<em>N</em> × 2) and radius of each surface; NaN for surfaces that are not circles.</td></tr>
@@ -330,7 +334,7 @@
       <div class="impl">
         <span class="label">In OGR Slip2D</span>
         <p>A surface without a factor of safety gets no <code>fos</code> attribute, and its <code>reason</code> instead, so that a reader that forgets to check gets an error naming the surface rather than a number. The module's own header still draws the metadata as a group <code>meta</code> and the surfaces as <code>surface_0000</code>; the code writes the metadata as attributes of the root and numbers the surfaces with five digits, as this page shows.</p>
-        <span class="src">Source: <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_core/project/project.py" target="_blank" rel="noopener">ogr_core/project/project.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_core/project/settings.py" target="_blank" rel="noopener">ogr_core/project/settings.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_core/project/results_io.py" target="_blank" rel="noopener">ogr_core/project/results_io.py</a></span>
+        <span class="src">Source: OGR-Core: <a href="https://github.com/samuelsl27/OGR-Core/blob/v0.2.2/ogr_core/project/project.py" target="_blank" rel="noopener">ogr_core/project/project.py</a> · <a href="https://github.com/samuelsl27/OGR-Core/blob/v0.2.2/ogr_core/project/settings.py" target="_blank" rel="noopener">ogr_core/project/settings.py</a> · <a href="https://github.com/samuelsl27/OGR-Core/blob/v0.2.2/ogr_core/project/results_io.py" target="_blank" rel="noopener">ogr_core/project/results_io.py</a></span>
       </div>
     </article>
 
@@ -405,7 +409,7 @@
     </div>
     <div class="legal">
       <span>© 2026 Samuel Sáez López · OGR Slip2D is free software under AGPL-3.0-or-later, with no warranty of any kind.</span>
-      <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
+      <span>OGR Slip2D <span data-v>0.1.481</span> · 2026-11-22</span>
     </div>
   </div>
   <div class="lang-hint" role="dialog" aria-label="Idioma" lang="es">

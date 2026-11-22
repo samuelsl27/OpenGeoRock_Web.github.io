@@ -162,7 +162,7 @@
 <nav class="crumbs label" aria-label="Breadcrumb"><a href="../../docs/index.html">Documentation</a><span aria-hidden="true">/</span><span>2 · User guide</span></nav>
 <div class="chapter label">2.12</div>
 <h1>Reports, scripting and the command line</h1>
-<div class="meta label"><span>Describes OGR Slip2D <span data-v>0.1.235</span></span></div>
+<div class="meta label"><span>Describes OGR Slip2D <span data-v>0.1.481</span></span></div>
 <!-- @end dochead -->
     </header>
 
@@ -170,24 +170,23 @@
       <p class="lede">Results leave the program as a PDF report, images, prints and DXF drawings. The program can also be run without the mouse, from the Python terminal inside the window, the command line, the Python API or an AI agent connected through the MCP server. The last three have their own reference chapters; here they are introduced from the point of view of the desktop program.</p>
 
       <h2 id="report"><span class="secnum">2.12.1</span><span class="ht">The PDF report</span><a class="anchor" href="#report" aria-label="Link to this section">#</a></h2>
-      <p><span class="ui">File → Generate Report…</span> writes an A4 PDF of the last Compute, with every method it ran; without a Compute it refuses, with a message. The file name proposed is the project's name followed by <code>_report.pdf</code>. The report has eight sections:</p>
+      <p><span class="ui">File → Generate Report…</span> writes an A4 PDF of the last Compute, with every method it ran; without a Compute it refuses, with a message. It first asks whether to include a drawing of the critical surface of each method, and how to frame it. The file name proposed is the project's name followed by <code>_report.pdf</code>, and the report is written in the language of the interface. It has these sections:</p>
       <ol>
         <li><strong>Project Summary</strong>: title, file, author, company, dates and comments;</li>
         <li><strong>General Settings</strong>: units, time and permeability units, failure direction;</li>
-        <li><strong>Analysis Options</strong>: the methods, number of slices, tolerance and maximum iterations, and the surface options;</li>
+        <li><strong>Analysis Options</strong>: the methods, number of slices, tolerance and maximum iterations, and the surface options; with a design standard applied, also the standard and what it factored;</li>
         <li><strong>Material Properties</strong>;</li>
-        <li><strong>Global Minimums</strong>: for each method, the factor of safety and the critical surface (centre and radius for a circle, the two end points, the total slice area);</li>
+        <li><strong>Global Minimums</strong>: for each method, the factor of safety and the critical surface (centre and radius for a circle, the two end points, the total slice area), followed by the vertices of a non-circular critical surface;</li>
+          <li><strong>Critical Surface by Method</strong>, the drawings, when they were asked for;</li>
         <li><strong>Valid / Invalid Surfaces</strong>: the counts per method, with the generation attempts;</li>
         <li><strong>Slice Data</strong> of the critical surface of each method;</li>
         <li><strong>List of Coordinates</strong> of the boundaries.</li>
       </ol>
       <p>The title, author and company come from <span class="ui">Analysis → Project Settings →</span> <span class="ui">Project Summary</span>.</p>
-      <div class="note warn"><span class="label">Before you send a report (version 0.1.235)</span>
+      <div class="note warn"><span class="label">Before you send a report (version 0.1.481)</span>
         <ul>
           <li>A new project carries the program author's name and institution as its default <em>Author</em> and <em>Company</em> in Project Summary. Replace them, or the report will name someone else.</li>
-          <li>The report contains tables only, no drawing of the model; add one with <span class="ui">File → Export Image…</span>.</li>
-          <li>It does not include the analysis notes, and it does not record a design standard: with one applied, the value it labels <em>Factor of Safety (FS)</em> is an over-design factor (<a class="xref" href="design-standards.html">Section 2.11</a>).</li>
-          <li>Its footer states the licence as GPL-3.0; the program is licensed under AGPL-3.0-or-later.</li>
+          <li>It does not include the analysis notes, apart from those of a design standard (<span class="ui">Analysis → Analysis Notes…</span>).</li>
         </ul>
       </div>
 
@@ -197,13 +196,13 @@
         <li><span class="ui">Edit → Copy Image</span> copies the view as it is on screen to the clipboard, as a bitmap.</li>
         <li>The Interpret window has its own <span class="ui">File → Export Image…</span> (PNG or JPEG of its view) and <span class="ui">Edit → Copy Image</span> (<a class="xref" href="results.html">Section 2.8</a>).</li>
       </ul>
-      <div class="note"><span class="label">Note</span><p><span class="ui">Edit → Picture Format</span> offers <em>Bitmap</em> and <em>Vector (SVG)</em>, but in version 0.1.235 the choice has no effect: Copy Image always places a bitmap on the clipboard.</p></div>
+      <div class="note"><span class="label">Note</span><p><span class="ui">Edit → Picture Format</span> offers <em>Bitmap</em> and <em>Vector (SVG)</em>, but in version 0.1.481 the choice has no effect: Copy Image always places a bitmap on the clipboard.</p></div>
 
       <h2 id="printing"><span class="secnum">2.12.3</span><span class="ht">Printing</span><a class="anchor" href="#printing" aria-label="Link to this section">#</a></h2>
-      <p><span class="ui">File → Page Setup…</span> chooses the paper and margins, and <span class="ui">File → Print Preview…</span> shows the whole model drawn on that page; print from the preview window. In version 0.1.235 <span class="ui">File → Print…</span> (<kbd>Ctrl</kbd>+<kbd>P</kbd>) only displays a message.</p>
+      <p><span class="ui">File → Page Setup…</span> chooses the paper and margins, and <span class="ui">File → Print Preview…</span> shows the whole model drawn on that page; print from the preview window. In version 0.1.481 <span class="ui">File → Print…</span> (<kbd>Ctrl</kbd>+<kbd>P</kbd>) only displays a message.</p>
 
       <h2 id="dxf"><span class="secnum">2.12.4</span><span class="ht">DXF drawings</span><a class="anchor" href="#dxf" aria-label="Link to this section">#</a></h2>
-      <p><span class="ui">File → Export DXF…</span> writes the model to a DXF drawing for CAD. The dialog sets the unit of the coordinates (m, cm, mm, km, ft or in; the model is in metres and the unit is recorded in the file), the <em>Load arrow size</em> as a percentage of the model diagonal (2 %), and what to include: <em>Boundaries (geometry)</em>, <em>Supports</em>, <em>Loads (as arrows)</em>, <em>Finite element mesh</em> (off by default, as it writes one line per element edge), <em>Critical slip surface</em> (after a Compute) and <em>Annotations (title, factor of safety)</em>. The geometry goes to the layers the DXF importer recognises, so the drawing can be edited and imported back; loads, mesh, slip surface and annotations go to separate layers whose names start with <code>OGR_X_</code>, which the importer ignores, so a load arrow cannot come back as a boundary. Importing a DXF is described in <a class="xref" href="geometry.html">Section 2.2</a>.</p>
+      <p><span class="ui">File → Export DXF…</span> writes the model to a DXF drawing for CAD. The dialog sets the unit of the coordinates (m, cm, mm, km, ft or in; the model is in metres and the unit is recorded in the file), the <em>Load arrow size</em> as a percentage of the model diagonal (2 %), and what to include: <em>Boundaries (geometry)</em>, <em>Supports</em>, <em>Loads (as arrows)</em>, <em>Finite element mesh</em> (off by default, as it writes one line per element edge), <em>Critical slip surface</em> (after a Compute), <em>Labels (title, factor of safety)</em> and <em>Annotation layer</em> (what was drawn with the <span class="ui">Tools</span> menu). The geometry goes to the layers the DXF importer recognises, so the drawing can be edited and imported back; loads, mesh, slip surface, labels and annotation layer go to separate layers whose names start with <code>OGR_X_</code>, which the importer ignores, so a load arrow cannot come back as a boundary. Importing a DXF is described in <a class="xref" href="geometry.html">Section 2.2</a>.</p>
 
       <h2 id="terminal"><span class="secnum">2.12.5</span><span class="ht">The Python terminal</span><a class="anchor" href="#terminal" aria-label="Link to this section">#</a></h2>
       <p><span class="ui">Window → Terminal</span> (<kbd>Ctrl</kbd>+<kbd>`</kbd>) opens a Python console inside the window, connected to the live model. These names are defined in it:</p>
@@ -229,7 +228,7 @@
 &gt;&gt;&gt; out = run_analysis(project)            # the methods enabled in the project
 &gt;&gt;&gt; {mid: r.critical.fos for mid, r in out.results.items() if r.critical}
 &gt;&gt;&gt; out.warnings                           # the analysis notes</code></pre></div>
-      <div class="note"><span class="label">Note</span><p>Changes made to <code>project</code> from the terminal do not go through <span class="ui">Edit → Undo</span>, and the view is not redrawn by itself: call <code>canvas.refresh_scene()</code>. A calculation started here runs in the window's own thread, so the window waits until it ends. A search built by hand from its class, as in the example of <code>help_ogr()</code>, uses that class's defaults, not the project's settings; <code>run_analysis</code> uses the project's.</p></div>
+      <div class="note"><span class="label">Note</span><p>Since version 0.1.305 a command that changes <code>project</code> is one step of <span class="ui">Edit → Undo</span>, named <em>Python script</em>, and the view is redrawn after it. A change to the finite-element mesh or its results is not part of that step; after one, call <code>canvas.refresh_scene()</code>. A calculation started here runs in the window's own thread, so the window waits until it ends. A search built by hand from its class, as in the example of <code>help_ogr()</code>, uses that class's defaults, not the project's settings; <code>run_analysis</code> uses the project's.</p></div>
 
       <h2 id="cli"><span class="secnum">2.12.6</span><span class="ht">The command line</span><a class="anchor" href="#cli" aria-label="Link to this section">#</a></h2>
       <p><code>ogr-slip2d-cli</code> runs a saved project without opening the window. It computes the analysis the project describes, through the same runner as the desktop program; each option overrides one setting of the project in memory, and the file is not modified.</p>
@@ -240,15 +239,15 @@
             <thead><tr><th>Command</th><th>What it does</th></tr></thead>
             <tbody>
               <tr><td><code>info project.ogr</code></td><td>A summary of the project and its materials.</td></tr>
-              <tr><td><code>compute project.ogr</code></td><td>Runs the analysis, prints every note and a table of the critical value of each method, and saves each method's result as HDF5 (<code>project.h5</code>, or one file per method). Options: <code>--method</code>, <code>--slices</code>, <code>--nx</code>, <code>--ny</code> (grid intervals), <code>--dr</code> (Radius Increment), <code>--search</code>, <code>--samples</code> (Number of Surfaces of the Slope, Block and Path searches) and <code>--output</code>.</td></tr>
-              <tr><td><code>methods</code></td><td>The nine methods with the equilibrium each satisfies.</td></tr>
+              <tr><td><code>compute project.ogr</code></td><td>Runs the analysis, prints every note and a table of the critical value of each method, and saves each method's result as HDF5 (<code>project.h5</code>, or one file per method). Options: <code>--method</code>, <code>--slices</code>, <code>--sarma-slices</code> (the least number of wedges of Sarma's method), <code>--nx</code>, <code>--ny</code> (grid intervals), <code>--dr</code> (Radius Increment), <code>--search</code>, <code>--samples</code> (Number of Surfaces of the Slope, Block and Path searches) and <code>--output</code>.</td></tr>
+              <tr><td><code>methods</code></td><td>The ten methods with the equilibrium each satisfies.</td></tr>
               <tr><td><code>strength-models</code></td><td>The strength models and their parameters.</td></tr>
               <tr><td><code>new-demo out.ogr</code></td><td>Saves the demo slope as a project.</td></tr>
             </tbody>
           </table>
         </div>
       </figure>
-      <p>A project the analysis cannot honour is refused with its reasons and exit code 3, as Compute refuses it in the window. Version 0.1.235 has no command-line command for the statistical analyses. <code>--search</code> takes the search ids <code>grid</code>, <code>slope</code>, <code>auto_refine</code>, <code>block</code>, <code>path</code>, <code>simulated_annealing</code> and <code>particle_swarm</code>; an id it does not recognise is not refused, and the run falls back to a Grid Search.</p>
+      <p>A project the analysis cannot honour is refused with its reasons and exit code 3, as Compute refuses it in the window. Version 0.1.481 has no command-line command for the statistical analyses. <code>--search</code> takes the search ids <code>grid</code>, <code>slope</code>, <code>auto_refine</code>, <code>block</code>, <code>path</code>, <code>simulated_annealing</code> and <code>particle_swarm</code>; an id it does not recognise is not refused, and the run falls back to a Grid Search.</p>
 
       <h2 id="python-api"><span class="secnum">2.12.7</span><span class="ht">Python API</span><a class="anchor" href="#python-api" aria-label="Link to this section">#</a></h2>
       <p>The packages of the program can be imported from Python. The shortest way to analyse a saved project is the same runner the window and the command line use:</p>
@@ -339,7 +338,7 @@ for note in out.warnings:
     </div>
     <div class="legal">
       <span>© 2026 Samuel Sáez López · OGR Slip2D is free software under AGPL-3.0-or-later, with no warranty of any kind.</span>
-      <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
+      <span>OGR Slip2D <span data-v>0.1.481</span> · 2026-11-22</span>
     </div>
   </div>
   <div class="lang-hint" role="dialog" aria-label="Idioma" lang="es">

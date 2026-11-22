@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>Casos de referencia de equilibrio límite — documentación de OGR Slip2D</title>
-<meta name="description" content="Los siete casos publicados de estabilidad de taludes que reproduce OGR Slip2D, uno a uno: fuente, modelo, búsqueda o superficie dada, valor de referencia, valor obtenido, diferencia y tolerancia, recalculados con la versión 0.1.235, y las comprobaciones de los métodos sobre superficies dadas.">
+<meta name="description" content="Los siete casos publicados de estabilidad de taludes que reproduce OGR Slip2D, uno a uno: fuente, modelo, búsqueda o superficie dada, valor de referencia, valor obtenido, diferencia y tolerancia, recalculados con la versión 0.1.481, y las comprobaciones de los métodos sobre superficies dadas.">
 <!-- @inc head -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>document.documentElement.classList.replace("no-js", "js")</script>
@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="OpenGeoRock">
 <meta property="og:title" content="Casos de referencia de equilibrio límite — documentación de OGR Slip2D">
-<meta property="og:description" content="Los siete casos publicados de estabilidad de taludes que reproduce OGR Slip2D, uno a uno: fuente, modelo, búsqueda o superficie dada, valor de referencia, valor obtenido, diferencia y tolerancia, recalculados con la versión 0.1.235, y las comprobaciones de los métodos sobre superficies dadas.">
+<meta property="og:description" content="Los siete casos publicados de estabilidad de taludes que reproduce OGR Slip2D, uno a uno: fuente, modelo, búsqueda o superficie dada, valor de referencia, valor obtenido, diferencia y tolerancia, recalculados con la versión 0.1.481, y las comprobaciones de los métodos sobre superficies dadas.">
 <meta property="og:url" content="https://opengeorock.org/es/docs/verification/slope-benchmarks.html">
 <meta property="og:image" content="https://opengeorock.org/assets/img/og-image.png">
 <meta property="og:locale" content="es_ES">
@@ -163,12 +163,12 @@
 <nav class="crumbs label" aria-label="Ruta de navegación"><a href="../../../es/docs/index.html">Documentación</a><span aria-hidden="true">/</span><span>4 · Verificación</span></nav>
 <div class="chapter label">4.2</div>
 <h1>Casos de referencia de equilibrio límite</h1>
-<div class="meta label"><span>Válido para OGR Slip2D <span data-v>0.1.235</span></span></div>
+<div class="meta label"><span>Válido para OGR Slip2D <span data-v>0.1.481</span></span></div>
 <!-- @end dochead -->
     </header>
 
     <article class="doc prose">
-      <p class="lede">Siete casos publicados se ejecutan con OGR Slip2D <span data-v>0.1.235</span> igual que los ejecuta la batería de tests. La referencia de cada caso es un valor publicado, y su tolerancia depende de la precisión de esa fuente (<a class="xref" href="methodology.html#tolerance">Sección 4.1.4</a>).</p>
+      <p class="lede">Siete casos publicados se ejecutan con OGR Slip2D <span data-v>0.1.481</span> igual que los ejecuta la batería de tests. La referencia de cada caso es un valor publicado, y su tolerancia depende de la precisión de esa fuente (<a class="xref" href="methodology.html#tolerance">Sección 4.1.4</a>).</p>
       <p>Los casos están en la carpeta <a href="https://github.com/samuelsl27/OGR-Slip2D/tree/main/validacion/casos" target="_blank" rel="noopener">validacion/casos/</a> del repositorio. Cada uno contiene el modelo (<code>modelo.ogr</code>), los valores esperados con su fuente y su tolerancia (<code>esperado.json</code>) y una descripción (<code>caso.md</code>). La numeración sigue el orden en que se añadieron los casos.</p>
 
       <h2 id="summary"><span class="secnum">4.2.1</span><span class="ht">Los siete casos de un vistazo</span><a class="anchor" href="#summary" aria-label="Enlace a esta sección">#</a></h2>
@@ -263,9 +263,9 @@
           <text class="mute" x="362.0" y="340" text-anchor="middle">diferencia respecto al valor de referencia (%)</text>
           </svg>
         </div>
-        <figcaption><span class="fignum">Figura 4.2.1</span> Diferencia entre el factor de seguridad de OGR Slip2D <span data-v>0.1.235</span> y el valor de referencia, como porcentaje de la referencia, para los doce pares de método y caso. La banda sombreada es la tolerancia de cada caso.</figcaption>
+        <figcaption><span class="fignum">Figura 4.2.1</span> Diferencia entre el factor de seguridad de OGR Slip2D <span data-v>0.1.481</span> y el valor de referencia, como porcentaje de la referencia, para los doce pares de método y caso. La banda sombreada es la tolerancia de cada caso.</figcaption>
       </figure>
-      <div class="note"><span class="label">Cómo se calculan las diferencias</span><p>Los valores obtenidos se muestran con cuatro decimales, pero la diferencia de cada fila y su comparación con la tolerancia se calculan con los valores sin redondear, como en la <a class="xref" href="methodology.html#eq-difference">Ec. (4.1.1)</a>: la diferencia es relativa al valor de referencia y es positiva cuando OGR Slip2D da el factor de seguridad más alto. Los valores se recalcularon con la versión <span data-v>0.1.235</span> sobre los modelos del repositorio, con la misma función que usa la batería de tests.</p></div>
+      <div class="note"><span class="label">Cómo se calculan las diferencias</span><p>Los valores obtenidos se muestran con cuatro decimales, pero la diferencia de cada fila y su comparación con la tolerancia se calculan con los valores sin redondear, como en la <a class="xref" href="methodology.html#eq-difference">Ec. (4.1.1)</a>: la diferencia es relativa al valor de referencia y es positiva cuando OGR Slip2D da el factor de seguridad más alto. Los valores se recalcularon con la versión <span data-v>0.1.481</span> sobre los modelos del repositorio, con la misma función que usa la batería de tests.</p></div>
       <div class="note warn"><span class="label">Alcance</span><p>Los siete casos usan superficies circulares y materiales de Mohr-Coulomb. En uno de ellos interviene la presión intersticial, mediante un nivel freático, y en otro una carga; ninguno incluye soportes, acción sísmica, un campo de presiones intersticiales por elementos finitos ni una superficie no circular. Spencer y GLE / Morgenstern-Price solo se comparan con un valor publicado en el caso 007 (<a class="xref" href="methodology.html#tolerance">Sección 4.1.4</a>); otras comprobaciones de esos métodos figuran en la <a class="xref" href="#method-checks">Sección 4.2.9</a>.</p></div>
 
       <h2 id="acads-1a"><span class="secnum">4.2.2</span><span class="ht">Caso 001 · ACADS 1(a): talud homogéneo, tensiones totales</span><a class="anchor" href="#acads-1a" aria-label="Enlace a esta sección">#</a></h2>
@@ -649,7 +649,7 @@
 
       <h2 id="reinforcement-1999"><span class="secnum">4.2.7</span><span class="ht">Caso 006 · Ejemplo de refuerzo (1999): el filtro de profundidad mínima</span><a class="anchor" href="#reinforcement-1999" aria-label="Enlace a esta sección">#</a></h2>
       <p>Es el ejemplo de retroanálisis de refuerzo del manual de referencia de un programa de estabilidad de taludes, publicado en 1999; el caso se llama Ejemplo de refuerzo (1999), como en la <a href="../../verification/index.html">página de Verificación</a>. Se trata de un talud sin cohesión con una carga distribuida en la coronación, y se pide la fuerza de refuerzo que lleva el talud a un factor de seguridad de 1.5, a partir del factor sin refuerzo, 0.764, hallado sobre el círculo de centro (−11.41, 35.264) y radio 34.426 m. El enunciado añade dos condiciones: solo se consideran superficies de rotura con una profundidad mínima de 2 m, y se coloca un punto de foco en el pie, de modo que solo se consideran los círculos que pasan por él. La fuente no figura en la <a href="../reference/bibliography.html">bibliografía</a>.</p>
-      <p><strong>Qué comprueba.</strong> Que el filtro de profundidad mínima llega al motor de cálculo. Es el único caso que pone a prueba un filtro de superficies: los demás comprueban métodos y búsquedas, y ninguno verificaba que un ajuste del filtro de superficies llegara al análisis, algo que durante muchas versiones no ocurría. La condición forma parte del enunciado y no es un detalle de la solución: sin ella el problema no tiene la respuesta publicada. El archivo del caso anota que, con el mismo modelo y el filtro desactivado, el mínimo cae sobre una lámina delgada de 0.669 m de espesor en la cara del talud, con su centro en el borde de la rejilla. Si el filtro dejara de llegar al motor de cálculo, este caso fallaría: en la versión <span data-v>0.1.235</span>, la Grid Search del modelo con el filtro desactivado da 0.7277, con centro en (−20.0, 45.6), que queda un 4.7 % por debajo del valor publicado y fuera de la tolerancia.</p>
+      <p><strong>Qué comprueba.</strong> Que el filtro de profundidad mínima llega al motor de cálculo. Es el único caso que pone a prueba un filtro de superficies: los demás comprueban métodos y búsquedas, y ninguno verificaba que un ajuste del filtro de superficies llegara al análisis, algo que durante muchas versiones no ocurría. La condición forma parte del enunciado y no es un detalle de la solución: sin ella el problema no tiene la respuesta publicada. El archivo del caso anota que, con el mismo modelo y el filtro desactivado, el mínimo cae sobre una lámina delgada de 0.669 m de espesor en la cara del talud, con su centro en el borde de la rejilla. Si el filtro dejara de llegar al motor de cálculo, este caso fallaría: en la versión <span data-v>0.1.481</span>, la Grid Search del modelo con el filtro desactivado da 0.7277, con centro en (−20.0, 45.6), que queda un 4.7 % por debajo del valor publicado y fuera de la tolerancia.</p>
       <figure class="fig" id="fig-geom-006">
         <div class="art">
           <svg class="dg" viewBox="0 0 640 403" role="img" aria-labelledby="fig-geom-006-t"><title id="fig-geom-006-t">Sección transversal del caso 006, el ejemplo de refuerzo: un talud de 12 m a 45 grados con una carga distribuida de 40 kPa en la coronación y un punto de foco en el pie</title>
@@ -967,7 +967,7 @@
     </div>
     <div class="legal">
       <span>© 2026 Samuel Sáez López · OGR Slip2D es software libre (licencia AGPL-3.0 o posterior) y se distribuye sin ninguna garantía.</span>
-      <span>OGR Slip2D <span data-v>0.1.235</span> · 2026-10-01</span>
+      <span>OGR Slip2D <span data-v>0.1.481</span> · 2026-11-22</span>
     </div>
   </div>
 </footer>
