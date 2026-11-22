@@ -17,7 +17,14 @@ Solo documentación del repositorio y una rama local: ninguna página, ninguna h
 
 - `python tools/sitio.py --check`: 94 páginas, 0 errores, 0 avisos.
 
-## Sin tocar
+## Las otras dos menciones de la rama
 
-- `.claude/commands/publicar.md` (paso 8) y `spec/constitution/roadmap.md` todavía nombran
-  `rediseno-v3`.
+- `.claude/commands/publicar.md`, paso 8: se quitó el paréntesis «(el rediseño vive en
+  `rediseno-v3`)». El resto del paso no cambia.
+- `spec/constitution/roadmap.md`: la frase que abre «Hecho en el rediseño v3» pasa a pasado,
+  con lo que consta en git. El rediseño entró en `main` el 2026-10-02 por *fast-forward*, con el
+  commit `5e8c84b` (reflog de `main`: «merge rediseno-v3: Fast-forward»), y la rama se borró el
+  2026-11-22. La lista de puntos que cerró no cambia.
+
+`git grep rediseno-v3` ya solo la encuentra en las notas de `dev/changelog/` y en esa frase de la
+hoja de ruta.

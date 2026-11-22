@@ -5,7 +5,8 @@ Orden previsto. Cada punto se implementa por el flujo de
 
 ## Hecho en el rediseño v3 (2026-10-01 y 02)
 
-El rediseño vive en la rama `rediseno-v3` hasta que se publique. Cierra los puntos
+El rediseño se hizo en la rama `rediseno-v3`, que entró en `main` el 2026-10-02 por
+*fast-forward* con el commit `5e8c84b`; la rama se borró el 2026-11-22. Cerró los puntos
 que esta hoja de ruta tenía pendientes:
 
 - **Imágenes optimizadas**: fotos y logotipos en `assets/img/`, en WebP o PNG,

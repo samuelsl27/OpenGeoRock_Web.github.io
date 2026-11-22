@@ -32,7 +32,7 @@ vuelta atrás salvo otro commit. Antes de llegar ahí:
 
    **Espera mi OK explícito antes de hacer commit y push.** Un OK a un resumen no
    vale para un cambio posterior.
-8. Si estás en una rama que no es `main` (el rediseño vive en `rediseno-v3`),
+8. Si estás en una rama que no es `main`,
    **pregunta cómo quiero llevarla a `main`** —fusión, o `git push origin
    <rama>:main`—. No lo decidas tú.
 9. **Tras el push**: Pages redespliega solo. Comprueba en https://opengeorock.org
