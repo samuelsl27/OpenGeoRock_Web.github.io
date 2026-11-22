@@ -109,8 +109,8 @@ intermedio. Revisa en local antes (`/revisar`, `/publicar`).
 ### Fuera del repositorio
 
 Notas, borradores, capturas en bruto y herramientas de producción **no viven
-aquí** sino en `C:\Samuel\OGR_Suite\Web\desarrollo\` (desde la raíz
-de este repo, `../desarrollo/`). No se versiona: en un clon nuevo no existe, y
+aquí** sino en `../desarrollo/`, la carpeta hermana de este
+repositorio. No se versiona: en un clon nuevo no existe, y
 los flujos de traducción y de figuras dependen de ella. Sus carpetas:
 
 - `notas/`: decisiones del rediseño, fichas del programa, anomalías encontradas,

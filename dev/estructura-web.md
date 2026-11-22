@@ -57,8 +57,8 @@ OGR-Web/
 └── AGENTS.md · CLAUDE.md · README.md · .mcp.json · .gitignore · .vscode/
 ```
 
-Fuera del repositorio, en `C:\Samuel\OGR_Suite\Web\desarrollo\` (desde la
-raíz de este repo, `../desarrollo/`): notas, modelos `.ogr` de los que salen las
+Fuera del repositorio, en `../desarrollo/` (la carpeta hermana de este
+repo): notas, modelos `.ogr` de los que salen las
 figuras, capturas en bruto, herramientas de producción y el trabajo de traducción.
 Ver `AGENTS.md`.
 
