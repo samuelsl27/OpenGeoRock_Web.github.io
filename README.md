@@ -43,6 +43,33 @@ búsqueda, `sitemap.xml` y todo `es/` son **salida generada**: no se editan a
 mano. Las traducciones al español se preparan, comprueban y montan con
 `../desarrollo/herramientas/traduccion.py` (fuera del repo; ver `AGENTS.md`).
 
+## Desarrollo
+
+Con solo este repositorio clonado se puede ver, corregir y comprobar la web. Hace falta:
+
+- **Python 3**, sin ningún paquete: `tools/sitio.py` y el servidor local usan la
+  biblioteca estándar. No hay entorno virtual.
+- **Node.js**, solo para componer las ecuaciones (`tools/render_math.cjs`). No hay
+  `package.json` ni nada que instalar: KaTeX va incluido en `tools/vendor/`.
+- **git**. Publicar es `git push origin main`.
+
+```bash
+git clone https://github.com/samuelsl27/OpenGeoRock_Web.github.io.git OGR-Web
+cd OGR-Web
+python tools/sitio.py --check      # tiene que dar 0 errores y no cambiar nada en un clon nuevo
+python -m http.server 8000
+```
+
+Lo que **no** viene en el clon es `../desarrollo/` (notas, modelos `.ogr`, capturas y las
+herramientas de traducción y de figuras): sin esa carpeta no se puede montar la versión española
+ni regenerar las figuras. Dos de sus herramientas piden algo más que la biblioteca estándar:
+las de imágenes, Pillow, y `recalcular_validacion.py`, el programa OGR Slip2D instalado. Las dos
+cosas están en el entorno de OGR Slip2D.
+
+Para trabajar en la suite entera (la web junto a los programas que documenta), este repositorio
+vive dentro de la carpeta de trabajo `OGR_Suite`, y el `DESARROLLO.md` de su raíz dice qué
+instalar en un PC con Windows y cómo se monta todo (desde esta carpeta, `../../DESARROLLO.md`).
+
 ## Publicar
 
 ```bash
