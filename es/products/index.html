@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>Productos — la suite OpenGeoRock</title>
-<meta name="description" content="La suite OpenGeoRock reúne cinco programas de código abierto sobre un mismo núcleo en Python. OGR Slip2D, para estabilidad de taludes en 2D, ya está disponible; OGR Data, OGR FEM2D, OGR Slip3D y OGR FEM3D están en la hoja de ruta.">
+<meta name="description" content="La suite OpenGeoRock reúne cinco programas de código abierto sobre un mismo núcleo en Python. OGR Slip2D, para estabilidad de taludes en 2D, ya está disponible; OGR FEM2D y OGR Data están en desarrollo, y OGR Slip3D y OGR FEM3D, previstos.">
 <!-- @inc head -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>document.documentElement.classList.replace("no-js", "js")</script>
@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="OpenGeoRock">
 <meta property="og:title" content="Productos — la suite OpenGeoRock">
-<meta property="og:description" content="La suite OpenGeoRock reúne cinco programas de código abierto sobre un mismo núcleo en Python. OGR Slip2D, para estabilidad de taludes en 2D, ya está disponible; OGR Data, OGR FEM2D, OGR Slip3D y OGR FEM3D están en la hoja de ruta.">
+<meta property="og:description" content="La suite OpenGeoRock reúne cinco programas de código abierto sobre un mismo núcleo en Python. OGR Slip2D, para estabilidad de taludes en 2D, ya está disponible; OGR FEM2D y OGR Data están en desarrollo, y OGR Slip3D y OGR FEM3D, previstos.">
 <meta property="og:url" content="https://opengeorock.org/es/products/">
 <meta property="og:image" content="https://opengeorock.org/assets/img/og-image.png">
 <meta property="og:locale" content="es_ES">
@@ -52,8 +52,8 @@
             </div>
             <div class="mega-col">
               <span class="label">Previstos</span>
-              <a class="mega-item" href="../../es/products/index.html#ogr-data"><b>OGR Data</b><span>Base de datos de propiedades de suelos y macizos rocosos</span></a>
-              <a class="mega-item" href="../../es/products/index.html#ogr-fem2d"><b>OGR FEM2D</b><span>Elementos finitos elastoplásticos 2D</span></a>
+              <a class="mega-item" href="../../es/products/index.html#ogr-data"><b>OGR Data</b><span>Propiedades resistentes de suelos y macizos rocosos</span></a>
+              <a class="mega-item" href="../../es/products/fem2d.html"><b>OGR FEM2D</b><span>Elementos finitos 2D, en desarrollo</span></a>
               <a class="mega-item" href="../../es/products/index.html#ogr-slip3d"><b>OGR Slip3D</b><span>Equilibrio límite en 3D</span></a>
               <a class="mega-item" href="../../es/products/index.html#ogr-fem3d"><b>OGR FEM3D</b><span>Elementos finitos 3D con flujo acoplado</span></a>
             </div>
@@ -64,7 +64,7 @@
               <a class="mega-item" href="../../es/docs/reference/cli.html"><b>La línea de comandos</b><span>Cálculos por lotes con ogr-slip2d-cli</span></a>
             </div>
           </div>
-          <div class="mega-foot"><span>OGR Slip2D ya está disponible; los otros cuatro programas están previstos.</span><a href="../../es/products/index.html">Todos los productos →</a></div>
+          <div class="mega-foot"><span>OGR Slip2D ya está disponible; OGR FEM2D y OGR Data están en desarrollo, y los otros dos programas están previstos.</span><a href="../../es/products/index.html">Todos los productos →</a></div>
         </div>
       </div>
       <a href="../../es/examples/index.html" data-nav="examples">Ejemplos</a>
@@ -137,14 +137,15 @@
   <div class="wrap">
     <div class="sec-head">
       <div><div class="sec-num label">Categoría 02</div><h2>Elementos finitos</h2></div>
-      <p>Tensiones, deformaciones y flujo acoplado. El núcleo de elementos finitos vive en <a href="https://github.com/samuelsl27/OGR-Core" target="_blank" rel="noopener">OGR-Core</a>, la biblioteca común de la suite, que es pública y tiene licencia AGPL-3.0-or-later. OGR Slip2D lo usa para calcular el flujo de agua subterránea, y OGR FEM2D se construirá sobre él.</p>
+      <p>Tensiones, deformaciones y flujo acoplado. El núcleo de elementos finitos vive en <a href="https://github.com/samuelsl27/OGR-Core" target="_blank" rel="noopener">OGR-Core</a>, la biblioteca común de la suite, que es pública y tiene licencia AGPL-3.0-or-later. OGR Slip2D lo usa para calcular el flujo de agua subterránea, y OGR FEM2D, en desarrollo, también depende de él.</p>
     </div>
     <div class="grid-2" style="align-items:stretch;gap:16px">
-      <div class="card planned" id="ogr-fem2d" style="min-height:260px">
-        <div class="split"><span class="tag soon">Previsto</span><span class="label">OGR-03</span></div>
+      <a class="card planned" id="ogr-fem2d" href="fem2d.html" style="min-height:260px">
+        <div class="split"><span class="tag soon">En desarrollo</span><span class="label">OGR-03</span></div>
         <h3 style="font-size:34px;margin-top:auto">OGR FEM2D</h3>
-        <p>Elementos finitos elastoplásticos en 2D para tensiones, deformaciones y reducción de resistencia en excavaciones, túneles y terraplenes.</p>
-      </div>
+        <p>Tensiones y deformaciones por elementos finitos en 2D, en deformación plana y en axisimetría, con leyes elástica y de Mohr–Coulomb y excavación por fases. Por ahora es un motor que se usa desde Python, validado con soluciones cerradas; después vienen el mallador, la interfaz y la reducción de resistencia.</p>
+        <div class="foot label"><span>Prealfa · v0.0.8</span><span>Ver la ficha →</span></div>
+      </a>
       <div class="card planned" id="ogr-fem3d" style="min-height:260px">
         <div class="split"><span class="tag soon">Previsto</span><span class="label">OGR-05</span></div>
         <h3 style="font-size:34px;margin-top:auto">OGR FEM3D</h3>
@@ -162,9 +163,9 @@
       <p>Una fuente común de datos de entrada para todos los programas de la suite.</p>
     </div>
     <div class="card planned" id="ogr-data" style="min-height:220px">
-      <div class="split"><span class="tag soon">Previsto</span><span class="label">OGR-02</span></div>
+      <div class="split"><span class="tag soon">En desarrollo inicial</span><span class="label">OGR-02</span></div>
       <h3 style="font-size:34px;margin-top:auto">OGR Data</h3>
-      <p>Una base de datos revisada y consultable de propiedades de suelos y macizos rocosos, con correlaciones y ábacos empíricos. En la hoja de ruta de OGR Slip2D es el paso siguiente, después de los instaladores y de ampliar los casos de validación.</p>
+      <p>Un programa de escritorio para estimar y ajustar las propiedades resistentes de suelos y macizos rocosos que usan los demás programas de la suite. Su primera versión trae criterios de rotura con sus envolventes, una calculadora de Hoek–Brown generalizado, valores típicos de tablas publicadas y citadas, la clasificación USCS y el ajuste a datos de ensayo. Todavía no tiene casos de validación propios.</p>
     </div>
   </div>
 </section>

@@ -1,0 +1,301 @@
+<!doctype html>
+<html class="no-js" lang="en" data-root="../">
+<head>
+<meta charset="utf-8">
+<title>OGR FEM2D — 2D finite elements for soil and rock, in development — OpenGeoRock</title>
+<meta name="description" content="OGR FEM2D is the OpenGeoRock engine for stresses and deformations by 2D finite elements, in development: elastic and Mohr–Coulomb laws, plane strain and axisymmetry, staged excavation, validated against closed-form solutions.">
+<!-- @inc head -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.replace("no-js", "js")</script>
+<link rel="canonical" href="https://opengeorock.org/products/fem2d.html">
+<link rel="alternate" hreflang="en" href="https://opengeorock.org/products/fem2d.html">
+<link rel="alternate" hreflang="es" href="https://opengeorock.org/es/products/fem2d.html">
+<link rel="alternate" hreflang="x-default" href="https://opengeorock.org/products/fem2d.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="OpenGeoRock">
+<meta property="og:title" content="OGR FEM2D — 2D finite elements for soil and rock, in development — OpenGeoRock">
+<meta property="og:description" content="OGR FEM2D is the OpenGeoRock engine for stresses and deformations by 2D finite elements, in development: elastic and Mohr–Coulomb laws, plane strain and axisymmetry, staged excavation, validated against closed-form solutions.">
+<meta property="og:url" content="https://opengeorock.org/products/fem2d.html">
+<meta property="og:image" content="https://opengeorock.org/assets/img/og-image.png">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#f4efe6">
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&amp;display=swap">
+<link rel="stylesheet" href="../assets/css/site.css">
+
+<script src="../assets/js/site.js" defer></script>
+<!-- @end head -->
+</head>
+<body>
+<!-- @inc header -->
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="wrap top-inner">
+    <a class="brand" href="../index.html" aria-label="OpenGeoRock — home">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
+      <b>OpenGeoRock</b>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <div class="has-menu current" data-nav="products">
+        <button type="button" aria-expanded="false" aria-haspopup="true">Products <svg class="caret" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+        <div class="mega">
+          <div class="mega-cols">
+            <div class="mega-col">
+              <span class="label">Available today</span>
+              <a class="mega-item feature" href="../products/slip2d.html"><b>OGR Slip2D</b><span>2D slope stability: limit equilibrium, finite-element groundwater and probabilistic analysis.</span></a>
+              <a class="mega-item" href="../ai/index.html"><b>MCP server for AI agents <span class="tag live">new</span></b><span>Let Claude, ChatGPT or a local model build and run OGR Slip2D models.</span></a>
+            </div>
+            <div class="mega-col">
+              <span class="label">On the roadmap</span>
+              <a class="mega-item" href="../products/index.html#ogr-data"><b>OGR Data</b><span>Strength properties of soils and rock masses</span></a>
+              <a class="mega-item" href="../products/fem2d.html"><b>OGR FEM2D</b><span>2D finite elements, in development</span></a>
+              <a class="mega-item" href="../products/index.html#ogr-slip3d"><b>OGR Slip3D</b><span>3D limit equilibrium</span></a>
+              <a class="mega-item" href="../products/index.html#ogr-fem3d"><b>OGR FEM3D</b><span>3D finite elements with coupled flow</span></a>
+            </div>
+            <div class="mega-col">
+              <span class="label">Use it from</span>
+              <a class="mega-item" href="../docs/getting-started/interface.html"><b>The desktop program</b><span>Modeller, interpreter and Python terminal</span></a>
+              <a class="mega-item" href="../docs/reference/python-api.html"><b>Python</b><span>Script analyses from your own code</span></a>
+              <a class="mega-item" href="../docs/reference/cli.html"><b>The command line</b><span>Batch runs with ogr-slip2d-cli</span></a>
+            </div>
+          </div>
+          <div class="mega-foot"><span>OGR Slip2D is available now; OGR FEM2D and OGR Data are in development, and the other two programs are planned.</span><a href="../products/index.html">All products →</a></div>
+        </div>
+      </div>
+      <a href="../examples/index.html" data-nav="examples">Examples</a>
+      <a href="../ai/index.html" data-nav="ai">AI &amp; MCP</a>
+      <a href="../docs/index.html" data-nav="docs">Docs</a>
+      <a href="../verification/index.html" data-nav="verification">Verification</a>
+      <a href="../about/index.html" data-nav="about">About</a>
+    </nav>
+    <div class="top-right">
+      <span class="lang" role="group" aria-label="Language"><a href="../products/fem2d.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../es/products/fem2d.html" hreflang="es" lang="es">ES</a></span>
+      <a class="btn gh" href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener" aria-label="Source code on GitHub"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0C17.3 4.7 18.3 5 18.3 5c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0012 .5z"/></svg><span>GitHub</span></a>
+      <a class="btn primary" href="../download/index.html" data-nav="download">Get OGR Slip2D</a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path class="l1" d="M4 7h16"/><path class="l2" d="M4 12h16"/><path class="l3" d="M4 17h16"/></svg></button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Main (mobile)">
+    <span class="label">Products</span>
+    <a href="../products/slip2d.html" data-nav="products" aria-current="page">OGR Slip2D</a>
+    <div class="sub"><a href="../products/index.html">The OpenGeoRock suite</a></div>
+    <span class="label">Explore</span>
+    <a href="../examples/index.html" data-nav="examples">Examples</a>
+    <a href="../ai/index.html" data-nav="ai">AI &amp; MCP</a>
+    <a href="../docs/index.html" data-nav="docs">Documentation</a>
+    <a href="../verification/index.html" data-nav="verification">Verification</a>
+    <span class="label">Project</span>
+    <a href="../about/index.html" data-nav="about">About</a>
+    <a href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener">Source on GitHub ↗</a>
+    <a class="btn primary lg" href="../download/index.html" data-nav="download">Get OGR Slip2D <span class="arrow">→</span></a>
+    <span class="lang" role="group" aria-label="Language"><a href="../products/fem2d.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../es/products/fem2d.html" hreflang="es" lang="es">ES</a></span>
+  </nav>
+</header>
+<!-- @end header -->
+
+<main id="main">
+
+<!-- ====== HERO ====== -->
+<section class="page-hero">
+  <div class="wrap">
+    <nav class="crumbs label" aria-label="Breadcrumb"><a href="../index.html">Home</a><span aria-hidden="true">/</span><a href="index.html">Products</a><span aria-hidden="true">/</span><span>OGR FEM2D</span></nav>
+    <div class="chips mt-m"><span class="tag soon">In development · v0.0.8</span><span class="tag">Pre-alpha</span><span class="tag">AGPL-3.0-or-later</span></div>
+    <h1 style="max-width:none">OGR FEM2D</h1>
+    <p class="lede">The suite's engine for stresses and deformations in soil and rock by two-dimensional finite elements. It is at an early stage: it has no interface, command line, project file or installer yet, and today it can only be used from Python, running from its source tree.</p>
+    <div class="cta-row">
+      <a class="btn primary lg" href="https://github.com/samuelsl27/OGR-FEM2D" target="_blank" rel="noopener">Source code on GitHub <span class="arrow">→</span></a>
+      <a class="btn lg" href="index.html">The suite</a>
+    </div>
+  </div>
+</section>
+
+<nav class="subnav" aria-label="On this page">
+  <div class="wrap">
+    <a href="#overview">Overview</a>
+    <a href="#features">What it does</a>
+    <a href="#validation">Validation</a>
+    <a href="#roadmap">Coming next</a>
+    <a href="#specs">Specifications</a>
+  </div>
+</nav>
+
+<!-- ====== OVERVIEW ====== -->
+<section class="section" id="overview">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="sec-num label">Overview</div><h2>An engine first, <em>the program later</em></h2></div>
+      <p>OGR FEM2D is being built from the inside out: first the engine and its validation against closed-form solutions, then the mesher, the project file and the interface. The engine is written in Rust, and every element and every constitutive law also has a reference implementation in Python, which the tests use as the oracle. Rust computes the stresses, internal forces and tangent at each integration point; Python assembles the model, solves the linear systems and drives the load steps. In the tests the two agree to 10<sup>−10</sup> relative.</p>
+    </div>
+    <div class="metrics" style="margin-top:0">
+      <div class="metric"><div class="v">2</div><div class="k label">Element types</div></div>
+      <div class="metric"><div class="v">2</div><div class="k label">Analysis types</div></div>
+      <div class="metric"><div class="v">2</div><div class="k label">Constitutive laws</div></div>
+      <div class="metric"><div class="v">4</div><div class="k label">Validated cases</div></div>
+      <div class="metric"><div class="v">293</div><div class="k label">Tests</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== FEATURES ====== -->
+<section class="section alt" id="features">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="sec-num label">Version 0.0.8</div><h2>What the engine does <em>today</em></h2></div>
+      <p>Only what is implemented and covered by tests in the published version. Everything else is in the roadmap below.</p>
+    </div>
+    <div class="feature-grid">
+      <div class="feature"><h4>Elements</h4><p>Three- and six-node triangles, in plane strain and in axisymmetry (the whole ring, with u<sub>r</sub> = 0 on the axis).</p></div>
+      <div class="feature"><h4>Constitutive laws</h4><p>Linear isotropic elasticity, and perfectly plastic Mohr–Coulomb with dilatancy (c ≥ 0, 0 ≤ ψ ≤ φ &lt; 90°), integrated by implicit return mapping with its consistent tangent (de Souza Neto, Perić and Owen 2008). Mohr–Coulomb is accepted only with six-node triangles in plane strain, the combination it has been validated with.</p></div>
+      <div class="feature"><h4>Loads and restraints</h4><p>Nodal loads, point loads inside an element and linearly varying loads on an element side, normal or in global axes, plus the self-weight of the active elements. Restraints in x, y or both, and prescribed displacements. The engine checks that the restraints stop every rigid-body motion and names the one they do not.</p></div>
+      <div class="feature"><h4>Initial stress</h4><p>A constant field, or a gravitational field with a horizontal ground surface and horizontal strata, each with its own K and K<sub>z</sub>. A variable K and an irregular surface are not supported yet.</p></div>
+      <div class="feature"><h4>Stages and excavation</h4><p>Each stage is solved on its active elements, and the load released by an excavation follows Zienkiewicz and Taylor (2000). An element cannot be reactivated, so there is no fill or construction stage yet.</p></div>
+      <div class="feature"><h4>Solver</h4><p>Full Newton–Raphson with the consistent tangent, load steps and automatic cutting of a step that does not converge.</p></div>
+    </div>
+    <div class="note warn mt-m"><span class="label">Meshes</span><p>There is no general mesher yet. The engine runs on a structured rectangle, a quarter annulus and a full radial annulus (plane strain only). The mesher for arbitrary regions is under way: boundary discretisation, arcs, curved six-node triangles with an exact Jacobian and the patch test are done in version 0.0.8; the mesher itself is not.</p></div>
+  </div>
+</section>
+
+<!-- ====== VALIDATION ====== -->
+<section class="section" id="validation">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="sec-num label">Validation</div><h2>Checked against <em>closed-form solutions</em></h2></div>
+      <p>Each case fixes its model, its mesh, the expected value and the source of the solution; the error is measured at the worst point of the mesh. The cases are in the <a href="https://github.com/samuelsl27/OGR-FEM2D/tree/main/validacion" target="_blank" rel="noopener">repository</a>.</p>
+    </div>
+    <div class="table-wrap">
+      <table class="data">
+        <thead><tr><th>Case</th><th>Solution</th><th>Quantity</th><th>Tolerance</th><th>Error</th></tr></thead>
+        <tbody>
+          <tr><td>Circular hole, elastic</td><td>Kirsch (1898)</td><td>u<sub>r</sub>(a) · σ<sub>θ</sub>(a)</td><td>0.5 %</td><td>0.189 % · 0.194 %</td></tr>
+          <tr><td>Circular hole, Mohr–Coulomb</td><td>Salençon (1969)</td><td>u<sub>r</sub>(a), ψ = 0° · ψ = 30°</td><td>2 %</td><td>1.10 % · 1.47 %</td></tr>
+          <tr><td>Spherical cavity, axisymmetric</td><td>Lamé (1852)</td><td>σ<sub>t</sub> · u<sub>R</sub>(a)</td><td>0.5 %</td><td>0.341 % · 0.130 %</td></tr>
+          <tr><td>Strip load, elastic</td><td>Michell (1902)</td><td>σ<sub>1</sub> · σ<sub>3</sub></td><td>0.01 q</td><td>0.0012 q · 0.0054 q</td></tr>
+          <tr><td>Circular hole, non-hydrostatic field, general mesh</td><td>Kirsch (1898)</td><td>—</td><td>0.5 %</td><td>pending: it needs the mesher</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ====== ROADMAP ====== -->
+<section class="section alt" id="roadmap">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="sec-num label">Roadmap</div><h2>What comes next</h2></div>
+      <p>In the order of the project's development plan, without dates.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card planned"><div class="split"><span class="tag soon">Phase 1</span></div><h3>A usable program</h3><p>The mesher for arbitrary regions, the finite-element model and its <code>.ogr</code> project file, results in HDF5 and their interpretation, and then the interface, the command line and the MCP server.</p></div>
+      <div class="card planned"><div class="split"><span class="tag soon">Phase 2</span></div><h3>Collapse and strength reduction</h3><p>Tolerance, collapse and load steps; full Mohr–Coulomb, Drucker–Prager and generalised Hoek–Brown; shear strength reduction; hydrostatic pore pressures; a faster global loop.</p></div>
+      <div class="card planned"><div class="split"><span class="tag soon">Later</span></div><h3>Structures, water and more</h3><p>Linings, bolts, joints, complete construction stages and infinite elements; then groundwater, advanced models, probabilistic analysis and special fields.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== SPECS ====== -->
+<section class="section" id="specs">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="sec-num label">Specifications</div><h2>Data sheet</h2></div>
+      <p>Taken from the source code of version 0.0.8. If you find a difference between this page and the program, the program is right; let us know and we will correct the page.</p>
+    </div>
+    <dl class="spec-list">
+      <div><dt class="label">Analysis</dt><dd>2D static finite elements, plane strain and axisymmetric</dd></div>
+      <div><dt class="label">Elements</dt><dd>Three- and six-node triangles</dd></div>
+      <div><dt class="label">Laws</dt><dd>Linear elastic; perfectly plastic Mohr–Coulomb with dilatancy (six-node triangles, plane strain)</dd></div>
+      <div><dt class="label">Loads</dt><dd>Nodal, point, linear on element sides, self-weight, prescribed displacements</dd></div>
+      <div><dt class="label">Initial stress</dt><dd>Constant, or gravitational with horizontal strata and K per stratum</dd></div>
+      <div><dt class="label">Stages</dt><dd>Excavation by deactivating elements</dd></div>
+      <div><dt class="label">Solver</dt><dd>Newton–Raphson, consistent tangent, load steps with automatic cutting</dd></div>
+      <div><dt class="label">Engine</dt><dd>Rust, with a Python reference implementation of every element and law</dd></div>
+      <div><dt class="label">Interfaces</dt><dd>Python, from the source tree</dd></div>
+      <div><dt class="label">Requirements</dt><dd>Python 3.11 or newer, Git and the stable Rust toolchain</dd></div>
+      <div><dt class="label">Shared code</dt><dd><a href="https://github.com/samuelsl27/OGR-Core" target="_blank" rel="noopener">OGR-Core</a>, pinned to a tag</dd></div>
+      <div><dt class="label">Licence</dt><dd>AGPL-3.0-or-later · no warranty</dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- ====== VERIFICATION ====== -->
+<section class="section ink" id="verification">
+  <div class="wrap cta-band">
+    <div>
+      <div class="label">Tests</div>
+      <h2 class="mt-s">A suite of <em>293 tests</em></h2>
+      <p class="mt-m">In the last run of version 0.0.8 all 293 tests pass. Besides the validation cases, they compare the Rust engine with the Python reference, check the curved elements with the patch test and check the radial mesh against the exact solution for a thick ring.</p>
+    </div>
+    <div class="cta-row"><a class="btn primary lg" href="https://github.com/samuelsl27/OGR-FEM2D/tree/main/validacion" target="_blank" rel="noopener">See the cases</a><a class="btn lg" href="https://github.com/samuelsl27/OGR-FEM2D/tree/main/docs/changelog" target="_blank" rel="noopener">Changelog</a></div>
+  </div>
+</section>
+
+</main>
+
+<!-- @inc footer -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <a class="brand" href="../index.html" aria-label="OpenGeoRock — home">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
+          <b>OpenGeoRock</b>
+        </a>
+        <p class="tagline">Open-source geotechnical software developed at the Universidad Politécnica de Cartagena.</p>
+        <span class="lang" role="group" aria-label="Language"><a href="../products/fem2d.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="../es/products/fem2d.html" hreflang="es" lang="es">ES</a></span>
+      </div>
+      <div>
+        <h5>Products</h5>
+        <ul>
+          <li><a href="../products/slip2d.html">OGR Slip2D</a></li>
+          <li><a href="../products/index.html">The suite</a></li>
+          <li><a href="../ai/index.html">MCP server</a></li>
+          <li><a href="../download/index.html">Download</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Learn</h5>
+        <ul>
+          <li><a href="../docs/index.html">Documentation</a></li>
+          <li><a href="../docs/getting-started/quick-start.html">Quick start</a></li>
+          <li><a href="../docs/theory/methods.html">Theory manual</a></li>
+          <li><a href="../examples/index.html">Examples</a></li>
+          <li><a href="../verification/index.html">Verification</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Project</h5>
+        <ul>
+          <li><a href="../about/index.html">About</a></li>
+          <li><a href="../about/index.html#team">Team</a></li>
+          <li><a href="../about/index.html#cite">How to cite</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Contributing</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/LICENSE" target="_blank" rel="noopener">Licence · AGPL-3.0</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Connect</h5>
+        <ul>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/issues" target="_blank" rel="noopener">Issues</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/tree/main/docs/changelog" target="_blank" rel="noopener">Changelog</a></li>
+          <li><a href="mailto:samuel.saez@edu.upct.es">Email</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© 2026 Samuel Sáez López · OGR Slip2D is free software under AGPL-3.0-or-later, with no warranty of any kind.</span>
+      <span>OGR Slip2D <span data-v>0.1.481</span> · 2026-11-22</span>
+    </div>
+  </div>
+  <div class="lang-hint" role="dialog" aria-label="Idioma" lang="es">
+    ¿Prefieres leer esta web en español?
+    <div class="row"><a class="btn sm primary go" href="../es/index.html">Ver en español</a><button class="btn sm" type="button" data-dismiss>No, gracias</button></div>
+  </div>
+</footer>
+<!-- @end footer -->
+</body>
+</html>

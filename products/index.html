@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>Products — the OpenGeoRock suite</title>
-<meta name="description" content="The OpenGeoRock suite has five open-source programs on one Python core. OGR Slip2D, for 2D slope stability, is available today; OGR Data, OGR FEM2D, OGR Slip3D and OGR FEM3D are on the roadmap.">
+<meta name="description" content="The OpenGeoRock suite has five open-source programs on one Python core. OGR Slip2D, for 2D slope stability, is available today; OGR FEM2D and OGR Data are in development, and OGR Slip3D and OGR FEM3D are planned.">
 <!-- @inc head -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>document.documentElement.classList.replace("no-js", "js")</script>
@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="OpenGeoRock">
 <meta property="og:title" content="Products — the OpenGeoRock suite">
-<meta property="og:description" content="The OpenGeoRock suite has five open-source programs on one Python core. OGR Slip2D, for 2D slope stability, is available today; OGR Data, OGR FEM2D, OGR Slip3D and OGR FEM3D are on the roadmap.">
+<meta property="og:description" content="The OpenGeoRock suite has five open-source programs on one Python core. OGR Slip2D, for 2D slope stability, is available today; OGR FEM2D and OGR Data are in development, and OGR Slip3D and OGR FEM3D are planned.">
 <meta property="og:url" content="https://opengeorock.org/products/">
 <meta property="og:image" content="https://opengeorock.org/assets/img/og-image.png">
 <meta property="og:locale" content="en_GB">
@@ -52,8 +52,8 @@
             </div>
             <div class="mega-col">
               <span class="label">On the roadmap</span>
-              <a class="mega-item" href="../products/index.html#ogr-data"><b>OGR Data</b><span>Soil and rock-mass property database</span></a>
-              <a class="mega-item" href="../products/index.html#ogr-fem2d"><b>OGR FEM2D</b><span>2D elastoplastic finite elements</span></a>
+              <a class="mega-item" href="../products/index.html#ogr-data"><b>OGR Data</b><span>Strength properties of soils and rock masses</span></a>
+              <a class="mega-item" href="../products/fem2d.html"><b>OGR FEM2D</b><span>2D finite elements, in development</span></a>
               <a class="mega-item" href="../products/index.html#ogr-slip3d"><b>OGR Slip3D</b><span>3D limit equilibrium</span></a>
               <a class="mega-item" href="../products/index.html#ogr-fem3d"><b>OGR FEM3D</b><span>3D finite elements with coupled flow</span></a>
             </div>
@@ -64,7 +64,7 @@
               <a class="mega-item" href="../docs/reference/cli.html"><b>The command line</b><span>Batch runs with ogr-slip2d-cli</span></a>
             </div>
           </div>
-          <div class="mega-foot"><span>OGR Slip2D is available now; the other four programs are planned.</span><a href="../products/index.html">All products →</a></div>
+          <div class="mega-foot"><span>OGR Slip2D is available now; OGR FEM2D and OGR Data are in development, and the other two programs are planned.</span><a href="../products/index.html">All products →</a></div>
         </div>
       </div>
       <a href="../examples/index.html" data-nav="examples">Examples</a>
@@ -137,14 +137,15 @@
   <div class="wrap">
     <div class="sec-head">
       <div><div class="sec-num label">Category 02</div><h2>Finite elements</h2></div>
-      <p>Stresses, deformations and coupled flow. The finite-element kernel lives in <a href="https://github.com/samuelsl27/OGR-Core" target="_blank" rel="noopener">OGR-Core</a>, the suite's shared library, which is public and licensed under AGPL-3.0-or-later. OGR Slip2D uses it to solve the groundwater flow, and OGR FEM2D will be built on it.</p>
+      <p>Stresses, deformations and coupled flow. The finite-element kernel lives in <a href="https://github.com/samuelsl27/OGR-Core" target="_blank" rel="noopener">OGR-Core</a>, the suite's shared library, which is public and licensed under AGPL-3.0-or-later. OGR Slip2D uses it to solve the groundwater flow, and OGR FEM2D, in development, depends on it too.</p>
     </div>
     <div class="grid-2" style="align-items:stretch;gap:16px">
-      <div class="card planned" id="ogr-fem2d" style="min-height:260px">
-        <div class="split"><span class="tag soon">Planned</span><span class="label">OGR-03</span></div>
+      <a class="card planned" id="ogr-fem2d" href="fem2d.html" style="min-height:260px">
+        <div class="split"><span class="tag soon">In development</span><span class="label">OGR-03</span></div>
         <h3 style="font-size:34px;margin-top:auto">OGR FEM2D</h3>
-        <p>Elastoplastic 2D finite elements for stresses, deformations and strength reduction in excavations, tunnels and embankments.</p>
-      </div>
+        <p>Stresses and deformations by 2D finite elements, in plane strain and axisymmetry, with elastic and Mohr–Coulomb laws and staged excavation. For now it is an engine used from Python, validated against closed-form solutions; the mesher, the interface and strength reduction come next.</p>
+        <div class="foot label"><span>Pre-alpha · v0.0.8</span><span>Product page →</span></div>
+      </a>
       <div class="card planned" id="ogr-fem3d" style="min-height:260px">
         <div class="split"><span class="tag soon">Planned</span><span class="label">OGR-05</span></div>
         <h3 style="font-size:34px;margin-top:auto">OGR FEM3D</h3>
@@ -162,9 +163,9 @@
       <p>A common source of input data for all the programs in the suite.</p>
     </div>
     <div class="card planned" id="ogr-data" style="min-height:220px">
-      <div class="split"><span class="tag soon">Planned</span><span class="label">OGR-02</span></div>
+      <div class="split"><span class="tag soon">In early development</span><span class="label">OGR-02</span></div>
       <h3 style="font-size:34px;margin-top:auto">OGR Data</h3>
-      <p>A reviewed, searchable database of soil and rock-mass properties, correlations and empirical charts. On the OGR Slip2D roadmap it comes next, after the installers and more validation cases.</p>
+      <p>A desktop program to estimate and fit the strength properties of soils and rock masses for the other programs of the suite. Its first version has failure criteria with their envelopes, a generalised Hoek–Brown calculator, typical values from cited published tables, USCS classification and fitting to test data. It has no validation cases of its own yet.</p>
     </div>
   </div>
 </section>

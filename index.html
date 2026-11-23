@@ -52,8 +52,8 @@
             </div>
             <div class="mega-col">
               <span class="label">On the roadmap</span>
-              <a class="mega-item" href="products/index.html#ogr-data"><b>OGR Data</b><span>Soil and rock-mass property database</span></a>
-              <a class="mega-item" href="products/index.html#ogr-fem2d"><b>OGR FEM2D</b><span>2D elastoplastic finite elements</span></a>
+              <a class="mega-item" href="products/index.html#ogr-data"><b>OGR Data</b><span>Strength properties of soils and rock masses</span></a>
+              <a class="mega-item" href="products/fem2d.html"><b>OGR FEM2D</b><span>2D finite elements, in development</span></a>
               <a class="mega-item" href="products/index.html#ogr-slip3d"><b>OGR Slip3D</b><span>3D limit equilibrium</span></a>
               <a class="mega-item" href="products/index.html#ogr-fem3d"><b>OGR FEM3D</b><span>3D finite elements with coupled flow</span></a>
             </div>
@@ -64,7 +64,7 @@
               <a class="mega-item" href="docs/reference/cli.html"><b>The command line</b><span>Batch runs with ogr-slip2d-cli</span></a>
             </div>
           </div>
-          <div class="mega-foot"><span>OGR Slip2D is available now; the other four programs are planned.</span><a href="products/index.html">All products →</a></div>
+          <div class="mega-foot"><span>OGR Slip2D is available now; OGR FEM2D and OGR Data are in development, and the other two programs are planned.</span><a href="products/index.html">All products →</a></div>
         </div>
       </div>
       <a href="examples/index.html" data-nav="examples">Examples</a>
@@ -422,7 +422,7 @@
   <div class="wrap">
     <div class="sec-head">
       <div><div class="sec-num label">§ 01 — The suite</div><h2>Five programs on <em>a shared Python core</em></h2></div>
-      <p>For now only OGR Slip2D is available, as public source code. The other four will be built on the same core: a property database, finite elements in 2D and 3D, and three-dimensional limit equilibrium.</p>
+      <p>OGR Slip2D is available as public source code. OGR FEM2D, for 2D finite elements, and OGR Data, for material properties, are in development; three-dimensional limit equilibrium and 3D finite elements are planned.</p>
     </div>
     <div class="suite">
       <a class="card ink" href="products/slip2d.html">
@@ -439,16 +439,16 @@
         <div class="chips mt-s"><span class="tag">10 methods</span><span class="tag">FE seepage</span><span class="tag">Monte Carlo</span><span class="tag">DXF</span><span class="tag">MCP</span></div>
       </a>
       <a class="card planned" href="products/index.html#ogr-data">
-        <div class="split"><span class="tag soon">Planned</span><span class="label">OGR-02</span></div>
+        <div class="split"><span class="tag soon">In early development</span><span class="label">OGR-02</span></div>
         <svg class="glyph" viewBox="0 0 200 120" aria-hidden="true"><path d="M18 106H190M18 106V10" fill="none" stroke="#6a645c" stroke-width="1"/><path d="M26 98L182 26" fill="none" stroke="oklch(0.5 0.11 150)" stroke-width="2"/><g fill="#34302a" opacity=".75"><circle cx="38" cy="90" r="2.6"/><circle cx="50" cy="96" r="2.6"/><circle cx="62" cy="80" r="2.6"/><circle cx="76" cy="84" r="2.6"/><circle cx="88" cy="70" r="2.6"/><circle cx="98" cy="76" r="2.6"/><circle cx="112" cy="58" r="2.6"/><circle cx="124" cy="62" r="2.6"/><circle cx="136" cy="48" r="2.6"/><circle cx="150" cy="52" r="2.6"/><circle cx="160" cy="36" r="2.6"/><circle cx="172" cy="40" r="2.6"/></g></svg>
         <h3>OGR Data</h3>
-        <p>Soil and rock-mass property database, correlations and charts.</p>
+        <p>Strength properties of soils and rock masses: failure criteria, typical values from published tables and fitting to test data.</p>
       </a>
-      <a class="card planned" href="products/index.html#ogr-fem2d">
-        <div class="split"><span class="tag soon">Planned</span><span class="label">OGR-03</span></div>
+      <a class="card planned" href="products/fem2d.html">
+        <div class="split"><span class="tag soon">In development</span><span class="label">OGR-03</span></div>
         <svg class="glyph" viewBox="0 0 200 120" aria-hidden="true"><g fill="none" stroke="#34302a" stroke-width=".9" opacity=".8"><path d="M10 108V52H70L120 80H190V108Z" stroke-width="1.6"/><path d="M10 80H190M40 52V108M70 52V108M100 66V108M130 80V108M160 80V108M10 52L40 80L70 52M40 80L70 108M70 80L100 108M100 80L130 108M130 80L160 108M160 80L190 108M10 80L40 108M70 52L100 80M100 66L120 80"/></g><path d="M58 52Q96 96 150 80" fill="none" stroke="#c8431b" stroke-width="2"/></svg>
         <h3>OGR FEM2D</h3>
-        <p>2D elastoplastic finite elements and strength reduction.</p>
+        <p>2D finite elements for stresses and deformations, elastic and Mohr–Coulomb, with staged excavation.</p>
       </a>
       <a class="card planned" href="products/index.html#ogr-slip3d">
         <div class="split"><span class="tag soon">Planned</span><span class="label">OGR-04</span></div>
