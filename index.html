@@ -477,7 +477,7 @@
       <div class="feature">
         <svg class="ic" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 27H12L21 15H31"/><path d="M8 27A17 17 0 0 0 25 15" stroke="#c8431b" stroke-width="2"/><path d="M12 27V21M15 25V19M18 23V18" stroke-width="1"/></svg>
         <h4>Ten limit-equilibrium methods</h4>
-        <p>Ordinary, Bishop, Janbu simplified and corrected, Spencer, Morgenstern–Price/GLE, Lowe–Karafiath, both Corps of Engineers methods and Sarma's method with non-vertical slices.</p>
+        <p>Ordinary, Bishop, Janbu simplified and corrected, Spencer, Morgenstern–Price/GLE, Lowe–Karafiath and both Corps of Engineers methods, on vertical slices. <a href="docs/theory/methods.html#sarma">Sarma's method</a> divides the mass into wedges whose faces may be inclined.</p>
       </div>
       <div class="feature">
         <svg class="ic" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><g stroke-width="1.2"><circle cx="8" cy="6" r="1.4"/><circle cx="14" cy="6" r="1.4"/><circle cx="20" cy="6" r="1.4"/><circle cx="8" cy="11" r="1.4"/><circle cx="14" cy="11" r="1.4" fill="#c8431b" stroke="#c8431b"/><circle cx="20" cy="11" r="1.4"/></g><path d="M3 29H12L21 19H31"/><path d="M7 29Q16 34 24 19" stroke="#c8431b" stroke-width="2"/></svg>
@@ -536,7 +536,7 @@
         <div class="msg user">Build a 16 m slope with a mid-height bench: silty sand over clay over dense gravel, water table 6 m below the crest. Check it with Bishop, Spencer and Morgenstern–Price.</div>
         <div class="tool"><b>model_define</b><span>3 materials · 2 contacts · water table</span></div>
         <div class="tool"><b>analysis_configure</b><span>grid search · 30 slices · left → right</span></div>
-        <div class="tool"><b>analysis_run</b><span>1 859 surfaces · 87 s</span></div>
+        <div class="tool"><b>analysis_run</b><span>1 859 surfaces</span></div>
         <div class="msg agent">Critical factors of safety: Bishop <strong>1.300</strong>, Spencer <strong>1.290</strong> (λ = 0.343), Morgenstern–Price <strong>1.292</strong>. The critical circle (centre 60.0, 47.6; R = 31.2 m) runs through the clay and exits 3.8 m beyond the toe.</div>
         <div class="note-line">This is how the model in Sheet 01, above, was built.</div>
       </div>

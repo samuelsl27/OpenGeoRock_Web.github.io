@@ -268,7 +268,7 @@
               <tr><td><code>focus_objects</code></td><td>Focus objects that restrict the search.</td></tr>
               <tr><td><code>user_surfaces</code></td><td>Circles defined by hand and analysed together with the search. Their ends where they meet the ground are not meaningful in the file: they are a result of the analysis, not an input.</td></tr>
               <tr><td><code>transient_initial_result</code></td><td>The initial state of a transient analysis. Written only when there is one (since v0.1.307).</td></tr>
-              <tr><td><code>user_polylines</code></td><td>Non-circular surfaces drawn by hand, with the data of Sarma's method at their vertices when it is given. Written only when there are any (since v0.1.427).</td></tr>
+              <tr><td><code>user_polylines</code></td><td>Non-circular surfaces defined by hand, each with <code>type</code> (<code>"polyline"</code>), <code>id</code> and <code>points</code> as [<em>x</em>, <em>y</em>] pairs from left to right, and, when any datum of Sarma's method is given at its interior vertices, <code>sarma</code>: one row per vertex with <code>x</code>, <code>y</code>, <code>angle</code> (degrees counter-clockwise from +<em>x</em>), <code>c</code> (kPa) and <code>phi</code> (degrees), <code>null</code> where not given (since v0.1.465). Written only when there are any (since v0.1.427).</td></tr>
             </tbody>
           </table>
         </div>
@@ -289,16 +289,61 @@
               <tr><td><code>statistics</code></td><td>Probabilistic and sensitivity analyses</td><td><code>probabilistic_analysis</code>, <code>sensitivity_analysis</code>, <code>sampling_method</code>, <code>num_samples</code>, <code>analysis_type</code>, <code>seed</code></td></tr>
               <tr><td><code>back_analysis</code></td><td>Back analysis of the support force</td><td><code>enabled</code>, <code>target_fos</code>, <code>elevation</code>, <code>method_id</code></td></tr>
               <tr><td><code>random_numbers</code></td><td>Seed of the random searches and of the sampling</td><td><code>method</code>, <code>seed</code>, <code>lhs_correlate</code></td></tr>
-              <tr><td><code>design_standard</code></td><td>Partial factors</td><td><code>enabled</code>, <code>standard</code>, <code>factor_permanent</code>, <code>factor_variable</code>, <code>factor_cohesion</code>, <code>factor_friction</code>, <code>factor_unit_weight</code>, <code>factor_resistance</code>, <code>factor_undrained</code>, <code>factor_shear_strength</code></td></tr>
-              <tr><td><code>advanced</code></td><td>Admissibility checks, iteration and parallel search</td><td><code>check_tensile_stresses</code>, <code>tensile_percent</code>, <code>check_m_alpha</code>, <code>initial_fos</code>, <code>min_lambda</code>, <code>max_lambda</code>, <code>iterate_steffensen</code>, <code>parallel_search</code>, <code>parallel_cpu_percent</code></td></tr>
+              <tr><td><code>design_standard</code></td><td>Partial factors</td><td><code>enabled</code>, <code>standard</code> (<code>none</code>, <code>eurocode7_da1c1</code>, <code>eurocode7_da1c2</code>, <code>eurocode7_da2</code>, <code>eurocode7_da3</code> or <code>custom</code>), <code>factor_permanent</code> and <code>factor_permanent_favourable</code> (γ<sub>G</sub> unfavourable and favourable, since v0.1.242), <code>factor_variable</code> and <code>factor_variable_favourable</code> (γ<sub>Q</sub>, since v0.1.243), <code>factor_cohesion</code>, <code>factor_friction</code>, <code>factor_unit_weight</code>, <code>factor_resistance</code>, <code>factor_undrained</code>, <code>factor_shear_strength</code>, <code>factor_seismic</code> (since v0.1.245), <code>anchor_permanent_factor</code> (false by default) and <code>single_source_weight</code> (true by default)</td></tr>
+              <tr><td><code>advanced</code></td><td>Admissibility checks, iteration and parallel search</td><td><code>check_tensile_stresses</code>, <code>tensile_percent</code>, <code>check_m_alpha</code>, <code>initial_fos</code>, <code>min_lambda</code>, <code>max_lambda</code>, <code>iterate_steffensen</code>, <code>parallel_search</code>, <code>parallel_cpu_percent</code>, <code>max_base_angle_deg</code> (80 by default), <code>pso_enhanced</code></td></tr>
               <tr><td><code>seismic</code></td><td>Seismic analysis beyond the factor of safety</td><td><code>compute_ky</code>, <code>ky_target_fos</code>, <code>newmark</code>, <code>record_id</code>, <code>polarity</code>, <code>allow_upslope</code>, <code>scale</code></td></tr>
               <tr><td><code>summary</code></td><td>Project summary</td><td><code>title</code>, <code>analysis</code>, <code>author</code>, <code>company</code>, <code>date_created</code>, <code>comments</code></td></tr>
               <tr><td><code>max_materials</code>, <code>max_supports</code></td><td>Limits of the model</td><td>20 each by default</td></tr>
-              <tr><td><code>sarma</code></td><td>Sarma's method (since v0.1.464); written only when the method is enabled or a field differs from its default</td><td><code>num_slices</code> (least number of wedges), <code>tolerance</code>, <code>max_iterations</code>, <code>slice_angles</code>, <code>interslice_strength</code>, <code>interslice_cohesion</code>, <code>interslice_phi</code>, <code>boundaries_at_materials</code>, <code>shear_sense</code></td></tr>
+              <tr><td><code>sarma</code></td><td>Sarma's method (since v0.1.464); written only when the method is enabled or a field differs from its default</td><td><code>num_slices</code> (wedges asked for, 25), <code>tolerance</code> (0.0001), <code>max_iterations</code> (75), <code>slice_angles</code> (<code>bisector</code>, <code>mean_normal</code> or <code>vertical</code>, and since v0.1.471 <code>optimized_global</code> or <code>optimized_all</code>; <code>bisector</code> by default), <code>interslice_strength</code> (<code>materials</code>, <code>given</code> or <code>none</code>; <code>materials</code>), <code>interslice_cohesion</code> and <code>interslice_phi</code> (0, read with <code>given</code>), <code>boundaries_at_materials</code> (true), <code>shear_sense</code> (<code>fixed</code> or <code>kinematic</code>; <code>fixed</code>)</td></tr>
             </tbody>
           </table>
         </div>
       </figure>
+      <p>With Sarma's method enabled and one surface defined by hand, the demo slope saved by v<span data-v>0.1.481</span> ends its <code>settings</code> and the file like this:</p>
+      <div class="code"><pre><code>    "sarma": {
+      "num_slices": 25,
+      "tolerance": 0.0001,
+      "max_iterations": 75,
+      "slice_angles": "bisector",
+      "interslice_strength": "materials",
+      "interslice_cohesion": 0.0,
+      "interslice_phi": 0.0,
+      "boundaries_at_materials": true,
+      "shear_sense": "fixed"
+    }
+  },
+  …
+  "user_polylines": [
+    {
+      "type": "polyline",
+      "id": "4bfd708e-3d17-41fb-8241-61dcfe97835e",
+      "points": [
+        [
+          19.0,
+          25.0
+        ],
+        …
+      ],
+      "sarma": [
+        {
+          "x": 25.0,
+          "y": 18.0,
+          "angle": 70.0,
+          "c": null,
+          "phi": null
+        },
+        {
+          "x": 31.0,
+          "y": 14.5,
+          "angle": null,
+          "c": 5.0,
+          "phi": 25.0
+        }
+      ]
+    }
+  ]
+}</code></pre></div>
+      <p>A vertex datum is checked when the surface is made, not when the file is read: the run checks the stored data again, analyses the polyline with the ones that pass and says how many it left out. A version before v0.1.471 reads <code>optimized_global</code> or <code>optimized_all</code> as a value it cannot take and skips Sarma's method with a note.</p>
       <p>The meaning of each setting is given where it is set: <a class="xref" href="../user-guide/project-settings.html">Section 2.1</a> for the window, and <code>catalog("settings")</code> or <code>settings_get</code> for the operations layer, which list every setting with its type and options.</p>
 
       <h2 id="versions"><span class="secnum">5.4.4</span><span class="ht">Versions and compatibility</span><a class="anchor" href="#versions" aria-label="Link to this section">#</a></h2>
@@ -307,7 +352,8 @@
         <li>a closed boundary that repeats its first vertex at the end, as every DXF import wrote before v0.1.197, is read without the repeated vertex (the same polygon);</li>
         <li>a rapid-drawdown project saved before the B̄ fields existed (v0.1.62) gets back the behaviour it was computed with;</li>
         <li>a B̄ rapid-drawdown project drawn with the drawdown convention used before v0.1.69 has its water table and drawdown line exchanged, so that the model means what it meant;</li>
-        <li>a water pressure grid that also declares its own value type sets the groundwater method accordingly (v0.1.202).</li>
+        <li>a water pressure grid that also declares its own value type sets the groundwater method accordingly (v0.1.202);</li>
+        <li>a design standard saved before v0.1.242–0.1.245 gets the fields it lacks: a named standard takes them from its preset, and DA3, if it still carries the action factors of set A1 (1.35, 1.5), takes those of A2; a <code>custom</code> one keeps its numbers (its favourable γ<sub>Q</sub> takes its γ<sub>Q</sub>), and a unit-weight factor other than 1, which multiplied the unit weight until v0.1.245, is read as its inverse, which divides it to the same value.</li>
       </ul>
       <p>The conversion of v0.1.69 changes, on purpose, the factor of safety of the files it applies to, and the changelog of that version says so. An older version of the program is not guaranteed to open a file written by a newer one.</p>
 

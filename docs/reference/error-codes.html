@@ -195,7 +195,7 @@
         <li>no converged factor: −111;</li>
         <li>anything else: −101.</li>
       </ol>
-      <p>Because −111 covers every calculation that produced no converged factor, it is not only a convergence problem: circles whose mass does not slide (<code>zero_driving</code>) and, in a rapid-drawdown analysis, candidates to which the procedure does not apply (<code>drawdown_not_applicable</code>) are −111 too, and the reason tells them apart. A surface rejected before it could be sliced has no result and no row. Since v0.1.445 the census of the Interpret window counts some of these rejections with a code, each with its own reason: −101 when an end of a polyline is not on the ground, its base rises above the ground, an end daylights outside the Slope Limits or a circle does not cut the ground twice, and −103 when a circle leaves the External Boundary between its crossings with the ground. The rest count as not sliced. No surface carries −103, because such a circle is never sliced.</p>
+      <p>Because −111 covers every calculation that produced no converged factor, it is not only a convergence problem: circles whose mass does not slide (<code>zero_driving</code>) and, in a rapid-drawdown analysis, candidates to which the procedure does not apply (<code>drawdown_not_applicable</code>) are −111 too, as are the surfaces Sarma's method refuses (<code>sarma_refused</code>), and the reason tells them apart. A surface rejected before it could be sliced has no result and no row. Since v0.1.445 the census of the Interpret window counts some of these rejections with a code, each with its own reason: −101 when an end of a polyline is not on the ground, its base rises above the ground, an end daylights outside the Slope Limits or a circle does not cut the ground twice, and −103 when a circle leaves the External Boundary between its crossings with the ground. The rest count as not sliced. No surface carries −103, because such a circle is never sliced.</p>
       <p>The codes appear in the Interpret window (<span class="ui">Data → Export Raw Data…</span>, whose last column holds the factor of safety or the code; <span class="ui">Data → Summary of Invalid Surfaces…</span>; <span class="ui">Query → Query Invalid Surfaces</span>, which shows the code of grid centres with no valid surface; and the <em>Surfaces with error code</em> option of the surface filter), and in the MCP tool <code>results_query</code> (views <code>error_codes</code>, <code>invalid_summary</code>, <code>raw_data</code> and <code>filter</code>). The HDF5 results file stores no code: a surface without a factor has no <code>fos</code> attribute and carries its <code>reason</code> (<a class="xref" href="file-format.html#results">Section 5.4.5</a>).</p>
       <div class="impl">
         <span class="label">In OGR Slip2D</span>
@@ -228,10 +228,42 @@
               <tr><td><code>drawdown_not_applicable</code></td><td>The rapid-drawdown procedure does not apply to this surface. Not an engine failure: in a search most candidates are like this.</td></tr>
               <tr><td><code>unsliceable_at_drawdown</code></td><td>The surface could not be sliced at the drawn-down level.</td></tr>
               <tr><td><code>envelope_not_converged</code></td><td>The strength envelope depends on the normal stress, and the stress it was read at never settled on the stress the method resolved, so the factor is not that of the envelope (since v0.1.213).</td></tr>
+              <tr><td><code>sarma_refused</code></td><td>Sarma's method refused the surface: its wedges could not be built, a face is parallel to a base, or the surface crosses a support (since v0.1.464). The <code>message_code</code> of the result says which (<a class="xref" href="#tbl-sarma-codes">Table 5.5.3</a>).</td></tr>
             </tbody>
           </table>
         </div>
       </figure>
+      <h3 id="sarma-codes"><span class="ht">Sarma's method</span><a class="anchor" href="#sarma-codes" aria-label="Link to this section">#</a></h3>
+      <p>Besides its reason, a result without a factor carries a finer code, <code>message_code</code>, with its values in <code>message_args</code>; the answers of the operations layer and the MCP server include both. For Sarma's method with non-vertical slices the codes are these:</p>
+      <figure class="tbl" id="tbl-sarma-codes">
+        <figcaption><span class="fignum">Table 5.5.3</span> Why Sarma's method gives no factor of safety for a surface: the message code and the reason it falls under.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Message code</th><th>Reason</th><th>When</th></tr></thead>
+            <tbody>
+              <tr><td><code>lem.sarma_supports</code></td><td><code>sarma_refused</code></td><td>The surface crosses a support; the method does not take supports.</td></tr>
+              <tr><td><code>lem.sarma_face_parallel</code></td><td><code>sarma_refused</code></td><td>A face is parallel to the base of a wedge.</td></tr>
+              <tr><td><code>lem.sarma_face_horizontal</code></td><td><code>sarma_refused</code></td><td>The angle given to a face is horizontal.</td></tr>
+              <tr><td><code>lem.sarma_face_no_exit</code></td><td><code>sarma_refused</code></td><td>A face does not reach the ground inside the model.</td></tr>
+              <tr><td><code>lem.sarma_faces_cross</code></td><td><code>sarma_refused</code></td><td>Two faces cross inside the sliding mass.</td></tr>
+              <tr><td><code>lem.sarma_wedge_invalid</code></td><td><code>sarma_refused</code></td><td>A wedge is not a polygon inside the sliding mass: one of its faces leaves the mass through the slip surface.</td></tr>
+              <tr><td><code>lem.sarma_wedge_outside</code></td><td><code>sarma_refused</code></td><td>Part of a wedge lies in no region with a material.</td></tr>
+              <tr><td><code>lem.sarma_face_strength</code></td><td><code>sarma_refused</code></td><td>The face takes its strength from the materials and crosses one whose strength model is not Mohr–Coulomb; the face then needs its own <em>c</em> and <em>φ</em>.</td></tr>
+              <tr><td><code>lem.sarma_excess_pore_pressure</code></td><td><code>sarma_refused</code></td><td>The excess pore pressure of undrained loading (B̄) is on; the method does not compute it.</td></tr>
+              <tr><td><code>lem.sarma_no_driving</code></td><td><code>zero_driving</code></td><td>Kc reaches the applied <em>k</em><sub>h</sub> only with the strength divided by more than 10<sup>6</sup>, or never: the surface does not slide.</td></tr>
+              <tr><td><code>lem.sarma_no_root</code></td><td><code>non_physical_fos</code></td><td>Kc stays below the applied <em>k</em><sub>h</sub> for every factor of safety down to 0.01.</td></tr>
+              <tr><td><code>lem.not_converged</code></td><td><code>not_converged</code></td><td>The iteration on <em>F</em> ran out of passes.</td></tr>
+              <tr><td><code>lem.sarma_drawdown</code></td><td><code>drawdown_not_applicable</code></td><td>The method was reached in a rapid-drawdown analysis by a route that does not skip it first.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p>Like every result with no converged factor, these surfaces have the code −111. Two conditions of the whole run are not reported surface by surface: with rapid drawdown, or with the excess pore pressure of loading, the method is not computed at all and the run says so once (notes <code>method.sarma_drawdown</code> and <code>method.sarma_excess</code>), and a value of <code>settings.sarma</code> it cannot take skips it with <code>method.sarma_bad_setting</code>, naming the field. Other notes of the run keep the factor and qualify it: <code>method.sarma_near_pole</code> when the least |<em>q</em>| of the faces is under 0.2, so that the factor is a root of Kc(<em>F</em>) = <em>k</em><sub>h</sub> next to a pole (v0.1.466), <code>method.sarma_near_pair</code> when such a factor also lies close to a pole of Kc, giving the next root down (v0.1.470), <code>method.sarma_tension</code> when a base or a face carries an effective normal force in tension, <code>method.sarma_verticalized</code> for faces made vertical, and <code>method.sarma_vertex_data_unused</code> for data given at vertices that did not reach the surface analysed. In the notes of a run each one keeps its code beside the sentence.</p>
+      <div class="impl">
+        <span class="label">In OGR Slip2D</span>
+        <p>The sentence and its code are written together, by one function, so they cannot disagree; the reasons stay coarser on purpose, because they group the census of invalid surfaces. A refusal comes back as a result with no factor and its code, never as NaN or as an exception that stops the run.</p>
+        <span class="src">Source: <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_slip2d/messages.py" target="_blank" rel="noopener">ogr_slip2d/messages.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_slip2d/methods/sarma.py" target="_blank" rel="noopener">ogr_slip2d/methods/sarma.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_slip2d/sarma/wedges.py" target="_blank" rel="noopener">ogr_slip2d/sarma/wedges.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_slip2d/method_note_messages.py" target="_blank" rel="noopener">ogr_slip2d/method_note_messages.py</a></span>
+      </div>
       <div class="impl">
         <span class="label">In OGR Slip2D</span>
         <p>The reasons are the <code>REASON_*</code> constants, and <code>ALL_REASONS</code> is the set every method's reason must belong to, so that a new reason cannot be introduced as a loose string. They are deliberately not translated: the interface translates the message where it shows it.</p>
@@ -241,7 +273,7 @@
       <h2 id="screens"><span class="secnum">5.5.3</span><span class="ht">Admissibility checks</span><a class="anchor" href="#screens" aria-label="Link to this section">#</a></h2>
       <p>A surface that fails an admissibility check has <em>not</em> failed to compute: its factor converged and is kept, because the searches that steer by the factor of safety need it. The surface is judged inadmissible afterwards and is not reported as the critical one, unless every valid surface is inadmissible; in that case the checks are ignored and the result says so. The verdict is recorded in <code>admissible</code>, <code>admissibility_note</code> and <code>admissibility_reason</code>, with these values:</p>
       <figure class="tbl" id="tbl-screens">
-        <figcaption><span class="fignum">Table 5.5.3</span> Admissibility checks, their code and their default.</figcaption>
+        <figcaption><span class="fignum">Table 5.5.4</span> Admissibility checks, their code and their default.</figcaption>
         <div class="table-wrap">
           <table class="data">
             <thead><tr><th>Reason</th><th class="n">Code</th><th>Check</th><th>Default</th></tr></thead>
@@ -258,7 +290,7 @@
       <h2 id="api-errors"><span class="secnum">5.5.4</span><span class="ht">Errors of the operations layer and the MCP server</span><a class="anchor" href="#api-errors" aria-label="Link to this section">#</a></h2>
       <p>An operation of <code>ogr_api</code> that fails on purpose raises an <code>OgrApiError</code> with a stable code, a message, a hint where there is one and, sometimes, details. An MCP client receives it as <code>[E_CODE] message Hint: hint</code>; a Python script catches it and reads <code>code</code>, <code>message</code>, <code>hint</code> and <code>details</code>. The codes are stable; the wording of the messages is not. An unknown name always comes with the closest known names (<em>Did you mean …?</em>).</p>
       <figure class="tbl" id="tbl-api-errors">
-        <figcaption><span class="fignum">Table 5.5.4</span> Error codes of the operations layer, the MCP server and the agent bridge.</figcaption>
+        <figcaption><span class="fignum">Table 5.5.5</span> Error codes of the operations layer, the MCP server and the agent bridge.</figcaption>
         <div class="table-wrap">
           <table class="data">
             <thead><tr><th>Code</th><th>Raised when</th></tr></thead>
@@ -284,7 +316,7 @@
 
       <h2 id="exit-codes"><span class="secnum">5.5.5</span><span class="ht">Exit codes</span><a class="anchor" href="#exit-codes" aria-label="Link to this section">#</a></h2>
       <figure class="tbl" id="tbl-exit-codes">
-        <figcaption><span class="fignum">Table 5.5.5</span> Exit codes of the command-line programs.</figcaption>
+        <figcaption><span class="fignum">Table 5.5.6</span> Exit codes of the command-line programs.</figcaption>
         <div class="table-wrap">
           <table class="data">
             <thead><tr><th>Program</th><th class="n">Code</th><th>Meaning</th></tr></thead>
@@ -321,7 +353,7 @@
   <aside class="doc-toc" aria-label="On this page">
     <div class="toc-inner">
 <!-- @inc pagetoc -->
-<span class="label">On this page</span><ul><li class="h2"><a href="#surface-codes">5.5.1 Surface error codes</a></li><li class="h2"><a href="#reasons">5.5.2 Failure reasons</a></li><li class="h2"><a href="#screens">5.5.3 Admissibility checks</a></li><li class="h2"><a href="#api-errors">5.5.4 Errors of the operations layer and the MCP server</a></li><li class="h2"><a href="#exit-codes">5.5.5 Exit codes</a></li><li class="h2"><a href="#references">5.5.6 References</a></li></ul><button class="print" type="button"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="1.5"/><path d="M6 14h12v7H6z"/></svg> Print this page</button>
+<span class="label">On this page</span><ul><li class="h2"><a href="#surface-codes">5.5.1 Surface error codes</a></li><li class="h2"><a href="#reasons">5.5.2 Failure reasons</a></li><li class="h3"><a href="#sarma-codes">Sarma&#x27;s method</a></li><li class="h2"><a href="#screens">5.5.3 Admissibility checks</a></li><li class="h2"><a href="#api-errors">5.5.4 Errors of the operations layer and the MCP server</a></li><li class="h2"><a href="#exit-codes">5.5.5 Exit codes</a></li><li class="h2"><a href="#references">5.5.6 References</a></li></ul><button class="print" type="button"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="1.5"/><path d="M6 14h12v7H6z"/></svg> Print this page</button>
 <!-- @end pagetoc -->
     </div>
   </aside>

@@ -168,7 +168,7 @@
         <div class="tool"><b>server_info</b><span>next call goes to: the open window</span></div>
         <div class="tool"><b>model_define</b><span>3 materials · 2 contacts · water table</span></div>
         <div class="tool"><b>analysis_configure</b><span>bishop · spencer · gle · grid · 30 slices</span></div>
-        <div class="tool"><b>analysis_run</b><span>job done · 87 s</span></div>
+        <div class="tool"><b>analysis_run</b><span>job done</span></div>
         <div class="tool"><b>results_get</b><span>view: critical · spencer</span></div>
         <div class="msg agent">Critical factors of safety: Bishop <strong>1.300</strong>, Spencer <strong>1.290</strong> (λ = 0.343) and Morgenstern–Price <strong>1.292</strong>, all on the same circle — centre (60.0, 47.6), radius 31.2 m. It runs through the clay, below the water table for most of its length, and exits 3.8 m beyond the toe.</div>
         <div class="msg user">Which slice carries the highest pore pressure?</div>
@@ -345,7 +345,7 @@ mcpo-env\Scripts\mcpo --port 8000 --api-key "your-key" -- ogr-slip2d-mcp --workd
           <tr><td>Model</td><td>The whole model in one call; boundaries, materials, regions; reshape the outline or change the slope angle; geometry clean-up</td><td><code>model_define</code> · <code>boundary_edit</code> · <code>slope_angle_change</code></td></tr>
           <tr><td>Loads</td><td>Distributed and line loads, pseudo-static seismic loading, acceleration records</td><td><code>load_set</code> · <code>seismic_set</code></td></tr>
           <tr><td>Supports</td><td>Support types, single supports and patterns</td><td><code>support_type_set</code> · <code>support_pattern_add</code></td></tr>
-          <tr><td>Search</td><td>Tension crack water, focus objects, user surfaces</td><td><code>focus_set</code> · <code>user_surface_add</code></td></tr>
+          <tr><td>Search</td><td>Tension crack water, focus objects, user surfaces (circles and polylines, with Sarma's data per vertex)</td><td><code>focus_set</code> · <code>user_surface_add</code> · <code>user_surface_edit</code></td></tr>
           <tr><td>Groundwater</td><td>Hydraulic properties, mesh, boundary conditions, transient stages, pressure grids, solve, read the field, drawdown sweep</td><td><code>mesh_generate</code> · <code>groundwater_run</code></td></tr>
           <tr><td>Statistics</td><td>Random variables, probabilistic and sensitivity runs, back analysis, optimisation</td><td><code>statistics_run</code> · <code>back_analysis_run</code></td></tr>
           <tr><td>Analysis</td><td>Settings, background runs, jobs, results, the interpretation window's queries, a single surface</td><td><code>analysis_run</code> · <code>results_query</code> · <code>surface_evaluate</code></td></tr>

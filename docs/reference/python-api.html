@@ -271,6 +271,64 @@ outcome = evaluate_surfaces(project, circle, ["bishop_simplified", "spencer"])
 for method_id, res in outcome.results.items():
     print(method_id, None if res is None else res.fos)</code></pre></div>
 
+      <h3 id="sarma-polyline"><span class="ht">Sarma's method on a surface drawn by hand</span><a class="anchor" href="#sarma-polyline" aria-label="Link to this section">#</a></h3>
+      <p>A non-circular surface defined by the user is a <code>UserPolylineSurface</code> (<code>ogr_core.geometry.user_polyline</code>, since v0.1.427), kept in <code>project.user_polylines</code>. <code>UserPolylineSurface.from_points(points, vertex_data=None)</code> checks the points (at least two, finite, advancing in <em>x</em>; a polyline given from right to left is stored left to right) and, since v0.1.465, the data of Sarma's method at its interior vertices: <code>angle</code>, the inclination of the face in degrees counter-clockwise from +<em>x</em> (only the line counts, and it may not be horizontal), and <code>c</code> (kPa, ≥ 0) and <code>phi</code> (degrees, from 0 to below 90), which go together. What fails the check raises <code>NotASurface</code>, a <code>ValueError</code> whose <code>kind</code> and <code>reason</code> name the rule. <code>slip_surface_of(polyline)</code>, in <code>ogr_slip2d.surface</code>, builds a fresh engine surface with those data attached, which <code>evaluate_surfaces</code> takes like any other surface. Sarma's method (id <code>sarma</code>) reads its own settings from <code>project.settings.sarma</code> (<a class="xref" href="file-format.html#settings">Section 5.4.3</a>), not those of <code>methods</code>.</p>
+      <div class="code"><pre><code>from ogr_core.geometry.user_polyline import UserPolylineSurface
+from ogr_core.project.demo import build_demo_project
+from ogr_slip2d import PathSearch
+from ogr_slip2d.analysis_runner import evaluate_surfaces
+from ogr_slip2d.methods import SarmaNonVertical
+from ogr_slip2d.surface import slip_surface_of
+
+
+def main():
+    project = build_demo_project()
+    polyline = UserPolylineSurface.from_points(
+        [(19, 25), (25, 18), (31, 14.5), (37, 15)],
+        vertex_data={(25, 18): {"angle": 70},             <span class="c"># face at 70°</span>
+                     (31, 14.5): {"c": 5, "phi": 25}})    <span class="c"># face strength</span>
+    project.user_polylines.append(polyline)
+    project.settings.search.surface_type = "non_circular"
+    project.settings.search.search_method = "path"
+    project.settings.sarma.num_slices = 10
+
+    outcome = evaluate_surfaces(project, slip_surface_of(polyline),
+                                ["spencer", "sarma"])
+    for method_id, res in outcome.results.items():
+        print(method_id, None if res is None else round(res.fos, 4))
+    sarma = outcome.results["sarma"]
+    print("wedges:", len(sarma.slices),
+          "Kc at F = 1:", round(sarma.details["sarma_kc"], 4))
+    for note in outcome.warnings:
+        print("Note:", note)
+
+    method = SarmaNonVertical(num_wedges=10, angle_policy="vertical")
+    res = PathSearch(method=method).evaluate_surface(
+        project, slip_surface_of(polyline))
+    print("hand-built, vertical faces:", round(res.fos, 4))
+
+
+if __name__ == "__main__":
+    main()</code></pre></div>
+      <p>Its output with v<span data-v>0.1.481</span>, on the demo slope:</p>
+      <div class="code"><pre><code>spencer 1.2634
+sarma 1.267
+wedges: 9 Kc at F = 1: 0.1817
+Note: sarma: uses its own number of wedges (10), tolerance and iterations (Sarma group of the Methods page): the global ones do not reach it.
+Note: Accelerate convergence (Steffensen) is on, and not one of the methods this run uses has an iteration it can accelerate, so the setting reached nothing and the results are the same as they would be with it off. The methods that ran are spencer, sarma. Aitken extrapolation speeds up a fixed point on the factor of safety, and only Bishop simplified (on circular surfaces) and both Janbu solve one. Spencer and GLE/Morgenstern-Price solve for the factor and the inter-slice force together, and extrapolating the factor alone leaves the force behind. Lowe-Karafiath and Corps of Engineers #1 and #2 iterate on the factor but are not wired to it. Ordinary/Fellenius has no iteration at all.
+hand-built, vertical faces: 1.2487</code></pre></div>
+      <ul>
+        <li><code>settings.sarma.num_slices</code> is the number of wedges asked for. The boundaries are the vertices of the surface, its crossings with the water table and the material contacts, plus uniform divisions; a division whose face would cross a neighbour is dropped. Here the face given at 70° at <em>x</em> = 25 crosses the division at <em>x</em> = 23.5, so 10 wedges asked for give 9; without the vertex data the same surface gives 10.</li>
+        <li>The faces with no angle at their vertex take the policy of <code>settings.sarma.slice_angles</code> (<code>"bisector"</code> by default). <code>details["sarma_kc"]</code> is the critical acceleration of the mass with its full strength, Kc at <em>F</em> = 1 <a class="cite" href="bibliography.html#sarma1973">(Sarma, 1973)</a>.</li>
+        <li><code>SarmaNonVertical</code> is imported from <code>ogr_slip2d.methods</code>; the top-level package does not export it. Built by hand it takes 25 wedges, the bisector, the strength of the materials on the faces, boundaries at the material contacts, the fixed sense of the face shear, a tolerance of 0.0001 and 75 iterations. A search over non-circular surfaces builds the wedges of the surfaces it evaluates, and a datum given at a vertex still applies: in the last line only the faces without an angle are vertical.</li>
+        <li><code>run_analysis</code> analyses the polylines stored in <code>project.user_polylines</code> together with the search when the Surface Type is <code>non_circular</code>, and skips them with a note otherwise. Sarma's method refuses a surface that crosses a support, and is not computed in a run with rapid drawdown or with the excess pore pressure of loading (<a class="xref" href="error-codes.html#tbl-sarma-codes">Table 5.5.3</a>).</li>
+      </ul>
+      <div class="impl">
+        <span class="label">In OGR Slip2D</span>
+        <p>The engine surface is built anew for each evaluation because the engine writes on the surface it is given (a tension crack moves its last vertex), and the stored polyline must come out of an analysis as it went in. The vertex data are kept by the coordinates of the vertex, not by its index, so they survive the polyline being reversed or cut by a crack; a datum whose vertex does not reach the surface analysed is left out, and the run says so.</p>
+        <span class="src">Source: OGR-Core: <a href="https://github.com/samuelsl27/OGR-Core/blob/v0.2.2/ogr_core/geometry/user_polyline.py" target="_blank" rel="noopener">ogr_core/geometry/user_polyline.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_slip2d/surface.py" target="_blank" rel="noopener">ogr_slip2d/surface.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_slip2d/methods/sarma.py" target="_blank" rel="noopener">ogr_slip2d/methods/sarma.py</a></span>
+      </div>
+
       <h3 id="results-files"><span class="ht">Results files</span><a class="anchor" href="#results-files" aria-label="Link to this section">#</a></h3>
       <p><code>save_results(path, search_result, project_id="")</code> writes one search result to HDF5 and <code>load_summary(path)</code> reads back its metadata and summary arrays, without the slices; both are in <code>ogr_core.project</code>. The layout is in <a class="xref" href="file-format.html#results">Section 5.4.5</a>.</p>
 
@@ -369,7 +427,7 @@ if __name__ == "__main__":
   <aside class="doc-toc" aria-label="On this page">
     <div class="toc-inner">
 <!-- @inc pagetoc -->
-<span class="label">On this page</span><ul><li class="h2"><a href="#levels">5.3.1 Two levels</a></li><li class="h2"><a href="#engine">5.3.2 The engine</a></li><li class="h3"><a href="#projects">Projects</a></li><li class="h3"><a href="#run-analysis">The analysis the project describes</a></li><li class="h3"><a href="#hand-built">A search built by hand</a></li><li class="h3"><a href="#one-surface">One surface</a></li><li class="h3"><a href="#results-files">Results files</a></li><li class="h3"><a href="#processes">Scripts and worker processes</a></li><li class="h2"><a href="#operations">5.3.3 The operations layer</a></li><li class="h2"><a href="#terminal">5.3.4 The embedded terminal</a></li></ul><button class="print" type="button"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="1.5"/><path d="M6 14h12v7H6z"/></svg> Print this page</button>
+<span class="label">On this page</span><ul><li class="h2"><a href="#levels">5.3.1 Two levels</a></li><li class="h2"><a href="#engine">5.3.2 The engine</a></li><li class="h3"><a href="#projects">Projects</a></li><li class="h3"><a href="#run-analysis">The analysis the project describes</a></li><li class="h3"><a href="#hand-built">A search built by hand</a></li><li class="h3"><a href="#one-surface">One surface</a></li><li class="h3"><a href="#sarma-polyline">Sarma&#x27;s method on a surface drawn by hand</a></li><li class="h3"><a href="#results-files">Results files</a></li><li class="h3"><a href="#processes">Scripts and worker processes</a></li><li class="h2"><a href="#operations">5.3.3 The operations layer</a></li><li class="h2"><a href="#terminal">5.3.4 The embedded terminal</a></li></ul><button class="print" type="button"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="1.5"/><path d="M6 14h12v7H6z"/></svg> Print this page</button>
 <!-- @end pagetoc -->
     </div>
   </aside>

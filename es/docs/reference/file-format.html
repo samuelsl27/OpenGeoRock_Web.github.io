@@ -268,7 +268,7 @@
               <tr><td><code>focus_objects</code></td><td>Objetos de foco que restringen la búsqueda.</td></tr>
               <tr><td><code>user_surfaces</code></td><td>Círculos definidos a mano y analizados junto con la búsqueda. Los extremos en que cortan el terreno no significan nada en el archivo: son un resultado del análisis, no un dato de entrada.</td></tr>
               <tr><td><code>transient_initial_result</code></td><td>El estado inicial de un análisis transitorio. Solo se escribe si existe (desde la v0.1.307).</td></tr>
-              <tr><td><code>user_polylines</code></td><td>Superficies no circulares dibujadas a mano, con los datos del método de Sarma en sus vértices cuando se dan. Solo se escribe si hay alguna (desde la v0.1.427).</td></tr>
+              <tr><td><code>user_polylines</code></td><td>Superficies no circulares definidas a mano, cada una con <code>type</code> (<code>"polyline"</code>), <code>id</code> y <code>points</code> como pares [<em>x</em>, <em>y</em>] de izquierda a derecha y, cuando se da algún dato del método de Sarma en sus vértices interiores, <code>sarma</code>: una fila por vértice con <code>x</code>, <code>y</code>, <code>angle</code> (grados en sentido antihorario desde +<em>x</em>), <code>c</code> (kPa) y <code>phi</code> (grados), con <code>null</code> donde no se da (desde la v0.1.465). Solo se escribe si hay alguna (desde la v0.1.427).</td></tr>
             </tbody>
           </table>
         </div>
@@ -289,16 +289,61 @@
               <tr><td><code>statistics</code></td><td>Análisis probabilístico y de sensibilidad</td><td><code>probabilistic_analysis</code>, <code>sensitivity_analysis</code>, <code>sampling_method</code>, <code>num_samples</code>, <code>analysis_type</code>, <code>seed</code></td></tr>
               <tr><td><code>back_analysis</code></td><td>Retroanálisis de la fuerza del soporte</td><td><code>enabled</code>, <code>target_fos</code>, <code>elevation</code>, <code>method_id</code></td></tr>
               <tr><td><code>random_numbers</code></td><td>Semilla de las búsquedas aleatorias y del muestreo</td><td><code>method</code>, <code>seed</code>, <code>lhs_correlate</code></td></tr>
-              <tr><td><code>design_standard</code></td><td>Coeficientes parciales</td><td><code>enabled</code>, <code>standard</code>, <code>factor_permanent</code>, <code>factor_variable</code>, <code>factor_cohesion</code>, <code>factor_friction</code>, <code>factor_unit_weight</code>, <code>factor_resistance</code>, <code>factor_undrained</code>, <code>factor_shear_strength</code></td></tr>
-              <tr><td><code>advanced</code></td><td>Comprobaciones de admisibilidad, iteración y búsqueda en paralelo</td><td><code>check_tensile_stresses</code>, <code>tensile_percent</code>, <code>check_m_alpha</code>, <code>initial_fos</code>, <code>min_lambda</code>, <code>max_lambda</code>, <code>iterate_steffensen</code>, <code>parallel_search</code>, <code>parallel_cpu_percent</code></td></tr>
+              <tr><td><code>design_standard</code></td><td>Coeficientes parciales</td><td><code>enabled</code>, <code>standard</code> (<code>none</code>, <code>eurocode7_da1c1</code>, <code>eurocode7_da1c2</code>, <code>eurocode7_da2</code>, <code>eurocode7_da3</code> o <code>custom</code>), <code>factor_permanent</code> y <code>factor_permanent_favourable</code> (γ<sub>G</sub> desfavorable y favorable, desde la v0.1.242), <code>factor_variable</code> y <code>factor_variable_favourable</code> (γ<sub>Q</sub>, desde la v0.1.243), <code>factor_cohesion</code>, <code>factor_friction</code>, <code>factor_unit_weight</code>, <code>factor_resistance</code>, <code>factor_undrained</code>, <code>factor_shear_strength</code>, <code>factor_seismic</code> (desde la v0.1.245), <code>anchor_permanent_factor</code> (false por defecto) y <code>single_source_weight</code> (true por defecto)</td></tr>
+              <tr><td><code>advanced</code></td><td>Comprobaciones de admisibilidad, iteración y búsqueda en paralelo</td><td><code>check_tensile_stresses</code>, <code>tensile_percent</code>, <code>check_m_alpha</code>, <code>initial_fos</code>, <code>min_lambda</code>, <code>max_lambda</code>, <code>iterate_steffensen</code>, <code>parallel_search</code>, <code>parallel_cpu_percent</code>, <code>max_base_angle_deg</code> (80 por defecto), <code>pso_enhanced</code></td></tr>
               <tr><td><code>seismic</code></td><td>Análisis sísmico más allá del factor de seguridad</td><td><code>compute_ky</code>, <code>ky_target_fos</code>, <code>newmark</code>, <code>record_id</code>, <code>polarity</code>, <code>allow_upslope</code>, <code>scale</code></td></tr>
               <tr><td><code>summary</code></td><td>Resumen del proyecto</td><td><code>title</code>, <code>analysis</code>, <code>author</code>, <code>company</code>, <code>date_created</code>, <code>comments</code></td></tr>
               <tr><td><code>max_materials</code>, <code>max_supports</code></td><td>Límites del modelo</td><td>20 por defecto para cada uno</td></tr>
-              <tr><td><code>sarma</code></td><td>Método de Sarma (desde la v0.1.464); solo se escribe si el método está activado o algún campo difiere de su valor por defecto</td><td><code>num_slices</code> (número mínimo de cuñas), <code>tolerance</code>, <code>max_iterations</code>, <code>slice_angles</code>, <code>interslice_strength</code>, <code>interslice_cohesion</code>, <code>interslice_phi</code>, <code>boundaries_at_materials</code>, <code>shear_sense</code></td></tr>
+              <tr><td><code>sarma</code></td><td>Método de Sarma (desde la v0.1.464); solo se escribe si el método está activado o algún campo difiere de su valor por defecto</td><td><code>num_slices</code> (cuñas pedidas, 25), <code>tolerance</code> (0.0001), <code>max_iterations</code> (75), <code>slice_angles</code> (<code>bisector</code>, <code>mean_normal</code> o <code>vertical</code> y, desde la v0.1.471, <code>optimized_global</code> u <code>optimized_all</code>; <code>bisector</code> por defecto), <code>interslice_strength</code> (<code>materials</code>, <code>given</code> o <code>none</code>; <code>materials</code>), <code>interslice_cohesion</code> e <code>interslice_phi</code> (0, se leen con <code>given</code>), <code>boundaries_at_materials</code> (true), <code>shear_sense</code> (<code>fixed</code> o <code>kinematic</code>; <code>fixed</code>)</td></tr>
             </tbody>
           </table>
         </div>
       </figure>
+      <p>Con el método de Sarma activado y una superficie definida a mano, el talud de demostración guardado por la v<span data-v>0.1.481</span> termina sus <code>settings</code> y el archivo así:</p>
+      <div class="code"><pre><code>    "sarma": {
+      "num_slices": 25,
+      "tolerance": 0.0001,
+      "max_iterations": 75,
+      "slice_angles": "bisector",
+      "interslice_strength": "materials",
+      "interslice_cohesion": 0.0,
+      "interslice_phi": 0.0,
+      "boundaries_at_materials": true,
+      "shear_sense": "fixed"
+    }
+  },
+  …
+  "user_polylines": [
+    {
+      "type": "polyline",
+      "id": "4bfd708e-3d17-41fb-8241-61dcfe97835e",
+      "points": [
+        [
+          19.0,
+          25.0
+        ],
+        …
+      ],
+      "sarma": [
+        {
+          "x": 25.0,
+          "y": 18.0,
+          "angle": 70.0,
+          "c": null,
+          "phi": null
+        },
+        {
+          "x": 31.0,
+          "y": 14.5,
+          "angle": null,
+          "c": 5.0,
+          "phi": 25.0
+        }
+      ]
+    }
+  ]
+}</code></pre></div>
+      <p>Un dato de vértice se comprueba al crear la superficie, no al leer el archivo: el análisis vuelve a comprobar los datos guardados, analiza la polilínea con los que pasan y dice cuántos ha dejado fuera. Una versión anterior a la v0.1.471 lee <code>optimized_global</code> u <code>optimized_all</code> como un valor que no admite y omite el método de Sarma con una nota.</p>
       <p>El significado de cada ajuste se explica donde se define: en la <a class="xref" href="../user-guide/project-settings.html">Sección 2.1</a> para la ventana y, para la capa de operaciones, con <code>catalog("settings")</code> o <code>settings_get</code>, que enumeran todos los ajustes con su tipo y sus opciones.</p>
 
       <h2 id="versions"><span class="secnum">5.4.4</span><span class="ht">Versiones y compatibilidad</span><a class="anchor" href="#versions" aria-label="Enlace a esta sección">#</a></h2>
@@ -307,7 +352,8 @@
         <li>un contorno cerrado que repite su primer vértice al final, como hacía toda importación de DXF antes de la v0.1.197, se lee sin el vértice repetido (es el mismo polígono);</li>
         <li>un proyecto de desembalse rápido guardado antes de que existieran los campos B̄ (v0.1.62) recupera el comportamiento con el que se calculó;</li>
         <li>un proyecto de desembalse rápido B̄ dibujado con la convención de desembalse anterior a la v0.1.69 se lee con el nivel freático y la línea de desembalse intercambiados, para que el modelo signifique lo que significaba;</li>
-        <li>una rejilla de presiones de agua que declara además su propio tipo de valor fija en consecuencia el método de agua subterránea (v0.1.202).</li>
+        <li>una rejilla de presiones de agua que declara además su propio tipo de valor fija en consecuencia el método de agua subterránea (v0.1.202);</li>
+        <li>una norma de diseño guardada antes de las v0.1.242–0.1.245 recibe los campos que le faltan: una norma con nombre los toma de su preajuste, y DA3, si aún lleva los coeficientes de acciones del conjunto A1 (1.35, 1.5), toma los de A2; una <code>custom</code> conserva sus números (su γ<sub>Q</sub> favorable toma su γ<sub>Q</sub>), y un coeficiente de peso específico distinto de 1, que multiplicaba el peso específico hasta la v0.1.245, se lee como su inverso, que lo divide hasta el mismo valor.</li>
       </ul>
       <p>La conversión de la v0.1.69 cambia, a propósito, el factor de seguridad de los archivos a los que se aplica, y el registro de cambios de esa versión lo indica. No se garantiza que una versión anterior del programa abra un archivo escrito por otra más reciente.</p>
 

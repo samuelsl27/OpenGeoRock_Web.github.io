@@ -170,18 +170,31 @@
       <p class="lede">Results leave the program as a PDF report, images, prints and DXF drawings. The program can also be run without the mouse, from the Python terminal inside the window, the command line, the Python API or an AI agent connected through the MCP server. The last three have their own reference chapters; here they are introduced from the point of view of the desktop program.</p>
 
       <h2 id="report"><span class="secnum">2.12.1</span><span class="ht">The PDF report</span><a class="anchor" href="#report" aria-label="Link to this section">#</a></h2>
-      <p><span class="ui">File → Generate Report…</span> writes an A4 PDF of the last Compute, with every method it ran; without a Compute it refuses, with a message. It first asks whether to include a drawing of the critical surface of each method, and how to frame it. The file name proposed is the project's name followed by <code>_report.pdf</code>, and the report is written in the language of the interface. It has these sections:</p>
+      <p><span class="ui">File → Generate Report…</span> writes an A4 PDF of the last Compute, with every method it ran; without a Compute it refuses, with a message. It first opens the <strong>Generate Report</strong> dialog, which chooses the figures (<a href="#report-figures">Figures of the report</a>), and then asks for the file name. The file name proposed is the project's name followed by <code>_report.pdf</code>, and the report is written in the language of the interface. It has these sections:</p>
       <ol>
         <li><strong>Project Summary</strong>: title, file, author, company, dates and comments;</li>
         <li><strong>General Settings</strong>: units, time and permeability units, failure direction;</li>
-        <li><strong>Analysis Options</strong>: the methods, number of slices, tolerance and maximum iterations, and the surface options; with a design standard applied, also the standard and what it factored;</li>
+        <li><strong>Analysis Options</strong>: the methods, number of slices, tolerance and maximum iterations, and the surface options; with Sarma among the methods, also its own settings; with a design standard applied, also the standard and what it factored;</li>
         <li><strong>Material Properties</strong>;</li>
-        <li><strong>Global Minimums</strong>: for each method, the factor of safety and the critical surface (centre and radius for a circle, the two end points, the total slice area), followed by the vertices of a non-circular critical surface;</li>
+        <li><strong>Global Minimums</strong>: for each method, the factor of safety and the critical surface (centre and radius for a circle, the two end points, the total slice area), followed by the vertices of a non-circular critical surface; when the critical surface is one drawn by the user, the report says so;</li>
           <li><strong>Critical Surface by Method</strong>, the drawings, when they were asked for;</li>
         <li><strong>Valid / Invalid Surfaces</strong>: the counts per method, with the generation attempts;</li>
-        <li><strong>Slice Data</strong> of the critical surface of each method;</li>
+        <li><strong>Slice Data</strong> of the critical surface of each method, and for Sarma a table of the faces of its wedges;</li>
         <li><strong>List of Coordinates</strong> of the boundaries.</li>
       </ol>
+      <h3 id="report-figures"><span class="ht">Figures of the report</span><a class="anchor" href="#report-figures" aria-label="Link to this section">#</a></h3>
+      <p>The <strong>Generate Report</strong> dialog (since version 0.1.339) has three options, and its <span class="ui">Generate</span> button goes on to the file name:</p>
+      <ul>
+        <li><strong>Critical surface of each method</strong> (ticked by default): one figure per method with a critical surface, in the section <em>Critical Surface by Method</em>. It draws the model and that method's critical surface and, when the search had a grid of slip centres, colours each centre by the number the run reports there: the minimum factor of safety, or the minimum over-design factor with a design standard applied; on a run that computes Ky or the Newmark displacement, the minimum Ky or the maximum displacement. The critical centre is marked. A non-circular search has no centres, so its figures show the surface alone. Unticked, the report has no figures and the other two options are greyed out.</li>
+        <li><strong>Framing</strong>: <em>Model</em> (the default) frames each figure on the model; <em>Model and search area</em> frames it on the model and every slip centre the searches evaluated, valid or not. Every figure of a report has the same frame, so that they can be compared. <em>Model and search area</em> is greyed out when no search of the run has a grid of slip centres.</li>
+        <li><strong>Annotations</strong> (ticked by default): draws the lines, texts, dimensions, axes and images of the <span class="ui">Tools</span> menu on the figures. It is greyed out when the model has no visible annotation.</li>
+      </ul>
+      <p>The words drawn on the figures (the scale and the legend) are in the language of the report. The same three options are the parameters <code>figures</code>, <code>framing</code> (<code>model</code> or <code>search_area</code>) and <code>annotations</code> of the MCP tool <code>report_generate</code>, so a script and the window produce the same report.</p>
+      <div class="impl">
+        <span class="label">In OGR Slip2D</span>
+        <p>The window and <code>report_generate</code> build the figures with the same function, <code>method_figures</code>. A figure is 1400 × 900 pixels and its frame has a margin of 5 % of its larger side. The coloured centres are those of the interpretation window: the value of the most critical valid surface of each centre; on a run of factors of safety they are drawn only when at least three centres have one.</p>
+        <span class="src">Source: <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_gui/dialogs/report_dialog.py" target="_blank" rel="noopener">ogr_gui/dialogs/report_dialog.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_api/report_figures.py" target="_blank" rel="noopener">ogr_api/report_figures.py</a> · OGR-Core: <a href="https://github.com/samuelsl27/OGR-Core/blob/v0.2.2/ogr_core/report/report_generator.py" target="_blank" rel="noopener">ogr_core/report/report_generator.py</a></span>
+      </div>
       <p>The title, author and company come from <span class="ui">Analysis → Project Settings →</span> <span class="ui">Project Summary</span>.</p>
       <div class="note warn"><span class="label">Before you send a report (version 0.1.481)</span>
         <ul>
@@ -239,7 +252,7 @@
             <thead><tr><th>Command</th><th>What it does</th></tr></thead>
             <tbody>
               <tr><td><code>info project.ogr</code></td><td>A summary of the project and its materials.</td></tr>
-              <tr><td><code>compute project.ogr</code></td><td>Runs the analysis, prints every note and a table of the critical value of each method, and saves each method's result as HDF5 (<code>project.h5</code>, or one file per method). Options: <code>--method</code>, <code>--slices</code>, <code>--sarma-slices</code> (the least number of wedges of Sarma's method), <code>--nx</code>, <code>--ny</code> (grid intervals), <code>--dr</code> (Radius Increment), <code>--search</code>, <code>--samples</code> (Number of Surfaces of the Slope, Block and Path searches) and <code>--output</code>.</td></tr>
+              <tr><td><code>compute project.ogr</code></td><td>Runs the analysis, prints every note and a table of the critical value of each method, and saves each method's result as HDF5 (<code>project.h5</code>, or one file per method). Options: <code>--method</code>, <code>--slices</code>, <code>--sarma-slices</code> (the number of wedges asked of Sarma's method; <a class="xref" href="../reference/cli.html#tbl-compute-options">Table 5.2.2</a>), <code>--nx</code>, <code>--ny</code> (grid intervals), <code>--dr</code> (Radius Increment), <code>--search</code>, <code>--samples</code> (Number of Surfaces of the Slope, Block and Path searches) and <code>--output</code>.</td></tr>
               <tr><td><code>methods</code></td><td>The ten methods with the equilibrium each satisfies.</td></tr>
               <tr><td><code>strength-models</code></td><td>The strength models and their parameters.</td></tr>
               <tr><td><code>new-demo out.ogr</code></td><td>Saves the demo slope as a project.</td></tr>
@@ -279,7 +292,7 @@ for note in out.warnings:
   <aside class="doc-toc" aria-label="On this page">
     <div class="toc-inner">
 <!-- @inc pagetoc -->
-<span class="label">On this page</span><ul><li class="h2"><a href="#report">2.12.1 The PDF report</a></li><li class="h2"><a href="#images">2.12.2 Images</a></li><li class="h2"><a href="#printing">2.12.3 Printing</a></li><li class="h2"><a href="#dxf">2.12.4 DXF drawings</a></li><li class="h2"><a href="#terminal">2.12.5 The Python terminal</a></li><li class="h2"><a href="#cli">2.12.6 The command line</a></li><li class="h2"><a href="#python-api">2.12.7 Python API</a></li><li class="h2"><a href="#ai-agents">2.12.8 AI agents</a></li></ul><button class="print" type="button"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="1.5"/><path d="M6 14h12v7H6z"/></svg> Print this page</button>
+<span class="label">On this page</span><ul><li class="h2"><a href="#report">2.12.1 The PDF report</a></li><li class="h3"><a href="#report-figures">Figures of the report</a></li><li class="h2"><a href="#images">2.12.2 Images</a></li><li class="h2"><a href="#printing">2.12.3 Printing</a></li><li class="h2"><a href="#dxf">2.12.4 DXF drawings</a></li><li class="h2"><a href="#terminal">2.12.5 The Python terminal</a></li><li class="h2"><a href="#cli">2.12.6 The command line</a></li><li class="h2"><a href="#python-api">2.12.7 Python API</a></li><li class="h2"><a href="#ai-agents">2.12.8 AI agents</a></li></ul><button class="print" type="button"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="1.5"/><path d="M6 14h12v7H6z"/></svg> Print this page</button>
 <!-- @end pagetoc -->
     </div>
   </aside>

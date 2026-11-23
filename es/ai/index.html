@@ -168,7 +168,7 @@
         <div class="tool"><b>server_info</b><span>próxima llamada: la ventana abierta</span></div>
         <div class="tool"><b>model_define</b><span>3 materiales · 2 contactos · nivel freático</span></div>
         <div class="tool"><b>analysis_configure</b><span>bishop · spencer · gle · rejilla · 30 dovelas</span></div>
-        <div class="tool"><b>analysis_run</b><span>tarea terminada · 87 s</span></div>
+        <div class="tool"><b>analysis_run</b><span>tarea terminada</span></div>
         <div class="tool"><b>results_get</b><span>view: critical · spencer</span></div>
         <div class="msg agent">Factores de seguridad críticos: Bishop <strong>1.300</strong>, Spencer <strong>1.290</strong> (λ = 0.343) y Morgenstern-Price <strong>1.292</strong>, los tres en el mismo círculo, de centro (60.0, 47.6) y radio 31.2 m. Atraviesa la arcilla, va por debajo del nivel freático en la mayor parte de su recorrido y sale 3.8 m más allá del pie.</div>
         <div class="msg user">¿En qué dovela es mayor la presión intersticial?</div>
@@ -345,7 +345,7 @@ mcpo-env\Scripts\mcpo --port 8000 --api-key "your-key" -- ogr-slip2d-mcp --workd
           <tr><td>Modelo</td><td>El modelo completo en una llamada; contornos, materiales y regiones; modificar el contorno o cambiar el ángulo del talud; limpieza de la geometría</td><td><code>model_define</code> · <code>boundary_edit</code> · <code>slope_angle_change</code></td></tr>
           <tr><td>Cargas</td><td>Cargas distribuidas y lineales, carga sísmica pseudoestática, acelerogramas</td><td><code>load_set</code> · <code>seismic_set</code></td></tr>
           <tr><td>Soportes</td><td>Tipos de soporte, soportes individuales y patrones de soportes</td><td><code>support_type_set</code> · <code>support_pattern_add</code></td></tr>
-          <tr><td>Búsqueda</td><td>Agua en la grieta de tracción, objetos de foco, superficies definidas por el usuario</td><td><code>focus_set</code> · <code>user_surface_add</code></td></tr>
+          <tr><td>Búsqueda</td><td>Agua en la grieta de tracción, objetos de foco, superficies definidas por el usuario (círculos y polilíneas, con los datos de Sarma por vértice)</td><td><code>focus_set</code> · <code>user_surface_add</code> · <code>user_surface_edit</code></td></tr>
           <tr><td>Agua subterránea</td><td>Propiedades hidráulicas, malla, condiciones de contorno, etapas transitorias, rejillas de presión, cálculo, lectura del campo de agua, barrido de desembalse</td><td><code>mesh_generate</code> · <code>groundwater_run</code></td></tr>
           <tr><td>Estadística</td><td>Variables aleatorias, análisis probabilísticos y de sensibilidad, retroanálisis, optimización</td><td><code>statistics_run</code> · <code>back_analysis_run</code></td></tr>
           <tr><td>Análisis</td><td>Ajustes, cálculos en segundo plano, tareas, resultados, consultas de la ventana de interpretación, cálculo de una superficie concreta</td><td><code>analysis_run</code> · <code>results_query</code> · <code>surface_evaluate</code></td></tr>

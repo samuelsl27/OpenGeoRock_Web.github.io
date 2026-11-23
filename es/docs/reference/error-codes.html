@@ -195,7 +195,7 @@
         <li>sin factor convergido: −111;</li>
         <li>cualquier otro caso: −101.</li>
       </ol>
-      <p>Como −111 abarca todo cálculo que no ha dado un factor convergido, no indica solo un problema de convergencia: también reciben −111 los círculos cuya masa no desliza (<code>zero_driving</code>) y, en un análisis de desembalse rápido, las superficies candidatas a las que no se aplica el procedimiento (<code>drawdown_not_applicable</code>), y el motivo permite distinguirlos. Una superficie rechazada antes de dividirla en dovelas no tiene resultado ni fila. Desde la v0.1.445, el recuento de la ventana Interpret cuenta algunos de esos rechazos con un código, cada uno con su propio motivo: −101 cuando un extremo de una polilínea no está sobre el terreno, su base sube por encima del terreno, un extremo aflora fuera de los Slope Limits o un círculo no corta dos veces el terreno, y −103 cuando un círculo sale del contorno externo entre sus cortes con el terreno. Los demás cuentan como no divididos en dovelas. Ninguna superficie lleva el −103, porque ese círculo nunca se divide en dovelas.</p>
+      <p>Como −111 abarca todo cálculo que no ha dado un factor convergido, no indica solo un problema de convergencia: también reciben −111 los círculos cuya masa no desliza (<code>zero_driving</code>) y, en un análisis de desembalse rápido, las superficies candidatas a las que no se aplica el procedimiento (<code>drawdown_not_applicable</code>), así como las superficies que rechaza el método de Sarma (<code>sarma_refused</code>), y el motivo permite distinguirlos. Una superficie rechazada antes de dividirla en dovelas no tiene resultado ni fila. Desde la v0.1.445, el recuento de la ventana Interpret cuenta algunos de esos rechazos con un código, cada uno con su propio motivo: −101 cuando un extremo de una polilínea no está sobre el terreno, su base sube por encima del terreno, un extremo aflora fuera de los Slope Limits o un círculo no corta dos veces el terreno, y −103 cuando un círculo sale del contorno externo entre sus cortes con el terreno. Los demás cuentan como no divididos en dovelas. Ninguna superficie lleva el −103, porque ese círculo nunca se divide en dovelas.</p>
       <p>Los códigos aparecen en la ventana Interpret, en <span class="ui">Data → Export Raw Data…</span> (cuya última columna contiene el factor de seguridad o el código), en <span class="ui">Data → Summary of Invalid Surfaces…</span>, en <span class="ui">Query → Query Invalid Surfaces</span> (que muestra el código de los centros de la rejilla sin ninguna superficie válida) y en la opción <em>Surfaces with error code</em> del filtro de superficies. También aparecen en la herramienta MCP <code>results_query</code> (vistas <code>error_codes</code>, <code>invalid_summary</code>, <code>raw_data</code> y <code>filter</code>). El archivo de resultados HDF5 no guarda ningún código: una superficie sin factor no tiene el atributo <code>fos</code> y lleva su <code>reason</code> (<a class="xref" href="file-format.html#results">Sección 5.4.5</a>).</p>
       <div class="impl">
         <span class="label">En OGR Slip2D</span>
@@ -228,10 +228,42 @@
               <tr><td><code>drawdown_not_applicable</code></td><td>El procedimiento de desembalse rápido no se aplica a esta superficie. No es un fallo del motor: en una búsqueda, la mayoría de las candidatas se encuentran en este caso.</td></tr>
               <tr><td><code>unsliceable_at_drawdown</code></td><td>La superficie no se puede dividir en dovelas con el nivel de agua ya descendido.</td></tr>
               <tr><td><code>envelope_not_converged</code></td><td>La envolvente de resistencia depende de la tensión normal, y la tensión con la que se leyó nunca llega a coincidir con la que obtiene el método, de modo que el factor no corresponde a la envolvente (desde v0.1.213).</td></tr>
+              <tr><td><code>sarma_refused</code></td><td>El método de Sarma rechazó la superficie: no se pudieron construir sus cuñas, una cara es paralela a una base o la superficie cruza un soporte (desde la v0.1.464). El <code>message_code</code> del resultado dice cuál (<a class="xref" href="#tbl-sarma-codes">Tabla 5.5.3</a>).</td></tr>
             </tbody>
           </table>
         </div>
       </figure>
+      <h3 id="sarma-codes"><span class="ht">El método de Sarma</span><a class="anchor" href="#sarma-codes" aria-label="Enlace a esta sección">#</a></h3>
+      <p>Además de su motivo, un resultado sin factor lleva un código más fino, <code>message_code</code>, con sus valores en <code>message_args</code>; las respuestas de la capa de operaciones y del servidor MCP incluyen los dos. Para el método de Sarma con dovelas no verticales los códigos son estos:</p>
+      <figure class="tbl" id="tbl-sarma-codes">
+        <figcaption><span class="fignum">Tabla 5.5.3</span> Por qué el método de Sarma no da factor de seguridad para una superficie: el código del mensaje y el motivo en que se incluye.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Código del mensaje</th><th>Motivo</th><th>Cuándo</th></tr></thead>
+            <tbody>
+              <tr><td><code>lem.sarma_supports</code></td><td><code>sarma_refused</code></td><td>La superficie cruza un soporte; el método no admite soportes.</td></tr>
+              <tr><td><code>lem.sarma_face_parallel</code></td><td><code>sarma_refused</code></td><td>Una cara es paralela a la base de una cuña.</td></tr>
+              <tr><td><code>lem.sarma_face_horizontal</code></td><td><code>sarma_refused</code></td><td>El ángulo dado a una cara es horizontal.</td></tr>
+              <tr><td><code>lem.sarma_face_no_exit</code></td><td><code>sarma_refused</code></td><td>Una cara no llega al terreno dentro del modelo.</td></tr>
+              <tr><td><code>lem.sarma_faces_cross</code></td><td><code>sarma_refused</code></td><td>Dos caras se cortan dentro de la masa deslizante.</td></tr>
+              <tr><td><code>lem.sarma_wedge_invalid</code></td><td><code>sarma_refused</code></td><td>Una cuña no es un polígono dentro de la masa deslizante: una de sus caras sale de la masa por la superficie de rotura.</td></tr>
+              <tr><td><code>lem.sarma_wedge_outside</code></td><td><code>sarma_refused</code></td><td>Parte de una cuña queda en una región sin material.</td></tr>
+              <tr><td><code>lem.sarma_face_strength</code></td><td><code>sarma_refused</code></td><td>La cara toma su resistencia de los materiales y cruza uno cuyo modelo de resistencia no es Mohr–Coulomb; esa cara necesita entonces su propia <em>c</em> y su <em>φ</em>.</td></tr>
+              <tr><td><code>lem.sarma_excess_pore_pressure</code></td><td><code>sarma_refused</code></td><td>Está activado el exceso de presión intersticial de la carga sin drenaje (B̄); el método no lo calcula.</td></tr>
+              <tr><td><code>lem.sarma_no_driving</code></td><td><code>zero_driving</code></td><td>Kc alcanza el <em>k</em><sub>h</sub> aplicado solo con la resistencia dividida por más de 10<sup>6</sup>, o nunca: la superficie no desliza.</td></tr>
+              <tr><td><code>lem.sarma_no_root</code></td><td><code>non_physical_fos</code></td><td>Kc se queda por debajo del <em>k</em><sub>h</sub> aplicado para todo factor de seguridad hasta 0.01.</td></tr>
+              <tr><td><code>lem.not_converged</code></td><td><code>not_converged</code></td><td>La iteración sobre <em>F</em> agotó sus pasadas.</td></tr>
+              <tr><td><code>lem.sarma_drawdown</code></td><td><code>drawdown_not_applicable</code></td><td>Se llegó al método en un análisis de desembalse rápido por una vía que no lo omite antes.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p>Como todo resultado sin factor convergido, estas superficies tienen el código −111. Dos condiciones de todo el análisis no se informan superficie a superficie: con desembalse rápido, o con el exceso de presión intersticial de la carga, el método no se calcula y el análisis lo dice una vez (notas <code>method.sarma_drawdown</code> y <code>method.sarma_excess</code>), y un valor de <code>settings.sarma</code> que no admite lo omite con <code>method.sarma_bad_setting</code>, que nombra el campo. Otras notas del análisis conservan el factor y lo matizan: <code>method.sarma_near_pole</code> cuando el menor |<em>q</em>| de las caras es inferior a 0.2, de modo que el factor es una raíz de Kc(<em>F</em>) = <em>k</em><sub>h</sub> junto a un polo (v0.1.466); <code>method.sarma_near_pair</code> cuando ese factor está además cerca de un polo de Kc, con la siguiente raíz por debajo (v0.1.470); <code>method.sarma_tension</code> cuando una base o una cara soporta una fuerza normal efectiva de tracción; <code>method.sarma_verticalized</code> por las caras que se pusieron verticales, y <code>method.sarma_vertex_data_unused</code> por los datos dados en vértices que no llegaron a la superficie analizada. En las notas de un análisis, cada una conserva su código junto a la frase.</p>
+      <div class="impl">
+        <span class="label">En OGR Slip2D</span>
+        <p>La frase y su código los escribe juntos una sola función, para que no puedan discrepar; los motivos son más gruesos a propósito, porque agrupan el recuento de superficies no válidas. Un rechazo vuelve como un resultado sin factor y con su código, nunca como NaN ni como una excepción que pare el análisis.</p>
+        <span class="src">Código: <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_slip2d/messages.py" target="_blank" rel="noopener">ogr_slip2d/messages.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_slip2d/methods/sarma.py" target="_blank" rel="noopener">ogr_slip2d/methods/sarma.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_slip2d/sarma/wedges.py" target="_blank" rel="noopener">ogr_slip2d/sarma/wedges.py</a> · <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_slip2d/method_note_messages.py" target="_blank" rel="noopener">ogr_slip2d/method_note_messages.py</a></span>
+      </div>
       <div class="impl">
         <span class="label">En OGR Slip2D</span>
         <p>Los motivos son las constantes <code>REASON_*</code>, y <code>ALL_REASONS</code> es el conjunto al que debe pertenecer el motivo de cada método, de modo que no pueda aparecer un motivo nuevo como una cadena suelta. No se traducen a propósito: la interfaz traduce el mensaje en el lugar donde lo muestra.</p>
@@ -241,7 +273,7 @@
       <h2 id="screens"><span class="secnum">5.5.3</span><span class="ht">Comprobaciones de admisibilidad</span><a class="anchor" href="#screens" aria-label="Enlace a esta sección">#</a></h2>
       <p>Una superficie que no supera una comprobación de admisibilidad <em>no</em> ha fallado en el cálculo: su factor ha convergido y se conserva, porque lo necesitan las búsquedas que se guían por el factor de seguridad. Después se la considera inadmisible y no se da como crítica, salvo que todas las superficies válidas sean inadmisibles; en ese caso se ignoran las comprobaciones y el resultado lo indica. La decisión se registra en <code>admissible</code>, <code>admissibility_note</code> y <code>admissibility_reason</code>, con estos valores:</p>
       <figure class="tbl" id="tbl-screens">
-        <figcaption><span class="fignum">Tabla 5.5.3</span> Comprobaciones de admisibilidad, su código y su valor por defecto.</figcaption>
+        <figcaption><span class="fignum">Tabla 5.5.4</span> Comprobaciones de admisibilidad, su código y su valor por defecto.</figcaption>
         <div class="table-wrap">
           <table class="data">
             <thead><tr><th>Motivo</th><th class="n">Código</th><th>Comprobación</th><th>Por defecto</th></tr></thead>
@@ -258,7 +290,7 @@
       <h2 id="api-errors"><span class="secnum">5.5.4</span><span class="ht">Errores de la capa de operaciones y del servidor MCP</span><a class="anchor" href="#api-errors" aria-label="Enlace a esta sección">#</a></h2>
       <p>Cuando una operación de <code>ogr_api</code> falla a propósito, lanza un <code>OgrApiError</code> con un código estable, un mensaje, una sugerencia (si la hay) y, a veces, detalles. Un cliente MCP lo recibe como <code>[E_CODE] message Hint: hint</code>; un script de Python lo captura y lee <code>code</code>, <code>message</code>, <code>hint</code> y <code>details</code>. Los códigos son estables; la redacción de los mensajes, no. Cuando un nombre no existe, el error propone los nombres conocidos más parecidos (<em>Did you mean …?</em>).</p>
       <figure class="tbl" id="tbl-api-errors">
-        <figcaption><span class="fignum">Tabla 5.5.4</span> Códigos de error de la capa de operaciones, del servidor MCP y del puente para agentes.</figcaption>
+        <figcaption><span class="fignum">Tabla 5.5.5</span> Códigos de error de la capa de operaciones, del servidor MCP y del puente para agentes.</figcaption>
         <div class="table-wrap">
           <table class="data">
             <thead><tr><th>Código</th><th>Cuándo se produce</th></tr></thead>
@@ -284,7 +316,7 @@
 
       <h2 id="exit-codes"><span class="secnum">5.5.5</span><span class="ht">Códigos de salida</span><a class="anchor" href="#exit-codes" aria-label="Enlace a esta sección">#</a></h2>
       <figure class="tbl" id="tbl-exit-codes">
-        <figcaption><span class="fignum">Tabla 5.5.5</span> Códigos de salida de los programas de línea de comandos.</figcaption>
+        <figcaption><span class="fignum">Tabla 5.5.6</span> Códigos de salida de los programas de línea de comandos.</figcaption>
         <div class="table-wrap">
           <table class="data">
             <thead><tr><th>Programa</th><th class="n">Código</th><th>Significado</th></tr></thead>
@@ -321,7 +353,7 @@
   <aside class="doc-toc" aria-label="En esta página">
     <div class="toc-inner">
 <!-- @inc pagetoc -->
-<span class="label">En esta página</span><ul><li class="h2"><a href="#surface-codes">5.5.1 Códigos de error de las superficies</a></li><li class="h2"><a href="#reasons">5.5.2 Motivos de fallo</a></li><li class="h2"><a href="#screens">5.5.3 Comprobaciones de admisibilidad</a></li><li class="h2"><a href="#api-errors">5.5.4 Errores de la capa de operaciones y del servidor MCP</a></li><li class="h2"><a href="#exit-codes">5.5.5 Códigos de salida</a></li><li class="h2"><a href="#references">5.5.6 Referencias</a></li></ul><button class="print" type="button"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="1.5"/><path d="M6 14h12v7H6z"/></svg> Imprimir esta página</button>
+<span class="label">En esta página</span><ul><li class="h2"><a href="#surface-codes">5.5.1 Códigos de error de las superficies</a></li><li class="h2"><a href="#reasons">5.5.2 Motivos de fallo</a></li><li class="h3"><a href="#sarma-codes">El método de Sarma</a></li><li class="h2"><a href="#screens">5.5.3 Comprobaciones de admisibilidad</a></li><li class="h2"><a href="#api-errors">5.5.4 Errores de la capa de operaciones y del servidor MCP</a></li><li class="h2"><a href="#exit-codes">5.5.5 Códigos de salida</a></li><li class="h2"><a href="#references">5.5.6 Referencias</a></li></ul><button class="print" type="button"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="1.5"/><path d="M6 14h12v7H6z"/></svg> Imprimir esta página</button>
 <!-- @end pagetoc -->
     </div>
   </aside>

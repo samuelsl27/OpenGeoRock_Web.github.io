@@ -171,7 +171,7 @@
       <div class="tabpanel" role="tabpanel" id="p-methods" aria-labelledby="t-methods">
         <div class="grid-2" style="align-items:start;gap:36px">
           <div>
-            <p>The first nine are listed from the simplest to the most rigorous, and each has been validated against a published case or the slice tables of a reference manual. Sarma's method, added in version 0.1.464, divides the mass into slices with inclined faces and has no published validation case yet.</p>
+            <p>The first nine are listed from the simplest to the most rigorous, and each has been validated against a published case or the slice tables of a reference manual. <a href="../docs/theory/methods.html#sarma">Sarma's method</a>, added in version 0.1.464, divides the mass into wedges whose faces may be inclined. Its factor of safety is the largest F at which the critical horizontal acceleration of the mass (Sarma 1973) equals the applied seismic coefficient, with the strength of the bases and of the faces divided by F. It satisfies force equilibrium only, does not accept supports or rapid drawdown, and has no published validation case yet.</p>
             <div class="table-wrap">
               <table class="data">
                 <thead><tr><th>Method</th><th>Equilibrium</th></tr></thead>
@@ -304,7 +304,8 @@
         <div class="grid-2" style="align-items:start;gap:36px">
           <div>
             <p><strong>Circular:</strong> grid, slope, auto-refine and particle swarm. <strong>Non-circular:</strong> block (with window, line, point and polyline objects), path, simulated annealing, auto-refine and particle swarm.</p>
-            <p>Focus objects (a window, a line, a point or a tangent) discard candidate surfaces before they are evaluated. In the reference case, a tangent to a weak layer cuts the evaluations from 206 to 17. Non-circular critical surfaces can be optimised by a random walk.</p>
+            <p>Focus objects (a window, a line, a point or a tangent) discard candidate surfaces before they are evaluated. In a test case, a tangent to a horizontal line cuts the evaluations from 268 to 9. Non-circular critical surfaces can be optimised by a random walk.</p>
+            <p>Surfaces drawn by the user are analysed alongside the search: circles in a circular run and, since version 0.1.427, polylines in a non-circular one. Since version 0.1.465 each interior vertex of a polyline can carry the angle of the face Sarma's method puts there, and that face's c and φ.</p>
             <a class="link" href="../docs/theory/search.html">How each search works →</a>
           </div>
           <figure class="sheet" style="margin:0">

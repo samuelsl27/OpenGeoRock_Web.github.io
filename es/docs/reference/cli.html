@@ -205,7 +205,7 @@
             <tbody>
               <tr><td><code>--method</code></td><td>texto</td><td><code>methods.enabled_methods</code></td><td>Un identificador o un alias de método (<a class="xref" href="#tbl-aliases">Tabla 5.2.3</a>). Si se omite, los métodos activados en el proyecto o, si no hay ninguno, Bishop simplificado. Un nombre desconocido termina con el código de salida 2.</td></tr>
               <tr><td><code>--slices</code></td><td>entero</td><td><code>methods.num_slices</code></td><td>Número de dovelas por superficie. No llega al método de Sarma, que tiene su propio ajuste.</td></tr>
-              <tr><td><code>--sarma-slices</code></td><td>entero</td><td><code>sarma.num_slices</code></td><td>Número mínimo de cuñas del método de Sarma (desde la v0.1.464).</td></tr>
+              <tr><td><code>--sarma-slices</code></td><td>entero</td><td><code>sarma.num_slices</code></td><td>Número de cuñas que se pide al método de Sarma (desde la v0.1.464; 25 en un proyecto nuevo). Los límites de las cuñas son los vértices de la superficie, sus cruces con el nivel freático, los contactos entre materiales que atraviesa (salvo que ese ajuste esté desactivado) y divisiones uniformes hasta ese número. Una división cuya cara cortaría a una vecina o no llegaría al terreno se descarta, así que un cálculo puede acabar con menos cuñas de las pedidas. La tolerancia y el número de iteraciones de Sarma también son ajustes propios, y ninguna opción los cambia.</td></tr>
               <tr><td><code>--nx</code></td><td>entero</td><td><code>search.grid_nx</code></td><td>Rejilla de centros: número de <em>intervalos</em> en la dirección <em>x</em> (centros = <code>nx</code> + 1).</td></tr>
               <tr><td><code>--ny</code></td><td>entero</td><td><code>search.grid_ny</code></td><td>Lo mismo en la dirección <em>y</em>.</td></tr>
               <tr><td><code>--dr</code></td><td>número</td><td><code>search.radius_increment</code></td><td>Incremento de radio, como número de intervalos (radios por centro = <code>dr</code> + 1); la búsqueda por rejilla lo redondea a un entero.</td></tr>
@@ -276,6 +276,32 @@ ogr-slip2d-cli compute demo.ogr
 Results saved: demo_bishop_simplified.h5
 Results saved: demo_janbu_simplified.h5</code></pre></div>
       <p>La rejilla de la demostración tiene 12 × 12 intervalos y un incremento de radio de 10, así que se intentan 13 × 13 × 11 = 1859 círculos por método. El cálculo no muestra ninguna nota: desde la v0.1.329 la demostración se guarda con la dirección de rotura de su geometría (de izquierda a derecha), con los mismos factores de seguridad que antes.</p>
+      <p>La misma rejilla calculada solo con el método de Sarma, con diez cuñas por superficie:</p>
+      <div class="code"><pre><code>ogr-slip2d-cli compute demo.ogr --method sarma --sarma-slices 10
+
+Note: sarma: uses its own number of wedges (10), tolerance and iterations 
+(Sarma group of the Methods page): the global ones do not reach it.
+Note: Accelerate convergence (Steffensen) is on, and not one of the methods 
+this run uses has an iteration it can accelerate, so the setting reached 
+nothing and the results are the same as they would be with it off. The methods 
+that ran are sarma. Aitken extrapolation speeds up a fixed point on the factor 
+of safety, and only Bishop simplified (on circular surfaces) and both Janbu 
+solve one. Spencer and GLE/Morgenstern-Price solve for the factor and the 
+inter-slice force together, and extrapolating the factor alone leaves the force
+behind. Lowe-Karafiath and Corps of Engineers #1 and #2 iterate on the factor 
+but are not wired to it. Ordinary/Fellenius has no iteration at all.
+Note: sarma: The critical centre lies on the edge of the search grid (x = 40; 
+grid x 10 to 40, y 25 to 45). A minimum on the boundary is the best of what was
+searched, not necessarily the lowest one: widen the grid on that side and 
+re-run before quoting it.
+                        grid — 1 method(s)                         
+┌────────┬──────────────┬───────┬─────────┬───────────┬───────────┐
+│ Method │ Critical FoS │ Valid │ Invalid │ Attempted │ Converged │
+├────────┼──────────────┼───────┼─────────┼───────────┼───────────┤
+│ sarma  │ 1.1346       │ 1362  │ 497     │ 1859      │ True      │
+└────────┴──────────────┴───────┴─────────┴───────────┴───────────┘
+Results saved: demo.h5</code></pre></div>
+      <p>La primera nota dice que el método de Sarma usa su propio número de cuñas, su tolerancia y sus iteraciones. La segunda viene del proyecto de demostración, que tiene activado <em>Accelerate convergence</em>, un ajuste que no llega a ninguna de las iteraciones del método de Sarma. La tercera avisa de que el centro crítico de este cálculo queda en el borde de la rejilla. Con las 25 cuñas del ajuste del proyecto, el mismo cálculo da 1.1334.</p>
 
       <h3 id="outputs"><span class="ht">Archivos de salida</span><a class="anchor" href="#outputs" aria-label="Enlace a esta sección">#</a></h3>
       <ul>

@@ -28,6 +28,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&amp;display=swap">
 <link rel="stylesheet" href="../../../assets/css/site.css">
 <link rel="stylesheet" href="../../../assets/css/docs.css">
+<link rel="stylesheet" href="../../../assets/vendor/katex/katex.min.css">
 <script src="../../../assets/js/site.js" defer></script>
 <!-- @end head -->
 </head>
@@ -209,18 +210,67 @@
               <tr><td>Saturated permeability Ks</td><td>Permeabilidad K1 del suelo saturado. Se deshabilita con <em>User Defined</em>, que la toma del primer punto de su curva.</td><td class="n">1 × 10⁻⁶</td></tr>
               <tr><td>K2 / K1</td><td>Anisotropía: cociente entre la segunda permeabilidad principal y la primera.</td><td class="n">1</td></tr>
               <tr><td>K1 angle (deg from +X)</td><td>Dirección de K1.</td><td class="n">0°</td></tr>
-              <tr><td>Minimum relative permeability kr_min</td><td>Límite inferior de la permeabilidad relativa: kr nunca baja de él, así que la zona seca conserva algo de conductividad (en el diálogo desde la versión 0.1.275).</td><td class="n">1 × 10⁻⁶</td></tr>
+              <tr><td>Minimum relative permeability kr_min</td><td>Límite inferior de la permeabilidad relativa, mayor que 0 y como mucho 1: kr nunca baja de él, con ningún modelo, así que la zona seca conserva algo de conductividad y el sistema de ecuaciones sigue teniendo solución (en el diálogo desde la versión 0.1.275; véase <a href="#user-curve">La curva del usuario y kr_min</a>).</td><td class="n">1 × 10⁻⁶</td></tr>
               <tr><td>Model</td><td>Cómo disminuye la permeabilidad en la zona no saturada: <em>Constant</em>, <em>Simple</em> (con un tipo de suelo: General, Sand, Silt, Clay o Loam), <em>Brooks-Corey</em>, <em>Fredlund-Xing</em>, <em>Gardner</em>, <em>van Genuchten</em> o <em>User Defined</em>. Los parámetros del modelo elegido aparecen debajo.</td><td>Constant</td></tr>
             </tbody>
           </table>
         </div>
       </figure>
-      <p><strong>Pick…</strong> carga parámetros representativos para Brooks-Corey, Fredlund-Xing, Gardner y van Genuchten, y su lista dice de dónde salen: de una tabla publicada para van Genuchten y Brooks-Corey, y valores ilustrativos sin fuente publicada para Gardner y Fredlund-Xing. <strong>Plot…</strong> dibuja la permeabilidad frente a la succión del material que se muestra.</p>
+      <p><strong>Pick…</strong> carga parámetros representativos para Brooks-Corey, Fredlund-Xing, Gardner y van Genuchten (con los demás modelos aparece desactivado), y el encabezado de su lista dice de dónde salen (desde la versión 0.1.279), como recoge la <a class="xref" href="#tbl-pick">Tabla 2.9.3</a>. <strong>Plot…</strong> dibuja la permeabilidad frente a la succión del material que se muestra.</p>
+      <figure class="tbl" id="tbl-pick">
+        <figcaption><span class="fignum">Tabla 2.9.3</span> Las bibliotecas de parámetros de Pick.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Modelo</th><th>Texturas</th><th>Parámetros que carga</th><th>Fuente</th></tr></thead>
+            <tbody>
+              <tr><td>van Genuchten</td><td>8: Sand, Loamy sand, Sandy loam, Loam, Silt, Silt loam, Clay, Silty clay</td><td>α de la página de van Genuchten y n del grupo del contenido de agua</td><td>Los valores medios por textura de <a class="cite" href="../reference/bibliography.html#carsel1988">Carsel y Parrish (1988)</a>, con α pasado de cm⁻¹ a m⁻¹ (arena: 0.145 cm⁻¹ = 14.5 m⁻¹)</td></tr>
+              <tr><td>Brooks-Corey</td><td>11: las texturas del USDA, de Sand a Clay</td><td>Índice de distribución de poros λ y presión de burbujeo</td><td><a class="cite" href="../reference/bibliography.html#rawls1982">Rawls, Brakensiek y Saxton (1982)</a>, medias geométricas de su tabla por textura; la presión de burbujeo, que allí va en cm de agua, se pasa a kPa con 0.0981 kPa por cm (γ<sub>w</sub> = 9.81 kN/m³)</td></tr>
+              <tr><td>Gardner</td><td>3: Sand, Loam, Clay</td><td>a y n</td><td>Ninguna: valores ilustrativos que dan el orden de magnitud, y la lista lo dice</td></tr>
+              <tr><td>Fredlund-Xing</td><td>3: Sand, Loam, Clay</td><td>A, B y C</td><td>Ninguna: valores ilustrativos, y la lista lo dice</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p>Los parámetros de las funciones de Gardner y de Fredlund y Xing se ajustan a las medidas de cada suelo, y no se encontró ninguna tabla de medias por textura para ellos, así que sus valores solo sirven de punto de partida. Ajústalos a tus propios datos si los tienes.</p>
 
       <figure class="fig shot-fig" id="fig-hydraulic-properties">
         <div class="art"><img src="../../../assets/img/shots/hydraulic-properties.webp" alt="El diálogo Define Hydraulic Properties: a la izquierda, la lista de materiales; a la derecha, la permeabilidad saturada, la anisotropía, el límite inferior de la permeabilidad relativa y el modelo de permeabilidad no saturada con sus parámetros, en una columna que se desplaza hacia abajo hasta la función de contenido de agua" loading="lazy" width="900" height="650"></div>
         <figcaption><span class="fignum">Figura 2.9.1</span> Define Hydraulic Properties.</figcaption>
       </figure>
+
+      <h3 id="user-curve"><span class="ht">La curva del usuario y kr_min</span><a class="anchor" href="#user-curve" aria-label="Enlace a esta sección">#</a></h3>
+      <p>Con el modelo <em>User Defined</em>, la permeabilidad es una tabla que se introduce en el propio diálogo (desde la versión 0.1.275), con las columnas <em>Matric suction (kPa)</em> y <em>Permeability (m/s)</em>. <strong>+ Row</strong> y <strong>− Row</strong> añaden y borran filas, e <strong>Import CSV…</strong> lee las dos columnas de un archivo de texto: los valores se separan con comas, puntos y coma, tabuladores o espacios, se saltan las líneas que no son dos números (una cabecera, un comentario que empieza por <code>#</code>) y se ignoran las columnas de más. Una coma decimal escrita en la tabla se lee como punto. Las filas se guardan ordenadas por succión.</p>
+      <ul>
+        <li>El primer punto, el de menor succión, es la permeabilidad saturada: el campo <strong>Saturated permeability Ks</strong> queda desactivado y la muestra.</li>
+        <li>Entre dos puntos, la permeabilidad se interpola linealmente en la succión y logarítmicamente en la permeabilidad. Por debajo de la primera succión vale lo mismo que saturada, y más allá de la última conserva el último valor.</li>
+        <li>La tabla necesita al menos dos puntos, ninguna succión negativa, ningún par de puntos con la misma succión y todas las permeabilidades positivas.</li>
+      </ul>
+      <p>La permeabilidad relativa, el valor de la tabla dividido entre el primero, nunca se toma por debajo de <strong>kr_min</strong>. Por eso los puntos de la tabla que quedan por debajo de kr_min por la primera permeabilidad se dibujan con Plot pero no cambian nada; baja kr_min para usarlos. Lo que deja el material inservible, y los puntos que no cambian nada, se escriben en rojo al pie del diálogo mientras editas, sin impedir el OK.</p>
+
+      <h3 id="water-content"><span class="ht">La función de contenido de agua</span><a class="anchor" href="#water-content" aria-label="Enlace a esta sección">#</a></h3>
+      <p>Debajo del modelo de permeabilidad, el grupo <strong>Water content function (transient analysis)</strong> contiene la curva de retención que lee un análisis transitorio para el agua almacenada en el suelo (desde la versión 0.1.268). Es la curva de <a class="cite" href="../reference/bibliography.html#vangenuchten1980">van Genuchten (1980)</a> con cualquier modelo de permeabilidad, lo cual es un convenio de OGR Slip2D, y el diálogo lo dice: el modelo de permeabilidad fija lo deprisa que se mueve el agua, y esta curva cuánta se almacena (<a class="xref" href="../theory/seepage.html#transient-analysis">Sección 3.7.8</a>).</p>
+      <figure class="tbl" id="tbl-water-content">
+        <figcaption><span class="fignum">Tabla 2.9.4</span> Campos de la función de contenido de agua.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Campo</th><th>Significado</th><th>Por defecto</th></tr></thead>
+            <tbody>
+              <tr><td>Saturated water content (θs)</td><td>Contenido volumétrico de agua del suelo saturado</td><td class="n">0.4</td></tr>
+              <tr><td>Residual water content (θr)</td><td>Contenido volumétrico de agua que queda con succiones muy altas</td><td class="n">0.05</td></tr>
+              <tr><td>alpha (1/m)</td><td>α de la curva (<code>wc_alpha</code>), para todos los modelos salvo van Genuchten, cuya curva usa el α de su propia página</td><td class="n">0.036</td></tr>
+              <tr><td>n</td><td>Exponente n de la curva, compartido con la permeabilidad de van Genuchten</td><td class="n">1.56</td></tr>
+              <tr><td>Custom m</td><td>Desmarcada: m = 1 − 1/n. Marcada: la m del campo de al lado</td><td>desmarcada (0.359)</td></tr>
+              <tr><td>Specific storage Ss (1/m)</td><td>Almacenamiento elástico del suelo saturado, por debajo del nivel freático</td><td class="n">1 × 10⁻⁵</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p>Desde la versión 0.1.278, el α de este grupo es un parámetro propio. Su valor por defecto, 0.036 m⁻¹, es un convenio del programa: no es el parámetro de ninguna textura de suelo. El 3.6 m⁻¹ de la página de van Genuchten es otra cosa, el suelo franco de <a class="cite" href="../reference/bibliography.html#carsel1988">Carsel y Parrish (1988)</a>. Con el modelo de van Genuchten, un solo α sirve a la vez para la permeabilidad y para la retención, como en la deducción original, así que el α de este grupo aparece desactivado. Un campo aparece desactivado siempre que no cambia nada para el modelo que se muestra y el análisis del proyecto: θs, θr, Ss y el α del grupo solo los lee un análisis transitorio, y n y m también la permeabilidad de van Genuchten. Da a la curva los valores de tu suelo antes de fiarte de un análisis transitorio.</p>
+      <div class="impl">
+        <span class="label">En OGR Slip2D</span>
+        <p>El diálogo escribe las propiedades hidráulicas de cada material al pulsar OK; Cancel descarta todos los cambios. Pick solo rellena los campos del modelo que se muestra y del grupo del contenido de agua; no cambia ningún otro material.</p>
+        <span class="src">Código: <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_gui/dialogs/hydraulic_properties_dialog.py" target="_blank" rel="noopener">ogr_gui/dialogs/hydraulic_properties_dialog.py</a> · OGR-Core: <a href="https://github.com/samuelsl27/OGR-Core/blob/v0.2.2/ogr_core/hydraulic/permeability_models.py" target="_blank" rel="noopener">ogr_core/hydraulic/permeability_models.py</a> · <a href="https://github.com/samuelsl27/OGR-Core/blob/v0.2.2/ogr_core/hydraulic/hydraulic_properties.py" target="_blank" rel="noopener">ogr_core/hydraulic/hydraulic_properties.py</a></span>
+      </div>
 
       <div class="note warn"><span class="label">Las unidades no se convierten</span><p>El programa no convierte ni K<sub>s</sub> ni los tiempos de las etapas: <em>Permeability Units</em> y <em>Time Units</em>, en la página General de Project Settings, solo los rotulan, y el diálogo no muestra ninguna unidad. Un análisis estacionario no depende de la unidad siempre que todos los materiales usen la misma, pero uno transitorio sí: da los tiempos de las etapas en la unidad de tiempo de K<sub>s</sub> (segundos si K<sub>s</sub> está en m/s). Ten en cuenta que, por defecto, las dos etiquetas son m/s y días.</p></div>
 
@@ -232,7 +282,7 @@
       <p>Una malla nueva parte de unas condiciones por defecto: <em>Unknown (P=0 or Q=0)</em> en la superficie del terreno, incluida la cara del talud, y caudal nodal nulo en los bordes izquierdo, derecho e inferior. Estas condiciones no prescriben ninguna altura en ningún punto, y un problema estacionario sin altura prescrita no tiene solución, así que hay que fijar al menos una altura antes de calcular.</p>
       <p><span class="ui">Groundwater →</span> <span class="ui">Set Boundary Conditions…</span> asigna una condición a todo un lado del modelo cada vez. Elige el <strong>Type</strong>, introduce el <strong>Value</strong> si el tipo lo requiere, selecciona el destino en <strong>Apply to</strong> (<em>Left edge</em>, <em>Right edge</em>, <em>Bottom edge</em> o <em>Ground surface</em>, cada uno con su número de nodos) y pulsa <strong>Assign</strong>. <strong>Restore defaults</strong> vuelve a las condiciones por defecto. La línea de resumen cuenta los nodos de cada tipo.</p>
       <figure class="tbl" id="tbl-bc-types">
-        <figcaption><span class="fignum">Tabla 2.9.3</span> Tipos de condición de contorno.</figcaption>
+        <figcaption><span class="fignum">Tabla 2.9.5</span> Tipos de condición de contorno.</figcaption>
         <div class="table-wrap">
           <table class="data">
             <thead><tr><th>Tipo</th><th>Valor</th><th>Superficie de rezume</th></tr></thead>
@@ -260,7 +310,7 @@
       <p><span class="ui">Groundwater → Compute Groundwater</span> resuelve el campo estacionario o, si hay un análisis transitorio configurado, las etapas de este. En un cálculo estacionario, la barra de estado indica el número de iteraciones y el intervalo de presión intersticial, y nombra los materiales que han usado las propiedades hidráulicas por defecto; si no converge, la barra de estado explica por qué. El campo se guarda en el archivo <code>.ogr</code>, así que al reabrir un proyecto no hace falta volver a calcularlo.</p>
       <div class="impl">
         <span class="label">En OGR Slip2D</span>
-        <p>El análisis estacionario calcula la altura total sobre triángulos lineales, con la permeabilidad reducida en la zona no saturada según el modelo de cada material, mediante iteración de Picard con subrelajación (relajación 0.4, 200 iteraciones como máximo, tolerancia 10⁻⁵ m). Los nodos de tipo <em>Unknown</em> alternan entre superficie de rezume y flujo nulo hasta que se estabilizan <a class="cite" href="../reference/bibliography.html#neuman1973">(Neuman, 1973)</a>. El análisis transitorio resuelve la ecuación de Richards en forma mixta, con pasos de tiempo implícitos <a class="cite" href="../reference/bibliography.html#celia1990">(Celia, Bouloutas y Zarba, 1990)</a>.</p>
+        <p>El análisis estacionario calcula la altura total sobre triángulos lineales, con la permeabilidad reducida en la zona no saturada según el modelo de cada material, mediante iteración de Picard con subrelajación (relajación 0.4, 200 iteraciones como máximo, tolerancia 10⁻⁵ m). Los nodos de tipo <em>Unknown</em> alternan entre superficie de rezume y flujo nulo hasta que se estabilizan <a class="cite" href="../reference/bibliography.html#neuman1973">(Neuman, 1973)</a>. Un bucle que no converge, o que se detiene con la superficie de rezume sin asentar, pasa a un rescate que busca la misma solución por otros caminos antes de dar el cálculo por no convergido (<a class="xref" href="../theory/seepage.html#picard-iteration">Sección 3.7.6</a>). El análisis transitorio resuelve la ecuación de Richards en forma mixta, con pasos de tiempo implícitos <a class="cite" href="../reference/bibliography.html#celia1990">(Celia, Bouloutas y Zarba, 1990)</a>.</p>
         <span class="src">Código: <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_slip2d/transient_stability.py" target="_blank" rel="noopener">ogr_slip2d/transient_stability.py</a> · OGR-Core: <a href="https://github.com/samuelsl27/OGR-Core/tree/v0.2.2/ogr_core/fem" target="_blank" rel="noopener">ogr_core/fem/</a></span>
       </div>
 
@@ -272,7 +322,7 @@
         <li><strong>Free surface (P=0)</strong> (activado): la línea de presión nula;</li>
         <li><strong>Mesh</strong> (desactivado): los lados de los elementos;</li>
         <li><strong>Discharge section…</strong>: pide una sección en la forma <code>x0,y0,x1,y1</code> y da el caudal que la atraviesa por unidad de ancho, positivo hacia la normal de la sección (la dirección del primer punto al segundo girada 90° en sentido antihorario);</li>
-        <li>en una ejecución transitoria, una lista <strong>Stage</strong>, con <em>[SF]</em> en las etapas en las que se calculó un factor de seguridad, y <strong>FoS vs time…</strong>.</li>
+        <li>en una ejecución transitoria, una lista <strong>Stage</strong>, con <em>[SF]</em> en las etapas en las que se calculó un factor de seguridad, y <strong>FoS vs time…</strong>. La primera entrada de la lista, <em>0: t = 0 (initial state)</em>, es el campo estacionario del que partió el cálculo (desde la versión 0.1.307), y le sigue una entrada por etapa.</li>
       </ul>
       <p>La línea situada bajo el gráfico indica el número de nodos, los intervalos de altura y de presión intersticial, las iteraciones, los nodos de la superficie de rezume y, en una etapa, su tiempo y sus factores de seguridad; si la resolución no ha convergido, aparece <em>NOT CONVERGED</em>.</p>
       <figure class="fig shot-fig" id="fig-groundwater-interpret">
@@ -280,6 +330,14 @@
         <figcaption><span class="fignum">Figura 2.9.3</span> La ventana Interpret Groundwater.</figcaption>
       </figure>
       <p>Los campos de agua subterránea también se pueden representar con isolíneas sobre los resultados de estabilidad, en la ventana Interpret de <span class="ui">Analysis → Interpret</span>, con <span class="ui">View → Contour Options…</span>; su menú <span class="ui">Groundwater</span> añade el historial de iteraciones, un gráfico de convergencia, la consulta de la altura en un punto y la exportación a CSV con <em>Export All Nodal Values…</em> (<a class="xref" href="results.html">Sección 2.8</a>).</p>
+
+      <h3 id="iteration-history"><span class="ht">Historial de iteraciones y convergencia</span><a class="anchor" href="#iteration-history" aria-label="Enlace a esta sección">#</a></h3>
+      <p>El menú <span class="ui">Groundwater</span> de la ventana Interpret tiene dos gráficos de cómo convergió la última solución de agua subterránea, desactivados mientras no haya un resultado de agua subterránea:</p>
+      <ul>
+        <li><strong>Iteration History…</strong> representa, frente al número de iteración, el mayor cambio de altura piezométrica entre una iteración y la siguiente, antes de relajar, en metros.</li>
+        <li><strong>Convergence Plot…</strong> representa la misma serie en escala logarítmica, con el umbral en el que se detuvo cada parte: la tolerancia dividida entre el factor de relajación para el bucle de Picard, que comprueba el cambio relajado, y la propia tolerancia para el rescate.</li>
+      </ul>
+      <p>Cuando el bucle de Picard de un análisis estacionario no converge y el programa prueba otros caminos hacia la misma solución (<a href="../theory/seepage.html#picard-rescue">el rescate</a>), cada uno es una serie propia, con su nombre en la leyenda: <em>Picard loop</em>, <em>Rescue: Anderson acceleration (depth 5)</em> y <em>(depth 20)</em>, <em>Rescue: continuation with Newton's method</em> y <em>Rescue: continuation followed across the kinks of the curves</em>. Las iteraciones se cuentan desde 1 a lo largo de todo el cálculo. Tras un análisis transitorio, el campo guardado es el de la última etapa, y los gráficos muestran su último paso de tiempo. Un campo calculado por una versión que no guardaba el historial solo da el número de iteraciones y si convergió.</p>
 
       <h2 id="coupling"><span class="secnum">2.9.8</span><span class="ht">Uso del campo en el análisis de estabilidad</span><a class="anchor" href="#coupling" aria-label="Enlace a esta sección">#</a></h2>
       <p>El campo calculado solo llega al análisis de equilibrio límite en los materiales cuyo <strong>Water Parameters → Type</strong> es <code>fem</code>: en la base de cada dovela de uno de esos materiales, la presión intersticial se interpola a partir de los valores nodales del elemento que la contiene. Una base de dovela fuera de la malla no recibe presión intersticial. Un material con cualquier otro tipo ignora por completo el campo.</p>
@@ -296,7 +354,8 @@
         <li><strong>Transient FEA options</strong>: <em>Tolerance</em> (1 × 10⁻⁵), <em>Maximum iterations</em> (30) y <em>Number of time steps</em> por etapa (por defecto <em>Auto</em>, que se deduce del tamaño de los elementos y del almacenamiento para que el frente de agua recorra aproximadamente un elemento por paso). Los mismos tres están en la página Transient de Project Settings, que aparece en gris salvo que la opción transitoria esté activada.</li>
       </ul>
       <p>Para un desembalse, por ejemplo, asigna un embalse al nivel inicial y captúralo como estado inicial. Después pulsa <strong>Restore defaults</strong> en Set Boundary Conditions (asignar un embalse más bajo no borra las alturas de los nodos a los que ya no llega), asigna el embalse al nivel más bajo y, de nuevo, cualquier otra condición, selecciona una etapa y captura las condiciones. Compute Groundwater resuelve las etapas en orden y calcula el factor de seguridad, con todos los métodos activados, en las etapas marcadas como <em>Calculate SF</em>. Los factores se representan en función del tiempo con <strong>FoS vs time…</strong> en Interpret Groundwater y con <span class="ui">Data → Graph SF with Time…</span> en la ventana Interpret. Si ningún material es de tipo <code>fem</code>, la ejecución avisa de que los factores de las etapas ignorarían las presiones calculadas.</p>
-      <div class="note"><span class="label">Nota</span><p>El análisis transitorio usa además una función de contenido de agua de van Genuchten de cada material, con cualquier modelo de permeabilidad: los contenidos de agua saturado y residual (0.4 y 0.05 por defecto), α, n y m, y el almacenamiento específico (1 × 10⁻⁵ 1/m). Desde la versión 0.1.268 aparecen en el grupo <em>Water content function (transient analysis)</em> de Define Hydraulic Properties. Desde la versión 0.1.278 su α es un parámetro propio (<code>wc_alpha</code>, 0.036 1/m por defecto), que leen todos los modelos salvo van Genuchten, que usa el α de su propia página.</p></div>
+      <p>Cuando al menos una etapa está marcada como <em>Calculate SF</em>, se analiza también el estado inicial, con las condiciones de contorno con las que se resolvió (desde la versión 0.1.309): una búsqueda más, que da el factor de seguridad en <span class="m" data-tex="t = 0"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">t = 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6151em;"></span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span><!--/k--></span>. Se muestra en la entrada <em>0: t = 0 (initial state)</em> de Interpret Groundwater, sus notas aparecen bajo ese mismo encabezado en Analysis Notes y las dos curvas del factor frente al tiempo empiezan en él. Ningún número de etapa cambia.</p>
+      <div class="note"><span class="label">Nota</span><p>El análisis transitorio lee además la función de contenido de agua de cada material, con cualquier modelo de permeabilidad (<a href="#water-content">La función de contenido de agua</a>). Sus valores por defecto son un convenio del programa, no un suelo.</p></div>
 
       <h2 id="drawdown-sweep"><span class="secnum">2.9.10</span><span class="ht">Drawdown Level Sweep</span><a class="anchor" href="#drawdown-sweep" aria-label="Enlace a esta sección">#</a></h2>
       <p><span class="ui">Groundwater → Drawdown Level Sweep…</span> pertenece al análisis de desembalse rápido por equilibrio límite, no al de elementos finitos: necesita tener seleccionado <em>Rapid Drawdown analysis</em> en el grupo Advanced, un método de agua subterránea basado en superficies de agua y al menos un material con comportamiento sin drenaje (<a class="xref" href="water.html">Sección 2.4</a>, <a class="xref" href="../theory/rapid-drawdown.html">Sección 3.8</a>). El barrido es necesario porque el nivel crítico del embalse no siempre es el más bajo.</p>
@@ -315,7 +374,7 @@
   <aside class="doc-toc" aria-label="En esta página">
     <div class="toc-inner">
 <!-- @inc pagetoc -->
-<span class="label">En esta página</span><ul><li class="h2"><a href="#workflow">2.9.1 El flujo de trabajo</a></li><li class="h2"><a href="#method">2.9.2 Elección de un método de elementos finitos</a></li><li class="h2"><a href="#hydraulic-properties">2.9.3 Propiedades hidráulicas</a></li><li class="h2"><a href="#mesh">2.9.4 La malla de elementos finitos</a></li><li class="h2"><a href="#boundary-conditions">2.9.5 Condiciones de contorno</a></li><li class="h2"><a href="#compute-groundwater">2.9.6 Cálculo del campo</a></li><li class="h2"><a href="#interpret-groundwater">2.9.7 Interpretación del campo</a></li><li class="h2"><a href="#coupling">2.9.8 Uso del campo en el análisis de estabilidad</a></li><li class="h2"><a href="#transient">2.9.9 Análisis transitorio</a></li><li class="h2"><a href="#drawdown-sweep">2.9.10 Drawdown Level Sweep</a></li></ul><button class="print" type="button"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="1.5"/><path d="M6 14h12v7H6z"/></svg> Imprimir esta página</button>
+<span class="label">En esta página</span><ul><li class="h2"><a href="#workflow">2.9.1 El flujo de trabajo</a></li><li class="h2"><a href="#method">2.9.2 Elección de un método de elementos finitos</a></li><li class="h2"><a href="#hydraulic-properties">2.9.3 Propiedades hidráulicas</a></li><li class="h3"><a href="#user-curve">La curva del usuario y kr_min</a></li><li class="h3"><a href="#water-content">La función de contenido de agua</a></li><li class="h2"><a href="#mesh">2.9.4 La malla de elementos finitos</a></li><li class="h2"><a href="#boundary-conditions">2.9.5 Condiciones de contorno</a></li><li class="h2"><a href="#compute-groundwater">2.9.6 Cálculo del campo</a></li><li class="h2"><a href="#interpret-groundwater">2.9.7 Interpretación del campo</a></li><li class="h3"><a href="#iteration-history">Historial de iteraciones y convergencia</a></li><li class="h2"><a href="#coupling">2.9.8 Uso del campo en el análisis de estabilidad</a></li><li class="h2"><a href="#transient">2.9.9 Análisis transitorio</a></li><li class="h2"><a href="#drawdown-sweep">2.9.10 Drawdown Level Sweep</a></li></ul><button class="print" type="button"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="1.5"/><path d="M6 14h12v7H6z"/></svg> Imprimir esta página</button>
 <!-- @end pagetoc -->
     </div>
   </aside>

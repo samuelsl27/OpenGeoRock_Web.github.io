@@ -28,6 +28,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&amp;display=swap">
 <link rel="stylesheet" href="../../assets/css/site.css">
 <link rel="stylesheet" href="../../assets/css/docs.css">
+<link rel="stylesheet" href="../../assets/vendor/katex/katex.min.css">
 <script src="../../assets/js/site.js" defer></script>
 <!-- @end head -->
 </head>
@@ -209,18 +210,67 @@
               <tr><td>Saturated permeability Ks</td><td>Permeability K1 of the saturated soil. Disabled for <em>User Defined</em>, which takes it from the first point of its curve.</td><td class="n">1 × 10⁻⁶</td></tr>
               <tr><td>K2 / K1</td><td>Anisotropy: ratio of the second principal permeability to the first.</td><td class="n">1</td></tr>
               <tr><td>K1 angle (deg from +X)</td><td>Direction of K1.</td><td class="n">0°</td></tr>
-              <tr><td>Minimum relative permeability kr_min</td><td>Floor of the relative permeability: kr is never taken below it, so the dry zone keeps some conductivity (in the dialog since version 0.1.275).</td><td class="n">1 × 10⁻⁶</td></tr>
+              <tr><td>Minimum relative permeability kr_min</td><td>Floor of the relative permeability, between 0 (excluded) and 1: kr is never taken below it, with any model, so the dry zone keeps some conductivity and the system of equations stays solvable (in the dialog since version 0.1.275; see <a href="#user-curve">The user curve and kr_min</a>).</td><td class="n">1 × 10⁻⁶</td></tr>
               <tr><td>Model</td><td>How the permeability falls in the unsaturated zone: <em>Constant</em>, <em>Simple</em> (with a soil type: General, Sand, Silt, Clay or Loam), <em>Brooks-Corey</em>, <em>Fredlund-Xing</em>, <em>Gardner</em>, <em>van Genuchten</em> or <em>User Defined</em>. The parameters of the chosen model appear below it.</td><td>Constant</td></tr>
             </tbody>
           </table>
         </div>
       </figure>
-      <p><strong>Pick…</strong> loads representative parameters for Brooks-Corey, Fredlund-Xing, Gardner and van Genuchten, and its list says where they come from: a published table for van Genuchten and Brooks-Corey, illustrative values with no published source for Gardner and Fredlund-Xing. <strong>Plot…</strong> draws the permeability against suction for the material shown.</p>
+      <p><strong>Pick…</strong> loads representative parameters for Brooks-Corey, Fredlund-Xing, Gardner and van Genuchten (it is greyed out for the other models), and the heading of its list says where they come from (since version 0.1.279), as in <a class="xref" href="#tbl-pick">Table 2.9.3</a>. <strong>Plot…</strong> draws the permeability against suction for the material shown.</p>
+      <figure class="tbl" id="tbl-pick">
+        <figcaption><span class="fignum">Table 2.9.3</span> The parameter libraries of Pick.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Model</th><th>Textures</th><th>Parameters loaded</th><th>Source</th></tr></thead>
+            <tbody>
+              <tr><td>van Genuchten</td><td>8: Sand, Loamy sand, Sandy loam, Loam, Silt, Silt loam, Clay, Silty clay</td><td>α of the van Genuchten page and n of the water content group</td><td>The mean values by texture of <a class="cite" href="../reference/bibliography.html#carsel1988">Carsel &amp; Parrish (1988)</a>, with α converted from cm⁻¹ to m⁻¹ (sand: 0.145 cm⁻¹ = 14.5 m⁻¹)</td></tr>
+              <tr><td>Brooks-Corey</td><td>11: the USDA textures from Sand to Clay</td><td>Pore size index λ and bubbling pressure</td><td><a class="cite" href="../reference/bibliography.html#rawls1982">Rawls, Brakensiek &amp; Saxton (1982)</a>, geometric means of their table by texture; the bubbling pressure, given there in cm of water, is converted to kPa with 0.0981 kPa per cm (γ<sub>w</sub> = 9.81 kN/m³)</td></tr>
+              <tr><td>Gardner</td><td>3: Sand, Loam, Clay</td><td>a and n</td><td>None: illustrative values that show the order of magnitude, and the list says so</td></tr>
+              <tr><td>Fredlund-Xing</td><td>3: Sand, Loam, Clay</td><td>A, B and C</td><td>None: illustrative values, and the list says so</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p>The parameters of Gardner's and of Fredlund and Xing's functions are fitted to the measurements of each soil, and no table of means by texture was found for them, so their values are only a starting point. Fit them to your own data where it exists.</p>
 
       <figure class="fig shot-fig" id="fig-hydraulic-properties">
         <div class="art"><img src="../../assets/img/shots/hydraulic-properties.webp" alt="The Define Hydraulic Properties dialog: the list of materials on the left; the saturated permeability, anisotropy, the floor of the relative permeability and the unsaturated permeability model with its parameters on the right, in a column that scrolls down to the water content function" loading="lazy" width="900" height="650"></div>
         <figcaption><span class="fignum">Figure 2.9.1</span> Define Hydraulic Properties.</figcaption>
       </figure>
+
+      <h3 id="user-curve"><span class="ht">The user curve and kr_min</span><a class="anchor" href="#user-curve" aria-label="Link to this section">#</a></h3>
+      <p>With the model <em>User Defined</em> the permeability is a table entered in the dialog (since version 0.1.275), with the columns <em>Matric suction (kPa)</em> and <em>Permeability (m/s)</em>. <strong>+ Row</strong> and <strong>− Row</strong> add and delete rows, and <strong>Import CSV…</strong> reads the two columns from a text file: commas, semicolons, tabs or spaces separate the values, lines that are not two numbers (a header, a comment starting with <code>#</code>) are skipped, and extra columns are ignored. A decimal comma typed in the table is read as a point. The rows are stored sorted by suction.</p>
+      <ul>
+        <li>The first point, the one of lowest suction, is the saturated permeability: the <strong>Saturated permeability Ks</strong> box is disabled and shows it.</li>
+        <li>Between two points the permeability is interpolated linearly in suction and logarithmically in permeability. Below the first suction it is the saturated value, and beyond the last one it keeps the last value.</li>
+        <li>The table needs at least two points, no negative suction, no two points with the same suction and every permeability positive.</li>
+      </ul>
+      <p>The relative permeability, the tabulated value divided by the first one, is never taken below <strong>kr_min</strong>. Points of the table below kr_min times the first permeability are therefore drawn by Plot but change nothing; lower kr_min to use them. What makes the material unusable, and points that change nothing, are written in red at the foot of the dialog while you edit, without blocking OK.</p>
+
+      <h3 id="water-content"><span class="ht">The water content function</span><a class="anchor" href="#water-content" aria-label="Link to this section">#</a></h3>
+      <p>Below the permeability model, the group <strong>Water content function (transient analysis)</strong> holds the retention curve that a transient analysis reads for the water stored in the soil (since version 0.1.268). It is the curve of <a class="cite" href="../reference/bibliography.html#vangenuchten1980">van Genuchten (1980)</a> for every permeability model, which is a convention of OGR Slip2D and says so in the dialog: the permeability model sets how fast the water moves, and this curve how much is stored (<a class="xref" href="../theory/seepage.html#transient-analysis">Section 3.7.8</a>).</p>
+      <figure class="tbl" id="tbl-water-content">
+        <figcaption><span class="fignum">Table 2.9.4</span> Fields of the water content function.</figcaption>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Field</th><th>Meaning</th><th>Default</th></tr></thead>
+            <tbody>
+              <tr><td>Saturated water content (θs)</td><td>Volumetric water content of the saturated soil</td><td class="n">0.4</td></tr>
+              <tr><td>Residual water content (θr)</td><td>Volumetric water content left at very high suction</td><td class="n">0.05</td></tr>
+              <tr><td>alpha (1/m)</td><td>α of the curve (<code>wc_alpha</code>), for every model except van Genuchten, whose curve uses the α of its own page</td><td class="n">0.036</td></tr>
+              <tr><td>n</td><td>Exponent n of the curve, shared with the van Genuchten permeability</td><td class="n">1.56</td></tr>
+              <tr><td>Custom m</td><td>Off: m = 1 − 1/n. On: the m given in the box beside it</td><td>off (0.359)</td></tr>
+              <tr><td>Specific storage Ss (1/m)</td><td>Elastic storage of the saturated soil, below the water table</td><td class="n">1 × 10⁻⁵</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+      <p>Since version 0.1.278 the α of this group is a parameter of its own. Its default, 0.036 m⁻¹, is a convention of the program: it is not the parameter of a soil texture. The 3.6 m⁻¹ of the van Genuchten page is a different thing, the loam of <a class="cite" href="../reference/bibliography.html#carsel1988">Carsel &amp; Parrish (1988)</a>. With the van Genuchten model one α serves both the permeability and the retention, as in the original derivation, so the α of this group is greyed out. A field is greyed out whenever it changes nothing for the model shown and the analysis of the project: θs, θr, Ss and the α of the group are read only by a transient analysis, and n and m also by the van Genuchten permeability. Give the curve the values of your soil before trusting a transient analysis.</p>
+      <div class="impl">
+        <span class="label">In OGR Slip2D</span>
+        <p>The dialog writes the hydraulic properties of each material when OK is pressed; Cancel discards every change. Pick fills only the boxes of the model shown and of the water content group; it changes no other material.</p>
+        <span class="src">Source: <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_gui/dialogs/hydraulic_properties_dialog.py" target="_blank" rel="noopener">ogr_gui/dialogs/hydraulic_properties_dialog.py</a> · OGR-Core: <a href="https://github.com/samuelsl27/OGR-Core/blob/v0.2.2/ogr_core/hydraulic/permeability_models.py" target="_blank" rel="noopener">ogr_core/hydraulic/permeability_models.py</a> · <a href="https://github.com/samuelsl27/OGR-Core/blob/v0.2.2/ogr_core/hydraulic/hydraulic_properties.py" target="_blank" rel="noopener">ogr_core/hydraulic/hydraulic_properties.py</a></span>
+      </div>
 
       <div class="note warn"><span class="label">Units are not converted</span><p>The program converts neither K<sub>s</sub> nor the stage times: <em>Permeability Units</em> and <em>Time Units</em> on the General page of Project Settings only label them, and the dialog shows no unit. A steady analysis does not depend on the unit as long as every material uses the same one, but a transient analysis does: give the stage times in the time unit of K<sub>s</sub> (seconds for K<sub>s</sub> in m/s). Note that the two labels default to m/s and days.</p></div>
 
@@ -232,7 +282,7 @@
       <p>A mesh starts with default conditions: <em>Unknown (P=0 or Q=0)</em> on the ground surface, slope face included, and zero nodal flow on the left, right and bottom edges. These prescribe no head anywhere, and a steady problem without a prescribed head has no solution, so at least one head must be set before computing.</p>
       <p><span class="ui">Groundwater →</span> <span class="ui">Set Boundary Conditions…</span> assigns a condition to a whole side of the model at a time. Choose the <strong>Type</strong>, enter the <strong>Value</strong> where the type takes one, select the target in <strong>Apply to</strong> (<em>Left edge</em>, <em>Right edge</em>, <em>Bottom edge</em> or <em>Ground surface</em>, each with its number of nodes) and press <strong>Assign</strong>. <strong>Restore defaults</strong> goes back to the default conditions. The summary line counts the nodes of each type.</p>
       <figure class="tbl" id="tbl-bc-types">
-        <figcaption><span class="fignum">Table 2.9.3</span> Boundary-condition types.</figcaption>
+        <figcaption><span class="fignum">Table 2.9.5</span> Boundary-condition types.</figcaption>
         <div class="table-wrap">
           <table class="data">
             <thead><tr><th>Type</th><th>Value</th><th>Seepage face</th></tr></thead>
@@ -260,7 +310,7 @@
       <p><span class="ui">Groundwater → Compute Groundwater</span> solves the steady field, or the stages of a transient analysis when one is configured. A steady solve reports the number of iterations and the range of pore pressure in the status bar, and names any material that used the default hydraulic properties; when it does not converge, the status bar says why. The field is saved in the <code>.ogr</code> file, so reopening a project does not require computing it again.</p>
       <div class="impl">
         <span class="label">In OGR Slip2D</span>
-        <p>The steady analysis solves for the total head on linear triangles, with the permeability reduced in the unsaturated zone by the model of each material, by under-relaxed Picard iteration (relaxation 0.4, at most 200 iterations, tolerance 10⁻⁵ m). Nodes of type <em>Unknown</em> switch between seepage face and no-flow until they settle <a class="cite" href="../reference/bibliography.html#neuman1973">(Neuman, 1973)</a>. The transient analysis solves Richards' equation in mixed form with implicit time steps <a class="cite" href="../reference/bibliography.html#celia1990">(Celia, Bouloutas &amp; Zarba, 1990)</a>.</p>
+        <p>The steady analysis solves for the total head on linear triangles, with the permeability reduced in the unsaturated zone by the model of each material, by under-relaxed Picard iteration (relaxation 0.4, at most 200 iterations, tolerance 10⁻⁵ m). Nodes of type <em>Unknown</em> switch between seepage face and no-flow until they settle <a class="cite" href="../reference/bibliography.html#neuman1973">(Neuman, 1973)</a>. A loop that does not converge, or that stops with the seepage face unsettled, is handed to a rescue that looks for the same solution by other means before the run is reported as not converged (<a class="xref" href="../theory/seepage.html#picard-iteration">Section 3.7.6</a>). The transient analysis solves Richards' equation in mixed form with implicit time steps <a class="cite" href="../reference/bibliography.html#celia1990">(Celia, Bouloutas &amp; Zarba, 1990)</a>.</p>
         <span class="src">Source: <a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/ogr_slip2d/transient_stability.py" target="_blank" rel="noopener">ogr_slip2d/transient_stability.py</a> · OGR-Core: <a href="https://github.com/samuelsl27/OGR-Core/tree/v0.2.2/ogr_core/fem" target="_blank" rel="noopener">ogr_core/fem/</a></span>
       </div>
 
@@ -272,7 +322,7 @@
         <li><strong>Free surface (P=0)</strong> (on): the line of zero pressure;</li>
         <li><strong>Mesh</strong> (off): the element edges;</li>
         <li><strong>Discharge section…</strong>: asks for a section as <code>x0,y0,x1,y1</code> and reports the flow through it per unit width, positive towards the normal of the section (the direction from the first point to the second turned 90° anticlockwise);</li>
-        <li>for a transient run, a <strong>Stage</strong> list, with <em>[SF]</em> on the stages that computed a factor of safety, and <strong>FoS vs time…</strong>.</li>
+        <li>for a transient run, a <strong>Stage</strong> list, with <em>[SF]</em> on the stages that computed a factor of safety, and <strong>FoS vs time…</strong>. The first entry of the list, <em>0: t = 0 (initial state)</em>, is the steady field the run started from (since version 0.1.307), followed by one entry per stage.</li>
       </ul>
       <p>The line below the plot gives the number of nodes, the ranges of head and pore pressure, the iterations, the seepage-face nodes and, for a stage, its time and factors of safety; <em>NOT CONVERGED</em> appears when the solve did not converge.</p>
       <figure class="fig shot-fig" id="fig-groundwater-interpret">
@@ -280,6 +330,14 @@
         <figcaption><span class="fignum">Figure 2.9.3</span> The Interpret Groundwater window.</figcaption>
       </figure>
       <p>The groundwater fields can also be contoured over the stability results, in the Interpret window of <span class="ui">Analysis → Interpret</span>, with <span class="ui">View → Contour Options…</span>; its <span class="ui">Groundwater</span> menu adds the iteration history, a convergence plot, a query of head at a point and <em>Export All Nodal Values…</em> to CSV (<a class="xref" href="results.html">Section 2.8</a>).</p>
+
+      <h3 id="iteration-history"><span class="ht">Iteration history and convergence</span><a class="anchor" href="#iteration-history" aria-label="Link to this section">#</a></h3>
+      <p>The <span class="ui">Groundwater</span> menu of the Interpret window has two charts of how the last groundwater solution converged, greyed out until a groundwater result exists:</p>
+      <ul>
+        <li><strong>Iteration History…</strong> plots, against the iteration number, the largest change of head between one iteration and the next, before relaxation, in metres.</li>
+        <li><strong>Convergence Plot…</strong> plots the same series on a logarithmic scale with the threshold at which each part stopped: the tolerance divided by the relaxation factor for the Picard loop, which tests the relaxed change, and the tolerance itself for the rescue.</li>
+      </ul>
+      <p>When the Picard loop of a steady analysis does not converge and the program tries other ways to the same solution (<a href="../theory/seepage.html#picard-rescue">the rescue</a>), each one is a series of its own, named in the legend: <em>Picard loop</em>, <em>Rescue: Anderson acceleration (depth 5)</em> and <em>(depth 20)</em>, <em>Rescue: continuation with Newton's method</em> and <em>Rescue: continuation followed across the kinks of the curves</em>. The iterations are counted from 1 across the whole run. After a transient analysis the stored field is that of the last stage, and the charts show its last time step. A field computed by a version that kept no history gives only the number of iterations and whether it converged.</p>
 
       <h2 id="coupling"><span class="secnum">2.9.8</span><span class="ht">Using the field in the stability analysis</span><a class="anchor" href="#coupling" aria-label="Link to this section">#</a></h2>
       <p>The computed field reaches the limit-equilibrium analysis only through the materials whose <strong>Water Parameters → Type</strong> is <code>fem</code>: at the base of every slice of such a material, the pore pressure is interpolated from the nodal values of the element that contains it. A slice base outside the mesh gets no pore pressure. A material left on any other type ignores the field entirely.</p>
@@ -296,7 +354,8 @@
         <li><strong>Transient FEA options</strong>: <em>Tolerance</em> (1 × 10⁻⁵), <em>Maximum iterations</em> (30) and <em>Number of time steps</em> per stage (<em>Auto</em> by default: derived from the element size and the storage, so that the water front crosses about one element per step). The same three are on the Transient page of Project Settings, which is greyed out unless the transient option is on.</li>
       </ul>
       <p>For a drawdown, for example, assign a reservoir at the initial level and capture it as the initial state. Then press <strong>Restore defaults</strong> in Set Boundary Conditions (assigning a lower reservoir does not clear the heads of the nodes it no longer reaches), assign the reservoir at the lower level, and any other condition again, select a stage and capture it. Compute Groundwater solves the stages in order and computes the factor of safety, with every enabled method, at the stages marked <em>Calculate SF</em>. They are plotted against time by <strong>FoS vs time…</strong> in Interpret Groundwater and by <span class="ui">Data → Graph SF with Time…</span> in the Interpret window. If no material is of type <code>fem</code>, the run warns that the stage factors would ignore the computed pressures.</p>
-      <div class="note"><span class="label">Note</span><p>The transient analysis also uses a van Genuchten water content function of each material, with any permeability model: the saturated and residual water contents (0.4 and 0.05 by default), α, n and m, and the specific storage (1 × 10⁻⁵ 1/m). Since version 0.1.268 they are shown in the <em>Water content function (transient analysis)</em> group of Define Hydraulic Properties. Since version 0.1.278 its α is a parameter of its own (<code>wc_alpha</code>, 0.036 1/m by default), read by every model except van Genuchten, which uses the α of its own page.</p></div>
+      <p>When at least one stage is marked <em>Calculate SF</em>, the initial state is analysed too, with the boundary conditions it was solved with (since version 0.1.309): one more search, which gives the factor of safety at <span class="m" data-tex="t = 0"><!--k--><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">t = 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6151em;"></span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span><!--/k--></span>. It is shown with the entry <em>0: t = 0 (initial state)</em> of Interpret Groundwater, its notes appear under that heading in Analysis Notes, and both charts of the factor against time start from it. No stage number changes.</p>
+      <div class="note"><span class="label">Note</span><p>The transient analysis also reads the water content function of each material, with any permeability model (<a href="#water-content">The water content function</a>). Its defaults are a convention of the program, not a soil.</p></div>
 
       <h2 id="drawdown-sweep"><span class="secnum">2.9.10</span><span class="ht">Drawdown Level Sweep</span><a class="anchor" href="#drawdown-sweep" aria-label="Link to this section">#</a></h2>
       <p><span class="ui">Groundwater → Drawdown Level Sweep…</span> belongs to the limit-equilibrium rapid-drawdown analysis, not to the finite-element one: it needs <em>Rapid Drawdown analysis</em> selected in the Advanced group, a groundwater method based on water surfaces, and at least one material with undrained behaviour (<a class="xref" href="water.html">Section 2.4</a>, <a class="xref" href="../theory/rapid-drawdown.html">Section 3.8</a>). The sweep is needed because the critical reservoir level is not always the lowest one.</p>
@@ -315,7 +374,7 @@
   <aside class="doc-toc" aria-label="On this page">
     <div class="toc-inner">
 <!-- @inc pagetoc -->
-<span class="label">On this page</span><ul><li class="h2"><a href="#workflow">2.9.1 The workflow</a></li><li class="h2"><a href="#method">2.9.2 Choosing a finite-element method</a></li><li class="h2"><a href="#hydraulic-properties">2.9.3 Hydraulic properties</a></li><li class="h2"><a href="#mesh">2.9.4 The finite-element mesh</a></li><li class="h2"><a href="#boundary-conditions">2.9.5 Boundary conditions</a></li><li class="h2"><a href="#compute-groundwater">2.9.6 Computing the field</a></li><li class="h2"><a href="#interpret-groundwater">2.9.7 Interpreting the field</a></li><li class="h2"><a href="#coupling">2.9.8 Using the field in the stability analysis</a></li><li class="h2"><a href="#transient">2.9.9 Transient analysis</a></li><li class="h2"><a href="#drawdown-sweep">2.9.10 Drawdown Level Sweep</a></li></ul><button class="print" type="button"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="1.5"/><path d="M6 14h12v7H6z"/></svg> Print this page</button>
+<span class="label">On this page</span><ul><li class="h2"><a href="#workflow">2.9.1 The workflow</a></li><li class="h2"><a href="#method">2.9.2 Choosing a finite-element method</a></li><li class="h2"><a href="#hydraulic-properties">2.9.3 Hydraulic properties</a></li><li class="h3"><a href="#user-curve">The user curve and kr_min</a></li><li class="h3"><a href="#water-content">The water content function</a></li><li class="h2"><a href="#mesh">2.9.4 The finite-element mesh</a></li><li class="h2"><a href="#boundary-conditions">2.9.5 Boundary conditions</a></li><li class="h2"><a href="#compute-groundwater">2.9.6 Computing the field</a></li><li class="h2"><a href="#interpret-groundwater">2.9.7 Interpreting the field</a></li><li class="h3"><a href="#iteration-history">Iteration history and convergence</a></li><li class="h2"><a href="#coupling">2.9.8 Using the field in the stability analysis</a></li><li class="h2"><a href="#transient">2.9.9 Transient analysis</a></li><li class="h2"><a href="#drawdown-sweep">2.9.10 Drawdown Level Sweep</a></li></ul><button class="print" type="button"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="1.5"/><path d="M6 14h12v7H6z"/></svg> Print this page</button>
 <!-- @end pagetoc -->
     </div>
   </aside>

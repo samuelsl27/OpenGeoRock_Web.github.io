@@ -171,7 +171,7 @@
       <div class="tabpanel" role="tabpanel" id="p-methods" aria-labelledby="t-methods">
         <div class="grid-2" style="align-items:start;gap:36px">
           <div>
-            <p>Los nueve primeros van del más sencillo al más riguroso, y cada uno se ha validado con un caso publicado o con las tablas de dovelas de un manual de referencia. El método de Sarma, que llegó en la versión 0.1.464, divide la masa en dovelas de caras inclinadas y todavía no tiene un caso de validación publicado.</p>
+            <p>Los nueve primeros van del más sencillo al más riguroso, y cada uno se ha validado con un caso publicado o con las tablas de dovelas de un manual de referencia. <a href="../docs/theory/methods.html#sarma">El método de Sarma</a>, que llegó en la versión 0.1.464, divide la masa en cuñas cuyas caras pueden ir inclinadas. Su factor de seguridad es el mayor F con el que la aceleración horizontal crítica de la masa (Sarma 1973) iguala al coeficiente sísmico aplicado, dividiendo por F la resistencia de las bases y la de las caras. Solo cumple el equilibrio de fuerzas, no admite soportes ni desembalse rápido y todavía no tiene un caso de validación publicado.</p>
             <div class="table-wrap">
               <table class="data">
                 <thead><tr><th>Método</th><th>Equilibrio</th></tr></thead>
@@ -304,7 +304,8 @@
         <div class="grid-2" style="align-items:start;gap:36px">
           <div>
             <p><strong>Circulares:</strong> por rejilla, de talud, con refinado automático y por enjambre de partículas. <strong>No circulares:</strong> por bloques (con objetos de ventana, línea, punto y polilínea), de camino, por recocido simulado, con refinado automático y por enjambre de partículas.</p>
-            <p>Los objetos de foco (ventana, línea, punto o tangente) descartan superficies candidatas antes de calcularlas. En el caso de referencia, una tangente a una capa débil reduce las evaluaciones de 206 a 17. Las superficies críticas no circulares pueden optimizarse con un paseo aleatorio.</p>
+            <p>Los objetos de foco (ventana, línea, punto o tangente) descartan superficies candidatas antes de calcularlas. En un caso de prueba, una tangente a una línea horizontal reduce las evaluaciones de 268 a 9. Las superficies críticas no circulares pueden optimizarse con un paseo aleatorio.</p>
+            <p>Las superficies que dibuja el usuario se calculan junto con la búsqueda: los círculos en un cálculo circular y, desde la versión 0.1.427, las polilíneas en uno no circular. Desde la versión 0.1.465, cada vértice interior de una polilínea puede llevar el ángulo de la cara que el método de Sarma pone en él, y la c y la φ de esa cara.</p>
             <a class="link" href="../docs/theory/search.html">Cómo funciona cada búsqueda →</a>
           </div>
           <figure class="sheet" style="margin:0">
