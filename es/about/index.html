@@ -104,7 +104,7 @@
   <div class="wrap">
     <nav class="crumbs label" aria-label="Ruta de navegación"><a href="../index.html">Inicio</a><span aria-hidden="true">/</span><span>El proyecto</span></nav>
     <h1>El proyecto <em>OpenGeoRock</em></h1>
-    <p class="lede">Casi todos los programas en los que se apoya un ingeniero geotécnico son cerrados y caros, y quien los usa no puede ver cómo llegan a sus resultados, aunque de ellos dependen decisiones sobre presas, taludes, túneles y cimentaciones. OpenGeoRock rehace esas herramientas como software de código abierto. El núcleo de cálculo está escrito en Python puro y tiene por encima una interfaz de escritorio; la batería de tests se publica con el resto del código, para que cualquiera pueda revisarla.</p>
+    <p class="lede">Casi todos los programas en los que se apoya un ingeniero geotécnico son cerrados y caros, y quien los usa no puede ver cómo llegan a sus resultados, aunque de ellos dependen decisiones sobre presas, taludes, túneles y cimentaciones. OpenGeoRock rehace esas herramientas como software de código abierto. En OGR Slip2D el núcleo de cálculo está escrito en Python puro y tiene por encima una interfaz de escritorio, y en todos los programas los tests se publican con el resto del código, para que cualquiera pueda revisarlos.</p>
   </div>
 </section>
 
@@ -116,7 +116,7 @@
       <p>Cada método va acompañado del caso de referencia con el que se validó, de modo que sus resultados se pueden comparar con una solución conocida. Por ahora la excepción es el método de Sarma, que llegó en la versión 0.1.464 y todavía no tiene caso de validación. Los demás principios se derivan de este.</p>
     </div>
     <div class="feature-grid">
-      <div class="feature"><span class="n label">01</span><h4>Motores de cálculo legibles</h4><p>Los núcleos de cálculo están escritos en Python puro, documentados e independientes de la interfaz, así que se pueden leer como cualquier otro código y llamar desde tus propios scripts o programas.</p></div>
+      <div class="feature"><span class="n label">01</span><h4>Motores de cálculo legibles</h4><p>Los motores de OGR Slip2D y OGR FEM2D están documentados y no dependen de ninguna interfaz, así que se pueden leer como cualquier otro código y llamar desde tus propios scripts o programas. El primero está escrito en Python puro; el segundo, en Rust, con una implementación de referencia en Python de cada elemento y cada ley.</p></div>
       <div class="feature"><span class="n label">02</span><h4>Resultados verificables</h4><p>Los resultados numéricos se validan con una referencia externa: un caso publicado, una solución analítica o una identidad exacta. Para eso no usamos resultados guardados del propio programa.</p></div>
       <div class="feature"><span class="n label">03</span><h4>Ningún ajuste sin efecto</h4><p>Si un control no cambia el resultado, el usuario sigue creyendo que el análisis lo tiene en cuenta. Por eso cada opción tiene un test que comprueba que modifica el resultado.</p></div>
       <div class="feature"><span class="n label">04</span><h4>Interfaz de escritorio</h4><p>La interfaz, hecha con PySide6, incluye un modelador, una ventana de interpretación de resultados y un terminal de Python integrado.</p></div>

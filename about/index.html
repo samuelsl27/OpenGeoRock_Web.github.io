@@ -104,7 +104,7 @@
   <div class="wrap">
     <nav class="crumbs label" aria-label="Breadcrumb"><a href="../index.html">Home</a><span aria-hidden="true">/</span><span>About</span></nav>
     <h1>The <em>OpenGeoRock</em> project</h1>
-    <p class="lede">Almost all the programs a geotechnical engineer relies on are closed and expensive, and their users cannot see how they reach their results, even though decisions about dams, slopes, tunnels and foundations depend on them. OpenGeoRock rebuilds those tools as open-source software. The computation core is written in plain Python and has a desktop interface on top; the test suite is published with the rest of the code, so anyone can inspect it.</p>
+    <p class="lede">Almost all the programs a geotechnical engineer relies on are closed and expensive, and their users cannot see how they reach their results, even though decisions about dams, slopes, tunnels and foundations depend on them. OpenGeoRock rebuilds those tools as open-source software. In OGR Slip2D the computation core is written in plain Python and has a desktop interface on top, and in every program the tests are published with the rest of the code, so anyone can inspect them.</p>
   </div>
 </section>
 
@@ -116,7 +116,7 @@
       <p>Each method comes with the reference case it was validated against, so its results can be compared with a known answer. The exception, for now, is Sarma's method, added in version 0.1.464, which has no validation case yet. The other principles follow from that one.</p>
     </div>
     <div class="feature-grid">
-      <div class="feature"><span class="n label">01</span><h4>Readable engines</h4><p>The computation cores are pure Python, documented and independent of the interface, so they can be read like any other code and called from your own scripts or programs.</p></div>
+      <div class="feature"><span class="n label">01</span><h4>Readable engines</h4><p>The engines of OGR Slip2D and OGR FEM2D are documented and independent of any interface, so they can be read like any other code and called from your own scripts or programs. The first is pure Python; the second is written in Rust, with a reference implementation in Python of every element and law.</p></div>
       <div class="feature"><span class="n label">02</span><h4>Verifiable results</h4><p>Numerical results are validated against an external reference: a published case, a closed-form solution or an analytic identity. We do not use stored snapshots of the program's own output for this.</p></div>
       <div class="feature"><span class="n label">03</span><h4>No setting that does nothing</h4><p>If a control does not change the result, the user still assumes the analysis takes it into account. That is why each option has a test that checks it changes the result.</p></div>
       <div class="feature"><span class="n label">04</span><h4>A desktop interface</h4><p>The PySide6 interface has a modeller, an interpretation window for the results and a built-in Python terminal.</p></div>

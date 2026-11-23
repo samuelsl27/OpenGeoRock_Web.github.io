@@ -33,8 +33,11 @@ v0.0.6; la propietaria eligió contar la v0.0.8, ya publicada.
 - Las cuatro fuentes de la validación de FEM2D no entran en la bibliografía: la página de producto las nombra por
   autor y año, como la de Slip2D, y el repositorio las cita a través de manuales (Jaeger, Cook y Zimmerman 2007;
   Timoshenko y Goodier 1951) sin DOI.
-- No se ha tocado «a shared Python core» de la portada, `products/` y `about/` (OGR Data no usa OGR-Core y el motor de
-  FEM2D es Rust): pendiente de decisión.
+- «A shared Python core» (portada, `products/`, `about/`) no era cierto: OGR Data no usa OGR-Core y el motor de
+  FEM2D es Rust. Con el OK de la propietaria, en un cambio aparte del mismo día: la portada dice «Five programs, one
+  open-source suite»; `products/`, que todos usan la misma licencia y que Slip2D toma de OGR-Core la geometría, los
+  materiales, las cargas y el motor de agua (FEM2D también depende de él); `about/`, que el motor de Slip2D es Python
+  puro y el de FEM2D Rust con referencia en Python.
 - Iconos de FEM2D y Data: para después.
 
 Anomalías encontradas: `../desarrollo/notas/anomalias-programa.md`, A6 (C1–C12).
