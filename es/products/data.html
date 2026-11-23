@@ -1,0 +1,260 @@
+<!doctype html>
+<html class="no-js" lang="es" data-root="../../">
+<head>
+<meta charset="utf-8">
+<title>OGR Data — propiedades resistentes de suelos y macizos rocosos, en desarrollo inicial — OpenGeoRock</title>
+<meta name="description" content="OGR Data es el programa de escritorio de OpenGeoRock, en desarrollo inicial, para estimar y ajustar las propiedades resistentes de suelos y macizos rocosos: diez criterios de rotura, Hoek–Brown generalizado, tablas publicadas, clasificación USCS y ajuste a datos de ensayo.">
+<!-- @inc head -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.replace("no-js", "js")</script>
+<link rel="canonical" href="https://opengeorock.org/es/products/data.html">
+<link rel="alternate" hreflang="en" href="https://opengeorock.org/products/data.html">
+<link rel="alternate" hreflang="es" href="https://opengeorock.org/es/products/data.html">
+<link rel="alternate" hreflang="x-default" href="https://opengeorock.org/products/data.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="OpenGeoRock">
+<meta property="og:title" content="OGR Data — propiedades resistentes de suelos y macizos rocosos, en desarrollo inicial — OpenGeoRock">
+<meta property="og:description" content="OGR Data es el programa de escritorio de OpenGeoRock, en desarrollo inicial, para estimar y ajustar las propiedades resistentes de suelos y macizos rocosos: diez criterios de rotura, Hoek–Brown generalizado, tablas publicadas, clasificación USCS y ajuste a datos de ensayo.">
+<meta property="og:url" content="https://opengeorock.org/es/products/data.html">
+<meta property="og:image" content="https://opengeorock.org/assets/img/og-image.png">
+<meta property="og:locale" content="es_ES">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#f4efe6">
+<link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../../assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&amp;display=swap">
+<link rel="stylesheet" href="../../assets/css/site.css">
+
+<script src="../../assets/js/site.js" defer></script>
+<!-- @end head -->
+</head>
+<body>
+<!-- @inc header -->
+<a class="skip" href="#main">Saltar al contenido</a>
+<header class="top">
+  <div class="wrap top-inner">
+    <a class="brand" href="../../es/index.html" aria-label="OpenGeoRock — inicio">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
+      <b>OpenGeoRock</b>
+    </a>
+    <nav class="nav" aria-label="Principal">
+      <div class="has-menu current" data-nav="products">
+        <button type="button" aria-expanded="false" aria-haspopup="true">Productos <svg class="caret" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+        <div class="mega">
+          <div class="mega-cols">
+            <div class="mega-col">
+              <span class="label">Disponible hoy</span>
+              <a class="mega-item feature" href="../../es/products/slip2d.html"><b>OGR Slip2D</b><span>Estabilidad de taludes 2D: equilibrio límite, agua subterránea por elementos finitos y análisis probabilístico.</span></a>
+              <a class="mega-item" href="../../es/ai/index.html"><b>Servidor MCP para agentes de IA <span class="tag live">nuevo</span></b><span>Claude, ChatGPT o un modelo local crean y calculan modelos de OGR Slip2D.</span></a>
+            </div>
+            <div class="mega-col">
+              <span class="label">Previstos</span>
+              <a class="mega-item" href="../../es/products/data.html"><b>OGR Data</b><span>Propiedades resistentes de suelos y macizos rocosos</span></a>
+              <a class="mega-item" href="../../es/products/fem2d.html"><b>OGR FEM2D</b><span>Elementos finitos 2D, en desarrollo</span></a>
+              <a class="mega-item" href="../../es/products/index.html#ogr-slip3d"><b>OGR Slip3D</b><span>Equilibrio límite en 3D</span></a>
+              <a class="mega-item" href="../../es/products/index.html#ogr-fem3d"><b>OGR FEM3D</b><span>Elementos finitos 3D con flujo acoplado</span></a>
+            </div>
+            <div class="mega-col">
+              <span class="label">Cómo se usa</span>
+              <a class="mega-item" href="../../es/docs/getting-started/interface.html"><b>El programa de escritorio</b><span>Modelador, intérprete y terminal de Python</span></a>
+              <a class="mega-item" href="../../es/docs/reference/python-api.html"><b>Python</b><span>Automatiza análisis desde tu propio código</span></a>
+              <a class="mega-item" href="../../es/docs/reference/cli.html"><b>La línea de comandos</b><span>Cálculos por lotes con ogr-slip2d-cli</span></a>
+            </div>
+          </div>
+          <div class="mega-foot"><span>OGR Slip2D ya está disponible; OGR FEM2D y OGR Data están en desarrollo, y los otros dos programas están previstos.</span><a href="../../es/products/index.html">Todos los productos →</a></div>
+        </div>
+      </div>
+      <a href="../../es/examples/index.html" data-nav="examples">Ejemplos</a>
+      <a href="../../es/ai/index.html" data-nav="ai">IA y MCP</a>
+      <a href="../../es/docs/index.html" data-nav="docs">Documentación</a>
+      <a href="../../es/verification/index.html" data-nav="verification">Verificación</a>
+      <a href="../../es/about/index.html" data-nav="about">Proyecto</a>
+    </nav>
+    <div class="top-right">
+      <span class="lang" role="group" aria-label="Idioma"><a href="../../products/data.html" hreflang="en" lang="en">EN</a><a href="../../es/products/data.html" hreflang="es" lang="es" aria-current="true">ES</a></span>
+      <a class="btn gh" href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener" aria-label="Código fuente en GitHub"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0C17.3 4.7 18.3 5 18.3 5c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0012 .5z"/></svg><span>GitHub</span></a>
+      <a class="btn primary" href="../../es/download/index.html" data-nav="download">Descargar OGR Slip2D</a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menú"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path class="l1" d="M4 7h16"/><path class="l2" d="M4 12h16"/><path class="l3" d="M4 17h16"/></svg></button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Principal (móvil)">
+    <span class="label">Productos</span>
+    <a href="../../es/products/slip2d.html" data-nav="products" aria-current="page">OGR Slip2D</a>
+    <div class="sub"><a href="../../es/products/index.html">La suite OpenGeoRock</a></div>
+    <span class="label">Explora</span>
+    <a href="../../es/examples/index.html" data-nav="examples">Ejemplos</a>
+    <a href="../../es/ai/index.html" data-nav="ai">IA y MCP</a>
+    <a href="../../es/docs/index.html" data-nav="docs">Documentación</a>
+    <a href="../../es/verification/index.html" data-nav="verification">Verificación</a>
+    <span class="label">Proyecto</span>
+    <a href="../../es/about/index.html" data-nav="about">El proyecto</a>
+    <a href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener">Código en GitHub ↗</a>
+    <a class="btn primary lg" href="../../es/download/index.html" data-nav="download">Descargar OGR Slip2D <span class="arrow">→</span></a>
+    <span class="lang" role="group" aria-label="Idioma"><a href="../../products/data.html" hreflang="en" lang="en">EN</a><a href="../../es/products/data.html" hreflang="es" lang="es" aria-current="true">ES</a></span>
+  </nav>
+</header>
+<!-- @end header -->
+
+<main id="main">
+
+<!-- ====== HERO ====== -->
+<section class="page-hero">
+  <div class="wrap">
+    <nav class="crumbs label" aria-label="Ruta de navegación"><a href="../index.html">Inicio</a><span aria-hidden="true">/</span><a href="index.html">Productos</a><span aria-hidden="true">/</span><span>OGR Data</span></nav>
+    <div class="chips mt-m"><span class="tag soon">En desarrollo inicial · v0.1.0</span><span class="tag">AGPL-3.0-or-later</span></div>
+    <h1 style="max-width:none">OGR Data</h1>
+    <p class="lede">Un programa de escritorio para estimar y ajustar las propiedades resistentes de suelos y macizos rocosos. Eliges un criterio de rotura, das sus parámetros o los ajustas a datos de ensayo, y las envolventes se redibujan en cuanto cambia un valor. Está en una fase temprana: todavía no tiene casos de validación propios ni instalador.</p>
+    <div class="cta-row">
+      <a class="btn primary lg" href="https://github.com/samuelsl27/OGR-Data" target="_blank" rel="noopener">Código fuente en GitHub <span class="arrow">→</span></a>
+      <a class="btn lg" href="index.html">La suite</a>
+    </div>
+  </div>
+</section>
+
+<nav class="subnav" aria-label="En esta página">
+  <div class="wrap">
+    <a href="#overview">Resumen</a>
+    <a href="#features">Qué hace</a>
+    <a href="#roadmap">Lo que viene</a>
+    <a href="#specs">Ficha técnica</a>
+  </div>
+</nav>
+
+<!-- ====== OVERVIEW ====== -->
+<section class="section" id="overview">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="sec-num label">Resumen</div><h2>Propiedades de los materiales <em>para la suite</em></h2></div>
+      <p>OGR Data es el programa de la suite para obtener y ajustar las propiedades de los suelos y macizos rocosos que usan OGR Slip2D y OGR FEM2D. Es un programa de escritorio aparte: no depende de OGR-Core y tiene sus propios archivos de proyecto. Esta página describe el código publicado en GitHub en el commit <code>328beb8</code>.</p>
+    </div>
+    <div class="metrics" style="margin-top:0">
+      <div class="metric"><div class="v">10</div><div class="k label">Criterios de rotura</div></div>
+      <div class="metric"><div class="v">6</div><div class="k label">Ajustes a datos de ensayo</div></div>
+      <div class="metric"><div class="v">4</div><div class="k label">Tablas publicadas</div></div>
+      <div class="metric"><div class="v">0</div><div class="k label">Casos de validación</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== FEATURES ====== -->
+<section class="section alt" id="features">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="sec-num label">Versión 0.1.0</div><h2>Lo que hace <em>hoy</em></h2></div>
+      <p>Solo lo que está implementado en el código publicado. Todo lo demás está en la hoja de ruta, más abajo.</p>
+    </div>
+    <div class="feature-grid">
+      <div class="feature"><h4>Hoek–Brown generalizado</h4><p>A partir de σ<sub>ci</sub>, GSI, m<sub>i</sub> y D, el programa calcula m<sub>b</sub>, s y a, las resistencias a tracción, a compresión simple y global del macizo y los c y φ equivalentes de Mohr–Coulomb (Hoek, Carranza-Torres y Corkum 2002), y el módulo del macizo por tres métodos, entre ellos el de Hoek y Diederichs (2006). El límite superior σ<sub>3max</sub> se puede fijar para un túnel o un talud a partir de su profundidad o su altura (Hoek, Carranza-Torres y Corkum 2002, §6).</p></div>
+      <div class="feature"><h4>Diez criterios de rotura</h4><p>Mohr–Coulomb, Hoek–Brown, Hoek–Brown generalizado, Drucker–Prager, Cam-Clay, Cam-Clay modificado, ablandamiento–endurecimiento, NorSand, curva potencial y Barton–Bandis, cada uno con sus parámetros y su envolvente en tensiones principales o en tensión tangencial y normal. NorSand solo tiene parámetros, todavía sin envolvente.</p></div>
+      <div class="feature"><h4>Valores típicos de tablas publicadas</h4><p>Diálogos de selección para las estimaciones de campo de la resistencia a compresión simple y para m<sub>i</sub> (Hoek, <em>Practical Rock Engineering</em>) y para el GSI (Hoek y Marinos 2000). El clasificador de suelos muestra las propiedades típicas de cada clase USCS (USDA NRCS, National Engineering Handbook, parte 631). Cada tabla lleva su fuente.</p></div>
+      <div class="feature"><h4>Clasificación USCS</h4><p>Clasificación de suelos según ASTM D2487 con los criterios de laboratorio del USDA NRCS, sobre una carta de plasticidad con la línea A y la línea U.</p></div>
+      <div class="feature"><h4>Ajuste a datos de ensayo</h4><p>Mohr–Coulomb a partir de ensayos triaxiales o de corte directo, Hoek–Brown de la roca intacta y Hoek–Brown generalizado del macizo a partir de ensayos triaxiales, y Barton–Bandis y la curva potencial a partir de ensayos de corte directo, por regresión lineal, Levenberg–Marquardt o símplex.</p></div>
+      <div class="feature"><h4>Lectura de las envolventes</h4><p>Un muestreador de tensiones y un muestreador de Mohr–Coulomb instantáneo, que da la c y la φ tangentes en un punto de la envolvente; superposiciones de la recta de Mohr–Coulomb de mejor ajuste y de la línea de Mogi, σ<sub>1</sub>/σ<sub>3</sub> = 3,4.</p></div>
+      <div class="feature"><h4>Proyectos y portapapeles</h4><p>Los proyectos se guardan en archivos <code>.ogrdata</code>, en JSON. Un material se puede copiar al portapapeles como texto, en un formato abierto pensado para los demás programas de la suite; OGR Slip2D <span data-v>0.1.481</span> todavía no lo lee.</p></div>
+    </div>
+    <div class="note warn mt-m"><span class="label">Aún sin validación</span><p>OGR Data no tiene casos de validación propios: ninguno de sus resultados se ha comparado todavía con una solución cerrada ni con un caso publicado. Algunas de sus envolventes y herramientas (la curva potencial, la superficie de ablandamiento–endurecimiento, los muestreadores y el residuo del ajuste) siguen documentadas en el código remitiendo al manual de usuario de otro programa, no a la fuente científica original.</p></div>
+  </div>
+</section>
+
+<!-- ====== ROADMAP ====== -->
+<section class="section" id="roadmap">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="sec-num label">Hoja de ruta</div><h2>Lo que viene</h2></div>
+      <p>En el orden de la lista de trabajo del proyecto, sin fechas.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card planned"><div class="split"><span class="tag soon">Lo siguiente</span></div><h3>Trabajar con los resultados</h3><p>Unidades y ajustes en toda la interfaz, opciones de gráfica y exportación, y proyectos con varios materiales.</p></div>
+      <div class="card planned"><div class="split"><span class="tag soon">Después</span></div><h3>Estados y calibración</h3><p>Estados de rotura y trayectorias de tensiones, calibración sobre varios estados, una base de datos de materiales hecha con fuentes publicadas y más diálogos de selección.</p></div>
+      <div class="card planned"><div class="split"><span class="tag soon">Más adelante</span></div><h3>Informes, ensayos y agentes</h3><p>Informes autocontenidos, simulación de ensayos de laboratorio, y una API de operaciones con un servidor MCP, como en OGR Slip2D.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== SPECS ====== -->
+<section class="section alt" id="specs">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="sec-num label">Especificaciones</div><h2>Ficha técnica</h2></div>
+      <p>Datos tomados del código fuente en el commit <code>328beb8</code>. Si encuentras alguna diferencia entre esta página y el programa, vale lo que diga el programa; avísanos y corregiremos la página.</p>
+    </div>
+    <dl class="spec-list">
+      <div><dt class="label">Criterios</dt><dd>10, de Mohr–Coulomb a NorSand</dd></div>
+      <div><dt class="label">Macizo rocoso</dt><dd>Hoek–Brown generalizado, c y φ equivalentes, módulo, σ<sub>3max</sub> para túneles y taludes</dd></div>
+      <div><dt class="label">Ajustes</dt><dd>Datos triaxiales y de corte directo; lineal, Levenberg–Marquardt, símplex</dd></div>
+      <div><dt class="label">Tablas</dt><dd>Resistencia a compresión simple, m<sub>i</sub>, GSI, propiedades de los suelos USCS</dd></div>
+      <div><dt class="label">Clasificación</dt><dd>USCS (ASTM D2487)</dd></div>
+      <div><dt class="label">Archivos</dt><dd>Proyectos .ogrdata (JSON), texto en el portapapeles</dd></div>
+      <div><dt class="label">Interfaz</dt><dd>Escritorio (PySide6, Matplotlib), temas claro y oscuro</dd></div>
+      <div><dt class="label">Validación</dt><dd>Todavía sin casos propios</dd></div>
+      <div><dt class="label">Requisitos</dt><dd>Python 3.11 o posterior</dd></div>
+      <div><dt class="label">Licencia</dt><dd>AGPL-3.0-or-later · sin garantía</dd></div>
+    </dl>
+  </div>
+</section>
+
+</main>
+
+<!-- @inc footer -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <a class="brand" href="../../es/index.html" aria-label="OpenGeoRock — inicio">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><rect class="lb" x="1" y="1" width="30" height="30" rx="7"/><path class="ls" d="M5 23H13L19 15H27" fill="none" stroke-width="2" stroke-linejoin="round"/><path class="la" d="M9 23A14 14 0 0 0 23.5 15" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
+          <b>OpenGeoRock</b>
+        </a>
+        <p class="tagline">Software geotécnico de código abierto desarrollado en la Universidad Politécnica de Cartagena.</p>
+        <span class="lang" role="group" aria-label="Idioma"><a href="../../products/data.html" hreflang="en" lang="en">EN</a><a href="../../es/products/data.html" hreflang="es" lang="es" aria-current="true">ES</a></span>
+      </div>
+      <div>
+        <h5>Productos</h5>
+        <ul>
+          <li><a href="../../es/products/slip2d.html">OGR Slip2D</a></li>
+          <li><a href="../../es/products/index.html">La suite</a></li>
+          <li><a href="../../es/ai/index.html">Servidor MCP</a></li>
+          <li><a href="../../es/download/index.html">Descargar</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Recursos</h5>
+        <ul>
+          <li><a href="../../es/docs/index.html">Documentación</a></li>
+          <li><a href="../../es/docs/getting-started/quick-start.html">Inicio rápido</a></li>
+          <li><a href="../../es/docs/theory/methods.html">Manual de teoría</a></li>
+          <li><a href="../../es/examples/index.html">Ejemplos</a></li>
+          <li><a href="../../es/verification/index.html">Verificación</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Proyecto</h5>
+        <ul>
+          <li><a href="../../es/about/index.html">El proyecto</a></li>
+          <li><a href="../../es/about/index.html#team">Equipo</a></li>
+          <li><a href="../../es/about/index.html#cite">Cómo citar</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Contribuir</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/blob/main/LICENSE" target="_blank" rel="noopener">Licencia · AGPL-3.0</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contacto</h5>
+        <ul>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/issues" target="_blank" rel="noopener">Incidencias</a></li>
+          <li><a href="https://github.com/samuelsl27/OGR-Slip2D/tree/main/docs/changelog" target="_blank" rel="noopener">Historial de cambios</a></li>
+          <li><a href="mailto:samuel.saez@edu.upct.es">Correo</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© 2026 Samuel Sáez López · OGR Slip2D es software libre (licencia AGPL-3.0 o posterior) y se distribuye sin ninguna garantía.</span>
+      <span>OGR Slip2D <span data-v>0.1.481</span> · 2026-11-22</span>
+    </div>
+  </div>
+</footer>
+<!-- @end footer -->
+</body>
+</html>
