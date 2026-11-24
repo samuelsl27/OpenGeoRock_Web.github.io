@@ -20,11 +20,20 @@ sigue el sistema «Cuaderno técnico» con su verde de marca y el bermellón de 
   `h1` (`.prod-head`; 56 px por debajo de 720 px).
 - `site.css`: cuatro reglas nuevas (`.mega-ic`, `.prod-ic`, `.prod-title`, `.prod-head`) y su ajuste móvil.
 
+### Segunda parte (mismo día)
+
+- **Portada** (`index.html` y su español): los cinco glifos dibujados de `.suite` se sustituyen por los iconos
+  (`img.glyph`, con `object-fit: contain` alineado a la izquierda). En la traducción guardada se cambiaron los
+  marcadores `<!--SVG 1-->`–`<!--SVG 5-->` por las imágenes, se renumeraron los demás y se ajustó
+  `index.svg.es.json`.
+- **Pie**: los enlaces de las columnas heredaban de `li a` el verde subrayado, ilegible sobre tinta. `.foot li a`
+  vuelve a heredar el color del pie, como el resto de su texto; el `:hover` sigue aclarándolos.
+- **`og-image.png`**: el logotipo pequeño de la esquina pasa a ser la piedra; la cuadrícula del papel se reconstruyó
+  debajo. El resto de la imagen no cambia (166 KB). Las redes sociales tardan en refrescar su copia.
+
 ## Qué no
 
 - No cambia ningún token, color, tipografía ni el acento de la web.
-- La portada sigue con sus glifos (`.suite .glyph`); no se han sustituido por los iconos.
-- `og-image.png` sigue siendo la anterior.
 
 ## Qué se comprobó
 
