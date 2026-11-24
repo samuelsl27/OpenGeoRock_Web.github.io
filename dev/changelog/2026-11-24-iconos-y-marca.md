@@ -43,3 +43,12 @@ sigue el sistema «Cuaderno técnico» con su verde de marca y el bermellón de 
 - Capturas a 1440 px (productos, ficha de Slip2D, menú desplegado, pie), 768 px (FEM2D en español) y 375 px
   reales (productos, descargas, Slip2D y Data en español): sin desbordamiento horizontal.
 - No se revisó la consola del navegador en un servidor local (solo capturas con Edge sin interfaz).
+
+### Tercera parte — favicon para Google
+
+Google seguía mostrando el icono antiguo en los resultados: guarda el favicon en su caché y la URL no había
+cambiado. Para que lo vuelva a pedir y lo acepte:
+
+- **`/favicon.ico`** (nuevo, en la raíz; 16, 32 y 48 px de `ogr-simbolo`): antes daba 404.
+- **`assets/img/favicon-96.png`** (nuevo): Google pide un favicon de 48 px o múltiplo de 48.
+- `tools/partials/head.html`: `?v=2` en los iconos para que cambie su URL, y el PNG de 96 px declarado.

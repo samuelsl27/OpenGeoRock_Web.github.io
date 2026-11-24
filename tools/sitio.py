@@ -516,6 +516,7 @@ def check(pages: list[str]) -> int:
             if re.match(r"^(https?:|mailto:|tel:|javascript:|data:)", link) or link == "":
                 continue
             path, _, frag = link.partition("#")
+            path = path.partition("?")[0]  # ?v=2 en los favicons: la consulta no es parte del archivo
             if not path:
                 target = rel
             elif path.startswith("/"):
